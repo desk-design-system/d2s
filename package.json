@@ -1,6 +1,6 @@
 {
   "name": "desk-design-system",
-  "author": "Team Repairdesk",
+  "author": "Kamil",
   "files": [
     "dist"
   ],
@@ -16,7 +16,7 @@
       "require": "./dist/style.css"
     }
   },
-  "version": "0.0.9",
+  "version": "0.0.1",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
