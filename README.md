@@ -15,6 +15,11 @@ A progressive [Vue Js](https://vuejs.org/) framework for building efficient and 
 - Develope the component with the required props and make sure you should add comments againt every prop so we can easily undertsnad the usage of  prop
 - Create your merge request with comments owner will  test the changes and merge the code later.
 
+#### Contributers
+----
+- [Husnain](https://github.com/ali-husnain)
+- [Jazib](https://github.com/jazib-ali)
+
 #### Stay in touch
 ----
 - Author - [Kamil Riaz](https://github.com/thekamilhayyat)
