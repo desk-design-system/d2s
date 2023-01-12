@@ -13,6 +13,7 @@ A progressive [Vue Js](https://vuejs.org/) framework for building efficient and 
 - Create new Branch and make sure the name of the branch should be same as the name of the component for example(git username-componentName)
 - Open the project in vs code go to src/component/ create the folder with the same name of your required component and add an index.vue file in it 
 - Develope the component with the required props and make sure you should add comments againt every prop so we can easily undertsnad the usage of  prop
+- Create your merge request with comments owner will  test the changes and merge the code later.
 
 #### Stay in touch
 ----
