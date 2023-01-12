@@ -1,143 +1,26 @@
-# Vue 3 + Vite
+A progressive [Vue Js](https://vuejs.org/) framework for building efficient and scalable client-side applications.
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
 
-## Recommended IDE Setup
+ ![](https://img.shields.io/github/release/pandao/editor.md.svg) ![](https://img.shields.io/bower/v/editor.md.svg)
 
-- [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar)
-## Set Up Command to publish 
-npm adduser
-npm publish
+#### Principal Sponsors
+----
+[![](https://uploads-ssl.webflow.com/5e109dcc98f2dc1a5ed58148/61125b555ae4913652623f25_RD-2.0-Logo-blog-p-500.png)](https://www.repairdesk.co/our-story#:~:text=RepairDesk%20allows%20users%20to%20keep,and%20manage%20invoices%20and%20receipts.)
+#### Support
+----
+- Clone d2 library setup into your local system
+- Open cloned project in VS code
+- Create new Branch and make sure the name of the branch should be same as the name of the component for example(git username-componentName)
+- Open the project in vs code go to src/component/ create the folder with the same name of your required component and add an index.vue file in it 
+- Develope the component with the required props and make sure you should add comments againt every prop so we can easily undertsnad the usage of  prop
 
-<!-- components -->
+#### Stay in touch
+----
+- Author - [Kamil Riaz](https://github.com/thekamilhayyat)
+- Website - [Repairdesk](https://www.repairdesk.co/our-story#:~:text=RepairDesk%20allows%20users%20to%20keep,and%20manage%20invoices%20and%20receipts.)
 
-<!-- button -->
+#### License 
+----
+- d2 is a [MIT licensed.](https://github.com/git/git-scm.com/blob/main/MIT-LICENSE.txt) 
 
-propName: default Value
 
-prependIcon: null
-
-appendIcon: null
-
-vertical: false
-
-iconstyle: String
-
-iconSize: "20"
-
-suffix: null
-
-title: String
-
-color: ""
-
-disable: false
-
-block: false
-
-size: medium
-
-type: default
-
-<!-- input -->
-
-propName: default Value
-
-prependIcon: null
-
-appendIcon: null
-
-vertical: false
-
-iconstyle: String
-
-iconSize: "20"
-
-suffix: null
-
-title: String
-
-color: ""
-
-disable: false
-
-block: false
-
-size: medium
-
-type: default
-
-<!-- card -->
-
-propName: default Value
-
-cardClass: bg-white
-
-<!-- alert -->
-
-propName: default Value
-
-type: 'warning' || "warning", "danger", "success", "blue"  && slot name:content
-
-<!-- avatarDropdwon -->
-
-src:  null
-
-avtarSize: 8
-
-href: #
-
-target: _self
-
-data: ''
-
-<!-- badge -->
-
-title: 'Text'
-
-type: 'round' || "round", "basic",
-
-size: 'medium' || "medium", "medium",
-
-dot: false
-
-className: ''
-
- 
- <!-- dialog  -->
-
- show: false
-
- slot: data
-
- @clickDrawer: $emit
-
- <!-- drawer  -->
-
- show: false
-
- slot: data
-
- @clickDrawer: $emit
-
- <!-- popover -->
-
-buttonClass: 'rounded-md'
-
-<!-- to change popover position -->
-
-position: 'absolute z-10 mt-1 w-screen max-w-sm -translate-x-3/4 transform px-4'
-
-<!-- autoComplete -->
-
-title: ''
-
-data: []
-
-placeholder: ''
-
-size: 20
-
-value: ''
-
-simle pass v-model fro binding value
