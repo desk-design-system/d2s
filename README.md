@@ -8,7 +8,7 @@ A progressive [Vue Js](https://vuejs.org/) framework for building efficient and 
 [![](https://uploads-ssl.webflow.com/5e109dcc98f2dc1a5ed58148/61125b555ae4913652623f25_RD-2.0-Logo-blog-p-500.png)](https://www.repairdesk.co/our-story#:~:text=RepairDesk%20allows%20users%20to%20keep,and%20manage%20invoices%20and%20receipts.)
 #### Support
 ----
-- Clone d2 library setup into your local system
+- Clone D2S library setup into your local system
 - Open cloned project in VS code
 - Create new Branch and make sure the name of the branch should be same as the name of the component for example(git username-componentName)
 - Open the project in vs code go to src/component/ create the folder with the same name of your required component and add an index.vue file in it 
@@ -27,6 +27,6 @@ A progressive [Vue Js](https://vuejs.org/) framework for building efficient and 
 
 #### License 
 ----
-- d2 is a [MIT licensed.](https://github.com/git/git-scm.com/blob/main/MIT-LICENSE.txt) 
+- D2S is an [MIT licensed.](https://github.com/git/git-scm.com/blob/main/MIT-LICENSE.txt) 
 
 
