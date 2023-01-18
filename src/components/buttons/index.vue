@@ -146,27 +146,27 @@
 <script>
 export default {
   props: {
-    prependIcon: {
-      type: String,
-      default: null,
-    },
-    appendIcon: {
-      type: String,
-      default: null,
-    },
-    vertical: Boolean,
-    iconstyle: {
-      type: String,
-      default: null,
-    },
-    iconSize: {
-      type: String,
-      default: "20",
-    },
-    suffix: {
-      type: String,
-      default: null,
-    },
+    // prependIcon: {
+    //   type: String,
+    //   default: null,
+    // },
+    // appendIcon: {
+    //   type: String,
+    //   default: null,
+    // },
+    // vertical: Boolean,
+    // iconstyle: {
+    //   type: String,
+    //   default: null,
+    // },
+    // iconSize: {
+    //   type: String,
+    //   default: "20",
+    // },
+    // suffix: {
+    //   type: String,
+    //   default: null,
+    // },
     title: {
       type: String,
       default: "Button",
