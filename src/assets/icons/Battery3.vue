@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="10px" viewBox="0 0 16 10" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Icons/20px/Battery-3</title>
+    <g id="☮️-Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Icon-20px" transform="translate(-96.000000, -281.000000)">
+            <g id="Icons/20px/Battery-3" transform="translate(94.000000, 276.000000)">
+                <polygon id="Path" points="0 0 20 0 20 20 0 20"></polygon>
+                <path d="M5,5.83333333 L14.1666667,5.83333333 C15.0871412,5.83333333 15.8333333,6.57952542 15.8333333,7.5 L15.8333333,7.91666667 C15.8333333,8.14678531 16.0198814,8.33333333 16.25,8.33333333 C16.4801186,8.33333333 16.6666667,8.51988135 16.6666667,8.75 L16.6666667,11.25 C16.6666667,11.4801186 16.4801186,11.6666667 16.25,11.6666667 C16.0198814,11.6666667 15.8333333,11.8532147 15.8333333,12.0833333 L15.8333333,12.5 C15.8333333,13.4204746 15.0871412,14.1666667 14.1666667,14.1666667 L5,14.1666667 C4.07952542,14.1666667 3.33333333,13.4204746 3.33333333,12.5 L3.33333333,7.5 C3.33333333,6.57952542 4.07952542,5.83333333 5,5.83333333" id="Path" stroke="#2C3E50" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                <line x1="5.83333333" y1="8.33333333" x2="5.83333333" y2="11.6666667" id="Path" stroke="#2C3E50" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></line>
+                <line x1="8.33333333" y1="8.33333333" x2="8.33333333" y2="11.6666667" id="Path" stroke="#2C3E50" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></line>
+                <line x1="10.8333333" y1="8.33333333" x2="10.8333333" y2="11.6666667" id="Path" stroke="#2C3E50" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></line>
+            </g>
+        </g>
+    </g>
+</svg>

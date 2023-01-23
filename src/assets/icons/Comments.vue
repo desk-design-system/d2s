@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="18px" height="16px" viewBox="0 0 18 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Icons/20px/Comments</title>
+    <g id="☮️-Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Icon-20px" transform="translate(-175.000000, -242.000000)">
+            <g id="Icons/20px/Comments" transform="translate(174.000000, 240.000000)">
+                <polygon id="Path" points="0 0 20 0 20 20 0 20"></polygon>
+                <path d="M2.5,16.6666667 L3.58333333,13.4166667 C1.64676451,10.5525081 2.3948969,6.85642277 5.33313962,4.77189547 C8.27138234,2.68736817 12.4918566,2.85849072 15.2044038,5.17213386 C17.9169509,7.485777 18.2834291,11.2270551 16.0615594,13.9226064 C13.8396897,16.6181578 9.71600083,17.435092 6.41666667,15.8333333 L2.5,16.6666667" id="Path" stroke="#1F2937" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                <line x1="10" y1="10" x2="10" y2="10.0083333" id="Path" stroke="#1F2937" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></line>
+                <line x1="6.66666667" y1="10" x2="6.66666667" y2="10.0083333" id="Path" stroke="#1F2937" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></line>
+                <line x1="13.3333333" y1="10" x2="13.3333333" y2="10.0083333" id="Path" stroke="#1F2937" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></line>
+            </g>
+        </g>
+    </g>
+</svg>
