@@ -33,11 +33,11 @@ export default {
     // },
     size: {
       control: { type: 'select' },
-      options: ['mini','small', 'medium', 'large','xLarge',],
-      description: "Accepted value mini / small / medium / large / xLarge ",
+      options: ['xs','sm', 'base', 'lg','xl',],
+      description: "Accepted value xs / sm / base / lg / xl ",
       table:{
         defaultValue:{
-          summary: "medium"
+          summary: "base"
         }
       }
     },
