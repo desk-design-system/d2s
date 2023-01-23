@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Icons/20px/List-Numbers</title>
+    <g id="☮️-Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Icon-20px" transform="translate(-296.000000, -350.000000)">
+            <g id="Icons/20px/List-Numbers" transform="translate(294.000000, 348.000000)">
+                <polygon id="Path" points="0 0 20 0 20 20 0 20"></polygon>
+                <line x1="9.16666667" y1="5" x2="16.6666667" y2="5" id="Path" stroke="#2C3E50" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></line>
+                <line x1="9.16666667" y1="10" x2="16.6666667" y2="10" id="Path" stroke="#2C3E50" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></line>
+                <line x1="10" y1="15" x2="16.6666667" y2="15" id="Path" stroke="#2C3E50" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></line>
+                <path d="M3.33333333,13.3333333 C3.33333333,12.4128588 4.07952542,11.6666667 5,11.6666667 C5.92047458,11.6666667 6.66666667,12.4128588 6.66666667,13.3333333 C6.66666667,13.8258333 6.25,14.1666667 5.83333333,14.5833333 L3.33333333,16.6666667 L6.66666667,16.6666667" id="Path" stroke="#2C3E50" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                <polyline id="Path" stroke="#2C3E50" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" points="5 8.33333333 5 3.33333333 3.33333333 5"></polyline>
+            </g>
+        </g>
+    </g>
+</svg>
