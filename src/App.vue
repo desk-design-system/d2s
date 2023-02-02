@@ -1,6 +1,7 @@
 <template>
   <div class="container mx-auto">
     <div class="flex justify-between">
+      <p class="dd-text-primary">Hello</p>
       <dd-button color="success"> kamil </dd-button>
       <img src="./assets/test.svg" alt="">
       <img src="./assets/Add User.svg" alt="">
