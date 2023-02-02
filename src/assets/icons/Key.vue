@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="15px" viewBox="0 0 16 15" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Icons/20px/Key</title>
+    <g id="☮️-Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Icon-20px" transform="translate(-936.000000, -278.000000)">
+            <g id="Icons/20px/Key" transform="translate(934.000000, 276.000000)">
+                <polygon id="Path" points="0 0 20 0 20 20 0 20"></polygon>
+                <circle id="Oval" stroke="#1F2937" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" cx="6.66666667" cy="12.5" r="3.33333333"></circle>
+                <line x1="9.04166667" y1="10.125" x2="15.8333333" y2="3.33333333" id="Path" stroke="#1F2937" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></line>
+                <line x1="15" y1="4.16666667" x2="16.6666667" y2="5.83333333" id="Path" stroke="#1F2937" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></line>
+                <line x1="12.5" y1="6.66666667" x2="14.1666667" y2="8.33333333" id="Path" stroke="#1F2937" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></line>
+            </g>
+        </g>
+    </g>
+</svg>

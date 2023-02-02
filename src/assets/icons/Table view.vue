@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Icons/20px/Table view</title>
+    <g id="☮️-Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Icon-20px" transform="translate(-656.000000, -314.000000)">
+            <g id="Group" transform="translate(654.000000, 312.000000)">
+                <polygon id="Path" points="0 0 20 0 20 20 0 20"></polygon>
+                <rect id="Rectangle" stroke="#374151" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" x="3.33333333" y="3.33333333" width="13.3333333" height="13.3333333" rx="1.66666667"></rect>
+                <line x1="3.33333333" y1="8.33333333" x2="16.6666667" y2="8.33333333" id="Path" stroke="#374151" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></line>
+                <line x1="8.33333333" y1="3.33333333" x2="8.33333333" y2="16.6666667" id="Path" stroke="#374151" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></line>
+            </g>
+        </g>
+    </g>
+</svg>
