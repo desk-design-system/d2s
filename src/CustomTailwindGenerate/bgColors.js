@@ -125,7 +125,7 @@ const colors=[
     "dd-bg-teal-300",
     "dd-bg-teal-400",
     "dd-bg-teal-500",
-    "!dd-bg-teal-600",
+    "dd-bg-teal-600",
     "dd-bg-teal-700",
     "dd-bg-teal-800",
     "dd-bg-teal-900",
