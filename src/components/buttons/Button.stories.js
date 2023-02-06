@@ -12,8 +12,8 @@ export default {
       control:{
         type: 'select' 
       },
-      options: ['primary','danger', 'success', 'white'],
-      description: "Change color value as per the requirement primary / danger / success / white",
+      options: ['primary','danger', 'white'],
+      description: "Change color value as per the requirement primary / danger  / white",
       table:{
         defaultValue:{
           summary: "-"
@@ -80,10 +80,24 @@ const Template = (args) => ({
 
 
 export const Primary = Template.bind({});
+export const Danger = Template.bind({});
+export const White = Template.bind({});
 // More on args: https://storybook.js.org/docs/vue/writing-stories/args
 console.log(Primary.args, "Primary")
 Primary.args = {
   color: 'primary',
+  title: 'Button',
+  size: 'small',
+  type: 'default'
+};
+Danger.args = {
+  color: 'danger',
+  title: 'Danger',
+  size: 'small',
+  type: 'default'
+};
+White.args = {
+  color: 'white',
   title: 'Button',
   size: 'small',
   type: 'default'
