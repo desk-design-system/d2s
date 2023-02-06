@@ -22,4 +22,9 @@ const typography =[
     "dd-font-bold",
     "dd-font-extrabold",
     "dd-font-black",
+    // word break
+    "break-normal",
+    "break-words",
+    "break-all",
+    "break-keep"
 ]
