@@ -1,24 +1,23 @@
 <template>
   <div class="container mx-auto">
     <div class="flex justify-between">
-      <p class="dd-text-primary">Hello</p>
-      <dd-button color="success"> kamil </dd-button>
-      <img src="./assets/test.svg" alt="">
-      <img src="./assets/Add User.svg" alt="">
-      <svgIcon2 />
+      <dd-alert :closable="true" type="warning" title="Warning">Warning Description kjsdnvkjdsnvjnsdvn ksjdvkjdsbnv jsdbjvbsd jsbdvkjbs jksbdkjbv kjsbdkjbv kjbjbds vjbkjbn sdkjbvkjsd </dd-alert>
+      <dd-alert :closable="true" type="danger" title="Danger">Danger Description</dd-alert>
+      <dd-alert :closable="true" type="success" title="Success">Success Description</dd-alert>
+      <dd-alert :closable="true" type="info" title="Info">Info Description</dd-alert>
+
     </div>
   </div>
 </template>
 <script>
-import DdButton from "@/components/buttons/index.vue";
-import svgIcon2 from "./components/icons/AlertIcon.vue"
+import DdAlert from "@/components/alerts/index.vue";
 export default {
   data() {
     return {};
   },
   components: {
-    DdButton,
-    svgIcon2
+    DdAlert,
+    
   },
 };
 </script>
