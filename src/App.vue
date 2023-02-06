@@ -1,22 +1,22 @@
 <template>
   <div class="container mx-auto">
-    <div class="flex justify-between">
-      <dd-alert :closable="true" type="warning" title="Warning">Warning Description kjsdnvkjdsnvjnsdvn ksjdvkjdsbnv jsdbjvbsd jsbdvkjbs jksbdkjbv kjsbdkjbv kjbjbds vjbkjbn sdkjbvkjsd </dd-alert>
-      <dd-alert :closable="true" type="danger" title="Danger">Danger Description</dd-alert>
-      <dd-alert :closable="true" type="success" title="Success">Success Description</dd-alert>
-      <dd-alert :closable="true" type="info" title="Info">Info Description</dd-alert>
-
-    </div>
+    <!-- <dd-badges></dd-badges> -->
+    <dd-badges  size="large" title="Hello" />
+    <dd-badges type="warning" closable size="large" title="Hello" />
+    <dd-badges type="danger" closable size="large" title="Hello" />
+    <dd-badges type="success" closable size="large" title="Hello" />
+    <dd-badges type="info" dot closable  title="Hello" />
+    <dd-badges type="purple" closable dot  rounded title="Hello" />
   </div>
 </template>
 <script>
-import DdAlert from "@/components/alerts/index.vue";
+import DdBadges from "@/components/badges/index.vue";
 export default {
   data() {
     return {};
   },
   components: {
-    DdAlert,
+    DdBadges,
     
   },
 };
