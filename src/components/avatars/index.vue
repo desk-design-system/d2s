@@ -2,7 +2,7 @@
     <div>
       <!-- default -->
       <div
-      v-if="type == 'default'">
+      v-if="type == 'default' && srcLink">
       <img
         v-bind="$attrs"
             :class="{
@@ -13,40 +13,43 @@
             'dd-h-14 dd-w-14': size === 'xLarge',
             }"
             class="dd-inline-flex dd-inline-block dd-rounded-full" 
-            :src="srcLink">
+            :src="srcLink" :alt="altName">
         </div>
     
       <!-- group -->
       <div 
-      v-else-if="type == 'group'">
+      v-else-if="type == 'group' && srcLink">
         <img
             v-bind="$attrs"
             :class="{
                 'dd-h-6 dd-w-6': size === 'mini',
             }" 
             class="dd-inline-flex dd-inline-block dd-h-6 dd-w-6 dd-space-x-1 dd-overflow-hidden dd-rounded-full dd-ring-2 dd-ring-white" 
-            :src="srcLink">
+            :src="srcLink" :alt="altName">
       </div>
-      
+
+      <!-- text -->
       <div
-      v-else-if="type == 'text'">
+      v-else>
       <span
         v-bind="$attrs"
             :class="{
-            'dd-text-white':color == '',
+            'dd-border-gray-300 dd-text-white dd-bg-gray-500':color == '',
             'dd-h-6 dd-w-6 dd-leading-none dd-text-xs dd-font-medium': size === 'mini',
             'dd-h-8 dd-w-8 dd-leading-none dd-text-sm dd-font-medium': size === 'small',
             'dd-h-10 dd-w-10 dd-leading-none dd-font-medium': size === 'medium',
             'dd-h-12 dd-w-12 dd-leading-none dd-text-lg dd-font-medium': size === 'large',
-            'dd-h-14 dd-w-14 dd-leading-none dd-text-xl dd-font-medium': size === 'xLarge',
+            'dd-h-14 dd-w-14 dd-leading-none dd-text-xl dd-font-medium': size === 'xLarge', 
             }"
-            class="dd-inline-flex dd-items-center dd-font-medium dd-justify-center dd-rounded-full dd-bg-gray-500"
+            class="dd-inline-flex dd-items-center dd-font-medium dd-justify-center dd-rounded-full"
             ><slot>{{ title.charAt(0) }}</slot></span>
         </div>
     </div>
   </template>
   
   <script>
+import { set } from 'lodash';
+
   export default {
     props: {
       title: {
@@ -55,7 +58,17 @@
         },
         default: "",
       },
+      color: {
+        type: String,
+        default: "",
+      },
       srcLink: {
+        type: String,
+        validator: function (value) {
+        },
+        default: "",
+      },
+      altName: {
         type: String,
         validator: function (value) {
         },
@@ -73,10 +86,12 @@
       type: {
         type: String,
         validator: function (value) {
-          return ["default", "group"].indexOf(value) !== -1;
+          return ["default", "group", "text"].indexOf(value) !== -1;
         },
-        default: "default",
+        default: "text",
       },
+    },
+    computed: {
     },
     data() {
       return {};
