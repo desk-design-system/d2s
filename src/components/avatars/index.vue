@@ -41,7 +41,7 @@
             'dd-h-12 dd-w-12 dd-leading-none dd-text-lg dd-font-medium': size === 'large',
             'dd-h-14 dd-w-14 dd-leading-none dd-text-xl dd-font-medium': size === 'xLarge', 
             }"
-            class="dd-inline-flex dd-items-center dd-font-medium dd-justify-center dd-rounded-full"
+            class="dd-inline-flex dd-items-center dd-font-medium dd-justify-center dd-rounded-full dd-capitalize"
             ><slot>{{ title.charAt(0) }}</slot></span>
         </div>
     </div>
