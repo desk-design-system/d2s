@@ -56,7 +56,7 @@ export default {
        description: "By default button type is color less so change the props default / round / text / circle",
       table:{
         defaultValue:{
-          summary: "-"
+          summary: "default"
         }
       }
     },
