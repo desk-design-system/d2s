@@ -14,7 +14,9 @@
 import DdBadges from "@/components/badges/index.vue";
 export default {
   data() {
-    return {};
+    return {
+      sizes:["mini", "small", "medium", "large", "xLarge"]
+    };
   },
   components: {
     DdBadges,
