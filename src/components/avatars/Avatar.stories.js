@@ -1,10 +1,9 @@
-// import MyButton from './Button.vue';
 import DdAvatar from "./index.vue"
 import { action } from "@storybook/addon-actions"
 
 // More on default export: https://storybook.js.org/docs/vue/writing-stories/introduction#default-export
 export default {
-  title: 'Example/DdAvatar',
+  title: 'Example/Avatar',
   component: DdAvatar,
   // More on argTypes: https://storybook.js.org/docs/vue/api/argtypes
   argTypes: {
@@ -74,17 +73,20 @@ const Template = (args) => ({
 
   },
   // And then the `args` are bound to your component with `v-bind="args"`
-  template: '<img-avatar @click="onClickMethod" v-bind="args" />  ',
+  template: '<dd-avatar v-bind="args" /> ',
 });
 
 
 
 export const Primary = Template.bind({});
 // More on args: https://storybook.js.org/docs/vue/writing-stories/args
-console.log(Primary.args, "small")
 Primary.args = {
   size: 'small',
-  type: 'default'
+  type: 'default',
+  srcLink: 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg',
+  color: '',
+  title: 'Test',
+  altName: 'my image'
 };
 
 

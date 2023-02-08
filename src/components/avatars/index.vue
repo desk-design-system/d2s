@@ -12,7 +12,7 @@
             'dd-h-12 dd-w-12': size === 'large',
             'dd-h-14 dd-w-14': size === 'xLarge',
             }"
-            class="dd-inline-flex dd-inline-block dd-rounded-full" 
+            class="dd-inline-block dd-rounded-full" 
             :src="srcLink" :alt="altName">
         </div>
     
@@ -24,7 +24,7 @@
             :class="{
                 'dd-h-6 dd-w-6': size === 'mini',
             }" 
-            class="dd-inline-flex dd-inline-block dd-h-6 dd-w-6 dd-space-x-1 dd-overflow-hidden dd-rounded-full dd-ring-2 dd-ring-white" 
+            class="dd-inline-block dd-h-6 dd-w-6 dd-space-x-1 dd-overflow-hidden dd-rounded-full dd-ring-2 dd-ring-white" 
             :src="srcLink" :alt="altName">
       </div>
 
@@ -48,14 +48,10 @@
   </template>
   
   <script>
-import { set } from 'lodash';
-
   export default {
     props: {
       title: {
         type: String,
-        validator: function (value) {
-        },
         default: "",
       },
       color: {
@@ -64,14 +60,10 @@ import { set } from 'lodash';
       },
       srcLink: {
         type: String,
-        validator: function (value) {
-        },
         default: "",
       },
       altName: {
         type: String,
-        validator: function (value) {
-        },
         default: "",
       },
       size: {
@@ -90,8 +82,6 @@ import { set } from 'lodash';
         },
         default: "text",
       },
-    },
-    computed: {
     },
     data() {
       return {};
