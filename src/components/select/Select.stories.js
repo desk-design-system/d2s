@@ -60,11 +60,18 @@ const Template = (args) => ({
   setup() {
     const onClickMethod =  (() => action("clicked"))
     const selected = ref('')
-    const value = ref([{
-      name: 'kamil',
+    const value = ref([
+      {
+      name: 'Option 1',
       value: 1,
       avatar:"https://images.unsplash.com/photo-1605496036006-fa36378ca4ab?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
-    }])
+    },
+    {
+      name: 'Option 2',
+      value: 2,
+      avatar:"https://images.unsplash.com/photo-1605496036006-fa36378ca4ab?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
+    },
+  ])
     return { value, selected, args, onClickMethod };
 
   },
