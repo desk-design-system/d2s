@@ -87,19 +87,19 @@ console.log(Primary.args, "Primary")
 Primary.args = {
   color: 'primary',
   title: 'Button',
-  size: 'small',
+  size: 'sm',
   type: 'default'
 };
 Danger.args = {
   color: 'danger',
   title: 'Danger',
-  size: 'small',
+  size: 'sm',
   type: 'default'
 };
 White.args = {
   color: 'white',
   title: 'Button',
-  size: 'small',
+  size: 'sm',
   type: 'default'
 };
 
