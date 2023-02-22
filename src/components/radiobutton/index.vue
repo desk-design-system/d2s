@@ -1,5 +1,5 @@
 <template>
-  <div :class="[ !list ? 'dd-flex dd-items-center dd-justify-center' : 'dd-space-y-2' ]" >
+  <div :class="[ !list ? 'dd-flex dd-items-center  dd-justify-between' : 'dd-space-y-2' ]" >
     <div  v-for="option in options" :key="option[defaultProps.value]" class="dd-flex dd-items-center">
       <input :id="option[defaultProps.value]" name="notification-method" type="radio" :checked="option[defaultProps.value]=== inputModelValue" @click="updateCheckedValue(option[defaultProps.value])" class="dd-cursor-pointer dd-h-4 dd-w-4 dd-border-gray-300 dd-text-teal-600 " />
       <slot name="item" :isSelected="option[defaultProps.value]=== inputModelValue" :option="option">
