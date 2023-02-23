@@ -44,6 +44,7 @@ const Template = (args) => ({
 
 
 
+export const Default = Template.bind({});
 export const Title = Template.bind({});
 export const TitleLeft = Template.bind({});
 // More on args: https://storybook.js.org/docs/vue/writing-stories/args
