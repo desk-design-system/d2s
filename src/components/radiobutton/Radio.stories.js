@@ -2,7 +2,7 @@ import DdRadio from "./index.vue"
 import { ref } from 'vue'
 // More on default export: https://storybook.js.org/docs/vue/writing-stories/introduction#default-export
 export default {
-  title: 'Example/RadioGroup',
+  title: 'Atoms/RadioGroup',
   component: DdRadio,
   // More on argTypes: https://storybook.js.org/docs/vue/api/argtypes
   argTypes: {
