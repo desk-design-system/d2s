@@ -9,7 +9,7 @@ import {
 } from "@heroicons/vue/solid";
 // More on default export: https://storybook.js.org/docs/vue/writing-stories/introduction#default-export
 export default {
-  title: 'Atoms/Tabs',
+  title: 'Molecules/Tabs',
   component: DdTabs,
   // More on argTypes: https://storybook.js.org/docs/vue/api/argtypes
   argTypes: {
