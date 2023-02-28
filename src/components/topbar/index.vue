@@ -5,7 +5,7 @@
     </div>
     <div class="dd-w-full dd-mr-2 dd-block dd-flex-grow lg:dd-flex lg:dd-items-center lg:dd-w-auto">
       <div class="dd-text-sm lg:dd-flex-grow">
-        <ddinput class="dd-w-3/5 dd-ml-12" />
+        <ddinput @update:modelValue="value" @change="emitSparkSearchEntry" class="dd-w-3/5 dd-ml-12" />
       </div>
       <ddavatar class="dd-h-8 dd-w-8" :srcLink="props.srcLink" />
     </div>
@@ -16,11 +16,15 @@
 import { defineComponent, defineProps } from 'vue'
 import ddinput from '../input/index.vue'
 import ddavatar from '../avatars/index.vue'
+import { emit } from 'process';
 
 const props = defineProps( {
   srcLink: {
     type: String,
     default: "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg",
   }
-} )
+})
+const emitSparkSearchEntry = (value) => {
+  emit('sparkSearch', value)
+}
 </script>
