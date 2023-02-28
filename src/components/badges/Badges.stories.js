@@ -2,7 +2,7 @@
 import ddBadge from "./index.vue"
 // More on default export: https://storybook.js.org/docs/vue/writing-stories/introduction#default-export
 export default {
-    title: 'Example/Badge',
+    title: 'Atoms/Badge',
     component: ddBadge,
     // More on argTypes: https://storybook.js.org/docs/vue/api/argtypes
     argTypes: {
