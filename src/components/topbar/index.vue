@@ -1,0 +1,26 @@
+<template>
+  <nav class="dd-flex dd-items-center dd-justify-between dd-bg-white">
+    <div class="dd-flex dd-items-center dd-justify-center dd-opacity-100 dd-h-14 dd-w-32" style="background-color: rgba(15,118,110, 1);  border-radius: 0px 100px 100px 0px;">
+      <span class="dd-opacity-100 dd-text-sm dd-font-medium dd-not-italic dd-tracking-normal dd-text-center dd-align-center dd-text-white dd-leading-4">Repair Shop</span>
+    </div>
+    <div class="dd-w-full dd-mr-2 dd-block dd-flex-grow lg:dd-flex lg:dd-items-center lg:dd-w-auto">
+      <div class="dd-text-sm lg:dd-flex-grow">
+        <ddinput class="dd-w-3/5 dd-ml-12" />
+      </div>
+      <ddavatar class="dd-h-8 dd-w-8" :srcLink="props.srcLink" />
+    </div>
+  </nav>
+</template>
+
+<script setup>
+import { defineComponent, defineProps } from 'vue'
+import ddinput from '../input/index.vue'
+import ddavatar from '../avatars/index.vue'
+
+const props = defineProps( {
+  srcLink: {
+    type: String,
+    default: "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg",
+  }
+} )
+</script>
