@@ -174,7 +174,6 @@ export default {
       type: String,
       default: "primary",
     },
-
     disable: {
       type: Boolean,
       default: false,
