@@ -1,6 +1,6 @@
 <template>
   <nav class="dd-flex dd-items-center dd-justify-between dd-bg-white">
-    <div class="dd-flex dd-items-center dd-justify-center dd-opacity-100 dd-h-14 dd-w-32" style="background-color: rgba(15,118,110, 1);  border-radius: 0px 100px 100px 0px;">
+    <div class="dd-flex dd-items-center dd-justify-center dd-opacity-100 dd-h-14 dd-w-32 dd-bg-teal-700 dd-rounded-r-full">
       <span class="dd-opacity-100 dd-text-sm dd-font-medium dd-not-italic dd-tracking-normal dd-text-center dd-align-center dd-text-white dd-leading-4">Repair Shop</span>
     </div>
     <div class="dd-w-full dd-mr-2 dd-block dd-flex-grow lg:dd-flex lg:dd-items-center lg:dd-w-auto">
