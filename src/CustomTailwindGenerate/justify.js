@@ -1,0 +1,17 @@
+const justify = [
+    'dd-justify-start',
+    'dd-justify-end',
+    'dd-justify-center',
+    'dd-justify-between',
+    'dd-justify-around',
+    'dd-justify-evenly',
+    'dd-justify-items-start',
+    'dd-justify-items-end',
+    'dd-justify-items-center',
+    'dd-justify-items-stretch',
+    'dd-justify-self-auto',
+    'dd-justify-self-start',
+    'dd-justify-self-end',
+    'dd-justify-self-center',
+    'dd-justify-self-stretch',
+]
