@@ -115,7 +115,7 @@ Primary.args = {
 Text.args = {
   title: 'Drop Down',
   type: 'text',
-  size:"sm",
+  size:"xs",
   placement: "left"
 };
 
