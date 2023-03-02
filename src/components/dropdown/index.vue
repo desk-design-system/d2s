@@ -1,17 +1,32 @@
 <template>
   <Menu as="div" class="dd-relative dd-inline-block dd-text-left">
     <div>
-      <MenuButton class="dd-inline-flex dd-w-full dd-justify-center dd-rounded-md dd-border dd-border-gray-300 dd-bg-white dd-px-4 dd-py-2 dd-text-sm dd-font-medium dd-text-gray-700 dd-shadow-sm hover:dd-bg-gray-50">
-        Options
-        <ChevronDownIcon class="-dd-mr-1 dd-ml-2 dd-h-5 dd-w-5" aria-hidden="true" />
+      <MenuButton :class="{ ...basicButton }" class="dd-inline-flex dd-w-full dd-justify-center ">
+        <slot>
+          {{ title }}
+        </slot>
+        <span :class="[size == 'xs' ? 'dd-h-4 dd-w-4' : 'dd-h-5 dd-w-5', title != '' ? '-dd-mr-1 dd-ml-1' : '']" class="">
+          <slot name="icon">
+            <ChevronDownIcon aria-hidden="true" />
+          </slot>
+        </span>
       </MenuButton>
     </div>
 
-    <transition enter-active-class="dd-transition dd-ease-out dd-duration-100" enter-from-class="dd-transform dd-opacity-0 dd-scale-95" enter-to-class="dd-transform dd-opacity-100 dd-scale-100" leave-active-class="dd-transition dd-ease-in dd-duration-75" leave-from-class="dd-transform dd-opacity-100 dd-scale-100" leave-to-class="dd-transform dd-opacity-0 dd-scale-95">
-      <MenuItems class="dd-absolute dd-left-0 dd-z-10 dd-mt-2 dd-w-fit dd-whitespace-nowrap dd-origin-top-right dd-rounded-md dd-bg-white dd-shadow-lg dd-ring-1 dd-ring-black dd-ring-opacity-5 focus:dd-outline-none">
+    <transition enter-active-class="dd-transition dd-ease-out dd-duration-100"
+      enter-from-class="dd-transform dd-opacity-0 dd-scale-95" enter-to-class="dd-transform dd-opacity-100 dd-scale-100"
+      leave-active-class="dd-transition dd-ease-in dd-duration-75"
+      leave-from-class="dd-transform dd-opacity-100 dd-scale-100" leave-to-class="dd-transform dd-opacity-0 dd-scale-95">
+      <MenuItems
+        :class="`dd-absolute {dd-${placement}-0 dd-z-10 dd-mt-2 dd-w-fit dd-whitespace-nowrap dd-origin-top-${placement} dd-rounded-md dd-bg-white dd-shadow-lg dd-ring-1 dd-ring-black dd-ring-opacity-5 focus:dd-outline-none`">
         <div class="dd-py-1">
-          <MenuItem v-slot="{ active }">
-            <a href="#" :class="[active ? 'dd-bg-gray-100 dd-text-gray-900' : 'dd-text-gray-700', 'dd-block dd-px-4 dd-py-2 dd-text-sm']">Account settings</a>
+          <MenuItem @click="getClick(item)" v-for="item in options" :key="item" v-slot="{ active }">
+          <span href="#"
+            :class="[active ? 'dd-bg-teal-50 dd-text-teal-600' : 'dd-text-gray-700', 'dd-block dd-py-2 dd-px-4 dd-cursor-pointer', size == 'xs' ? 'dd-text-xs' : 'dd-text-sm']">
+            <slot name="items" :item="item">
+              {{ item[props.defaultProps.name] }}
+            </slot>
+          </span>
           </MenuItem>
         </div>
       </MenuItems>
@@ -20,6 +35,107 @@
 </template>
 
 <script setup>
+import { ref, computed } from "vue"
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
 import { ChevronDownIcon } from '@heroicons/vue/solid'
+const emits = defineEmits( ['update:modelValue', "change"] )
+const props = defineProps( {
+  title: {
+    type: String,
+    default: "",
+  },
+  options: {
+    type: Array,
+    required: true
+  },
+
+  defaultProps: {
+    type: Object,
+    default: () => ( {
+      name: 'name',
+      value: 'value',
+      avatar: 'avatar'
+    } )
+  },
+  color: {
+    type: String,
+    default: "default",
+  },
+  type: {
+    type: String,
+    validator: function ( value ) {
+      // The value must match one of these strings
+      return (
+        ["button", "text",].indexOf( value ) !== -1
+      )
+    },
+    default: "button",
+  },
+  placement: {
+    type: String,
+    validator: function ( value ) {
+      // The value must match one of these strings
+      return (
+        ["right", "left",].indexOf( value ) !== -1
+      )
+    },
+    default: "right",
+  },
+  size: {
+    type: String,
+    validator: function ( value ) {
+      // The value must match one of these strings
+      return (
+        ["xs", "sm", "base", "lg", "xl"].indexOf( value ) !== -1
+      )
+    },
+    default: "base",
+  },
+  defaultProps: {
+    type: Object,
+    default: () => ( {
+      name: 'name',
+      value: 'value',
+    } )
+  }
+} )
+const getClick = ( i ) => {
+  emits( "command", i )
+}
+const basicButton = computed( () => {
+  // return {
+  if ( props.type == 'text' ) {
+    return {
+      "dd-text-xs ": props.size === "xs",
+      "dd-text-sm  ":
+        props.size === "sm",
+      "dd-text-sm ": props.size === "base",
+      "dd-text-base ": props.size === "lg",
+      "dd-text-base ": props.size === "xl",
+      "dd-text-teal-600  hover:dd-text-teal-700": props.color === "primary",
+      "dd-text-red-600  hover:dd-text-red-200": props.color === "danger",
+      " dd-text-gray-600 dd-border hover:dd-text-gray-700":
+        props.color === "",
+    }
+  } else {
+    return {
+      "dd-border-gray-300 dd-text-gray-700 dd-border  focus:dd-outline-none":
+        props.color,
+      "dd-px-2.5 dd-py-1.5  dd-text-xs dd-rounded": props.size === "xs",
+      "dd-px-3 dd-py-2 dd-text-sm  dd-h-9 dd-rounded-md":
+        props.size === "sm",
+      "dd-px-4 dd-py-2 dd-text-sm dd-rounded-md": props.size === "base",
+      "dd-px-4 dd-py-2 dd-text-base dd-rounded-md": props.size === "lg",
+      "dd-px-6 dd-py-3 dd-text-base dd-rounded-md": props.size === "xl",
+      "dd-cursor-not-allowed !dd-bg-gray-200 !dd-text-gray-400 hover:dd-bg-gray-300":
+        props.disable,
+      "dd-bg-teal-600 dd-text-white hover:dd-bg-teal-700":
+        props.color === "primary",
+      "dd-bg-red-600 dd-text-white hover:dd-bg-red-700":
+        props.color === "danger",
+      "dd-bg-white dd-border-gray-300 dd-text-gray-700 dd-border hover:dd-bg-gray-50 focus:dd-outline-none":
+        props.color === "white",
+    }
+  }
+} )
 </script>
