@@ -13,6 +13,8 @@ const position = [
   'dd-inset-px',
   'dd-inset-x-px',
   'dd-inset-y-px',
-  'dd-top-14'
+  'dd-top-14',
+  'dd-top-16',
+  'dd-top-20',
 
 ]
