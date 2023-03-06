@@ -1,6 +1,6 @@
 <template>
 <div>
-  <div v-if="currentIcon" :width='props.width' :height='props.height'>
+  <div v-if="currentIcon" :style="{'width': props.width, 'height': props.height}" >
     <component :is="currentIcon" :stroke="props.selectedItem !== '' ? 'teal' : 'gray'"/>
   </div>
 </div>                         
@@ -10,8 +10,8 @@
 
 import { defineProps, watchEffect, shallowRef, defineEmits, defineAsyncComponent } from "vue";
   const props = defineProps({
-    item: {
-      type: Object,
+    icon: {
+      type: String,
       required: true,
     },
     color: {
@@ -21,11 +21,11 @@ import { defineProps, watchEffect, shallowRef, defineEmits, defineAsyncComponent
     },
     height: {
       type: String,
-      default: '32px'
+      default: '20px'
     },
     width: {
       type: String,
-      default: '32px'
+      default: '20px'
     },
     selectedItem: {
       type: String,
@@ -35,7 +35,7 @@ import { defineProps, watchEffect, shallowRef, defineEmits, defineAsyncComponent
   const currentIcon = shallowRef('')
 
   watchEffect(() => {
-    import(`../icons/${props.item.component}.vue`).then(val => {
+    import(`../icons/${props.icon}.vue`).then(val => {
       currentIcon.value = val.default
     })
   })

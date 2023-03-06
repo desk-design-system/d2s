@@ -8,8 +8,8 @@
               <li class="dd-flex dd-align-center dd-justify-center">
                   <a href="#" class="dd-flex dd-justify-center dd-flex-col pp-mt-3 dd-items-center dd-p-2 dd-text-base dd-font-normal dd-text-gray-900 dd-rounded-lg dark:dd-text-white">
                     
-                    <div v-for="(item, index) in items" :key="index" :class="selectedItem == item.component ? 'dd-bg-gray-100' : ''" class="dd-mt-2 hover:dd-bg-gray-100 dd-p-2"> 
-                      <leftBarItem @click="emitEventClicked(item)" :selected-item="selectedItem == item.component ? selectedItem : ''" :item="item" :color="item.color" :height="item.height" :width="item.width" ></leftBarItem>
+                    <div v-for="(item, index) in items" :key="index" :class="selectedItem == item[defaultProps.value] ? 'dd-bg-gray-100' : ''" class="dd-mt-2 hover:dd-bg-gray-100 dd-p-2"> 
+                      <leftBarItem @click="handleClicked(item)" :selected-item="selectedItem == item[defaultProps.value] ? selectedItem : ''" :icon="item[defaultProps.icon]" :color="item.color" :height="item.height" :width="item.width" ></leftBarItem>
                     </div>
                   </a>
               </li>
@@ -22,7 +22,7 @@
 
 <script setup>
 
-import { defineProps, defineEmits, ref } from "vue";
+import { defineProps, defineEmits, ref,computed } from "vue";
 import { emit } from "process"
 import leftBarItem from './LeftBarItem.vue'
 
@@ -31,11 +31,32 @@ import leftBarItem from './LeftBarItem.vue'
       type: Array,
       required: true,
     },
+    modelValue: {
+    type: [String, Number],
+    default: null,
+  },
+  defaultProps: {
+    type: Object,
+    default: () => ( {
+      icon: 'icon',
+      value: 'value',
+    } )
+  }
   }) 
 
-  const selectedItem = ref(props.items[0].component)
-  const emitEventClicked = (item) => {
-      selectedItem.value = item.component
+  const inputModelValue = computed( {
+  get () {
+    return props.modelValue
+  },
+  set ( val ) {
+    emits( "update:modelValue", val )
+    
+  }
+} )
+
+  const selectedItem = ref(null)
+  const handleClicked = (item) => {
+      selectedItem.value =  item[defaultProps.value]
       emit('itemclicked', item);
     };
 
