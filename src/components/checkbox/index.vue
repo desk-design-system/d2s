@@ -1,9 +1,9 @@
 <template>
-  <div class="dd-flex dd-items-center  dd-justify-start" >
+  <div class="dd-flex !dd-items-center  !dd-justify-start" >
     
-      <input value="test" v-bind="$attrs" :id="id" v-model="inputModelValue" type="checkbox"  class="dd-h-4 dd-w-4 dd-rounded dd-border-gray-300 dd-text-teal-600 focus:dd-ring-teal-500 dd-cursor-pointer" />
-      <slot name="title">
-        <label class="dd-ml-3 dd-block dd-text-sm dd-font-medium dd-text-gray-700">
+      <input value="test" v-bind="$attrs" :id="id" v-model="inputModelValue" type="checkbox"  class="!dd-h-4 !dd-w-4 !dd-rounded !dd-border-gray-300 !dd-text-teal-600 focus:!dd-ring-teal-500 !dd-cursor-pointer" />
+      <slot name="label">
+        <label class="!dd-ml-3 !dd-block !dd-text-sm !dd-font-medium !dd-text-gray-700">
           {{ label }}
         </label>
       </slot>
