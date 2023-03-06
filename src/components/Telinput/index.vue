@@ -1,4 +1,5 @@
 <template>
+  <label class=" dd-block dd-text-sm dd-font-medium dd-text-gray-700 dd-mb-1">{{ label }}</label>
   <vue-tel-input v-bind="config" :id="id" v-model="inputModelValue"></vue-tel-input>
 </template>
 <script setup>
@@ -9,6 +10,10 @@ import 'vue-tel-input/dist/vue-tel-input.css';
 const emits = defineEmits( ['update:modelValue','change'] )
 const props = defineProps( {
   id: {
+    type: String,
+    default: "",
+  },
+  label: {
     type: String,
     default: "",
   },
