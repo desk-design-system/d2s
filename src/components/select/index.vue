@@ -69,7 +69,7 @@ const props = defineProps( {
   },
   placeholder: {
     type: String,
-    default: "Select",
+    default: "",
   },
   value: {
     type: String,
