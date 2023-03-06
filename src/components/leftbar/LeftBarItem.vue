@@ -1,7 +1,7 @@
 <template>
 <div>
   <div v-if="currentIcon" :style="{'width': props.width, 'height': props.height}" >
-    <component :is="currentIcon" :stroke="props.selectedItem !== '' ? 'teal' : 'gray'"/>
+    <component :is="currentIcon" :stroke="props.selectedItem ? 'teal' : 'gray'"/>
   </div>
 </div>                         
 </template>
@@ -19,7 +19,7 @@ import { defineProps, watchEffect, shallowRef, defineEmits, defineAsyncComponent
       required: true,
       default: 'red'
     },
-    height: {
+  height: {
       type: String,
       default: '20px'
     },
@@ -28,8 +28,8 @@ import { defineProps, watchEffect, shallowRef, defineEmits, defineAsyncComponent
       default: '20px'
     },
     selectedItem: {
-      type: String,
-      default: ""
+      type: Boolean,
+      default: false
     }
   }) 
   const currentIcon = shallowRef('')
