@@ -1,6 +1,6 @@
 <template>
   <Listbox v-bind="$attrs" as="div" v-model="inputModelValue">
-    <ListboxLabel v-if="props.title != ''" class="dd-block text-sm  dd-text-gray-400 dd-capitalize"> {{ props.title }}
+    <ListboxLabel v-if="props.title != ''" class="dd-block text-sm  dd-text-gray-400 dd-capitalize"> {{ props.label }}
     </ListboxLabel>
     <div class="mt-1 relative">
       <ListboxButton
@@ -55,7 +55,7 @@ import { CheckIcon, ChevronDownIcon } from '@heroicons/vue/solid'
 import ddAvatar from "../avatars/index.vue"
 const emits = defineEmits( ['update:modelValue', "change"] )
 const props = defineProps( {
-  title: {
+  label: {
     type: String,
     default: "",
   },
