@@ -3,9 +3,9 @@
     <div>
       <MenuButton :class="{ ...basicButton }" class="dd-inline-flex dd-w-full dd-justify-center ">
         <slot>
-          {{ title }}
+          {{ label }}
         </slot>
-        <span :class="[size == 'xs' ? 'dd-h-4 dd-w-4' : 'dd-h-5 dd-w-5', title != '' ? '-dd-mr-1 dd-ml-1' : '']" class="">
+        <span :class="[size == 'xs' ? 'dd-h-4 dd-w-4' : 'dd-h-5 dd-w-5', label != '' ? '-dd-mr-1 dd-ml-1' : '']" class="">
           <slot name="icon">
             <ChevronDownIcon aria-hidden="true" />
           </slot>
@@ -40,7 +40,7 @@ import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
 import { ChevronDownIcon } from '@heroicons/vue/solid'
 const emits = defineEmits( ['update:modelValue', "change"] )
 const props = defineProps( {
-  title: {
+  label: {
     type: String,
     default: "",
   },
