@@ -99,4 +99,7 @@ const grids = [
     'dd-auto-rows-min',
     'dd-auto-rows-max',
     'dd-auto-rows-fr',
+    'dd-gap-0',
+    'dd-gap-x-0',
+    'dd-gap-4',
 ]
