@@ -1,6 +1,6 @@
 <template>
   <Listbox v-bind="$attrs" as="div" v-model="inputModelValue">
-    <ListboxLabel v-if="props.title != ''" class="dd-block text-sm  dd-text-gray-400 dd-capitalize"> {{ props.label }}
+    <ListboxLabel v-if="props.title != ''" class="dd-block text-sm  dd-text-gray-700 dd-capitalize"> {{ props.label }}
     </ListboxLabel>
     <div class="mt-1 relative">
       <ListboxButton
