@@ -45,6 +45,7 @@ const inputModelValue = computed( {
   border-radius:6px  !important;
   border-width: 1px;
   border-color: #D1D5DB !important;
+  height: 36px !important;
 }
 .vue-tel-input input{
   border-top-right-radius: 6px  !important;
@@ -54,7 +55,7 @@ const inputModelValue = computed( {
 .vue-tel-input:focus-within {
   box-shadow: unset !important;
   border-color:  #0f766e !important;
-  border-width: 1px;
+  border-width: 2px;
 }
 .vti__dropdown{
   border-top-left-radius: 6px  !important;
