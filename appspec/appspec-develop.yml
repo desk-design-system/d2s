@@ -1,0 +1,20 @@
+version: 0.0
+os: linux
+files:
+  - source: ./
+    destination: /var/www/d2s.repairdesk.co/
+permissions:
+  - object: /var/www/d2s.repairdesk.co/
+    pattern: "**"
+    owner: www-data
+    group: www-data
+    mode: 664
+    type:
+      - file
+  - object: /var/www/d2s.repairdesk.co/
+    pattern: "**"
+    owner: www-data
+    group: www-data
+    mode: 775
+    type:
+      - directory
