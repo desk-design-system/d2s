@@ -1,4 +1,2 @@
 #!/bin/bash
-cd /var/www/node-rc-api.repairdesk.co/
-pm2 stop NodeRCApi
-sudo rm -rf /var/www/node-rc-api.repairdesk.co/*
+sudo rm -rf /var/www/d2s.repairdesk.co/*
