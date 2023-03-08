@@ -1,4 +1,4 @@
-An progressive [Vue Js](https://vuejs.org/) framework for building efficient and scalable client-side applications.
+A progressive [Vue Js](https://vuejs.org/) framework for building efficient and scalable client-side applications.
 
 
  ![](https://img.shields.io/github/release/pandao/editor.md.svg) ![](https://img.shields.io/bower/v/editor.md.svg)
