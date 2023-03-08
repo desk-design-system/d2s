@@ -18,3 +18,8 @@ permissions:
     mode: 775
     type:
       - directory
+hooks:
+  BeforeInstall:
+    - location: appspec/stopdevelop
+      timeout: 30
+      runas: root
