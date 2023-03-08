@@ -16,7 +16,7 @@
       "require": "./dist/style.css"
     }
   },
-  "version": "0.0.2",
+  "version": "1.2.0",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -29,7 +29,8 @@
     "@heroicons/vue": "^1.0.6",
     "@vue-hero-icons/outline": "^1.7.2",
     "@vue-hero-icons/solid": "^1.7.2",
-    "vue": "^3.2.40"
+    "vue": "^3.2.40",
+    "vue-tel-input": "^6.0.5"
   },
   "devDependencies": {
     "@babel/core": "^7.20.12",

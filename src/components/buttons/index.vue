@@ -73,9 +73,9 @@
       ' dd-px-4 dd-py-2 dd-text-sm': size === 'base',
       ' dd-px-4 dd-py-2 dd-text-base': size === 'lg',
       ' dd-px-6 dd-py-3 dd-text-base': size === 'xl',
-      ' dd-text-teal-700 hover:dd-bg-teal-700': color === 'primary',
-      ' dd-text-red-600 hover:dd-bg-red-700': color === 'danger',
-      'dd-cursor-not-allowed  !dd-text-gray-400 hover:dd-text-gray-500 hover:dd-bg-transparent	': disable,
+      ' dd-text-teal-700 hover:dd-text-teal-700': color === 'primary',
+      ' dd-text-red-600 hover:dd-text-red-700': color === 'danger',
+      'dd-cursor-not-allowed  !dd-text-gray-400 hover:dd-text-gray-500 hover:dd-text-transparent	': disable,
     }" class="
         dd-inline-flex
         dd-items-center

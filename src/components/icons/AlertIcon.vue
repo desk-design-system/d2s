@@ -1,6 +1,6 @@
 <template>
-<svg width="18px" height="16px" viewBox="0 0 18 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <g id="☮️-Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+<svg  viewBox="0 0 18 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g id="☮️-Icons"  stroke-width="1" fill="none" fill-rule="evenodd">
         <g id="Icon-20px" transform="translate(-975.000000, -277.000000)">
             <g id="Icons/20px/Alert" transform="translate(974.000000, 276.000000)">
                 <polygon id="Path" points="0 0 20 0 20 20 0 20"></polygon>

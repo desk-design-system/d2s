@@ -1,10 +1,10 @@
 <template>
   <Listbox v-bind="$attrs" as="div" v-model="inputModelValue">
-    <ListboxLabel v-if="props.title != ''" class="dd-block text-sm  dd-text-gray-400 dd-capitalize"> {{ props.title }}
+    <ListboxLabel v-if="props.title != ''" class="dd-block text-sm dd-font-medium  dd-text-gray-700 dd-capitalize"> {{ props.label }}
     </ListboxLabel>
     <div class="mt-1 relative">
       <ListboxButton
-        class="dd-flex dd-items-center dd-cursor-pointer dd-bg-white dd-relative dd-min-w-[320px] dd-border dd-border-gray-300 dd-rounded-md dd-shadow-sm dd-pl-3 dd-pr-10 dd-py-2 dd-text-left  dd-h-9   sm:dd-text-sm">
+        class="dd-flex dd-items-center dd-cursor-pointer dd-bg-white dd-relative dd-w-full dd-border dd-border-gray-300 dd-rounded-md dd-shadow-sm dd-pl-3 dd-pr-10 dd-py-2 dd-text-left  dd-h-9   sm:dd-text-sm">
         <!-- <div class="dd-flex dd-items-center dd-mb-3"> -->
         <ddAvatar v-if="selectedValue && showAvatar" size="mini" class="dd-mr-3"
           :srcLink="selectedValue[props.defaultProps.avatar]" />
@@ -55,7 +55,7 @@ import { CheckIcon, ChevronDownIcon } from '@heroicons/vue/solid'
 import ddAvatar from "../avatars/index.vue"
 const emits = defineEmits( ['update:modelValue', "change"] )
 const props = defineProps( {
-  title: {
+  label: {
     type: String,
     default: "",
   },
@@ -69,7 +69,7 @@ const props = defineProps( {
   },
   placeholder: {
     type: String,
-    default: "Select",
+    default: "",
   },
   value: {
     type: String,

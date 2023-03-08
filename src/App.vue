@@ -1,6 +1,5 @@
 <template>
-  <div class="container mx-auto">
-    
+  <div class="dd-container dd-mx-auto dd-m-5">
   </div>
 </template>
 <script>

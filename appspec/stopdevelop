@@ -1,0 +1,2 @@
+#!/bin/bash
+sudo rm -rf /var/www/d2s.repairdesk.co/*
