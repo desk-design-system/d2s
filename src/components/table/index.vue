@@ -50,11 +50,6 @@ const props = defineProps( {
     required: true
   },
 
-  
-  modelValue: {
-    type: [String, Number],
-    default: null,
-  },
   defaultProps: {
     type: Object,
     default: () => ( {
@@ -63,21 +58,6 @@ const props = defineProps( {
       avatar: 'avatar'
     } )
   }
-} )
-const inputModelValue = computed( {
-  get () {
-    return props.modelValue
-  },
-  set ( val ) {
-    emits( "update:modelValue", val )
-    emits( "change", val )
-  }
-} )
-const selectedValue = computed( () => {
-  return props.options.find( ( predicate ) => {
-    return predicate[props.defaultProps.value] == inputModelValue.value
-  } )
-
 } )
 </script>
 
