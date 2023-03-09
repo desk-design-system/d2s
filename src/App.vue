@@ -1,9 +1,9 @@
 <template>
   <div class="dd-container dd-mx-auto dd-m-5">
+    
   </div>
 </template>
-<script>
-
+<script >
 export default {
   data() {
     return {
@@ -11,7 +11,11 @@ export default {
     };
   },
   components:{
-
+    
   }
 };
+</script>
+
+<script setup>
+
 </script>
