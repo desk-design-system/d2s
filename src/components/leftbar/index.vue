@@ -1,5 +1,5 @@
 <template>
-  <div class="dd-fixed dd-top-14">
+  <div class="dd-fixed dd-top-14 dd-z-10">
       <aside ref="leftBarRef" id="default-sidebar" class="dd-shadow dd-fixed dd-top-15 dd-left-0 dd-z-40 dd-w-16 dd-h-screen dd-transition-transform dd-translate-x-full sm:dd-translate-x-0" aria-label="Sidebar">
         <div class="dd-h-full dd-py-4 dd-overflow-y-auto dd-bg-white">
             <ul class="space-y-2">
