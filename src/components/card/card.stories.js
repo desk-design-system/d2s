@@ -15,6 +15,16 @@ export default {
                 }
             }
         },
+        elevation:{
+          control: { type: 'select' },
+          options: ["none", "sm", "lg", 'xl'],
+          description: "Change the elevtion of card",
+          table:{
+            defaultValue:{
+              summary: "none"
+            }
+          }
+        },
         class: {
             
             description: "Change color value as per the requirement primary / danger / success / white",
@@ -46,7 +56,8 @@ export const Index = Template.bind({});
 // More on args: https://storybook.js.org/docs/vue/writing-stories/args
 Index.args = {
     title: 'The face of the moon in shadow.',
-    class: "dd-bg-black"
+    class: "dd-bg-black",
+    elevation: 'sm'
 };
 
 
