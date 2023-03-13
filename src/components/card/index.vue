@@ -50,7 +50,7 @@ export default {
       type: Boolean,
       default: false
     },
-    heading:{
+    title:{
       type: String,
       default: ''
     },
