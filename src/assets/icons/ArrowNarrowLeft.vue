@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="14px" height="10px" viewBox="0 0 14 10" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<template>
+<svg  viewBox="0 0 14 10" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <title>Icons/20px/Arrow-narrow-left</title>
     <g id="☮️-Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <g id="Icon-20px" transform="translate(-1177.000000, -209.000000)">
@@ -12,3 +12,4 @@
         </g>
     </g>
 </svg>
+</template>
