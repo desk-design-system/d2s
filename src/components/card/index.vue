@@ -1,6 +1,13 @@
 <template>
-  <div class="dd-card" :class="[hasCustomClass ? customStyle : defaultClasses, elevationFun ]">
+  <div class="dd-card dd-rounded dd-bg-white" :class="elevationFun">
+    <div class="dd-p-5 dd-border-b dd-border-gray-300" v-if="header">
+      <p class="dd-text-lg dd-text-gray-700 dd-font-medium dd-pb-1">{{ heading }} </p>
+      <p class="dd-text-sm dd-text-gray-700">{{ subHeading }}</p>
+    </div>
+    <!-- :class="[hasCustomClass ? customStyle : defaultClasses]" -->
+    <div class="dd-p-5" >
     <slot> {{ title }} </slot>
+  </div>
   </div>
 </template>
 
@@ -25,11 +32,11 @@ export default {
       }
     }
   },
-  data () {
-    return {
-      defaultClasses: "dd-p-6 dd-rounded dd-bg-white"
-    }
-  },
+  // data () {
+  //   return {
+  //     defaultClasses: "dd-p-6 dd-rounded dd-bg-white"
+  //   }
+  // },
   props: {
     title: {
       type: String,
@@ -38,6 +45,18 @@ export default {
     customStyle: {
       type: String,
       default: ""
+    },
+    header:{
+      type: Boolean,
+      default: false
+    },
+    heading:{
+      type: String,
+      default: ''
+    },
+    subHeading:{
+      type: String,
+      default: ''
     },
     elevation: {
       type: String,

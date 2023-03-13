@@ -1,0 +1,14 @@
+<template>
+<svg  viewBox="0 0 12 11" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g id="⚡️-First-Release-Multistore" stroke="currentColor" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="New-Unit-Flow-1" transform="translate(-1297.000000, -331.000000)">
+            <g id="Icons/16px/Chevron-Left" transform="translate(1295.000000, 328.500000)">
+                <polygon id="Path" points="0 0 16 0 16 16 0 16"></polygon>
+                <line x1="3.33333333" y1="8" x2="12.6666667" y2="8" id="Path" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></line>
+                <line x1="3.33333333" y1="8" x2="7.33333333" y2="12" id="Path" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></line>
+                <line x1="3.33333333" y1="8" x2="7.33333333" y2="4" id="Path" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"></line>
+            </g>
+        </g>
+    </g>
+</svg>
+</template>
