@@ -110,7 +110,7 @@ export default {
     icon:{
       type: String,
       default: null,
-    }
+    },
     // vertical: Boolean,
     // iconstyle: {
     //   type: String,
