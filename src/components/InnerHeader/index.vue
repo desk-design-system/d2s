@@ -1,5 +1,5 @@
 <template>
-  <div class="dd-flex dd-justify-between dd-items-center">
+  <div class="dd-flex dd-justify-between dd-items-center dd-mb-6">
     <div class="dd-flex ">
       <span v-if="isBack" @click="$emit('onGoBack')" class="dd-cursor-pointer dd-pt-2 dd-mr-2  ">
         <svgComponent icon="ArrowLeft" size="16" class="dd-text-gray-500"  />
