@@ -1,5 +1,5 @@
 <template>
-  <div class="dd-card dd-rounded dd-bg-white" :class="elevationFun">
+  <div class="dd-card dd-rounded dd-bg-white dd-mb-4" :class="elevationFun">
     <div class="dd-p-5 dd-border-b dd-border-gray-300" v-if="header">
       <p class="dd-text-lg dd-text-gray-700 dd-font-medium dd-pb-1">{{ title }} </p>
       <p class="dd-text-sm dd-text-gray-700">{{ subTitle }}</p>
