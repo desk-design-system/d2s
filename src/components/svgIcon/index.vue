@@ -1,5 +1,5 @@
 <template>
-    <component v-bind="$attrs" :style="{'width': props.width, 'height': props.height}" :is="currentIcon" class="dd-svg" />
+    <component v-bind="$attrs" :stroke="'#d12026'" :style="{'width': `${props.size + 'px'}`, 'height': `${props.size + 'px'}`}" :is="currentIcon" class="dd-svg" />
 </template>
 
 <script setup>
@@ -10,11 +10,7 @@ const props = defineProps({
     type: String,
     required: true,
   },
-  width:{
-    type: String,
-    default: "20"
-  },
-  height:{
+  size:{
     type: String,
     default: "20"
   },
