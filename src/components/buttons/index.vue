@@ -9,10 +9,9 @@
           dd-capitalize
           dd-whitespace-nowrap
         ">
-      <svgIcon v-bind="$attrs" v-if="prefix" :icon="icon" :size="iconSize" />
+      <svgIcon  v-if="prefix" :icon="icon" :size="iconSize" />
     <slot>{{ title }}</slot>
-
-    <svgIcon v-bind="$attrs" v-if="suffix" :icon="icon" :size="iconSize" />
+    <svgIcon  v-if="suffix" :icon="icon" :size="iconSize" />
   </button>
 
   <!-- round -->
@@ -126,7 +125,7 @@ export default {
     // },
     title: {
       type: String,
-      default: "Button",
+      default: "",
     },
     color: {
       type: String,
@@ -192,6 +191,9 @@ export default {
   data () {
     return {}
   },
+  components:{
+    svgIcon
+  }
 }
 </script>
 
