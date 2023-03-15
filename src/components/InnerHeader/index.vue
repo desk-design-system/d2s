@@ -5,7 +5,7 @@
         <svgComponent icon="ArrowLeft" size="16" class="dd-text-gray-500"  />
       </span>
       <div>
-        <p class="dd-flex dd-items-center dd-text-lg dd-text-gray-700 dd-font-medium">{{ title }} <svgComponent @click="$emit('onEdit')" v-if="isEdit" icon="Edit" size="16" class="dd-text-gray-500 dd-ml-2"  /></p> 
+        <p class="dd-flex dd-items-center dd-text-lg dd-text-gray-700 dd-font-medium">{{ title }} <svgComponent @click="$emit('onEdit')" v-if="isEdit" icon="Edit" size="16" class="dd-text-gray-500 dd-ml-2 dd-cursor-pointer"  /></p> 
         <p class="dd-text-sm dd-text-gray-700">{{ subTitle }}</p>
       </div>
     </div>
