@@ -1,7 +1,7 @@
 import AlertComponent from "./index.vue";
 import { createComponent } from "./helpers";
 
-export const useAlert = (globalProps = {}) => {
+export const useNotification = (globalProps = {}) => {
   return {
     open(options) {
       let message = null;

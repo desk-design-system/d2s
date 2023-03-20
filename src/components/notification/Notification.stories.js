@@ -1,8 +1,7 @@
 import DdButton from "../buttons/index.vue"
 import { action } from "@storybook/addon-actions"
-import {useAlert} from "./index.js"
-import {ref} from 'vue'
 // More on default export: https://storybook.js.org/docs/vue/writing-stories/introduction#default-export
+import { inject, onMounted } from "vue";
 export default {
   title: 'Atoms/Notification',
   component: DdButton,
@@ -45,11 +44,11 @@ const Template = (args) => ({
   components: { DdButton },
   // The story's `args` need to be mapped into the template through the `setup()` method
   setup() {
-    const $alert = useAlert()
-    const showAlertSuccess =  () => {$alert.success(args.title, args.message, args.timeout, args.placement)}
-    const showAlertWarning =  () => {$alert.warning(args.title, args.message, args.timeout, args.placement)}
-    const showAlertError =  () => {$alert.error(args.title, args.message, args.timeout, args.placement)}
-    const showAlertInfo =  () => {$alert.info(args.title, args.message, args.timeout, args.placement)}
+    const notification = inject('$notification')
+    const showAlertSuccess =  () => {notification.success(args.title, args.message, args.timeout, args.placement)}
+    const showAlertWarning =  () => {notification.warning(args.title, args.message, args.timeout, args.placement)}
+    const showAlertError =  () => {notification.error(args.title, args.message, args.timeout, args.placement)}
+    const showAlertInfo =  () => {notification.info(args.title, args.message, args.timeout, args.placement)}
     return {  args, showAlertSuccess , showAlertWarning,showAlertError ,showAlertInfo};
 
   },
