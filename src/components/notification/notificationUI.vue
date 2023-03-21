@@ -45,7 +45,11 @@ const props = defineProps( {
   message: String,
   type: String,
   title: String,
-  placement: String
+  placement: String,
+  offSet:{
+    type: [Number],
+    default: 2
+  } 
 } )
 
 const bgClasses = {
@@ -68,6 +72,7 @@ const borderClasses = {
   Info: "red-900", //ToDo: change class
   Warning: "red-900", //ToDo: change class
 }
+
 
 const alertOptions = computed( () => {
   return {
@@ -122,7 +127,8 @@ onBeforeMount( () => {
     parentTop.value.id = props.placement
     switch ( props.placement ) {
       case 'topLeft':
-        parentTop.value.className = "dd-absolute dd-left-[2%] dd-top-[10%]"
+        parentTop.value.style
+        parentTop.value.className = `dd-absolute dd-left-[2%] dd-top-[${props.offSet}%]`
         break
       case 'bottomLeft':
         parentTop.value.className = "dd-absolute dd-left-[2%] dd-bottom-[5%]"
