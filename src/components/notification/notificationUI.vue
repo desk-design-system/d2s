@@ -22,7 +22,7 @@
                 <p class="dd-mt-1 dd-text-sm dd-text-gray-500"> {{ message }}</p>
               </div>
               <div class="dd-ml-4 dd-flex dd-flex-shrink-0">
-                <button type="button" @click="show = false"
+                <button type="button" @click="closeNotification()"
                   class="dd-inline-flex dd-rounded-md dd-bg-white dd-text-gray-400 hover:dd-text-gray-700 ">
                   <span class="dd-sr-only">Close</span>
                   <XIcon class="dd-h-4 dd-w-4 " aria-hidden="true" />
@@ -110,7 +110,9 @@ const conditionalIcons = computed( () => {
 } )
 
 const emit = defineEmits( ["update:show", "removeElement"] )
-
+const closeNotification =() =>{
+  emit('update:show', false)
+} 
 const parentTop = ref( null )
 const root = ref( null )
 onBeforeMount( () => {
@@ -130,7 +132,7 @@ onBeforeMount( () => {
         break
       case 'topRight':
       default:
-        parentTop.value.className = "dd-absolute dd-right-[2%] dd-top-[10%]"
+        parentTop.value.className = "dd-absolute dd-right-[2%] dd-top-[11%]"
         break
     }
 
