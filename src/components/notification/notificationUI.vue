@@ -120,7 +120,7 @@ onBeforeMount( () => {
     parentTop.value.id = props.placement
     switch ( props.placement ) {
       case 'topLeft':
-        parentTop.value.className = "dd-absolute dd-left-[2%]"
+        parentTop.value.className = "dd-absolute dd-left-[2%] dd-top-[10%]"
         break
       case 'bottomLeft':
         parentTop.value.className = "dd-absolute dd-left-[2%] dd-bottom-[5%]"
@@ -130,7 +130,7 @@ onBeforeMount( () => {
         break
       case 'topRight':
       default:
-        parentTop.value.className = "dd-absolute dd-right-[2%]"
+        parentTop.value.className = "dd-absolute dd-right-[2%] dd-top-[10%]"
         break
     }
 
