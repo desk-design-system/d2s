@@ -1,7 +1,7 @@
 // /* eslint-disable import/prefer-default-export */
+import * as DDSystem from "./components.js"
 export * as DDSystem from "./components.js"
 import {useNotification} from "./notification"
-
 const install = (app, options) =>{
   app.provide('$notification', useNotification())
   app.config.globalProperties.$notification = useNotification()
