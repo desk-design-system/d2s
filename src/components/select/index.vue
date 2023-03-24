@@ -1,10 +1,11 @@
 <template>
   <Listbox v-bind="$attrs" as="div" v-model="inputModelValue">
-    <ListboxLabel v-if="props.title != ''" class="dd-block text-sm dd-font-medium  dd-text-gray-700 dd-capitalize"> {{ props.label }}
+    <ListboxLabel v-if="props.title != ''" class="dd-block text-sm dd-font-medium  dd-text-gray-700 dd-capitalize"> {{ props.label }} <span v-if="isRequired" class="dd-text-red-500 ">*</span> 
     </ListboxLabel>
     <div class="mt-1 relative">
       <ListboxButton
-        class="dd-flex dd-items-center dd-cursor-pointer dd-bg-white dd-relative dd-w-full dd-border dd-border-gray-300 dd-rounded-md dd-shadow-sm dd-pl-3 dd-pr-10 dd-py-2 dd-text-left  dd-h-9   sm:dd-text-sm">
+      :class="[hasError ?  'dd-border-red-600' : 'dd-border-gray-300'  ]"
+        class="dd-flex dd-items-center dd-cursor-pointer dd-bg-white dd-relative dd-w-full dd-border  dd-rounded-md dd-shadow-sm dd-pl-3 dd-pr-10 dd-py-2 dd-text-left  dd-h-9   sm:dd-text-sm">
         <!-- <div class="dd-flex dd-items-center dd-mb-3"> -->
         <ddAvatar v-if="selectedValue && showAvatar" size="mini" class="dd-mr-3"
           :srcLink="selectedValue[props.defaultProps.avatar]" />
@@ -20,7 +21,7 @@
       <transition leave-active-class="dd-transition dd-ease-in dd-duration-100" leave-from-class="dd-opacity-100"
         leave-to-class="dd-opacity-0">
         <ListboxOptions :class="listClass"
-          class="dd-absolute dd-z-10 dd-mt-1 dd-min-w-[320px] dd-bg-white dd-shadow-lg dd-max-h-60 dd-rounded-md dd-py-1 dd-text-base dd-ring-1 dd-ring-black dd-ring-opacity-5 dd-overflow-auto focus:dd-outline-none sm:dd-text-sm">
+          class=" dd-absolute dd-z-10 dd-mt-1 dd-w-[320px] dd-bg-white dd-shadow-lg dd-max-h-60 dd-rounded-md dd-py-1 dd-text-base dd-ring-1 dd-ring-black dd-ring-opacity-5 dd-overflow-auto focus:dd-outline-none sm:dd-text-sm">
           <ListboxOption as="template" v-for="item in options" :key="item[props.defaultProps.id]"
             :value="item[props.defaultProps.value]" v-slot="{ active, selected }">
             <slot name="items" :isSelected="selected ?? item[props.defaultProps.id] === selected[props.defaultProps.id]" :item="item">
@@ -47,6 +48,7 @@
       </transition>
     </div>
   </Listbox>
+  <span v-if="errorMessage" class="dd-text-xs dd-text-red-500 dd-capitalize">{{ errorMessage }}</span>
 </template>
 <script setup>
 import { ref, computed } from "vue"
@@ -60,6 +62,14 @@ const props = defineProps( {
     default: "",
   },
   showOnline: {
+    type: Boolean,
+    default: false,
+  },
+  errorMessage: {
+    type: String,
+    default: "",
+  },
+  isRequired: {
     type: Boolean,
     default: false,
   },
@@ -124,6 +134,13 @@ const selectedValue = computed( () => {
     return predicate[props.defaultProps.value] == inputModelValue.value
   } )
 
+} )
+const hasError = computed( () => {
+  if(props.errorMessage){
+    return true
+  } else{
+  return false
+  }
 } )
 </script>
 
