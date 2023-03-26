@@ -1,5 +1,5 @@
 <template>
-  <div v-bind="$attrs" class="dd-card dd-rounded dd-bg-white dd-mb-4" :class="elevationFun">
+  <div  class="dd-card dd-rounded dd-bg-white dd-mb-4" :class="[elevationFun, className]">
     <div :class="`dd-py-${headerY} dd-px-${headerX}`" class="dd-border-b dd-border-gray-300" v-if="header">
       <p class="dd-text-lg dd-text-gray-700 dd-font-medium dd-pb-1">{{ title }} </p>
       <p class="dd-text-sm dd-text-gray-700">{{ subTitle }}</p>
@@ -38,20 +38,24 @@ export default {
   //   }
   // },
   props: {
-    headerX:{
+    className:{
       type: String,
+      default: ''
+    },
+    headerX:{
+      type: Number,
       default: 5
     },
     headerY:{
-      type: String,
+      type: Number,
       default: 5
     },
     x:{
-      type: String,
+      type: Number,
       default: 5
     },
     y:{
-      type: String,
+      type: Number,
       default: 5
     },
     content: {
