@@ -1,6 +1,11 @@
 <template>
   <Menu as="div" class="dd-relative dd-inline-block dd-text-left">
-    <div>
+    <div v-if="type == 'avatar'">
+      <MenuButton  >
+        <ddAvatar :size="avatarSize" :srcLink="avatarLink"  />
+      </MenuButton>
+    </div>
+    <div v-else-if="type == 'button'">
       <MenuButton :class="{ ...basicButton }" class="dd-inline-flex dd-w-full dd-justify-center ">
         <slot>
           {{ label }}
@@ -18,7 +23,7 @@
       leave-active-class="dd-transition dd-ease-in dd-duration-75"
       leave-from-class="dd-transform dd-opacity-100 dd-scale-100" leave-to-class="dd-transform dd-opacity-0 dd-scale-95">
       <MenuItems
-        :class="`dd-absolute {dd-${placement}-0 dd-z-10 dd-mt-2 dd-w-fit dd-whitespace-nowrap dd-origin-top-${placement} dd-rounded-md dd-bg-white dd-shadow-lg dd-ring-1 dd-ring-black dd-ring-opacity-5 focus:dd-outline-none`">
+        :class="`dd-absolute dd-${placement}-0 dd-z-10 dd-mt-2 dd-w-fit dd-whitespace-nowrap dd-origin-top-${placement} dd-rounded-md dd-bg-white dd-shadow-lg dd-ring-1 dd-ring-black dd-ring-opacity-5 focus:dd-outline-none`">
         <div class="dd-py-1">
           <MenuItem @click="getClick(item)" v-for="item in options" :key="item" v-slot="{ active }">
           <span href="#"
@@ -38,9 +43,18 @@
 import { ref, computed } from "vue"
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
 import { ChevronDownIcon } from '@heroicons/vue/solid'
+import ddAvatar from "../avatars/index.vue"
 const emits = defineEmits( ['update:modelValue', "change"] )
 const props = defineProps( {
   label: {
+    type: String,
+    default: "",
+  },
+  avatarSize:{
+    type: String,
+    default: "medium",
+  },
+  avatarLink:{
     type: String,
     default: "",
   },
@@ -48,7 +62,16 @@ const props = defineProps( {
     type: Array,
     required: true
   },
-
+  type: {
+      type: String,
+      validator: function ( value ) {
+        // The value must match one of these strings
+        return (
+          ["text", "button", "avatar"].indexOf( value ) !== -1
+        )
+      },
+      default: "button",
+    },
   defaultProps: {
     type: Object,
     default: () => ( {
