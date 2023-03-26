@@ -15,8 +15,8 @@
         <slot name="suffix">
         </slot>
       </div>
+      <span v-if="errorMessage" class="dd-text-xs dd-text-red-500 dd-capitalize">{{ errorMessage }}</span>
     </div>
-    <span v-if="errorMessage" class="dd-text-xs dd-text-red-500 dd-capitalize">{{ errorMessage }}</span>
   </div>
 </template>
 
