@@ -1,7 +1,7 @@
 <template>
   <div class="dd-bg-gray-100 dd-h-screen">
     <div class="dd-flex dd-flex-col dd-justify-center dd-align-center ">
-      <div class=" dd-w-[215px] dd-mx-auto dd-mt-20 dd-mb-24">
+      <div class=" dd-w-[215px] dd-mx-auto dd-mt-20 sm:dd-mb-18 dd-mb-24">
         <img src="../../assets/rdlogo.png" />
       </div>
       <div v-if="showMessage">
@@ -11,8 +11,8 @@
       </ddCard>
       </div>
       <div class="dd-mx-auto" v-else>
-        <p class="dd-text-center dd-text-3xl dd-text-gray-700 dd-font-bold  dd-mb-6">{{title}}</p>
-      <ddCard elevation="sm" :x="10" :y="8" className="dd-w-[450px] ">
+        <p class="dd-text-center dd-text-3xl dd-text-gray-700 dd-font-bold">{{title}}</p>
+      <ddCard elevation="sm" :x="10" :y="8" className="dd-w-[450px] dd-mb-6">
         <slot></slot>
       </ddCard>
       </div>
