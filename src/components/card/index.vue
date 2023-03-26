@@ -1,11 +1,11 @@
 <template>
-  <div class="dd-card dd-rounded dd-bg-white dd-mb-4" :class="elevationFun">
-    <div class="dd-p-5 dd-border-b dd-border-gray-300" v-if="header">
+  <div v-bind="$attrs" class="dd-card dd-rounded dd-bg-white dd-mb-4" :class="elevationFun">
+    <div :class="`dd-py-${headerY} dd-px-${headerX}`" class="dd-border-b dd-border-gray-300" v-if="header">
       <p class="dd-text-lg dd-text-gray-700 dd-font-medium dd-pb-1">{{ title }} </p>
       <p class="dd-text-sm dd-text-gray-700">{{ subTitle }}</p>
     </div>
     <!-- :class="[hasCustomClass ? customStyle : defaultClasses]" -->
-    <div class="dd-p-5" >
+    <div :class="`dd-py-${y} dd-px-${x}`" >
     <slot> {{ content }} </slot>
   </div>
   </div>
@@ -38,6 +38,22 @@ export default {
   //   }
   // },
   props: {
+    headerX:{
+      type: String,
+      default: 5
+    },
+    headerY:{
+      type: String,
+      default: 5
+    },
+    x:{
+      type: String,
+      default: 5
+    },
+    y:{
+      type: String,
+      default: 5
+    },
     content: {
       type: String,
       default: ""
