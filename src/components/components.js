@@ -19,3 +19,4 @@ export { default as DdTopbar } from './topbar/index.vue';
 export { default as DdDropDown } from './dropdown/index.vue';
 export { default as DdTable } from './table/index.vue';
 export { default as DdInnerHeader } from './InnerHeader/index.vue';
+export { default as DdSignUpSell } from './signInShell/index.vue';
