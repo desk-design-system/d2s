@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-bind="$attrs">
     <label v-if="label" class="dd-block dd-text-sm dd-font-medium dd-text-gray-700 dd-mb-1">{{ label }}  <span v-if="isRequired" class="dd-text-red-500 ">*</span> </label>
     <div class="dd-relative  dd-rounded-md ">
       <div v-if="$slots.prefix"
@@ -7,7 +7,7 @@
         <slot name="prefix">
         </slot>
       </div>
-      <input :class="[$slots.prefix ? 'dd-pl-10' : 'dd-pl-2', hasError ?  '!dd-border-red-600' : '!dd-border-gray-300'  ]" v-bind="$attrs" v-model="inputModelValue" :type="type"
+      <input :class="[$slots.prefix ? 'dd-pl-10' : 'dd-pl-2', hasError ?  '!dd-border-red-600' : '!dd-border-gray-300'  ]"  v-model="inputModelValue" :type="type"
         class="!dd-block !dd-w-full !dd-rounded-md   focus:!dd-border-teal-600 dd-focus:!dd-ring-teal-600 sm:!dd-text-sm focus:ring-2 focus:dd-ring-inset focus:dd-ring-teal-600 dd-shadow-sm"
         :placeholder="placeholder" />
       <div v-if="$slots.suffix"
