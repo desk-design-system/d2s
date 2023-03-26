@@ -1,6 +1,6 @@
 <template>
   <Listbox v-bind="$attrs" as="div" v-model="inputModelValue">
-    <ListboxLabel v-if="props.title != ''" class="dd-block text-sm dd-font-medium  dd-text-gray-700 dd-capitalize"> {{ props.label }} <span v-if="isRequired" class="dd-text-red-500 ">*</span> 
+    <ListboxLabel v-if="label != ''" class="dd-block text-sm dd-font-medium  dd-text-gray-700 dd-capitalize"> {{ label }} <span v-if="isRequired && label != ''" class="dd-text-red-500 ">*</span> 
     </ListboxLabel>
     <div class="mt-1 relative">
       <ListboxButton
@@ -46,9 +46,9 @@
           </ListboxOption>
         </ListboxOptions>
       </transition>
+      <span v-if="errorMessage" class="dd-text-xs dd-text-red-600 dd-capitalize">{{ errorMessage }}</span>
     </div>
   </Listbox>
-  <span v-if="errorMessage" class="dd-text-xs dd-text-red-500 dd-capitalize">{{ errorMessage }}</span>
 </template>
 <script setup>
 import { ref, computed } from "vue"
