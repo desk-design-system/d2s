@@ -47,11 +47,11 @@
   </button>
   <button v-bind="$attrs" v-else-if="type == 'text'" :class="{
     ' dd-text-gray-700  hover:dd-text-gray-900 ': color == '',
-    ' dd-px-2.5 dd-py-1.5 dd-text-xs': size === 'xs',
-    ' dd-px-3 dd-py-2 dd-text-sm': size === 'sm',
-    ' dd-px-4 dd-py-2 dd-text-sm': size === 'base',
-    ' dd-px-4 dd-py-2 dd-text-base': size === 'lg',
-    ' dd-px-6 dd-py-3 dd-text-base': size === 'xl',
+    '  dd-py-1.5 dd-text-xs': size === 'xs',
+    '  dd-py-2 dd-text-sm': size === 'sm',
+    '  dd-py-2 dd-text-sm': size === 'base',
+    '  dd-py-2 dd-text-base': size === 'lg',
+    '  dd-py-3 dd-text-base': size === 'xl',
     ' dd-text-teal-700 hover:dd-text-teal-700': color === 'primary',
     ' dd-text-red-600 hover:dd-text-red-700': color === 'danger',
     'dd-text-yellow-600  hover:dd-text-yellow-700': color === 'warning',
