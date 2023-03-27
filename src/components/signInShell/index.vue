@@ -5,14 +5,13 @@
         <img src="../../assets/rdlogo.png" />
       </div>
       <div v-if="showMessage">
-        <ddCard elevation="sm" :x="14" :y="14" className="dd-w-[620px] dd-mx-auto">
-          hello
+        <ddCard elevation="sm" :x="14" :y="14" :className="[`dd-w-[${width}px]`, 'dd-mx-auto']">
         <slot></slot>
       </ddCard>
       </div>
-      <div class="dd-mx-auto" v-else>
+      <div class="" v-else>
         <p class="dd-text-center dd-text-3xl dd-text-gray-700 dd-font-bold">{{title}}</p>
-      <ddCard elevation="sm" :x="10" :y="8" className="dd-w-[450px] dd-mb-6">
+      <ddCard elevation="sm" :x="10" :y="8" :className="[`dd-w-[350px]`, ' dd-mt-6 dd-mx-auto']">
         <slot></slot>
       </ddCard>
       </div>
@@ -26,6 +25,10 @@ const props = defineProps( {
   title: {
     type: String,
     default: "",
+  },
+  width: {
+    type: Number,
+    default: 450,
   },
   icon:{
     type: Boolean,
