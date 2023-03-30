@@ -8,7 +8,7 @@
         </slot>
       </div>
       <input :class="[$slots.prefix ? 'dd-pl-10' : 'dd-pl-2', hasError ?  '!dd-border-red-600' : '!dd-border-gray-300', errorMessage ? 'dd-mb-1' : ''  ]"  v-model="inputModelValue" :type="type"
-        class="!dd-block !dd-w-full !dd-rounded-md   focus:!dd-border-teal-600 dd-focus:!dd-ring-teal-600 sm:!dd-text-sm focus:ring-2 focus:dd-ring-inset focus:dd-ring-teal-600 dd-shadow-sm"
+        class="dd-border-solid	 !dd-block !dd-w-full !dd-rounded-md   focus:!dd-border-teal-600 dd-focus:!dd-ring-teal-600 sm:!dd-text-sm focus:ring-2 focus:dd-ring-inset focus:dd-ring-teal-600 dd-shadow-sm"
         :placeholder="placeholder" />
       <div v-if="$slots.suffix"
         class="!dd-pointer-events-none !dd-absolute !dd-inset-y-0 !dd-right-0 !dd-flex !dd-items-center !dd-pl-3 !dd-pr-3">
@@ -67,6 +67,9 @@ const hasError = computed( () => {
 } )
 </script>
 
-<style lang="scss" scoped>
-
+<style lang="css" scoped>
+input{
+  padding-top: 0.5em;
+    padding-bottom: 0.5em;
+}
 </style>
