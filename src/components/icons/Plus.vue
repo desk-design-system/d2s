@@ -1,5 +1,5 @@
 <template>
-<svg width="14px" height="14px" viewBox="0 0 14 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg  viewBox="0 0 14 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <g id="☮️-Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <g id="Icon-20px" transform="translate(-97.000000, -207.000000)">
             <g id="Icons/20px/Plus" transform="translate(94.000000, 204.000000)">

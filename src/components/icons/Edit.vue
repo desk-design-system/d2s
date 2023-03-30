@@ -1,5 +1,5 @@
 <template>
-<svg width="12px" height="12px" viewBox="0 0 12 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg  viewBox="0 0 12 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <title>Icons/16px/Plus Copy</title>
     <g id="⚡️-First-Release-Multistore" stroke="currentColor" stroke-width="1" fill="none" fill-rule="evenodd">
         <g id="New-Unit-Flow-1" transform="translate(-1349.000000, -329.000000)">
