@@ -1,7 +1,7 @@
 <template>
   <nav class="dd-shadow dd-flex dd-items-center dd-justify-between dd-bg-white dd-fixed dd-w-full dd-z-10">
     <div class="dd-flex dd-items-center dd-justify-center dd-opacity-100 dd-h-14 dd-w-32 dd-bg-teal-700 dd-rounded-r-full">
-      <span class="dd-opacity-100 dd-text-sm dd-font-medium dd-not-italic dd-tracking-normal dd-text-center dd-align-center dd-text-white dd-leading-4">Repair Shop</span>
+      <span class="dd-opacity-100 dd-text-sm dd-font-medium dd-not-italic dd-tracking-normal dd-text-center dd-align-center dd-text-white dd-leading-4">{{title}}</span>
     </div>
     <div class="dd-flex dd-items-center dd-justify-end dd-w-full dd-mr-6 dd-flex-grow lg:dd-flex lg:dd-items-center lg:dd-w-auto">
       <!-- <div class="dd-text-sm lg:dd-flex-grow">
@@ -27,6 +27,10 @@ const props = defineProps( {
     type: Array,
     required: true
   },
+  title:{
+    type: String,
+    default: "Store Name",
+  }
 })
 const emitSparkSearchEntry = (value) => {
   emit('sparkSearch', value)
