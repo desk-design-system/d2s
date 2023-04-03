@@ -4,15 +4,15 @@
     <div class="dd-relative  dd-rounded-md ">
       <div v-if="prefix"
         class="!dd-pointer-events-none !dd-absolute !dd-inset-y-0 !dd-left-0 !dd-flex !dd-items-center !dd-pl-3 !dd-pr-10">
-        <svgIcon  :icon="icon" size="16" />
+        <svgIcon class="dd-text-gray-400" :icon="icon" :size="btnIconSize" />
       </div>
-      <input :class="[suffix ? 'dd-pr-10' : 'dd-pr-2', prefix ? 'dd-pl-10' : 'dd-pl-2', hasError ?  '!dd-border-red-600' : '!dd-border-gray-300', errorMessage ? 'dd-mb-1' : ''  ]"  v-model="inputModelValue" :type="type"
+      <input :class="[inputSize,suffix ? 'dd-pr-10' : 'dd-pr-2', prefix ? 'dd-pl-10' : 'dd-pl-2', hasError ?  '!dd-border-red-600' : '!dd-border-gray-300', errorMessage ? 'dd-mb-1' : ''  ]"  v-model="inputModelValue" :type="type"
         class="dd-border-solid	 !dd-block !dd-w-full !dd-rounded-md   focus:!dd-border-teal-600 dd-focus:!dd-ring-teal-600 sm:!dd-text-sm focus:ring-2 focus:dd-ring-inset focus:dd-ring-teal-600 dd-shadow-sm"
         :placeholder="placeholder" />
         <!-- $slots.suffix -->
         <div v-if="suffix"
         class="!dd-pointer-events-none !dd-absolute !dd-inset-y-0 !dd-right-0 !dd-flex !dd-items-center !dd-pl-3 !dd-pr-3">
-        <svgIcon  :icon="icon" size="16" />
+        <svgIcon class="dd-text-gray-400"  :icon="icon" :size="btnIconSize" />
         <!-- <slot name="suffix">
         </slot> -->
       </div>
@@ -62,7 +62,27 @@ const props = defineProps( {
     type: [String, Number],
     default: null,
   },
+  size: {
+  type: String,
+  validator: function ( value ) {
+    // The value must match one of these strings
+    return (
+      ["xs", "sm", "base", "lg", "xl"].indexOf( value ) !== -1
+    )
+  },
+  default: "base",
+},
 } )
+
+const inputSize = computed( () => {
+  return{
+    "dd-h-6 !dd-text-xs": props.size === "xs",
+      "dd-h-7  ":props.size === "sm",
+      "dd-h-8 ": props.size === "base",
+      "dd-h-9 ": props.size === "lg",
+      "dd-h-10 ": props.size === "xl",
+  }
+})
 const inputModelValue = computed( {
   get () {
     return props.modelValue
@@ -79,15 +99,15 @@ const hasError = computed( () => {
   return false
   }
 } )
-const  btnIconSize = () => {
-      if ( this.size == 'xs' ) {
+const  btnIconSize = computed( () => {
+      if ( props.size == 'xs' ) {
         return '10'
-      } else if ( this.size == 'sm' ) {
+      } else if ( props.size == 'sm' ) {
         return '12'
       } else {
         return '16'
       }
-    }
+    })
 </script>
 
 <style lang="css" scoped>
