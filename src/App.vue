@@ -3,7 +3,11 @@
   <ddHeadr :items="items" />  
   <ddButton @click="alertt" prefix icon="Plus" title="elo" />
   <ddCheckBox />
-    <ddRadion size="sm" prefix suffix icon="Search"  />
+  <ddDropDown :options="options" />
+  <wrapper>
+    <ddInput size="sm" prefix suffix icon="Search" :rules="/^[+]?([0-9]+(?:[\.][0-9]*)?|\.[0-9]+)$/" v-model="inputValue"  />
+    {{ inputValue }}
+  </wrapper>
   </div>
 </template>
 
@@ -20,8 +24,10 @@ import ddDialog from "./components/dialog/index.vue"
 import ddDivider from "./components/divider/index.vue"
 import ddDrawer from "./components/drawer/index.vue"
 import ddDropDown from "./components/dropdown/index.vue"
-import ddRadion from "./components/input/index.vue"
+import ddInput from "./components/input/index.vue"
+import wrapper from "./components/validations/ddForm.vue"
 
+const inputValue = ref("kamil")
 const options = ref([
 {
 name: "Test",
