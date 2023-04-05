@@ -1,7 +1,13 @@
 <template>
   <div class="dd-container dd-mx-auto dd-m-5">
   <ddHeadr :items="items" />  
+  <ddAlert title="elo" closable />
+  <ddAvatar srcLink="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg" />
+  <ddBadge title="elo" />
+  <ddBadge title="elo" rounded size="large" />
+  <ddBadge title="elo" rounded size="large" dot />
   <ddButton @click="alertt" prefix icon="Plus" title="elo" />
+  <ddBred :items="options" seprator="chevron" shadow />
   <ddCheckBox />
     <ddRadion size="sm" prefix suffix icon="Search"  />
   </div>
