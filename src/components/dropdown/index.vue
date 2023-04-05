@@ -44,7 +44,7 @@ import { ref, computed } from "vue"
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
 import { ChevronDownIcon } from '@heroicons/vue/solid'
 import ddAvatar from "../avatars/index.vue"
-const emits = defineEmits( ['update:modelValue', "change"] )
+const emits = defineEmits( ['command','update:modelValue', "change"] )
 const props = defineProps( {
   label: {
     type: String,
