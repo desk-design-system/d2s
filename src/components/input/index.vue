@@ -6,9 +6,11 @@
         class="!dd-pointer-events-none !dd-absolute !dd-inset-y-0 !dd-left-0 !dd-flex !dd-items-center !dd-pl-3 !dd-pr-10">
         <svgIcon class="dd-text-gray-400" :icon="icon" :size="btnIconSize" />
       </div>
-      <input :class="[inputSize,suffix ? 'dd-pr-10' : 'dd-pr-2', prefix ? 'dd-pl-10' : 'dd-pl-2', hasError ?  '!dd-border-red-600' : '!dd-border-gray-300', errorMessage ? 'dd-mb-1' : ''  ]"  v-model="inputModelValue" :type="type"
+
+      <input :class="[inputSize,suffix ? 'dd-pr-10' : 'dd-pr-2', prefix ? 'dd-pl-10' : 'dd-pl-2', hasError ?  '!dd-border-red-600' : '!dd-border-gray-300', errorMessage ? 'dd-mb-1' : ''  ]"  v-model="value" :type="type"
         class="dd-border-solid	 !dd-block !dd-w-full !dd-rounded-md   focus:!dd-border-teal-600 dd-focus:!dd-ring-teal-600 sm:!dd-text-sm focus:ring-2 focus:dd-ring-inset focus:dd-ring-teal-600 dd-shadow-sm"
         :placeholder="placeholder" />
+
         <!-- $slots.suffix -->
         <div v-if="suffix"
         class="!dd-pointer-events-none !dd-absolute !dd-inset-y-0 !dd-right-0 !dd-flex !dd-items-center !dd-pl-3 !dd-pr-3">
@@ -23,12 +25,17 @@
 
 <script setup>
 import svgIcon from "../svgIcon/index.vue"
-import { ref, computed } from "vue"
+import { ref, computed, watch } from "vue"
+import { useField } from "vee-validate";
 const emits = defineEmits( ['update:modelValue', "change"] )
 const props = defineProps( {
   label: {
     type: String,
     default: "",
+  },
+  rules:{
+  type: [String, RegExp, Function],
+  default: ''
   },
   prefix:{
     type: Boolean,
@@ -42,10 +49,10 @@ const props = defineProps( {
       type: String,
       default: null,
     },
-  errorMessage: {
-    type: String,
-    default: "",
-  },
+  // errorMessage: {
+  //   type: String,
+  //   default: "",
+  // },
   isRequired: {
     type: Boolean,
     default: false,
@@ -73,6 +80,23 @@ const props = defineProps( {
   default: "base",
 },
 } )
+const getRandomInt = (max = 1000) => {
+  return Math.floor(Math.random() * max);
+}
+
+const getRules = () => {
+  debugger
+  if(props.rules instanceof RegExp) {
+    return {regex: props.rules}
+  }
+  return props.rules
+}
+
+const { errorMessage, value, handleChange } = useField((props.label + getRandomInt()), getRules(), {label: props.label ? props.label: 'input'});
+
+watch(() => value, (newValue) => {
+  inputModelValue.value = newValue
+})
 
 const inputSize = computed( () => {
   return{
@@ -88,12 +112,13 @@ const inputModelValue = computed( {
     return props.modelValue
   },
   set ( val ) {
+    handleChange(val)
     emits( "update:modelValue", val )
     emits( "change", val )
   }
 } )
 const hasError = computed( () => {
-  if(props.errorMessage){
+  if(errorMessage.value){
     return true
   } else{
   return false
