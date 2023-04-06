@@ -1,8 +1,8 @@
 <template>
   <Switch  v-bind="$attrs" :class="[
-    inputModelValue ? 'dd-bg-teal-600' : 'dd-bg-gray-200', size == 'sm' ? 'dd-h-5' : 'dd-h-6',
+    inputModelValue ? 'dd-bg-teal-600' : 'dd-bg-gray-200', size == 'sm' ? 'dd-h-5.5' : 'dd-h-6.5',
     'dd-relative dd-inline-flex dd-flex-shrink-0   dd-border-2 dd-border-transparent dd-rounded-full dd-cursor-pointer dd-transition-colors dd-ease-in-out dd-duration-200 focus:dd-outline-none '
-  ]" v-model="inputModelValue" class="dd-relative dd-inline-flex dd-flex-shrink-0 dd-w-11">
+  ]" v-model="inputModelValue" class="dd-relative dd-inline-flex dd-flex-shrink-0 dd-w-11 dd-base dd-pl-0">
     <span class="dd-sr-only">Use setting</span>
     <span aria-hidden="true"
       :class="[
