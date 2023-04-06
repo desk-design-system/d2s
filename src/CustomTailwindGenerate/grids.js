@@ -102,4 +102,8 @@ const grids = [
     'dd-gap-0',
     'dd-gap-x-0',
     'dd-gap-4',
+    'dd-gap-6',
+    'dd-gap-8',
+    'dd-gap-12',
+    'dd-gap-16',,
 ]
