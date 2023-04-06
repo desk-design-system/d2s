@@ -1,5 +1,5 @@
 <template>
-  <div v-bind="$attrs">
+  <div class="dd-base" v-bind="$attrs">
     <label v-if="label" class="dd-block dd-text-sm dd-font-medium dd-text-gray-700 dd-mb-1">{{ label }}  <span v-if="isRequired" class="dd-text-red-500 ">*</span> </label>
     <div class="dd-relative  dd-rounded-md ">
       <div v-if="prefix"
@@ -7,7 +7,7 @@
         <svgIcon class="dd-text-gray-400" :icon="icon" :size="btnIconSize" />
       </div>
       <input :class="[inputSize,suffix ? 'dd-pr-10' : 'dd-pr-2', prefix ? 'dd-pl-10' : 'dd-pl-2', hasError ?  '!dd-border-red-600' : '!dd-border-gray-300', errorMessage ? 'dd-mb-1' : ''  ]"  v-model="inputModelValue" :type="type"
-        class="dd-border-solid	 !dd-block !dd-w-full !dd-rounded-md   focus:!dd-border-teal-600 dd-focus:!dd-ring-teal-600 sm:!dd-text-sm focus:ring-2 focus:dd-ring-inset focus:dd-ring-teal-600 dd-shadow-sm"
+        class="dd-border-solid	base !dd-block !dd-w-full !dd-rounded-md   focus:!dd-border-teal-600 dd-focus:!dd-ring-teal-600 sm:!dd-text-sm focus:ring-2 focus:dd-ring-inset focus:dd-ring-teal-600 dd-shadow-sm"
         :placeholder="placeholder" />
         <!-- $slots.suffix -->
         <div v-if="suffix"

@@ -1,7 +1,7 @@
 <template>
-  <div class="dd-flex !dd-items-center  !dd-justify-start" >
+  <div class="dd-flex !dd-items-center  !dd-justify-start dd-base" >
     
-      <input value="test" v-bind="$attrs" :id="id" v-model="inputModelValue" type="checkbox"  class="!dd-h-4 !dd-w-4 !dd-rounded !dd-border-gray-300 !dd-text-teal-600 focus:!dd-ring-teal-500 !dd-cursor-pointer" />
+      <input value="test" v-bind="$attrs" :id="id" v-model="inputModelValue" type="checkbox"  class=" !dd-h-4 !dd-w-4 !dd-rounded !dd-border-gray-300 !dd-border-solid !dd-text-teal-600 focus:!dd-ring-teal-500 !dd-cursor-pointer" />
       <slot name="label">
         <label class="!dd-ml-3 !dd-block !dd-text-sm  !dd-text-gray-700">
           {{ label }}
