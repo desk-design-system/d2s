@@ -1,5 +1,6 @@
 <template>
   <div class="dd-container dd-mx-auto dd-m-5">
+    <dd-wraper>
   <ddHeadr :items="items" />  
   <ddAlert title="elo" closable />
   <ddAvatar srcLink="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg" />
@@ -10,6 +11,7 @@
   <ddBred :items="options" seprator="chevron" shadow />
   <ddCheckBox />
     <ddRadion size="sm" prefix suffix icon="Search"  />
+  </dd-wraper>
   </div>
 </template>
 
@@ -27,7 +29,7 @@ import ddDivider from "./components/divider/index.vue"
 import ddDrawer from "./components/drawer/index.vue"
 import ddDropDown from "./components/dropdown/index.vue"
 import ddRadion from "./components/input/index.vue"
-
+import ddWraper from "./components/scrollerApp/index.vue"
 const options = ref([
 {
 name: "Test",
