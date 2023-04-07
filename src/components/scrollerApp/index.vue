@@ -1,5 +1,5 @@
 <template>
-  <div class="dd-wraper" :style="styles" >
+  <div class="dd-wrapper" :style="styles" >
 <slot></slot>
   </div>
 </template>
