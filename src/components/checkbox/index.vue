@@ -1,9 +1,9 @@
 <template>
   <div class="dd-flex !dd-items-center  !dd-justify-start dd-base" >
     
-      <input value="test" v-bind="$attrs" :id="id" v-model="inputModelValue" type="checkbox"  class=" !dd-h-4 !dd-w-4 !dd-rounded !dd-border-gray-300 !dd-border-solid !dd-text-teal-600 focus:!dd-ring-teal-500 !dd-cursor-pointer" />
+      <input value="test" :disabled="disabled" v-bind="$attrs" :id="id" v-model="inputModelValue" type="checkbox" :class="[disabled ? ' !dd-cursor-not-allowed !dd-border-gray-200 !dd-text-gray-400' : 'dd-cursor-pointer !dd-border-gray-300 !dd-text-teal-600' ]" class=" !dd-h-4 !dd-w-4 !dd-rounded  !dd-border-solid  focus:!dd-ring-teal-500 " />
       <slot name="label">
-        <label class="!dd-ml-3 !dd-block !dd-text-sm  !dd-text-gray-700">
+        <label :class="[disabled ? '!dd-text-gray-300' : '!dd-text-gray-700' ]" class="!dd-ml-3 !dd-block !dd-text-sm  ">
           {{ label }}
         </label>
       </slot>
@@ -26,7 +26,10 @@ const props = defineProps( {
     type: [String, Number, Boolean],
     default: null,
   },
-
+  disabled:{
+    type: Boolean,
+    default: false
+  },
 } )
 const inputModelValue = computed( {
   get () {
