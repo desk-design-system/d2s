@@ -9,8 +9,9 @@
   <ddBadge title="elo" rounded size="large" dot />
   <ddButton @click="alertt" prefix icon="Plus" title="elo" />
   <ddBred :items="options" seprator="chevron" shadow />
-  <ddCheckBox />
-    <ddRadion size="sm" prefix suffix icon="Search"  />
+  <ddCheckBox  v-model="model" />
+    <ddRadion  :options="options" />
+    <ddInput v-model="text"  />
   </dd-wraper>
   </div>
 </template>
@@ -28,8 +29,9 @@ import ddDialog from "./components/dialog/index.vue"
 import ddDivider from "./components/divider/index.vue"
 import ddDrawer from "./components/drawer/index.vue"
 import ddDropDown from "./components/dropdown/index.vue"
-import ddRadion from "./components/input/index.vue"
+import ddRadion from "./components/radiobutton/index.vue"
 import ddWraper from "./components/scrollerApp/index.vue"
+import ddInput from "./components/input/index.vue"
 const options = ref([
 {
 name: "Test",
@@ -54,9 +56,8 @@ const items = ref([
     value: 3,
   },
 ]);
-const alertt = () =>{
-alert("elo")
-}
+const model = ref(false)
+const text = ref(".akxmc lascn")
 </script>
 
 
