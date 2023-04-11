@@ -1,9 +1,18 @@
 <template>
   <div class="dd-container dd-mx-auto dd-m-5">
+    <dd-wraper>
   <ddHeadr :items="items" />  
+  <ddAlert title="elo" closable />
+  <ddAvatar srcLink="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg" />
+  <ddBadge title="elo" />
+  <ddBadge title="elo" rounded size="large" />
+  <ddBadge title="elo" rounded size="large" dot />
   <ddButton @click="alertt" prefix icon="Plus" title="elo" />
-  <ddCheckBox />
-    <ddRadion size="sm" prefix suffix icon="Search"  />
+  <ddBred :items="options" seprator="chevron" shadow />
+  <ddCheckBox  v-model="model" />
+    <ddRadion  :options="options" />
+    <ddInput v-model="text"  />
+  </dd-wraper>
   </div>
 </template>
 
@@ -20,8 +29,9 @@ import ddDialog from "./components/dialog/index.vue"
 import ddDivider from "./components/divider/index.vue"
 import ddDrawer from "./components/drawer/index.vue"
 import ddDropDown from "./components/dropdown/index.vue"
-import ddRadion from "./components/input/index.vue"
-
+import ddRadion from "./components/radiobutton/index.vue"
+import ddWraper from "./components/scrollerApp/index.vue"
+import ddInput from "./components/input/index.vue"
 const options = ref([
 {
 name: "Test",
@@ -46,9 +56,8 @@ const items = ref([
     value: 3,
   },
 ]);
-const alertt = () =>{
-alert("elo")
-}
+const model = ref(false)
+const text = ref(".akxmc lascn")
 </script>
 
 

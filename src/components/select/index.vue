@@ -1,10 +1,10 @@
 <template>
   <Listbox v-bind="$attrs" as="div" v-model="inputModelValue">
-    <ListboxLabel v-if="label != ''" class="dd-block text-sm dd-font-medium  dd-text-gray-700 dd-capitalize"> {{ label }} <span v-if="isRequired && label != ''" class="dd-text-red-500 ">*</span> 
+    <ListboxLabel v-if="label != ''" class="dd-block dd-text-sm dd-font-medium  dd-text-gray-700 dd-capitalize"> {{ label }} <span v-if="isRequired && label != ''" class="dd-text-red-500 ">*</span> 
     </ListboxLabel>
-    <div class="mt-1 dd-relative">
+    <div class="dd-mt-1 dd-relative">
       <ListboxButton
-      :class="[hasError ?  'dd-border-red-600' : 'dd-border-gray-300'  ]"
+      :class="[hasError ?  'dd-border-red-600' : 'dd-border-gray-300',inputSize  ]"
         class="dd-border-solid dd-flex dd-items-center dd-cursor-pointer dd-bg-white dd-relative dd-w-full dd-border  dd-rounded-md dd-shadow-sm dd-pl-3 dd-pr-10 dd-py-2 dd-text-left  dd-h-9   sm:dd-text-sm">
         <!-- <div class="dd-flex dd-items-center dd-mb-3"> -->
         <ddAvatar v-if="selectedValue && showAvatar" size="mini" class="dd-mr-3"
@@ -101,6 +101,16 @@ const props = defineProps( {
     type: [String,],
     default: null,
   },
+  size: {
+  type: String,
+  validator: function ( value ) {
+    // The value must match one of these strings
+    return (
+      ["xs", "sm", "base", "lg", "xl"].indexOf( value ) !== -1
+    )
+  },
+  default: "base",
+},
   checkIcon: {
     type: String,
     validator: function ( value ) {
@@ -129,6 +139,15 @@ const inputModelValue = computed( {
     emits( "change", val )
   }
 } )
+const inputSize = computed( () => {
+  return{
+    "dd-h-6 !dd-text-xs": props.size === "xs",
+      "dd-h-7  ":props.size === "sm",
+      "dd-h-8 ": props.size === "base",
+      "dd-h-9 ": props.size === "lg",
+      "dd-h-10 ": props.size === "xl",
+  }
+})
 const selectedValue = computed( () => {
   return props.options.find( ( predicate ) => {
     return predicate[props.defaultProps.value] == inputModelValue.value

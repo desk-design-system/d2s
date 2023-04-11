@@ -1,5 +1,5 @@
 <template>
-  <!-- <div> -->
+  <!-- <div class="base"> -->
   <!-- default -->
   <button v-bind="$attrs" v-if="type == 'default'" :class="{ ...defaultButton }" class="
               dd-inline-flex
@@ -8,6 +8,7 @@
               dd-font-semibold
               dd-capitalize
               dd-whitespace-nowrap
+              dd-cursor-pointer
             ">
     <svg v-if="loader" aria-hidden="true" :class="[size == 'xs' || size == 'sm' ? 'dd-h-3.5 dd-w-3.5' : 'dd-h-4 dd-w-4']"
       class=" dd-animate-spin dd-fill-teal-600 dd-text-white-50 " viewBox="0 0 100 101" fill="none"
@@ -50,6 +51,7 @@
               dd-font-medium
               dd-capitalize
               dd-whitespace-nowrap
+              dd-cursor-pointer
             ">
     <slot>{{ title }}</slot>
   </button>
@@ -60,10 +62,10 @@
     '  dd-py-2 dd-text-sm': size === 'base',
     '  dd-py-2 dd-text-base': size === 'lg',
     '  dd-py-3 dd-text-base': size === 'xl',
-    ' dd-text-teal-700 hover:dd-text-teal-700': color === 'primary',
-    ' dd-text-red-600 hover:dd-text-red-700': color === 'danger',
-    'dd-text-yellow-600  hover:dd-text-yellow-700': color === 'warning',
-    'dd-text-green-600  hover:dd-text-green-700':
+    ' dd-text-teal-700 hover:dd-text-teal-700 dd-bg-transparent': color === 'primary',
+    ' dd-text-red-600 hover:dd-text-red-700 dd-bg-transparent': color === 'danger',
+    'dd-text-yellow-600  hover:dd-text-yellow-700 dd-bg-transparent': color === 'warning',
+    'dd-text-green-600  hover:dd-text-green-700 dd-bg-transparent':
       color === 'success',
     'dd-cursor-not-allowed  !dd-text-gray-400 hover:dd-text-gray-500 hover:dd-text-transparent	': disable,
   }" class="
@@ -72,6 +74,7 @@
               dd-font-medium
               dd-capitalize
               dd-whitespace-nowrap
+              dd-cursor-pointer
             ">
     <slot>{{ title }}</slot>
   </button>
@@ -96,6 +99,7 @@
               dd-rounded-full
               dd-capitalize
               dd-whitespace-nowrap
+              dd-cursor-pointer
             ">
     <slot>{{ title }}</slot>
   </button>

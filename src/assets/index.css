@@ -1,7 +1,7 @@
 /* ./src/index.css */
 /* .dd-base{ */
-  @tailwind base;
+  /* @tailwind base; */
+  @import "base.css";
   @tailwind components;
   @tailwind utilities;
-  @import "base.css";
 /* } */
