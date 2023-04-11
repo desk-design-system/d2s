@@ -1,3 +1,0 @@
-const containers = [
-    'dd-container'
-]
