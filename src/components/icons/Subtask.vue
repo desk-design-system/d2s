@@ -1,0 +1,82 @@
+<template>
+  <svg
+    width="16px"
+    height="14px"
+    viewBox="0 0 16 14"
+    version="1.1"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+  >
+    <title>Icons/20px/Subtask</title>
+    <g
+      id="☮️-Icons"
+      stroke="none"
+      stroke-width="1"
+      fill="none"
+      fill-rule="evenodd"
+    >
+      <g id="Icon-20px" transform="translate(-1096.000000, -279.000000)">
+        <g
+          id="Icons/20px/Subtask"
+          transform="translate(1094.000000, 276.000000)"
+        >
+          <polygon id="Path" points="0 0 20 0 20 20 0 20"></polygon>
+          <line
+            x1="5"
+            y1="7.5"
+            x2="10"
+            y2="7.5"
+            id="Path"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          ></line>
+          <line
+            x1="3.33333333"
+            y1="4.16666667"
+            x2="6.66666667"
+            y2="4.16666667"
+            id="Path"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          ></line>
+          <path
+            d="M5,4.16666667 L5,13.3333333 C5,13.7935706 5.37309604,14.1666667 5.83333333,14.1666667 L10,14.1666667"
+            id="Path"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          ></path>
+          <rect
+            id="Rectangle"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            x="10"
+            y="5.83333333"
+            width="6.66666667"
+            height="3.33333333"
+            rx="0.833333333"
+          ></rect>
+          <rect
+            id="Rectangle"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            x="10"
+            y="12.5"
+            width="6.66666667"
+            height="3.33333333"
+            rx="0.833333333"
+          ></rect>
+        </g>
+      </g>
+    </g>
+  </svg>
+</template>
