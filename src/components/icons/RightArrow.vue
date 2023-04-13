@@ -1,0 +1,66 @@
+<template>
+  <svg
+    width="14px"
+    height="12px"
+    viewBox="0 0 14 12"
+    version="1.1"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+  >
+    <title>Icons/20px/Right arrow</title>
+    <g
+      id="☮️-Icons"
+      stroke="none"
+      stroke-width="1"
+      fill="none"
+      fill-rule="evenodd"
+    >
+      <g id="Icon-20px" transform="translate(-1137.000000, -280.000000)">
+        <g
+          id="Icons/20px/Right-arrow"
+          transform="translate(1134.000000, 276.000000)"
+        >
+          <g
+            id="Group"
+            transform="translate(10.000000, 10.000000) scale(-1, 1) translate(-10.000000, -10.000000) "
+          >
+            <polygon id="Path" points="0 0 20 0 20 20 0 20"></polygon>
+            <line
+              x1="4.16666667"
+              y1="10"
+              x2="15.8333333"
+              y2="10"
+              id="Path"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            ></line>
+            <line
+              x1="4.16666667"
+              y1="10"
+              x2="9.16666667"
+              y2="15"
+              id="Path"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            ></line>
+            <line
+              x1="4.16666667"
+              y1="10"
+              x2="9.16666667"
+              y2="5"
+              id="Path"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            ></line>
+          </g>
+        </g>
+      </g>
+    </g>
+  </svg>
+</template>
