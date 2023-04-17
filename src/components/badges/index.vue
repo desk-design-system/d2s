@@ -28,28 +28,32 @@
     <slot name="prefix"></slot>
     <slot>{{ title }}</slot>
     <slot name="suffix"></slot>
-    <dd-button
+    <!-- <dd-button
       v-if="closable"
       @click="$emit('close')"
       type="text"
       class="!dd-py-0 !dd-px-0"
     >
-      <XIcon
+      
+    </dd-button> -->
+    <XIcon
+    v-if="closable && title || $slots.default"
+      @click="$emit('close')"
         :class="{
           ...tagText,
-          'dd-h-3.5 dd-w-3.5 dd-mt-0.5': size === 'medium',
-          'dd-h-3.5 dd-w-3.5 dd-mt-1': size === 'large',
+          'dd-h-3.5 dd-w-3.5 ': size === 'medium',
+          'dd-h-4 dd-w-4 ': size === 'large',
         }"
-        class="dd-ml-1.5 dd-inline-flex"
+        class="dd-ml-1.5 dd-inline-flex hover:!dd-text-teal-700 "
         aria-hidden="true"
       />
-    </dd-button>
   </span>
 </template>
 
-<script>
+<script >
 import { XIcon } from "@heroicons/vue/solid";
 import ddButton from "../buttons/index.vue";
+// const emits = defineEmits( [ "close"] )
 export default {
   props: {
     title: {
