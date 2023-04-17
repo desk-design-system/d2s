@@ -12,6 +12,8 @@
   <ddCheckBox  v-model="model" />
     <ddRadion  :options="options" />
     <ddInput v-model="text"  />
+    <ddMulti showTooltip customIcon  v-model="text" :options="options" />
+    <ddSelect v-model="coner" :options="options" />
   </dd-wraper>
   </div>
 </template>
@@ -32,6 +34,9 @@ import ddDropDown from "./components/dropdown/index.vue"
 import ddRadion from "./components/radiobutton/index.vue"
 import ddWraper from "./components/scrollerApp/index.vue"
 import ddInput from "./components/input/index.vue"
+import ddMulti from "./components/multiSelect/index.vue"
+import ddSelect from "./components/select/index.vue"
+import ddSvg from "./components/svgIcon/index.vue"
 const options = ref([
 {
 name: "Test",
@@ -40,6 +45,16 @@ value: 1
 {
 name: "Test2",
 value: 2
+}
+])
+const options2 = ref([
+{
+title: "Test",
+id: 1
+},
+{
+title: "Test2",
+id: 2
 }
 ])
 const items = ref([
@@ -57,7 +72,8 @@ const items = ref([
   },
 ]);
 const model = ref(false)
-const text = ref(".akxmc lascn")
+const text = ref([])
+const coner = ref('')
 </script>
 
 
