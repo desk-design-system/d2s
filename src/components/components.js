@@ -22,4 +22,4 @@ export { default as DdInnerHeader } from './InnerHeader/index.vue';
 export { default as DdSignUpSell } from './signInShell/index.vue';
 export { default as DdWrapper } from './scrollerApp/index.vue';
 export { default as DdSvgIcon } from './svgIcon/index.vue';
-export { default as DdBreadcrum } from './breadcrumbs/index.vue';
+export { default as DdBreadcrumb } from './breadcrumbs/index.vue';
