@@ -9,7 +9,7 @@
       </div>
       <input
       :disabled="disabled"
-        :class="[inputSize, suffix ? 'dd-pr-10' : 'dd-pr-2', prefix ? 'dd-pl-10' : 'dd-pl-2', hasError ? '!dd-border-red-600' : '!dd-border-gray-300', errorMessage ? 'dd-mb-1' : '',disabled ? '!dd-text-gray-500 dd-ring-gray-200 dd-bg-gray-50 dd-cursor-not-allowed dd-select-none' : 'focus:dd-ring-teal-600 focus:!dd-border-teal-600 dd-text-gray-700']"
+        :class="[inputSize, suffix ? '!dd-pr-10' : '!dd-pr-2', prefix ? '!dd-pl-10' : '!dd-pl-2', hasError ? '!dd-border-red-600' : '!dd-border-gray-300', errorMessage ? 'dd-mb-1' : '',disabled ? '!dd-text-gray-500 dd-ring-gray-200 dd-bg-gray-50 dd-cursor-not-allowed dd-select-none' : 'focus:dd-ring-teal-600 focus:!dd-border-teal-600 dd-text-gray-700']"
         v-model="inputModelValue" :type="inputType"
         class="dd-border-solid !dd-block !dd-w-full !dd-rounded-md    dd-focus:!dd-ring-teal-600 sm:!dd-text-sm focus:ring-2 focus:dd-ring-inset  dd-shadow-sm"
         :placeholder="placeholder" />

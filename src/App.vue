@@ -11,9 +11,9 @@
   <ddBred :items="options" seprator="chevron" shadow />
   <ddCheckBox  v-model="model" />
     <ddRadion  :options="options" />
-    <ddInput v-model="text"  />
-    <ddMulti showTooltip customIcon  v-model="text" :options="options" />
-    <ddSelect v-model="coner" :options="options" />
+    <ddInput label="elo" v-model="text"  />
+    <ddMulti label="elo" showTooltip customIcon  v-model="text" :options="options" />
+    <!-- <ddSelect v-model="coner" :options="options" /> -->
   </dd-wraper>
   </div>
 </template>
@@ -45,6 +45,34 @@ value: 1
 {
 name: "Test2",
 value: 2
+},
+{
+name: "Test2",
+value: 3
+},
+{
+name: "Test2",
+value: 4
+},
+{
+name: "Test2",
+value: 5
+},
+{
+name: "Test2",
+value: 6
+},
+{
+name: "Test2",
+value: 7
+},
+{
+name: "Test2",
+value: 8
+},
+{
+name: "Test2",
+value: 9
 }
 ])
 const options2 = ref([

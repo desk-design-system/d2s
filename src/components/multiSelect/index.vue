@@ -9,17 +9,18 @@
     >
       <ListboxLabel
         class="dd-block dd-text-sm dd-font-medium dd-text-gray-700 dd-mb-1"
-        v-if="props.showTitle"
+        v-if="props.label"
       >
         <span class="dd-block dd-truncate"
-          >{{ props.title }}
+          >{{ props.label }}
           <span v-if="props.isRequired" class="dd-text-red-500">*</span>
         </span>
       </ListboxLabel>
       <div class="dd-relative">
         <ListboxButton
+        
           :class="[isDisabled ?  'dd-cursor-not-allowed' : 'dd-cursor-pointer', hasError ?  'dd-border-red-600' : 'dd-border-gray-300',inputSize  ]"
-          class="dd-bg-white dd-h-9 dd-relative dd-w-full dd-border dd-border-gray-300 dd-rounded-md dd-shadow-sm dd-pl-3 dd-pr-10 dd-text-left   sm:dd-text-sm"
+          class="dd-bg-white dd-pt-1  dd-relative dd-w-full dd-border dd-border-gray-300 dd-rounded-md dd-shadow-sm dd-pl-3 dd-pr-10 dd-text-left   sm:dd-text-sm"
         >
           <!-- <RDTooltipVue
             v-if="props.showTooltip"
@@ -61,7 +62,7 @@
           <!-- <span v-if="selectedValue"
           class="dd-block dd-truncate dd-text-gray-500 dd-text-sm"></span>
         <span v-else class="dd-text-sm dd-text-gray-400 dd-capitalize">{{ props.placeholder }}</span> -->
-          <ddBadge v-for="(val, index) in selectedOptions" :key="index" class="dd-mr-2" type="basic" @click.stop closable @close="removeItem(val)" size="large" :title="val[defaultProps.name]" />
+          <ddBadge v-for="(val, index) in selectedOptions" :key="index" class="dd-mr-2 dd-mb-1" type="basic" @click.stop closable @close="removeItem(val)"  :title="val[defaultProps.name]" />
           <span
             class="dd-absolute dd-inset-y-0 dd-right-0 dd-flex dd-items-center dd-pr-2 dd-pointer-events-none"
           >
@@ -157,7 +158,7 @@ errorMessage: {
     type: Boolean,
     default: false,
   },
-  title: {
+  label: {
     type: String,
     default: "",
   },
@@ -174,10 +175,6 @@ errorMessage: {
     default: false,
   },
   
-  showTitle: {
-    type: Boolean,
-    default: true,
-  },
   isDisabled: {
     type: Boolean,
     default: false,
@@ -232,12 +229,17 @@ const removeItem = (i) =>{
 
 const inputSize = computed( () => {
   return{
-    "dd-h-6 !dd-text-xs": props.size === "xs",
-      "dd-h-7  ":props.size === "sm",
-      "dd-h-8 ": props.size === "base",
-      "dd-h-9 ": props.size === "lg",
-      "dd-h-10 ": props.size === "xl",
+    "dd-min-h-[1.5rem] !dd-text-xs": props.size === "xs",
+      "dd-min-h-[1.75rem] ":props.size === "sm",
+      "dd-min-h-[2rem] ": props.size === "base",
+      "dd-min-h-[2.25rem] ": props.size === "lg",
+      "dd-min-h-[2.5rem] ": props.size === "xl",
   }
+})
+const styles = computed(() =>{
+  const styleObj = {}
+    styleObj[props.wrapperProperty] = `calc(100vh - ${props.wrapperValue})`
+    return styleObj
 })
 const hasError = computed( () => {
   if(props.errorMessage){
