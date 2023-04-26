@@ -130,9 +130,10 @@ import {
   ListboxOptions,
 } from "@headlessui/vue";
 import RDTooltipVue from "../tooltip/index.vue";
-import { useField } from "vee-validate";
-import { watchEffect, computed, ref } from "vue";
+import { watchEffect, computed, ref, watch } from "vue";
+import {useField} from "vee-validate"
 import { CheckIcon, ChevronDownIcon,
+  
   ChevronUpIcon } from '@heroicons/vue/solid'
 import ddBadge from "../badges/index.vue"
 const props = defineProps({
@@ -150,10 +151,14 @@ const props = defineProps({
   },
   default: "base",
 },
-errorMessage: {
-    type: String,
-    default: "",
+rules:{
+  type: [String, RegExp, Function],
+  default: ''
   },
+// errorMessage: {
+//     type: String,
+//     default: "",
+//   },
   showTooltip: {
     type: Boolean,
     default: false,
@@ -165,6 +170,10 @@ errorMessage: {
   placeholder: {
     type: String,
     default: "",
+  },
+  name: {
+    type: String,
+    default: () => ('Select' + Math.floor(Math.random() * 5000)),
   },
   options: {
     type: Array,
@@ -241,8 +250,20 @@ const styles = computed(() =>{
     styleObj[props.wrapperProperty] = `calc(100vh - ${props.wrapperValue})`
     return styleObj
 })
+const getRules = () => {
+  if(props.rules instanceof RegExp) {
+    return {regex: props.rules}
+  }
+  return props.rules
+}
+
+const { errorMessage, value, handleChange } = useField((props.name), getRules(), {label: props.name});
+
+watch(() => value, (newValue) => {
+  inputModelValue.value = newValue
+})
 const hasError = computed( () => {
-  if(props.errorMessage){
+  if(errorMessage.value){
     return true
   } else{
   return false

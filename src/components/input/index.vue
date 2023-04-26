@@ -8,6 +8,7 @@
         <svgIcon class="dd-text-gray-400" :icon="icon" :size="btnIconSize" />
       </div>
       <input
+      :name="name"
       :disabled="disabled"
         :class="[inputSize, suffix ? '!dd-pr-10' : '!dd-pr-2', prefix ? '!dd-pl-10' : '!dd-pl-2', hasError ? '!dd-border-red-600 focus:!dd-border-red-600 dd-focus:!dd-ring-red-600' : '!dd-border-gray-300 focus:dd-ring-teal-600 focus:!dd-border-teal-600', errorMessage ? 'dd-mb-1' : '',disabled ? '!dd-text-gray-500 dd-ring-gray-200 dd-bg-gray-50 dd-cursor-not-allowed dd-select-none' : ' dd-text-gray-700']"
         v-model="inputModelValue" :type="inputType"
@@ -24,7 +25,11 @@
     </div>
   </div>
 </template>
-
+<!-- <script>
+const getRandomInt = (max = 1000) => {
+  return Math.floor(Math.random() * max);
+}
+</script> -->
 <script setup>
 import {useField} from "vee-validate"
 import svgIcon from "../svgIcon/index.vue"
@@ -55,13 +60,9 @@ const props = defineProps( {
       type: String,
       default: null,
     },
-    name: {
+  name: {
     type: String,
-    default: null,
-  },
-  errorMessage: {
-    type: String,
-    default: "input",
+    default: () => ('Input' + Math.floor(Math.random() * 5000)),
   },
   isRequired: {
     type: Boolean,
@@ -90,9 +91,7 @@ const props = defineProps( {
     default: "base",
   },
 } )
-const getRandomInt = (max = 1000) => {
-  return Math.floor(Math.random() * max);
-}
+
 
 const getRules = () => {
   if(props.rules instanceof RegExp) {
@@ -101,7 +100,7 @@ const getRules = () => {
   return props.rules
 }
 
-const { errorMessage, value, handleChange } = useField((props.name + getRandomInt()), getRules(), {label: props.name});
+const { errorMessage, value, handleChange } = useField(( props.name ), getRules(), {label: props.name});
 
 watch(() => value, (newValue) => {
   inputModelValue.value = newValue
@@ -127,8 +126,8 @@ const inputModelValue = computed( {
     emits( "change", val )
   }
 } )
+
 const hasError = computed( () => {
-  // if(errorMessage.value){
   if ( errorMessage.value ) {
     return true
   } else {
@@ -159,6 +158,7 @@ const suffixIconClick = () => {
   }
   emits( 'suffixIconClick', true )
 }
+
 watch( () => props.type, ( newVal ) => {
   inputType.value = newVal
 },{immediate: true} )
