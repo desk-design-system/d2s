@@ -11,7 +11,7 @@
   <ddBred :items="options" seprator="chevron" shadow />
   <ddCheckBox  v-model="model" />
     <ddRadion  :options="options" />
-    <ddInput label="elo" v-model="text"  />
+    <ddInput  rules="required" label="elo" v-model="text"  />
     <ddMulti label="elo" showTooltip customIcon  v-model="text" :options="options" />
     <!-- <ddSelect v-model="coner" :options="options" /> -->
   </dd-wraper>
