@@ -19,7 +19,7 @@
       <div class="dd-relative">
         <ListboxButton
         
-          :class="[isDisabled ?  'dd-cursor-not-allowed' : 'dd-cursor-pointer', hasError ?  'dd-border-red-600' : 'dd-border-gray-300',inputSize  ]"
+          :class="[isDisabled ?  'dd-cursor-not-allowed' : 'dd-cursor-pointer', hasError ?  ' !dd-border-red-600 focus:!dd-border-red-600 dd-focus:!dd-ring-red-600' : 'dd-border-gray-300 focus:dd-ring-teal-600 focus:!dd-border-teal-600',inputSize  ]"
           class="dd-bg-white dd-pt-1  dd-relative dd-w-full dd-border dd-border-gray-300 dd-rounded-md dd-shadow-sm dd-pl-3 dd-pr-10 dd-text-left   sm:dd-text-sm"
         >
           <!-- <RDTooltipVue

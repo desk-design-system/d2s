@@ -4,7 +4,7 @@
     </ListboxLabel>
     <div class="dd-mt-1 dd-relative">
       <ListboxButton
-      :class="[hasError ?  'dd-border-red-600' : 'dd-border-gray-300',inputSize  ]"
+      :class="[hasError ?  ' !dd-border-red-600 focus:!dd-border-red-600 dd-focus:!dd-ring-red-600' : 'dd-border-gray-300 focus:dd-ring-teal-600 focus:!dd-border-teal-600',inputSize  ]"
         class="dd-border-solid dd-flex dd-items-center dd-cursor-pointer dd-bg-white dd-relative dd-w-full dd-border  dd-rounded-md dd-shadow-sm dd-pl-3 dd-pr-10 dd-py-2 dd-text-left  dd-h-9   sm:dd-text-sm">
         <!-- <div class="dd-flex dd-items-center dd-mb-3"> -->
         <ddAvatar v-if="selectedValue && showAvatar" size="mini" class="dd-mr-3"
