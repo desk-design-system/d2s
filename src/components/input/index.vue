@@ -8,10 +8,11 @@
         <svgIcon class="dd-text-gray-400" :icon="icon" :size="btnIconSize" />
       </div>
       <input
+      :name="name"
       :disabled="disabled"
-        :class="[inputSize, suffix ? '!dd-pr-10' : '!dd-pr-2', prefix ? '!dd-pl-10' : '!dd-pl-2', hasError ? '!dd-border-red-600' : '!dd-border-gray-300', errorMessage ? 'dd-mb-1' : '',disabled ? '!dd-text-gray-500 dd-ring-gray-200 dd-bg-gray-50 dd-cursor-not-allowed dd-select-none' : 'focus:dd-ring-teal-600 focus:!dd-border-teal-600 dd-text-gray-700']"
+        :class="[inputSize, suffix ? '!dd-pr-10' : '!dd-pr-2', prefix ? '!dd-pl-10' : '!dd-pl-2', hasError ? '!dd-border-red-600 focus:!dd-border-red-600 dd-focus:!dd-ring-red-600' : '!dd-border-gray-300 focus:dd-ring-teal-600 focus:!dd-border-teal-600', errorMessage ? 'dd-mb-1' : '',disabled ? '!dd-text-gray-500 dd-ring-gray-200 dd-bg-gray-50 dd-cursor-not-allowed dd-select-none' : ' dd-text-gray-700']"
         v-model="inputModelValue" :type="inputType"
-        class="dd-border-solid !dd-block !dd-w-full !dd-rounded-md    dd-focus:!dd-ring-teal-600 sm:!dd-text-sm focus:ring-2 focus:dd-ring-inset  dd-shadow-sm"
+        class="dd-border-solid !dd-block !dd-w-full !dd-rounded-md     sm:!dd-text-sm focus:ring-2 focus:dd-ring-inset  dd-shadow-sm"
         :placeholder="placeholder" />
       <!-- $slots.suffix -->
       <div @click="suffixIconClick" v-if="suffix && suffixIcon"
@@ -24,8 +25,13 @@
     </div>
   </div>
 </template>
-
+<!-- <script>
+const getRandomInt = (max = 1000) => {
+  return Math.floor(Math.random() * max);
+}
+</script> -->
 <script setup>
+import {useField} from "vee-validate"
 import svgIcon from "../svgIcon/index.vue"
 import { ref, computed, watch } from "vue"
 const emits = defineEmits( ['update:modelValue', "change", "suffixIconClick"] )
@@ -33,6 +39,10 @@ const props = defineProps( {
   label: {
     type: String,
     default: "",
+  },
+  rules:{
+  type: [String, RegExp, Function],
+  default: ''
   },
   prefix: {
     type: Boolean,
@@ -47,12 +57,12 @@ const props = defineProps( {
     default: false
   },
   icon: {
+      type: String,
+      default: null,
+    },
+  name: {
     type: String,
-    default: null,
-  },
-  errorMessage: {
-    type: String,
-    default: "",
+    default: () => ('Input' + Math.floor(Math.random() * 5000)),
   },
   isRequired: {
     type: Boolean,
@@ -81,6 +91,21 @@ const props = defineProps( {
     default: "base",
   },
 } )
+
+
+const getRules = () => {
+  if(props.rules instanceof RegExp) {
+    return {regex: props.rules}
+  }
+  return props.rules
+}
+
+const { errorMessage, value, handleChange } = useField(( props.name ), getRules(), {label: props.name});
+
+watch(() => value, (newValue) => {
+  inputModelValue.value = newValue
+})
+
 const inputType = ref( 'text' )
 const inputSize = computed( () => {
   return {
@@ -96,12 +121,14 @@ const inputModelValue = computed( {
     return props.modelValue
   },
   set ( val ) {
+    handleChange(val)
     emits( "update:modelValue", val )
     emits( "change", val )
   }
 } )
+
 const hasError = computed( () => {
-  if ( props.errorMessage ) {
+  if ( errorMessage.value ) {
     return true
   } else {
     return false
@@ -131,6 +158,7 @@ const suffixIconClick = () => {
   }
   emits( 'suffixIconClick', true )
 }
+
 watch( () => props.type, ( newVal ) => {
   inputType.value = newVal
 },{immediate: true} )

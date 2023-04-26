@@ -7,19 +7,24 @@
   <ddBadge title="elo" />
   <ddBadge title="elo" rounded size="large" />
   <ddBadge title="elo" rounded size="large" dot />
-  <ddButton @click="alertt" prefix icon="Plus" title="elo" />
+  <ddButton @click="fun" prefix icon="Plus" title="Form" />
   <ddBred :items="options" seprator="chevron" shadow />
   <ddCheckBox  v-model="model" />
+  <ddObserver ref="wraperForm" >
+
     <ddRadion  :options="options" />
-    <ddInput label="elo" v-model="text"  />
-    <ddMulti label="elo" showTooltip customIcon  v-model="text" :options="options" />
-    <!-- <ddSelect v-model="coner" :options="options" /> -->
+    <!-- <ddInput  rules="required|min:6" label="Input" v-model="text"  />
+    <ddInput  rules="required|confirmed:@Jazib" label="Confirm" v-model="coner"  /> -->
+    <ddMulti label="elo" rules="required" showTooltip customIcon  v-model="text" :options="options" />
+    <ddSelect  label="testing" rules="required" v-model="coner" :options="options" />
+  </ddObserver>
   </dd-wraper>
   </div>
 </template>
 
 <script setup>
 import {ref} from "vue"
+import ddObserver from "./components/validations/ddForm.vue"
 import ddAlert from "./components/alerts/index.vue"
 import ddAvatar from "./components/avatars/index.vue"
 import ddBadge from "./components/badges/index.vue"
@@ -99,6 +104,15 @@ const items = ref([
     value: 3,
   },
 ]);
+const wraperForm = ref(null)
+const  fun = async () =>{
+  const inValid = await wraperForm.value.validate()
+if (inValid.valid) {
+  alert("Success")
+} else{
+  alert("Los")
+}
+}
 const model = ref(false)
 const text = ref([])
 const coner = ref('')

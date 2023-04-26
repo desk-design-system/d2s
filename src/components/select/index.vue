@@ -51,7 +51,8 @@
   </Listbox>
 </template>
 <script setup>
-import { ref, computed } from "vue"
+import {useField} from "vee-validate"
+import { ref, computed,watch } from "vue"
 import { Switch, Listbox, ListboxButton, ListboxLabel, ListboxOption, ListboxOptions } from '@headlessui/vue'
 import { CheckIcon, ChevronDownIcon } from '@heroicons/vue/solid'
 import ddAvatar from "../avatars/index.vue"
@@ -61,17 +62,21 @@ const props = defineProps( {
     type: String,
     default: "",
   },
+  rules:{
+  type: [String, RegExp, Function],
+  default: ''
+  },
   showOnline: {
     type: Boolean,
     default: false,
   },
-  errorMessage: {
-    type: String,
-    default: "",
-  },
   isRequired: {
     type: Boolean,
     default: false,
+  },
+  name: {
+    type: String,
+    default: () => ('Select' + Math.floor(Math.random() * 5000)),
   },
   options: {
     type: Array,
@@ -154,8 +159,27 @@ const selectedValue = computed( () => {
   } )
 
 } )
+
+// const getRandomInt = (max = 1000) => {
+//   return Math.floor(Math.random() * max);
+// }
+
+const getRules = () => {
+  if(props.rules instanceof RegExp) {
+    return {regex: props.rules}
+  }
+  return props.rules
+}
+
+const { errorMessage, value, handleChange } = useField((props.name), getRules(), {label: props.name});
+
+watch(() => value, (newValue) => {
+  inputModelValue.value = newValue
+})
+
+const inputType = ref( 'text' )
 const hasError = computed( () => {
-  if(props.errorMessage){
+  if(errorMessage.value){
     return true
   } else{
   return false

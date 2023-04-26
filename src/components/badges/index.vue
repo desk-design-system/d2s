@@ -37,7 +37,7 @@
       
     </dd-button> -->
     <XIcon
-    v-if="closable && title || $slots.default"
+    v-if="closable "
       @click="$emit('close')"
         :class="{
           ...tagText,

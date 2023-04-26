@@ -28,6 +28,8 @@
   "dependencies": {
     "@headlessui/vue": "^1.6.4",
     "@heroicons/vue": "^1.0.6",
+    "@vee-validate/i18n": "^4.8.3",
+    "@vee-validate/rules": "^4.8.4",
     "@vue-hero-icons/outline": "^1.7.2",
     "@vue-hero-icons/solid": "^1.7.2",
     "vee-validate": "^4.8.4",
