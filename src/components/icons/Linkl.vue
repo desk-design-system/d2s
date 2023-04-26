@@ -1,0 +1,41 @@
+<template>
+  <svg
+    width="16px"
+    height="16px"
+    viewBox="0 0 16 16"
+    version="1.1"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+  >
+    <title>Icons/20px/Linkl</title>
+    <g
+      id="☮️-Icons"
+      stroke="none"
+      stroke-width="1"
+      fill="none"
+      fill-rule="evenodd"
+    >
+      <g id="Icon-20px" transform="translate(-176.000000, -314.000000)">
+        <g id="Icons/20px/Linkl" transform="translate(174.000000, 312.000000)">
+          <polygon id="Path" points="0 0 20 0 20 20 0 20"></polygon>
+          <path
+            d="M8.33333333,11.6666667 C8.88192611,12.2265718 9.63279944,12.5420919 10.4166667,12.5420919 C11.2005339,12.5420919 11.9514072,12.2265718 12.5,11.6666667 L15.8333333,8.33333333 C16.9839265,7.1827401 16.9839265,5.31725991 15.8333333,4.1666667 C14.6827401,3.01607348 12.8172599,3.01607347 11.6666667,4.16666667 L11.25,4.58333333"
+            id="Path"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          ></path>
+          <path
+            d="M11.6666667,8.33333333 C11.1180739,7.77342817 10.3672006,7.45790812 9.58333333,7.45790812 C8.79946611,7.45790812 8.04859278,7.77342817 7.5,8.33333333 L4.16666667,11.6666667 C3.01607344,12.8172599 3.01607344,14.6827401 4.16666667,15.8333333 C5.3172599,16.9839266 7.1827401,16.9839266 8.33333333,15.8333333 L8.75,15.4166667"
+            id="Path"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          ></path>
+        </g>
+      </g>
+    </g>
+  </svg>
+</template>

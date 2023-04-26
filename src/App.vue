@@ -1,14 +1,20 @@
 <template>
   <div class="dd-container dd-mx-auto dd-m-5">
+    <dd-wraper>
   <ddHeadr :items="items" />  
+  <ddAlert title="elo" closable />
+  <ddAvatar srcLink="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg" />
+  <ddBadge title="elo" />
+  <ddBadge title="elo" rounded size="large" />
+  <ddBadge title="elo" rounded size="large" dot />
   <ddButton @click="alertt" prefix icon="Plus" title="elo" />
-  <ddCheckBox />
-  <ddDropDown :options="options" />
-  <wrapper>
-    <!-- <ddInput size="sm" prefix suffix icon="Search" :rules="/^[+]?([0-9]+(?:[\.][0-9]*)?|\.[0-9]+)$/" v-model="inputValue"  /> -->
-    <!-- <ddInput name="zohaib" prefix suffix icon="Search" rules="email" v-model="inputValue"  /> -->
-    <ddSelect v-model="inputValue" label="elo" :options="options" />
-  </wrapper>
+  <ddBred :items="options" seprator="chevron" shadow />
+  <ddCheckBox  v-model="model" />
+    <ddRadion  :options="options" />
+    <ddInput label="elo" v-model="text"  />
+    <ddMulti label="elo" showTooltip customIcon  v-model="text" :options="options" />
+    <!-- <ddSelect v-model="coner" :options="options" /> -->
+  </dd-wraper>
   </div>
 </template>
 
@@ -25,11 +31,12 @@ import ddDialog from "./components/dialog/index.vue"
 import ddDivider from "./components/divider/index.vue"
 import ddDrawer from "./components/drawer/index.vue"
 import ddDropDown from "./components/dropdown/index.vue"
+import ddRadion from "./components/radiobutton/index.vue"
+import ddWraper from "./components/scrollerApp/index.vue"
 import ddInput from "./components/input/index.vue"
+import ddMulti from "./components/multiSelect/index.vue"
 import ddSelect from "./components/select/index.vue"
-import wrapper from "./components/validations/ddForm.vue"
-
-const inputValue = ref("")
+import ddSvg from "./components/svgIcon/index.vue"
 const options = ref([
 {
 name: "Test",
@@ -38,6 +45,44 @@ value: 1
 {
 name: "Test2",
 value: 2
+},
+{
+name: "Test2",
+value: 3
+},
+{
+name: "Test2",
+value: 4
+},
+{
+name: "Test2",
+value: 5
+},
+{
+name: "Test2",
+value: 6
+},
+{
+name: "Test2",
+value: 7
+},
+{
+name: "Test2",
+value: 8
+},
+{
+name: "Test2",
+value: 9
+}
+])
+const options2 = ref([
+{
+title: "Test",
+id: 1
+},
+{
+title: "Test2",
+id: 2
 }
 ])
 const items = ref([
@@ -54,9 +99,9 @@ const items = ref([
     value: 3,
   },
 ]);
-const alertt = () =>{
-alert("elo")
-}
+const model = ref(false)
+const text = ref([])
+const coner = ref('')
 </script>
 
 

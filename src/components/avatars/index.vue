@@ -46,7 +46,7 @@ export default {
     },
     srcLink: {
       type: String,
-      default: "",
+      default: "https://img.freepik.com/free-icon/user_318-563642.jpg",
     },
     altName: {
       type: String,

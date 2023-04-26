@@ -20,3 +20,7 @@ export { default as DdDropDown } from './dropdown/index.vue';
 export { default as DdTable } from './table/index.vue';
 export { default as DdInnerHeader } from './InnerHeader/index.vue';
 export { default as DdSignUpSell } from './signInShell/index.vue';
+export { default as DdWrapper } from './scrollerApp/index.vue';
+export { default as DdSvgIcon } from './svgIcon/index.vue';
+export { default as DdBreadcrumb } from './breadcrumbs/index.vue';
+export { default as DdMultiSelect } from './multiSelect/index.vue';

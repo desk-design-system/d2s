@@ -1,0 +1,69 @@
+<template>
+  <svg
+    width="16px"
+    height="16px"
+    viewBox="0 0 16 16"
+    version="1.1"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+  >
+    <title>Icons/20px/Message-dots</title>
+    <g
+      id="☮️-Icons"
+      stroke="none"
+      stroke-width="1"
+      fill="none"
+      fill-rule="evenodd"
+    >
+      <g id="Icon-20px" transform="translate(-136.000000, -243.000000)">
+        <g
+          id="Icons/20px/Message-dots"
+          transform="translate(134.000000, 240.000000)"
+        >
+          <polygon id="Path" points="0 0 20 0 20 20 0 20"></polygon>
+          <path
+            d="M3.33333333,17.5 L3.33333333,6.66666667 C3.33333333,5.28595479 4.45262146,4.16666667 5.83333333,4.16666667 L14.1666667,4.16666667 C15.5473785,4.16666667 16.6666667,5.28595479 16.6666667,6.66666667 L16.6666667,11.6666667 C16.6666667,13.0473785 15.5473785,14.1666667 14.1666667,14.1666667 L6.66666667,14.1666667 L3.33333333,17.5"
+            id="Path"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          ></path>
+          <line
+            x1="10"
+            y1="9.16666667"
+            x2="10"
+            y2="9.175"
+            id="Path"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          ></line>
+          <line
+            x1="6.66666667"
+            y1="9.16666667"
+            x2="6.66666667"
+            y2="9.175"
+            id="Path"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          ></line>
+          <line
+            x1="13.3333333"
+            y1="9.16666667"
+            x2="13.3333333"
+            y2="9.175"
+            id="Path"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          ></line>
+        </g>
+      </g>
+    </g>
+  </svg>
+</template>

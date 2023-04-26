@@ -1,0 +1,49 @@
+<template>
+  <svg
+    width="12px"
+    height="14px"
+    viewBox="0 0 12 14"
+    version="1.1"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+  >
+    <title>Icons/20px/Pause</title>
+    <g
+      id="☮️-Icons"
+      stroke="none"
+      stroke-width="1"
+      fill="none"
+      fill-rule="evenodd"
+    >
+      <g id="Icon-20px" transform="translate(-818.000000, -315.000000)">
+        <g id="Icons/20px/Pause" transform="translate(814.000000, 312.000000)">
+          <polygon id="Path" points="0 0 20 0 20 20 0 20"></polygon>
+          <rect
+            id="Rectangle"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            x="5"
+            y="4.16666667"
+            width="3.33333333"
+            height="11.6666667"
+            rx="0.833333333"
+          ></rect>
+          <rect
+            id="Rectangle"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            x="11.6666667"
+            y="4.16666667"
+            width="3.33333333"
+            height="11.6666667"
+            rx="0.833333333"
+          ></rect>
+        </g>
+      </g>
+    </g>
+  </svg>
+</template>

@@ -1,0 +1,17 @@
+const order = [
+  "dd-order-1",
+  "dd-order-2",
+  "dd-order-3",
+  "dd-order-4",
+  "dd-order-5",
+  "dd-order-6",
+  "dd-order-7",
+  "dd-order-8",
+  "dd-order-9",
+  "dd-order-10",
+  "dd-order-11",
+  "dd-order-12",
+  "dd-order-first",
+  "dd-order-last",
+  "dd-order-none",
+];

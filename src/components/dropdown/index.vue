@@ -1,12 +1,12 @@
 <template>
   <Menu as="div" class="dd-relative dd-inline-block dd-text-left">
     <div v-if="type == 'avatar'">
-      <MenuButton  >
+      <MenuButton class="dd-bg-transparent dd-cursor-pointer" >
         <ddAvatar :size="avatarSize" :srcLink="avatarLink"  />
       </MenuButton>
     </div>
     <div v-else-if="type == 'button'">
-      <MenuButton :class="{ ...basicButton }" class="dd-inline-flex dd-w-full dd-justify-center ">
+      <MenuButton :class="{ ...basicButton }" class="dd-inline-flex dd-w-full dd-justify-center dd-cursor-pointer">
         <slot>
           {{ label }}
         </slot>
@@ -44,7 +44,7 @@ import { ref, computed } from "vue"
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
 import { ChevronDownIcon } from '@heroicons/vue/solid'
 import ddAvatar from "../avatars/index.vue"
-const emits = defineEmits( ['command','update:modelValue', "change"] )
+const emits = defineEmits( ['update:modelValue', "change", 'command'] )
 const props = defineProps( {
   label: {
     type: String,
@@ -56,22 +56,22 @@ const props = defineProps( {
   },
   avatarLink:{
     type: String,
-    default: "",
+    default: "https://img.freepik.com/free-icon/user_318-563642.jpg",
   },
   options: {
     type: Array,
     required: true
   },
-  type: {
-      type: String,
-      validator: function ( value ) {
-        // The value must match one of these strings
-        return (
-          ["text", "button", "avatar"].indexOf( value ) !== -1
-        )
-      },
-      default: "button",
-    },
+  // type: {
+  //     type: String,
+  //     validator: function ( value ) {
+  //       // The value must match one of these strings
+  //       return (
+  //         ["text", "button", "avatar"].indexOf( value ) !== -1
+  //       )
+  //     },
+  //     default: "button",
+  //   },
   defaultProps: {
     type: Object,
     default: () => ( {
@@ -81,8 +81,16 @@ const props = defineProps( {
     } )
   },
   color: {
+    size: {
     type: String,
-    default: "default",
+    validator: function ( value ) {
+      // The value must match one of these strings
+      return (
+        ["primary", "danger", "white",'transparent'].indexOf( value ) !== -1
+      )
+    },
+    default: "white",
+  },
   },
   type: {
     type: String,
@@ -127,29 +135,27 @@ const getClick = ( i ) => {
 }
 const basicButton = computed( () => {
   // return {
-  if ( props.type == 'text' ) {
+  // if ( props.type == 'text' ) {
+  //   return {
+  //     "dd-text-xs ": props.size === "xs",
+  //     "dd-text-sm  ":
+  //       props.size === "sm",
+  //     "dd-text-sm ": props.size === "base",
+  //     "dd-text-base ": props.size === "lg",
+  //     "dd-text-base ": props.size === "xl",
+  //     "dd-text-teal-600  hover:dd-text-teal-700": props.color === "primary",
+  //     "dd-text-red-600  hover:dd-text-red-200": props.color === "danger",
+  //     " dd-text-gray-600 dd-border hover:dd-text-gray-700 dd-bg-transparent":
+  //       props.color === "",
+  //   }
+  // } else {
     return {
-      "dd-text-xs ": props.size === "xs",
-      "dd-text-sm  ":
+      "dd-px-2.5 dd-py-1.5 dd-h-6 dd-text-xs dd-rounded": props.size === "xs",
+      "dd-px-3 dd-py-2 dd-text-sm dd-h-7 dd-rounded-md":
         props.size === "sm",
-      "dd-text-sm ": props.size === "base",
-      "dd-text-base ": props.size === "lg",
-      "dd-text-base ": props.size === "xl",
-      "dd-text-teal-600  hover:dd-text-teal-700": props.color === "primary",
-      "dd-text-red-600  hover:dd-text-red-200": props.color === "danger",
-      " dd-text-gray-600 dd-border hover:dd-text-gray-700":
-        props.color === "",
-    }
-  } else {
-    return {
-      "dd-border-gray-300 dd-text-gray-700 dd-border  focus:dd-outline-none":
-        props.color,
-      "dd-px-2.5 dd-py-1.5  dd-text-xs dd-rounded": props.size === "xs",
-      "dd-px-3 dd-py-2 dd-text-sm  dd-h-9 dd-rounded-md":
-        props.size === "sm",
-      "dd-px-4 dd-py-2 dd-text-sm dd-rounded-md": props.size === "base",
-      "dd-px-4 dd-py-2 dd-text-base dd-rounded-md": props.size === "lg",
-      "dd-px-6 dd-py-3 dd-text-base dd-rounded-md": props.size === "xl",
+      "dd-px-4 dd-py-2 dd-text-sm dd-rounded-md dd-h-8": props.size === "base",
+      "dd-px-4 dd-py-2 dd-text-base dd-rounded-md dd-h-9": props.size === "lg",
+      "dd-px-6 dd-py-3 dd-text-base dd-rounded-md dd-h-10": props.size === "xl",
       "dd-cursor-not-allowed !dd-bg-gray-200 !dd-text-gray-400 hover:dd-bg-gray-300":
         props.disable,
       "dd-bg-teal-600 dd-text-white hover:dd-bg-teal-700":
@@ -158,7 +164,10 @@ const basicButton = computed( () => {
         props.color === "danger",
       "dd-bg-white dd-border-gray-300 dd-text-gray-700 dd-border hover:dd-bg-gray-50 focus:dd-outline-none":
         props.color === "white",
+        "dd-text-gray-700 dd-bg-transparent":
+        props.color =='transparent',
     }
-  }
+  // }
 } )
+
 </script>
