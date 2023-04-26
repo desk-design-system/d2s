@@ -5,8 +5,9 @@
   <ddCheckBox />
   <ddDropDown :options="options" />
   <wrapper>
-    <ddInput size="sm" prefix suffix icon="Search" :rules="/^[+]?([0-9]+(?:[\.][0-9]*)?|\.[0-9]+)$/" v-model="inputValue"  />
-    {{ inputValue }}
+    <!-- <ddInput size="sm" prefix suffix icon="Search" :rules="/^[+]?([0-9]+(?:[\.][0-9]*)?|\.[0-9]+)$/" v-model="inputValue"  /> -->
+    <!-- <ddInput name="zohaib" prefix suffix icon="Search" rules="email" v-model="inputValue"  /> -->
+    <ddSelect v-model="inputValue" label="elo" :options="options" />
   </wrapper>
   </div>
 </template>
@@ -25,9 +26,10 @@ import ddDivider from "./components/divider/index.vue"
 import ddDrawer from "./components/drawer/index.vue"
 import ddDropDown from "./components/dropdown/index.vue"
 import ddInput from "./components/input/index.vue"
+import ddSelect from "./components/select/index.vue"
 import wrapper from "./components/validations/ddForm.vue"
 
-const inputValue = ref("kamil")
+const inputValue = ref("")
 const options = ref([
 {
 name: "Test",

@@ -1,24 +1,26 @@
 <template>
   <div v-bind="$attrs">
     <label v-if="label" class="dd-block dd-text-sm dd-font-medium dd-text-gray-700 dd-mb-1">{{ label }}  <span v-if="isRequired" class="dd-text-red-500 ">*</span> </label>
-    <div class="dd-relative  dd-rounded-md ">
-      <div v-if="prefix"
-        class="!dd-pointer-events-none !dd-absolute !dd-inset-y-0 !dd-left-0 !dd-flex !dd-items-center !dd-pl-3 !dd-pr-10">
-        <svgIcon class="dd-text-gray-400" :icon="icon" :size="btnIconSize" />
+    <div>
+      <div class="dd-relative  dd-rounded-md ">
+        <div v-if="prefix"
+          class="!dd-pointer-events-none !dd-absolute !dd-inset-y-0 !dd-left-0 !dd-flex !dd-items-center !dd-pl-3 !dd-pr-10">
+          <svgIcon class="dd-text-gray-400" :icon="icon" :size="btnIconSize" />
+        </div>
+  
+        <input :name="name" :class="[inputSize,suffix ? 'dd-pr-10' : 'dd-pr-2', prefix ? 'dd-pl-10' : 'dd-pl-2', hasError ?  '!dd-border-red-600' : '!dd-border-gray-300', ]"  v-model="value" :type="type"
+          class="dd-border-solid	 !dd-block !dd-w-full !dd-rounded-md   focus:!dd-border-teal-600 dd-focus:!dd-ring-teal-600 sm:!dd-text-sm focus:ring-2 focus:dd-ring-inset focus:dd-ring-teal-600 dd-shadow-sm"
+          :placeholder="placeholder" />
+  
+          <!-- $slots.suffix -->
+          <div v-if="suffix"
+          class="!dd-pointer-events-none !dd-absolute !dd-inset-y-0 !dd-right-0 !dd-flex !dd-items-center !dd-pl-3 !dd-pr-3">
+          <svgIcon class="dd-text-gray-400"  :icon="icon" :size="btnIconSize" />
+          <!-- <slot name="suffix">
+          </slot> -->
+        </div>
       </div>
-
-      <input :class="[inputSize,suffix ? 'dd-pr-10' : 'dd-pr-2', prefix ? 'dd-pl-10' : 'dd-pl-2', hasError ?  '!dd-border-red-600' : '!dd-border-gray-300', errorMessage ? 'dd-mb-1' : ''  ]"  v-model="value" :type="type"
-        class="dd-border-solid	 !dd-block !dd-w-full !dd-rounded-md   focus:!dd-border-teal-600 dd-focus:!dd-ring-teal-600 sm:!dd-text-sm focus:ring-2 focus:dd-ring-inset focus:dd-ring-teal-600 dd-shadow-sm"
-        :placeholder="placeholder" />
-
-        <!-- $slots.suffix -->
-        <div v-if="suffix"
-        class="!dd-pointer-events-none !dd-absolute !dd-inset-y-0 !dd-right-0 !dd-flex !dd-items-center !dd-pl-3 !dd-pr-3">
-        <svgIcon class="dd-text-gray-400"  :icon="icon" :size="btnIconSize" />
-        <!-- <slot name="suffix">
-        </slot> -->
-      </div>
-      <span v-if="errorMessage" class="dd-text-xs dd-text-red-500 dd-capitalize dd-pt-px">{{ errorMessage }}</span>
+      <span v-if="errorMessage" class="dd-text-xs dd-text-red-500  dd-pt-px">{{ errorMessage }}</span>
     </div>
   </div>
 </template>
@@ -49,10 +51,10 @@ const props = defineProps( {
       type: String,
       default: null,
     },
-  // errorMessage: {
-  //   type: String,
-  //   default: "",
-  // },
+    name: {
+    type: String,
+    default: "input",
+  },
   isRequired: {
     type: Boolean,
     default: false,
@@ -85,14 +87,13 @@ const getRandomInt = (max = 1000) => {
 }
 
 const getRules = () => {
-  debugger
   if(props.rules instanceof RegExp) {
     return {regex: props.rules}
   }
   return props.rules
 }
 
-const { errorMessage, value, handleChange } = useField((props.label + getRandomInt()), getRules(), {label: props.label ? props.label: 'input'});
+const { errorMessage, value, handleChange } = useField((props.name + getRandomInt()), getRules(), {label: props.name});
 
 watch(() => value, (newValue) => {
   inputModelValue.value = newValue
