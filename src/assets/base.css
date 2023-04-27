@@ -189,7 +189,7 @@ menu {
 .dd-base iframe,
 .dd-base embed,
 .dd-base object {
-  display: block;
+  /* display: block; */
   vertical-align: middle;
 }
 img,
