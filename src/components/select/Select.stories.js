@@ -87,21 +87,21 @@ export const Avatar = Template.bind({});
 export const CheckLeft = Template.bind({});
 // More on args: https://storybook.js.org/docs/vue/writing-stories/args
 Primary.args = {
-  title: 'Primary Select',
+  label: 'Primary Select',
   placeholder: "Select Option"
 };
 Online.args = {
-  title: 'Online Select',
+  label: 'Online Select',
   placeholder: "Select Option",
   showOnline: true,
 };
 Avatar.args = {
-  title: 'Avatar Select',
+  label: 'Avatar Select',
   placeholder: "Select Option",
   showAvatar: true,
 };
 CheckLeft.args = {
-  title: 'Check Icon Left',
+  label: 'Check Icon Left',
   placeholder: "Select Option",
   checkIcon: 'left',
 };
