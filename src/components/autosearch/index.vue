@@ -1,6 +1,6 @@
 <template>
   <div class="dd-base" v-bind="$attrs">
-    <label v-if="label" class="dd-block dd-text-sm dd-font-medium dd-text-gray-700 dd-mb-1">{{ label }} {{ query }} </label>
+    <label v-if="label" class="dd-block dd-text-sm dd-font-medium dd-text-gray-700 dd-mb-1">{{ label }}</label>
     <Combobox v-model="inputModelValue">
       <div class="dd-relative ">
         <div v-if="prefix"
