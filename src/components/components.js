@@ -24,3 +24,4 @@ export { default as DdWrapper } from './scrollerApp/index.vue';
 export { default as DdSvgIcon } from './svgIcon/index.vue';
 export { default as DdBreadcrumb } from './breadcrumbs/index.vue';
 export { default as DdMultiSelect } from './multiSelect/index.vue';
+export { default as DDAutoSearch } from './autosearch/index.vue';
