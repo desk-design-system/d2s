@@ -225,7 +225,7 @@ video {
   padding: 0.5rem 0.75rem;
   font-size: 1rem;
   line-height: 1.5rem;
-  --tw-shadow: 0 0 #0000;
+  /* --tw-shadow: 0 0 #0000; */
 }
 .dd-base [type="text"]:focus,
 .dd-base [type="email"]:focus,
