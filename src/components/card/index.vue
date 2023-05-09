@@ -1,36 +1,49 @@
 <template>
-  <div v-bind="$attrs" class="dd-card dd-rounded dd-bg-white dd-mb-4" :class="[elevationFun, className]">
-    <div :class="`dd-py-${headerY} dd-px-${headerX}`" class="dd-border-b dd-border-gray-300" v-if="header">
-      <p class="dd-text-lg dd-text-gray-700 dd-font-medium dd-pb-1">{{ title }} </p>
+  <div
+    v-bind="$attrs"
+    class="dd-card dd-rounded dd-bg-white dd-mb-4"
+    :class="[elevationFun, className, roundedFun]"
+  >
+    <div
+      :class="`dd-py-${headerY} dd-px-${headerX}`"
+      class="dd-border-b dd-border-gray-300"
+      v-if="header"
+    >
+      <p class="dd-text-lg dd-text-gray-700 dd-font-medium dd-pb-1">
+        {{ title }}
+      </p>
       <p class="dd-text-sm dd-text-gray-500">{{ subTitle }}</p>
     </div>
     <!-- :class="[hasCustomClass ? customStyle : defaultClasses]" -->
-    <div :class="`dd-py-${y} dd-px-${x}`" >
-    <slot> {{ content }} </slot>
-  </div>
+    <div :class="`dd-py-${y} dd-px-${x}`">
+      <slot> {{ content }} </slot>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
   computed: {
-    hasCustomClass () {
-      if ( this.customStyle ) {
-        return true
+    hasCustomClass() {
+      if (this.customStyle) {
+        return true;
       }
-      return false
+      return false;
     },
-    elevationFun () {
-      if ( this.elevation == 'sm' ) {
-        return 'dd-drop-shadow-sm'
-      } else if ( this.elevation == 'lg' ) {
-        return 'dd-drop-shadow-lg'
-      } else if ( this.elevation == 'xl' ) {
-        return 'dd-drop-shadow-xl'
+    elevationFun() {
+      if (this.elevation == "sm") {
+        return "dd-drop-shadow-sm";
+      } else if (this.elevation == "lg") {
+        return "dd-drop-shadow-lg";
+      } else if (this.elevation == "xl") {
+        return "dd-drop-shadow-xl";
       } else {
-        return ''
+        return "";
       }
-    }
+    },
+    roundedFun() {
+      return this.rounded ? `dd-rounded-${this.rounded}` : `dd-rounded`;
+    },
   },
   // data () {
   //   return {
@@ -38,57 +51,62 @@ export default {
   //   }
   // },
   props: {
-    className:{
+    className: {
       type: String,
-      default: ''
+      default: "",
     },
-    headerX:{
+    headerX: {
       type: Number,
-      default: 5
+      default: 5,
     },
-    headerY:{
+    headerY: {
       type: Number,
-      default: 5
+      default: 5,
     },
-    x:{
+    x: {
       type: Number,
-      default: 5
+      default: 5,
     },
-    y:{
+    y: {
       type: Number,
-      default: 5
+      default: 5,
     },
     content: {
       type: String,
-      default: ""
+      default: "",
     },
     customStyle: {
       type: String,
-      default: ""
+      default: "",
     },
-    header:{
+    header: {
       type: Boolean,
-      default: false
+      default: false,
     },
-    title:{
+    title: {
       type: String,
-      default: ''
+      default: "",
     },
-    subTitle:{
+    subTitle: {
       type: String,
-      default: ''
+      default: "",
     },
     elevation: {
       type: String,
-      validator: function ( value ) {
+      validator: function (value) {
         // The value must match one of these strings
-        return (
-          ["none", "sm", "lg", 'xl'].indexOf( value ) !== -1
-        )
+        return ["none", "sm", "lg", "xl"].indexOf(value) !== -1;
       },
       default: "none",
     },
-  }
-}
+    rounded: {
+      type: String,
+      validator: function (value) {
+        // The value must match one of these strings
+        return ["none", "sm", "md", "lg", "full"].indexOf(value) !== -1;
+      },
+      default: null,
+    },
+  },
+};
 </script>
-

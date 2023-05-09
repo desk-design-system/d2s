@@ -33,11 +33,15 @@
           v-model="coner"
           :options="options"
         />
-        <DdAccordion rules="required" :srcLink="srcLink" :showAvatar="showAvatar">
-        Customers
-        <template #content>
+        <DdAccordion
+          rules="required"
+          :srcLink="srcLink"
+          :showAvatar="showAvatar"
+        >
+          Customers
+          <template #content>
             <div>test dropdown</div>
-        </template>
+          </template>
         </DdAccordion>
       </ddObserver>
     </dd-wraper>
@@ -141,9 +145,8 @@ const model = ref(false);
 const text = ref([]);
 const coner = ref("");
 const open = ref(false);
-const srcLink = ref("https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg");
+const srcLink = ref(
+  "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg"
+);
 const showAvatar = ref(false);
 </script>
-
-
-
