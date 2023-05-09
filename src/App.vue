@@ -1,4 +1,7 @@
 <template>
+  <div>
+    <DdTopbar />
+  </div>
   <div class="dd-container dd-mx-auto dd-m-5">
     <dd-wraper>
       <ddHeadr :items="items" />
@@ -30,33 +33,25 @@
           v-model="coner"
           :options="options"
         />
+        <DdAccordion
+          rules="required"
+          :srcLink="srcLink"
+          :showAvatar="showAvatar"
+        >
+          Customers
+          <template #content>
+            <div>test dropdown</div>
+          </template>
+        </DdAccordion>
       </ddObserver>
     </dd-wraper>
-    <ddStepper :active="active" :steps="stepperItems">
-      <template #default>
-        <div v-if="active === 0">
-          {{ step }}
-          <dd-button @click="next"> Next </dd-button>
-        </div>
-        <div v-else-if="active === 1">
-          <div class="dd-flex">
-            <dd-button @click="next"> Next </dd-button>
-            <dd-button @click="back"> Back </dd-button>
-          </div>
-        </div>
-        <div v-else-if="active === 2">
-          <div class="dd-flex">
-            <dd-button @click="next"> Next </dd-button>
-            <dd-button @click="back"> Back </dd-button>
-          </div>
-        </div>
-      </template>
-    </ddStepper>
   </div>
 </template>
 
 <script setup>
 import { ref } from "vue";
+import DdAccordion from "./components/Accordion/index.vue";
+import DdTopbar from "./components/topbar/index.vue";
 import ddObserver from "./components/validations/ddForm.vue";
 import ddAlert from "./components/alerts/index.vue";
 import ddAvatar from "./components/avatars/index.vue";
@@ -75,7 +70,6 @@ import ddInput from "./components/input/index.vue";
 import ddMulti from "./components/multiSelect/index.vue";
 import ddSelect from "./components/select/index.vue";
 import ddSvg from "./components/svgIcon/index.vue";
-import ddStepper from "./components/stepper/index.vue";
 const options = ref([
   {
     name: "Test",
@@ -138,18 +132,6 @@ const items = ref([
     value: 3,
   },
 ]);
-
-let active = ref(0);
-function next() {
-  active.value += 1;
-  active.log("Complete", active);
-}
-function back() {
-  active.value -= 1;
-  console.log("Complete", active);
-}
-
-const stepperItems = ref(["Job details", "Application form", "Preview"]);
 const wraperForm = ref(null);
 const fun = async () => {
   const inValid = await wraperForm.value.validate();
@@ -162,4 +144,9 @@ const fun = async () => {
 const model = ref(false);
 const text = ref([]);
 const coner = ref("");
+const open = ref(false);
+const srcLink = ref(
+  "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg"
+);
+const showAvatar = ref(false);
 </script>

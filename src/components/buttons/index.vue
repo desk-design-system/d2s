@@ -226,12 +226,12 @@ export default {
       return {
         "dd-border-gray-300 dd-text-gray-700 dd-border  focus:dd-outline-none":
           this.color == "",
-        "dd-px-2 dd-py-1 dd-text-xs dd-rounded": this.size === "xs",
-        "dd-px-2 dd-py-1 dd-text-sm  dd-rounded-md":
+        "dd-px-2 dd-h-6 dd-text-xs dd-rounded": this.size === "xs",
+        "dd-px-2 dd-h-7 dd-text-sm  dd-rounded-md":
           this.size === "sm",
-        "dd-px-2.5 dd-py-1.5 dd-text-sm dd-rounded-md": this.size === "base",
-        "dd-px-3 dd-py-2 dd-text-sm dd-rounded-md": this.size === "lg",
-        "dd-px-3.5 dd-py-2.5 dd-text-sm dd-rounded-md": this.size === "xl",
+        "dd-px-2.5 dd-h-8 dd-text-sm dd-rounded-md": this.size === "base",
+        "dd-px-3 dd-h-9 dd-text-sm dd-rounded-md": this.size === "lg",
+        "dd-px-3.5 dd-h-10 dd-text-sm dd-rounded-md": this.size === "xl",
         "dd-cursor-not-allowed !dd-bg-gray-200 !dd-text-gray-400 hover:dd-bg-gray-300":
           this.disable,
         "dd-bg-teal-600 dd-text-white hover:dd-bg-teal-700":
