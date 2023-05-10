@@ -33,12 +33,20 @@
           v-model="coner"
           :options="options"
         />
-        <DdAccordion rules="required" :srcLink="srcLink" :showAvatar="showAvatar">
-        Customers
-        <template #content>
-            <div>test dropdown</div>
-        </template>
-        </DdAccordion>
+        <div class="dd-mb-10">
+          <DdAccordion
+            rules="required"
+            :srcLink="srcLink"
+            :showAvatar="showAvatar"
+          >
+            Customers
+            <template #content>
+              <div>test dropdown</div>
+            </template>
+          </DdAccordion>
+        </div>
+        <!-- <DdPagination /> -->
+        <tabel />
       </ddObserver>
     </dd-wraper>
   </div>
@@ -46,7 +54,9 @@
 
 <script setup>
 import { ref } from "vue";
+import tabel from "./components/Pagination/tabel.vue"
 import DdAccordion from "./components/Accordion/index.vue";
+import { DdPagination } from "./components/Pagination";
 import DdTopbar from "./components/topbar/index.vue";
 import ddObserver from "./components/validations/ddForm.vue";
 import ddAlert from "./components/alerts/index.vue";
@@ -141,7 +151,9 @@ const model = ref(false);
 const text = ref([]);
 const coner = ref("");
 const open = ref(false);
-const srcLink = ref("https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg");
+const srcLink = ref(
+  "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg"
+);
 const showAvatar = ref(false);
 </script>
 
