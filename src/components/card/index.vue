@@ -103,7 +103,9 @@ export default {
       type: String,
       validator: function (value) {
         // The value must match one of these strings
-        return ["none", "sm", "md", "lg", "full"].indexOf(value) !== -1;
+        return (
+          ["none", "sm", "md", "lg", "xl", "2xl", "full"].indexOf(value) !== -1
+        );
       },
       default: null,
     },

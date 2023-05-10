@@ -44,6 +44,20 @@
           </template>
         </DdAccordion>
       </ddObserver>
+      <DdStepper :steps="stepperItems" :active="0"></DdStepper>
+      <ddCard rounded="xl">
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Neque labore
+        temporibus doloribus animi tempora delectus suscipit repellendus fuga
+        saepe impedit debitis laudantium, maiores, accusantium molestiae minus
+        illo cumque consectetur consequuntur! Lorem ipsum, dolor sit amet
+        consectetur adipisicing elit. Neque labore temporibus doloribus animi
+        tempora delectus suscipit repellendus fuga saepe impedit debitis
+        laudantium, maiores, accusantium molestiae minus illo cumque consectetur
+        consequuntur! Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+        Neque labore temporibus doloribus animi tempora delectus suscipit
+        repellendus fuga saepe impedit debitis laudantium, maiores, accusantium
+        molestiae minus illo cumque consectetur consequuntur!
+      </ddCard>
     </dd-wraper>
   </div>
 </template>
@@ -69,6 +83,7 @@ import ddWraper from "./components/scrollerApp/index.vue";
 import ddInput from "./components/input/index.vue";
 import ddMulti from "./components/multiSelect/index.vue";
 import ddSelect from "./components/select/index.vue";
+import DdStepper from "./components/stepper/index.vue";
 import ddSvg from "./components/svgIcon/index.vue";
 const options = ref([
   {
@@ -108,6 +123,7 @@ const options = ref([
     value: 9,
   },
 ]);
+const stepperItems = ref(["Personal Details", "Business Details"]);
 const options2 = ref([
   {
     title: "Test",
