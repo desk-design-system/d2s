@@ -8,11 +8,11 @@
 
 @layer components{
   .dd-stepper-selected{
-    @apply  dd-flex dd-flex-col dd-border-l-4 dd-border-teal-600 dd-py-2 dd-pl-4  md:dd-border-l-0 md:dd-border-t-4 md:dd-pb-0 md:dd-pl-0 md:dd-pt-4
+    @apply  dd-flex dd-flex-col  dd-border-teal-600 dd-py-2 dd-pl-4   dd-border-t-4 md:dd-pb-0 md:dd-pl-0 md:dd-pt-4
   }
 
   .dd-stepper-unselected{
-    @apply  dd-flex dd-flex-col dd-border-l-4 dd-border-gray-100 dd-py-2 dd-pl-4  md:dd-border-l-0 md:dd-border-t-4 md:dd-pb-0 md:dd-pl-0 md:dd-pt-4
+    @apply  dd-flex dd-flex-col  dd-border-gray-100 dd-py-2 dd-pl-4   dd-border-t-4 md:dd-pb-0 md:dd-pl-0 md:dd-pt-4
   }
 
   .dd-stepper-step-text{
