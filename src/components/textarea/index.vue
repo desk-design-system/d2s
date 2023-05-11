@@ -4,7 +4,6 @@
       >{{ label }} <span v-if="isRequired" class="dd-text-red-500">*</span>
     </label>
     <div class="dd-w-full dd-rounded-md">
-      {{ inputModelValue }}
       <textarea
         :name="name"
         :disabled="disabled"
@@ -14,6 +13,7 @@
           errorMessage ? 'dd-mb-1' : '',
           disabled ? 'dd-input-disabled' : ' dd-text-gray-700',
         ]"
+        v-model="inputModelValue"
         class="dd-textarea dd-w-full !dd-rounded"
         :placeholder="placeholder"
       />

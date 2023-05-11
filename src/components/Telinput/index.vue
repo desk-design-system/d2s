@@ -1,13 +1,11 @@
 <template>
   <div>
-    {{ inputSize }}
     <label
       class="dd-block dd-text-sm dd-font-medium dd-text-gray-700 dd-mb-1"
       >{{ label }}</label
     >
     <vue-tel-input
       :style="{ height: `${inputSize} !important` }"
-      class="dd-h-20"
       v-bind="config"
       :id="id"
       v-model="inputModelValue"
@@ -69,12 +67,6 @@ const inputSize = computed(() => {
     default:
       return "2rem";
   }
-  return {
-    "1.75rem": props.size === "sm",
-    "2rem": props.size === "base",
-    "2.25rem": props.size === "lg",
-    "2.5rem": props.size === "xl",
-  };
 });
 </script>
 <style>
