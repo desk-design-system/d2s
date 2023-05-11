@@ -1,9 +1,10 @@
 <template>
   <div
     v-bind="$attrs"
-    class="dd-card dd-rounded dd-bg-white dd-mb-4"
+    class="dd-card dd-bg-slate-400 dd-mb-4"
     :class="[elevationFun, className, roundedFun]"
   >
+    {{ roundedFun }}
     <div
       :class="`dd-py-${headerY} dd-px-${headerX}`"
       class="dd-border-b dd-border-gray-300"
@@ -42,6 +43,17 @@ export default {
       }
     },
     roundedFun() {
+      // if (this.rounded == "sm") {
+      //   return "dd-rounded-sm";
+      // } else if (this.rounded == "lg") {
+      //   return "dd-rounded-lg";
+      // } else if (this.rounded == "xl") {
+      //   return "dd-rounded-xl";
+      // } else if (this.rounded == "2xl") {
+      //   return "dd-rounded-2xl";
+      // } else {
+      //   return "dd-rounded";
+      // }
       return this.rounded ? `dd-rounded-${this.rounded}` : `dd-rounded`;
     },
   },
@@ -107,7 +119,7 @@ export default {
           ["none", "sm", "md", "lg", "xl", "2xl", "full"].indexOf(value) !== -1
         );
       },
-      default: null,
+      default: "",
     },
   },
 };
