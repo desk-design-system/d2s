@@ -2,11 +2,8 @@
   <!-- v-if="step.status === 'complete'" -->
   <div v-bind="$attrs">
     <nav aria-label="Progress" class="dd-px-5">
-      <ol
-        role="list"
-        class="dd-space-y-4 md:dd-flex md:dd-space-x-8 md:dd-space-y-0"
-      >
-        <li v-for="(step, index) in steps" :key="index" class="md:dd-flex-1">
+      <ol role="list" class="dd-flex dd-space-x-8 dd-space-y-0">
+        <li v-for="(step, index) in steps" :key="index" class="dd-flex-1">
           <a
             :href="step.href"
             class="dd-group"
