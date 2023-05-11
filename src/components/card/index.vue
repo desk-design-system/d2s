@@ -4,7 +4,6 @@
     class="dd-card dd-bg-slate-400 dd-mb-4"
     :class="[elevationFun, className, roundedFun]"
   >
-    {{ roundedFun }}
     <div
       :class="`dd-py-${headerY} dd-px-${headerX}`"
       class="dd-border-b dd-border-gray-300"
@@ -15,7 +14,6 @@
       </p>
       <p class="dd-text-sm dd-text-gray-500">{{ subTitle }}</p>
     </div>
-    <!-- :class="[hasCustomClass ? customStyle : defaultClasses]" -->
     <div :class="`dd-py-${y} dd-px-${x}`">
       <slot> {{ content }} </slot>
     </div>
@@ -43,17 +41,6 @@ export default {
       }
     },
     roundedFun() {
-      // if (this.rounded == "sm") {
-      //   return "dd-rounded-sm";
-      // } else if (this.rounded == "lg") {
-      //   return "dd-rounded-lg";
-      // } else if (this.rounded == "xl") {
-      //   return "dd-rounded-xl";
-      // } else if (this.rounded == "2xl") {
-      //   return "dd-rounded-2xl";
-      // } else {
-      //   return "dd-rounded";
-      // }
       return this.rounded ? `dd-rounded-${this.rounded}` : `dd-rounded`;
     },
   },
