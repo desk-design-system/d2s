@@ -33,16 +33,6 @@
           v-model="coner"
           :options="options"
         />
-        <DdAccordion
-          rules="required"
-          :srcLink="srcLink"
-          :showAvatar="showAvatar"
-        >
-          Customers
-          <template #content>
-            <div>test dropdown</div>
-          </template>
-        </DdAccordion>
         <div class="dd-mb-10">
           <DdAccordion
             rules="required"
