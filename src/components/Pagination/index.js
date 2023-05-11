@@ -1,1 +1,0 @@
-export { default as DdPagination } from "./Pagination.vue"

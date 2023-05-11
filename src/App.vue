@@ -45,7 +45,12 @@
             </template>
           </DdAccordion>
         </div>
-        <!-- <DdPagination /> -->
+        <DdPagination
+          :count="totalRecords"
+          :limit="limit"
+          :offset="offset"
+          @fetch-data="getData"
+        />
         <tabel />
       </ddObserver>
     </dd-wraper>
@@ -54,9 +59,8 @@
 
 <script setup>
 import { ref } from "vue";
-import tabel from "./components/Pagination/tabel.vue"
+import DdPagination from "./components/Pagination/index.vue";
 import DdAccordion from "./components/Accordion/index.vue";
-import { DdPagination } from "./components/Pagination";
 import DdTopbar from "./components/topbar/index.vue";
 import ddObserver from "./components/validations/ddForm.vue";
 import ddAlert from "./components/alerts/index.vue";
@@ -155,6 +159,13 @@ const srcLink = ref(
   "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg"
 );
 const showAvatar = ref(false);
+let totalRecords = ref(0);
+let limit = ref(5);
+let offset = ref(0);
+
+const getData = () => {
+  totalRecords.value = 100;
+};
 </script>
 
 
