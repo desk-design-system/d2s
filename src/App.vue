@@ -44,22 +44,7 @@
           </template>
         </DdAccordion>
       </ddObserver>
-      <DdStepper :steps="stepperItems" :active="0"></DdStepper>
-      <ddCard rounded="2xl">
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Neque labore
-        temporibus doloribus animi tempora delectus suscipit repellendus fuga
-        saepe impedit debitis laudantium, maiores, accusantium molestiae minus
-        illo cumque consectetur consequuntur! Lorem ipsum, dolor sit amet
-        consectetur adipisicing elit. Neque labore temporibus doloribus animi
-        tempora delectus suscipit repellendus fuga saepe impedit debitis
-        laudantium, maiores, accusantium molestiae minus illo cumque consectetur
-        consequuntur! Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-        Neque labore temporibus doloribus animi tempora delectus suscipit
-        repellendus fuga saepe impedit debitis laudantium, maiores, accusantium
-        molestiae minus illo cumque consectetur consequuntur!
-      </ddCard>
-
-      <dd-text-area label="HEllo" name="helo" :modelValue="mod" />
+      <dd-text-area v-model="mod" rules="^[0-9]+$" label="rules" />
     </dd-wraper>
   </div>
 </template>
@@ -85,11 +70,7 @@ import ddWraper from "./components/scrollerApp/index.vue";
 import ddInput from "./components/input/index.vue";
 import ddMulti from "./components/multiSelect/index.vue";
 import ddSelect from "./components/select/index.vue";
-import DdStepper from "./components/stepper/index.vue";
-import ddTeleInput from "./components/Telinput/index.vue";
-import ddTextArea from "./components/textarea/index.vue";
-import ddSvg from "./components/svgIcon/index.vue";
-const mod = ref("");
+
 const options = ref([
   {
     name: "Test",
