@@ -28,3 +28,4 @@ export { default as DdAutoSearch } from "./autosearch/index.vue";
 export { default as DdValidator } from "./validations/ddForm.vue";
 export { default as DdAccordion } from "./Accordion/index.vue";
 export { default as DdStepper } from "./stepper/index.vue";
+export { default as DdPagination } from "./Pagination/index.vue";

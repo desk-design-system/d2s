@@ -43,6 +43,25 @@
             <div>test dropdown</div>
           </template>
         </DdAccordion>
+        <div class="dd-mb-10">
+          <DdAccordion
+            rules="required"
+            :srcLink="srcLink"
+            :showAvatar="showAvatar"
+          >
+            Customers
+            <template #content>
+              <div>test dropdown</div>
+            </template>
+          </DdAccordion>
+          <DdPagination
+            :count="count"
+            :limit="limit"
+            :offset="offset"
+            @fetch-data="getData"
+          />
+        </div>
+        <tabel />
       </ddObserver>
       <DdStepper :steps="stepperItems" :active="0"></DdStepper>
       <ddCard rounded="xl">
@@ -64,6 +83,7 @@
 
 <script setup>
 import { ref } from "vue";
+import DdPagination from "./components/Pagination/index.vue";
 import DdAccordion from "./components/Accordion/index.vue";
 import DdTopbar from "./components/topbar/index.vue";
 import ddObserver from "./components/validations/ddForm.vue";
@@ -165,4 +185,11 @@ const srcLink = ref(
   "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg"
 );
 const showAvatar = ref(false);
+const count = ref(0);
+const limit = ref(5);
+const offset = ref(0);
+
+const getData = () => {
+  count.value = 100;
+};
 </script>
