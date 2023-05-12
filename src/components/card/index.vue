@@ -1,7 +1,7 @@
 <template>
   <div
     v-bind="$attrs"
-    class="dd-card dd-bg-slate-400 dd-mb-4"
+    class="dd-card rounded dd-mb-4"
     :class="[elevationFun, className, roundedFun]"
   >
     <div
