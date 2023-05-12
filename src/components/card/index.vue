@@ -1,7 +1,7 @@
 <template>
   <div
     v-bind="$attrs"
-    class="dd-card dd-rounded dd-bg-white dd-mb-4"
+    class="dd-card dd-bg-slate-400 dd-mb-4"
     :class="[elevationFun, className, roundedFun]"
   >
     <div
@@ -14,7 +14,6 @@
       </p>
       <p class="dd-text-sm dd-text-gray-500">{{ subTitle }}</p>
     </div>
-    <!-- :class="[hasCustomClass ? customStyle : defaultClasses]" -->
     <div :class="`dd-py-${y} dd-px-${x}`">
       <slot> {{ content }} </slot>
     </div>
@@ -107,7 +106,7 @@ export default {
           ["none", "sm", "md", "lg", "xl", "2xl", "full"].indexOf(value) !== -1
         );
       },
-      default: null,
+      default: "",
     },
   },
 };
