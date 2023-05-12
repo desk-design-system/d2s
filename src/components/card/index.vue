@@ -1,7 +1,7 @@
 <template>
   <div
     v-bind="$attrs"
-    class="dd-card dd-bg-slate-400 dd-mb-4"
+    class="dd-card rounded dd-mb-4"
     :class="[elevationFun, className, roundedFun]"
   >
     <div
@@ -44,11 +44,7 @@ export default {
       return this.rounded ? `dd-rounded-${this.rounded}` : `dd-rounded`;
     },
   },
-  // data () {
-  //   return {
-  //     defaultClasses: "dd-p-6 dd-rounded dd-bg-white"
-  //   }
-  // },
+
   props: {
     className: {
       type: String,
