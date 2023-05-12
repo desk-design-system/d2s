@@ -59,15 +59,12 @@ import ddBadge from "./components/badges/index.vue";
 import ddBred from "./components/breadcrumbs/index.vue";
 import ddButton from "./components/buttons/index.vue";
 import ddCheckBox from "./components/checkbox/index.vue";
-import ddDivider from "./components/divider/index.vue";
-import ddDrawer from "./components/drawer/index.vue";
 import ddDropDown from "./components/dropdown/index.vue";
 import ddRadion from "./components/radiobutton/index.vue";
 import ddWraper from "./components/scrollerApp/index.vue";
 import ddInput from "./components/input/index.vue";
 import ddMulti from "./components/multiSelect/index.vue";
 import ddSelect from "./components/select/index.vue";
-import { ChevronDoubleDownIcon, ChevronUpIcon } from "@heroicons/vue/solid";
 
 const options = ref([
   {
