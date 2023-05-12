@@ -33,8 +33,8 @@
           v-model="coner"
           :options="options"
         />
-        <div class="dd-mb-10">
-          <DdAccordion
+        <div class="dd-mt-10">
+          <!-- <DdAccordion
             rules="required"
             :srcLink="srcLink"
             :showAvatar="showAvatar"
@@ -49,6 +49,12 @@
             :limit="limit"
             :offset="offset"
             @fetch-data="getData"
+          /> -->
+          <dd-group-btn
+            :buttons="buttons"
+            :showIcon="showIcon"
+            :selected="selected"
+            @selected="onButtonSelected"
           />
         </div>
         <tabel />
@@ -60,6 +66,7 @@
 
 <script setup>
 import { ref } from "vue";
+import DdGroupBtn from "./components/groupButton/index.vue";
 import DdPagination from "./components/Pagination/index.vue";
 import DdAccordion from "./components/Accordion/index.vue";
 import DdTopbar from "./components/topbar/index.vue";
@@ -80,6 +87,7 @@ import ddWraper from "./components/scrollerApp/index.vue";
 import ddInput from "./components/input/index.vue";
 import ddMulti from "./components/multiSelect/index.vue";
 import ddSelect from "./components/select/index.vue";
+import { ChevronDoubleDownIcon, ChevronUpIcon } from "@heroicons/vue/solid";
 
 const options = ref([
   {
@@ -167,5 +175,20 @@ const offset = ref(0);
 
 const getData = () => {
   count.value = 100;
+};
+
+const showIcon = ref(true);
+const buttons = [
+  { id: 1, label: "Button 1", color: "white", icon: "ChevronLeft" },
+  { id: 2, label: "Button 2", color: "primary", icon: "ChevronRight" },
+  { id: 3, label: "Button 3", color: "danger", icon: "ChevronDown" },
+  { id: 4, label: "Button 4", color: "warning", icon: "ChevronLeft" },
+  { id: 5, label: "Button 5", color: "selected", icon: "ChevronRight" },
+  { id: 6, label: "", size:"xs", color: "white", icon: "ChevronUp" },
+  { id: 7, label: "", size:"xl", color: "white", icon: "ChevronDown" },
+];
+
+const onButtonSelected = (button) => {
+  console.log(button, "from parent");
 };
 </script>
