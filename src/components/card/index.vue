@@ -44,11 +44,7 @@ export default {
       return this.rounded ? `dd-rounded-${this.rounded}` : `dd-rounded`;
     },
   },
-  // data () {
-  //   return {
-  //     defaultClasses: "dd-p-6 dd-rounded dd-bg-white"
-  //   }
-  // },
+
   props: {
     className: {
       type: String,
