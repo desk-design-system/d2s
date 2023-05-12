@@ -34,22 +34,6 @@
           :options="options"
         />
         <div class="dd-mt-10">
-          <!-- <DdAccordion
-            rules="required"
-            :srcLink="srcLink"
-            :showAvatar="showAvatar"
-          >
-            Customers
-            <template #content>
-              <div>test dropdown</div>
-            </template>
-          </DdAccordion>
-          <DdPagination
-            :count="count"
-            :limit="limit"
-            :offset="offset"
-            @fetch-data="getData"
-          /> -->
           <dd-group-btn
             :buttons="buttons"
             :showIcon="showIcon"
@@ -67,8 +51,6 @@
 <script setup>
 import { ref } from "vue";
 import DdGroupBtn from "./components/groupButton/index.vue";
-import DdPagination from "./components/Pagination/index.vue";
-import DdAccordion from "./components/Accordion/index.vue";
 import DdTopbar from "./components/topbar/index.vue";
 import ddObserver from "./components/validations/ddForm.vue";
 import ddAlert from "./components/alerts/index.vue";
@@ -76,9 +58,7 @@ import ddAvatar from "./components/avatars/index.vue";
 import ddBadge from "./components/badges/index.vue";
 import ddBred from "./components/breadcrumbs/index.vue";
 import ddButton from "./components/buttons/index.vue";
-import ddCard from "./components/card/index.vue";
 import ddCheckBox from "./components/checkbox/index.vue";
-import ddDialog from "./components/dialog/index.vue";
 import ddDivider from "./components/divider/index.vue";
 import ddDrawer from "./components/drawer/index.vue";
 import ddDropDown from "./components/dropdown/index.vue";
@@ -164,18 +144,9 @@ const fun = async () => {
 const model = ref(false);
 const text = ref([]);
 const coner = ref("");
-const open = ref(false);
 const srcLink = ref(
   "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg"
 );
-const showAvatar = ref(false);
-const count = ref(0);
-const limit = ref(5);
-const offset = ref(0);
-
-const getData = () => {
-  count.value = 100;
-};
 
 const showIcon = ref(true);
 const buttons = [
