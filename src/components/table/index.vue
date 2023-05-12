@@ -18,16 +18,20 @@
               </tr>
             </thead>
             <tbody class="dd-divide-y dd-divide-gray-200 dd-bg-white">
-              <tr v-for="(row, index) in rows" :key="index">
-                <td
-                v-for="col in columns" :key="col.value"
-                  class="dd-whitespace-nowrap dd-py-4 dd-pl-4 dd-pr-3 dd-text-sm  dd-text-gray-500 sm:dd-pl-6"
-                >
-                <slot name="row" :column="col" :row="row" :value="row[col.value]">
-                  {{ row[col.value] }}
-                </slot>
-                </td>
-              </tr>
+              <template v-if="rows">
+
+                <tr v-for="(row, index) in rows" :key="index">
+                  <td
+                  v-for="col in columns" :key="col.value"
+                    class="dd-whitespace-nowrap dd-py-4 dd-pl-4 dd-pr-3 dd-text-sm  dd-text-gray-500 sm:dd-pl-6"
+                  >
+                  <slot name="row" :column="col" :row="row" :value="row[col.value]">
+                    {{ row[col.value] }}
+                  </slot>
+                  </td>
+                </tr>
+              </template>
+              <slot v-else name="noData"  />
             </tbody>
           </table>
         </div>
