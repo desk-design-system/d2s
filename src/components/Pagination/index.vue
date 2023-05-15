@@ -8,7 +8,7 @@
     >
       <span class="dd-sr-only">Previous</span>
       <svgIcon
-        class="-dd-mb-[2px] dd-m-auto"
+        class="dd-flex dd-items-center"
         icon="ChevronLeft"
         color="white"
         size="12"
@@ -46,7 +46,7 @@
     >
       <span class="dd-sr-only">Next</span>
       <svgIcon
-        class="-dd-mb-[2px] dd-m-auto"
+        class="dd-flex dd-items-center"
         color="white"
         icon="ChevronRight"
         size="12"
@@ -101,8 +101,8 @@ const pages = computed(() => {
 
     if (currentPage.value <= 3) {
       endPage = 3;
-    } else if (currentPage.value >= pageCount - 3) {
-      startPage = pageCount - 3;
+    } else if (currentPage.value >= pageCount - 2) {
+      startPage = pageCount - 2;
     } else {
       startPage = currentPage.value - 3;
       endPage = currentPage.value + 3;
