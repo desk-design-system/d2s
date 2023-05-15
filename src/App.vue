@@ -27,11 +27,30 @@
           v-model="text"
           :options="options"
         />
+        <div class="dd-mb-10">
+          <DdAccordion
+            rules="required"
+            :srcLink="srcLink"
+            :showAvatar="showAvatar"
+          >
+            Customers
+            <template #content>
+              <div>test dropdown</div>
+            </template>
+          </DdAccordion>
+          <DdPagination
+            :count="count"
+            :limit="limit"
+            :offset="offset"
+            @fetch-data="getData"
+          />
+        </div>
         <ddSelect
-          label="testing"
-          rules="required"
-          v-model="coner"
-          :options="options"
+          v-model="selected"
+          :options="filteredOptions"
+          :filterable="filterable"
+          @searchQuery="search"
+          @addQuery="addquery"
         />
         <tabel />
       </ddObserver>
@@ -41,7 +60,9 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { computed, ref } from "vue";
+import DdPagination from "./components/Pagination/index.vue";
+import DdAccordion from "./components/Accordion/index.vue";
 import DdTopbar from "./components/topbar/index.vue";
 import ddObserver from "./components/validations/ddForm.vue";
 import ddAlert from "./components/alerts/index.vue";
@@ -49,15 +70,9 @@ import ddAvatar from "./components/avatars/index.vue";
 import ddBadge from "./components/badges/index.vue";
 import ddBred from "./components/breadcrumbs/index.vue";
 import ddButton from "./components/buttons/index.vue";
-import ddCard from "./components/card/index.vue";
 import ddCheckBox from "./components/checkbox/index.vue";
-import ddDialog from "./components/dialog/index.vue";
-import ddDivider from "./components/divider/index.vue";
-import ddDrawer from "./components/drawer/index.vue";
-import ddDropDown from "./components/dropdown/index.vue";
 import ddRadion from "./components/radiobutton/index.vue";
 import ddWraper from "./components/scrollerApp/index.vue";
-import ddInput from "./components/input/index.vue";
 import ddMulti from "./components/multiSelect/index.vue";
 import ddSelect from "./components/select/index.vue";
 
@@ -71,31 +86,31 @@ const options = ref([
     value: 2,
   },
   {
-    name: "Test2",
+    name: "Test3",
     value: 3,
   },
   {
-    name: "Test2",
+    name: "Test4",
     value: 4,
   },
   {
-    name: "Test2",
+    name: "Test5",
     value: 5,
   },
   {
-    name: "Test2",
+    name: "Test6",
     value: 6,
   },
   {
-    name: "Test2",
+    name: "Test7",
     value: 7,
   },
   {
-    name: "Test2",
+    name: "Test8",
     value: 8,
   },
   {
-    name: "Test2",
+    name: "Test9",
     value: 9,
   },
 ]);
@@ -136,4 +151,50 @@ const fun = async () => {
 const model = ref(false);
 const text = ref([]);
 const coner = ref("");
+const open = ref(false);
+const people = ref ([
+  { value: 1, name: "Leslie Alexander" },
+  { value: 2, name: "Aeslie Blexander" },
+  { value: 3, name: "Ceslie Dlexander" },
+  { value: 4, name: "Eeslie Flexander" },
+  { value: 5, name: "Geslie Hlexander" },
+  { value: 6, name: "Ieslie Jlexander" },
+  { value: 7, name: "Jeslie KJlexander" },
+  // More people...
+]);
+const srcLink = ref(
+  "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg"
+);
+const showAvatar = ref(false);
+const count = ref(0);
+const limit = ref(5);
+const offset = ref(0);
+const selected = ref("");
+const query = ref("");
+const filterable = ref(false);
+
+const getData = () => {
+  count.value = 100;
+};
+
+const filteredOptions = computed(() =>
+  query.value == ""
+    ? people.value
+    : people.value.filter((item) => {
+        return item.name.toLowerCase().includes(query.value.toLowerCase());
+      })
+);
+
+const search = (data) =>{
+ query.value = data
+}
+const addquery = (data) => {
+  selected.value = "";
+  const queryArr = {
+    value: people.value.length + 1,
+    name: data,
+  };
+  people.value.unshift(queryArr);
+  query.value = ""
+};
 </script>
