@@ -1,6 +1,6 @@
 <template>
   <div v-bind="$attrs">
-    <label v-if="label" class="dd-block dd-text-sm dd-font-medium dd-text-gray-700 dd-mb-1">{{ label }}</label>
+    <label v-if="label" class="dd-block dd-text-sm dd-font-medium dd-text-gray-700 dd-mb-1">{{ label }} <span v-if="isRequired" class="dd-text-red-500">*</span></label>
     <Combobox as="div" v-bind="$attrs" v-model="inputModelValue">
       <div class="dd-mt-1 dd-relative">
         <ComboboxInput :class="[
