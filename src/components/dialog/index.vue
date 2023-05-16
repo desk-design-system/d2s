@@ -68,7 +68,7 @@ import {
 import { CheckIcon, XIcon } from "@heroicons/vue/outline"
 import { ref, computed } from "vue"
 import rdButton from "../buttons/index.vue"
-
+const emits = defineEmits( ['update:modelValue', "change"] )
 const props = defineProps( {
   title: {
     type: String,
