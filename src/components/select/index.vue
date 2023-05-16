@@ -10,8 +10,7 @@
           inputSize,
         ]" :readonly="!filterable"
           class="dd-border-solid focus-visible:dd-outline-none dd-flex dd-items-center dd-cursor-pointer dd-bg-white dd-relative dd-w-full dd-border dd-rounded-md dd-shadow-sm dd-pl-3 dd-pr-10 dd-py-2 dd-text-left dd-h-9 sm:dd-text-sm"
-          @change="searchQuery($event.target.value)" :displayValue="(option) => option.name" @click="setDropDown">
-          <!-- <div class="dd-flex dd-items-center dd-mb-3"> -->
+          @change="searchQuery($event.target.value)" :displayValue="(val) => findItem(val)" @click="setDropDown">
           <ddAvatar v-if="selectedValue && showAvatar" size="mini" class="dd-mr-3"
             :srcLink="selectedValue[props.defaultProps.avatar]" />
           <span v-if="selectedValue" class="dd-block dd-truncate dd-text-gray-500 dd-text-sm">{{
@@ -19,7 +18,6 @@
           <span v-else class="dd-text-sm dd-text-gray-400 dd-capitalize">{{
             props.placeholder
           }}</span>
-          <!-- </div> -->
           <span class="dd-absolute dd-inset-y-0 dd-right-0 dd-flex dd-items-center dd-pr-2 dd-pointer-events-none">
             <ChevronDownIcon class="dd-h-5 dd-w-5 dd-text-gray-400" aria-hidden="true" />
           </span>
@@ -74,8 +72,9 @@
           </ComboboxOptions>
           <ComboboxOptions class="dd-shadow-md dd-text-center dd-rounded-md" v-if="queries !== '' && options.length === 0"
             v-model="queries">
-            <ComboboxOption class="dd-p-4 dd-text-xs dd-text-left dd-text-gray-400" @click="addQuery(queries)">
-              {{ queries }}
+            <ComboboxOption class="dd-p-4 dd-text-sm dd-text-left dd-text-gray-500 dd-cursor-pointer dd-text dd-font-semibold"
+              @click="addQuery(queries)">
+              Add as new: {{ queries }}
             </ComboboxOption>
           </ComboboxOptions>
         </TransitionRoot>
@@ -229,8 +228,17 @@ const setDropDown = () => {
 };
 
 const addQuery = (query) => {
+  queries.value = query
   emits("addQuery", query);
 };
+
+
+const findItem = (val) => {
+  const item = props.options.find((predicate) =>
+    predicate[props.defaultProps.value] == val
+  )
+  return item?.[props.defaultProps.name] ?? queries.value
+}
 
 const getRules = () => {
   if (props.rules instanceof RegExp) {
