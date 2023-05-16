@@ -28,7 +28,6 @@
 <script setup>
 import { ref, computed } from "vue";
 import DdSelect from "./components/select/index.vue"
-import DdTable from "./components/table/index.vue"
 import ddObserver from "./components/validations/ddForm.vue";
 import ddAlert from "./components/alerts/index.vue";
 import ddAvatar from "./components/avatars/index.vue";
@@ -102,95 +101,6 @@ const items = ref([
     value: 3,
   },
 ]);
-
-const columns = ref([
-  {
-    title: 'Id',
-    value: 'id'
-  },
-  {
-    title: 'User Name',
-    value: 'username'
-  },
-  {
-    title: 'First Name',
-    value: 'firstname'
-  },
-  {
-    title: 'Last Name',
-    value: 'lastname'
-  },
-  {
-    title: 'Email',
-    value: 'email'
-  },
-])
-const rows = ref([
-  {
-    id: 1,
-    username: "Herry007",
-    firstname: "Herry",
-    lastname: "Brook",
-    email: "herry@repairdesk.co"
-  },
-  {
-    id: 2,
-    username: "David2",
-    firstname: "David",
-    lastname: "Jeman",
-    email: "David@repairdesk.co"
-  },
-  {
-    id: 3,
-    username: "Henry0",
-    firstname: "Henry",
-    lastname: "Cavil",
-    email: "henry@repairdesk.co"
-  },
-  {
-    id: 4,
-    username: "Herry007",
-    firstname: "Herry",
-    lastname: "Brook",
-    email: "herry@repairdesk.co"
-  },
-  {
-    id: 5,
-    username: "JSmith",
-    firstname: "John",
-    lastname: "Smith",
-    email: "john.smith@example.com"
-  },
-  {
-    id: 6,
-    username: "LGreen",
-    firstname: "Lucy",
-    lastname: "Green",
-    email: "lucy.green@example.com"
-  },
-  {
-    id: 13,
-    username: "AMiller",
-    firstname: "Alice",
-    lastname: "Miller",
-    email: "alice.miller@example.com"
-  },
-  {
-    id: 14,
-    username: "BDavis",
-    firstname: "Bob",
-    lastname: "Davis",
-    email: "bob.davis@example.com"
-  },
-  {
-    id: 15,
-    username: "KJohnson",
-    firstname: "Kate",
-    lastname: "Johnson",
-    email: "kate.johnson@example.com"
-  }
-])
-
 
 const wraperForm = ref(null);
 const fun = async () => {
