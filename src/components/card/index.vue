@@ -1,11 +1,11 @@
 <template>
   <div
     v-bind="$attrs"
-    class="dd-card rounded dd-bg-white dd-mb-4"
+    class="dd-card dd-bg-white dd-mb-4"
     :class="[elevationFun, className, roundedFun]"
   >
     <div
-      :class="`dd-py-${headerY} dd-px-${headerX}`"
+      :style="headerCustomePadding"
       class="dd-border-b dd-border-gray-300"
       v-if="header"
     >
@@ -14,7 +14,7 @@
       </p>
       <p class="dd-text-sm dd-text-gray-500">{{ subTitle }}</p>
     </div>
-    <div :class="`dd-py-${y} dd-px-${x}`">
+    <div :style="customePadding" >
       <slot> {{ content }} </slot>
     </div>
   </div>
@@ -43,6 +43,12 @@ export default {
     roundedFun() {
       return this.rounded ? `dd-rounded-${this.rounded}` : `dd-rounded`;
     },
+    customePadding() {
+      return   {'padding-top': this.y+'px','padding-bottom': this.y+'px','padding-left': this.x+'px','padding-right': this.x+'px',}
+    },
+    headerCustomePadding() {
+      return   {'padding-top': this.headerY+'px','padding-bottom': this.headerY+'px','padding-left': this.headerX+'px','padding-right': this.headerX+'px',}
+    },
   },
 
   props: {
@@ -52,19 +58,19 @@ export default {
     },
     headerX: {
       type: Number,
-      default: 5,
+      default: 20,
     },
     headerY: {
       type: Number,
-      default: 5,
+      default: 20,
     },
     x: {
       type: Number,
-      default: 5,
+      default: 20,
     },
     y: {
       type: Number,
-      default: 5,
+      default: 20,
     },
     content: {
       type: String,
