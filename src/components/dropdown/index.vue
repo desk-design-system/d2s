@@ -1,20 +1,28 @@
 <template>
   <Menu as="div" class="dd-relative dd-inline-block dd-text-left">
     <div v-if="type == 'avatar'">
-      <MenuButton class="dd-bg-transparent dd-cursor-pointer" >
-        <ddAvatar :size="avatarSize" :srcLink="avatarLink"  />
+      <MenuButton class="dd-bg-transparent dd-cursor-pointer">
+        <ddAvatar :size="avatarSize" :srcLink="avatarLink" />
       </MenuButton>
     </div>
     <div v-else-if="type == 'button'">
-      <MenuButton :class="{ ...basicButton }" class="dd-inline-flex dd-w-full dd-justify-center dd-cursor-pointer">
+      <MenuButton :class="{ ...basicButton }"
+        class="dd-flex dd-w-full dd-justify-center dd-items-center dd-gap-1 dd-cursor-pointer dd-h-8 !dd-p-2">
         <slot>
           {{ label }}
         </slot>
-        <span :class="[size == 'xs' ? 'dd-h-4 dd-w-4' : 'dd-h-5 dd-w-5', label != '' ? '-dd-mr-1 dd-ml-1' : '']" class="">
+        <span :class="[size == 'xs' ? 'dd-h-4 dd-w-4' : 'dd-h-5 dd-w-5', label != '' ? '-dd-mr-1 dd-ml-1' : '']"
+          class="dd-flex dd-justify-center dd-items-center">
           <slot name="icon">
-            <ChevronDownIcon aria-hidden="true" />
+            <svgIcon color="white" icon="ChevronDown" size="10" />
           </slot>
         </span>
+      </MenuButton>
+    </div>
+    <div v-else-if="type == 'icon'">
+      <MenuButton :class="{ ...basicButton }"
+        class="dd-flex dd-w-full dd-justify-center dd-items-center dd-gap-1 dd-cursor-pointer dd-h-[30px] !dd-p-2 dd-border-none focus-visible:dd-outline-none" v-bind="$attrs">
+        <svgIcon :color="color" :icon="defaultIcon" size="10" />
       </MenuButton>
     </div>
 
@@ -25,10 +33,12 @@
       <MenuItems
         :class="`dd-absolute dd-${placement}-0 dd-z-10 dd-mt-2 dd-w-fit dd-whitespace-nowrap dd-origin-top-${placement} dd-rounded-md dd-bg-white dd-shadow-lg dd-ring-1 dd-ring-black dd-ring-opacity-5 focus:dd-outline-none`">
         <div class="dd-py-1">
-          <MenuItem @click="getClick(item)" v-for="item in options" :key="item" v-slot="{ active }">
+          <MenuItem @click="getClick(item)" v-for="(item, index) in options" :key="index" v-slot="{ active }">
           <span href="#"
             :class="[active ? 'dd-bg-teal-50 dd-text-teal-600' : 'dd-text-gray-700', 'dd-block dd-py-2 dd-px-4 dd-cursor-pointer', size == 'xs' ? 'dd-text-xs' : 'dd-text-sm']">
             <slot name="items" :item="item">
+              <svgIcon v-if="showIcon" :color="item.color ? item.color : ''" :icon="item.icon ? item.icon : ''"
+                :size="item.size ? item.size : ''" />
               {{ item[props.defaultProps.name] }}
             </slot>
           </span>
@@ -42,19 +52,31 @@
 <script setup>
 import { ref, computed } from "vue"
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
-import { ChevronDownIcon } from '@heroicons/vue/solid'
+import svgIcon from "../svgIcon/index.vue";
 import ddAvatar from "../avatars/index.vue"
-const emits = defineEmits( ['update:modelValue', "change", 'command'] )
-const props = defineProps( {
+const emits = defineEmits(['update:modelValue', "change", 'command'])
+const props = defineProps({
   label: {
     type: String,
     default: "",
   },
-  avatarSize:{
+  icon: {
+    type: String,
+    default: "ArrowDown",
+  },
+  showIcon: {
+    type: Boolean,
+    default: false,
+  },
+  defaultIcon: {
+    type: String,
+    default: "ChevronDown",
+  },
+  avatarSize: {
     type: String,
     default: "medium",
   },
-  avatarLink:{
+  avatarLink: {
     type: String,
     default: "https://img.freepik.com/free-icon/user_318-563642.jpg",
   },
@@ -74,66 +96,66 @@ const props = defineProps( {
   //   },
   defaultProps: {
     type: Object,
-    default: () => ( {
+    default: () => ({
       name: 'name',
       value: 'value',
       avatar: 'avatar'
-    } )
+    })
   },
   color: {
     size: {
-    type: String,
-    validator: function ( value ) {
-      // The value must match one of these strings
-      return (
-        ["primary", "danger", "white",'transparent'].indexOf( value ) !== -1
-      )
+      type: String,
+      validator: function (value) {
+        // The value must match one of these strings
+        return (
+          ["primary", "danger", "white", 'transparent'].indexOf(value) !== -1
+        )
+      },
+      default: "white",
     },
-    default: "white",
-  },
   },
   type: {
     type: String,
-    validator: function ( value ) {
+    validator: function (value) {
       // The value must match one of these strings
       return (
-        ["button", "text",].indexOf( value ) !== -1
+        ["button", "text", "icon"].indexOf(value) !== -1
       )
     },
     default: "button",
   },
   placement: {
     type: String,
-    validator: function ( value ) {
+    validator: function (value) {
       // The value must match one of these strings
       return (
-        ["right", "left",].indexOf( value ) !== -1
+        ["right", "left",].indexOf(value) !== -1
       )
     },
     default: "right",
   },
   size: {
     type: String,
-    validator: function ( value ) {
+    validator: function (value) {
       // The value must match one of these strings
       return (
-        ["xs", "sm", "base", "lg", "xl"].indexOf( value ) !== -1
+        ["xs", "sm", "base", "lg", "xl"].indexOf(value) !== -1
       )
     },
     default: "base",
   },
   defaultProps: {
     type: Object,
-    default: () => ( {
+    default: () => ({
       name: 'name',
       value: 'value',
-    } )
+    })
   }
-} )
-const getClick = ( i ) => {
-  emits( "command", i )
+})
+const getClick = (i) => {
+  emits("command", i)
 }
-const basicButton = computed( () => {
+const basicButton = computed(() => {
   // return {
   // if ( props.type == 'text' ) {
   //   return {
@@ -149,25 +171,25 @@ const basicButton = computed( () => {
   //       props.color === "",
   //   }
   // } else {
-    return {
-      "dd-px-2.5 dd-py-1.5 dd-h-6 dd-text-xs dd-rounded": props.size === "xs",
-      "dd-px-3 dd-py-2 dd-text-sm dd-h-7 dd-rounded-md":
-        props.size === "sm",
-      "dd-px-4 dd-py-2 dd-text-sm dd-rounded-md dd-h-8": props.size === "base",
-      "dd-px-4 dd-py-2 dd-text-base dd-rounded-md dd-h-9": props.size === "lg",
-      "dd-px-6 dd-py-3 dd-text-base dd-rounded-md dd-h-10": props.size === "xl",
-      "dd-cursor-not-allowed !dd-bg-gray-200 !dd-text-gray-400 hover:dd-bg-gray-300":
-        props.disable,
-      "dd-bg-teal-600 dd-text-white hover:dd-bg-teal-700":
-        props.color === "primary",
-      "dd-bg-red-600 dd-text-white hover:dd-bg-red-700":
-        props.color === "danger",
-      "dd-bg-white dd-border-gray-300 dd-text-gray-700 dd-border hover:dd-bg-gray-50 focus:dd-outline-none":
-        props.color === "white",
-        "dd-text-gray-700 dd-bg-transparent":
-        props.color =='transparent',
-    }
+  return {
+    "dd-px-2.5 dd-py-1.5 dd-h-6 dd-text-xs dd-rounded": props.size === "xs",
+    "dd-px-3 dd-py-2 dd-text-sm dd-h-7 dd-rounded-md":
+      props.size === "sm",
+    "dd-px-4 dd-py-2 dd-text-sm dd-rounded-md dd-h-8": props.size === "base",
+    "dd-px-4 dd-py-2 dd-text-base dd-rounded-md dd-h-9": props.size === "lg",
+    "dd-px-6 dd-py-3 dd-text-base dd-rounded-md dd-h-10": props.size === "xl",
+    "dd-cursor-not-allowed !dd-bg-gray-200 !dd-text-gray-400 hover:dd-bg-gray-300":
+      props.disable,
+    "dd-bg-teal-600 dd-text-white hover:dd-bg-teal-700":
+      props.color === "primary",
+    "dd-bg-red-600 dd-text-white hover:dd-bg-red-700":
+      props.color === "danger",
+    "dd-bg-white dd-border-gray-300 dd-text-gray-700 dd-border hover:dd-bg-gray-50 focus:dd-outline-none":
+      props.color === "white",
+    "dd-text-gray-700 dd-bg-transparent":
+      props.color == 'transparent',
+  }
   // }
-} )
+})
 
 </script>
