@@ -72,11 +72,13 @@
         </slot> -->
       </div>
     </div>
+    <slot name="errorMessage" :error="errorMessage">
     <span
       v-if="errorMessage"
       class="dd-text-xs dd-text-red-500 dd-capitalize dd-pt-px"
       >{{ errorMessage }}</span
     >
+  </slot>
   </div>
 </template>
 <!-- <script>
