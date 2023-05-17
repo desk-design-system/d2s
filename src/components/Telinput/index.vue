@@ -2,7 +2,7 @@
   <div>
     <label
       class="dd-block dd-text-sm dd-font-medium dd-text-gray-700 dd-mb-1"
-      >{{ label }}  {{ hasError }} <span v-if="isRequired" class="dd-text-red-500">*</span></label
+      >{{ label }} <span v-if="isRequired" class="dd-text-red-500">*</span></label
     >
     <vue-tel-input
     :name="name"

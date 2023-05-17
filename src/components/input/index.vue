@@ -74,9 +74,9 @@
     </div>
     <slot name="errorMessage" :error="errorMessage">
     <span
-      v-if="errorMessage"
+      v-if="errorMessage || customErrorMessage"
       class="dd-text-xs dd-text-red-500 dd-capitalize dd-pt-px"
-      >{{ errorMessage }}</span
+      >{{ errorMessage || customErrorMessage }}</span
     >
   </slot>
   </div>
@@ -96,10 +96,15 @@ const props = defineProps({
     type: String,
     default: "",
   },
+  customErrorMessage: {
+    type: String,
+    default: "",
+  },
   rules: {
     type: [String, RegExp, Function],
     default: "",
   },
+
   prefix: {
     type: Boolean,
     default: false,
@@ -186,7 +191,7 @@ const inputModelValue = computed({
 });
 
 const hasError = computed(() => {
-  if (errorMessage.value) {
+  if (errorMessage.value || props.customErrorMessage) {
     return true;
   } else {
     return false;
