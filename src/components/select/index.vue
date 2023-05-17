@@ -1,6 +1,7 @@
 <template>
   <div v-bind="$attrs">
-    <label v-if="label" class="dd-block dd-text-sm dd-font-medium dd-text-gray-700 dd-mb-1">{{ label }} <span v-if="isRequired" class="dd-text-red-500">*</span></label>
+    <label v-if="label" class="dd-block dd-text-sm dd-font-medium dd-text-gray-700 dd-mb-1">{{ label }} <span
+        v-if="isRequired" class="dd-text-red-500">*</span></label>
     <Combobox as="div" v-bind="$attrs" v-model="inputModelValue">
       <div class="dd-mt-1 dd-relative">
         <ComboboxInput :class="[
@@ -72,7 +73,8 @@
           </ComboboxOptions>
           <ComboboxOptions class="dd-shadow-md dd-text-center dd-rounded-md" v-if="queries !== '' && options.length === 0"
             v-model="queries">
-            <ComboboxOption class="dd-p-4 dd-text-sm dd-text-left dd-text-gray-500 dd-cursor-pointer dd-text dd-font-semibold"
+            <ComboboxOption
+              class="dd-p-4 dd-text-sm dd-text-left dd-text-gray-500 dd-cursor-pointer dd-text dd-font-semibold"
               @click="addQuery(queries)">
               Add as new: {{ queries }}
             </ComboboxOption>
@@ -136,7 +138,7 @@ const props = defineProps({
   },
   filterable: {
     type: Boolean,
-    default: "",
+    default: false,
   },
   value: {
     type: String,
@@ -202,6 +204,7 @@ const inputSize = computed(() => {
   };
 });
 const selectedValue = computed(() => {
+  showDropdown.value = false
   return props.options.find((predicate) => {
     return predicate[props.defaultProps.value] == inputModelValue.value;
   });

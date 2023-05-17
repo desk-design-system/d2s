@@ -16,8 +16,8 @@
     <ddInput  rules="required|confirmed:@Jazib" label="Confirm" v-model="coner"  /> -->
         <ddMulti label="elo" rules="required" showTooltip customIcon v-model="text" :options="options" />
       </ddObserver>
-      <ddSelect v-model="selected" v-bind="args" :options="filteredOptions" :filterable="filterable" @searchQuery="search"
-        @addQuery="addquery" label="select" />
+      <DdSelect v-model="selected" :options="filteredOptions" filterable @searchQuery="search" @addQuery="addquery"
+        label="select" />
       <div class="dd-mb-10">
         <!-- <dd-table :rows="rows" :columns="columns" /> -->
       </div>
@@ -135,6 +135,7 @@ const people = ref([
   // More people...
 ]);
 const selected = ref("");
+const filterable = ref(false);
 const search = (data) => {
   query.value = data
 }
