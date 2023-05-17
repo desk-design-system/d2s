@@ -1,5 +1,5 @@
 <template>
-  <div class="dd-flex dd-justify-center dd-items-center dd-w-fit dd-m-auto">
+  <div class="dd-flex dd-justify-center dd-items-center dd-w-fit">
     <dd-button
       class="dd-rounded-tl-lg dd-rounded-tr-none dd-rounded-bl-lg dd-rounded-br-none"
       color="white"
