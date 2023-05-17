@@ -53,18 +53,18 @@ const Template = (args) => ({
       // More people...
     ]);
     const selected = ref("");
-    const search = (data) =>{
-      query.value = data
-     }
-     const addquery = (data) => {
-       selected.value = "";
-       const queryArr = {
-         value: people.value.length + 1,
-         name: data,
-       };
-       people.value.unshift(queryArr);
-       query.value = ""
-     };
+    const search = (data) => {
+      query.value = data;
+    };
+    const addquery = (data) => {
+      selected.value = "";
+      const queryArr = {
+        value: people.value.length + 1,
+        name: data,
+      };
+      people.value.unshift(queryArr);
+      query.value = "";
+    };
     return {
       selected,
       args,
@@ -78,12 +78,8 @@ const Template = (args) => ({
   },
   // And then the `args` are bound to your component with `v-bind="args"`
   template: `<ddSelect
-    v-model="selected"
-    v-bind="args"
-    :options="filteredOptions"
-    :filterable="filterable"
-    @searchQuery="search"
-    @addQuery="addquery"
+  v-model="selected" :options="filteredOptions" filterable @searchQuery="search" @addQuery="addquery"
+  label="select"
   />`,
 });
 
@@ -91,6 +87,4 @@ export const Basic = Template.bind({});
 
 // export const CheckLeft = Template.bind( {} )
 // More on args: https://storybook.js.org/docs/vue/writing-stories/args
-Basic.args = {
-};
-
+Basic.args = {};
