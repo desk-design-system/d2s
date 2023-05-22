@@ -9,7 +9,7 @@
       :style="{ height: `${inputSize} !important`, borderColor: `${hasError ? '#dc2626' : '#d1d5db'} !important` }"
       v-bind="config"
       :id="id"
-      v-model="inputModelValue"
+      v-model="value"
     ></vue-tel-input>
      <span
       v-if="errorMessage"
@@ -37,17 +37,13 @@ const props = defineProps({
     type: String,
     default: "",
   },
-  value: {
-    type: String,
-    default: null,
-  },
   config: {
     type: Object,
     default: () => ({}),
   },
   modelValue: {
-    type: [String, Number, Boolean],
-    default: null,
+    type: [String],
+    required: true,
   },
   isRequired: {
     type: Boolean,
@@ -66,16 +62,23 @@ const props = defineProps({
     default: () => "Select" + Math.floor(Math.random() * 5000),
   },
 });
+
+const propModelValue = computed(() => {
+  if(!props.modelValue) {
+    return ''
+  }
+  return props.modelValue.toString()
+})
 const inputModelValue = computed({
   get() {
-    return props.modelValue;
+    return propModelValue;
   },
   set(val) {
-    handleChange(val);
     emits("update:modelValue", val);
     emits("change", val);
   },
 });
+
 const inputSize = computed(() => {
   switch (props.size) {
     case "sm":
@@ -108,13 +111,25 @@ const getRules = () => {
 
 const { errorMessage, value, handleChange } = useField(props.name, getRules(), {
   label: props.name,
+  initialValue: propModelValue.value
 });
 watch(
   () => value,
   (newValue) => {
-    inputModelValue.value = newValue;
+    inputModelValue.value = newValue.value;
   }
 );
+
+watch(
+  () => propModelValue,
+  (newValue) => {
+    handleChange(newValue.value);
+  },
+  {
+    immediate: true
+  }
+);
+
 </script>
 <style>
 .vue-tel-input {
