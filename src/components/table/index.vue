@@ -3,7 +3,7 @@
     <div class="dd-min-w-full dd-align-middle">
       <div :class="[noHeight ? '' : 'dd-max-h-[calc(30vh-80px)] dd-min-h-[calc(100vh-80px)]']" class="fixedScroll custom-scrollbar">
         <!-- header with group button  -->
-        <div class="dd-flex dd-items-center dd-justify-between dd-sticky dd-top-0 dd-z-[1000]">
+        <div class="dd-flex dd-items-center dd-justify-between !dd-w-full dd-sticky dd-top-0 dd-z-[1000] dd-bg-white group_wrapper">
           <transition name="group">
             <div class="dd-flex dd-items-center dd-gap-2 dd-py-1.5 dd-pl-2 dd-pr-3 dd-text-left"
               v-if="selectedId.length > 0">
@@ -119,7 +119,7 @@
                 ]">
                 <slot name="td" />
                 <td
-                  class="dd-py-3.5 dd-pl-4 dd-text-left dd-text-xs dd-font-medium dd-text-gray-700 sm:dd-pl-4 dd-w-[56px]">
+                  class="dd-py-3.5 dd-px-3 dd-text-left dd-text-xs dd-font-medium dd-text-gray-700 sm:dd-pl-4 dd-w-[56px]">
                   <dd-checkbox :checked="selectedId && selectedId.includes(row.id)" :value="row.id"
                     @click="setChecked(row.id)" :disabled="row.disabled" />
                 </td>
@@ -135,7 +135,7 @@
                 <td
                   class="actions_wrapper dd-w-full"
                   :style="setting == true ? `z-index: -1 !important;` : `z-index: 0 !important;`"
-                  :class="[row.disabled ? '!dd-pointer-event-none' : '']">
+                  :class="[row.disabled ? '!dd-pointer-event-none' : '', selectedId.length > 0] ? 'dd-px-8': ''">
                   <div class="dd-flex dd-items-center dd-justify-center" @mouseenter="handleMouseEnterActions(row)" @mouseleave="handleMouseLeaveActions">
                     <svgIcon class="!dd-text-gray-500" icon="DotHorizontal" :size="size"
                       v-if="!(isActionHovered(row) || isMouseHoveredRow(row))" />
@@ -419,7 +419,7 @@ const openSettingsBar = () => {
   position: sticky;
   left: 0;
   background: #fff;
-  transition: background-color .25s ease;
+  transition: .25s ease;
   z-index: 999;
 }
 
@@ -430,13 +430,11 @@ const openSettingsBar = () => {
   background: #FFFF;
   margin: 0 !important;
   transition: .5s ease;
-  box-shadow: 5px 0 5px rgba(0, 0, 0, 0.2);
   z-index: 999;
 }
 
 .fixedScroll td:nth-child(2) {
   transition: .5s ease;
-  box-shadow: 5px 0 5px rgba(0, 0, 0, 0.2);
   z-index: 10;
 }
 .fixedScroll th:nth-last-child(1),
@@ -445,6 +443,12 @@ const openSettingsBar = () => {
   right: 0;
   background: #FFFF;
   transition: .25s ease;
+}
+
+.fixedScroll .group_wrapper:nth-child(1) {
+  position: sticky;
+  left: 0;
+  transition: background-color .25s ease;
 }
 /* input animation  */
 .input-enter-active,
