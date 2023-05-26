@@ -1,9 +1,11 @@
 <template>
   <div class="dd-flow-root">
     <div class="dd-min-w-full dd-align-middle">
-      <div :class="[noHeight ? '' : 'dd-max-h-[calc(30vh-80px)] dd-min-h-[calc(100vh-80px)]']" class="fixedScroll custom-scrollbar">
+      <div :class="[noHeight ? '' : 'dd-max-h-[calc(30vh-80px)] dd-min-h-[calc(100vh-80px)]']"
+        class="fixedScroll custom-scrollbar">
         <!-- header with group button  -->
-        <div class="dd-flex dd-items-center dd-justify-between !dd-w-full dd-sticky dd-top-0 dd-z-[1000] dd-bg-white group_wrapper">
+        <div
+          class="dd-flex dd-items-center dd-justify-between !dd-w-full dd-sticky dd-top-0 dd-z-[1000] dd-bg-white group_wrapper">
           <transition name="group">
             <div class="dd-flex dd-items-center dd-gap-2 dd-py-1.5 dd-pl-2 dd-pr-3 dd-text-left"
               v-if="selectedId.length > 0">
@@ -53,7 +55,8 @@
         <table class="dd-min-w-full dd-overflow-y-auto dd-divide-y dd-divide-gray-300">
           <!-- tabel head  -->
           <transition name="thead">
-            <thead class="dd-cursor-pointer !dd-sticky !dd-top-0 dd-bg-white dd-z-[1000]" v-if="selectedId.length == 0 && !search">
+            <thead class="dd-cursor-pointer !dd-sticky !dd-top-0 dd-bg-white dd-z-[1000]"
+              v-if="selectedId.length == 0 && !search">
               <tr>
                 <div class="dd-py-3.5 dd-pl-4 dd-pr-3 dd-text-left checkbox_wrapper">
                   <dd-checkbox v-model="allSelected" @click="selectAllFields" :disabled="checkAllDisabled" />
@@ -111,9 +114,9 @@
           <tbody class="dd-divide-y dd-divide-gray-200 [&>*:last-child]:!dd-border-b">
             <template v-if="rows">
               <tr v-for="(row, index) in displayedRows" :key="index"
-                class="hover:dd-bg-gray-100 [&>*:nth-child(2)]:!dd-font-medium" :class="[
+                class="hover_class [&>*:nth-child(2)]:!dd-font-medium" :class="[
                   selectedId.includes(row.id)
-                    ? 'dd-bg-gray-100 !dd-border-l-2 !dd-border-t-gray-200 !dd-border-b-gray-200 !dd-border-teal-600'
+                    ? 'dd-bg-gray-100 !dd-border-l-2 !dd-border-t-gray-200 !dd-border-b-gray-200 !dd-border-teal-600 [&>*:last-child]:!dd-bg-gray-100 [&>*:nth-child(1)]:!dd-bg-gray-100 [&>*:nth-child(2)]:!dd-bg-gray-100'
                     : '',
                   row.disabled ? 'dd-bg-gray-100 dd-pointer-event-none' : ''
                 ]">
@@ -132,11 +135,11 @@
                   </slot>
                 </td>
                 <!-- actions  -->
-                <td
-                  class="actions_wrapper dd-w-full"
+                <td class="actions_wrapper dd-w-full"
                   :style="setting == true ? `z-index: -1 !important;` : `z-index: 0 !important;`"
-                  :class="[row.disabled ? '!dd-pointer-event-none' : '', selectedId.length > 0] ? 'dd-px-8': ''">
-                  <div class="dd-flex dd-items-center dd-justify-center" @mouseenter="handleMouseEnterActions(row)" @mouseleave="handleMouseLeaveActions">
+                  :class="[row.disabled ? '!dd-pointer-event-none' : '', selectedId.length > 0] ? 'dd-px-8' : ''">
+                  <div class="dd-flex dd-items-center dd-justify-center" @mouseenter="handleMouseEnterActions(row)"
+                    @mouseleave="handleMouseLeaveActions">
                     <svgIcon class="!dd-text-gray-500" icon="DotHorizontal" :size="size"
                       v-if="!(isActionHovered(row) || isMouseHoveredRow(row))" />
                     <DdGroupButton v-if="isActionHovered(row) && isMouseHoveredRow(row)"
@@ -267,6 +270,17 @@ const limit = ref(0);
 const rowLimit = ref([]);
 const queryInput = ref("");
 const savedData = ref({});
+
+const rows = document.querySelectorAll('.hover_class');
+rows.forEach(row => {
+  row.addEventListener('mouseenter', () => {
+    row.classList.add('hovered');
+  });
+
+  row.addEventListener('mouseleave', () => {
+    row.classList.remove('hovered');
+  });
+});
 
 const selectNumberOfRows = (button) => {
   selectedButton.value = button;
@@ -402,6 +416,11 @@ const openSettingsBar = () => {
 
 <style scoped>
 /* fixed column */
+tr:hover td:not(:first-child),
+tr:hover > td:first-child {
+  background-color:  #F3F4F6;
+}
+
 .fixedScroll {
   overflow: scroll;
 }
@@ -437,6 +456,7 @@ const openSettingsBar = () => {
   transition: .5s ease;
   z-index: 10;
 }
+
 .fixedScroll th:nth-last-child(1),
 .fixedScroll .actions_wrapper {
   position: sticky;
@@ -450,6 +470,7 @@ const openSettingsBar = () => {
   left: 0;
   transition: background-color .25s ease;
 }
+
 /* input animation  */
 .input-enter-active,
 .input-leave-active {
@@ -560,7 +581,6 @@ const openSettingsBar = () => {
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb:horizontal {
-  width: 3px; /* Adjust the width as desired */
-}
-
-</style>
+  width: 3px;
+  /* Adjust the width as desired */
+}</style>
