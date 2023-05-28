@@ -1,8 +1,8 @@
 <template>
   <div class="dd-flow-root">
     <div class="dd-min-w-full dd-align-middle">
-      <div :class="[noHeight ? '' : 'dd-max-h-[calc(30vh-80px)] dd-min-h-[calc(100vh-80px)]']"
-        class="fixedScroll custom-scrollbar">
+      <div :class="[noHeight ? '' : 'dd-max-h-[calc(30vh-80px)] dd-min-h-[calc(100vh-80px)]', fixed ? 'fixedScroll' : 'dd-overflow-scroll']"
+        class="custom-scrollbar">
         <!-- header with group button  -->
         <div
           class="dd-flex dd-items-center dd-justify-between !dd-w-full dd-sticky dd-top-0 dd-z-[1000] dd-bg-white group_wrapper">
@@ -71,7 +71,7 @@
                       v-show="isHovered(col) && !col.disabled" @click="sortRows(col)" :disabled="col.disabled" />
                   </div>
                 </th>
-                <th class="dd-flex dd-items-center dd-justify-center dd-gap-8 dd-mr-6 dd-py-3.5 dd-pr-5 dd-mr-0">
+                <th class="dd-flex dd-items-center dd-justify-center dd-gap-8">
                   <svgIcon class="!dd-text-gray-500" icon="Search" :size="size" @click="openSearch" />
                   <svgIcon class="!dd-text-gray-500 dd-relative" :class="[setting ? 'rotated' : 'rotatedReverse']"
                     icon="Settings" :size="size" @click="openSettingsBar" />
@@ -136,7 +136,6 @@
                 </td>
                 <!-- actions  -->
                 <td class="actions_wrapper dd-w-full"
-                  :style="setting == true ? `z-index: -1 !important;` : `z-index: 0 !important;`"
                   :class="[row.disabled ? '!dd-pointer-event-none' : '', selectedId.length > 0] ? 'dd-px-8' : ''">
                   <div class="dd-flex dd-items-center dd-justify-center" @mouseenter="handleMouseEnterActions(row)"
                     @mouseleave="handleMouseLeaveActions">
@@ -216,6 +215,10 @@ const props = defineProps({
   noHeight: {
     type: Boolean,
     default: false,
+  },
+  fixed: {
+    type: Boolean,
+    default: true,
   },
   checkAllDisabled: {
     type: Boolean,
@@ -338,6 +341,7 @@ const setChecked = (id) => {
   const index = selectedId.value.indexOf(id);
   if (index === -1) {
     selectedId.value.push(id);
+    setting.value = false;
   } else {
     search.value = false;
     selectedId.value.splice(index, 1);
@@ -412,6 +416,7 @@ const sortRows = (col) => {
 const openSettingsBar = () => {
   setting.value = !setting.value
 };
+
 </script>
 
 <style scoped>
@@ -463,6 +468,7 @@ tr:hover > td:first-child {
   right: 0;
   background: #FFFF;
   transition: .25s ease;
+  z-index: 999;
 }
 
 .fixedScroll .group_wrapper:nth-child(1) {
