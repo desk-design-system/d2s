@@ -1,5 +1,5 @@
 <template>
-  <div v-bind="$attrs">
+  <div v-bind="$attrs" ref="componentRef">
     <label v-if="label" class="dd-block dd-text-sm dd-font-medium dd-text-gray-700 dd-mb-1">{{ label }} <span
         v-if="isRequired" class="dd-text-red-500">*</span></label>
     <Combobox as="div" v-bind="$attrs" v-model="inputModelValue">
@@ -11,7 +11,7 @@
           inputSize,
         ]" :readonly="!filterable"
           class="dd-border-solid focus-visible:dd-outline-none dd-flex dd-items-center dd-cursor-pointer dd-bg-white dd-relative dd-w-full dd-border dd-rounded-md dd-shadow-sm dd-pl-3 dd-pr-10 dd-py-2 dd-text-left dd-h-9 sm:dd-text-sm"
-          @change="searchQuery($event.target.value)" :displayValue="(val) => findItem(val)" @click="setDropDown">
+          @change="searchQuery($event.target.value)" :displayValue="(val) => findItem(val)" @click="setDropDown()">
           <ddAvatar v-if="selectedValue && showAvatar" size="mini" class="dd-mr-3"
             :srcLink="selectedValue[props.defaultProps.avatar]" />
           <span v-if="selectedValue" class="dd-block dd-truncate dd-text-gray-500 dd-text-sm">{{
@@ -87,7 +87,7 @@
 </template>
 <script setup>
 import { useField } from "vee-validate";
-import { ref, computed, watch } from "vue";
+import { ref, computed, watch, onMounted, onBeforeUnmount } from "vue";
 import {
   Switch,
   Combobox,
@@ -185,6 +185,7 @@ const props = defineProps({
     }),
   },
 });
+
 const inputModelValue = computed({
   get() {
     return props.modelValue;
@@ -194,6 +195,16 @@ const inputModelValue = computed({
     emits("change", val);
   },
 });
+
+const componentRef = ref(null);
+const handleOutsideDropdown = (event) => {
+  if (event.target !== componentRef.value && event.composedPath().includes(componentRef.value)) return;
+  showDropdown.value = false;
+}
+
+onMounted(() => { window.addEventListener('click', handleOutsideDropdown) })
+onBeforeUnmount(() => {window.removeEventListener('click', handleOutsideDropdown)})
+
 const inputSize = computed(() => {
   return {
     "dd-h-6 !dd-text-xs": props.size === "xs",
@@ -232,6 +243,8 @@ const setDropDown = () => {
 
 const addQuery = (query) => {
   queries.value = query
+  isIconRotated.value = false;
+  showDropdown.value = false;
   emits("addQuery", query);
 };
 
