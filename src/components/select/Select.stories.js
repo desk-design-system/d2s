@@ -64,6 +64,7 @@ const Template = (args) => ({
       };
       people.value.unshift(queryArr);
       query.value = "";
+      selected.value = queryArr.value;
     };
     return {
       selected,

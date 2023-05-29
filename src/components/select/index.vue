@@ -200,6 +200,11 @@ const componentRef = ref(null);
 const handleOutsideDropdown = (event) => {
   if (event.target !== componentRef.value && event.composedPath().includes(componentRef.value)) return;
   showDropdown.value = false;
+  if((Array.isArray(props.options) && props.options.length == 0) && props.modelValue) {
+    emits("searchQuery", "");
+    emits("update:modelValue", props.modelValue);
+    return props.modelValue;
+  }
 }
 
 onMounted(() => { window.addEventListener('click', handleOutsideDropdown) })
