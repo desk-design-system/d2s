@@ -1,7 +1,7 @@
 <template>
-  <div class="">
-    <dd-table :rows="rows" :columns="columns" :buttons="buttons" :Actions="Actions" :values="values" showIcon footer
-      :limit="limit" @saveChanges="saveChanges" @resetData="resetData" />
+  <div class="table_comp">
+    <dd-table :rows="rows" :columns="columns" :buttons="buttons" :Actions="Actions" :values="values" showIcon footer fixed rowActions checkBoxProp checkAllDisabled disableDropdown noDropdown size="12" actionsIconSize="12"
+      :limit="limit" @saveChanges="saveChanges" @resetData="resetData" @NumberOfRow="NumberOfRow" @searchQuery="searchQuery" @loadmore="loadmore" @allCheckboxes="allCheckboxes" @selectedRow="selectedRow" />
   </div>
   <!-- <div>
     <DdTopbar />
@@ -146,7 +146,7 @@ const columns = ref([
     title: 'Id',
     value: 'id',
     checked: true,
-    size: "",
+    size: "130",
     id: 1,
     disabled: true,
   },
@@ -154,7 +154,7 @@ const columns = ref([
     title: 'User Name',
     value: 'username',
     checked: true,
-    size: "",
+    size: "130",
     id: 2,
     disabled: true,
   },
@@ -162,70 +162,70 @@ const columns = ref([
     title: 'First Name',
     value: 'firstname',
     checked: true,
-    size: "",
+    size: "130",
     id: 3,
   },
   {
     title: 'Last Name',
     value: 'lastname',
     checked: true,
-    size: "",
+    size: "130",
     id: 4,
   },
   {
     title: 'Email',
     value: 'email',
     checked: true,
-    size: "",
+    size: "130",
     id: 5,
   },
   {
     title: 'Email',
     value: 'email',
     checked: true,
-    size: "",
+    size: "130",
     id: 5,
   },
   {
     title: 'Email',
     value: 'email',
     checked: true,
-    size: "",
+    size: "130",
     id: 5,
   },
   {
     title: 'Email',
     value: 'email',
     checked: true,
-    size: "",
+    size: "130",
     id: 5,
   },
   {
     title: 'Email',
     value: 'email',
     checked: true,
-    size: "",
+    size: "130",
     id: 5,
   },
   {
     title: 'Email',
     value: 'email',
     checked: true,
-    size: "",
+    size: "130",
     id: 5,
   },
   {
     title: 'Email',
     value: 'email',
     checked: true,
-    size: "",
+    size: "130",
     id: 5,
   },
   {
     title: 'Status',
     value: 'status',
     checked: true,
-    size: "",
+    size: "130",
     id: 6,
   },
 ])
@@ -515,9 +515,9 @@ const rows = ref([
 ])
 
 const buttons = [
-  { id: 1, label: "5", color: "white", icon: "ChevronLeft" },
-  { id: 2, label: "10", color: "white", icon: "ChevronRight" },
-  { id: 3, label: "15", color: "white", icon: "ChevronDown" },
+  { id: 1, label: "5", color: "white", icon: "" },
+  { id: 2, label: "10", color: "white", icon: "" },
+  { id: 3, label: "15", color: "white", icon: "" },
 ];
 
 const Actions = ref([
