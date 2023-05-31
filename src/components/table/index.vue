@@ -81,12 +81,13 @@
                 <th>
                   <div class="dd-flex dd-items-center dd-justify-end dd-mx-10 dd-gap-4">
                     <svgIcon class="!dd-text-gray-500" icon="Search" :size="size" @click="openSearch" />
-                    <svgIcon class="!dd-text-gray-500" :class="[setting ? 'rotated' : 'rotatedReverse']" icon="Settings"
-                      :size="size" @click="openSettingsBar" />
+                    <svgIcon ref="settingElement" class="!dd-text-gray-500"
+                      :class="[setting ? 'rotated' : 'rotatedReverse']" icon="Settings" :size="size"
+                      @click="openSettingsBar" />
                   </div>
                   <!-- settings component  -->
                   <transition name="setting">
-                    <div v-if="setting" ref="settingElement"
+                    <div v-if="setting"
                       class="dd-p-2 dd-w-[250px] dd-bg-white dd-container dd-my-[2.1rem] dd-absolute dd-right-4 dd-top-1 dd-shadow-xl dd-rounded-lg dd-border dd-border-gray-100"
                       style="z-index: 1100;">
                       <div class="dd-flex dd-items-center dd-justify-between dd-gap-2 dd-font-sans"
@@ -360,6 +361,7 @@ const limit = ref(0);
 const rowLimit = ref([]);
 const queryInput = ref("");
 const savedData = ref({});
+const settingElement = ref(null);
 
 const selectNumberOfRows = (button) => {
   selectedButton.value = button;
@@ -377,6 +379,11 @@ const scrollToBottom = () => {
 };
 
 
+const handleDomClick = (event) => {
+  if (settingElement.value && !settingElement.value.$el.contains(event.target)) {
+    setting.value = false;
+  }
+};
 
 const displayedRows = computed(() => {
   if (limit.value && props.rows) {
@@ -406,9 +413,11 @@ const loadMore = () => {
 onMounted(() => {
   handleScroll();
   scrollToBottom();
+  document.addEventListener('click', handleDomClick);
 });
 onBeforeMount(() => {
   limit.value = props.rows.length;
+  document.addEventListener('click', handleDomClick);
 })
 
 watch(
@@ -435,6 +444,9 @@ const selectAllFields = () => {
   } else {
     search.value = false;
     selectedId.value = [];
+    setTimeout(() => {
+      scrollToBottom();
+    }, 50)
   }
   allSelected.value = !allSelected.value;
 };
@@ -448,6 +460,9 @@ const setChecked = (id) => {
   } else {
     search.value = false;
     selectedId.value.splice(index, 1);
+    setTimeout(() => {
+      scrollToBottom();
+    }, 50)
   }
 };
 
