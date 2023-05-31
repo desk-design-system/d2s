@@ -1,5 +1,5 @@
 <template>
-  <div class="dd-flow-root">
+  <div class="dd-flow-root" v-bind="$attrs">
     <div class="dd-min-w-full dd-align-middle">
       <div :class="[
         noHeight
@@ -11,7 +11,7 @@
         <!-- header with group button  -->
         <div
           class="dd-flex dd-items-center dd-justify-between !dd-w-full dd-sticky dd-top-0 dd-z-[1000] dd-bg-white group_wrapper">
-          <transition name="group">
+          <transition name="group" v-if="actionHeader">
             <div class="dd-flex dd-items-center dd-gap-2 dd-py-1.5 dd-pl-2 dd-pr-3 dd-text-left"
               v-if="selectedId.length > 0">
               <DdGroupButton :buttons="buttons">
@@ -38,6 +38,7 @@
                 <slot name="groupActions" />
               </DdGroupButton>
               <DdDropDown v-if="noDropdown" color="white" label="Actions" v-model="selectedActions" :options="values" />
+              <slot name="customDropDown" />
             </div>
           </transition>
           <svgIcon class="!dd-text-gray-500 dd-mr-3" :class="[selectedId.length === 0 || search ? 'dd-hidden' : '']"
@@ -120,19 +121,19 @@
             </thead>
           </transition>
           <tbody class="dd-divide-y dd-divide-gray-200 [&>*:last-child]:!dd-border-b" v-if="displayedRows.length > 0">
-            <template v-if="rows">
+            <template v-if="defaultRow">
               <tr v-for="(row, index) in displayedRows" :key="index" class="[&>*:nth-child(2)]:!dd-font-medium" :class="[
                 selectedId.includes(row.id)
                   ? '[&>*:nth-child(1)]:dd-bg-gray-100 [&>*:nth-child(2)]:dd-bg-gray-100  [&>*:last-child]:dd-bg-gray-100 dd-bg-gray-100 !dd-border-l-2 !dd-border-t-gray-200 !dd-border-b-gray-200 !dd-border-teal-600'
                   : '',
                 row.disabled ? 'dd-bg-gray-100 dd-pointer-event-none' : '',
               ]">
-                <slot name="td" />
                 <td v-if="checkBoxProp"
                   class="dd-py-3.5 dd-px-3 dd-text-left dd-text-xs dd-font-medium dd-text-gray-700 sm:dd-pl-4 dd-w-[56px]">
                   <dd-checkbox :checked="selectedId && selectedId.includes(row.id)" :value="row.id"
                     @click="setChecked(row.id)" :disabled="row.disabled" />
                 </td>
+                <slot name="td" />
                 <!-- :class="row.status === 'Repaired and Collected' ? 'dd-text-blue-300' : 'dd-text-teal-400'" -->
                 <td v-for="col in columns" :key="col.value" v-show="col.checked"
                   class="dd-whitespace-nowrap dd-py-4 dd-pl-4 dd-pr-3 dd-text-sm dd-text-gray-500 sm:dd-pl-6"
@@ -158,23 +159,24 @@
                         :class="[!(isActionHovered(row) || isMouseHoveredRow(row)) ? '!dd-p-0 dd-rounded-none !dd-border-none dd-ring-0 !dd-shadow-none !dd-bg-transparent' : '!dd-p-0']">
                         <DdDropDown color="white" class="dd-text-gray-700"
                           :class="[(isActionHovered(row) || isMouseHoveredRow(row)) ? '' : 'dd-rounded-none dd-border-none dd-ring-0 dd-bg-transparent [&>button]:!dd-shadow-none [&>button]:!dd-bg-none']"
-                          type="icon" v-model="selected" :options="Actions" :size="actionsIconSize" placement="right" defaultIcon="DotHorizontal"
-                          :showIcon="showIcon" />
+                          type="icon" v-model="selected" :options="Actions" :size="actionsIconSize" placement="right"
+                          defaultIcon="DotHorizontal" :showIcon="showIcon" />
                       </dd-Button>
                     </DdGroupButton>
+                    <slot name="rowActions" />
                   </div>
                 </td>
               </tr>
             </template>
+            <slot name="tbody" />
           </tbody>
           <tbody v-else>
             <tr>
               <td :colspan="columns.length + 2" class="dd-h-full">
-                <slot name="noData">
-                  <div class="dd-flex dd-items-center dd-justify-center dd-min-h-[60vh]">
-                    <svgIcon size="140" color="white" icon="noData" />
-                  </div>
-                </slot>
+                <slot name="noData" />
+                <div class="dd-flex dd-items-center dd-justify-center dd-min-h-[60vh]" v-if="emptyState">
+                  <svgIcon size="140" color="white" icon="noData" />
+                </div>
               </td>
             </tr>
           </tbody>
@@ -203,14 +205,14 @@
 </template>
 
 <script setup>
-import { computed, nextTick, onBeforeMount, onMounted, ref, watch } from "vue";
+import { computed, onBeforeMount, onMounted, ref, watch } from "vue";
 import DdButton from "../buttons/index.vue";
 import svgIcon from "../svgIcon/index.vue";
 import DdCheckbox from "../checkbox/index.vue";
 import DdGroupButton from "../groupButton/index.vue";
 import DdDropDown from "../dropdown/index.vue";
 import DdInput from "../input/index.vue";
-const emits = defineEmits(["update:modelValue", "saveChanges", "resetData", "selectedRow", "NumberOfRow", "loadmore", "allCheckboxes", "searchQuery", "rerender"]);
+const emits = defineEmits(["update:modelValue", "saveChanges", "resetData", "selectedRow", "NumberOfRow", "loadmore", "allCheckboxes", "searchQuery"]);
 const props = defineProps({
   columns: {
     type: Array,
@@ -236,6 +238,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  defaultRow: {
+    type: Boolean,
+    default: false,
+  },
   fixed: {
     type: Boolean,
     default: false,
@@ -245,6 +251,10 @@ const props = defineProps({
     default: true,
   },
   checkBoxProp: {
+    type: Boolean,
+    default: true,
+  },
+  actionHeader: {
     type: Boolean,
     default: true,
   },
@@ -268,11 +278,11 @@ const props = defineProps({
     type: String,
     default: "14",
   },
-  limit: {
-    type: Number,
-    default: 5,
-  },
   showIcon: {
+    type: Boolean,
+    default: false,
+  },
+  emptyState: {
     type: Boolean,
     default: false,
   },
@@ -389,8 +399,8 @@ const loadMore = () => {
     limit.value += additionalRowsCount;
     emits("loadmore", limit.value);
     setTimeout(() => {
-    scrollToBottom();
-  }, 50)
+      scrollToBottom();
+    }, 50)
   }
 };
 onMounted(() => {
