@@ -16,7 +16,7 @@
             enter-to="dd-opacity-100 dd-translate-y-0 sm:dd-scale-100" leave="dd-ease-in dd-duration-200"
             leave-from="dd-opacity-100 dd-translate-y-0 sm:dd-scale-100"
             leave-to="dd-opacity-0 dd-translate-y-4 sm:dd-translate-y-0 sm:dd-scale-95">
-            <DialogPanel :style="{ 'width': modalWidth + '%' }"
+            <DialogPanel :style="{ 'width': modalWidth }"
               class="dd-relative dd-bg-white dd-rounded-lg   dd-overflow-hidden dd-shadow-xl dd-transform dd-transition-all ">
               <div v-if="header" class="dd-p-6 dd-pb-3">
                 <slot name="header">
@@ -104,7 +104,7 @@ const props = defineProps( {
   },
   modalWidth: {
     type: String,
-    default: "30",
+    default: "30%",
   },
   shadow: {
     type: Boolean,
