@@ -1,7 +1,9 @@
 <template>
   <div class="table_comp">
-    <dd-table :rows="rows" :columns="columns" :buttons="buttons" :Actions="Actions" :values="values" showIcon footer fixed rowActions checkBoxProp checkAllDisabled disableDropdown noDropdown size="12" actionsIconSize="12"
-      :limit="limit" @saveChanges="saveChanges" @resetData="resetData" @NumberOfRow="NumberOfRow" @searchQuery="searchQuery" @loadmore="loadmore" @allCheckboxes="allCheckboxes" @selectedRow="selectedRow" />
+    <dd-table :rows="rows" :columns="columns" :buttons="buttons" :Actions="Actions" :values="values" showIcon footer fixed
+      actionHeader rowActions checkBoxProp checkAllDisabled disableDropdown noDropdown defaultRow emptyState size="12"
+      actionsIconSize="12" @saveChanges="saveChanges" @resetData="resetData" @NumberOfRow="NumberOfRow"
+      @searchQuery="searchQuery" @loadmore="loadmore" @allCheckboxes="allCheckboxes" @selectedRow="selectedRow" />
   </div>
   <!-- <div>
     <DdTopbar />
