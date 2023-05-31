@@ -22,7 +22,7 @@
     <div v-else-if="type == 'icon'">
       <MenuButton :class="{ ...basicButton }"
         class="dd-flex dd-w-full dd-justify-center dd-items-center dd-gap-1 dd-cursor-pointer dd-h-[30px] !dd-p-2 dd-border-none focus-visible:dd-outline-none" v-bind="$attrs">
-        <svgIcon :color="color" :icon="defaultIcon" size="10" />
+        <svgIcon :color="color" :icon="defaultIcon" :size="size" />
       </MenuButton>
     </div>
 
@@ -63,6 +63,10 @@ const props = defineProps({
   icon: {
     type: String,
     default: "ArrowDown",
+  },
+  size: {
+    type: String,
+    default: "13",
   },
   showIcon: {
     type: Boolean,
