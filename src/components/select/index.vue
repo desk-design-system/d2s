@@ -74,9 +74,9 @@
           <ComboboxOptions class="dd-shadow-md dd-text-center dd-rounded-md" v-if="queries !== '' && options.length === 0"
             v-model="queries">
             <ComboboxOption
-              class="dd-p-4 dd-text-sm dd-text-left dd-text-gray-500 dd-cursor-pointer dd-text dd-font-semibold"
+              class="dd-p-4 dd-text-sm dd-text-left dd-text-gray-700 dd-cursor-pointer dd-font-medium hover:dd-bg-teal-600 hover:dd-text-white hover:dd-rounded-lg"
               @click="addQuery(queries)">
-              Add as new: {{ queries }}
+              Add <span class="!dd-font-bold">{{ queries }}</span>  as new
             </ComboboxOption>
           </ComboboxOptions>
         </TransitionRoot>
@@ -282,7 +282,6 @@ watch(
   }
 );
 
-const inputType = ref("text");
 const hasError = computed(() => {
   if (errorMessage.value) {
     return true;
