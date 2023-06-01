@@ -81,13 +81,12 @@
                 <th>
                   <div class="dd-flex dd-items-center dd-justify-end dd-mx-10 dd-gap-4">
                     <svgIcon class="!dd-text-gray-500" icon="Search" :size="size" @click="openSearch" />
-                    <svgIcon ref="settingElement" class="!dd-text-gray-500"
-                      :class="[setting ? 'rotated' : 'rotatedReverse']" icon="Settings" :size="size"
-                      @click="openSettingsBar" />
+                    <svgIcon ref="settingIcon" class="!dd-text-gray-500" :class="[setting ? 'rotated' : 'rotatedReverse']"
+                      icon="Settings" :size="size" @click="openSettingsBar" />
                   </div>
                   <!-- settings component  -->
                   <transition name="setting">
-                    <div v-if="setting"
+                    <div v-if="setting" ref="settingElement"
                       class="dd-p-2 dd-w-[250px] dd-bg-white dd-container dd-my-[2.1rem] dd-absolute dd-right-4 dd-top-1 dd-shadow-xl dd-rounded-lg dd-border dd-border-gray-100"
                       style="z-index: 1100;">
                       <div class="dd-flex dd-items-center dd-justify-between dd-gap-2 dd-font-sans"
@@ -362,6 +361,7 @@ const rowLimit = ref([]);
 const queryInput = ref("");
 const savedData = ref({});
 const settingElement = ref(null);
+const settingIcon = ref(null);
 
 const selectNumberOfRows = (button) => {
   selectedButton.value = button;
@@ -380,7 +380,7 @@ const scrollToBottom = () => {
 
 
 const handleDomClick = (event) => {
-  if (settingElement.value && !settingElement.value.$el.contains(event.target)) {
+  if (settingElement.value && !settingElement.value.contains(event.target) && !settingIcon.value.$el.contains(event.target)) {
     setting.value = false;
   }
 };
