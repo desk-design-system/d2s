@@ -81,8 +81,8 @@
                 <th>
                   <div class="dd-flex dd-items-center dd-justify-end dd-mx-10 dd-gap-4">
                     <svgIcon class="!dd-text-gray-500" icon="Search" :size="size" @click="openSearch" />
-                    <svgIcon class="!dd-text-gray-500" :class="[setting ? 'rotated' : 'rotatedReverse']" icon="Settings"
-                      :size="size" @click="openSettingsBar" />
+                    <svgIcon ref="settingIcon" class="!dd-text-gray-500" :class="[setting ? 'rotated' : 'rotatedReverse']"
+                      icon="Settings" :size="size" @click="openSettingsBar" />
                   </div>
                   <!-- settings component  -->
                   <transition name="setting">
@@ -360,6 +360,8 @@ const limit = ref(0);
 const rowLimit = ref([]);
 const queryInput = ref("");
 const savedData = ref({});
+const settingElement = ref(null);
+const settingIcon = ref(null);
 
 const selectNumberOfRows = (button) => {
   selectedButton.value = button;
@@ -376,7 +378,12 @@ const scrollToBottom = () => {
   container.scrollLeft += scrollByAmount;
 };
 
-
+//dom click
+const handleDomClick = (event) => {
+  if (settingElement.value && !settingElement.value.contains(event.target) && !settingIcon.value.$el.contains(event.target)) {
+    setting.value = false;
+  }
+};
 
 const displayedRows = computed(() => {
   if (limit.value && props.rows) {
@@ -406,9 +413,11 @@ const loadMore = () => {
 onMounted(() => {
   handleScroll();
   scrollToBottom();
+  document.addEventListener('click', handleDomClick);
 });
 onBeforeMount(() => {
   limit.value = props.rows.length;
+  document.addEventListener('click', handleDomClick);
 })
 
 watch(
@@ -435,6 +444,9 @@ const selectAllFields = () => {
   } else {
     search.value = false;
     selectedId.value = [];
+    setTimeout(() => {
+      scrollToBottom();
+    }, 50)
   }
   allSelected.value = !allSelected.value;
 };
@@ -448,6 +460,9 @@ const setChecked = (id) => {
   } else {
     search.value = false;
     selectedId.value.splice(index, 1);
+    setTimeout(() => {
+      scrollToBottom();
+    }, 50)
   }
 };
 
