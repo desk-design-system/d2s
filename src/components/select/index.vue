@@ -198,8 +198,10 @@ const inputModelValue = computed({
 
 const componentRef = ref(null);
 const handleOutsideDropdown = (event) => {
+  /* handled close case of dropdown */
   if (event.target !== componentRef.value && event.composedPath().includes(componentRef.value)) return;
   showDropdown.value = false;
+  isIconRotated.value = false;
   /* Set the last selected item in select dropdown */
   if((Array.isArray(props.options) && props.options.length == 0) && props.modelValue) {
     emits("searchQuery", "");
