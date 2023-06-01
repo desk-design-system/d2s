@@ -378,7 +378,7 @@ const scrollToBottom = () => {
   container.scrollLeft += scrollByAmount;
 };
 
-
+//dom click
 const handleDomClick = (event) => {
   if (settingElement.value && !settingElement.value.contains(event.target) && !settingIcon.value.$el.contains(event.target)) {
     setting.value = false;
