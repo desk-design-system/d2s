@@ -31,6 +31,7 @@
         </ComboboxButton>
         <TransitionRoot leave-active-class="dd-transition dd-ease-in dd-duration-100" leave-from-class="dd-opacity-100"
           leave-to-class="dd-opacity-0">
+
           <ComboboxOptions v-if="filteredOptions.length > 0" :static="showDropdown" :class="listClass"
             class="dd-absolute dd-z-10 dd-mt-1 dd-w-full dd-bg-white dd-shadow-lg dd-max-h-60 dd-rounded-md dd-py-1 dd-text-base dd-ring-1 dd-ring-black dd-ring-opacity-5 dd-overflow-auto focus:dd-outline-none sm:dd-text-sm">
             <ComboboxOption as="template" v-for="item in filteredOptions" :key="item[props.defaultProps.id]"
@@ -74,9 +75,9 @@
           <ComboboxOptions class="dd-shadow-md dd-text-center dd-rounded-md"
             v-if="queries !== '' && filteredOptions.length === 0" v-model="queries">
             <ComboboxOption
-              class="dd-p-4 dd-text-sm dd-text-left dd-text-gray-500 dd-cursor-pointer dd-text dd-font-semibold"
+              class="dd-p-4 dd-text-sm dd-text-left dd-text-gray-700 dd-cursor-pointer dd-font-medium hover:dd-bg-teal-600 hover:dd-text-white hover:dd-rounded-lg"
               @click="addQuery(queries)">
-              Add as new: {{ queries }}
+              Add <span class="!dd-font-bold">{{ queries }}</span>  as new
             </ComboboxOption>
           </ComboboxOptions>
         </TransitionRoot>
@@ -286,7 +287,6 @@ watch(
   }
 );
 
-const inputType = ref("text");
 const hasError = computed(() => {
   if (errorMessage.value) {
     return true;
