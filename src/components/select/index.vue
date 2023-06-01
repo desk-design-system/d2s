@@ -31,13 +31,14 @@
         </ComboboxButton>
         <TransitionRoot leave-active-class="dd-transition dd-ease-in dd-duration-100" leave-from-class="dd-opacity-100"
           leave-to-class="dd-opacity-0">
-          <ComboboxOptions v-if="options.length > 0" :static="showDropdown" :class="listClass" 
+
+          <ComboboxOptions v-if="filteredOptions.length > 0" :static="showDropdown" :class="listClass"
             class="dd-absolute dd-z-10 dd-mt-1 dd-w-full dd-bg-white dd-shadow-lg dd-max-h-60 dd-rounded-md dd-py-1 dd-text-base dd-ring-1 dd-ring-black dd-ring-opacity-5 dd-overflow-auto focus:dd-outline-none sm:dd-text-sm">
-            <ComboboxOption as="template" v-for="item in options" :key="item[props.defaultProps.id]"
+            <ComboboxOption as="template" v-for="item in filteredOptions" :key="item[props.defaultProps.id]"
               :value="item[props.defaultProps.value]" v-slot="{ active, selected }">
               <slot name="items" :isSelected="selected ??
                 item[props.defaultProps.id] === selected[props.defaultProps.id]
-                " :item="item">
+              " :item="item">
                 <li :class="[
                   active ? 'dd-text-white dd-bg-teal-600' : 'dd-text-gray-900',
                   'dd-cursor-pointer dd-select-none dd-relative dd-py-2',
@@ -71,8 +72,8 @@
               </slot>
             </ComboboxOption>
           </ComboboxOptions>
-          <ComboboxOptions class="dd-shadow-md dd-text-center dd-rounded-md" v-if="queries !== '' && options.length === 0"
-            v-model="queries">
+          <ComboboxOptions class="dd-shadow-md dd-text-center dd-rounded-md"
+            v-if="queries !== '' && filteredOptions.length === 0" v-model="queries">
             <ComboboxOption
               class="dd-p-4 dd-text-sm dd-text-left dd-text-gray-700 dd-cursor-pointer dd-font-medium hover:dd-bg-teal-600 hover:dd-text-white hover:dd-rounded-lg"
               @click="addQuery(queries)">
@@ -103,9 +104,7 @@ import ddAvatar from "../avatars/index.vue";
 import svgIcon from "../svgIcon/index.vue";
 const emits = defineEmits([
   "update:modelValue",
-  "change",
-  "searchQuery",
-  "addQuery",
+  "change"
 ]);
 const props = defineProps({
   label: {
@@ -203,15 +202,12 @@ const handleOutsideDropdown = (event) => {
   showDropdown.value = false;
   isIconRotated.value = false;
   /* Set the last selected item in select dropdown */
-  if((Array.isArray(props.options) && props.options.length == 0) && props.modelValue) {
-    emits("searchQuery", "");
-    emits("update:modelValue", props.modelValue);
-    return props.modelValue;
-  }
+  queries.value = "";
+  emits("update:modelValue", props.modelValue);
 }
 
 onMounted(() => { window.addEventListener('click', handleOutsideDropdown) })
-onBeforeUnmount(() => {window.removeEventListener('click', handleOutsideDropdown)})
+onBeforeUnmount(() => { window.removeEventListener('click', handleOutsideDropdown) })
 
 const inputSize = computed(() => {
   return {
@@ -229,19 +225,22 @@ const selectedValue = computed(() => {
   });
 });
 
-// const getRandomInt = (max = 1000) => {
-//   return Math.floor(Math.random() * max);
-// }
-
 const isIconRotated = ref(false);
 const rotateIcon = () => {
   isIconRotated.value = !isIconRotated.value;
 };
 const showDropdown = ref(false);
 const queries = ref("");
+const filteredOptions = computed(() =>
+  queries.value == ""
+    ? props.options
+    : props.options.filter((el) => {
+      return el.name.toLowerCase().includes(queries.value.toLowerCase())
+    })
+);
+
 const searchQuery = (val) => {
   queries.value = val;
-  emits("searchQuery", val);
 };
 
 const setDropDown = () => {
@@ -250,10 +249,16 @@ const setDropDown = () => {
 };
 
 const addQuery = (query) => {
-  queries.value = query
-  isIconRotated.value = false;
+  queries.value = query;
+  const queryObj = {
+    name: query,
+    value: props.options.length + 1,
+  };
+  props.options.unshift(queryObj);
+  emits("update:modelValue", queryObj.value);
   showDropdown.value = false;
-  emits("addQuery", query);
+  isIconRotated.value = false;
+  queries.value = "";
 };
 
 
