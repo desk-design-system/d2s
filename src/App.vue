@@ -597,6 +597,7 @@ const addquery = (data) => {
   };
   people.value.unshift(queryArr);
   query.value = ""
+  selected.value = queryArr.value
 };
 
 const saveChanges = (data) => {

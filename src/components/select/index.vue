@@ -31,7 +31,7 @@
         </ComboboxButton>
         <TransitionRoot leave-active-class="dd-transition dd-ease-in dd-duration-100" leave-from-class="dd-opacity-100"
           leave-to-class="dd-opacity-0">
-          <ComboboxOptions v-if="options.length > 0" static :class="listClass"
+          <ComboboxOptions v-if="options.length > 0" :static="showDropdown" :class="listClass" 
             class="dd-absolute dd-z-10 dd-mt-1 dd-w-full dd-bg-white dd-shadow-lg dd-max-h-60 dd-rounded-md dd-py-1 dd-text-base dd-ring-1 dd-ring-black dd-ring-opacity-5 dd-overflow-auto focus:dd-outline-none sm:dd-text-sm">
             <ComboboxOption as="template" v-for="item in options" :key="item[props.defaultProps.id]"
               :value="item[props.defaultProps.value]" v-slot="{ active, selected }">
@@ -198,8 +198,10 @@ const inputModelValue = computed({
 
 const componentRef = ref(null);
 const handleOutsideDropdown = (event) => {
+  /* handled close case of dropdown */
   if (event.target !== componentRef.value && event.composedPath().includes(componentRef.value)) return;
   showDropdown.value = false;
+  isIconRotated.value = false;
   /* Set the last selected item in select dropdown */
   if((Array.isArray(props.options) && props.options.length == 0) && props.modelValue) {
     emits("searchQuery", "");
