@@ -37,7 +37,7 @@
                 </dd-Button>
                 <slot name="groupActions" />
               </DdGroupButton>
-              <DdDropDown v-if="noDropdown" color="white" label="Actions" v-model="selectedActions" :options="values" />
+              <DdDropDown v-if="noDropdown" color="white" label="Actions" v-model="headerActions" :options="values" />
               <slot name="customDropDown" />
             </div>
           </transition>
@@ -78,7 +78,7 @@
                       :disabled="col.disabled || limit < 1" />
                   </div>
                 </th>
-                <th v-if="headerActions">
+                <th v-if="headRowActions">
                   <div class="dd-flex dd-items-center dd-justify-end dd-mx-10 dd-gap-4">
                     <svgIcon v-if="searchIcon" class="!dd-text-gray-500" icon="Search" :size="size" @click="openSearch" />
                     <svgIcon ref="settingIcon" class="!dd-text-gray-500" :class="[setting ? 'rotated' : 'rotatedReverse']"
@@ -138,7 +138,8 @@
                 <!-- :class="row.status === 'Repaired and Collected' ? 'dd-text-blue-300' : 'dd-text-teal-400'" -->
                 <td v-for="col in columns" :key="col.value" v-show="col.checked"
                   class="dd-whitespace-nowrap dd-py-4 dd-pl-4 dd-pr-3 dd-text-sm dd-text-gray-500 sm:dd-pl-6"
-                  :class="[checkBoxProp ? 'dd-cursor-pointer' : '']" @click="row.disabled ? null :setChecked(row.id)">
+                  :class="[row.disabled || !checkBoxProp ? '' : 'dd-cursor-pointer']"
+                  @click="row.disabled ? null : setChecked(row.id)">
                   <slot name="row" :column="col" :row="row" :value="row[col.value]" :disabled="row.disabled">
                     {{ row[col.value] }}
                   </slot>
@@ -153,15 +154,16 @@
                       <dd-Button @click="editRow()" color="white" v-if="(isActionHovered(row) || isMouseHoveredRow(row))">
                         <svgIcon class="-dd-mb-[2px] dd-m-auto" color="white" icon="Pencil" :size="size" />
                       </dd-Button>
-                      <dd-Button @click="deleteRow()" color="white" v-if="(isActionHovered(row) || isMouseHoveredRow(row))">
+                      <dd-Button @click="deleteRow()" color="white"
+                        v-if="(isActionHovered(row) || isMouseHoveredRow(row))">
                         <svgIcon class="-dd-mb-[2px] dd-m-auto" color="white" icon="Trash" :size="size" />
                       </dd-Button>
                       <dd-Button color="white" class="!dd-px-1"
                         :class="[!(isActionHovered(row) || isMouseHoveredRow(row)) ? '!dd-p-0 dd-rounded-none !dd-border-none dd-ring-0 !dd-shadow-none !dd-bg-transparent' : '!dd-p-0']">
                         <DdDropDown color="white" class="dd-text-gray-700"
                           :class="[(isActionHovered(row) || isMouseHoveredRow(row)) ? '' : 'dd-rounded-none dd-border-none dd-ring-0 dd-bg-transparent [&>button]:!dd-shadow-none [&>button]:!dd-bg-none']"
-                          type="icon" v-model="selected" :options="Actions" :size="actionsIconSize" placement="right"
-                          defaultIcon="DotHorizontal" :showIcon="showIcon" />
+                          type="icon" v-model="rowActionsIcons" :options="Actions" :size="actionsIconSize"
+                          placement="right" defaultIcon="DotHorizontal" :showIcon="showIcon" :disabled="row.disabled" />
                       </dd-Button>
                     </DdGroupButton>
                   </div>
@@ -275,6 +277,10 @@ const props = defineProps({
     type: String,
     default: "",
   },
+  headerselectedActions: {
+    type: String,
+    default: "",
+  },
   actionsIconSize: {
     type: String,
     default: "14",
@@ -291,7 +297,7 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-  headerActions: {
+  headRowActions: {
     type: Boolean,
     default: true,
   },
@@ -356,7 +362,6 @@ const handleScroll = () => {
 
 const allSelected = ref(false);
 const selectedId = ref([]);
-const selectedActions = ref("");
 const search = ref(false);
 const hoveredColumn = ref(null);
 const hoveredRow = ref(null);
@@ -370,6 +375,8 @@ const queryInput = ref("");
 const savedData = ref({});
 const settingElement = ref(null);
 const settingIcon = ref(null);
+const headerActions = ref("");
+const rowActionsIcons = ref("");
 
 const selectNumberOfRows = (button) => {
   selectedButton.value = button;
@@ -425,6 +432,8 @@ onMounted(() => {
 });
 onBeforeMount(() => {
   limit.value = props.rows.length;
+  headerActions.value = props.headerselectedActions;
+  rowActionsIcons.value = props.selected;
   document.addEventListener('click', handleDomClick);
 })
 
@@ -446,8 +455,10 @@ const selectAllFields = () => {
     selectedId.value = [];
     setting.value = false;
     rowLimit.value.forEach((row) => {
-      selectedId.value.push(row.id);
-      emits("allCheckboxes", row);
+      if (!row.disabled === true) {
+        selectedId.value.push(row.id);
+        emits("allCheckboxes", row);
+      }
     });
   } else {
     search.value = false;
@@ -511,6 +522,7 @@ const isHovered = (col) => {
   return hoveredColumn.value === col;
 };
 const isActionHovered = (rows) => {
+  if (rows.disabled === true) return;
   return hoveredRow.value === rows;
 };
 const handleMouseEnter = (col) => {
@@ -530,6 +542,7 @@ const handleMouseLeaveActions = () => {
   isMouseHovered.value = false;
 };
 const isMouseHoveredRow = (rowData) => {
+  if (rowData.disabled === true) return;
   return hoveredRow.value === rowData;
 };
 
