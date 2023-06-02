@@ -236,7 +236,7 @@ const rows = ref([
     lastname: "Brook",
     email: "herry@repairdesk.co",
     status: "in progress",
-    disabled: false,
+    disabled: true,
   },
   {
     id: 2,
@@ -245,7 +245,7 @@ const rows = ref([
     lastname: "Jeman",
     email: "David@repairdesk.co",
     status: "Repaired and Collected",
-    disabled: false,
+    disabled: true,
   },
   {
     id: 3,
