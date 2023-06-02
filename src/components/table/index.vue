@@ -150,10 +150,10 @@
                     <DdGroupButton class="dd-absolute dd-top-2.5 dd-right-9 dd-z-10"
                       @mouseenter="handleMouseEnterActions(row)" @mouseleave="handleMouseLeaveActions"
                       :class="[!(isActionHovered(row) || isMouseHoveredRow(row)) ? '!dd-p-0 dd-rounded-none !dd-border-none dd-ring-0 !dd-shadow-none' : '!dd-p-0']">
-                      <dd-Button color="white" v-if="(isActionHovered(row) || isMouseHoveredRow(row))">
+                      <dd-Button @click="editRow()" color="white" v-if="(isActionHovered(row) || isMouseHoveredRow(row))">
                         <svgIcon class="-dd-mb-[2px] dd-m-auto" color="white" icon="Pencil" :size="size" />
                       </dd-Button>
-                      <dd-Button color="white" v-if="(isActionHovered(row) || isMouseHoveredRow(row))">
+                      <dd-Button @click="deleteRow()" color="white" v-if="(isActionHovered(row) || isMouseHoveredRow(row))">
                         <svgIcon class="-dd-mb-[2px] dd-m-auto" color="white" icon="Trash" :size="size" />
                       </dd-Button>
                       <dd-Button color="white" class="!dd-px-1"
@@ -213,7 +213,7 @@ import DdCheckbox from "../checkbox/index.vue";
 import DdGroupButton from "../groupButton/index.vue";
 import DdDropDown from "../dropdown/index.vue";
 import DdInput from "../input/index.vue";
-const emits = defineEmits(["update:modelValue", "saveChanges", "resetData", "selectedRow", "NumberOfRow", "loadmore", "allCheckboxes", "searchQuery"]);
+const emits = defineEmits(["update:modelValue", "saveChanges", "resetData", "selectedRow", "NumberOfRow", "loadmore", "allCheckboxes", "searchQuery", "editRow", "deleteRow"]);
 const props = defineProps({
   columns: {
     type: Array,
@@ -270,6 +270,10 @@ const props = defineProps({
   size: {
     type: String,
     default: "14",
+  },
+  selected: {
+    type: String,
+    default: "",
   },
   actionsIconSize: {
     type: String,
@@ -359,7 +363,6 @@ const hoveredRow = ref(null);
 const sortDirection = ref("asc");
 const isMouseHovered = ref(false);
 const selectedButton = ref(null);
-const selected = ref("");
 const setting = ref(false);
 const limit = ref(0);
 const rowLimit = ref([]);
@@ -545,6 +548,13 @@ const openSettingsBar = () => {
   if (limit.value < 1) return;
   setting.value = !setting.value;
 };
+
+const editRow = () => {
+  emits("editRow")
+}
+const deleteRow = () => {
+  emits("deleteRow")
+}
 </script>
 
 <style scoped>
