@@ -375,8 +375,8 @@ const queryInput = ref("");
 const savedData = ref({});
 const settingElement = ref(null);
 const settingIcon = ref(null);
-const headerActions = ref("");
-const rowActionsIcons = ref("");
+const headerActions = ref(props.headerselectedActions);
+const rowActionsIcons = ref(props.selected);
 
 const selectNumberOfRows = (button) => {
   selectedButton.value = button;
@@ -432,8 +432,6 @@ onMounted(() => {
 });
 onBeforeMount(() => {
   limit.value = props.rows.length;
-  headerActions.value = props.headerselectedActions;
-  rowActionsIcons.value = props.selected;
   document.addEventListener('click', handleDomClick);
 })
 
