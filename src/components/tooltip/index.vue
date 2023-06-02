@@ -1,13 +1,8 @@
 <template>
-  <div
-    @mouseleave="toolTipVisibility"
-    @mouseenter="toolTipVisibility"
-    class="dd-relative dd-py-2"
-  >
-    <span v-if="showToolTip" v-bind:class="toolTipStyling"
-      >{{ toolTipText }}
+  <div @mouseleave="toolTipVisibility" @mouseenter="toolTipVisibility" class="dd-relative dd-py-2">
+    <span v-if="showToolTip" v-bind:class="toolTipStyling">{{ toolTipText }}
     </span>
-    <slot name="content"></slot>
+    <slot></slot>
   </div>
 </template>
 
@@ -57,28 +52,53 @@ export default {
   },
   computed: {
     toolTipStyling() {
-      let tooltippin = ""
-
       let fixedProperties =
-        "dd-whitespace-pre-line  after:dd-content-[''] after:dd-absolute after:dd-p-1 after:-dd-dd-rotate-45 " + this.fixedStylePin +  " dd-text-white dd-absolute  dd-dd-flex dd-items-center dd-justify-left dd-text-xs dd-p-2 dd-rounded-md " + this.fixedStyle + " dd-drop-shadow-md dd-z-50";
+        "dd-whitespace-pre-line  after:dd-content-[''] after:dd-absolute after:dd-p-1 after:-dd-rotate-45 " + this.fixedStylePin + " dd-text-white dd-absolute  dd-flex dd-items-center dd-justify-left dd-text-xs dd-p-2 dd-rounded-md " + this.fixedStyle + " dd-drop-shadow-md dd-z-50";
 
       const addAnimation = this.isAnimate ? "motion-safe:dd-animate-bounce" : "";
 
       switch (this.tooltipWidth) {
         case "dd-fixed":
-          fixedProperties = fixedProperties + "  dd-min-w-[20rem] ";
+          fixedProperties = fixedProperties + "  dd-min-w-[5rem] ";
         case "dd-auto":
           fixedProperties = fixedProperties + " dd-max-w-[20rem] ";
       }
 
       switch (this.toolTipPosition) {
+        case "top-start":
+          return (
+            fixedProperties +
+            " " +
+            "after:-dd-bottom-1 after:dd-left-6 dd-bottom-9 " +
+            " " +
+            addAnimation
+          );
+
         case "top":
           return (
             fixedProperties +
             " " +
-            "after:-dd-bottom-1 after:dd-left-3  dd-bottom-8 " +
+            "after:-dd-bottom-1 after:dd-left-9 dd-bottom-9 " +
             " " +
             addAnimation
+          );
+
+        case "top-end":
+          return (
+            fixedProperties +
+            " " +
+            "after:-dd-bottom-1 after:dd-left-12 dd-bottom-9 " +
+            " " +
+            addAnimation
+          );
+
+        case "bottom-start":
+          return (
+            fixedProperties +
+            " " +
+            addAnimation +
+            " " +
+            "after:-dd-top-1 after:dd-left-6 dd-top-10 "
           );
 
         case "bottom":
@@ -87,15 +107,52 @@ export default {
             " " +
             addAnimation +
             " " +
-            "after:-dd-top-1 after:dd-left-3 dd-top-10"
+            "after:-dd-top-1 after:dd-left-9 dd-top-10 "
           );
+
+        case "bottom-end":
+          return (
+            fixedProperties +
+            " " +
+            addAnimation +
+            " " +
+            "after:-dd-top-1 after:dd-left-12 dd-top-10 "
+          );
+
+        case "left-start":
+          return (
+            fixedProperties +
+            " " +
+            addAnimation +
+            " " +
+            "after:-dd-right-1 after:dd-top-2 -dd-left-20 dd-top-0 "
+          );
+
         case "left":
           return (
             fixedProperties +
             " " +
             addAnimation +
             " " +
-            "after:-dd-right-1 after:dd-top-4 dd-right-[105%] dd-top-0 "
+            "after:-dd-right-1 after:dd-top-3 -dd-left-20 dd-top-0 "
+          );
+
+        case "left-end":
+          return (
+            fixedProperties +
+            " " +
+            addAnimation +
+            " " +
+            "after:-dd-right-1 after:dd-top-4 -dd-left-20 dd-top-0 "
+          );
+
+        case "right-start":
+          return (
+            fixedProperties +
+            " " +
+            addAnimation +
+            " " +
+            "after:-dd-left-1 after:dd-top-2 dd-left-24 dd-top-0 "
           );
 
         case "right":
@@ -104,7 +161,16 @@ export default {
             " " +
             addAnimation +
             " " +
-            "after:-dd-left-1 after:dd-top-4 dd-left-[50%] dd-top-0 "
+            "after:-dd-left-1 after:dd-top-3 dd-left-24 dd-top-0 "
+          );
+
+        case "right-end":
+          return (
+            fixedProperties +
+            " " +
+            addAnimation +
+            " " +
+            "after:-dd-left-1 after:dd-top-4 dd-left-24 dd-top-0 "
           );
 
         default:
