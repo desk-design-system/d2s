@@ -69,7 +69,7 @@ export default {
           return (
             fixedProperties +
             " " +
-            "after:-dd-bottom-1 after:dd-left-6 dd-bottom-9 " +
+            "after:-dd-bottom-1 after:dd-left-4 dd-bottom-9 " +
             " " +
             addAnimation
           );
@@ -87,7 +87,7 @@ export default {
           return (
             fixedProperties +
             " " +
-            "after:-dd-bottom-1 after:dd-left-12 dd-bottom-9 " +
+            "after:-dd-bottom-1 after:dd-left-14 dd-bottom-9 " +
             " " +
             addAnimation
           );
@@ -98,7 +98,7 @@ export default {
             " " +
             addAnimation +
             " " +
-            "after:-dd-top-1 after:dd-left-6 dd-top-10 "
+            "after:-dd-top-1 after:dd-left-4 dd-top-10 "
           );
 
         case "bottom":
@@ -116,7 +116,7 @@ export default {
             " " +
             addAnimation +
             " " +
-            "after:-dd-top-1 after:dd-left-12 dd-top-10 "
+            "after:-dd-top-1 after:dd-left-14 dd-top-10 "
           );
 
         case "left-start":
