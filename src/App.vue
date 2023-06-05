@@ -8,9 +8,6 @@
 import { inject } from "vue";
 import DdButton from "./components/buttons/index.vue"
 
-
-const modal = inject('$modal')
-
 const options = {
   title: "Delete Unit",
   message: "Are you sure you want to delete this unit from the multistore? This action cannot be undone",

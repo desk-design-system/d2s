@@ -78,9 +78,9 @@
                       :disabled="col.disabled || limit < 1" />
                   </div>
                 </th>
-                <th>
+                <th v-if="headerActions">
                   <div class="dd-flex dd-items-center dd-justify-end dd-mx-10 dd-gap-4">
-                    <svgIcon class="!dd-text-gray-500" icon="Search" :size="size" @click="openSearch" />
+                    <svgIcon v-if="searchIcon" class="!dd-text-gray-500" icon="Search" :size="size" @click="openSearch" />
                     <svgIcon ref="settingIcon" class="!dd-text-gray-500" :class="[setting ? 'rotated' : 'rotatedReverse']"
                       icon="Settings" :size="size" @click="openSettingsBar" />
                   </div>
@@ -117,6 +117,7 @@
                     </div>
                   </transition>
                 </th>
+                <slot name="headerActions" />
               </tr>
             </thead>
           </transition>
@@ -126,18 +127,18 @@
                 selectedId.includes(row.id)
                   ? '[&>*:nth-child(1)]:dd-bg-gray-100 [&>*:nth-child(2)]:dd-bg-gray-100  [&>*:last-child]:dd-bg-gray-100 dd-bg-gray-100 !dd-border-l-2 !dd-border-t-gray-200 !dd-border-b-gray-200 !dd-border-teal-600'
                   : '',
-                row.disabled ? 'dd-bg-gray-100 dd-pointer-event-none' : '',
+                row.disabled ? '[&>*:nth-child(1)]:dd-bg-gray-100 [&>*:nth-child(2)]:dd-bg-gray-100  [&>*:last-child]:dd-bg-gray-100  dd-bg-gray-100 dd-pointer-event-none' : '',
               ]">
                 <td v-if="checkBoxProp"
                   class="dd-py-3.5 dd-px-3 dd-text-left dd-text-xs dd-font-medium dd-text-gray-700 sm:dd-pl-4 dd-w-[56px]">
                   <dd-checkbox :checked="selectedId && selectedId.includes(row.id)" :value="row.id"
-                    @click="setChecked(row.id)" :disabled="row.disabled" />
+                    @click="setChecked(row.id)" :disabled="row.disabled || checkAllDisabled" />
                 </td>
                 <slot name="td" />
                 <!-- :class="row.status === 'Repaired and Collected' ? 'dd-text-blue-300' : 'dd-text-teal-400'" -->
                 <td v-for="col in columns" :key="col.value" v-show="col.checked"
                   class="dd-whitespace-nowrap dd-py-4 dd-pl-4 dd-pr-3 dd-text-sm dd-text-gray-500 sm:dd-pl-6"
-                  :class="[checkBoxProp ? 'dd-cursor-pointer' : '']" @click="checkBoxProp ? setChecked(row.id) : null">
+                  :class="[checkBoxProp ? 'dd-cursor-pointer' : '']" @click="row.disabled ? null :setChecked(row.id)">
                   <slot name="row" :column="col" :row="row" :value="row[col.value]" :disabled="row.disabled">
                     {{ row[col.value] }}
                   </slot>
@@ -149,10 +150,10 @@
                     <DdGroupButton class="dd-absolute dd-top-2.5 dd-right-9 dd-z-10"
                       @mouseenter="handleMouseEnterActions(row)" @mouseleave="handleMouseLeaveActions"
                       :class="[!(isActionHovered(row) || isMouseHoveredRow(row)) ? '!dd-p-0 dd-rounded-none !dd-border-none dd-ring-0 !dd-shadow-none' : '!dd-p-0']">
-                      <dd-Button color="white" v-if="(isActionHovered(row) || isMouseHoveredRow(row))">
+                      <dd-Button @click="editRow()" color="white" v-if="(isActionHovered(row) || isMouseHoveredRow(row))">
                         <svgIcon class="-dd-mb-[2px] dd-m-auto" color="white" icon="Pencil" :size="size" />
                       </dd-Button>
-                      <dd-Button color="white" v-if="(isActionHovered(row) || isMouseHoveredRow(row))">
+                      <dd-Button @click="deleteRow()" color="white" v-if="(isActionHovered(row) || isMouseHoveredRow(row))">
                         <svgIcon class="-dd-mb-[2px] dd-m-auto" color="white" icon="Trash" :size="size" />
                       </dd-Button>
                       <dd-Button color="white" class="!dd-px-1"
@@ -163,8 +164,8 @@
                           defaultIcon="DotHorizontal" :showIcon="showIcon" />
                       </dd-Button>
                     </DdGroupButton>
-                    <slot name="rowActions" />
                   </div>
+                  <slot name="rowActions" />
                 </td>
               </tr>
             </template>
@@ -212,7 +213,7 @@ import DdCheckbox from "../checkbox/index.vue";
 import DdGroupButton from "../groupButton/index.vue";
 import DdDropDown from "../dropdown/index.vue";
 import DdInput from "../input/index.vue";
-const emits = defineEmits(["update:modelValue", "saveChanges", "resetData", "selectedRow", "NumberOfRow", "loadmore", "allCheckboxes", "searchQuery"]);
+const emits = defineEmits(["update:modelValue", "saveChanges", "resetData", "selectedRow", "NumberOfRow", "loadmore", "allCheckboxes", "searchQuery", "editRow", "deleteRow"]);
 const props = defineProps({
   columns: {
     type: Array,
@@ -262,10 +263,6 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-  disableDropdown: {
-    type: Boolean,
-    default: true,
-  },
   noDropdown: {
     type: Boolean,
     default: true,
@@ -273,6 +270,10 @@ const props = defineProps({
   size: {
     type: String,
     default: "14",
+  },
+  selected: {
+    type: String,
+    default: "",
   },
   actionsIconSize: {
     type: String,
@@ -289,6 +290,14 @@ const props = defineProps({
   footer: {
     type: Boolean,
     default: false,
+  },
+  headerActions: {
+    type: Boolean,
+    default: true,
+  },
+  searchIcon: {
+    type: Boolean,
+    default: true,
   },
   defaultProps: {
     type: Object,
@@ -354,7 +363,6 @@ const hoveredRow = ref(null);
 const sortDirection = ref("asc");
 const isMouseHovered = ref(false);
 const selectedButton = ref(null);
-const selected = ref("");
 const setting = ref(false);
 const limit = ref(0);
 const rowLimit = ref([]);
@@ -452,6 +460,7 @@ const selectAllFields = () => {
 };
 
 const setChecked = (id) => {
+  if (props.checkBoxProp === false || props.checkAllDisabled === true) return;
   const index = selectedId.value.indexOf(id);
   if (index === -1) {
     selectedId.value.push(id);
@@ -539,6 +548,13 @@ const openSettingsBar = () => {
   if (limit.value < 1) return;
   setting.value = !setting.value;
 };
+
+const editRow = () => {
+  emits("editRow")
+}
+const deleteRow = () => {
+  emits("deleteRow")
+}
 </script>
 
 <style scoped>
