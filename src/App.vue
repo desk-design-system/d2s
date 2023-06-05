@@ -145,9 +145,9 @@ const columns = ref([
     title: 'Id',
     value: 'id',
     checked: true,
-    size: "130",
+    size: "30",
     id: 1,
-    disabled: true,
+    disabled: false,
   },
   {
     title: 'User Name',
@@ -155,7 +155,7 @@ const columns = ref([
     checked: true,
     size: "130",
     id: 2,
-    disabled: true,
+    disabled: false,
   },
   {
     title: 'First Name',
@@ -236,7 +236,7 @@ const rows = ref([
     lastname: "Brook",
     email: "herry@repairdesk.co",
     status: "in progress",
-    disabled: true,
+    disabled: false,
   },
   {
     id: 2,
@@ -245,7 +245,7 @@ const rows = ref([
     lastname: "Jeman",
     email: "David@repairdesk.co",
     status: "Repaired and Collected",
-    disabled: true,
+    disabled: false,
   },
   {
     id: 3,
@@ -514,9 +514,9 @@ const rows = ref([
 ])
 
 const buttons = [
-  { id: 1, label: "5", color: "white", icon: "" },
-  { id: 2, label: "10", color: "white", icon: "" },
-  { id: 3, label: "15", color: "white", icon: "" },
+  { id: 1, label: "5", color: "white", size: "sm" },
+  { id: 2, label: "10", color: "white", size: "sm" },
+  { id: 3, label: "15", color: "white", size: "sm" },
 ];
 
 const Actions = ref([

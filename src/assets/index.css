@@ -50,6 +50,6 @@
     @apply dd-text-xs dd-text-red-500 dd-capitalize dd-pt-px;
   }
   .dd-group-button {
-    @apply dd-inline-flex dd-shadow-sm dd-justify-start [&>*:first-child]:!dd-rounded-l-lg [&>*:last-child]:!dd-rounded-r-lg [&>*:last-child]:!dd-border-r [&>button]:!dd-ring-0 [&>button]:!dd-rounded-none [&>button]:!dd-border [&>button]:!dd-border-gray-300 [&>button]:!dd-border-r-0;
+    @apply dd-inline-flex dd-shadow-sm dd-justify-start [&>*:first-child]:!dd-rounded-l [&>*:last-child]:!dd-rounded-r [&>*:last-child]:!dd-border-r [&>button]:!dd-ring-0 [&>button]:!dd-rounded-none [&>button]:!dd-border [&>button]:!dd-border-gray-300 [&>button]:!dd-border-r-0;
   }
 }
