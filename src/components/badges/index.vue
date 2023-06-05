@@ -1,17 +1,6 @@
 <template>
   <span
-    :class="{
-      'dd-px-2 dd-py-0.5 dd-text-xs': size === 'medium',
-      'dd-px-2.5 dd-py-0.5 dd-text-sm ': size === 'large',
-      '!dd-px-2': closable && size === 'large',
-      'dd-rounded-full': rounded,
-      'dd-bg-gray-100 dd-text-gray-700': type === 'basic',
-      'dd-bg-yellow-100 dd-text-yellow-800': type === 'warning',
-      'dd-bg-green-100 dd-text-green-800': type === 'success',
-      'dd-bg-red-100 dd-text-red-800': type === 'danger',
-      'dd-bg-blue-100 dd-text-blue-800': type === 'info',
-      'dd-bg-purple-100 dd-text-purple-800': type === 'purple',
-    }"
+    :class="[badgeStyling]"
     class="dd-inline-flex dd-items-center dd-font-medium dd-rounded"
   >
     <svg
@@ -108,7 +97,21 @@ export default {
         "!dd-text-purple-800": this.type === "purple",
       };
     },
-  },
+    badgeStyling() {
+      return {
+        ' dd-px-2 dd-py-0.5 dd-text-xs ': this.size === 'medium',
+        ' dd-px-2.5 dd-py-0.5 dd-text-sm ': this.size === 'large',
+        ' !dd-px-2 ': this.closable && this.size === 'large',
+        ' dd-rounded-xl ': this.rounded,
+        ' dd-bg-gray-100 dd-text-gray-700 ': this.type === 'basic',
+        ' dd-bg-yellow-100 dd-text-yellow-800 ': this.type === 'warning',
+        ' dd-bg-green-100 dd-text-green-800 ': this.type === 'success',
+        ' dd-bg-red-100 dd-text-red-800 ': this.type === 'danger',
+        ' dd-bg-blue-100 dd-text-blue-800 ': this.type === 'info',
+        ' dd-bg-purple-100 dd-text-purple-800 ': this.type === 'purple',
+      }
+    }
+  }
 };
 </script>
 
