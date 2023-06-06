@@ -53,7 +53,7 @@ export default {
   computed: {
     toolTipStyling() {
       let fixedProperties =
-        "dd-whitespace-pre-line  after:dd-content-[''] after:dd-absolute after:dd-p-1 after:-dd-rotate-45 " + this.fixedStylePin + " dd-text-white dd-absolute  dd-flex dd-items-center dd-justify-left dd-text-xs dd-p-2 dd-rounded-md " + this.fixedStyle + " dd-drop-shadow-md dd-z-50";
+        "dd-z-50 dd-whitespace-pre-line  after:dd-content-[''] after:dd-absolute after:dd-p-1 after:-dd-rotate-45 " + this.fixedStylePin + " dd-text-white dd-absolute  dd-flex dd-items-center dd-justify-left dd-text-xs dd-p-2 dd-rounded-md " + this.fixedStyle + " dd-drop-shadow-md dd-z-50";
 
       const addAnimation = this.isAnimate ? "motion-safe:dd-animate-bounce" : "";
 
