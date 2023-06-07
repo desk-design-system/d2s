@@ -142,13 +142,13 @@ const people = ref([
 ]);
 const columns = ref([
   {
-    title: 'Id',
+    title: 'ID',
     value: 'id',
     checked: true,
-    size: "30",
+    size: "50",
     id: 1,
     disabled: false,
-    sortDirection: '',
+    sortDirection: 'asc',
   },
   {
     title: 'User Name',
