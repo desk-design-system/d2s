@@ -1,7 +1,13 @@
 <template>
-  <div class="dd-container dd-mx-auto dd-m-5">
-    <dd-wraper>
-      <ddHeadr :items="items" />
+  <div class="table_comp">
+    <dd-table :rows="rows" :columns="columns" :buttons="buttons" :Actions="Actions" :values="values" defaultRow footer />
+  </div>
+  <!-- <div>
+    <DdTopbar />
+  </div> -->
+  <!-- <div class="dd-container dd-mx-auto dd-m-5"> -->
+  <!-- <dd-wraper> -->
+  <!-- <ddHeadr :items="items" />
       <ddAlert title="elo" closable />
       <ddAvatar srcLink="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg" />
       <ddBadge title="elo" />
@@ -9,28 +15,37 @@
       <ddBadge title="elo" rounded size="large" dot />
       <ddButton @click="fun" prefix icon="Plus" title="Form" />
       <ddBred :items="options" seprator="chevron" shadow />
-      <ddCheckBox v-model="model" />
-      <ddObserver ref="wraperForm">
-        <ddRadion :options="options" />
-        <!-- <ddInput  rules="required|min:6" label="Input" v-model="text"  />
+      <ddCheckBox v-model="model" /> -->
+  <!-- <ddObserver ref="wraperForm"> -->
+  <!-- <ddRadion :options="options" /> -->
+  <!-- <ddInput  rules="required|min:6" label="Input" v-model="text"  />
     <ddInput  rules="required|confirmed:@Jazib" label="Confirm" v-model="coner"  /> -->
-        <ddMulti label="elo" rules="required" showTooltip customIcon v-model="text" :options="options" />
-      </ddObserver>
-      <DdSelect v-model="selected" :options="filteredOptions" filterable @searchQuery="search" @addQuery="addquery"
-        label="select" />
-      <div class="dd-mb-10">
-        <!-- <dd-table :rows="rows" :columns="columns" /> -->
-      </div>
-    </dd-wraper>
-  </div>
+  <!-- <ddMulti label="elo" rules="required" showTooltip customIcon v-model="text" :options="options" />
+        <div class="dd-mb-10">
+          <DdAccordion rules="required" :srcLink="srcLink" :showAvatar="showAvatar">
+            Customers
+            <template #content>
+              <div>test dropdown</div>
+            </template>
+          </DdAccordion>
+          <DdPagination :count="count" :limit="limit" :offset="offset" @fetch-data="getData" />
+        </div> -->
+  <!-- <ddSelect v-model="selected" :options="filteredOptions" :filterable="filterable" @searchQuery="search"
+          @addQuery="addquery" /> -->
+  <!-- </ddObserver> -->
+  <!-- <dd-text-area v-model="mod" rules="^[0-9]+$" label="rules" /> -->
+  <!-- </dd-wraper> -->
+  <!-- </div> -->
 </template>
 
 <script setup>
 import { ref, computed } from "vue";
+import DdTable from "./components/table/index.vue"
 import DdSelect from "./components/select/index.vue"
+import DdAccordion from "./components/Accordion/index.vue";
+import DdTopbar from "./components/topbar/index.vue";
 import ddObserver from "./components/validations/ddForm.vue";
 import ddAlert from "./components/alerts/index.vue";
-import ddAvatar from "./components/avatars/index.vue";
 import ddBadge from "./components/badges/index.vue";
 import ddBred from "./components/breadcrumbs/index.vue";
 import ddButton from "./components/buttons/index.vue";
@@ -113,17 +128,8 @@ const fun = async () => {
 };
 const model = ref(false);
 const text = ref([]);
-
-
-const query = ref("");
-const filteredOptions = computed(() =>
-  query.value == ""
-    ? people.value
-    : people.value.filter((item) => {
-      return item.name.toLowerCase().includes(query.value.toLowerCase());
-    })
-);
-
+const coner = ref("");
+const open = ref(false);
 const people = ref([
   { value: 1, name: "Leslie Alexander" },
   { value: 2, name: "Aeslie Blexander" },
@@ -134,8 +140,450 @@ const people = ref([
   { value: 7, name: "Jeslie KJlexander" },
   // More people...
 ]);
+const columns = ref([
+  {
+    title: 'Id',
+    value: 'id',
+    checked: true,
+    size: "30",
+    id: 1,
+    disabled: false,
+  },
+  {
+    title: 'User Name',
+    value: 'username',
+    checked: true,
+    size: "130",
+    id: 2,
+    disabled: false,
+  },
+  {
+    title: 'First Name',
+    value: 'firstname',
+    checked: true,
+    size: "130",
+    id: 3,
+  },
+  {
+    title: 'Last Name',
+    value: 'lastname',
+    checked: true,
+    size: "130",
+    id: 4,
+  },
+  {
+    title: 'Email',
+    value: 'email',
+    checked: true,
+    size: "130",
+    id: 5,
+  },
+  {
+    title: 'Email',
+    value: 'email',
+    checked: true,
+    size: "130",
+    id: 5,
+  },
+  {
+    title: 'Email',
+    value: 'email',
+    checked: true,
+    size: "130",
+    id: 5,
+  },
+  {
+    title: 'Email',
+    value: 'email',
+    checked: true,
+    size: "130",
+    id: 5,
+  },
+  {
+    title: 'Email',
+    value: 'email',
+    checked: true,
+    size: "130",
+    id: 5,
+  },
+  {
+    title: 'Email',
+    value: 'email',
+    checked: true,
+    size: "130",
+    id: 5,
+  },
+  {
+    title: 'Email',
+    value: 'email',
+    checked: true,
+    size: "130",
+    id: 5,
+  },
+  {
+    title: 'Status',
+    value: 'status',
+    checked: true,
+    size: "130",
+    id: 6,
+  },
+])
+const rows = ref([
+  {
+    id: 1,
+    username: "Herry007",
+    firstname: "Herry",
+    lastname: "Brook",
+    email: "herry@repairdesk.co",
+    status: "in progress",
+    disabled: false,
+  },
+  {
+    id: 2,
+    username: "David2",
+    firstname: "David",
+    lastname: "Jeman",
+    email: "David@repairdesk.co",
+    status: "Repaired and Collected",
+    disabled: false,
+  },
+  {
+    id: 3,
+    username: "Henry0",
+    firstname: "Henry",
+    lastname: "Cavil",
+    email: "henry@repairdesk.co",
+    status: "in progress",
+  },
+  {
+    id: 4,
+    username: "Herry007",
+    firstname: "Herry",
+    lastname: "Brook",
+    email: "herry@repairdesk.co",
+    status: "Repaired and Collected"
+  },
+  {
+    id: 5,
+    username: "JSmith",
+    firstname: "John",
+    lastname: "Smith",
+    email: "john.smith@example.com",
+    status: "in progress",
+  },
+  {
+    id: 6,
+    username: "LGreen",
+    firstname: "Lucy",
+    lastname: "Green",
+    email: "lucy.green@example.com",
+    status: "Repaired and Collected"
+  },
+  {
+    id: 7,
+    username: "AMiller",
+    firstname: "Alice",
+    lastname: "Miller",
+    email: "alice.miller@example.com",
+    status: "in progress",
+  },
+  {
+    id: 8,
+    username: "BDavis",
+    firstname: "Bob",
+    lastname: "Davis",
+    email: "bob.davis@example.com",
+    status: "Repaired and Collected"
+  },
+  {
+    id: 9,
+    username: "KJohnson",
+    firstname: "Kate",
+    lastname: "Johnson",
+    email: "kate.johnson@example.com",
+    status: "in progress",
+  },
+  {
+    id: 10,
+    username: "KJohnson",
+    firstname: "Kate",
+    lastname: "Johnson",
+    email: "kate.johnson@example.com",
+    status: "in progress",
+  },
+  {
+    id: 11,
+    username: "KJohnson",
+    firstname: "Kate",
+    lastname: "Johnson",
+    email: "kate.johnson@example.com",
+    status: "in progress",
+  },
+  {
+    id: 12,
+    username: "KJohnson",
+    firstname: "Kate",
+    lastname: "Johnson",
+    email: "kate.johnson@example.com",
+    status: "in progress",
+  },
+  {
+    id: 13,
+    username: "KJohnson",
+    firstname: "Kate",
+    lastname: "Johnson",
+    email: "kate.johnson@example.com",
+    status: "in progress",
+  },
+  {
+    id: 14,
+    username: "KJohnson",
+    firstname: "Kate",
+    lastname: "Johnson",
+    email: "kate.johnson@example.com",
+    status: "in progress",
+  },
+  {
+    id: 15,
+    username: "KJohnson",
+    firstname: "Kate",
+    lastname: "Johnson",
+    email: "kate.johnson@example.com",
+    status: "in progress",
+  },
+  {
+    id: 16,
+    username: "KJohnson",
+    firstname: "Kate",
+    lastname: "Johnson",
+    email: "kate.johnson@example.com",
+    status: "in progress",
+  },
+  {
+    id: 17,
+    username: "KJohnson",
+    firstname: "Kate",
+    lastname: "Johnson",
+    email: "kate.johnson@example.com",
+    status: "in progress",
+  },
+  {
+    id: 18,
+    username: "KJohnson",
+    firstname: "Kate",
+    lastname: "Johnson",
+    email: "kate.johnson@example.com",
+    status: "in progress",
+  },
+  {
+    id: 19,
+    username: "KJohnson",
+    firstname: "Kate",
+    lastname: "Johnson",
+    email: "kate.johnson@example.com",
+    status: "in progress",
+  },
+  {
+    id: 20,
+    username: "KJohnson",
+    firstname: "Kate",
+    lastname: "Johnson",
+    email: "kate.johnson@example.com",
+    status: "in progress",
+  },
+  {
+    id: 21,
+    username: "KJohnson",
+    firstname: "Kate",
+    lastname: "Johnson",
+    email: "kate.johnson@example.com",
+    status: "in progress",
+  },
+  {
+    id: 22,
+    username: "KJohnson",
+    firstname: "Kate",
+    lastname: "Johnson",
+    email: "kate.johnson@example.com",
+    status: "in progress",
+  },
+  {
+    id: 23,
+    username: "KJohnson",
+    firstname: "Kate",
+    lastname: "Johnson",
+    email: "kate.johnson@example.com",
+    status: "in progress",
+  },
+  {
+    id: 24,
+    username: "KJohnson",
+    firstname: "Kate",
+    lastname: "Johnson",
+    email: "kate.johnson@example.com",
+    status: "in progress",
+  },
+  {
+    id: 25,
+    username: "KJohnson",
+    firstname: "Kate",
+    lastname: "Johnson",
+    email: "kate.johnson@example.com",
+    status: "in progress",
+  },
+  {
+    id: 26,
+    username: "KJohnson",
+    firstname: "Kate",
+    lastname: "Johnson",
+    email: "kate.johnson@example.com",
+    status: "in progress",
+  },
+  {
+    id: 27,
+    username: "KJohnson",
+    firstname: "Kate",
+    lastname: "Johnson",
+    email: "kate.johnson@example.com",
+    status: "in progress",
+  },
+  {
+    id: 28,
+    username: "KJohnson",
+    firstname: "Kate",
+    lastname: "Johnson",
+    email: "kate.johnson@example.com",
+    status: "in progress",
+  },
+  {
+    id: 29,
+    username: "KJohnson",
+    firstname: "Kate",
+    lastname: "Johnson",
+    email: "kate.johnson@example.com",
+    status: "in progress",
+  },
+  {
+    id: 30,
+    username: "KJohnson",
+    firstname: "Kate",
+    lastname: "Johnson",
+    email: "kate.johnson@example.com",
+    status: "in progress",
+  },
+  {
+    id: 31,
+    username: "KJohnson",
+    firstname: "Kate",
+    lastname: "Johnson",
+    email: "kate.johnson@example.com",
+    status: "in progress",
+  },
+  {
+    id: 32,
+    username: "KJohnson",
+    firstname: "Kate",
+    lastname: "Johnson",
+    email: "kate.johnson@example.com",
+    status: "in progress",
+  },
+  {
+    id: 33,
+    username: "KJohnson",
+    firstname: "Kate",
+    lastname: "Johnson",
+    email: "kate.johnson@example.com",
+    status: "in progress",
+  },
+  {
+    id: 34,
+    username: "KJohnson",
+    firstname: "Kate",
+    lastname: "Johnson",
+    email: "kate.johnson@example.com",
+    status: "in progress",
+  },
+  {
+    id: 35,
+    username: "KJohnson",
+    firstname: "Kate",
+    lastname: "Johnson",
+    email: "kate.johnson@example.com",
+    status: "in progress",
+  },
+])
+
+const buttons = [
+  { id: 1, label: "5", color: "white", size: "sm" },
+  { id: 2, label: "10", color: "white", size: "sm" },
+  { id: 3, label: "15", color: "white", size: "sm" },
+];
+
+const Actions = ref([
+  {
+    name: 'DropDown Menu 1',
+    icon: 'DotHorizontal',
+    size: 12,
+    value: 1,
+  },
+  {
+    name: 'DropDown Menu 2',
+    icon: 'Trash',
+    size: 12,
+    value: 2,
+  },
+  {
+    name: 'DropDown Menu 3',
+    icon: 'Pencil',
+    size: 12,
+    value: 3,
+  }
+]);
+
+
+const values = ref([
+  {
+    name: "DropDown Menu 1",
+    value: 1,
+    disabled: true,
+  },
+  {
+    name: "DropDown Menu 2",
+    value: 2,
+  },
+  {
+    name: "DropDown Menu 3",
+    value: 3,
+  },
+  {
+    name: "DropDown Menu 4",
+    value: 4,
+  },
+]);
+
+const srcLink = ref(
+  "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg"
+);
+const showAvatar = ref(false);
+const showIcon = ref(false);
+const count = ref(0);
+const limit = ref(0);
+const offset = ref(0);
 const selected = ref("");
 const filterable = ref(false);
+
+const getData = () => {
+  count.value = 100;
+};
+
+const filteredOptions = computed(() =>
+  query.value == ""
+    ? people.value
+    : people.value.filter((item) => {
+      return item.name.toLowerCase().includes(query.value.toLowerCase());
+    })
+);
+
 const search = (data) => {
   query.value = data
 }
@@ -148,4 +596,26 @@ const addquery = (data) => {
   query.value = ""
   selected.value = queryArr.value
 };
+
+const saveChanges = (data) => {
+  console.log(data, 'data from parent');
+}
+const resetData = (data) => {
+  // if (data.checked === false) {
+  //   data.checked = true
+  // } else if (data.size !== "") {
+  //   return data.size = "";
+  // }
+  console.log(data, 'reset data');
+}
 </script>
+
+
+<style>
+#app {
+  padding: 0;
+  margin: 0;
+  overflow: hidden !important;
+  overflow-y: hidden !important;
+}
+</style>

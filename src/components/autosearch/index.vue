@@ -48,7 +48,9 @@
       </ComboboxOptions>
       <ComboboxOptions class="dd-shadow-md dd-text-center dd-rounded-md "
         v-if="query !== '' && options.length === 0">
-        <p class="dd-p-4 dd-text-sm dd-text-gray-400">No Data found.</p>
+          <slot name="noData">
+            <p class="dd-p-4 dd-text-sm dd-text-gray-400">No Data found.</p>
+          </slot>
       </ComboboxOptions>
       </TransitionRoot>
     </Combobox>

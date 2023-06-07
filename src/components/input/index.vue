@@ -1,14 +1,10 @@
 <template>
   <div class="dd-base" v-bind="$attrs">
-    <label
-      v-if="label"
-      class="dd-block dd-text-sm dd-font-medium dd-text-gray-700 dd-mb-1"
-      >{{ label }} <span v-if="isRequired" class="dd-text-red-500">*</span>
+    <label v-if="label" class="dd-block dd-text-sm dd-font-medium dd-text-gray-700 dd-mb-1">{{ label }} <span
+        v-if="isRequired" class="dd-text-red-500">*</span>
     </label>
     <div class="dd-relative dd-rounded-md">
-      <div
-        v-if="prefix"
-        class="
+      <div v-if="prefix" class="
           !dd-pointer-events-none
           !dd-absolute
           !dd-inset-y-0
@@ -17,42 +13,32 @@
           !dd-items-center
           !dd-pl-3
           !dd-pr-10
-        "
-      >
+        ">
         <svgIcon class="dd-text-gray-400" :icon="icon" :size="btnIconSize" />
       </div>
-      <input
-        :name="name"
-        :disabled="disabled"
-        :class="[
-          inputSize,
-          suffix ? '!dd-pr-10' : '!dd-pr-2',
-          prefix ? '!dd-pl-10' : '!dd-pl-2',
-          hasError
-            ? '!dd-border-red-600 focus:!dd-border-red-600 dd-focus:!dd-ring-red-600'
-            : '!dd-border-gray-300 focus:dd-ring-teal-600 focus:!dd-border-teal-600',
-          errorMessage ? 'dd-mb-1' : '',
-          disabled
-            ? '!dd-text-gray-500 dd-ring-gray-200 dd-bg-gray-50 dd-cursor-not-allowed dd-select-none'
-            : ' dd-text-gray-700',
-        ]"
-        v-model="inputModelValue"
-        :type="inputType"
-        class="
+      <input :name="name" :disabled="disabled" :class="[
+        inputSize,
+        noBorder,
+        suffix ? '!dd-pr-10' : '!dd-pr-2',
+        prefix ? '!dd-pl-10' : '!dd-pl-2',
+        hasError
+          ? '!dd-border-red-600 focus:!dd-border-red-600 dd-focus:!dd-ring-red-600'
+          : '!dd-border-gray-300 focus:dd-ring-teal-600 focus:!dd-border-teal-600',
+        Right ? 'dd-text-right !dd-text-xs !dd-text-gray-400 !dd-font-normal' : 'dd-text-left',
+        errorMessage ? 'dd-mb-1' : '',
+        disabled
+          ? '!dd-text-gray-500 dd-ring-gray-200 dd-bg-gray-50 dd-cursor-not-allowed dd-select-none'
+          : ' dd-text-gray-700',
+      ]" v-model="inputModelValue" :type="inputType" class="
           dd-border-solid
           !dd-block !dd-w-full !dd-rounded-md
           sm:!dd-text-sm
           focus:ring-2
           focus:dd-ring-inset
           dd-shadow-sm
-        "
-        :placeholder="placeholder"
-      />
+        " :placeholder="placeholder" />
       <!-- $slots.suffix -->
-      <div
-        @click="suffixIconClick"
-        v-if="suffix && suffixIcon"
-        class="
+      <div @click="suffixIconClick" v-if="suffix && suffixIcon" class="
           dd-cursor-pointer
           !dd-absolute
           !dd-inset-y-0
@@ -61,24 +47,13 @@
           !dd-items-center
           !dd-pl-3
           !dd-pr-3
-        "
-      >
-        <svgIcon
-          class="dd-text-gray-400"
-          :icon="suffixIcon"
-          :size="btnIconSize"
-        />
+        ">
+        <svgIcon class="dd-text-gray-400" :icon="suffixIcon" :size="btnIconSize" />
         <!-- <slot name="suffix">
         </slot> -->
       </div>
     </div>
-    <slot name="errorMessage" :error="errorMessage">
-    <span
-      v-if="errorMessage || customErrorMessage"
-      class="dd-text-xs dd-text-red-500 dd-capitalize dd-pt-px"
-      >{{ errorMessage || customErrorMessage }}</span
-    >
-  </slot>
+    <span v-if="errorMessage" class="dd-text-xs dd-text-red-500 dd-capitalize dd-pt-px">{{ errorMessage }}</span>
   </div>
 </template>
 <!-- <script>
@@ -104,7 +79,10 @@ const props = defineProps({
     type: [String, RegExp, Function],
     default: "",
   },
-
+  Right: {
+    type: Boolean,
+    default: false,
+  },
   prefix: {
     type: Boolean,
     default: false,
@@ -140,6 +118,10 @@ const props = defineProps({
   modelValue: {
     type: [String, Number],
     default: null,
+  },
+  Border: {
+    type: String,
+    default: "",
   },
   size: {
     type: String,
@@ -179,6 +161,11 @@ const inputSize = computed(() => {
     "dd-h-10 ": props.size === "xl",
   };
 });
+const noBorder = computed(() => {
+  return {
+    "!dd-border-none focus:!dd-ring-0 !dd-shadow-none": props.Border === "none"
+  }
+})
 const inputModelValue = computed({
   get() {
     return props.modelValue;
