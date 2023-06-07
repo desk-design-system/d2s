@@ -1,6 +1,6 @@
 <template>
   <div class="table_comp">
-    <dd-table :rows="rows" :columns="columns" :buttons="buttons" :Actions="Actions" :values="values" defaultRow footer />
+    <dd-table :rows="rows" :columns="columns" :buttons="buttons" :Actions="Actions" :values="values" defaultRow footer emptyState />
   </div>
   <!-- <div>
     <DdTopbar />
