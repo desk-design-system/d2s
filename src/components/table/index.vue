@@ -67,12 +67,16 @@
                 <div class="dd-flex dd-gap-2 dd-pl-2" style="inline-size: max-content">
                   <span>{{ col.title }}</span>
                   <svgIcon class="!dd-text-gray-500 dd-relative dd-top-[2px]" icon="Selector" size="12"
-                    v-show="isHovered(col) && !col.disabled && !limit < 1" @click="sortRows(col)"
-                    :disabled="col.disabled || limit < 1" />
-                    <svgIcon class="!dd-text-gray-500" icon="SelectorUp" size="12" />
-                    <svgIcon class="!dd-text-gray-500" icon="SelectorDown" size="12" />
+                    v-show="isHovered(col) && !col.disabled && !limit < 1 && col.sortDirection === ''"
+                    @click="sortRows(col)" :disabled="col.disabled || limit < 1" />
+                  <svgIcon class="!dd-text-gray-500" icon="SelectorUp" size="12" v-show="col.sortDirection === 'desc'"
+                    @click="sortRows(col)" />
+                  <svgIcon class="!dd-text-gray-500" icon="SelectorDown" size="12" v-show="col.sortDirection === 'asc'"
+                    @click="sortRows(col)" />
                 </div>
               </th>
+
+
               <th v-if="headRowActions">
                 <div
                   class="dd-flex dd-items-center dd-justify-end dd-gap-4 dd-relative dd-right-5 !dd-z-[999] dd-bg-white dd-pl-2.5">
@@ -118,18 +122,21 @@
           </thead>
           <tbody class="dd-divide-y dd-divide-gray-200 [&>*:last-child]:!dd-border-b" v-if="displayedRows.length > 0">
             <template v-if="defaultRow">
-              <tr v-for="(row, index) in displayedRows" :key="index" class="[&>*:nth-child(2)]:!dd-font-medium dd-relative" :class="[
-                selectedId.includes(row.id)
-                  ? '[&>*:nth-child(1)]:dd-bg-gray-100 [&>*:nth-child(2)]:dd-bg-gray-100  [&>*:last-child]:dd-bg-gray-100 dd-bg-gray-100'
-                  : '',
-                row.disabled ? '[&>*:nth-child(1)]:dd-bg-gray-100 [&>*:nth-child(2)]:dd-bg-gray-100  [&>*:last-child]:dd-bg-gray-100  dd-bg-gray-100 dd-pointer-event-none' : '',
-              ]" @mouseenter="handleMouseEnterActions(row)" @mouseleave="handleMouseLeaveActions">
-                <td v-if="checkBoxProp" class="dd-py-2.5 dd-pl-5 dd-pr-3 dd-text-xs dd-font-medium dd-text-gray-700 sm:dd-pl-4">
-                  <div :class="[selectedId.includes(row.id) ? '[&>*:nth-child(1)]:after:!dd-border-l-[3px] [&>*:nth-child(1)]:after:!dd-border-t-gray-200 [&>*:nth-child(1)]:after:!dd-border-b-gray-200 [&>*:nth-child(1)]:after:!dd-border-teal-600 [&>*:nth-child(1)]:after:dd-left-0 [&>*:nth-child(1)]:after:dd-absolute [&>*:nth-child(1)]:after:dd-top-0 [&>*:nth-child(1)]:after:dd-bottom-0' : '']">
+              <tr v-for="(row, index) in displayedRows" :key="index"
+                class="[&>*:nth-child(2)]:!dd-font-medium dd-relative" :class="[
+                  selectedId.includes(row.id)
+                    ? '[&>*:nth-child(1)]:dd-bg-gray-100 [&>*:nth-child(2)]:dd-bg-gray-100  [&>*:last-child]:dd-bg-gray-100 dd-bg-gray-100'
+                    : '',
+                  row.disabled ? '[&>*:nth-child(1)]:dd-bg-gray-100 [&>*:nth-child(2)]:dd-bg-gray-100  [&>*:last-child]:dd-bg-gray-100  dd-bg-gray-100 dd-pointer-event-none' : '',
+                ]" @mouseenter="handleMouseEnterActions(row)" @mouseleave="handleMouseLeaveActions">
+                <td v-if="checkBoxProp"
+                  class="dd-py-2.5 dd-pl-5 dd-pr-3 dd-text-xs dd-font-medium dd-text-gray-700 sm:dd-pl-4">
+                  <div
+                    :class="[selectedId.includes(row.id) ? '[&>*:nth-child(1)]:after:!dd-border-l-[3px] [&>*:nth-child(1)]:after:!dd-border-t-gray-200 [&>*:nth-child(1)]:after:!dd-border-b-gray-200 [&>*:nth-child(1)]:after:!dd-border-teal-600 [&>*:nth-child(1)]:after:dd-left-0 [&>*:nth-child(1)]:after:dd-absolute [&>*:nth-child(1)]:after:dd-top-0 [&>*:nth-child(1)]:after:dd-bottom-0' : '']">
                     <div class="dd-h-full -dd-my-2.5">
-                    <dd-checkbox :checked="selectedId && selectedId.includes(row.id) && !row.disabled" :value="row.id"
-                    @click="setChecked(row.id)" :disabled="row.disabled || checkAllDisabled" />
-                  </div>
+                      <dd-checkbox :checked="selectedId && selectedId.includes(row.id) && !row.disabled" :value="row.id"
+                        @click="setChecked(row.id)" :disabled="row.disabled || checkAllDisabled" />
+                    </div>
                   </div>
                 </td>
                 <slot name="td" />
@@ -521,7 +528,7 @@ const indeterminate = () => {
 };
 
 watchEffect(() => {
-  if(selectedId.value.length !== limit.value) {
+  if (selectedId.value.length !== limit.value) {
     return allSelected.value = false;
   }
 })
@@ -587,17 +594,37 @@ const isMouseHoveredRow = (rowData) => {
 };
 
 const sortRows = (col) => {
-  props.rows.sort((a, b) => {
-    const aValue = a[col.value];
-    const bValue = b[col.value];
-
-    if (aValue < bValue) return sortDirection.value === "asc" ? -1 : 1;
-    if (aValue > bValue) return sortDirection.value === "asc" ? 1 : -1;
-    return 0;
+  props.columns.forEach((column) => {
+    if (column !== col) {
+      column.sortDirection = '';
+    }
   });
+
+  if (col.sortDirection === '') {
+    col.sortDirection = 'asc';
+    props.rows.sort((a, b) => {
+      const aValue = a[col.value];
+      const bValue = b[col.value];
+      if (aValue < bValue) return -1;
+      if (aValue > bValue) return 1;
+      return 0;
+    });
+  } else if (col.sortDirection === 'asc') {
+    col.sortDirection = 'desc';
+    props.rows.sort((a, b) => {
+      const aValue = a[col.value];
+      const bValue = b[col.value];
+      if (aValue < bValue) return 1;
+      if (aValue > bValue) return -1;
+      return 0;
+    });
+  } else if (col.sortDirection === 'desc') {
+    col.sortDirection = '';
+    props.rows.sort((a, b) => a.index - b.index);
+  }
   setTimeout(() => {
     scrollToLeft();
-  }, 50)
+  }, 50);
 };
 
 const openSettingsBar = () => {

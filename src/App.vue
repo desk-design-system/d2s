@@ -148,6 +148,7 @@ const columns = ref([
     size: "30",
     id: 1,
     disabled: false,
+    sortDirection: '',
   },
   {
     title: 'User Name',
@@ -156,6 +157,7 @@ const columns = ref([
     size: "130",
     id: 2,
     disabled: false,
+    sortDirection: '',
   },
   {
     title: 'First Name',
@@ -163,6 +165,7 @@ const columns = ref([
     checked: true,
     size: "130",
     id: 3,
+    sortDirection: '',
   },
   {
     title: 'Last Name',
@@ -170,6 +173,7 @@ const columns = ref([
     checked: true,
     size: "130",
     id: 4,
+    sortDirection: '',
   },
   {
     title: 'Email',
@@ -177,6 +181,7 @@ const columns = ref([
     checked: true,
     size: "130",
     id: 5,
+    sortDirection: '',
   },
   {
     title: 'Email',
@@ -184,6 +189,7 @@ const columns = ref([
     checked: true,
     size: "130",
     id: 5,
+    sortDirection: '',
   },
   {
     title: 'Email',
@@ -191,6 +197,7 @@ const columns = ref([
     checked: true,
     size: "130",
     id: 5,
+    sortDirection: '',
   },
   {
     title: 'Email',
@@ -198,6 +205,7 @@ const columns = ref([
     checked: true,
     size: "130",
     id: 5,
+    sortDirection: '',
   },
   {
     title: 'Email',
@@ -205,6 +213,7 @@ const columns = ref([
     checked: true,
     size: "130",
     id: 5,
+    sortDirection: '',
   },
   {
     title: 'Email',
@@ -212,6 +221,7 @@ const columns = ref([
     checked: true,
     size: "130",
     id: 5,
+    sortDirection: '',
   },
   {
     title: 'Email',
@@ -219,6 +229,15 @@ const columns = ref([
     checked: true,
     size: "130",
     id: 5,
+    sortDirection: '',
+  },
+  {
+    title: 'Email',
+    value: 'email',
+    checked: true,
+    size: "130",
+    id: 5,
+    sortDirection: '',
   },
   {
     title: 'Status',
@@ -226,6 +245,7 @@ const columns = ref([
     checked: true,
     size: "130",
     id: 6,
+    sortDirection: '',
   },
 ])
 const rows = ref([
