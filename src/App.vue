@@ -1,6 +1,6 @@
 <template>
-  <div class="table_comp">
-    <dd-table :rows="rows" :columns="columns" :buttons="buttons" :Actions="Actions" :values="values" defaultRow footer emptyState />
+  <div class="dd-bg-gray-50">
+    <dd-table :rows="rows" :columns="columns" :buttons="buttons" :Actions="Actions" :values="values" defaultRow footer emptyState @editRow="reset" />
   </div>
   <!-- <div>
     <DdTopbar />
@@ -54,82 +54,7 @@ import ddRadion from "./components/radiobutton/index.vue";
 import ddWraper from "./components/scrollerApp/index.vue";
 import ddMulti from "./components/multiSelect/index.vue";
 
-const options = ref([
-  {
-    name: "Test",
-    value: 1,
-  },
-  {
-    name: "Test2",
-    value: 2,
-  },
-  {
-    name: "Test3",
-    value: 3,
-  },
-  {
-    name: "Test4",
-    value: 4,
-  },
-  {
-    name: "Test5",
-    value: 5,
-  },
-  {
-    name: "Test6",
-    value: 6,
-  },
-  {
-    name: "Test7",
-    value: 7,
-  },
-  {
-    name: "Test8",
-    value: 8,
-  },
-  {
-    name: "Test9",
-    value: 9,
-  },
-]);
-const options2 = ref([
-  {
-    title: "Test",
-    id: 1,
-  },
-  {
-    title: "Test2",
-    id: 2,
-  },
-]);
-const items = ref([
-  {
-    icon: "LayoutDashboard",
-    value: 1,
-  },
-  {
-    icon: "FileAnalytics",
-    value: 2,
-  },
-  {
-    icon: "Setting",
-    value: 3,
-  },
-]);
 
-const wraperForm = ref(null);
-const fun = async () => {
-  const inValid = await wraperForm.value.validate();
-  if (inValid.valid) {
-    alert("Success");
-  } else {
-    alert("Los");
-  }
-};
-const model = ref(false);
-const text = ref([]);
-const coner = ref("");
-const open = ref(false);
 const people = ref([
   { value: 1, name: "Leslie Alexander" },
   { value: 2, name: "Aeslie Blexander" },
@@ -145,9 +70,9 @@ const columns = ref([
     title: 'ID',
     value: 'id',
     checked: true,
-    size: "50",
+    size: "100",
     id: 1,
-    disabled: false,
+    disabled: true,
     sortDirection: 'asc',
   },
   {
@@ -156,7 +81,7 @@ const columns = ref([
     checked: true,
     size: "130",
     id: 2,
-    disabled: false,
+    disabled: true,
     sortDirection: '',
   },
   {
@@ -581,51 +506,8 @@ const values = ref([
   },
 ]);
 
-const srcLink = ref(
-  "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg"
-);
-const showAvatar = ref(false);
-const showIcon = ref(false);
-const count = ref(0);
-const limit = ref(0);
-const offset = ref(0);
-const selected = ref("");
-const filterable = ref(false);
-
-const getData = () => {
-  count.value = 100;
-};
-
-const filteredOptions = computed(() =>
-  query.value == ""
-    ? people.value
-    : people.value.filter((item) => {
-      return item.name.toLowerCase().includes(query.value.toLowerCase());
-    })
-);
-
-const search = (data) => {
-  query.value = data
-}
-const addquery = (data) => {
-  const queryArr = {
-    value: people.value.length + 1,
-    name: data,
-  };
-  people.value.unshift(queryArr);
-  query.value = ""
-};
-
-const saveChanges = (data) => {
-  console.log(data, 'data from parent');
-}
-const resetData = (data) => {
-  // if (data.checked === false) {
-  //   data.checked = true
-  // } else if (data.size !== "") {
-  //   return data.size = "";
-  // }
-  console.log(data, 'reset data');
+function reset() {
+  console.log('item');
 }
 </script>
 

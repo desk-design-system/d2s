@@ -4,14 +4,14 @@
       <div :class="[
         noHeight
           ? ''
-          : `dd-max-h-[533px] dd-min-h-[533px]'`,
-        fixed || limit < 1 ? 'dd-overflow-x-scroll' : 'fixedScroll',
-        limit < 1 ? 'dd-overflow-y-hidden' : 'custom-scrollbar'
+          : getCalculatedHeight,
+        fixed || limit < 1 ? '' : 'fixedScroll',
+        limit < 1 ? 'dd-overflow-y-hidden' : '',
       ]" ref="containerRef" @scroll="handleScroll">
         <!-- header with group button  -->
         <div
-          class="dd-flex dd-items-center dd-justify-between !dd-w-full dd-sticky dd-top-0 dd-z-[1000] dd-bg-white group_wrapper" :class="selectedId.length > 0 ? ' dd-border-b-[1px] dd-border-gray-300 ': ''">
-          <div v-if="selectedId.length > 0 || !actionHeader" class="dd-flex dd-items-center dd-gap-2 dd-py-1.5 dd-pl-3 dd-pr-3 dd-text-left">
+          class="dd-flex dd-items-center dd-justify-between !dd-w-full group_wrapper !dd-sticky !dd-top-0 !dd-bg-white !dd-z-[1000]" :class="[selectedId.length > 0 ? ' dd-border-b-[1px] dd-border-gray-300 dd-h-[40px]': '']">
+          <div v-if="selectedId.length > 0 || !actionHeader" class="dd-flex dd-items-center dd-gap-2 dd-py-2 dd-pl-3 dd-pr-3 dd-text-left">
             <DdGroupButton :buttons="buttons">
               <dd-Button color="white" v-if="checkBoxProp" size="sm">
                 <div class="dd-flex dd-items-center">
@@ -40,35 +40,35 @@
             <slot name="customDropDown" />
           </div>
           <svgIcon class="!dd-text-gray-500 dd-mr-3" :class="[selectedId.length === 0 ? 'dd-hidden' : '']"
-            :icon="selectedId.length > 0 ? 'Search' : 'none'" size="20" @click="openSearch" />
+            :icon="selectedId.length > 0 ? 'Search' : 'none'" size="25" @click="openSearch" />
 
-          <div class="dd-w-full dd-relative dd-cursor-pointer" v-if="search">
-            <dd-input type="text" v-model="queryInput" @change="searchQuery" class="focus-visible:!dd-border-none"
-              :icon="selectedId.length === 0 ? 'Search' : ''" Border="none" placeholder="Search Ticket" size="xl"
+          <div class="dd-w-full dd-cursor-pointer" v-if="search">
+            <dd-input type="text" v-model="queryInput" @change="searchQuery" class="focus-visible:!dd-border-none dd-relative"
+              :icon="selectedId.length === 0 ? 'Search' : ''" Border="none" placeholder="Search Ticket" :size="selectedId.length > 0 ? 'lg' : 'xl'"
               :prefix="selectedId.length === 0 ? true : false" />
-            <svgIcon icon="Close" :size="size"
+            <svgIcon icon="Close" size="12"
               class="dd-absolute dd-right-4 dd-text-gray-400 dd-top-4 hover:dd-text-gray-500" @click="closeSearch" />
           </div>
         </div>
         <slot name="actionHeader" />
-        <table class="dd-min-w-full dd-overflow-y-auto dd-border-0">
+        <table class="dd-border-0">
           <!-- tabel head  -->
-          <thead class="!dd-sticky !dd-top-0 dd-bg-white dd-z-[900]" :class="[limit > 1 ? 'dd-cursor-pointer' : '']"
+          <thead class="!dd-sticky !dd-top-0 !dd-bg-white !dd-z-[1000]" :class="[limit > 1 ? 'dd-cursor-pointer' : '']"
             v-if="selectedId.length == 0 && !search">
-            <tr>
-              <th class="dd-py-2 dd-pl-5 dd-text-left checkbox_wrapper !dd-leading-3 dd-h-[40px] table_head_row"
+            <tr class="dd-bg-white">
+              <th class="dd-py-2 dd-pl-5 dd-text-left checkbox_wrapper !dd-leading-3 dd-h-[40px] table_head_row dd-sticky dd-top-0"
                 v-if="checkBoxProp">
                 <dd-checkbox v-model="allSelected" @click="selectAllFields" :disabled="checkAllDisabled || limit < 1" />
               </th>
               <slot name="thead" />
               <th v-for="col in columns" :key="col.value" :value="col" scope="col" v-show="col.checked"
-                class="dd-py-2 dd-pl-3 dd-pr-3 dd-text-left dd-text-xs dd-font-medium dd-text-gray-500 !dd-leading-3 dd-h-[40px] table_head_row"
+                class="dd-py-2 dd-pl-3 dd-pr-3 dd-text-left dd-text-xs dd-font-medium dd-text-gray-500 !dd-leading-3 dd-h-[40px] table_head_row dd-sticky dd-top-0"
                 :style="`min-width: ${col.size}px`" @mouseenter="handleMouseEnter(col)" @mouseleave="handleMouseLeave"
                 @click="sortRows(col)">
                 <div class="dd-flex dd-gap-2">
                   <span class="dd-text-xs">{{ col.title }}</span>
                   <svgIcon class="!dd-text-gray-500 dd-relative dd-top-[3px]" icon="Selector" size="10"
-                    v-show="isHovered(col) && !col.disabled && !limit < 1 && col.sortDirection === ''"
+                    v-show="isHovered(col) && !limit < 1 && col.sortDirection === ''"
                     :disabled="col.disabled || limit < 1" />
                   <svgIcon class="!dd-text-gray-500 dd-relative dd-top-[3px]" icon="SelectorUp" size="10"
                     v-show="col.sortDirection === 'desc'" @click="sortRows(col)" />
@@ -78,7 +78,7 @@
               </th>
 
 
-              <th v-if="headRowActions" class="table_head_row">
+              <th v-if="headRowActions" class="table_head_row dd-sticky dd-top-0">
                 <div
                   class="dd-flex dd-items-center dd-justify-end dd-gap-4 dd-relative dd-right-5 !dd-z-[999] dd-bg-white dd-pl-2.5">
                   <svgIcon v-if="searchIcon" class="!dd-text-gray-500" icon="Search" size="20" @click="openSearch" />
@@ -119,7 +119,7 @@
               <slot name="headerActions" />
             </tr>
           </thead>
-          <tbody class="" v-if="displayedRows.length > 0">
+          <tbody class="dd-bg-white" v-if="displayedRows.length > 0" ref="parentRef">
             <template v-if="defaultRow">
               <tr v-for="(row, index) in displayedRows" :key="index"
                 class="[&>*:nth-child(2)]:!dd-font-medium dd-relative dd-border-b dd-border-gray-300" :class="[
@@ -128,28 +128,28 @@
                     : '',
                   row.disabled ? '[&>*:nth-child(1)]:dd-bg-gray-100 [&>*:nth-child(2)]:dd-bg-gray-100  [&>*:last-child]:dd-bg-gray-100  dd-bg-gray-100 dd-pointer-event-none' : '',
                 ]" @mouseenter="handleMouseEnterActions(row)" @mouseleave="handleMouseLeaveActions">
-                <td v-if="checkBoxProp" class="dd-py-2.5 dd-pl-5 dd-pr-1 dd-text-xs dd-font-medium dd-text-gray-700">
+                <td v-if="checkBoxProp" class="dd-py-2.5 dd-pl-5 dd-pr-1 dd-text-xs dd-font-medium dd-text-gray-700" @click.prevent="setChecked(row.id), stopScroll($event.target)">
                   <div
+                    class="dd-w-full"
                     :class="[selectedId.includes(row.id) ? '[&>*:nth-child(1)]:after:!dd-border-l-[3px] [&>*:nth-child(1)]:after:!dd-border-t-gray-200 [&>*:nth-child(1)]:after:!dd-border-b-gray-200 [&>*:nth-child(1)]:after:!dd-border-teal-600 [&>*:nth-child(1)]:after:dd-left-0 [&>*:nth-child(1)]:after:dd-absolute [&>*:nth-child(1)]:after:dd-top-0 [&>*:nth-child(1)]:after:dd-bottom-0' : '']">
                     <div class="dd-h-full -dd-my-2.5">
                       <dd-checkbox :checked="selectedId && selectedId.includes(row.id) && !row.disabled" :value="row.id"
-                        @click="setChecked(row.id)" :disabled="row.disabled || checkAllDisabled" />
+                      :disabled="row.disabled || checkAllDisabled" />
                     </div>
                   </div>
                 </td>
                 <slot name="td" />
-                <!-- :class="row.status === 'Repaired and Collected' ? 'dd-text-blue-300' : 'dd-text-teal-400'" -->
                 <td v-for="col in columns" :key="col.value" v-show="col.checked"
-                  class="dd-whitespace-nowrap dd-py-2.5 dd-px-3 dd-text-sm dd-text-gray-500 dd-min-w-[55px]"
+                  class="dd-whitespace-nowrap dd-py-2.5 dd-px-3 dd-text-sm dd-text-gray-500"
                   :class="[row.disabled || !checkBoxProp ? '' : 'dd-cursor-pointer']"
-                  @click="row.disabled ? null : setChecked(row.id)">
+                  @click="row.disabled ? null : setChecked(row.id)" :style="`min-width: ${col.size}px`">
                   <slot name="row" :column="col" :row="row" :value="row[col.value]" :disabled="row.disabled">
                     {{ row[col.value] }}
                   </slot>
                 </td>
                 <!-- actions  -->
-                <td class="dd-pl-8 dd-pr-8 dd-relative" :style="`z-index: ${displayedRows.length - index} `"
-                  :class="[row.disabled ? '!dd-pointer-event-none' : '']">
+                <td class="dd-pl-9 dd-pr-9 dd-relative dd-min-w-[56px]" :style="`z-index: ${displayedRows.length - index} `"
+                  :class="[row.disabled ? '!dd-pointer-event-none' : '']" @click.prevent="stopScroll($event.target)">
                   <div v-if="rowActions">
                     <DdGroupButton class="dd-absolute dd-top-1 dd-right-5 dd-z-10"
                       :class="[!(isActionHovered(row) || isMouseHoveredRow(row)) ? '!dd-p-0 dd-rounded-none !dd-border-none dd-ring-0 !dd-shadow-none' : '!dd-p-0']">
@@ -191,7 +191,7 @@
       </div>
       <div v-if="footer && limit > 1" class="dd-flex dd-items-center dd-justify-between dd-py-3 dd-px-3">
         <DdGroupButton :buttons="buttons">
-          <dd-Button v-for="button in buttons" :key="button.id" :color="button.color" :size="button.size"
+          <dd-Button v-for="button in buttons" :key="button.id" :color="button.color" :size="button.size" :disabled="parseInt(button.label) > rows.length"
             @click="selectNumberOfRows(button)">
             <span class="dd-text-sm"
               :class="[parseInt(button.label) === limit ? '!dd-font-semibold dd-text-gray-600' : 'dd-font-normal dd-text-gray-500']">{{
@@ -212,7 +212,7 @@
 </template>
 
 <script setup>
-import { computed, onBeforeMount, onMounted, ref, watch, watchEffect } from "vue";
+import { computed, nextTick, onBeforeMount, onMounted, onUnmounted, reactive, ref, watch, watchEffect } from "vue";
 import DdButton from "../buttons/index.vue";
 import svgIcon from "../svgIcon/index.vue";
 import DdCheckbox from "../checkbox/index.vue";
@@ -337,63 +337,103 @@ const handleScroll = () => {
   const tableLastHead = container.querySelectorAll('.fixedScroll th:last-child');
 
   tableHeaderCell.forEach((cell) => {
-    if (container.scrollLeft > 0) {
+    if (container.scrollLeft > 1) {
       cell.classList.add('checkbox_cell_wrapper');
-    } else if (container.scrollLeft < 0) {
+    } else if (container.scrollLeft < 1) {
       cell.classList.remove('checkbox_cell_wrapper');
     }
   });
 
   tableHeadCells.forEach((cell) => {
-    if (container.scrollLeft > 0) {
+    if (container.scrollLeft > 1) {
       cell.classList.add('fixed_head_cell_one');
-    } else if (container.scrollLeft < 0) {
+    } else if (container.scrollLeft < 1) {
       cell.classList.remove('fixed_head_cell_one');
     }
   });
   tableRowCells.forEach((cell) => {
-    if (container.scrollLeft > 0) {
+    if (container.scrollLeft > 1) {
       cell.classList.add('fixed_cell_one');
-    } else if (container.scrollLeft < 0) {
+    } else if (container.scrollLeft < 1) {
       cell.classList.remove('fixed_cell_one');
     }
   });
 
   tableCells2.forEach((cell) => {
-    if (container.scrollLeft > 0) {
+    if (container.scrollLeft > 1) {
       cell.classList.add('fixed_cell_two');
-    } else if (container.scrollLeft < 0) {
+    } else if (container.scrollLeft < 1) {
       cell.classList.remove('fixed_cell_two');
     }
   });
 
   tableCells2Head.forEach((cell) => {
-    if (container.scrollLeft > 0) {
+    if (container.scrollLeft > 1) {
       cell.classList.add('fixed_cell_two_head');
-    } else if (container.scrollLeft < 0) {
+    } else if (container.scrollLeft < 1) {
       cell.classList.remove('fixed_cell_two_head');
     }
   });
 
   tableLastCell.forEach((cell) => {
     const scrollValueFromRight = container.scrollWidth - container.clientWidth - container.scrollLeft;
-    if (scrollValueFromRight > 0) {
+    if (scrollValueFromRight > 1) {
       cell.classList.add('fixed_last_cell');
-    } else if (scrollValueFromRight < 0) {
+    } else if (scrollValueFromRight < 1) {
       cell.classList.remove('fixed_last_cell');
     }
   });
 
   tableLastHead.forEach((cell) => {
     const scrollValueFromRight = container.scrollWidth - container.clientWidth - container.scrollLeft;
-    if (scrollValueFromRight > 0) {
+    if (scrollValueFromRight > 1) {
       cell.classList.add('fixed_last_cell_head');
-    } else if (scrollValueFromRight < 0) {
+    } else if (scrollValueFromRight < 1) {
       cell.classList.remove('fixed_last_cell_head');
     }
   });
 
 };
+
+const stopScroll = (event) => {
+  const container = containerRef.value;
+  const firstChild = container.querySelectorAll('.fixedScroll td:nth-child(1)');
+  if(firstChild && Array.from(firstChild).includes(event)) {
+    container.classList.remove('fixedScroll')
+    setTimeout(() => {
+      container.classList.add('fixedScroll')
+    }, 500);
+  }
+}
+
+const parentRef = ref(null);
+// const isSticky = ref(false);
+
+// onMounted(() => {
+//   window.addEventListener('scroll', handleScrolltop);
+// });
+
+// onUnmounted(() => {
+//   window.removeEventListener('scroll', handleScrolltop);
+// });
+
+// function handleScrolltop() {
+//   const distanceFromTop = parentRef.value.getBoundingClientRect().top;
+//   isSticky.value = distanceFromTop <= -1;
+//   setTimeout(() => {
+//     handleScroll();
+//   }, 50);
+// }
+
+const getCalculatedHeight = computed(() => {
+  if (!props.noHeight) {
+    if(limit.value < 13) {
+      return 'dd-max-h-[calc(100vh-200px)] dd-min-h-[calc(100vh-200px)]'
+    } else {
+      return 'dd-max-h-[calc(100vh-200px)] dd-min-h-[calc(100vh-200px)]'
+    }
+  }
+})
 
 const allSelected = ref(false);
 const selectedId = ref([]);
@@ -418,22 +458,22 @@ const selectNumberOfRows = (button) => {
   limit.value = parseInt(button.label);
   emits("NumberOfRow", button);
   setTimeout(() => {
-    scrollToRight();
+    handleScroll();
   }, 50)
 };
 
-const scrollToRight = () => {
-  const scrollByAmount = 1;
-  const container = containerRef.value;
-  container.scrollLeft += scrollByAmount;
-};
+// const scrollToRight = () => {
+//   const scrollByAmount = 1;
+//   const container = containerRef.value;
+//   container.scrollLeft += scrollByAmount;
+// };
 
 
-const scrollToLeft = () => {
-  const scrollByAmount = 1;
-  const container = containerRef.value;
-  container.scrollLeft -= scrollByAmount;
-};
+// const scrollToLeft = () => {
+//   const scrollByAmount = 1;
+//   const container = containerRef.value;
+//   container.scrollLeft -= scrollByAmount;
+// };
 //dom click
 const handleDomClick = (event) => {
   if (settingElement.value && !settingElement.value.contains(event.target) && !settingIcon.value.$el.contains(event.target)) {
@@ -462,13 +502,12 @@ const loadMore = () => {
     limit.value += additionalRowsCount;
     emits("loadmore", limit.value);
     setTimeout(() => {
-      scrollToRight();
-    }, 50)
+      handleScroll();
+    }, 0)
   }
 };
 onMounted(() => {
   handleScroll();
-  scrollToRight();
   document.addEventListener('click', handleDomClick);
 });
 onBeforeMount(() => {
@@ -503,7 +542,7 @@ const selectAllFields = () => {
     search.value = false;
     selectedId.value = [];
     setTimeout(() => {
-      scrollToRight();
+      handleScroll();
     }, 0)
   }
   allSelected.value = !allSelected.value;
@@ -520,8 +559,8 @@ const setChecked = (id) => {
     search.value = false;
     selectedId.value.splice(index, 1);
     setTimeout(() => {
-      scrollToLeft();
-    }, 50)
+      handleScroll();
+    }, 0)
   }
 };
 
@@ -546,15 +585,20 @@ const saveSettings = () => {
   savedData.value.forEach((item) => {
     emits("saveChanges", item);
   });
+  setTimeout(() => {
+    handleScroll();
+  }, 0);
 };
 
 const resetDefault = () => {
   savedData.value = props.columns;
   savedData.value.forEach((item) => {
     item.checked = true;
-    item.size = "";
     emits("resetData", item);
   });
+  setTimeout(() => {
+    handleScroll();
+  }, 0);
 };
 
 const openSearch = () => {
@@ -565,8 +609,8 @@ const openSearch = () => {
 const closeSearch = () => {
   search.value = false;
   setTimeout(() => {
-    scrollToRight();
-  }, 50)
+    handleScroll();
+  }, 0)
 };
 
 const isHovered = (col) => {
@@ -662,7 +706,15 @@ tr:hover>td:first-child {
 }
 
 .fixedScroll {
-  overflow-x: scroll;
+  overflow-y: scroll;
+}
+.fixedScroll::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+.fixedScroll::-webkit-scrollbar-thumb {
+  background-color: transparent;
 }
 
 .checkbox_cell_wrapper {
@@ -756,7 +808,7 @@ tr:hover>td:first-child {
 
 /* scroll bar  */
 
-.custom-scrollbar {
+/* .custom-scrollbar {
   scrollbar-width: 2px;
   scrollbar-color: #f1f1f1 !important;
 }
@@ -778,5 +830,5 @@ tr:hover>td:first-child {
 
 .custom-scrollbar::-webkit-scrollbar-thumb:horizontal {
   width: 3px;
-}
+} */
 </style>
