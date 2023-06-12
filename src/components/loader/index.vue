@@ -1,24 +1,15 @@
 <template>
-  <div
-    class="
-      dd-text-sm dd-p-0 dd-mx-0 dd-text-gray-600 dd-w-10
-      hover:dd-text-primaryDark hover:dd-bg-primaryLight
-    "
-  >
-    <div class="dd-flex">
-      <!-- Spinner -->
-      <div class="dd-flex">
-        <div class="dd-relative">
-          <!-- Outer Ring-->
-          <div :class="[loaderOuterRingStyling]"></div>
-          <!-- Inner Ring -->
-          <div :class="[loaderInnerRingStyling]"></div>
-        </div>
-      </div>
+  <div class="dd-h-screen dd-w-full dd-flex dd-items-center dd-justify-center">
+    <!-- Spinner -->
+    <div class="dd-relative">
+      <!-- Outer Ring-->
+      <div :class="[loaderOuterRingStyling]"></div>
+      <!-- Inner Ring -->
+      <div :class="[loaderInnerRingStyling]"></div>
     </div>
   </div>
 </template>
-
+  
 <script>
 export default {
   props: {
@@ -129,3 +120,4 @@ export default {
   },
 };
 </script>
+  
