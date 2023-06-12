@@ -1,17 +1,19 @@
 <template>
   <div class="dd-flow-root" v-bind="$attrs">
-    <div class="dd-min-w-full dd-align-middle">
+    <div class="dd-min-w-full dd-align-middle dd-bg-white">
       <div :class="[
         noHeight
           ? ''
           : getCalculatedHeight,
-        fixed || limit < 1 ? '' : 'fixedScroll',
+        fixed || limit < 1 ? 'empty_state' : 'fixedScroll',
         limit < 1 ? 'dd-overflow-y-hidden' : '',
       ]" ref="containerRef" @scroll="handleScroll">
         <!-- header with group button  -->
         <div
-          class="dd-flex dd-items-center dd-justify-between !dd-w-full group_wrapper !dd-sticky !dd-top-0 !dd-bg-white !dd-z-[1000]" :class="[selectedId.length > 0 ? ' dd-border-b-[1px] dd-border-gray-300 dd-h-[40px]': '']">
-          <div v-if="selectedId.length > 0 || !actionHeader" class="dd-flex dd-items-center dd-gap-2 dd-py-2 dd-pl-3 dd-pr-3 dd-text-left">
+          class="dd-flex dd-items-center dd-justify-between !dd-w-full group_wrapper !dd-sticky !dd-top-0 !dd-bg-white !dd-z-[1000]"
+          :class="[selectedId.length > 0 ? ' dd-border-b-[1px] dd-border-gray-300 dd-h-[40px]' : '']">
+          <div v-if="selectedId.length > 0 || !actionHeader"
+            class="dd-flex dd-items-center dd-gap-2 dd-py-2 dd-pl-3 dd-pr-3 dd-text-left">
             <DdGroupButton :buttons="buttons">
               <dd-Button color="white" v-if="checkBoxProp" size="sm">
                 <div class="dd-flex dd-items-center">
@@ -40,27 +42,29 @@
             <slot name="customDropDown" />
           </div>
           <svgIcon class="!dd-text-gray-500 dd-mr-3" :class="[selectedId.length === 0 ? 'dd-hidden' : '']"
-            :icon="selectedId.length > 0 ? 'Search' : 'none'" size="25" @click="openSearch" />
+            :icon="selectedId.length > 0 ? 'Search' : 'none'" size="20" @click="openSearch" />
 
           <div class="dd-w-full dd-cursor-pointer" v-if="search">
-            <dd-input type="text" v-model="queryInput" @change="searchQuery" class="focus-visible:!dd-border-none dd-relative"
-              :icon="selectedId.length === 0 ? 'Search' : ''" Border="none" placeholder="Search Ticket" :size="selectedId.length > 0 ? 'lg' : 'xl'"
+            <dd-input type="text" v-model="queryInput" @change="searchQuery"
+              class="focus-visible:!dd-border-none dd-relative" :icon="selectedId.length === 0 ? 'Search' : ''"
+              Border="none" placeholder="Search Ticket" :size="selectedId.length > 0 ? 'lg' : 'xl'"
               :prefix="selectedId.length === 0 ? true : false" />
             <svgIcon icon="Close" size="12"
-              class="dd-absolute dd-right-4 dd-text-gray-400 dd-top-4 hover:dd-text-gray-500" @click="closeSearch" />
+              class="dd-absolute dd-right-4 dd-text-gray-400 dd-top-3.5 hover:dd-text-gray-500" @click="closeSearch" />
           </div>
         </div>
         <slot name="actionHeader" />
-        <table class="dd-border-0">
+        <table class="dd-w-full dd-border-0">
           <!-- tabel head  -->
           <thead class="!dd-sticky !dd-top-0 !dd-bg-white !dd-z-[1000]" :class="[limit > 1 ? 'dd-cursor-pointer' : '']"
             v-if="selectedId.length == 0 && !search">
             <tr class="dd-bg-white">
-              <th class="dd-py-2 dd-pl-5 dd-text-left checkbox_wrapper !dd-leading-3 dd-h-[40px] table_head_row dd-sticky dd-top-0"
+              <th
+                class="dd-py-2 dd-pl-5 dd-text-left checkbox_wrapper !dd-leading-3 dd-h-[40px] table_head_row dd-sticky dd-top-0"
                 v-if="checkBoxProp">
                 <dd-checkbox v-model="allSelected" @click="selectAllFields" :disabled="checkAllDisabled || limit < 1" />
               </th>
-              <slot name="thead" />
+              <slot name="th" />
               <th v-for="col in columns" :key="col.value" :value="col" scope="col" v-show="col.checked"
                 class="dd-py-2 dd-pl-3 dd-pr-3 dd-text-left dd-text-xs dd-font-medium dd-text-gray-500 !dd-leading-3 dd-h-[40px] table_head_row dd-sticky dd-top-0"
                 :style="`min-width: ${col.size}px`" @mouseenter="handleMouseEnter(col)" @mouseleave="handleMouseLeave"
@@ -69,24 +73,24 @@
                   <span class="dd-text-xs">{{ col.title }}</span>
                   <svgIcon class="!dd-text-gray-500 dd-relative dd-top-[3px]" icon="Selector" size="10"
                     v-show="isHovered(col) && !limit < 1 && col.sortDirection === ''"
-                    :disabled="col.disabled || limit < 1" />
+                    :disabled="col.disabled || limit < 1" v-if="limit" />
                   <svgIcon class="!dd-text-gray-500 dd-relative dd-top-[3px]" icon="SelectorUp" size="10"
-                    v-show="col.sortDirection === 'desc'" @click="sortRows(col)" />
+                    v-show="col.sortDirection === 'desc'" @click="sortRows(col)" v-if="limit" />
                   <svgIcon class="!dd-text-gray-500 dd-relative dd-top-[3px]" icon="SelectorDown" size="10"
-                    v-show="col.sortDirection === 'asc'" @click="sortRows(col)" />
+                    v-show="col.sortDirection === 'asc'" @click="sortRows(col)" v-if="limit" />
                 </div>
               </th>
 
 
-              <th v-if="headRowActions" class="table_head_row dd-sticky dd-top-0">
-                <div
+              <th class="table_head_row dd-sticky dd-top-0">
+                <div v-if="headRowActions"
                   class="dd-flex dd-items-center dd-justify-end dd-gap-4 dd-relative dd-right-5 !dd-z-[999] dd-bg-white dd-pl-2.5">
                   <svgIcon v-if="searchIcon" class="!dd-text-gray-500" icon="Search" size="20" @click="openSearch" />
                   <svgIcon ref="settingIcon" class="!dd-text-gray-500" :class="[setting ? 'rotated' : 'rotatedReverse']"
                     icon="Settings" size="20" @click="openSettingsBar" />
                 </div>
                 <!-- settings component  -->
-                <transition name="setting">
+                <transition name="setting" v-if="headRowActions">
                   <div v-if="setting" ref="settingElement"
                     class="dd-px-2 dd-pt-2 dd-w-[250px] dd-bg-white dd-container dd-my-[2.1rem] dd-absolute dd-right-4 dd-top-1 dd-shadow-xl dd-rounded-lg dd-border dd-border-gray-100"
                     style="z-index: 1100;">
@@ -124,17 +128,17 @@
               <tr v-for="(row, index) in displayedRows" :key="index"
                 class="[&>*:nth-child(2)]:!dd-font-medium dd-relative dd-border-b dd-border-gray-300" :class="[
                   selectedId.includes(row.id)
-                    ? '[&>*:nth-child(1)]:dd-bg-gray-100 [&>*:nth-child(2)]:dd-bg-gray-100  [&>*:last-child]:dd-bg-gray-100 dd-bg-gray-100'
+                    ? '[&>*:nth-child(1)]:dd-bg-gray-50 [&>*:nth-child(2)]:dd-bg-gray-50  [&>*:last-child]:dd-bg-gray-50 dd-bg-gray-50'
                     : '',
-                  row.disabled ? '[&>*:nth-child(1)]:dd-bg-gray-100 [&>*:nth-child(2)]:dd-bg-gray-100  [&>*:last-child]:dd-bg-gray-100  dd-bg-gray-100 dd-pointer-event-none' : '',
+                  row.disabled ? '[&>*:nth-child(1)]:dd-bg-gray-50 [&>*:nth-child(2)]:dd-bg-gray-50  [&>*:last-child]:dd-bg-gray-50  dd-bg-gray-50 dd-pointer-event-none' : '',
                 ]" @mouseenter="handleMouseEnterActions(row)" @mouseleave="handleMouseLeaveActions">
-                <td v-if="checkBoxProp" class="dd-py-2.5 dd-pl-5 dd-pr-1 dd-text-xs dd-font-medium dd-text-gray-700" @click.prevent="setChecked(row.id), stopScroll($event.target)">
-                  <div
-                    class="dd-w-full"
+                <td v-if="checkBoxProp" class="dd-py-2.5 dd-pl-5 dd-pr-1 dd-text-xs dd-font-medium dd-text-gray-700"
+                  @click="setChecked(row.id)">
+                  <div class="dd-w-full"
                     :class="[selectedId.includes(row.id) ? '[&>*:nth-child(1)]:after:!dd-border-l-[3px] [&>*:nth-child(1)]:after:!dd-border-t-gray-200 [&>*:nth-child(1)]:after:!dd-border-b-gray-200 [&>*:nth-child(1)]:after:!dd-border-teal-600 [&>*:nth-child(1)]:after:dd-left-0 [&>*:nth-child(1)]:after:dd-absolute [&>*:nth-child(1)]:after:dd-top-0 [&>*:nth-child(1)]:after:dd-bottom-0' : '']">
                     <div class="dd-h-full -dd-my-2.5">
                       <dd-checkbox :checked="selectedId && selectedId.includes(row.id) && !row.disabled" :value="row.id"
-                      :disabled="row.disabled || checkAllDisabled" />
+                        :disabled="row.disabled || checkAllDisabled" />
                     </div>
                   </div>
                 </td>
@@ -148,11 +152,14 @@
                   </slot>
                 </td>
                 <!-- actions  -->
-                <td class="dd-pl-9 dd-pr-9 dd-relative dd-min-w-[56px]" :style="`z-index: ${displayedRows.length - index} `"
-                  :class="[row.disabled ? '!dd-pointer-event-none' : '']" @click.prevent="stopScroll($event.target)">
+                <td class="dd-pl-9 dd-pr-9 dd-relative dd-min-w-[56px]"
+                  :style="`z-index: ${displayedRows.length - index} `"
+                  :class="[row.disabled ? '!dd-pointer-event-none' : '']">
                   <div v-if="rowActions">
                     <DdGroupButton class="dd-absolute dd-top-1 dd-right-5 dd-z-10"
-                      :class="[!(isActionHovered(row) || isMouseHoveredRow(row)) ? '!dd-p-0 dd-rounded-none !dd-border-none dd-ring-0 !dd-shadow-none' : '!dd-p-0']">
+                      :class="[!(isActionHovered(row) || isMouseHoveredRow(row)) ? '!dd-p-0 dd-rounded-none !dd-border-none dd-ring-0 !dd-shadow-none' : '!dd-p-0']"
+                      ref="groupBtnRef">
+                      <slot name="customActions" />
                       <dd-Button @click="editRow()" color="white" v-if="(isActionHovered(row) || isMouseHoveredRow(row))">
                         <svgIcon class="dd-mt-[5px] dd-m-auto dd-text-gray-500" color="white" icon="Pencil" size="16" />
                       </dd-Button>
@@ -176,8 +183,8 @@
             <slot name="tbody" />
           </tbody>
           <tbody v-else>
-            <tr>
-              <td :colspan="columns.length + 2" class="dd-h-full">
+            <tr class="">
+              <td :colspan="columns.length + 2" class="dd-h-full hover:!dd-bg-transparent">
                 <slot name="noData" />
                 <div class="dd-flex dd-items-center dd-justify-center dd-min-h-[60vh]" v-if="emptyState">
                   <svgIcon size="140" color="white" icon="noData" />
@@ -191,12 +198,11 @@
       </div>
       <div v-if="footer && limit > 1" class="dd-flex dd-items-center dd-justify-between dd-py-3 dd-px-3">
         <DdGroupButton :buttons="buttons">
-          <dd-Button v-for="button in buttons" :key="button.id" :color="button.color" :size="button.size" :disabled="parseInt(button.label) > rows.length"
-            @click="selectNumberOfRows(button)">
-            <span class="dd-text-sm"
-              :class="[parseInt(button.label) === limit ? '!dd-font-semibold dd-text-gray-600' : 'dd-font-normal dd-text-gray-500']">{{
-                button.label }}</span>
-            <svgIcon v-if="showIcon" color="white" :icon="button.icon" :size="size" />
+          <dd-Button v-for="button in buttons" :key="button.id" :color="button.color" :size="button.size"
+            :disabled="parseInt(button.label) > rows.length" @click="selectNumberOfRows(button)">
+            <span class="dd-text-sm dd-text-gray-500 dd-font-normal" :class="setActiveButton(button.label)">{{
+              button.label }}</span>
+            <svgIcon v-if="showIcon" color="white" :icon="button.icon" size="14" />
           </dd-Button>
         </DdGroupButton>
 
@@ -212,7 +218,7 @@
 </template>
 
 <script setup>
-import { computed, nextTick, onBeforeMount, onMounted, onUnmounted, reactive, ref, watch, watchEffect } from "vue";
+import { computed, onBeforeMount, onMounted, ref, watch, watchEffect } from "vue";
 import DdButton from "../buttons/index.vue";
 import svgIcon from "../svgIcon/index.vue";
 import DdCheckbox from "../checkbox/index.vue";
@@ -273,10 +279,6 @@ const props = defineProps({
     type: Boolean,
     default: true,
   },
-  size: {
-    type: String,
-    default: "12",
-  },
   selected: {
     type: String,
     default: "",
@@ -284,10 +286,6 @@ const props = defineProps({
   headerselectedActions: {
     type: String,
     default: "",
-  },
-  actionsIconSize: {
-    type: String,
-    default: "14",
   },
   tabelHeight: {
     type: String,
@@ -395,16 +393,16 @@ const handleScroll = () => {
 
 };
 
-const stopScroll = (event) => {
-  const container = containerRef.value;
-  const firstChild = container.querySelectorAll('.fixedScroll td:nth-child(1)');
-  if(firstChild && Array.from(firstChild).includes(event)) {
-    container.classList.remove('fixedScroll')
-    setTimeout(() => {
-      container.classList.add('fixedScroll')
-    }, 500);
-  }
-}
+// const stopScroll = (event) => {
+//   const container = containerRef.value;
+//   const firstChild = container.querySelectorAll('.fixedScroll td:nth-child(1)');
+//   if(firstChild && Array.from(firstChild).includes(event)) {
+//     container.classList.remove('fixedScroll')
+//     setTimeout(() => {
+//       container.classList.add('fixedScroll')
+//     }, 0);
+//   }
+// }
 
 const parentRef = ref(null);
 // const isSticky = ref(false);
@@ -427,13 +425,19 @@ const parentRef = ref(null);
 
 const getCalculatedHeight = computed(() => {
   if (!props.noHeight) {
-    if(limit.value < 13) {
+    if (limit.value < 13) {
       return 'dd-max-h-[calc(100vh-200px)] dd-min-h-[calc(100vh-200px)]'
     } else {
       return 'dd-max-h-[calc(100vh-200px)] dd-min-h-[calc(100vh-200px)]'
     }
   }
-})
+});
+
+const setActiveButton = computed(() => {
+  return (label) => {
+    return activeButton.value === label ? '!dd-text-gray-700 !dd-font-medium' : '';
+  };
+});
 
 const allSelected = ref(false);
 const selectedId = ref([]);
@@ -452,9 +456,11 @@ const settingIcon = ref(null);
 const allCheckboxesChecked = ref(false);
 const headerActions = ref(props.headerselectedActions);
 const rowActionsIcons = ref(props.selected);
+const activeButton = ref('');
 
 const selectNumberOfRows = (button) => {
   selectedButton.value = button;
+  activeButton.value = button.label;
   limit.value = parseInt(button.label);
   emits("NumberOfRow", button);
   setTimeout(() => {
@@ -702,18 +708,32 @@ const deleteRow = () => {
 /* fixed column */
 tr:hover td:not(:first-child),
 tr:hover>td:first-child {
-  background-color: #f3f4f6;
+  background-color: #F9FAFB
 }
 
 .fixedScroll {
-  overflow-y: scroll;
+  overflow: scroll;
 }
+
 .fixedScroll::-webkit-scrollbar {
   width: 0;
   height: 0;
 }
 
 .fixedScroll::-webkit-scrollbar-thumb {
+  background-color: transparent;
+}
+
+.empty_state {
+  overflow-y: scroll;
+}
+
+.empty_state::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+.empty_state::-webkit-scrollbar-thumb {
   background-color: transparent;
 }
 
@@ -756,7 +776,7 @@ tr:hover>td:first-child {
 
 .fixed_last_cell {
   position: sticky;
-  right: 0;
+  right: -1px;
   background: #ffff;
   margin: 0 !important;
   box-shadow: 2px 0 2px -2px rgba(0, 0, 0, 0.12) inset;
@@ -764,7 +784,7 @@ tr:hover>td:first-child {
 
 .fixed_last_cell_head {
   position: sticky;
-  right: 0;
+  right: -1px;
   background: #ffff;
 }
 
@@ -830,5 +850,4 @@ tr:hover>td:first-child {
 
 .custom-scrollbar::-webkit-scrollbar-thumb:horizontal {
   width: 3px;
-} */
-</style>
+} */</style>

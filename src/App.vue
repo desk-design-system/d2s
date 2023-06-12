@@ -1,45 +1,86 @@
 <template>
-  <div class="dd-bg-gray-50">
-    <dd-table :rows="rows" :columns="columns" :buttons="buttons" :Actions="Actions" :values="values" defaultRow footer emptyState @editRow="reset" />
-  </div>
-  <!-- <div>
-    <DdTopbar />
-  </div> -->
-  <!-- <div class="dd-container dd-mx-auto dd-m-5"> -->
-  <!-- <dd-wraper> -->
-  <!-- <ddHeadr :items="items" />
-      <ddAlert title="elo" closable />
-      <ddAvatar srcLink="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg" />
-      <ddBadge title="elo" />
-      <ddBadge title="elo" rounded size="large" />
-      <ddBadge title="elo" rounded size="large" dot />
-      <ddButton @click="fun" prefix icon="Plus" title="Form" />
-      <ddBred :items="options" seprator="chevron" shadow />
-      <ddCheckBox v-model="model" /> -->
-  <!-- <ddObserver ref="wraperForm"> -->
-  <!-- <ddRadion :options="options" /> -->
-  <!-- <ddInput  rules="required|min:6" label="Input" v-model="text"  />
-    <ddInput  rules="required|confirmed:@Jazib" label="Confirm" v-model="coner"  /> -->
-  <!-- <ddMulti label="elo" rules="required" showTooltip customIcon v-model="text" :options="options" />
-        <div class="dd-mb-10">
-          <DdAccordion rules="required" :srcLink="srcLink" :showAvatar="showAvatar">
-            Customers
-            <template #content>
-              <div>test dropdown</div>
-            </template>
-          </DdAccordion>
-          <DdPagination :count="count" :limit="limit" :offset="offset" @fetch-data="getData" />
-        </div> -->
-  <!-- <ddSelect v-model="selected" :options="filteredOptions" :filterable="filterable" @searchQuery="search"
-          @addQuery="addquery" /> -->
-  <!-- </ddObserver> -->
-  <!-- <dd-text-area v-model="mod" rules="^[0-9]+$" label="rules" /> -->
-  <!-- </dd-wraper> -->
-  <!-- </div> -->
+  <div class="dd-w-full dd-bg-gray-100 ">
+    <div class="dd-flex dd-items-center dd-justify-between dd-bg-white dd-w-full dd-relative dd-top-0 dd-z-20">
+      <div class="dd-flex dd-items-center dd-py-3 dd-px-4 dd-gap-4">
+        <div class="dd-bg-teal-700 dd-pt-1 dd-pb-1.5 dd-px-3 dd-rounded-3xl">
+          <span class="dd-text-white dd-text-center">Repair shop</span>
+        </div>
+        <div>
+          <input type="text" placeholder="Spark Search"
+            class="dd-border-2 dd-border-gray-100 dd-py-1.5 dd-px-3 focus-visible:dd-outline-none dd-rounded-lg dd-w-[500px]">
+        </div>
+      </div>
+      <div class="dd-flex dd-items-center dd-py-3 dd-px-4 dd-gap-4">
+        <DdGroupButton>
+          <dd-Button color="white">
+            Register A
+          </dd-Button>
+          <dd-Button color="white">
+            Morning shift
+          </dd-Button>
+        </DdGroupButton>
+        <div class="dd-flex dd-items-center dd-gap-3">
+          <svgIcon color="white" icon="Bulb" class="dd-mb-1" />
+          <div class="dd-w-8 dd-h-8 dd-bg-gray-200 dd-rounded-full"></div>
+        </div>
+      </div>
+    </div>
+    <div class="dd-w-16 dd-bg-white dd-h-full dd-absolute dd-left-0 dd-top-0 dd-z-10">
+      <div class="dd-flex dd-items-center dd-justify-between dd-h-full dd-flex-col">
+        <div class="dd-flex dd-items-center dd-text-center dd-gap-8 dd-flex-col dd-mt-24">
+          <svgIcon color="white" icon="Bulb" class="dd-text-gray-400 hover:dd-text-gray-700" />
+          <svgIcon color="white" icon="switch" class="dd-text-gray-400 hover:dd-text-gray-700" />
+          <svgIcon color="white" icon="Star" class="dd-text-gray-400 hover:dd-text-gray-700" />
+          <svgIcon color="white" icon="Lock" class="dd-text-gray-400 hover:dd-text-gray-700" />
+          <svgIcon color="white" icon="Mail" class="dd-text-gray-400 hover:dd-text-gray-700" />
+        </div>
+        <div class=" dd-h-fit">
+          <div class="dd-border-t dd-border-gray-300 dd-w-6 dd-mb-6"></div>
+          <svgIcon class="!dd-text-gray-500 dd-mb-6" icon="Settings" size="20" />
+        </div>
+      </div>
+    </div>
+    <div class="dd-w-full dd-h-full">
+      <div class="dd-w-full">
+        <div class="dd-flex dd-items-center dd-justify-between dd-p-6">
+          <span class="dd-ml-16 dd-text-gray-700 dd-text-xl dd-font-semibold">Manage Tickets</span>
+          <div class="dd-flex dd-gap-4">
+            <dd-Button color="white">
+              Export
+            </dd-Button>
+            <dd-Button>
+              Create Ticket
+            </dd-Button>
+          </div>
+        </div>
+        <div class="dd-ml-16 dd-flex">
+          <div class="dd-w-[5%]">
+          <div class="dd-ml-5 dd-flex dd-gap-3 dd-flex-col dd-w-fit">
+            <dd-Button color="white" size="sm">
+              <svgIcon color="white" icon="Bulb" class="dd-flex dd-items-center dd-justify-center dd-text-gray-400 hover:dd-text-gray-700" />
+            </dd-Button>
+            <dd-Button color="white" size="sm">
+              <svgIcon color="white" icon="switch" class="dd-flex dd-items-center dd-justify-center dd-text-gray-400 hover:dd-text-gray-700" />
+            </dd-Button>
+            <dd-Button color="white" size="sm">
+              <svgIcon color="white" icon="Star" class="dd-flex dd-items-center dd-justify-center dd-text-gray-400 hover:dd-text-gray-700" />
+            </dd-Button>
+          </div>
+          </div>
+          <div class="dd-w-[93%]">
+            <dd-table :rows="rows" :columns="columns" :buttons="buttons" :Actions="Actions" :values="values" defaultRow footer emptyState @searchQuery="searchQuery" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> 
 </template>
 
 <script setup>
 import { ref, computed } from "vue";
+import DdGroupButton from "./components/groupButton/index.vue";
+import DdButton from "./components/buttons/index.vue";
+import svgIcon from "./components/svgIcon/index.vue";
 import DdTable from "./components/table/index.vue"
 import DdSelect from "./components/select/index.vue"
 import DdAccordion from "./components/Accordion/index.vue";
@@ -70,7 +111,7 @@ const columns = ref([
     title: 'ID',
     value: 'id',
     checked: true,
-    size: "100",
+    size: "60",
     id: 1,
     disabled: true,
     sortDirection: 'asc',
@@ -506,17 +547,17 @@ const values = ref([
   },
 ]);
 
-function reset() {
-  console.log('item');
+function searchQuery(query) {
+  console.log(query, 'query');
 }
 </script>
 
 
 <style>
-#app {
+body {
   padding: 0;
   margin: 0;
-  overflow: hidden !important;
-  overflow-y: hidden !important;
+  overflow-x: hidden !important;
+  background: #F3F4F6 !important;
 }
 </style>
