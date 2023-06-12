@@ -14,50 +14,16 @@ export const useMessageBox = (globalProps = {}) => {
       return promise;
     },
     // error(title, message, saveTitle, closeTitle, closed, solved, modalWidth) {
-    error(options) {
-      return this.open(
-        Object.assign(
-          {},
-          {
-            title: options.title,
-            message: options.message,
-            saveTitle: options.saveTitle,
-            closeTitle: options.closeTitle,
-            type: options.type,
-            closed: options.closed,
-            solved: options.solved,
-            modalWidth: options.odalWidth,
-          }
-        )
-      );
-    },
-    success(options) {
-      return this.open(
-        Object.assign(
-          {},
-          {
-            title: options.title,
-            message: options.message,
-            saveTitle: options.saveTitle,
-            closeTitle: options.closeTitle,
-            type: options.type,
-            closed: options.closed,
-            solved: options.solved,
-            modalWidth: options.odalWidth,
-          }
-        )
-      );
-    },
-    info(title, message, saveTitle, closeTitle, closed, solved, modalWidth, options) {
+    error(options, title, message, saveTitle, closeTitle, closed, solved, modalWidth) {
       return this.open(
         Object.assign(
           {},
           {
             title: title ?? options.title,
-            message: message ?? options.message,
+            message: message ? message : options.message,
             saveTitle: saveTitle ?? options.saveTitle,
             closeTitle: closeTitle ?? options.closeTitle,
-            type: type ?? options.type,
+            type: "Error" ?? options.type,
             closed: closed ?? options.closed,
             solved: solved ?? options.solved,
             modalWidth: modalWidth ?? options.modalWidth,
@@ -65,13 +31,47 @@ export const useMessageBox = (globalProps = {}) => {
         )
       );
     },
-    warning(title, message, saveTitle, closeTitle, closed, solved, modalWidth, options) {
+    success(options, title, message, saveTitle, closeTitle, closed, solved, modalWidth) {
       return this.open(
         Object.assign(
           {},
           {
             title: title ?? options.title,
-            message: message ?? options.message,
+            message: message ? message : options.message,
+            saveTitle: saveTitle ?? options.saveTitle,
+            closeTitle: closeTitle ?? options.closeTitle,
+            type: "Success" ?? options.type,
+            closed: closed ?? options.closed,
+            solved: solved ?? options.solved,
+            modalWidth: modalWidth ?? options.modalWidth,
+          }
+        )
+      );
+    },
+    info(options, title, message, saveTitle, closeTitle, closed, solved, modalWidth) {
+      return this.open(
+        Object.assign(
+          {},
+          {
+            title: title ?? options.title,
+            message: message ? message : options.message,
+            saveTitle: saveTitle ?? options.saveTitle,
+            closeTitle: closeTitle ?? options.closeTitle,
+            type: "Info" ?? options.type,
+            closed: closed ?? options.closed,
+            solved: solved ?? options.solved,
+            modalWidth: modalWidth ?? options.modalWidth,
+          }
+        )
+      );
+    },
+    warning(options, title, message, saveTitle, closeTitle, closed, solved, modalWidth) {
+      return this.open(
+        Object.assign(
+          {},
+          {
+            title: title ?? options.title,
+            message: message ? message : options.message,
             saveTitle: saveTitle ?? options.saveTitle,
             closeTitle: closeTitle ?? options.closeTitle,
             type: "Warning" ?? options.type,
