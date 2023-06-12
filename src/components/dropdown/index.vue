@@ -35,7 +35,7 @@
         <div class="dd-py-1">
           <MenuItem @click="getClick(item)" v-for="(item, index) in options" :key="index" v-slot="{ active }">
           <span href="#"
-            :class="[active ? 'dd-bg-teal-50 dd-text-teal-600' : 'dd-text-gray-700', 'dd-block dd-py-2 dd-px-4 dd-cursor-pointer', size == 'xs' ? 'dd-text-xs' : 'dd-text-sm']">
+            :class="[active ? 'dd-bg-teal-50 dd-text-teal-600' : 'dd-text-gray-700', 'dd-block dd-py-1 dd-px-4 dd-cursor-pointer', size == 'xs' ? 'dd-text-xs' : 'dd-text-sm']">
             <slot name="items" :item="item">
               <svgIcon v-if="showIcon" :color="item.color ? item.color : ''" :icon="item.icon ? item.icon : ''"
                 :size="item.size ? item.size : ''" />
@@ -176,8 +176,8 @@ const basicButton = computed(() => {
   //   }
   // } else {
   return {
-    "dd-px-2.5 dd-py-1.5 dd-h-6 dd-text-xs dd-rounded": props.size === "xs",
-    "dd-px-3 dd-py-2 dd-text-sm dd-h-7 dd-rounded-md":
+    "dd-px-2.5 dd-py-0 !dd-h-6 dd-text-xs dd-rounded": props.size === "xs",
+    "dd-px-3 dd-py-2 dd-text-sm !dd-h-7 dd-rounded-md":
       props.size === "sm",
     "dd-px-4 dd-py-2 dd-text-sm dd-rounded-md dd-h-8": props.size === "base",
     "dd-px-4 dd-py-2 dd-text-base dd-rounded-md dd-h-9": props.size === "lg",

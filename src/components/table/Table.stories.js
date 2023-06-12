@@ -143,9 +143,9 @@ export default {
         },
       },
     },
-    headerActions: {
+    headRowActions: {
       description:
-        "To replace actions in thead at first headerActions = false and use actionHeader slot to pass custom actions",
+        "To replace actions in thead at first headRowActions = false and use actionHeader slot to pass custom actions",
       table: {
         defaultValue: {
           summary: [],
@@ -155,6 +155,15 @@ export default {
     selected: {
       description:
         "To select row actions",
+      table: {
+        defaultValue: {
+          summary: "",
+        },
+      },
+    },
+    headerselectedActions: {
+      description:
+        "To select actions from header dropdown",
       table: {
         defaultValue: {
           summary: "",
