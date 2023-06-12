@@ -1,5 +1,5 @@
 <template>
-  <div class="dd-h-screen dd-w-full dd-flex dd-items-center dd-justify-center">
+  <div class="dd-h-full dd-w-full dd-flex dd-items-center dd-justify-center">
     <!-- Spinner -->
     <div class="dd-relative">
       <!-- Outer Ring-->
