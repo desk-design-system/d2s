@@ -30,8 +30,6 @@ configure({
 const app = createApp(App);
 app.provide("$notification", useNotification());
 app.config.globalProperties.$notification = useNotification();
-console.log(app.config.globalProperties.$notification, 'app.config.globalProperties.$notification');
 app.provide("$modal", useMessageBox());
 app.config.globalProperties.$modal = useMessageBox();
-console.log(app.config.globalProperties.$modal, 'app.config.globalProperties.$modal');
 app.mount("#app");

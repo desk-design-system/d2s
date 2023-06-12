@@ -6,11 +6,11 @@ export default {
   component: DdButton,
   // More on argTypes: https://storybook.js.org/docs/vue/api/argtypes
   argTypes: {
-    message: {
+    title: {
       description: "Add modal Title",
       table: {
         defaultValue: {
-          summary: null,
+          summary: "Delete Unit",
         },
       },
     },
@@ -18,7 +18,7 @@ export default {
       description: "Add modal message",
       table: {
         defaultValue: {
-          summary: null,
+          summary: "Are you sure you want to delete this unit from the multistore? This action cannot be undone",
         },
       },
     },
@@ -26,7 +26,7 @@ export default {
       description: "Success button title",
       table: {
         defaultValue: {
-          summary: null,
+          summary: "Yes, Delete",
         },
       },
     },
@@ -34,7 +34,7 @@ export default {
       description: "Close button title",
       table: {
         defaultValue: {
-          summary: null,
+          summary: "Close",
         },
       },
     },
@@ -42,7 +42,7 @@ export default {
       description: "show close button",
       table: {
         defaultValue: {
-          summary: null,
+          summary: true,
         },
       },
     },
@@ -50,7 +50,7 @@ export default {
       description: "show success button",
       table: {
         defaultValue: {
-          summary: null,
+          summary: true,
         },
       },
     },
@@ -58,7 +58,7 @@ export default {
       description: "primary, succeess, warning, error types",
       table: {
         defaultValue: {
-          summary: null,
+          summary: "",
         },
       },
     },
@@ -66,7 +66,7 @@ export default {
       description: "Modal width",
       table: {
         defaultValue: {
-          summary: null,
+          summary: "45%",
         },
       },
     },
