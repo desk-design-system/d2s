@@ -24,6 +24,7 @@
         hasError
           ? '!dd-border-red-600 focus:!dd-border-red-600 dd-focus:!dd-ring-red-600'
           : '!dd-border-gray-300 focus:dd-ring-teal-600 focus:!dd-border-teal-600',
+        Right ? 'dd-text-right !dd-text-xs !dd-text-gray-400 !dd-font-normal' : 'dd-text-left',
         errorMessage ? 'dd-mb-1' : '',
         disabled
           ? '!dd-text-gray-500 dd-ring-gray-200 dd-bg-gray-50 dd-cursor-not-allowed dd-select-none'
@@ -78,7 +79,10 @@ const props = defineProps({
     type: [String, RegExp, Function],
     default: "",
   },
-
+  Right: {
+    type: Boolean,
+    default: false,
+  },
   prefix: {
     type: Boolean,
     default: false,

@@ -1,9 +1,7 @@
 <template>
-  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-antenna-bars-1" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-  <path stroke="currentColor" d="M6 18l0 .01" />
-  <path stroke="currentColor" d="M10 18l0 .01" />
-  <path stroke="currentColor" d="M14 18l0 .01" />
-  <path stroke="currentColor" d="M18 18l0 .01" />
-</svg>
+  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-dots" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path stroke="#6B7280" d="M5 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+    <path stroke="#6B7280" d="M12 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+    <path stroke="#6B7280" d="M19 12m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+  </svg>
 </template>

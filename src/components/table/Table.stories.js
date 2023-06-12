@@ -143,6 +143,42 @@ export default {
         },
       },
     },
+    headRowActions: {
+      description:
+        "To replace actions in thead at first headRowActions = false and use actionHeader slot to pass custom actions",
+      table: {
+        defaultValue: {
+          summary: [],
+        },
+      },
+    },
+    selected: {
+      description:
+        "To select row actions",
+      table: {
+        defaultValue: {
+          summary: "",
+        },
+      },
+    },
+    headerselectedActions: {
+      description:
+        "To select actions from header dropdown",
+      table: {
+        defaultValue: {
+          summary: "",
+        },
+      },
+    },
+    searchIcon: {
+      description:
+        "To replace actions in thead actionHeader = false and use actionHeader slot to pass custom actions",
+      table: {
+        defaultValue: {
+          summary: [],
+        },
+      },
+    },
     thead: {
       description: "Use thead slot to add custom content in thead",
       table: {
