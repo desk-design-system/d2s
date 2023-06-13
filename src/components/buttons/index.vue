@@ -1,7 +1,8 @@
 <template>
   <!-- <div class="base"> -->
   <!-- default -->
-  <button v-bind="$attrs" v-if="type == 'default'" :class="{ ...defaultButton }" class="
+  {{ id }}
+  <button v-bind="$attrs" :id="id" v-if="type == 'default'" :class="{ ...defaultButton }" class="
               dd-inline-flex
               dd-items-center
               dd-shadow-sm
@@ -53,7 +54,7 @@
               dd-whitespace-nowrap
               dd-cursor-pointer
             ">
-            <svg v-if="loader" aria-hidden="true" :class="[size == 'xs' || size == 'sm' ? 'dd-h-3.5 dd-w-3.5' : 'dd-h-4 dd-w-4']"
+    <svg v-if="loader" aria-hidden="true" :class="[size == 'xs' || size == 'sm' ? 'dd-h-3.5 dd-w-3.5' : 'dd-h-4 dd-w-4']"
       class=" dd-animate-spin dd-fill-teal-600 dd-text-white-50 " viewBox="0 0 100 101" fill="none"
       xmlns="http://www.w3.org/2000/svg">
       <path
@@ -90,7 +91,7 @@
               dd-whitespace-nowrap
               dd-cursor-pointer
             ">
-            <svg v-if="loader" aria-hidden="true" :class="[size == 'xs' || size == 'sm' ? 'dd-h-3.5 dd-w-3.5' : 'dd-h-4 dd-w-4']"
+    <svg v-if="loader" aria-hidden="true" :class="[size == 'xs' || size == 'sm' ? 'dd-h-3.5 dd-w-3.5' : 'dd-h-4 dd-w-4']"
       class=" dd-animate-spin dd-fill-teal-600 dd-text-white-50 " viewBox="0 0 100 101" fill="none"
       xmlns="http://www.w3.org/2000/svg">
       <path
@@ -129,7 +130,7 @@
               dd-whitespace-nowrap
               dd-cursor-pointer
             ">
-            <svg v-if="loader" aria-hidden="true" :class="[size == 'xs' || size == 'sm' ? 'dd-h-3.5 dd-w-3.5' : 'dd-h-4 dd-w-4']"
+    <svg v-if="loader" aria-hidden="true" :class="[size == 'xs' || size == 'sm' ? 'dd-h-3.5 dd-w-3.5' : 'dd-h-4 dd-w-4']"
       class=" dd-animate-spin dd-fill-teal-600 dd-text-white-50 " viewBox="0 0 100 101" fill="none"
       xmlns="http://www.w3.org/2000/svg">
       <path
@@ -159,6 +160,10 @@ export default {
     loader: {
       type: Boolean,
       default: false,
+    },
+    id: {
+      type: String || Number,
+      default: null,
     },
     suffix: {
       type: Boolean,
@@ -204,25 +209,25 @@ export default {
     },
     size: {
       type: String,
-      validator: function ( value ) {
+      validator: function (value) {
         // The value must match one of these strings
         return (
-          ["xs", "sm", "base", "lg", "xl"].indexOf( value ) !== -1
+          ["xs", "sm", "base", "lg", "xl"].indexOf(value) !== -1
         )
       },
       default: "base",
     },
     type: {
       type: String,
-      validator: function ( value ) {
+      validator: function (value) {
         // The value must match one of these strings
-        return ["default", "round", "text", "circle"].indexOf( value ) !== -1
+        return ["default", "round", "text", "circle"].indexOf(value) !== -1
       },
       default: "default",
     },
   },
   computed: {
-    defaultButton () {
+    defaultButton() {
       return {
         "dd-border-gray-300 dd-text-gray-700 dd-border  focus:dd-outline-none":
           this.color == "",
@@ -249,22 +254,22 @@ export default {
           this.color === "selected",
       }
     },
-    prefixSpace () {
-      if ( this.prefix && this.icon && !this.loader && this.$slots.default || this.title ) {
+    prefixSpace() {
+      if (this.prefix && this.icon && !this.loader && this.$slots.default || this.title) {
         return 'dd-ml-1.5'
 
       }
     },
-    sufixSpace () {
-      if ( this.suffix && this.icon && !this.loader && this.$slots.default || this.title ) {
+    sufixSpace() {
+      if (this.suffix && this.icon && !this.loader && this.$slots.default || this.title) {
         return 'dd-mr-1.5'
 
       }
     },
-    btnIconSize () {
-      if ( this.size == 'xs' ) {
+    btnIconSize() {
+      if (this.size == 'xs') {
         return '10'
-      } else if ( this.size == 'sm' ) {
+      } else if (this.size == 'sm') {
         return '12'
       } else {
         return '16'
@@ -272,7 +277,7 @@ export default {
     }
 
   },
-  data () {
+  data() {
     return {}
   },
   components: {

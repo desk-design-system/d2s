@@ -95,17 +95,6 @@ import ddRadion from "./components/radiobutton/index.vue";
 import ddWraper from "./components/scrollerApp/index.vue";
 import ddMulti from "./components/multiSelect/index.vue";
 
-
-const people = ref([
-  { value: 1, name: "Leslie Alexander" },
-  { value: 2, name: "Aeslie Blexander" },
-  { value: 3, name: "Ceslie Dlexander" },
-  { value: 4, name: "Eeslie Flexander" },
-  { value: 5, name: "Geslie Hlexander" },
-  { value: 6, name: "Ieslie Jlexander" },
-  { value: 7, name: "Jeslie KJlexander" },
-  // More people...
-]);
 const columns = ref([
   {
     title: 'ID',
