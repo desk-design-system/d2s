@@ -1,7 +1,55 @@
 /* ./src/index.css */
 /* .dd-base{ */
-  /* @tailwind base; */
-  @import "base.css";
-  @tailwind components;
-  @tailwind utilities;
+/* @tailwind base; */
+@import "base.css";
+@tailwind components;
+@tailwind utilities;
 /* } */
+
+@layer components {
+  /* Stepper classes */
+  .dd-stepper-selected {
+    @apply dd-flex dd-flex-col  dd-border-teal-600 dd-py-2 dd-pl-4   dd-border-t-4 md:dd-pb-0 md:dd-pl-0 md:dd-pt-4;
+  }
+
+  .dd-stepper-unselected {
+    @apply dd-flex dd-flex-col  dd-border-gray-100 dd-py-2 dd-pl-4   dd-border-t-4 md:dd-pb-0 md:dd-pl-0 md:dd-pt-4;
+  }
+
+  .dd-stepper-step-text {
+    @apply dd-text-sm dd-font-medium dd-text-teal-600;
+  }
+
+  .dd-stepper-step-title {
+    @apply dd-text-gray-700 dd-text-sm dd-font-medium;
+  }
+
+  /* Textarea and input classes */
+
+  .dd-text-area {
+    @apply dd-block dd-w-full dd-rounded-md dd-border-0 dd-py-1.5 dd-px-2 !dd-outline-none dd-text-gray-900 dd-shadow-sm dd-ring-1 dd-ring-inset dd-ring-gray-300 placeholder:dd-text-gray-400  focus-within:dd-ring-inset focus-within:dd-ring-teal-600 sm:dd-text-sm sm:dd-leading-6;
+  }
+
+  .dd-input-label {
+    @apply dd-block dd-text-sm dd-font-medium dd-text-gray-700 dd-mb-1;
+  }
+
+  .dd-input-error {
+    @apply !dd-border-red-600 focus:!dd-border-red-600 focus:!dd-ring-red-600;
+  }
+
+  .dd-input-no-error {
+    @apply !dd-border-gray-300 focus:dd-ring-teal-600 focus:!dd-border-teal-600;
+  }
+
+  .dd-input-disabled {
+    @apply !dd-text-gray-500 dd-ring-gray-200 dd-bg-gray-50 dd-cursor-not-allowed dd-select-none;
+  }
+
+  .dd-input-error-message {
+    @apply dd-text-xs dd-text-red-500 dd-capitalize dd-pt-px;
+  }
+  .dd-group-button {
+    @apply dd-inline-flex dd-shadow-sm dd-justify-start [&>*:first-child]:!dd-rounded-l [&>*:last-child]:!dd-rounded-r [&>*:last-child]:!dd-border-r [&>button]:!dd-ring-0 [&>button]:!dd-rounded-none [&>button]:!dd-border [&>button]:!dd-border-gray-300 [&>button]:!dd-border-r-0;
+  }
+}

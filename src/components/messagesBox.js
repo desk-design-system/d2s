@@ -1,21 +1,20 @@
-// /* eslint-disable import/prefer-default-export */
-import * as DDSystem from "./components.js"
-export * as DDSystem from "./components.js"
-import {useNotification} from "./notification"
-import AllRules from "@vee-validate/rules"
-import {defineRule, configure} from "vee-validate"
-import {localize} from "@vee-validate/i18n"
+import * as DDSystem from "./components.js";
+export * as DDSystem from "./components.js";
+import { useMessageBox } from "./MessageBox";
+import AllRules from "@vee-validate/rules";
+import { defineRule, configure } from "vee-validate";
+import { localize } from "@vee-validate/i18n";
 
-const install = (app, options) =>{
-  app.provide('$notification', useNotification())
-  app.config.globalProperties.$notification = useNotification()
+const install = (app, options) => {
+  app.provide("$modal", useMessageBox());
+  app.config.globalProperties.$modal = useMessageBox();
   Object.keys(DDSystem).forEach((name) => {
     app.component(name, DDSystem[name]);
   });
-  
+
   Object.keys(AllRules).forEach((rule) => {
-    defineRule(rule, AllRules[rule])
-  })
+    defineRule(rule, AllRules[rule]);
+  });
   configure({
     generateMessage: localize("en", {
       messages: {
@@ -28,13 +27,10 @@ const install = (app, options) =>{
         integer: "This {field} must be an integer",
         max: "This {field} not be greater than 0:{max} values",
         min: "This {field} must be at least 0:{min} values",
-        numeric: "This {field} may only contain numeric values"
-      }
-    })
-  })
-}
+        numeric: "This {field} may only contain numeric values",
+      },
+    }),
+  });
+};
 
-
-
-
-export default install
+export default install;

@@ -1,0 +1,86 @@
+<template>
+  <svg
+    width="100px"
+    height="100px"
+    viewBox="0 0 100 100"
+    version="1.1"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+  >
+    <title>Group</title>
+    <g
+      id="📝-Book-a-Demo-Form-Final"
+      stroke="none"
+      stroke-width="1"
+      fill="none"
+      fill-rule="evenodd"
+    >
+      <g id="3" transform="translate(-872.000000, -468.000000)">
+        <g id="Group-2" transform="translate(733.000000, 428.000000)">
+          <g id="Group" transform="translate(139.000000, 40.000000)">
+            <polygon id="Path" points="0 0 100 0 100 100 0 100"></polygon>
+            <path
+              d="M49.1458333,87.5 L20.8333333,87.5 C16.2309604,87.5 12.5,83.7690396 12.5,79.1666667 L12.5,29.1666667 C12.5,24.5642938 16.2309604,20.8333333 20.8333333,20.8333333 L70.8333333,20.8333333 C75.4357062,20.8333333 79.1666667,24.5642938 79.1666667,29.1666667 L79.1666667,45.8333333"
+              id="Path"
+              stroke="currentColor"
+              stroke-width="6.25"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            ></path>
+            <circle
+              id="Oval"
+              stroke="currentColor"
+              stroke-width="6.25"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              cx="75"
+              cy="75"
+              r="16.6666667"
+            ></circle>
+            <line
+              x1="62.5"
+              y1="12.5"
+              x2="62.5"
+              y2="29.1666667"
+              id="Path"
+              stroke="currentColor"
+              stroke-width="6.25"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            ></line>
+            <line
+              x1="29.1666667"
+              y1="12.5"
+              x2="29.1666667"
+              y2="29.1666667"
+              id="Path"
+              stroke="currentColor"
+              stroke-width="6.25"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            ></line>
+            <line
+              x1="12.5"
+              y1="45.8333333"
+              x2="79.1666667"
+              y2="45.8333333"
+              id="Path"
+              stroke="currentColor"
+              stroke-width="6.25"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            ></line>
+            <polyline
+              id="Path"
+              stroke="currentColor"
+              stroke-width="6.25"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              points="75 68.7333333 75 75 79.1666667 79.1666667"
+            ></polyline>
+          </g>
+        </g>
+      </g>
+    </g>
+  </svg>
+</template>
