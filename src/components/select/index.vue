@@ -11,14 +11,10 @@
           inputSize,
         ]" :readonly="!filterable"
           class="dd-border-solid focus-visible:dd-outline-none dd-flex dd-items-center dd-cursor-pointer dd-bg-white dd-relative dd-w-full dd-border dd-rounded-md dd-shadow-sm dd-pl-3 dd-pr-10 dd-py-2 dd-text-left dd-h-9 sm:dd-text-sm"
-          @change="searchQuery($event.target.value)" :displayValue="(val) => findItem(val)" @click="setDropDown()">
+          @change="searchQuery($event.target.value)" :displayValue="(val) => findItem(val)"
+          @click="setDropDown()" :placeholder="props.placeholder">
           <ddAvatar v-if="selectedValue && showAvatar" size="mini" class="dd-mr-3"
             :srcLink="selectedValue[props.defaultProps.avatar]" />
-          <span v-if="selectedValue" class="dd-block dd-truncate dd-text-gray-500 dd-text-sm">{{
-            selectedValue[props.defaultProps.name] }}</span>
-          <span v-else class="dd-text-sm dd-text-gray-400 dd-capitalize">{{
-            props.placeholder
-          }}</span>
           <span class="dd-absolute dd-inset-y-0 dd-right-0 dd-flex dd-items-center dd-pr-2 dd-pointer-events-none">
             <ChevronDownIcon class="dd-h-5 dd-w-5 dd-text-gray-400" aria-hidden="true" />
           </span>
