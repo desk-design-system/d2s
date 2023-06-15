@@ -16,6 +16,7 @@
         v-model="inputModelValue"
         class="dd-textarea dd-w-full !dd-rounded"
         :placeholder="placeholder"
+        @focus="emits('focus')"
       />
     </div>
     <span v-if="errorMessage" class="dd-input-error-message">{{
@@ -27,7 +28,7 @@
 import { useField } from "vee-validate";
 import svgIcon from "../svgIcon/index.vue";
 import { ref, computed, watch } from "vue";
-const emits = defineEmits(["update:modelValue", "change", "suffixIconClick"]);
+const emits = defineEmits(["update:modelValue", "change", "suffixIconClick", 'focus']);
 const props = defineProps({
   label: {
     type: String,
