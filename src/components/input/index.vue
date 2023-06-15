@@ -37,7 +37,9 @@
           focus:dd-ring-inset
           dd-shadow-sm
         " :placeholder="placeholder"
-        @focus="emits('focus')" />
+        @focus="emits('focus')"
+        @blur="emits('blur')"
+        />
       <!-- $slots.suffix -->
       <div @click="suffixIconClick" v-if="suffix && suffixIcon" class="
           dd-cursor-pointer
@@ -66,7 +68,7 @@ const getRandomInt = (max = 1000) => {
 import { useField } from "vee-validate";
 import svgIcon from "../svgIcon/index.vue";
 import { ref, computed, watch } from "vue";
-const emits = defineEmits(["update:modelValue", "change", "suffixIconClick", 'focus']);
+const emits = defineEmits(["update:modelValue", "change", "suffixIconClick", 'focus', 'blur']);
 const props = defineProps({
   label: {
     type: String,
