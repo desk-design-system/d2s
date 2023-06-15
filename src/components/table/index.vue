@@ -1,21 +1,16 @@
 <template>
   <div class="dd-flow-root dd-w-full" v-bind="$attrs">
-    <div class="dd-min-w-full dd-align-middle dd-bg-white">
+    <div class="dd-min-w-full dd-align-middle dd-bg-white dd-relative">
       <div :class="[
         !noHeight ? '' : getCalculatedHeight,
         !fixed || limit < 1 ? 'empty_state' : 'fixedScroll',
         limit < 1 ? 'dd-overflow-y-hidden' : '',
       ]" ref="containerRef" @scroll="handleScroll">
         <!-- header with group button  -->
-        <div
+        <div v-if="actionHeader"
           class="dd-flex dd-items-center dd-justify-between !dd-w-full group_wrapper !dd-bg-white !dd-z-[1000]"
-          :class="[
-            selectedId.length > 0
-              ? ' dd-border-b-[1px] dd-border-gray-300 dd-h-[40px]'
-              : '',
-          ]">
-          <div v-if="selectedId.length > 0 || !actionHeader"
-            class="dd-flex dd-items-center dd-gap-2 dd-py-2 dd-pl-3 dd-pr-3 dd-text-left">
+          :class="[selectedId.length > 0 ? 'dd-h-[40px]' : '']">
+          <div v-if="selectedId.length > 0" class="dd-flex dd-items-center dd-gap-2 dd-py-2 dd-pl-3 dd-pr-3 dd-text-left">
             <DdGroupButton :buttons="buttons">
               <dd-Button color="white" v-if="checkBoxProp" size="sm">
                 <div class="dd-flex dd-items-center">
@@ -43,23 +38,38 @@
               size="sm" />
             <slot name="customDropDown" />
           </div>
-          <svgIcon class="!dd-text-gray-500 dd-mr-3" :class="[selectedId.length === 0 ? 'dd-hidden' : '']"
-            :icon="selectedId.length > 0 ? 'Search' : 'none'" size="20" @click="openSearch" />
+          <svgIcon v-if="actionHeader && !search" class="!dd-text-gray-500 dd-absolute dd-right-6"
+            :class="[selectedId.length === 0 ? 'dd-hidden' : '']" :icon="selectedId.length > 0 ? 'Search' : 'none'"
+            size="20" @click="openSearch" />
 
           <div class="dd-w-full dd-cursor-pointer" v-if="search">
-            <dd-input type="text" v-model="queryInput" @change="searchQuery"
-              class="focus-visible:!dd-border-none dd-relative" :icon="selectedId.length === 0 ? 'Search' : ''"
-              Border="none" placeholder="Search Ticket" :size="selectedId.length > 0 ? 'lg' : 'xl'"
-              :prefix="selectedId.length === 0 ? true : false" />
-            <svgIcon icon="Close" size="12"
-              class="dd-absolute dd-text-gray-400 dd-top-3.5 hover:dd-text-gray-500" @click="closeSearch" :class="[fixed ? 'dd-right-6' : 'dd-right-12']" />
+            <div class="dd-flex dd-items-center dd-gap-3">
+              <svgIcon v-if="selectedId.length > 0" icon="Search" size="20" class="dd-text-gray-400" />
+                <dd-input type="text" v-model="queryInput" @change="searchQuery" class="focus-visible:!dd-border-none"
+                  :icon="selectedId.length === 0 ? 'Search' : ''" Border="none" placeholder="Search Ticket"
+                  :size="selectedId.length > 0 ? 'lg' : 'xl'" :prefix="selectedId.length === 0 ? true : false" />
+            </div>
+            <svgIcon icon="Close" size="12" class="dd-absolute dd-text-gray-400 dd-top-3.5 hover:dd-text-gray-500"
+              @click="closeSearch" :class="[fixed ? 'dd-right-6' : 'dd-right-6']" />
           </div>
         </div>
+        <div class="dd-w-full dd-cursor-pointer" v-if="search && !actionHeader" :class="[fixed ? 'group_wrapper' : '']">
+          <dd-input type="text" v-model="queryInput" @change="searchQuery"
+            class="focus-visible:!dd-border-none dd-relative" :icon="selectedId.length === 0 ? 'Search' : ''"
+            Border="none" placeholder="Search Ticket" :size="selectedId.length > 0 ? 'lg' : 'xl'"
+            :prefix="selectedId.length === 0 ? true : false" />
+          <svgIcon icon="Close" size="12" class="dd-absolute dd-text-gray-400 dd-top-3.5 hover:dd-text-gray-500"
+            @click="closeSearch" :class="[fixed ? 'dd-right-6' : 'dd-right-6']" />
+        </div>
         <slot name="actionHeader" />
-        <table class="dd-w-full dd-border-0">
+        <table class="dd-w-full" :class="
+          selectedId.length > 0 && actionHeader == true
+            ? '!dd-border-t dd-border-gray-300'
+            : '!dd-border-0'
+        ">
           <!-- tabel head  -->
           <thead class="!dd-sticky !dd-top-0 !dd-bg-white !dd-z-[1000]" :class="[limit > 1 ? 'dd-cursor-pointer' : '']"
-            v-if="selectedId.length == 0 && !search">
+            v-if="setTableHeader">
             <tr class="dd-bg-white">
               <th
                 class="dd-py-2 dd-pl-5 dd-text-left checkbox_wrapper !dd-leading-3 dd-h-[40px] table_head_row dd-sticky dd-top-0"
@@ -135,7 +145,7 @@
                     ? '[&>*:nth-child(1)]:dd-bg-gray-50 [&>*:nth-child(2)]:dd-bg-gray-50  [&>*:last-child]:dd-bg-gray-50  dd-bg-gray-50 dd-pointer-event-none dd-cursor-not-allowed'
                     : 'dd-cursor-pointer',
                 ]" @mouseenter="hoveringRow ? handleMouseEnterActions(row) : null"
-                @mouseleave="hoveringRow ? handleMouseLeaveActions : null" @click="row.disabled ? null : clickedRow(row)">
+                @mouseleave="handleMouseLeaveActions" @click="row.disabled ? null : clickedRow(row)">
                 <td v-if="checkBoxProp" class="dd-py-2.5 dd-pl-5 dd-pr-1 dd-text-xs dd-font-medium dd-text-gray-700">
                   <div class="dd-w-full" :class="[
                     selectedId.includes(row.id)
@@ -288,7 +298,7 @@ const props = defineProps({
   },
   actionHeader: {
     type: Boolean,
-    default: true,
+    default: false,
   },
   checkAllDisabled: {
     type: Boolean,
@@ -324,7 +334,7 @@ const props = defineProps({
   },
   headRowActions: {
     type: Boolean,
-    default: true,
+    default: false,
   },
   disabledLoadmore: {
     type: Boolean,
@@ -356,7 +366,7 @@ const props = defineProps({
   },
   hoveringRow: {
     type: Boolean,
-    default: true,
+    default: false,
   },
   sortIcon: {
     type: Boolean,
@@ -472,6 +482,16 @@ const getCalculatedHeight = computed(() => {
       return "dd-max-h-[calc(100vh-200px)] dd-min-h-[calc(100vh-200px)]";
     }
   }
+});
+
+const setTableHeader = computed(() => {
+  if (search.value == true) {
+    return false;
+  }
+  if (props.actionHeader == true) {
+    return false;
+  }
+  return true;
 });
 
 const allSelected = ref(false);

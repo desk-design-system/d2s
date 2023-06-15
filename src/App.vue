@@ -64,7 +64,7 @@
           </div>
             <div class="dd-w-full dd-min-w-full dd-px-6">
               <dd-table :rows="rows" :columns="columns" :buttons="buttons" :Actions="Actions" :values="values"
-               footer checkBoxProp noHeight rowKey="id" :paginationButton="paginationButton" :limitVal="limitVal" />
+               footer checkBoxProp noHeight rowKey="id" :paginationButton="paginationButton" :limitVal="limitVal" hoveringRow headRowActions fixed  />
             </div>
         </div>
       </div>
