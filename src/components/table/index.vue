@@ -317,7 +317,6 @@
                       : 'dd-cursor-pointer',
                   ]"
                 >
-                  <!-- <svgIcon class="dd-mt-[5px] dd-m-auto dd-text-gray-500" color="white" icon="DotHorizontal" size="16" /> -->
                   <hoverRow
                     actionsPanel
                     :values="Actions"
@@ -328,6 +327,8 @@
                     :row="row"
                     @editRow="editRow"
                     @deleteRow="deleteRow"
+                    :selectedId="selectedId"
+                    @dropdownValue="dropdownValue"
                   />
                   <slot name="rowActions" />
                 </td>
@@ -422,6 +423,7 @@ const emits = defineEmits([
   "deleteRow",
   "selectedCheckBoxes",
   "sort",
+  "dropdownValue"
 ]);
 const props = defineProps({
   rowKey: {
@@ -661,7 +663,6 @@ const isMouseHovered = ref(false);
 const selectedButton = ref(props.buttonselected);
 const setting = ref(false);
 const limit = ref(props.limitVal);
-const rowLimit = ref([]);
 const queryInput = ref("");
 const savedData = ref({});
 const settingElement = ref(null);
@@ -722,7 +723,7 @@ const selectAllFields = () => {
   if (allSelected.value === false) {
     selectedId.value = [];
     setting.value = false;
-    rowLimit.value.forEach((row) => {
+    props.rows.forEach((row) => {
       if (!row.disabled === true) {
         selectedId.value.push(row.id);
         emits("allCheckboxes", row);
@@ -731,7 +732,7 @@ const selectAllFields = () => {
   } else {
     search.value = false;
     selectedId.value = [];
-    setTimeout(() => {
+    setTimeout(() => {~
       handleScroll();
     }, 0);
   }
@@ -841,6 +842,9 @@ const editRow = () => {
 };
 const deleteRow = () => {
   emits("deleteRow");
+};
+const dropdownValue = (data) => {
+  emits("dropdownValue", data);
 };
 </script>
 

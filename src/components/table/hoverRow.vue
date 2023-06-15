@@ -14,6 +14,8 @@
         @click="editRow()"
         color="white"
         size="base"
+        class="!dd-px-1.5"
+        :class="[selectedId.includes(row.id) ? '!dd-bg-gray-50' : '']"
         v-if="isActionHovered(row)"
       >
         <svgIcon
@@ -27,6 +29,8 @@
         @click="deleteRow()"
         color="white"
         size="base"
+        class="!dd-px-1.5"
+        :class="[selectedId.includes(row.id) ? '!dd-bg-gray-50' : '']"
         v-if="isActionHovered(row)"
       >
         <svgIcon
@@ -38,22 +42,23 @@
       </dd-Button>
       <dd-Button
         color="white"
-        class="!dd-p-[0px]"
+        class="!dd-p-0"
         size="base"
         :class="[
           !isActionHovered(row)
             ? '!dd-p-0 dd-rounded-none !dd-border-none dd-ring-0 !dd-shadow-none !dd-bg-transparent'
-            : '!dd-px-1',
+            : '!dd-px-0 !dd-bg-white',
         ]"
       >
         <DdDropDown
-          color="white"
+          color="transparent"
           class="dd-text-gray-700 !dd-w-[28px] !dd-h-[28px] [&>svg]:dd-pt-[2px]"
           :class="[
             isActionHovered(row)
               ? ''
               : 'dd-rounded-none dd-border-none dd-ring-0 dd-bg-transparent [&>button]:!dd-shadow-none',
-              rowDisabled ? '!dd-bg-gray-50' : 'dd-bg-white'
+              rowDisabled ? '!dd-bg-gray-50' : 'dd-bg-white',
+              selectedId.includes(row.id) ? '!dd-bg-gray-50' : ''
           ]"
           type="icon"
           v-model="rowActionsIcons"
@@ -62,6 +67,7 @@
           defaultIcon="DotHorizontal"
           :showIcon="showIcon"
           :disabled="rowDisabled"
+          @command="getDropdownVal"
         />
       </dd-Button>
     </DdGroupButton>
@@ -74,7 +80,7 @@ import svgIcon from "../svgIcon/index.vue";
 import DdGroupButton from "../groupButton/index.vue";
 import DdDropDown from "../dropdown/index.vue";
 import { ref } from "vue";
-const emits = defineEmits(["editRow", "deleteRow"]);
+const emits = defineEmits(["editRow", "deleteRow", "dropdownValue"]);
 const props = defineProps({
   selected: {
     type: String,
@@ -104,6 +110,10 @@ const props = defineProps({
     tyep: Object,
     default: {},
   },
+  selectedId: {
+    type: Array,
+    default: []
+  }
 });
 
 const rowActionsIcons = ref(props.selected);
@@ -111,6 +121,10 @@ const isActionHovered = (rows) => {
   if (rows.disabled === true) return;
   return props.hoveredRow === rows;
 };
+
+const getDropdownVal = (data) => {
+  emits("dropdownValue", data);
+}
 
 const editRow = () => {
   emits("editRow");
