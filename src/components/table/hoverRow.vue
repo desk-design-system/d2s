@@ -16,7 +16,7 @@
         size="base"
         class="!dd-px-1.5"
         :class="[selectedId.includes(row.id) ? '!dd-bg-gray-50' : '']"
-        v-if="isActionHovered(row)"
+        v-if="(isActionHovered(row) || isMouseHoveredRow(row))"
       >
         <svgIcon
           class="dd-mt-[5px] dd-m-auto dd-text-gray-500"
@@ -31,7 +31,7 @@
         size="base"
         class="!dd-px-1.5"
         :class="[selectedId.includes(row.id) ? '!dd-bg-gray-50' : '']"
-        v-if="isActionHovered(row)"
+        v-if="(isActionHovered(row) || isMouseHoveredRow(row))"
       >
         <svgIcon
           class="dd-mt-[5px] dd-m-auto dd-text-gray-500"
