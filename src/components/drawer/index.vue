@@ -10,7 +10,7 @@
       <div class="dd-fixed dd-inset-0 dd-overflow-hidden">
         <div class="dd-absolute dd-inset-0 dd-overflow-hidden dd-flex">
           <div @click="$emit('clickDrawer')" style="height: 100%;width: 100%;"></div>
-          <div :style="{ 'width': size + '%' }"
+          <div :style="{ 'width': size }"
             :class="`dd-pointer-events-none dd-fixed dd-inset-y-0 dd-${position}-0 dd-flex `">
             <TransitionChild as="template"
               enter="dd-transform dd-transition dd-ease-in-out dd-duration-500 sm:dd-duration-700"
@@ -96,7 +96,7 @@ const props = defineProps( {
   },
   size: {
     type: String,
-    default: "30",
+    default: "30%",
   },
   position: {
     type: String,
