@@ -1,7 +1,7 @@
 <!-- This example requires Tailwind CSS v2.0+ -->
 <template>
   <TransitionRoot as="template" :show="inputModelValue">
-    <Dialog as="div" class="dd-relative dd-z-10" @close="outerClick">
+    <Dialog as="div" class="dd-relative dd-z-10" @close="close()">
       <TransitionChild as="template" enter="dd-ease-out dd-duration-300" enter-from="dd-opacity-0"
         enter-to="dd-opacity-100" leave="dd-ease-in dd-duration-200" leave-from="dd-opacity-100"
         leave-to="dd-opacity-0">
@@ -16,7 +16,7 @@
             enter-to="dd-opacity-100 dd-translate-y-0 sm:dd-scale-100" leave="dd-ease-in dd-duration-200"
             leave-from="dd-opacity-100 dd-translate-y-0 sm:dd-scale-100"
             leave-to="dd-opacity-0 dd-translate-y-4 sm:dd-translate-y-0 sm:dd-scale-95">
-            <DialogPanel :style="{ 'width': modalWidth + '%' }"
+            <DialogPanel :style="{ 'width': modalWidth }"
               class="dd-relative dd-bg-white dd-rounded-lg   dd-overflow-hidden dd-shadow-xl dd-transform dd-transition-all ">
               <div v-if="header" class="dd-p-6 dd-pb-3">
                 <slot name="header">
@@ -26,8 +26,8 @@
                     </DialogTitle>
                     <div class="dd-ml-3 dd-flex dd-h-7 dd-items-center">
                       <button type="button"
-                        class="dd-rounded-md    focus:dd-outline-none dd-text-gray-500 hover:dd-text-gray-500"
-                        @click="$emit('close')">
+                        class="dd-rounded-md  dd-bg-transparent  focus:dd-outline-none hover:dd-cursor-pointer  dd-text-gray-600 hover:dd-text-gray-500"
+                        @click="close()">
                         <XIcon class="dd-h-6 dd-w-6" aria-hidden="true" />
                       </button>
                     </div>
@@ -44,9 +44,9 @@
                 class=" dd-flex  dd-flex-shrink-0 dd-justify-end dd-px-6 dd-py-3">
                 <slot name="footer">
                   <span class="dd-mr-4">
-                    <rdButton @click="$emit('cancel')" color="white" :title="closeTitle" />
+                    <rdButton @click="cancel()" color="white" :title="closeTitle" />
                   </span>
-                  <rdButton @click="$emit('submit')" :color="color" :title="saveTitle" />
+                  <rdButton @click="submit()" :color="color" :title="saveTitle" />
                 </slot>
               </div>
             </DialogPanel>
@@ -68,7 +68,7 @@ import {
 import { CheckIcon, XIcon } from "@heroicons/vue/outline"
 import { ref, computed } from "vue"
 import rdButton from "../buttons/index.vue"
-
+const emits = defineEmits( ['update:modelValue', "change","close","cancel","submit"] )
 const props = defineProps( {
   title: {
     type: String,
@@ -104,7 +104,7 @@ const props = defineProps( {
   },
   modalWidth: {
     type: String,
-    default: "30",
+    default: "30%",
   },
   shadow: {
     type: Boolean,
@@ -137,10 +137,17 @@ const inputModelValue = computed( {
     emits( "change", val )
   }
 } )
-// const outerClick = computed( {
-//   if(closeOnClickModal){
-
-//   }
-// })
+const close = () => {
+  inputModelValue.value = false
+  emits( "close", true )
+}
+const cancel = () => {
+  inputModelValue.value = false
+  emits( "cancel", true )
+}
+const submit = () => {
+  inputModelValue.value = false
+  emits( "cancel", true )
+}
 
 </script>
