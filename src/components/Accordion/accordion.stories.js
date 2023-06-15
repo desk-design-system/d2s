@@ -32,11 +32,11 @@ export const Default = {
         },
         template: ` <dd-accordion :active="0" :multiple='false'>
                           <dd-accordion-tab title="Tab-1" >
-                              <h3>This is tab 1<h3/>
-                          </dd-accordion-tab/>
+                              <h3>This is tab 1</h3>
+                          </dd-accordion-tab>
                           <dd-accordion-tab title="Tab-2" >
-                              <h3>This is tab 2<h3/>
-                          </dd-accordion-tab/>
+                              <h3>This is tab 2</h3>
+                          </dd-accordion-tab>
                     </dd-accordion>`,
     }),
     args: {
@@ -61,11 +61,11 @@ export const SingleActive = {
         },
         template: ` <dd-accordion :active="1" :multiple='false'>
                           <dd-accordion-tab title="Tab-1" >
-                              <h3>This is tab 1<h3/>
-                          </dd-accordion-tab/>
+                              <h3>This is tab 1</h3>
+                          </dd-accordion-tab>
                           <dd-accordion-tab title="Tab-2" >
-                              <h3>This is tab 2<h3/>
-                          </dd-accordion-tab/>
+                              <h3>This is tab 2</h3>
+                          </dd-accordion-tab>
                     </dd-accordion>`,
     }),
     args: {
@@ -91,7 +91,7 @@ export const MultipleActive = {
         template: `<dd-accordion :active="[1,2]" :multiple='true'>
                           <dd-accordion-tab title="Tab-1" >
                               <h3>This is tab 1</h3>
-                          </dd-accordion-tab/>
+                          </dd-accordion-tab>
                           <dd-accordion-tab title="Tab-2" >
                               <h3>This is tab 2</h3>
                           </dd-accordion-tab>

@@ -46,8 +46,8 @@ export const Default = {
             };
         },
         template: ` <dd-accordion  :active="0" :multiple='false'>
-                          <dd-accordion-tab  :title="$attrs.title" >
-                              <h3>Hello</h3>
+                          <dd-accordion-tab  :title="args.title" >
+                              <h3>This is tab</h3>
                           </dd-accordion-tab>
                         
                     </dd-accordion>`,
@@ -72,8 +72,8 @@ export const PrependIcon = {
             };
         },
         template: ` <dd-accordion  :active="0" :multiple='false'>
-                          <dd-accordion-tab  prepend-icon="Checklist" :title="$attrs.title" >
-                              <h3>Hello</h3>
+                          <dd-accordion-tab  prepend-icon="Checklist" :title="args.title" >
+                              <h3>This is tab</h3>
                           </dd-accordion-tab>
                           
                     </dd-accordion>`,
@@ -98,8 +98,8 @@ export const AppendIcon = {
             };
         },
         template: ` <dd-accordion  :active="0" :multiple='false'>
-                          <dd-accordion-tab  append-icon="Checklist" :title="$attrs.title" >
-                              <h3>Hello</h3>
+                          <dd-accordion-tab  append-icon="Checklist" :title="args.title" >
+                              <h3>This is tab</h3>
                           </dd-accordion-tab>
                          
                     </dd-accordion>`,
@@ -119,7 +119,7 @@ Default.parameters = {
       source: {
         code:  ` <dd-accordion  :active="1" :multiple='false'>
     <dd-accordion-tab title="Tab-1" >
-        <h3>Hello</h3>
+        <h3>This is tab</h3>
     </dd-accordion-tab>
   
 </dd-accordion>`,
@@ -132,7 +132,7 @@ PrependIcon.parameters = {
       source: {
         code:  ` <dd-accordion  :active="1" :multiple='false'>
     <dd-accordion-tab  prepend-icon="Checklist" title="Tab-1" >
-        <h3>Hello</h3>
+        <h3>This is tab</h3>
     </dd-accordion-tab>
    
 </dd-accordion>`,
@@ -145,7 +145,7 @@ AppendIcon.parameters = {
       source: {
         code:  ` <dd-accordion  :active="1" :multiple='false'>
     <dd-accordion-tab  append-icon="Checklist" title="Tab-1" >
-        <h3>Hello</h3>
+        <h3>This is tab</h3>
     </dd-accordion-tab>
 
 </dd-accordion>`,
