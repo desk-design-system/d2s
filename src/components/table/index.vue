@@ -2,7 +2,7 @@
   <div class="dd-flow-root dd-w-full" v-bind="$attrs">
     <div class="dd-min-w-full dd-align-middle dd-bg-white dd-relative">
       <div :class="[
-        !noHeight ? '' : getCalculatedHeight,
+        !fixedHeight ? '' : getCalculatedHeight,
         !fixed || limit < 1 ? 'empty_state' : 'fixedScroll',
         limit < 1 ? 'dd-overflow-y-hidden' : '',
       ]" ref="containerRef" @scroll="handleScroll">
@@ -34,15 +34,16 @@
               </dd-Button>
               <slot name="groupActions" />
             </DdGroupButton>
-            <DdDropDown v-if="noDropdown" color="white" label="Actions" v-model="headerActions" :options="values"
-              size="sm" />
+            <DdDropDown v-if="actionsPanel" color="white" label="Actions" v-model="headerActions" :options="values"
+              size="sm" :showIcon="showIcon"
+              @command="getHeaderDropdownVal" />
             <slot name="customDropDown" />
           </div>
-          <svgIcon v-if="actionHeader && !search" class="!dd-text-gray-500 dd-absolute dd-right-6"
+          <svgIcon v-if="actionHeader && !search && searchIcon" class="!dd-text-gray-500 dd-absolute dd-right-6"
             :class="[selectedId.length === 0 ? 'dd-hidden' : '']" :icon="selectedId.length > 0 ? 'Search' : 'none'"
             size="20" @click="openSearch" />
 
-          <div class="dd-w-full dd-cursor-pointer" v-if="search">
+          <div class="dd-w-full dd-cursor-pointer" v-if="search && searchIcon">
             <div class="dd-flex dd-items-center dd-gap-3">
               <svgIcon v-if="selectedId.length > 0" icon="Search" size="20" class="dd-text-gray-400" />
               <dd-input type="text" v-model="queryInput" @change="searchQuery" class="focus-visible:!dd-border-none"
@@ -53,7 +54,7 @@
               @click="closeSearch" :class="[fixed ? 'dd-right-6' : 'dd-right-6']" />
           </div>
         </div>
-        <div class="dd-w-full dd-cursor-pointer" v-if="search && !actionHeader" :class="[fixed ? 'group_wrapper' : '']">
+        <div class="dd-w-full dd-cursor-pointer" v-if="search && !actionHeader && searchIcon" :class="[fixed ? 'group_wrapper' : '']">
           <dd-input type="text" v-model="queryInput" @change="searchQuery"
             class="focus-visible:!dd-border-none dd-relative" :icon="selectedId.length === 0 ? 'Search' : ''"
             Border="none" placeholder="Search Ticket" :size="selectedId.length > 0 ? 'lg' : 'xl'"
@@ -98,7 +99,7 @@
                 <div v-if="headRowActions"
                   class="dd-flex dd-items-center dd-justify-end dd-gap-4 dd-relative dd-right-5 !dd-z-[999] dd-bg-white dd-pl-2.5">
                   <svgIcon v-if="searchIcon" class="!dd-text-gray-500" icon="Search" size="20" @click="openSearch" />
-                  <svgIcon v-if="settingIcon" ref="settingIcon" class="!dd-text-gray-500" :class="[setting ? 'rotated' : 'rotatedReverse']"
+                  <svgIcon v-if="settingbarIcon" ref="settingIcon" class="!dd-text-gray-500" :class="[setting ? 'rotated' : 'rotatedReverse']"
                     icon="Settings" size="20" @click="openSettingsBar" />
                 </div>
                 <!-- settings component  -->
@@ -180,7 +181,7 @@
                       ? '!dd-pointer-event-none'
                       : 'dd-cursor-pointer',
                   ]">
-                  <hoverRow actionsPanel :values="Actions" :rowDisabled="row.disabled" :selected="selected"
+                  <hoverRow :actionsPanel="actionsPanel" :values="Actions" :rowDisabled="row.disabled" :selected="selected"
                     :showIcon="showIcon" :hoveredRow="hoveredRow" :row="row" @editRow="editRow" @deleteRow="deleteRow"
                     :selectedId="selectedId" @dropdownValue="dropdownValue" />
                   <slot name="rowActions" />
@@ -193,7 +194,7 @@
             <tr class="">
               <td :colspan="columns.length + 2" class="dd-h-full hover:!dd-bg-transparent">
                 <slot name="noData" />
-                <div class="dd-flex dd-items-center dd-justify-center dd-min-h-[60vh]" v-if="!emptyState">
+                <div class="dd-flex dd-items-center dd-justify-center dd-min-h-[60vh]" v-if="emptyState">
                   <svgIcon size="140" color="white" icon="noData" />
                 </div>
               </td>
@@ -206,11 +207,11 @@
           <dd-Button v-for="button in buttons" :key="button.id" :color="button.color" :size="button.size"
             :disabled="button.disabled"
             class="dd-text-sm [&>span]:!dd-text-gray-500 [&>span]:!dd-font-normal !dd-w-[41px] !dd-p-0 dd-flex dd-items-center dd-justify-center"
-            :class="setActiveButton" :loader="button.loader" :title="button.label" :type="button.type"
+            :class="setActiveButton(button.label)" :loader="button.loader" :title="button.label" :type="button.type"
             :block="button.block" :icon="button.icon" :iconSize="button.iconSize" @click="selectNumberOfRows(button)" />
         </DdGroupButton>
 
-        <dd-Button color="white" size="sm" v-model="selectedButton" :disable="disabledLoadmore" @click="loadMore()">
+        <dd-Button color="white" size="sm" v-model="selectedButton" :disable="disabledLoadmore" :loader="loadmoreLoader" @click="loadMore()">
           Load More
         </dd-Button>
       </div>
@@ -251,6 +252,7 @@ const emits = defineEmits([
   "selectedCheckBoxes",
   "sort",
   "dropdownValue",
+  "headerDropdown"
 ]);
 const props = defineProps({
   rowKey: {
@@ -277,7 +279,7 @@ const props = defineProps({
     type: Array,
     required: true,
   },
-  noHeight: {
+  fixedHeight: {
     type: Boolean,
     default: false,
   },
@@ -305,10 +307,6 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-  noDropdown: {
-    type: Boolean,
-    default: true,
-  },
   selected: {
     type: String,
     default: "",
@@ -316,10 +314,6 @@ const props = defineProps({
   headerselectedActions: {
     type: String,
     default: "",
-  },
-  tabelHeight: {
-    type: String,
-    default: "492",
   },
   showIcon: {
     type: Boolean,
@@ -341,17 +335,21 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-  disablePaginationButton: {
+  loadmoreLoader: {
     type: Boolean,
-    default: true,
+    default: false,
   },
   searchIcon: {
     type: Boolean,
-    default: true,
+    default: false,
   },
-  settingIcon: {
+  settingbarIcon: {
     type: Boolean,
-    default: true,
+    default: false,
+  },
+  actionsPanel: {
+    type: Boolean,
+    default: false,
   },
   limitVal: {
     type: Number,
@@ -360,10 +358,6 @@ const props = defineProps({
   paginationButton: {
     type: String,
     default: "5",
-  },
-  setActiveButton: {
-    type: String,
-    default: "",
   },
   buttonselected: {
     type: String,
@@ -482,11 +476,17 @@ const handleScroll = () => {
 };
 
 const getCalculatedHeight = computed(() => {
-  if (props.noHeight) {
+  if (props.fixedHeight) {
     if (limit.value < 13) {
       return "dd-max-h-[calc(100vh-200px)] dd-min-h-[calc(100vh-200px)]";
     }
   }
+});
+
+const setActiveButton = computed(() => {
+  return (label) => {
+    return selectedButton.value === label ? '!dd-text-gray-700 !dd-font-medium' : '';
+  };
 });
 
 const setTableHeader = computed(() => {
@@ -693,6 +693,9 @@ const deleteRow = () => {
 const dropdownValue = (data) => {
   emits("dropdownValue", data);
 };
+const getHeaderDropdownVal = (data) => {
+  emits("headerDropdown", data);
+}
 </script>
 
 <style scoped>

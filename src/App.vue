@@ -63,7 +63,8 @@
             </div>
           </div>
             <div class="dd-w-full dd-min-w-full dd-px-6">
-              <dd-table :rows="rows" :columns="columns" :buttons="buttons" :Actions="Actions" :values="values" />
+              <dd-table :rows="rows" :columns="columns" :buttons="buttons" :Actions="Actions" :values="values"
+               footer checkBoxProp fixedHeight rowKey="id" hoveringRow headRowActions fixed actionHeader emptyState actionsPanel sortIcon/>
             </div>
         </div>
       </div>
@@ -472,7 +473,7 @@ const rows = ref([
 ]);
 
 const buttons = [
-  { id: 1, label: "5", color: "white", size: "sm", disabled: true },
+  { id: 1, label: "5", color: "white", size: "sm", active: "15" },
   { id: 2, label: "10", color: "white", size: "sm" },
   { id: 3, label: "15", color: "white", size: "sm" },
 ];

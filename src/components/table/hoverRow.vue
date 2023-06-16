@@ -112,7 +112,9 @@ const props = defineProps({
   },
   selectedId: {
     type: Array,
-    default: []
+    default: () => ({
+      name: "1",
+    }),
   }
 });
 

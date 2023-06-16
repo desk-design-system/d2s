@@ -42,11 +42,17 @@ const props = defineProps({
   },
   rows: {
     type: Array,
-    default: () => [],
+    default: () => ({
+      name: "name",
+      value: "value",
+      avatar: "avatar",
+    }),
   },
   selectedId: {
     type: Array,
-    default: [],
+    default: () => ({
+      id: "1",
+    }),
   },
 })
 

@@ -46,7 +46,7 @@ export default {
         },
       },
     },
-    noHeight: {
+    fixedHeight: {
       description: "Fixed hieght will be removed",
       table: {
         defaultValue: {
@@ -233,12 +233,13 @@ const Template = (args) => ({
   setup() {
     const columns = ref([
       {
-        title: "Id",
+        title: "ID",
         value: "id",
         checked: true,
-        size: "130",
+        size: "60",
         id: 1,
         disabled: true,
+        sortDirection: "asc",
       },
       {
         title: "User Name",
@@ -246,7 +247,8 @@ const Template = (args) => ({
         checked: true,
         size: "130",
         id: 2,
-        disabled: true,
+        disabled: false,
+        sortDirection: "",
       },
       {
         title: "First Name",
@@ -254,6 +256,7 @@ const Template = (args) => ({
         checked: true,
         size: "130",
         id: 3,
+        sortDirection: "",
       },
       {
         title: "Last Name",
@@ -261,6 +264,7 @@ const Template = (args) => ({
         checked: true,
         size: "130",
         id: 4,
+        sortDirection: "",
       },
       {
         title: "Email",
@@ -268,6 +272,7 @@ const Template = (args) => ({
         checked: true,
         size: "130",
         id: 5,
+        sortDirection: "",
       },
       {
         title: "Email",
@@ -275,6 +280,7 @@ const Template = (args) => ({
         checked: true,
         size: "130",
         id: 5,
+        sortDirection: "",
       },
       {
         title: "Email",
@@ -282,34 +288,7 @@ const Template = (args) => ({
         checked: true,
         size: "130",
         id: 5,
-      },
-      {
-        title: "Email",
-        value: "email",
-        checked: true,
-        size: "130",
-        id: 5,
-      },
-      {
-        title: "Email",
-        value: "email",
-        checked: true,
-        size: "130",
-        id: 5,
-      },
-      {
-        title: "Email",
-        value: "email",
-        checked: true,
-        size: "130",
-        id: 5,
-      },
-      {
-        title: "Email",
-        value: "email",
-        checked: true,
-        size: "130",
-        id: 5,
+        sortDirection: "",
       },
       {
         title: "Status",
@@ -317,11 +296,12 @@ const Template = (args) => ({
         checked: true,
         size: "130",
         id: 6,
+        sortDirection: "",
       },
     ]);
     const rows = ref([
       {
-        id: 1,
+        id: 0,
         username: "Herry007",
         firstname: "Herry",
         lastname: "Brook",
@@ -330,7 +310,7 @@ const Template = (args) => ({
         disabled: false,
       },
       {
-        id: 2,
+        id: 1,
         username: "David2",
         firstname: "David",
         lastname: "Jeman",
@@ -339,7 +319,7 @@ const Template = (args) => ({
         disabled: false,
       },
       {
-        id: 3,
+        id: 2,
         username: "Henry0",
         firstname: "Henry",
         lastname: "Cavil",
@@ -347,7 +327,7 @@ const Template = (args) => ({
         status: "in progress",
       },
       {
-        id: 4,
+        id: 3,
         username: "Herry007",
         firstname: "Herry",
         lastname: "Brook",
@@ -355,7 +335,7 @@ const Template = (args) => ({
         status: "Repaired and Collected",
       },
       {
-        id: 5,
+        id: 4,
         username: "JSmith",
         firstname: "John",
         lastname: "Smith",
@@ -363,7 +343,7 @@ const Template = (args) => ({
         status: "in progress",
       },
       {
-        id: 6,
+        id: 5,
         username: "LGreen",
         firstname: "Lucy",
         lastname: "Green",
@@ -371,7 +351,7 @@ const Template = (args) => ({
         status: "Repaired and Collected",
       },
       {
-        id: 7,
+        id: 6,
         username: "AMiller",
         firstname: "Alice",
         lastname: "Miller",
@@ -379,236 +359,21 @@ const Template = (args) => ({
         status: "in progress",
       },
       {
-        id: 8,
+        id: 7,
         username: "BDavis",
         firstname: "Bob",
         lastname: "Davis",
         email: "bob.davis@example.com",
         status: "Repaired and Collected",
       },
-      {
-        id: 9,
-        username: "KJohnson",
-        firstname: "Kate",
-        lastname: "Johnson",
-        email: "kate.johnson@example.com",
-        status: "in progress",
-      },
-      {
-        id: 10,
-        username: "KJohnson",
-        firstname: "Kate",
-        lastname: "Johnson",
-        email: "kate.johnson@example.com",
-        status: "in progress",
-      },
-      {
-        id: 11,
-        username: "KJohnson",
-        firstname: "Kate",
-        lastname: "Johnson",
-        email: "kate.johnson@example.com",
-        status: "in progress",
-      },
-      {
-        id: 12,
-        username: "KJohnson",
-        firstname: "Kate",
-        lastname: "Johnson",
-        email: "kate.johnson@example.com",
-        status: "in progress",
-      },
-      {
-        id: 13,
-        username: "KJohnson",
-        firstname: "Kate",
-        lastname: "Johnson",
-        email: "kate.johnson@example.com",
-        status: "in progress",
-      },
-      {
-        id: 14,
-        username: "KJohnson",
-        firstname: "Kate",
-        lastname: "Johnson",
-        email: "kate.johnson@example.com",
-        status: "in progress",
-      },
-      {
-        id: 15,
-        username: "KJohnson",
-        firstname: "Kate",
-        lastname: "Johnson",
-        email: "kate.johnson@example.com",
-        status: "in progress",
-      },
-      {
-        id: 16,
-        username: "KJohnson",
-        firstname: "Kate",
-        lastname: "Johnson",
-        email: "kate.johnson@example.com",
-        status: "in progress",
-      },
-      {
-        id: 17,
-        username: "KJohnson",
-        firstname: "Kate",
-        lastname: "Johnson",
-        email: "kate.johnson@example.com",
-        status: "in progress",
-      },
-      {
-        id: 18,
-        username: "KJohnson",
-        firstname: "Kate",
-        lastname: "Johnson",
-        email: "kate.johnson@example.com",
-        status: "in progress",
-      },
-      {
-        id: 19,
-        username: "KJohnson",
-        firstname: "Kate",
-        lastname: "Johnson",
-        email: "kate.johnson@example.com",
-        status: "in progress",
-      },
-      {
-        id: 20,
-        username: "KJohnson",
-        firstname: "Kate",
-        lastname: "Johnson",
-        email: "kate.johnson@example.com",
-        status: "in progress",
-      },
-      {
-        id: 21,
-        username: "KJohnson",
-        firstname: "Kate",
-        lastname: "Johnson",
-        email: "kate.johnson@example.com",
-        status: "in progress",
-      },
-      {
-        id: 22,
-        username: "KJohnson",
-        firstname: "Kate",
-        lastname: "Johnson",
-        email: "kate.johnson@example.com",
-        status: "in progress",
-      },
-      {
-        id: 23,
-        username: "KJohnson",
-        firstname: "Kate",
-        lastname: "Johnson",
-        email: "kate.johnson@example.com",
-        status: "in progress",
-      },
-      {
-        id: 24,
-        username: "KJohnson",
-        firstname: "Kate",
-        lastname: "Johnson",
-        email: "kate.johnson@example.com",
-        status: "in progress",
-      },
-      {
-        id: 25,
-        username: "KJohnson",
-        firstname: "Kate",
-        lastname: "Johnson",
-        email: "kate.johnson@example.com",
-        status: "in progress",
-      },
-      {
-        id: 26,
-        username: "KJohnson",
-        firstname: "Kate",
-        lastname: "Johnson",
-        email: "kate.johnson@example.com",
-        status: "in progress",
-      },
-      {
-        id: 27,
-        username: "KJohnson",
-        firstname: "Kate",
-        lastname: "Johnson",
-        email: "kate.johnson@example.com",
-        status: "in progress",
-      },
-      {
-        id: 28,
-        username: "KJohnson",
-        firstname: "Kate",
-        lastname: "Johnson",
-        email: "kate.johnson@example.com",
-        status: "in progress",
-      },
-      {
-        id: 29,
-        username: "KJohnson",
-        firstname: "Kate",
-        lastname: "Johnson",
-        email: "kate.johnson@example.com",
-        status: "in progress",
-      },
-      {
-        id: 30,
-        username: "KJohnson",
-        firstname: "Kate",
-        lastname: "Johnson",
-        email: "kate.johnson@example.com",
-        status: "in progress",
-      },
-      {
-        id: 31,
-        username: "KJohnson",
-        firstname: "Kate",
-        lastname: "Johnson",
-        email: "kate.johnson@example.com",
-        status: "in progress",
-      },
-      {
-        id: 32,
-        username: "KJohnson",
-        firstname: "Kate",
-        lastname: "Johnson",
-        email: "kate.johnson@example.com",
-        status: "in progress",
-      },
-      {
-        id: 33,
-        username: "KJohnson",
-        firstname: "Kate",
-        lastname: "Johnson",
-        email: "kate.johnson@example.com",
-        status: "in progress",
-      },
-      {
-        id: 34,
-        username: "KJohnson",
-        firstname: "Kate",
-        lastname: "Johnson",
-        email: "kate.johnson@example.com",
-        status: "in progress",
-      },
-      {
-        id: 35,
-        username: "KJohnson",
-        firstname: "Kate",
-        lastname: "Johnson",
-        email: "kate.johnson@example.com",
-        status: "in progress",
-      },
     ]);
+    
     const buttons = [
-      { id: 1, label: "5", color: "white", icon: "" },
-      { id: 2, label: "10", color: "white", icon: "" },
-      { id: 3, label: "15", color: "white", icon: "" },
+      { id: 1, label: "5", color: "white", size: "sm", loader: true },
+      { id: 2, label: "10", color: "white", size: "sm" },
+      { id: 3, label: "15", color: "white", size: "sm" },
     ];
-
+    
     const Actions = ref([
       {
         name: "DropDown Menu 1",
@@ -629,7 +394,7 @@ const Template = (args) => ({
         value: 3,
       },
     ]);
-
+    
     const values = ref([
       {
         name: "DropDown Menu 1",
@@ -654,9 +419,218 @@ const Template = (args) => ({
   },
   // And then the `args` are bound to your component with `v-bind="args"`
   template:
-    '<div> <dd-table :rows="rows" :columns="columns" :buttons="buttons" :Actions="Actions" :values="values" /> </div>',
+    '<div> <dd-table v-bind="args" :rows="rows" :columns="columns" :buttons="buttons" :Actions="Actions" :values="values" /> </div>',
 });
 
 export const Default = Template.bind({});
-
+export const stickySide = Template.bind({});
+export const noHeight = Template.bind({});
+export const noHeaderAction = Template.bind({});
+export const noHoveringRow = Template.bind({});
+export const noRowAction = Template.bind({});
+export const noSortingIcon = Template.bind({});
+export const noCheckBoxes = Template.bind({});
+export const disabledCheckBoxes = Template.bind({});
+export const removeTheadActions = Template.bind({});
+export const removeFooter = Template.bind({});
 // More on args: https://storybook.js.org/docs/vue/writing-stories/args
+Default.args = {
+  
+};
+stickySide.args = {
+  fixed: true,
+  footer: true,
+  fixedHeight: true,
+  rowKey: "id",
+  hoveringRow: true,
+  checkBoxProp: true,
+  settingbarIcon: true,
+  searchIcon: true,
+  headRowActions: true,
+  actionHeader: true,
+  emptyState: true,
+  loadmoreLoader: true,
+  sortIcon: true,
+  selected: "",
+  paginationButton: "",
+  buttonselected: "",
+  headerselectedActions: "",
+  actionsPanel: true,
+};
+
+noHeight.args = {
+  fixed: true,
+  footer: true,
+  rowKey: "id",
+  hoveringRow: true,
+  checkBoxProp: true,
+  settingbarIcon: true,
+  searchIcon: true,
+  headRowActions: true,
+  actionHeader: true,
+  emptyState: true,
+  sortIcon: true,
+  selected: "",
+  paginationButton: "",
+  buttonselected: "",
+  headerselectedActions: "",
+  actionsPanel: true,
+};
+
+noHeaderAction.args = {
+  fixed: true,
+  footer: true,
+  checkBoxProp: true,
+  rowKey: "id",
+  hoveringRow: true,
+  settingbarIcon: true,
+  searchIcon: true,
+  headRowActions: true,
+  actionHeader: false,
+  emptyState: true,
+  sortIcon: true,
+  selected: "",
+  paginationButton: "",
+  buttonselected: "",
+  headerselectedActions: "",
+  actionsPanel: true,
+};
+
+noHoveringRow.args = {
+  fixed: true,
+  footer: true,
+  rowKey: "id",
+  hoveringRow: false,
+  checkBoxProp: true,
+  settingbarIcon: true,
+  searchIcon: true,
+  headRowActions: true,
+  actionHeader: false,
+  emptyState: true,
+  sortIcon: true,
+  selected: "",
+  paginationButton: "",
+  buttonselected: "",
+  headerselectedActions: "",
+  actionsPanel: true,
+};
+
+noRowAction.args = {
+  fixed: true,
+  footer: true,
+  rowKey: "id",
+  hoveringRow: false,
+  checkBoxProp: true,
+  settingbarIcon: true,
+  searchIcon: true,
+  headRowActions: true,
+  actionHeader: false,
+  emptyState: true,
+  selected: "",
+  paginationButton: "",
+  buttonselected: "",
+  headerselectedActions: "",
+};
+
+noSortingIcon.args = {
+  fixed: true,
+  footer: true,
+  rowKey: "id",
+  hoveringRow: true,
+  checkBoxProp: true,
+  settingbarIcon: true,
+  searchIcon: true,
+  headRowActions: true,
+  actionHeader: true,
+  emptyState: true,
+  actionsPanel: true,
+  sortIcon: false,
+  selected: "",
+  showIcon: true,
+  paginationButton: "",
+  buttonselected: "",
+  headerselectedActions: "",
+};
+
+noCheckBoxes.args = {
+  fixed: true,
+  footer: true,
+  rowKey: "id",
+  hoveringRow: true,
+  checkBoxProp: false,
+  settingbarIcon: true,
+  searchIcon: true,
+  headRowActions: true,
+  actionHeader: true,
+  emptyState: true,
+  searchIcon: true,
+  actionsPanel: true,
+  selected: "",
+  showIcon: true,
+  paginationButton: "",
+  buttonselected: "",
+  headerselectedActions: "",
+};
+
+disabledCheckBoxes.args = {
+  fixed: true,
+  footer: true,
+  rowKey: "id",
+  hoveringRow: true,
+  headRowActions: true,
+  checkBoxProp: true,
+  actionHeader: true,
+  emptyState: true,
+  searchIcon: true,
+  settingbarIcon: true,
+  sortIcon: false,
+  actionsPanel: true,
+  selected: "",
+  showIcon: true,
+  checkAllDisabled: true,
+  paginationButton: "",
+  buttonselected: "",
+  headerselectedActions: "",
+};
+
+removeTheadActions.args = {
+  fixed: true,
+  footer: true,
+  rowKey: "id",
+  hoveringRow: true,
+  checkBoxProp: true,
+  settingbarIcon: false,
+  searchIcon: false,
+  headRowActions: true,
+  actionHeader: true,
+  emptyState: true,
+  sortIcon: false,
+  actionsPanel: true,
+  selected: "",
+  showIcon: true,
+  checkAllDisabled: false,
+  paginationButton: "",
+  buttonselected: "",
+  headerselectedActions: "",
+};
+
+removeFooter.args = {
+  fixed: true,
+  footer: false,
+  rowKey: "id",
+  hoveringRow: true,
+  checkBoxProp: true,
+  settingbarIcon: false,
+  searchIcon: false,
+  headRowActions: true,
+  actionHeader: true,
+  emptyState: true,
+  sortIcon: false,
+  actionsPanel: true,
+  selected: "",
+  showIcon: true,
+  checkAllDisabled: false,
+  paginationButton: "",
+  buttonselected: "",
+  headerselectedActions: "",
+};
