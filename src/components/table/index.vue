@@ -98,7 +98,7 @@
                 <div v-if="headRowActions"
                   class="dd-flex dd-items-center dd-justify-end dd-gap-4 dd-relative dd-right-5 !dd-z-[999] dd-bg-white dd-pl-2.5">
                   <svgIcon v-if="searchIcon" class="!dd-text-gray-500" icon="Search" size="20" @click="openSearch" />
-                  <svgIcon ref="settingIcon" class="!dd-text-gray-500" :class="[setting ? 'rotated' : 'rotatedReverse']"
+                  <svgIcon v-if="settingIcon" ref="settingIcon" class="!dd-text-gray-500" :class="[setting ? 'rotated' : 'rotatedReverse']"
                     icon="Settings" size="20" @click="openSettingsBar" />
                 </div>
                 <!-- settings component  -->
@@ -138,7 +138,7 @@
           <tbody class="dd-bg-white" v-if="rows.length > 0" ref="parentRef">
             <template v-if="!defaultRow">
               <tr v-for="(row, index) in rows" :key="index"
-                class="[&>*:nth-child(2)]:!dd-font-medium dd-relative dd-border-b dd-border-gray-300" :class="[
+                class="[&>*:nth-child(1)]:!dd-font-normal [&>*:nth-child(2)]:!dd-font-medium dd-relative dd-border-b dd-border-gray-300" :class="[
                   selectedId.includes(row.id)
                     ? '[&>*:nth-child(1)]:dd-bg-gray-50 [&>*:nth-child(2)]:dd-bg-gray-50  [&>*:last-child]:!dd-bg-gray-50 dd-bg-gray-50'
                     : '',
@@ -346,6 +346,10 @@ const props = defineProps({
     default: true,
   },
   searchIcon: {
+    type: Boolean,
+    default: true,
+  },
+  settingIcon: {
     type: Boolean,
     default: true,
   },

@@ -654,7 +654,7 @@ const Template = (args) => ({
   },
   // And then the `args` are bound to your component with `v-bind="args"`
   template:
-    '<dd-table v-bind="args" :rows="rows" :columns="columns" :buttons="buttons" :Actions="Actions" :values="values" showIcon footer fixed rowActions checkBoxProp checkAllDisabled disableDropdown noDropdown defaultRow size="12" @saveChanges="saveChanges"  @resetData="resetData" @NumberOfRow="NumberOfRow" @searchQuery="searchQuery" @loadmore="loadmore" @allCheckboxes="allCheckboxes" @selectedRow="selectedRow" /> ',
+    '<div> <dd-table :rows="rows" :columns="columns" :buttons="buttons" :Actions="Actions" :values="values" /> </div>',
 });
 
 export const Default = Template.bind({});
