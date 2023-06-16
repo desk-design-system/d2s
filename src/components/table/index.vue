@@ -216,7 +216,7 @@
         </dd-Button>
       </div>
       <div v-else>
-        <slot name="footer" />
+        <slot name="footerSlot" />
       </div>
     </div>
   </div>

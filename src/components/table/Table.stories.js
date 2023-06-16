@@ -286,9 +286,9 @@ export default {
         },
       },
     },
-    footer: {
+    footerSlot: {
       description:
-        "Use footer slot to add custom content",
+        "Use footer slot to add custom content in footer",
       table: {
         defaultValue: {
           summary: [],
