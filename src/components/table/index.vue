@@ -62,7 +62,7 @@
           <svgIcon icon="Close" size="12" class="dd-absolute dd-text-gray-400 dd-top-3.5 hover:dd-text-gray-500"
             @click="closeSearch" :class="[fixed ? 'dd-right-6' : 'dd-right-6']" />
         </div>
-        <slot name="actionHeader" />
+        <slot name="actionHeaderSlot" />
         <table class="dd-w-full" :class="
           selectedId.length > 0 && actionHeader == true
             ? '!dd-border-t dd-border-gray-300'

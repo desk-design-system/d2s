@@ -31,7 +31,7 @@ export default {
       },
     },
     Actions: {
-      description: "Pass data array in group button and row end or use rowActions = false and use rowActions slot to add custom content by DdGroupButton",
+      description: "Pass data array in group button and row end and use rowActions slot to add custom content by DdGroupButton",
       table: {
         defaultValue: {
           summary: [],
@@ -59,6 +59,33 @@ export default {
       table: {
         defaultValue: {
           summary: Boolean,
+        },
+      },
+    },
+    actionHeader: {
+      description:
+        "To replace actions in thead and use actionHeaderSlot slot to pass custom actions",
+      table: {
+        defaultValue: {
+          summary: Boolean,
+        },
+      },
+    },
+    actionHeaderSlot: {
+      description:
+        "To replace actions in thead and use actionHeaderSlot slot to pass custom actions",
+      table: {
+        defaultValue: {
+          summary: [],
+        },
+      },
+    },
+    headerActions: {
+      description:
+        "To add custom content in thead when replacing search, settings icon",
+      table: {
+        defaultValue: {
+          summary: [],
         },
       },
     },
@@ -126,18 +153,18 @@ export default {
         },
       },
     },
-    actionHeader: {
+    headRowActions: {
       description:
-        "To replace actions in thead and use actionHeader slot to pass custom actions",
+        "To replace actions in thead and use customDropDown slot to pass custom actions",
       table: {
         defaultValue: {
           summary: [],
         },
       },
     },
-    headRowActions: {
+    groupActions: {
       description:
-        "To replace actions in thead and use actionHeader slot to pass custom actions",
+        "To add content in headeer dd group button",
       table: {
         defaultValue: {
           summary: [],
@@ -177,6 +204,15 @@ export default {
       table: {
         defaultValue: {
           summary: [],
+        },
+      },
+    },
+    footer: {
+      description:
+        "to show footer",
+      table: {
+        defaultValue: {
+          summary: Boolean,
         },
       },
     },
@@ -252,7 +288,7 @@ export default {
     },
     footer: {
       description:
-        "Use footer slot to add custom content and keep footer as false",
+        "Use footer slot to add custom content",
       table: {
         defaultValue: {
           summary: [],
