@@ -42,10 +42,10 @@ export default {
       }
     },
     size: {
-      description: "Change the width of the drawer",
+      description: "Change the width of the drawer with your required unints for example  400px ,50% , 50em and etc and defaults value is 30% ",
       table: {
         defaultValue: {
-          summary: "30"
+          summary: "30%"
         }
       }
     },

@@ -23,6 +23,14 @@ export default {
         },
       },
     },
+    rows: {
+      description: "Define number of rows for textarea",
+      table: {
+        defaultValue: {
+          summary: "4",
+        },
+      },
+    },
     rules: {
       control: { type: "select" },
       options: ["alpha", "max:6", "alpha_dash"],

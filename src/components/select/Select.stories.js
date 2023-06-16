@@ -71,5 +71,6 @@ export const Basic = Template.bind({});
 Basic.args = {
   filterable: true,
   label: "select",
-  addNewItem: true
+  addNewItem: true,
+  placeholder: 'choose option'
 };
