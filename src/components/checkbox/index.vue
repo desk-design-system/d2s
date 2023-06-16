@@ -1,7 +1,7 @@
 <template>
   <div class="dd-base">
-    <input :disabled="disabled" :indeterminate="indeterminate" :checked="checked" :value="value" v-bind="$attrs" :id="id"
-      v-model="inputModelValue" type="checkbox"
+    <input :disabled="disabled" :indeterminate="selectedId.length > 0 ? indeterminate : null" :checked="checked"
+      :value="value" v-bind="$attrs" :id="id" v-model="inputModelValue" type="checkbox"
       :class="[disabled ? ' !dd-cursor-not-allowed !dd-border-gray-200 !dd-text-gray-400' : 'dd-cursor-pointer !dd-border-gray-300 !dd-text-teal-600']"
       class=" !dd-h-4 !dd-w-4 !dd-rounded  !dd-border-solid  focus:!dd-ring-teal-500 " @click="getChecked" />
     <slot name="label">
@@ -43,6 +43,10 @@ const props = defineProps({
   rows: {
     type: Array,
     default: () => [],
+  },
+  selectedId: {
+    type: Array,
+    default: [],
   },
 })
 

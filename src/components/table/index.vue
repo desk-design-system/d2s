@@ -14,8 +14,8 @@
             <DdGroupButton :buttons="buttons">
               <dd-Button color="white" v-if="checkBoxProp" size="sm">
                 <div class="dd-flex dd-items-center">
-                  <dd-checkbox v-model="allSelected" @click="selectAllFields" :disabled="checkAllDisabled" :rows="rows"
-                    @indeterminate="indeterminate" :allCheckboxesChecked="allCheckboxesChecked" />
+                  <dd-checkbox v-model="allSelected" @click="selectAllFields" :disabled="checkAllDisabled || limit < 1"
+                  :rows="rows" @indeterminate="indeterminate" :allCheckboxesChecked="allCheckboxesChecked" :selectedId="selectedId" />
                   <span class="dd-text-sm dd-font-medium dd-text-gray-700 dd-pl-2" :disabled="buttons.disabled">{{
                     selectedId.length }} Selected</span>
                 </div>
@@ -45,9 +45,9 @@
           <div class="dd-w-full dd-cursor-pointer" v-if="search">
             <div class="dd-flex dd-items-center dd-gap-3">
               <svgIcon v-if="selectedId.length > 0" icon="Search" size="20" class="dd-text-gray-400" />
-                <dd-input type="text" v-model="queryInput" @change="searchQuery" class="focus-visible:!dd-border-none"
-                  :icon="selectedId.length === 0 ? 'Search' : ''" Border="none" placeholder="Search Ticket"
-                  :size="selectedId.length > 0 ? 'lg' : 'xl'" :prefix="selectedId.length === 0 ? true : false" />
+              <dd-input type="text" v-model="queryInput" @change="searchQuery" class="focus-visible:!dd-border-none"
+                :icon="selectedId.length === 0 ? 'Search' : ''" Border="none" placeholder="Search Ticket"
+                :size="selectedId.length > 0 ? 'lg' : 'xl'" :prefix="selectedId.length === 0 ? true : false" />
             </div>
             <svgIcon icon="Close" size="12" class="dd-absolute dd-text-gray-400 dd-top-3.5 hover:dd-text-gray-500"
               @click="closeSearch" :class="[fixed ? 'dd-right-6' : 'dd-right-6']" />
@@ -68,13 +68,14 @@
             : '!dd-border-0'
         ">
           <!-- tabel head  -->
-          <thead class="!dd-sticky !dd-top-0 !dd-bg-white !dd-z-[1000]" :class="[limit > 1 ? 'dd-cursor-pointer' : '']"
-            v-if="setTableHeader">
+          <thead v-if="setTableHeader" class="!dd-sticky !dd-top-0 !dd-bg-white !dd-z-[1000]"
+            :class="[limit > 1 ? 'dd-cursor-pointer' : '']">
             <tr class="dd-bg-white">
               <th
                 class="dd-py-2 dd-pl-5 dd-text-left checkbox_wrapper !dd-leading-3 dd-h-[40px] table_head_row dd-sticky dd-top-0"
                 v-if="checkBoxProp">
-                <dd-checkbox v-model="allSelected" @click="selectAllFields" :disabled="checkAllDisabled || limit < 1" />
+                <dd-checkbox v-model="allSelected" @click="selectAllFields" :disabled="checkAllDisabled || limit < 1"
+                  :rows="rows" @indeterminate="indeterminate" :allCheckboxesChecked="allCheckboxesChecked" :selectedId="selectedId" />
               </th>
               <slot name="th" />
               <th v-for="col in columns" :key="col.value" :value="col" scope="col" v-show="col.checked"
@@ -139,7 +140,7 @@
               <tr v-for="(row, index) in rows" :key="index"
                 class="[&>*:nth-child(2)]:!dd-font-medium dd-relative dd-border-b dd-border-gray-300" :class="[
                   selectedId.includes(row.id)
-                    ? '[&>*:nth-child(1)]:dd-bg-gray-50 [&>*:nth-child(2)]:dd-bg-gray-50  [&>*:last-child]:dd-bg-gray-50 dd-bg-gray-50'
+                    ? '[&>*:nth-child(1)]:dd-bg-gray-50 [&>*:nth-child(2)]:dd-bg-gray-50  [&>*:last-child]:!dd-bg-gray-50 dd-bg-gray-50'
                     : '',
                   row.disabled
                     ? '[&>*:nth-child(1)]:dd-bg-gray-50 [&>*:nth-child(2)]:dd-bg-gray-50  [&>*:last-child]:dd-bg-gray-50  dd-bg-gray-50 dd-pointer-event-none dd-cursor-not-allowed'
@@ -485,13 +486,15 @@ const getCalculatedHeight = computed(() => {
 });
 
 const setTableHeader = computed(() => {
-  if (search.value == true) {
+  if (props.actionHeader === true && selectedId.value.length > 0) {
     return false;
-  }
-  if (props.actionHeader == true) {
+  } else if (search.value === true) {
     return false;
+  } else if (props.actionHeader === false && selectedId.value.length > 0) {
+    return true;
+  } else {
+    return true;
   }
-  return true;
 });
 
 const allSelected = ref(false);
