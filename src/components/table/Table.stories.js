@@ -62,14 +62,6 @@ export default {
         },
       },
     },
-    defaultRow: {
-      description: "Used to show default tbody",
-      table: {
-        defaultValue: {
-          summary: Boolean,
-        },
-      },
-    },
     fixed: {
       description: "Fixed columns will be removed",
       table: {
@@ -136,7 +128,7 @@ export default {
     },
     actionHeader: {
       description:
-        "To replace actions in thead actionHeader = false and use actionHeader slot to pass custom actions",
+        "To replace actions in thead and use actionHeader slot to pass custom actions",
       table: {
         defaultValue: {
           summary: [],
@@ -145,7 +137,7 @@ export default {
     },
     headRowActions: {
       description:
-        "To replace actions in thead at first headRowActions = false and use actionHeader slot to pass custom actions",
+        "To replace actions in thead and use actionHeader slot to pass custom actions",
       table: {
         defaultValue: {
           summary: [],
@@ -172,7 +164,61 @@ export default {
     },
     searchIcon: {
       description:
-        "To replace actions in thead actionHeader = false and use actionHeader slot to pass custom actions",
+        "To remove search in thead and use actionHeader slot to pass custom actions",
+      table: {
+        defaultValue: {
+          summary: [],
+        },
+      },
+    },
+    settingbarIcon: {
+      description:
+        "To remove setting in thead and use actionHeader slot to pass custom actions",
+      table: {
+        defaultValue: {
+          summary: [],
+        },
+      },
+    },
+    actionsPanel: {
+      description:
+        "To remove actions in row",
+      table: {
+        defaultValue: {
+          summary: [],
+        },
+      },
+    },
+    buttonselected: {
+      description:
+        "To get value from pagination button which is selected in loadmore event",
+      table: {
+        defaultValue: {
+          summary: [],
+        },
+      },
+    },
+    headerselectedActions: {
+      description:
+        "v-modals thead actions in dropdown",
+      table: {
+        defaultValue: {
+          summary: [],
+        },
+      },
+    },
+    defaultRow: {
+      description:
+        "to remove tbody data and make custom table with tbody slot",
+      table: {
+        defaultValue: {
+          summary: [],
+        },
+      },
+    },
+    selected: {
+      description:
+        "v-modals tr actions in dropdown",
       table: {
         defaultValue: {
           summary: [],
