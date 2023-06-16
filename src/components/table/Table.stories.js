@@ -113,30 +113,6 @@ export default {
         },
       },
     },
-    noDropdown: {
-      description: "Remove Dropdown from thead actions",
-      table: {
-        defaultValue: {
-          summary: Boolean,
-        },
-      },
-    },
-    size: {
-      description: "Set icon size on table",
-      table: {
-        defaultValue: {
-          summary: Boolean,
-        },
-      },
-    },
-    actionsIconSize: {
-      description: "Set icon size from row action on table",
-      table: {
-        defaultValue: {
-          summary: Boolean,
-        },
-      },
-    },
     showIcon: {
       description: "Used to show icons in group buttons",
       table: {
@@ -164,7 +140,16 @@ export default {
     },
     groupActions: {
       description:
-        "To add content in headeer dd group button",
+        "To add content in header dd group button",
+      table: {
+        defaultValue: {
+          summary: [],
+        },
+      },
+    },
+    thead: {
+      description:
+        "To add content in thead",
       table: {
         defaultValue: {
           summary: [],
