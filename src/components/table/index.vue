@@ -34,7 +34,7 @@
               </dd-Button>
               <slot name="groupActions" />
             </DdGroupButton>
-            <DdDropDown v-if="actionsPanel" color="white" label="Actions" v-model="headerselectedActions" :options="values"
+            <DdDropDown v-if="actionsPanel" color="white" label="Actions" v-model="headerActions" :options="values"
               size="sm" :showIcon="showIcon"
               @command="getHeaderDropdownVal" />
             <slot name="customDropDown" />
@@ -515,6 +515,7 @@ const savedData = ref({});
 const settingElement = ref(null);
 const settingIcon = ref(null);
 const allCheckboxesChecked = ref(false);
+const headerActions = ref(props.headerselectedActions);
 
 const selectNumberOfRows = (button) => {
   emits("numberOfRow", button);
