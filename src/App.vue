@@ -1,5 +1,5 @@
 <template>
-  <div class="dd-w-full dd-bg-gray-100 ">
+  <div class="dd-w-full dd-bg-gray-100">
     <div class="dd-flex dd-items-center dd-justify-between dd-bg-white dd-w-full dd-relative dd-top-0 dd-z-20">
       <div class="dd-flex dd-items-center dd-py-3 dd-px-4 dd-gap-4">
         <div class="dd-bg-teal-700 dd-pt-1 dd-pb-1.5 dd-px-3 dd-rounded-3xl">
@@ -7,17 +7,13 @@
         </div>
         <div>
           <input type="text" placeholder="Spark Search"
-            class="dd-border-2 dd-border-gray-100 dd-py-1.5 dd-px-3 focus-visible:dd-outline-none dd-rounded-lg dd-w-[500px]">
+            class="dd-border-2 dd-border-gray-100 dd-py-1.5 dd-px-3 focus-visible:dd-outline-none dd-rounded-lg dd-w-[500px]" />
         </div>
       </div>
       <div class="dd-flex dd-items-center dd-py-3 dd-px-4 dd-gap-4">
         <DdGroupButton>
-          <dd-Button color="white">
-            Register A
-          </dd-Button>
-          <dd-Button color="white">
-            Morning shift
-          </dd-Button>
+          <dd-Button color="white"> Register A </dd-Button>
+          <dd-Button color="white"> Morning shift </dd-Button>
         </DdGroupButton>
         <div class="dd-flex dd-items-center dd-gap-3">
           <svgIcon color="white" icon="Bulb" class="dd-mb-1" />
@@ -34,178 +30,166 @@
           <svgIcon color="white" icon="Lock" class="dd-text-gray-400 hover:dd-text-gray-700" />
           <svgIcon color="white" icon="Mail" class="dd-text-gray-400 hover:dd-text-gray-700" />
         </div>
-        <div class=" dd-h-fit">
+        <div class="dd-h-fit">
           <div class="dd-border-t dd-border-gray-300 dd-w-6 dd-mb-6"></div>
           <svgIcon class="!dd-text-gray-500 dd-mb-6" icon="Settings" size="20" />
         </div>
       </div>
     </div>
-    <div class="dd-w-full dd-h-full">
+    <div class="dd-w-full dd-h-full dd-pl-20">
       <div class="dd-w-full">
-        <div class="dd-flex dd-items-center dd-justify-between dd-p-6">
-          <span class="dd-ml-16 dd-text-gray-700 dd-text-xl dd-font-semibold">Manage Tickets</span>
+        <div class="dd-flex dd-items-center dd-justify-between dd-py-6 dd-pr-6">
+          <span class="dd-text-gray-700 dd-text-xl dd-font-semibold">Manage Tickets</span>
           <div class="dd-flex dd-gap-4">
-            <dd-Button color="white">
-              Export
-            </dd-Button>
-            <dd-Button>
-              Create Ticket
-            </dd-Button>
+            <dd-Button color="white"> Export </dd-Button>
+            <dd-Button> Create Ticket </dd-Button>
           </div>
         </div>
-        <div class="dd-ml-16 dd-flex">
-          <div class="dd-w-[5%]">
-          <div class="dd-ml-5 dd-flex dd-gap-3 dd-flex-col dd-w-fit">
-            <dd-Button color="white" size="sm">
-              <svgIcon color="white" icon="Bulb" class="dd-flex dd-items-center dd-justify-center dd-text-gray-400 hover:dd-text-gray-700" />
-            </dd-Button>
-            <dd-Button color="white" size="sm">
-              <svgIcon color="white" icon="switch" class="dd-flex dd-items-center dd-justify-center dd-text-gray-400 hover:dd-text-gray-700" />
-            </dd-Button>
-            <dd-Button color="white" size="sm">
-              <svgIcon color="white" icon="Star" class="dd-flex dd-items-center dd-justify-center dd-text-gray-400 hover:dd-text-gray-700" />
-            </dd-Button>
+        <div class="dd-relative dd-pl-6 dd-w-full">
+          <div class="dd-absolute dd-left-0">
+            <div class="dd-flex dd-items-end dd-gap-3 dd-flex-col">
+              <dd-Button color="white" size="sm">
+                <svgIcon color="white" icon="Bulb"
+                  class="dd-flex dd-items-center dd-justify-center dd-text-gray-400 hover:dd-text-gray-700" />
+              </dd-Button>
+              <dd-Button color="white" size="sm">
+                <svgIcon color="white" icon="switch"
+                  class="dd-flex dd-items-center dd-justify-center dd-text-gray-400 hover:dd-text-gray-700" />
+              </dd-Button>
+              <dd-Button color="white" size="sm">
+                <svgIcon color="white" icon="Star"
+                  class="dd-flex dd-items-center dd-justify-center dd-text-gray-400 hover:dd-text-gray-700" />
+              </dd-Button>
+            </div>
           </div>
-          </div>
-          <div class="dd-w-[93%]">
-            <dd-table :rows="rows" :columns="columns" :buttons="buttons" :Actions="Actions" :values="values" defaultRow footer emptyState @searchQuery="searchQuery" />
-          </div>
+            <div class="dd-w-full dd-min-w-full dd-px-6">
+              <dd-table :rows="rows" :columns="columns" :buttons="buttons" :Actions="Actions" :values="values"
+               footer checkBoxProp fixedHeight rowKey="id" hoveringRow headRowActions fixed actionHeader emptyState actionsPanel sortIcon/>
+            </div>
         </div>
       </div>
     </div>
-  </div> 
+  </div>
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
+import { ref } from "vue";
 import DdGroupButton from "./components/groupButton/index.vue";
 import DdButton from "./components/buttons/index.vue";
 import svgIcon from "./components/svgIcon/index.vue";
-import DdTable from "./components/table/index.vue"
-import DdSelect from "./components/select/index.vue"
-import DdAccordion from "./components/Accordion/index.vue";
-import DdTopbar from "./components/topbar/index.vue";
-import ddObserver from "./components/validations/ddForm.vue";
-import ddAlert from "./components/alerts/index.vue";
-import ddBadge from "./components/badges/index.vue";
-import ddBred from "./components/breadcrumbs/index.vue";
-import ddButton from "./components/buttons/index.vue";
-import ddCheckBox from "./components/checkbox/index.vue";
-import ddRadion from "./components/radiobutton/index.vue";
-import ddWraper from "./components/scrollerApp/index.vue";
-import ddMulti from "./components/multiSelect/index.vue";
+import DdTable from "./components/table/index.vue";
 
 const columns = ref([
   {
-    title: 'ID',
-    value: 'id',
+    title: "ID",
+    value: "id",
     checked: true,
     size: "60",
     id: 1,
     disabled: true,
-    sortDirection: 'asc',
+    sortDirection: "asc",
   },
   {
-    title: 'User Name',
-    value: 'username',
+    title: "User Name",
+    value: "username",
     checked: true,
     size: "130",
     id: 2,
-    disabled: true,
-    sortDirection: '',
+    disabled: false,
+    sortDirection: "",
   },
   {
-    title: 'First Name',
-    value: 'firstname',
+    title: "First Name",
+    value: "firstname",
     checked: true,
     size: "130",
     id: 3,
-    sortDirection: '',
+    sortDirection: "",
   },
   {
-    title: 'Last Name',
-    value: 'lastname',
+    title: "Last Name",
+    value: "lastname",
     checked: true,
     size: "130",
     id: 4,
-    sortDirection: '',
+    sortDirection: "",
   },
   {
-    title: 'Email',
-    value: 'email',
+    title: "Email",
+    value: "email",
     checked: true,
     size: "130",
     id: 5,
-    sortDirection: '',
+    sortDirection: "",
   },
   {
-    title: 'Email',
-    value: 'email',
+    title: "Email",
+    value: "email",
     checked: true,
     size: "130",
     id: 5,
-    sortDirection: '',
+    sortDirection: "",
   },
   {
-    title: 'Email',
-    value: 'email',
+    title: "Email",
+    value: "email",
     checked: true,
     size: "130",
     id: 5,
-    sortDirection: '',
+    sortDirection: "",
   },
   {
-    title: 'Email',
-    value: 'email',
+    title: "Email",
+    value: "email",
     checked: true,
     size: "130",
     id: 5,
-    sortDirection: '',
+    sortDirection: "",
   },
   {
-    title: 'Email',
-    value: 'email',
+    title: "Email",
+    value: "email",
     checked: true,
     size: "130",
     id: 5,
-    sortDirection: '',
+    sortDirection: "",
   },
   {
-    title: 'Email',
-    value: 'email',
+    title: "Email",
+    value: "email",
     checked: true,
     size: "130",
     id: 5,
-    sortDirection: '',
+    sortDirection: "",
   },
   {
-    title: 'Email',
-    value: 'email',
+    title: "Email",
+    value: "email",
     checked: true,
     size: "130",
     id: 5,
-    sortDirection: '',
+    sortDirection: "",
   },
   {
-    title: 'Email',
-    value: 'email',
+    title: "Email",
+    value: "email",
     checked: true,
     size: "130",
     id: 5,
-    sortDirection: '',
+    sortDirection: "",
   },
   {
-    title: 'Status',
-    value: 'status',
+    title: "Status",
+    value: "status",
     checked: true,
     size: "130",
     id: 6,
-    sortDirection: '',
+    sortDirection: "",
   },
-])
+]);
 const rows = ref([
   {
-    id: 1,
+    id: 0,
     username: "Herry007",
     firstname: "Herry",
     lastname: "Brook",
@@ -214,7 +198,7 @@ const rows = ref([
     disabled: false,
   },
   {
-    id: 2,
+    id: 1,
     username: "David2",
     firstname: "David",
     lastname: "Jeman",
@@ -223,7 +207,7 @@ const rows = ref([
     disabled: false,
   },
   {
-    id: 3,
+    id: 2,
     username: "Henry0",
     firstname: "Henry",
     lastname: "Cavil",
@@ -231,15 +215,15 @@ const rows = ref([
     status: "in progress",
   },
   {
-    id: 4,
+    id: 3,
     username: "Herry007",
     firstname: "Herry",
     lastname: "Brook",
     email: "herry@repairdesk.co",
-    status: "Repaired and Collected"
+    status: "Repaired and Collected",
   },
   {
-    id: 5,
+    id: 4,
     username: "JSmith",
     firstname: "John",
     lastname: "Smith",
@@ -247,15 +231,15 @@ const rows = ref([
     status: "in progress",
   },
   {
-    id: 6,
+    id: 5,
     username: "LGreen",
     firstname: "Lucy",
     lastname: "Green",
     email: "lucy.green@example.com",
-    status: "Repaired and Collected"
+    status: "Repaired and Collected",
   },
   {
-    id: 7,
+    id: 6,
     username: "AMiller",
     firstname: "Alice",
     lastname: "Miller",
@@ -263,12 +247,20 @@ const rows = ref([
     status: "in progress",
   },
   {
-    id: 8,
+    id: 7,
     username: "BDavis",
     firstname: "Bob",
     lastname: "Davis",
     email: "bob.davis@example.com",
-    status: "Repaired and Collected"
+    status: "Repaired and Collected",
+  },
+  {
+    id: 8,
+    username: "KJohnson",
+    firstname: "Kate",
+    lastname: "Johnson",
+    email: "kate.johnson@example.com",
+    status: "in progress",
   },
   {
     id: 9,
@@ -478,43 +470,34 @@ const rows = ref([
     email: "kate.johnson@example.com",
     status: "in progress",
   },
-  {
-    id: 35,
-    username: "KJohnson",
-    firstname: "Kate",
-    lastname: "Johnson",
-    email: "kate.johnson@example.com",
-    status: "in progress",
-  },
-])
+]);
 
 const buttons = [
-  { id: 1, label: "5", color: "white", size: "sm" },
+  { id: 1, label: "5", color: "white", size: "sm", active: "15" },
   { id: 2, label: "10", color: "white", size: "sm" },
   { id: 3, label: "15", color: "white", size: "sm" },
 ];
 
 const Actions = ref([
   {
-    name: 'DropDown Menu 1',
-    icon: 'DotHorizontal',
+    name: "DropDown Menu 1",
+    icon: "DotHorizontal",
     size: 12,
     value: 1,
   },
   {
-    name: 'DropDown Menu 2',
-    icon: 'Trash',
+    name: "DropDown Menu 2",
+    icon: "Trash",
     size: 12,
     value: 2,
   },
   {
-    name: 'DropDown Menu 3',
-    icon: 'Pencil',
+    name: "DropDown Menu 3",
+    icon: "Pencil",
     size: 12,
     value: 3,
-  }
+  },
 ]);
-
 
 const values = ref([
   {
@@ -535,10 +518,6 @@ const values = ref([
     value: 4,
   },
 ]);
-
-function searchQuery(query) {
-  console.log(query, 'query');
-}
 </script>
 
 
@@ -547,6 +526,6 @@ body {
   padding: 0;
   margin: 0;
   overflow-x: hidden !important;
-  background: #F3F4F6 !important;
+  background: #f3f4f6 !important;
 }
 </style>
