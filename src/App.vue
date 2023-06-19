@@ -1,73 +1,8 @@
 <template>
-  <div class="dd-w-full dd-bg-gray-100">
-    <div class="dd-flex dd-items-center dd-justify-between dd-bg-white dd-w-full dd-relative dd-top-0 dd-z-20">
-      <div class="dd-flex dd-items-center dd-py-3 dd-px-4 dd-gap-4">
-        <div class="dd-bg-teal-700 dd-pt-1 dd-pb-1.5 dd-px-3 dd-rounded-3xl">
-          <span class="dd-text-white dd-text-center">Repair shop</span>
-        </div>
-        <div>
-          <input type="text" placeholder="Spark Search"
-            class="dd-border-2 dd-border-gray-100 dd-py-1.5 dd-px-3 focus-visible:dd-outline-none dd-rounded-lg dd-w-[500px]" />
-        </div>
-      </div>
-      <div class="dd-flex dd-items-center dd-py-3 dd-px-4 dd-gap-4">
-        <DdGroupButton>
-          <dd-Button color="white"> Register A </dd-Button>
-          <dd-Button color="white"> Morning shift </dd-Button>
-        </DdGroupButton>
-        <div class="dd-flex dd-items-center dd-gap-3">
-          <svgIcon color="white" icon="Bulb" class="dd-mb-1" />
-          <div class="dd-w-8 dd-h-8 dd-bg-gray-200 dd-rounded-full"></div>
-        </div>
-      </div>
-    </div>
-    <div class="dd-w-16 dd-bg-white dd-h-full dd-absolute dd-left-0 dd-top-0 dd-z-10">
-      <div class="dd-flex dd-items-center dd-justify-between dd-h-full dd-flex-col">
-        <div class="dd-flex dd-items-center dd-text-center dd-gap-8 dd-flex-col dd-mt-24">
-          <svgIcon color="white" icon="Bulb" class="dd-text-gray-400 hover:dd-text-gray-700" />
-          <svgIcon color="white" icon="switch" class="dd-text-gray-400 hover:dd-text-gray-700" />
-          <svgIcon color="white" icon="Star" class="dd-text-gray-400 hover:dd-text-gray-700" />
-          <svgIcon color="white" icon="Lock" class="dd-text-gray-400 hover:dd-text-gray-700" />
-          <svgIcon color="white" icon="Mail" class="dd-text-gray-400 hover:dd-text-gray-700" />
-        </div>
-        <div class="dd-h-fit">
-          <div class="dd-border-t dd-border-gray-300 dd-w-6 dd-mb-6"></div>
-          <svgIcon class="!dd-text-gray-500 dd-mb-6" icon="Settings" size="20" />
-        </div>
-      </div>
-    </div>
-    <div class="dd-w-full dd-h-full dd-pl-20">
-      <div class="dd-w-full">
-        <div class="dd-flex dd-items-center dd-justify-between dd-py-6 dd-pr-6">
-          <span class="dd-text-gray-700 dd-text-xl dd-font-semibold">Manage Tickets</span>
-          <div class="dd-flex dd-gap-4">
-            <dd-Button color="white"> Export </dd-Button>
-            <dd-Button> Create Ticket </dd-Button>
-          </div>
-        </div>
-        <div class="dd-relative dd-pl-6 dd-w-full">
-          <div class="dd-absolute dd-left-0">
-            <div class="dd-flex dd-items-end dd-gap-3 dd-flex-col">
-              <dd-Button color="white" size="sm">
-                <svgIcon color="white" icon="Bulb"
-                  class="dd-flex dd-items-center dd-justify-center dd-text-gray-400 hover:dd-text-gray-700" />
-              </dd-Button>
-              <dd-Button color="white" size="sm">
-                <svgIcon color="white" icon="switch"
-                  class="dd-flex dd-items-center dd-justify-center dd-text-gray-400 hover:dd-text-gray-700" />
-              </dd-Button>
-              <dd-Button color="white" size="sm">
-                <svgIcon color="white" icon="Star"
-                  class="dd-flex dd-items-center dd-justify-center dd-text-gray-400 hover:dd-text-gray-700" />
-              </dd-Button>
-            </div>
-          </div>
-            <div class="dd-w-full dd-min-w-full dd-px-6">
-              <dd-table :rows="rows" :columns="columns" lastCell/>
-            </div>
-        </div>
-      </div>
-    </div>
+  <div class="dd-mt-3">
+    <dd-table :rows="rows" :columns="columns" :buttons="buttons" :Actions="Actions" :values="values" footer checkBoxProp
+      fixedHeight rowKey="id" hoveringRow lastCell fixed actionHeader emptyState actionsPanel sortIcon settingbarIcon
+      searchIcon />
   </div>
 </template>
 
