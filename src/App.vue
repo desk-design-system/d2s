@@ -63,8 +63,7 @@
             </div>
           </div>
             <div class="dd-w-full dd-min-w-full dd-px-6">
-              <dd-table :rows="rows" :columns="columns" :buttons="buttons" :Actions="Actions" :values="values"
-               footer checkBoxProp fixedHeight rowKey="id" hoveringRow headRowActions fixed actionHeader emptyState actionsPanel sortIcon/>
+              <dd-table :rows="rows" :columns="columns" lastCell/>
             </div>
         </div>
       </div>

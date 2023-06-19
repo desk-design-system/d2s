@@ -95,15 +95,15 @@
                 </div>
               </th>
 
-              <th class="table_head_row dd-sticky dd-top-0">
-                <div v-if="headRowActions"
+              <th class="table_head_row dd-sticky dd-top-0" v-if="lastCell">
+                <div
                   class="dd-flex dd-items-center dd-justify-end dd-gap-4 dd-relative dd-right-5 !dd-z-[999] dd-bg-white dd-pl-2.5">
                   <svgIcon v-if="searchIcon" class="!dd-text-gray-500" icon="Search" size="20" @click="openSearch" />
                   <svgIcon v-if="settingbarIcon" ref="settingIcon" class="!dd-text-gray-500" :class="[setting ? 'rotated' : 'rotatedReverse']"
                     icon="Settings" size="20" @click="openSettingsBar" />
                 </div>
                 <!-- settings component  -->
-                <transition name="setting" v-if="headRowActions">
+                <transition name="setting" v-if="lastCell">
                   <div v-if="setting" ref="settingElement"
                     class="dd-px-2 dd-pt-2 dd-w-[250px] dd-bg-white dd-container dd-my-[2.1rem] dd-absolute dd-right-4 dd-top-1 dd-shadow-xl dd-rounded-lg dd-border dd-border-gray-100"
                     style="z-index: 1100">
@@ -175,7 +175,7 @@
                   </slot>
                 </td>
                 <!-- actions  -->
-                <td class="dd-pl-9 dd-pr-9 dd-relative dd-max-w-[56px]" :style="`z-index: ${rows.length - index} `"
+                <td v-if="lastCell" class="dd-pl-9 dd-pr-9 dd-relative dd-max-w-[56px]" :style="`z-index: ${rows.length - index} `"
                   :class="[
                     row.disabled
                       ? '!dd-pointer-event-none'
@@ -327,10 +327,6 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-  headRowActions: {
-    type: Boolean,
-    default: false,
-  },
   disabledLoadmore: {
     type: Boolean,
     default: false,
@@ -344,6 +340,10 @@ const props = defineProps({
     default: false,
   },
   settingbarIcon: {
+    type: Boolean,
+    default: false,
+  },
+  lastCell: {
     type: Boolean,
     default: false,
   },
