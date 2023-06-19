@@ -32,4 +32,3 @@ export { default as DdStepper } from "./stepper/index.vue";
 export { default as DdPagination } from "./Pagination/index.vue";
 export { default as DdTextarea } from "./textarea/index.vue";
 export { default as DdGroupButton } from "./textarea/index.vue";
-export { default as DdTable } from "./table/index.vue"
