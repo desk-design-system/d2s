@@ -14,30 +14,30 @@
         @click="editRow()"
         color="white"
         size="base"
-        class="!dd-px-1.5 dd-w-[28px] dd-h-[28px]"
+        class="!dd-px-1 dd-w-[28px] dd-h-[28px]"
         :class="[selectedId.includes(row.id) ? '!dd-bg-gray-50' : '']"
         v-if="isActionHovered(row)"
       >
         <svgIcon
-          class="dd-mt-[5px] dd-m-auto dd-text-gray-500"
+          class="dd-mt-[5px] dd-text-gray-500"
           color="white"
           icon="Pencil"
-          size="16"
+          size="20"
         />
       </dd-Button>
       <dd-Button
         @click="deleteRow()"
         color="white"
         size="base"
-        class="!dd-px-1.5 dd-w-[28px] dd-h-[28px]"
+        class="!dd-px-1 dd-w-[28px] dd-h-[28px]"
         :class="[selectedId.includes(row.id) ? '!dd-bg-gray-50' : '']"
         v-if="isActionHovered(row)"
       >
         <svgIcon
-          class="dd-mt-[5px] dd-m-auto dd-text-gray-500"
+          class="dd-mt-[5px] dd-text-gray-500"
           color="white"
           icon="Trash"
-          size="16"
+          size="20"
         />
       </dd-Button>
       <dd-Button
