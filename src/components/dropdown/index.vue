@@ -16,7 +16,7 @@
           <slot name="icon">
             <svgIcon color="white" icon="ChevronDown" size="10" />
           </slot>
-        </span>`
+        </span>
       </MenuButton>
     </div>
     <div v-else-if="type == 'icon'">
