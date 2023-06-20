@@ -70,7 +70,9 @@
         ">
           <!-- tabel head  -->
           <thead v-if="setTableHeader" class="!dd-sticky !dd-top-0 !dd-bg-white !dd-z-[1000]"
-            :class="[limit > 1 ? 'dd-cursor-pointer' : '']">
+            :class="[limit > 1 ? 'dd-cursor-pointer' : '',
+            rows.length === 0 ? 'dd-opacity-40' : ''
+            ]">
             <tr class="dd-bg-white">
               <th
                 class="dd-py-2 !dd-pl-5 dd-text-left checkbox_wrapper !dd-leading-3 dd-h-[41px] table_head_row dd-sticky dd-top-0"
