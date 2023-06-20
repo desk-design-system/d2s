@@ -82,7 +82,7 @@
               <th v-for="col in columns" :key="col.value" :value="col" scope="col" v-show="col.checked"
                 class="dd-py-2 dd-text-left dd-text-xs dd-font-medium dd-text-gray-500 !dd-leading-3 dd-h-[41px] table_head_row dd-sticky dd-top-0"
                 :style="`min-width: ${col.size}px`" @mouseenter="handleMouseEnter(col)" @mouseleave="handleMouseLeave"
-                @click="sortRows(col)" :class="[checkBoxProp ? 'dd-pl-3 dd-pr-3' : 'dd-pl-3']">
+                @click="sortRows(col)" :class="[checkBoxProp ? 'dd-pl-3 dd-pr-3' : 'dd-pl-5']">
                 <div :class="[sortIcon ? 'dd-flex dd-gap-1.5 dd-w-fit' : 'dd-w-fit']">
                   <span class="dd-text-xs">{{ col.title }}</span>
                   <div v-if="sortIcon">
@@ -169,7 +169,7 @@
                 <td v-for="col in columns" :key="col.value" v-show="col.checked"
                   class="dd-whitespace-nowrap dd-py-2.5 dd-pl-3 dd-pr-3 dd-text-sm dd-text-gray-500" :class="[
                     row.disabled || !checkBoxProp
-                      ? '!dd-pl-3'
+                      ? '!dd-pl-5'
                       : 'dd-cursor-pointer',
                   ]" :style="`min-width: ${col.size}px`">
                   <slot name="row" :column="col" :row="row" :value="row[col.value]" :disabled="row.disabled">
