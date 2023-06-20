@@ -1,7 +1,7 @@
 <template>
   <div v-if="actionsPanel">
     <DdGroupButton
-      class="dd-absolute dd-top-1 dd-right-5 dd-z-10"
+      class="dd-absolute dd-top-1.5 dd-right-5 dd-z-10"
       :class="[
         !isActionHovered(row)
           ? '!dd-p-0 dd-rounded-none !dd-border-none dd-ring-0 !dd-shadow-none'
@@ -14,7 +14,7 @@
         @click="editRow()"
         color="white"
         size="base"
-        class="!dd-px-1.5"
+        class="!dd-px-1.5 dd-w-[28px] dd-h-[28px]"
         :class="[selectedId.includes(row.id) ? '!dd-bg-gray-50' : '']"
         v-if="isActionHovered(row)"
       >
@@ -29,7 +29,7 @@
         @click="deleteRow()"
         color="white"
         size="base"
-        class="!dd-px-1.5"
+        class="!dd-px-1.5 dd-w-[28px] dd-h-[28px]"
         :class="[selectedId.includes(row.id) ? '!dd-bg-gray-50' : '']"
         v-if="isActionHovered(row)"
       >
@@ -42,7 +42,7 @@
       </dd-Button>
       <dd-Button
         color="white"
-        class="!dd-p-0"
+        class="!dd-p-0 !dd-h-7 !dd-w-7"
         size="base"
         :class="[
           !isActionHovered(row)
@@ -52,7 +52,7 @@
       >
         <DdDropDown
           color="transparent"
-          class="dd-text-gray-700 !dd-w-[28px] !dd-h-[28px] [&>svg]:dd-pt-[2px]"
+          class="dd-text-gray-700 dd-top-[3px] dd-left-[3px]"
           :class="[
             isActionHovered(row)
               ? ''
@@ -65,6 +65,7 @@
           :options="values"
           placement="right"
           defaultIcon="DotHorizontal"
+          size="base"
           :showIcon="showIcon"
           :disabled="rowDisabled"
           @command="getDropdownVal"
@@ -129,10 +130,10 @@ const getDropdownVal = (data) => {
 }
 
 const editRow = () => {
-  emits("editRow");
+  emits("editRow", props.row);
 };
 const deleteRow = () => {
-  emits("deleteRow");
+  emits("deleteRow", props.row);
 };
 </script>
 

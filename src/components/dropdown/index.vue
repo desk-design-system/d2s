@@ -7,7 +7,7 @@
     </div>
     <div v-else-if="type == 'button'">
       <MenuButton :class="{ ...basicButton }"
-        class="dd-flex dd-w-full dd-justify-center dd-items-center dd-gap-1 dd-cursor-pointer dd-h-8 !dd-p-2">
+        class="dd-flex dd-w-full dd-justify-center dd-items-center dd-gap-1 dd-cursor-pointer !dd-p-2">
         <slot>
           {{ label }}
         </slot>
@@ -16,12 +16,12 @@
           <slot name="icon">
             <svgIcon color="white" icon="ChevronDown" size="10" />
           </slot>
-        </span>
+        </span>`
       </MenuButton>
     </div>
     <div v-else-if="type == 'icon'">
       <MenuButton :class="{ ...basicButton }"
-        class="dd-flex dd-w-full dd-justify-center dd-items-center dd-gap-1 dd-cursor-pointer dd-h-[30px] !dd-p-2 dd-border-none focus-visible:dd-outline-none" v-bind="$attrs">
+        class="dd-flex dd-justify-center dd-items-center dd-gap-1 dd-cursor-pointer !dd-p-0 dd-border-none focus-visible:dd-outline-none" v-bind="$attrs">
         <svgIcon :color="color" :icon="defaultIcon" :size="size" />
       </MenuButton>
     </div>
@@ -35,7 +35,7 @@
         <div class="dd-py-1">
           <MenuItem @click="getClick(item)" v-for="(item, index) in options" :key="index" v-slot="{ active }">
           <span href="#"
-            :class="[active ? 'dd-bg-teal-50 dd-text-teal-600' : 'dd-text-gray-700', 'dd-block dd-py-1 dd-px-4 dd-cursor-pointer', size == 'xs' ? 'dd-text-xs' : 'dd-text-sm']">
+            :class="[active ? 'dd-bg-teal-50 dd-text-teal-600' : 'dd-text-gray-700', '!dd-font-normal dd-block dd-py-1 dd-px-4 dd-cursor-pointer', size == 'xs' ? 'dd-text-xs' : 'dd-text-sm']">
             <slot name="items" :item="item">
               <svgIcon v-if="showIcon" :color="item.color ? item.color : ''" :icon="item.icon ? item.icon : ''"
                 :size="item.size ? item.size : ''" />
@@ -66,7 +66,7 @@ const props = defineProps({
   },
   size: {
     type: String,
-    default: "13",
+    default: "20",
   },
   showIcon: {
     type: Boolean,
@@ -179,7 +179,7 @@ const basicButton = computed(() => {
     "dd-px-2.5 dd-py-0 !dd-h-6 dd-text-xs dd-rounded": props.size === "xs",
     "dd-px-3 dd-py-2 dd-text-sm !dd-h-7 dd-rounded-md":
       props.size === "sm",
-    "dd-px-4 dd-py-2 dd-text-sm dd-rounded-md dd-h-8": props.size === "base",
+    "dd-px-4 dd-py-2 dd-text-sm dd-rounded-md": props.size === "base",
     "dd-px-4 dd-py-2 dd-text-base dd-rounded-md dd-h-9": props.size === "lg",
     "dd-px-6 dd-py-3 dd-text-base dd-rounded-md dd-h-10": props.size === "xl",
     "dd-cursor-not-allowed !dd-bg-gray-200 !dd-text-gray-400 hover:dd-bg-gray-300":

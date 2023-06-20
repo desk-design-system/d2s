@@ -101,7 +101,7 @@
                 <div
                   class="dd-flex dd-items-center dd-justify-end dd-gap-4 dd-relative dd-right-5 !dd-z-[999] dd-bg-white dd-pl-2.5">
                   <svgIcon v-if="searchIcon" class="!dd-text-gray-500" icon="Search" size="20" @click="openSearch" />
-                  <svgIcon v-if="settingbarIcon" ref="settingIcon" class="!dd-text-gray-500" :class="[setting ? 'rotated' : 'rotatedReverse']"
+                  <svgIcon v-if="settingbarIcon" ref="settingIcon" class="!dd-text-gray-500"
                     icon="Settings" size="20" @click="openSettingsBar" />
                 </div>
                 <!-- settings component  -->
@@ -133,7 +133,7 @@
                       </dd-Button>
                     </div>
                   </div>
-                </transition>
+                  </transition>
               </th>
               <slot name="headerActions" />
             </tr>
@@ -686,11 +686,11 @@ const openSettingsBar = () => {
   setting.value = !setting.value;
 };
 
-const editRow = () => {
-  emits("editRow");
+const editRow = (row) => {
+  emits("editRow", row);
 };
-const deleteRow = () => {
-  emits("deleteRow");
+const deleteRow = (row) => {
+  emits("deleteRow", row);
 };
 const dropdownValue = (data) => {
   emits("dropdownValue", data);
@@ -801,17 +801,6 @@ tr:hover>td:first-child {
 .fixedScroll .group_wrapper:nth-child(1) {
   position: sticky;
   left: 0;
-}
-
-/* icon rotation  */
-.rotated {
-  transform: rotate(-180deg);
-  transition: transform 0.5s ease;
-}
-
-.rotatedReverse {
-  transform: rotate(0deg);
-  transition: transform 0.5s ease;
 }
 
 /* setting animation  */
