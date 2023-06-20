@@ -1,7 +1,7 @@
 <template>
   <div v-if="actionsPanel">
     <DdGroupButton
-      class="dd-absolute dd-top-1.5 dd-right-5 dd-z-10"
+      class="dd-absolute dd-top-1.5 dd-right-4 dd-z-10"
       :class="[
         !isActionHovered(row)
           ? '!dd-p-0 dd-rounded-none !dd-border-none dd-ring-0 !dd-shadow-none'
