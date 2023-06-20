@@ -798,7 +798,7 @@ tr:hover>td:first-child {
   background: #ffff;
 }
 
-xf.fixedScroll .group_wrapper:nth-child(1) {
+.fixedScroll .group_wrapper:nth-child(1) {
   position: sticky;
   left: 0;
 }
