@@ -20,7 +20,7 @@
         inputSize,
         noBorder,
         suffix ? '!dd-pr-10' : '!dd-pr-2',
-        prefix ? '!dd-pl-14' : '!dd-pl-2',
+        prefix ? '!dd-pl-[53px]' : '!dd-pl-2',
         hasError
           ? '!dd-border-red-600 focus:!dd-border-red-600 dd-focus:!dd-ring-red-600'
           : '!dd-border-gray-300 focus:dd-ring-teal-600 focus:!dd-border-teal-600',

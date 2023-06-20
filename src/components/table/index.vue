@@ -9,7 +9,7 @@
         <!-- header with group button  -->
         <div v-if="actionHeader"
           class="dd-flex dd-items-center dd-justify-between !dd-w-full group_wrapper !dd-bg-white !dd-z-[1000]"
-          :class="[selectedId.length > 0 ? 'dd-h-[39px]' : '']">
+          :class="[selectedId.length > 0 ? 'dd-h-[40px]' : '']">
           <div v-if="selectedId.length > 0" class="dd-flex dd-items-center dd-gap-2 dd-py-2 dd-pl-3 dd-pr-3 dd-text-left">
             <DdGroupButton :buttons="buttons">
               <dd-Button color="white" v-if="checkBoxProp" size="sm">
