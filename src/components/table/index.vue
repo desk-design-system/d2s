@@ -43,10 +43,10 @@
             :class="[selectedId.length === 0 ? 'dd-hidden' : '']" :icon="selectedId.length > 0 ? 'Search' : 'none'"
             size="20" @click="openSearch" />
 
-          <div class="dd-w-full dd-cursor-pointer dd-h-[40px]" v-if="search && searchIcon">
-            <div class="dd-flex dd-items-center dd-gap-3">
+          <div class="dd-w-full dd-cursor-pointer" v-if="search && searchIcon">
+            <div class="dd-flex dd-items-center dd-gap-3 !dd-border-b dd-border-gray-300">
               <svgIcon v-if="selectedId.length > 0" icon="Search" size="20" class="dd-text-gray-400" />
-              <dd-input type="text" v-model="queryInput" @change="searchQuery" class="focus-visible:!dd-border-none dd-w-full dd-border-b dd-border-gray-300"
+              <dd-input type="text" v-model="queryInput" @change="searchQuery" class="focus-visible:!dd-border-none dd-w-full"
                 :icon="selectedId.length === 0 ? 'Search' : ''" Border="none" placeholder="Search Ticket"
                 size="xl" :prefix="selectedId.length === 0 ? true : false" />
             </div>
@@ -73,16 +73,16 @@
             :class="[limit > 1 ? 'dd-cursor-pointer' : '']">
             <tr class="dd-bg-white">
               <th
-                class="dd-py-2 dd-pl-5 dd-text-left checkbox_wrapper !dd-leading-3 dd-h-[40px] table_head_row dd-sticky dd-top-0"
+                class="dd-py-2 !dd-pl-5 dd-text-left checkbox_wrapper !dd-leading-3 dd-h-[41px] table_head_row dd-sticky dd-top-0"
                 v-if="checkBoxProp">
                 <dd-checkbox v-model="allSelected" @click="selectAllFields" :disabled="checkAllDisabled || limit < 1"
                   :rows="rows" @indeterminate="indeterminate" :allCheckboxesChecked="allCheckboxesChecked" :selectedId="selectedId" />
               </th>
               <slot name="th" />
               <th v-for="col in columns" :key="col.value" :value="col" scope="col" v-show="col.checked"
-                class="dd-py-2 dd-text-left dd-text-xs dd-font-medium dd-text-gray-500 !dd-leading-3 dd-h-[40px] table_head_row dd-sticky dd-top-0"
+                class="dd-py-2 dd-text-left dd-text-xs dd-font-medium dd-text-gray-500 !dd-leading-3 dd-h-[41px] table_head_row dd-sticky dd-top-0"
                 :style="`min-width: ${col.size}px`" @mouseenter="handleMouseEnter(col)" @mouseleave="handleMouseLeave"
-                @click="sortRows(col)" :class="[checkBoxProp ? 'dd-pl-3 dd-pr-3' : 'dd-pl-6']">
+                @click="sortRows(col)" :class="[checkBoxProp ? 'dd-pl-3 dd-pr-3' : 'dd-pl-3']">
                 <div :class="[sortIcon ? 'dd-flex dd-gap-1.5 dd-w-fit' : 'dd-w-fit']">
                   <span class="dd-text-xs">{{ col.title }}</span>
                   <div v-if="sortIcon">
@@ -169,7 +169,7 @@
                 <td v-for="col in columns" :key="col.value" v-show="col.checked"
                   class="dd-whitespace-nowrap dd-py-2.5 dd-pl-3 dd-pr-3 dd-text-sm dd-text-gray-500" :class="[
                     row.disabled || !checkBoxProp
-                      ? '!dd-pl-6'
+                      ? '!dd-pl-3'
                       : 'dd-cursor-pointer',
                   ]" :style="`min-width: ${col.size}px`">
                   <slot name="row" :column="col" :row="row" :value="row[col.value]" :disabled="row.disabled">
@@ -798,7 +798,7 @@ tr:hover>td:first-child {
   background: #ffff;
 }
 
-.fixedScroll .group_wrapper:nth-child(1) {
+xf.fixedScroll .group_wrapper:nth-child(1) {
   position: sticky;
   left: 0;
 }

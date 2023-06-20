@@ -1,6 +1,6 @@
 <template>
   <div class="dd-mt-3">
-    <dd-table :rows="rows" :columns="columns" :buttons="buttons" :Actions="Actions" :values="values" footer checkBoxProp
+    <dd-table :rows="rows" :columns="columns" :buttons="buttons" :Actions="Actions" :values="values" footer
       fixedHeight rowKey="id" hoveringRow lastCell fixed actionHeader emptyState actionsPanel sortIcon settingbarIcon
       searchIcon />
   </div>
