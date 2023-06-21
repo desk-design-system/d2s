@@ -44,28 +44,28 @@
             size="20" @click="openSearch" />
 
           <div class="dd-w-full dd-cursor-pointer" v-if="search && searchIcon">
-            <div class="dd-flex dd-items-center dd-gap-3">
+            <div class="dd-flex dd-items-center dd-gap-3 !dd-border-b dd-border-gray-200">
               <svgIcon v-if="selectedId.length > 0" icon="Search" size="20" class="dd-text-gray-400" />
-              <dd-input type="text" v-model="queryInput" @change="searchQuery" class="focus-visible:!dd-border-none"
+              <dd-input type="text" v-model="queryInput" @change="searchQuery" class="focus-visible:!dd-border-none dd-w-full"
                 :icon="selectedId.length === 0 ? 'Search' : ''" Border="none" placeholder="Search Ticket"
-                :size="selectedId.length > 0 ? 'lg' : 'xl'" :prefix="selectedId.length === 0 ? true : false" />
+                size="xl" :prefix="selectedId.length === 0 ? true : false" />
             </div>
-            <svgIcon icon="Close" size="12" class="dd-absolute dd-text-gray-400 dd-top-3.5 hover:dd-text-gray-500"
+            <svgIcon icon="Close" size="12" class="dd-absolute dd-text-gray-400 dd-top-4 hover:dd-text-gray-500"
               @click="closeSearch" :class="[fixed ? 'dd-right-6' : 'dd-right-6']" />
           </div>
         </div>
         <div class="dd-w-full dd-cursor-pointer" v-if="search && !actionHeader && searchIcon" :class="[fixed ? 'group_wrapper' : '']">
           <dd-input type="text" v-model="queryInput" @change="searchQuery"
-            class="focus-visible:!dd-border-none dd-relative" :icon="selectedId.length === 0 ? 'Search' : ''"
+            class="focus-visible:!dd-border-none" :icon="selectedId.length === 0 ? 'Search' : ''"
             Border="none" placeholder="Search Ticket" :size="selectedId.length > 0 ? 'lg' : 'xl'"
             :prefix="selectedId.length === 0 ? true : false" />
-          <svgIcon icon="Close" size="12" class="dd-absolute dd-text-gray-400 dd-top-3.5 hover:dd-text-gray-500"
+          <svgIcon icon="Close" size="12" class="dd-absolute dd-text-gray-400 dd-top-4 hover:dd-text-gray-500"
             @click="closeSearch" :class="[fixed ? 'dd-right-6' : 'dd-right-6']" />
         </div>
         <slot name="actionHeaderSlot" />
         <table class="dd-w-full" :class="
           selectedId.length > 0 && actionHeader == true
-            ? '!dd-border-t dd-border-gray-300'
+            ? '!dd-border-t dd-border-gray-200'
             : '!dd-border-0'
         ">
           <!-- tabel head  -->
@@ -73,37 +73,39 @@
             :class="[limit > 1 ? 'dd-cursor-pointer' : '']">
             <tr class="dd-bg-white">
               <th
-                class="dd-py-2 dd-pl-5 dd-text-left checkbox_wrapper !dd-leading-3 dd-h-[40px] table_head_row dd-sticky dd-top-0"
+                class="dd-py-2 !dd-pl-5 dd-text-left checkbox_wrapper !dd-leading-3 dd-h-[41px] table_head_row dd-sticky dd-top-0"
                 v-if="checkBoxProp">
                 <dd-checkbox v-model="allSelected" @click="selectAllFields" :disabled="checkAllDisabled || limit < 1"
                   :rows="rows" @indeterminate="indeterminate" :allCheckboxesChecked="allCheckboxesChecked" :selectedId="selectedId" />
               </th>
               <slot name="th" />
               <th v-for="col in columns" :key="col.value" :value="col" scope="col" v-show="col.checked"
-                class="dd-py-2 dd-text-left dd-text-xs dd-font-medium dd-text-gray-500 !dd-leading-3 dd-h-[40px] table_head_row dd-sticky dd-top-0"
+                class="dd-py-2 dd-text-left dd-text-xs dd-font-medium dd-text-gray-500 !dd-leading-3 dd-h-[41px] table_head_row dd-sticky dd-top-0"
                 :style="`min-width: ${col.size}px`" @mouseenter="handleMouseEnter(col)" @mouseleave="handleMouseLeave"
-                @click="sortRows(col)" :class="[checkBoxProp ? 'dd-pl-3 dd-pr-3' : 'dd-pl-6']">
-                <div class="dd-flex dd-gap-2">
+                @click="sortRows(col)" :class="[checkBoxProp ? 'dd-pl-3 dd-pr-3' : 'dd-pl-5']">
+                <div :class="[sortIcon ? 'dd-flex dd-gap-1.5 dd-w-fit' : 'dd-w-fit']">
                   <span class="dd-text-xs">{{ col.title }}</span>
-                  <svgIcon class="!dd-text-gray-500 dd-relative dd-top-[3px]" icon="Selector" size="10" v-show="
+                  <div v-if="sortIcon">
+                    <svgIcon class="!dd-text-gray-500 dd-relative dd-top-[3px]" icon="Selector" size="10" v-show="
                     isHovered(col) && !limit < 1 && col.sortDirection === ''
-                  " :disabled="col.disabled || limit < 1" v-if="limit && sortIcon" />
+                  " :disabled="col.disabled || limit < 1" v-if="limit" />
                   <svgIcon class="!dd-text-gray-500 dd-relative dd-top-[3px]" icon="SelectorUp" size="10"
-                    v-show="col.sortDirection === 'desc'" @click="sortRows(col)" v-if="limit && sortIcon" />
+                    v-show="col.sortDirection === 'desc'" @click="sortRows(col)" v-if="limit" />
                   <svgIcon class="!dd-text-gray-500 dd-relative dd-top-[3px]" icon="SelectorDown" size="10"
-                    v-show="col.sortDirection === 'asc'" @click="sortRows(col)" v-if="limit && sortIcon" />
+                    v-show="col.sortDirection === 'asc'" @click="sortRows(col)" v-if="limit" />
+                  </div>
                 </div>
               </th>
 
-              <th class="table_head_row dd-sticky dd-top-0">
-                <div v-if="headRowActions"
+              <th class="table_head_row dd-sticky dd-top-0" v-if="lastCell">
+                <div
                   class="dd-flex dd-items-center dd-justify-end dd-gap-4 dd-relative dd-right-5 !dd-z-[999] dd-bg-white dd-pl-2.5">
                   <svgIcon v-if="searchIcon" class="!dd-text-gray-500" icon="Search" size="20" @click="openSearch" />
                   <svgIcon v-if="settingbarIcon" ref="settingIcon" class="!dd-text-gray-500" :class="[setting ? 'rotated' : 'rotatedReverse']"
                     icon="Settings" size="20" @click="openSettingsBar" />
                 </div>
                 <!-- settings component  -->
-                <transition name="setting" v-if="headRowActions">
+                <transition name="setting" v-if="lastCell">
                   <div v-if="setting" ref="settingElement"
                     class="dd-px-2 dd-pt-2 dd-w-[250px] dd-bg-white dd-container dd-my-[2.1rem] dd-absolute dd-right-4 dd-top-1 dd-shadow-xl dd-rounded-lg dd-border dd-border-gray-100"
                     style="z-index: 1100">
@@ -139,7 +141,7 @@
           <tbody class="dd-bg-white" v-if="rows.length > 0" ref="parentRef">
             <template v-if="!defaultRow">
               <tr v-for="(row, index) in rows" :key="index"
-                class="[&>*:nth-child(1)]:!dd-font-normal [&>*:nth-child(2)]:!dd-font-medium dd-relative dd-border-b dd-border-gray-300" :class="[
+                class="[&>*:nth-child(1)]:!dd-font-normal [&>*:nth-child(2)]:!dd-font-medium dd-relative dd-border-b dd-border-gray-100" :class="[
                   selectedId.includes(row.id)
                     ? '[&>*:nth-child(1)]:dd-bg-gray-50 [&>*:nth-child(2)]:dd-bg-gray-50  [&>*:last-child]:!dd-bg-gray-50 dd-bg-gray-50'
                     : '',
@@ -167,7 +169,7 @@
                 <td v-for="col in columns" :key="col.value" v-show="col.checked"
                   class="dd-whitespace-nowrap dd-py-2.5 dd-pl-3 dd-pr-3 dd-text-sm dd-text-gray-500" :class="[
                     row.disabled || !checkBoxProp
-                      ? '!dd-pl-6'
+                      ? '!dd-pl-5'
                       : 'dd-cursor-pointer',
                   ]" :style="`min-width: ${col.size}px`">
                   <slot name="row" :column="col" :row="row" :value="row[col.value]" :disabled="row.disabled">
@@ -175,7 +177,7 @@
                   </slot>
                 </td>
                 <!-- actions  -->
-                <td class="dd-pl-9 dd-pr-9 dd-relative dd-max-w-[56px]" :style="`z-index: ${rows.length - index} `"
+                <td v-if="lastCell" class="dd-pl-9 dd-pr-9 dd-relative dd-max-w-[56px]" :style="`z-index: ${rows.length - index} `"
                   :class="[
                     row.disabled
                       ? '!dd-pointer-event-none'
@@ -327,10 +329,6 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-  headRowActions: {
-    type: Boolean,
-    default: false,
-  },
   disabledLoadmore: {
     type: Boolean,
     default: false,
@@ -344,6 +342,10 @@ const props = defineProps({
     default: false,
   },
   settingbarIcon: {
+    type: Boolean,
+    default: false,
+  },
+  lastCell: {
     type: Boolean,
     default: false,
   },
@@ -408,27 +410,27 @@ const handleScroll = () => {
   );
 
   tableHeaderCell.forEach((cell) => {
-    if (container.scrollLeft > 1) {
+    if (container.scrollLeft >= 0) {
       cell.classList.add("checkbox_cell_wrapper");
-    } else if (container.scrollLeft < 1) {
+    } else if (container.scrollLeft <= 0) {
       cell.classList.remove("checkbox_cell_wrapper");
     }
   });
 
   tableHeadCells.forEach((cell) => {
-    if (container.scrollLeft > 1) {
+    if (container.scrollLeft >= 0) {
       cell.classList.add("fixed_head_cell_one");
-    } else if (container.scrollLeft < 1) {
+    } else if (container.scrollLeft < 0) {
       cell.classList.remove("fixed_head_cell_one");
     }
   });
   tableRowCells.forEach((cell) => {
-    if (container.scrollLeft > 1) {
+    if (container.scrollLeft >= 0) {
       if (props.checkBoxProp == false) {
         cell.style.boxShadow = "-2px 0 2px -2px rgba(0, 0, 0, 0.2) inset";
       }
       cell.classList.add("fixed_cell_one");
-    } else if (container.scrollLeft < 1) {
+    } else if (container.scrollLeft <= 0) {
       cell.classList.remove("fixed_cell_one");
       if (props.checkBoxProp == false) {
         cell.style.boxShadow = "none";
@@ -438,17 +440,17 @@ const handleScroll = () => {
 
   if (props.checkBoxProp !== false) {
     tableCells2.forEach((cell) => {
-      if (container.scrollLeft > 1) {
+      if (container.scrollLeft >= 0) {
         cell.classList.add("fixed_cell_two");
-      } else if (container.scrollLeft < 1) {
+      } else if (container.scrollLeft <= 0) {
         cell.classList.remove("fixed_cell_two");
       }
     });
 
     tableCells2Head.forEach((cell) => {
-      if (container.scrollLeft > 1) {
+      if (container.scrollLeft >= 0) {
         cell.classList.add("fixed_cell_two_head");
-      } else if (container.scrollLeft < 1) {
+      } else if (container.scrollLeft <= 0) {
         cell.classList.remove("fixed_cell_two_head");
       }
     });
@@ -457,9 +459,9 @@ const handleScroll = () => {
   tableLastCell.forEach((cell) => {
     const scrollValueFromRight =
       container.scrollWidth - container.clientWidth - container.scrollLeft;
-    if (scrollValueFromRight > 1) {
+    if (scrollValueFromRight > -1) {
       cell.classList.add("fixed_last_cell");
-    } else if (scrollValueFromRight < 1) {
+    } else if (scrollValueFromRight < -1) {
       cell.classList.remove("fixed_last_cell");
     }
   });
@@ -467,9 +469,9 @@ const handleScroll = () => {
   tableLastHead.forEach((cell) => {
     const scrollValueFromRight =
       container.scrollWidth - container.clientWidth - container.scrollLeft;
-    if (scrollValueFromRight > 1) {
+    if (scrollValueFromRight > 0) {
       cell.classList.add("fixed_last_cell_head");
-    } else if (scrollValueFromRight < 1) {
+    } else if (scrollValueFromRight < 0) {
       cell.classList.remove("fixed_last_cell_head");
     }
   });
@@ -705,7 +707,7 @@ const getHeaderDropdownVal = (data) => {
   bottom: 0;
   left: 0;
   right: 0;
-  border-bottom: 1px solid #d1d5db !important;
+  border-bottom: 1px solid #E5E7EB !important;
 }
 
 .selected-label {
