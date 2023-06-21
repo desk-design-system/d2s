@@ -1,5 +1,5 @@
 <template>
-  <div class="dd-base">
+  <div class="dd-base dd-flex dd-items-center">
     <input :disabled="disabled" :indeterminate="selectedId.length > 0 ? indeterminate : null" :checked="checked"
       :value="value" v-bind="$attrs" :id="id" v-model="inputModelValue" type="checkbox"
       :class="[disabled ? ' !dd-cursor-not-allowed !dd-border-gray-200 !dd-text-gray-400' : 'dd-cursor-pointer !dd-border-gray-300 !dd-text-teal-600']"
