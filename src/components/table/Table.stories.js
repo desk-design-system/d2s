@@ -99,6 +99,14 @@ export default {
         },
       },
     },
+    dragDrop: {
+      description: "to use drag drop functionality",
+      table: {
+        defaultValue: {
+          summary: Boolean,
+        },
+      },
+    },
     checkBoxProp: {
       description: "Remove checkboxes from tabel",
       table: {
