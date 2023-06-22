@@ -68,7 +68,7 @@
           : '!dd-border-0'
           ">
           <!-- tabel head  -->
-          <thead v-if="setTableHeader"
+          <thead class="!dd-sticky !dd-top-0 !dd-bg-white !dd-z-[1000]" v-if="setTableHeader"
             :class="[limit > 1 ? 'dd-cursor-pointer' : '']">
             <tr class="dd-bg-white">
               <th

@@ -31,7 +31,8 @@ export default {
       },
     },
     Actions: {
-      description: "Pass data array in group button and row end and use rowActions slot to add custom content by DdGroupButton",
+      description:
+        "Pass data array in group button and row end and use rowActions slot to add custom content by DdGroupButton",
       table: {
         defaultValue: {
           summary: [],
@@ -39,7 +40,8 @@ export default {
       },
     },
     values: {
-      description: "Pass data array in DdDropDown or use noDropdown prop and use customDropDown slot to add custom content",
+      description:
+        "Pass data array in DdDropDown or use noDropdown prop and use customDropDown slot to add custom content",
       table: {
         defaultValue: {
           summary: [],
@@ -139,8 +141,7 @@ export default {
       },
     },
     groupActions: {
-      description:
-        "To add content in header dd group button",
+      description: "To add content in header dd group button",
       table: {
         defaultValue: {
           summary: [],
@@ -148,8 +149,7 @@ export default {
       },
     },
     thead: {
-      description:
-        "To add content in thead",
+      description: "To add content in thead",
       table: {
         defaultValue: {
           summary: [],
@@ -157,8 +157,7 @@ export default {
       },
     },
     selected: {
-      description:
-        "To select row actions",
+      description: "To select row actions",
       table: {
         defaultValue: {
           summary: "",
@@ -166,8 +165,7 @@ export default {
       },
     },
     headerselectedActions: {
-      description:
-        "To select actions from header dropdown",
+      description: "To select actions from header dropdown",
       table: {
         defaultValue: {
           summary: "",
@@ -193,8 +191,7 @@ export default {
       },
     },
     footer: {
-      description:
-        "to show footer",
+      description: "to show footer",
       table: {
         defaultValue: {
           summary: Boolean,
@@ -202,8 +199,7 @@ export default {
       },
     },
     actionsPanel: {
-      description:
-        "To remove actions in row",
+      description: "To remove actions in row",
       table: {
         defaultValue: {
           summary: [],
@@ -220,8 +216,7 @@ export default {
       },
     },
     headerselectedActions: {
-      description:
-        "v-modals thead actions in dropdown",
+      description: "v-modals thead actions in dropdown",
       table: {
         defaultValue: {
           summary: [],
@@ -229,8 +224,7 @@ export default {
       },
     },
     defaultRow: {
-      description:
-        "to remove tbody data and make custom table with tbody slot",
+      description: "to remove tbody data and make custom table with tbody slot",
       table: {
         defaultValue: {
           summary: [],
@@ -238,8 +232,7 @@ export default {
       },
     },
     selected: {
-      description:
-        "v-modals tr actions in dropdown",
+      description: "v-modals tr actions in dropdown",
       table: {
         defaultValue: {
           summary: [],
@@ -272,8 +265,7 @@ export default {
       },
     },
     footerSlot: {
-      description:
-        "Use footer slot to add custom content in footer",
+      description: "Use footer slot to add custom content in footer",
       table: {
         defaultValue: {
           summary: [],
@@ -298,7 +290,7 @@ const Template = (args) => ({
   components: { DdTable },
   // The story's `args` need to be mapped into the template through the `setup()` method
   setup() {
-    const columns = ref([
+    let columns = ref([
       {
         title: "ID",
         value: "id",
@@ -307,6 +299,7 @@ const Template = (args) => ({
         id: 1,
         disabled: true,
         sortDirection: "asc",
+        hovered: false,
       },
       {
         title: "User Name",
@@ -316,6 +309,7 @@ const Template = (args) => ({
         id: 2,
         disabled: false,
         sortDirection: "",
+        hovered: false,
       },
       {
         title: "First Name",
@@ -323,7 +317,9 @@ const Template = (args) => ({
         checked: true,
         size: "130",
         id: 3,
+        disabled: false,
         sortDirection: "",
+        hovered: false,
       },
       {
         title: "Last Name",
@@ -331,7 +327,9 @@ const Template = (args) => ({
         checked: true,
         size: "130",
         id: 4,
+        disabled: false,
         sortDirection: "",
+        hovered: false,
       },
       {
         title: "Email",
@@ -339,31 +337,69 @@ const Template = (args) => ({
         checked: true,
         size: "130",
         id: 5,
+        disabled: false,
         sortDirection: "",
+        hovered: false,
       },
       {
-        title: "Email",
-        value: "email",
+        title: "Task",
+        value: "task",
         checked: true,
         size: "130",
-        id: 5,
+        id: 6,
+        disabled: false,
         sortDirection: "",
+        hovered: false,
       },
       {
-        title: "Email",
-        value: "email",
+        title: "Device",
+        value: "device",
         checked: true,
         size: "130",
-        id: 5,
+        id: 7,
+        disabled: false,
         sortDirection: "",
+        hovered: false,
+      },
+      {
+        title: "Model",
+        value: "model",
+        checked: true,
+        size: "130",
+        id: 8,
+        disabled: false,
+        sortDirection: "",
+        hovered: false,
+      },
+      {
+        title: "Phone",
+        value: "phone",
+        checked: true,
+        size: "130",
+        id: 9,
+        disabled: false,
+        sortDirection: "",
+        hovered: false,
+      },
+      {
+        title: "Address",
+        value: "address",
+        checked: true,
+        size: "130",
+        id: 10,
+        disabled: false,
+        sortDirection: "",
+        hovered: false,
       },
       {
         title: "Status",
         value: "status",
         checked: true,
         size: "130",
-        id: 6,
+        id: 11,
+        disabled: false,
         sortDirection: "",
+        hovered: false,
       },
     ]);
     const rows = ref([
@@ -374,6 +410,11 @@ const Template = (args) => ({
         lastname: "Brook",
         email: "herry@repairdesk.co",
         status: "in progress",
+        task: "reparing",
+        device: "iphone",
+        model: "2022",
+        phone: "+13232321321",
+        address: "Newyork",
         disabled: false,
       },
       {
@@ -382,6 +423,11 @@ const Template = (args) => ({
         firstname: "David",
         lastname: "Jeman",
         email: "David@repairdesk.co",
+        task: "reparing",
+        device: "iphone",
+        model: "2022",
+        phone: "+13232321321",
+        address: "Newyork",
         status: "Repaired and Collected",
         disabled: false,
       },
@@ -391,6 +437,11 @@ const Template = (args) => ({
         firstname: "Henry",
         lastname: "Cavil",
         email: "henry@repairdesk.co",
+        task: "reparing",
+        device: "iphone",
+        model: "2022",
+        phone: "+13232321321",
+        address: "Newyork",
         status: "in progress",
       },
       {
@@ -399,6 +450,11 @@ const Template = (args) => ({
         firstname: "Herry",
         lastname: "Brook",
         email: "herry@repairdesk.co",
+        task: "reparing",
+        device: "iphone",
+        model: "2022",
+        phone: "+13232321321",
+        address: "Newyork",
         status: "Repaired and Collected",
       },
       {
@@ -407,7 +463,12 @@ const Template = (args) => ({
         firstname: "John",
         lastname: "Smith",
         email: "john.smith@example.com",
+        device: "iphone",
+        model: "2022",
+        phone: "+13232321321",
+        address: "Newyork",
         status: "in progress",
+        task: "reparing",
       },
       {
         id: 5,
@@ -415,7 +476,12 @@ const Template = (args) => ({
         firstname: "Lucy",
         lastname: "Green",
         email: "lucy.green@example.com",
+        device: "iphone",
+        model: "2022",
+        phone: "+13232321321",
+        address: "Newyork",
         status: "Repaired and Collected",
+        task: "reparing",
       },
       {
         id: 6,
@@ -423,7 +489,12 @@ const Template = (args) => ({
         firstname: "Alice",
         lastname: "Miller",
         email: "alice.miller@example.com",
+        device: "iphone",
+        model: "2022",
+        phone: "+13232321321",
+        address: "Newyork",
         status: "in progress",
+        task: "reparing",
       },
       {
         id: 7,
@@ -431,16 +502,21 @@ const Template = (args) => ({
         firstname: "Bob",
         lastname: "Davis",
         email: "bob.davis@example.com",
+        device: "iphone",
+        model: "2022",
+        phone: "+13232321321",
+        address: "Newyork",
         status: "Repaired and Collected",
+        task: "reparing",
       },
     ]);
-    
+
     const buttons = [
-      { id: 1, label: "5", color: "white", size: "sm", loader: true },
+      { id: 1, label: "5", color: "white", size: "sm", active: "15" },
       { id: 2, label: "10", color: "white", size: "sm" },
       { id: 3, label: "15", color: "white", size: "sm" },
     ];
-    
+
     const Actions = ref([
       {
         name: "DropDown Menu 1",
@@ -461,7 +537,7 @@ const Template = (args) => ({
         value: 3,
       },
     ]);
-    
+
     const values = ref([
       {
         name: "DropDown Menu 1",
@@ -482,11 +558,27 @@ const Template = (args) => ({
       },
     ]);
 
-    return { columns, rows, args, buttons, Actions, values };
+    let columnVal = ref(columns.value);
+    const updateSettings = (data) => {
+      const reorderedColumns = [];
+      data.forEach((item) => {
+        const column = columnVal.value.find((col) => col.value === item.value);
+        if (column) {
+          reorderedColumns.push(column);
+        }
+      });
+      columnVal.value = reorderedColumns;
+    };
+
+    return { columns, rows, args, buttons, Actions, values, columnVal, updateSettings };
   },
   // And then the `args` are bound to your component with `v-bind="args"`
-  template:
-    '<div> <dd-table v-bind="args" :rows="rows" :columns="columns" :buttons="buttons" :Actions="Actions" :values="values" /> </div>',
+  template: `<div> <dd-table v-bind="args" :rows="rows" :columns="columns" :buttons="buttons" :Actions="Actions" :values="values" /> <br><br><br><br>
+  <h1>Table with drag drop</h1> 
+  <br>
+  <dd-table :rows="rows" :columns="columnVal" :buttons="buttons" :Actions="Actions" :values="values" footer checkBoxProp
+    fixedHeight rowKey="id" hoveringRow lastCell fixed actionHeader emptyState actionsPanel sortIcon settingbarIcon
+    searchIcon @updateSettings="updateSettings" /> </div>`,
 });
 
 export const Default = Template.bind({});
@@ -501,9 +593,7 @@ export const disabledCheckBoxes = Template.bind({});
 export const removeTheadActions = Template.bind({});
 export const removeFooter = Template.bind({});
 // More on args: https://storybook.js.org/docs/vue/writing-stories/args
-Default.args = {
-  
-};
+Default.args = {};
 stickySide.args = {
   fixed: true,
   footer: true,
