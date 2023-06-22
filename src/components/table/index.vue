@@ -114,7 +114,7 @@
                         @mouseleave="hideIcon(element)">
                         <div class="dd-flex dd-items-center" v-if="element?.disabled === false">
                           <div class="dd-w-4">
-                            <svgIcon :disabled="element?.disabled"
+                            <svgIcon :disabled="element?.disabled" v-show="dragDrop"
                               class="!dd-text-gray-500 handle dd-relative dd-top-[3px]"
                               :class="[element.disabled ? 'dd-hidden' : 'dd-cursor-move', { 'dd-hidden': !element.hovered }]"
                               icon="GripVerticle" size="16" />
@@ -380,6 +380,10 @@ const props = defineProps({
     default: false,
   },
   sortIcon: {
+    type: Boolean,
+    default: false,
+  },
+  dragDrop: {
     type: Boolean,
     default: false,
   },

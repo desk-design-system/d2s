@@ -2,7 +2,7 @@
   <div class="dd-mt-3">
     <dd-table :rows="rows" :columns="columnVal" :buttons="buttons" :Actions="Actions" :values="values" footer checkBoxProp
       fixedHeight rowKey="id" hoveringRow lastCell fixed actionHeader emptyState actionsPanel sortIcon settingbarIcon
-      searchIcon @updateSettings="updateSettings" />
+      searchIcon @updateSettings="updateSettings" dragDrop />
   </div>
 </template>
 

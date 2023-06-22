@@ -577,8 +577,8 @@ const Template = (args) => ({
   <h1>Table with drag drop</h1> 
   <br>
   <dd-table :rows="rows" :columns="columnVal" :buttons="buttons" :Actions="Actions" :values="values" footer checkBoxProp
-    fixedHeight rowKey="id" hoveringRow lastCell fixed actionHeader emptyState actionsPanel sortIcon settingbarIcon
-    searchIcon @updateSettings="updateSettings" /> </div>`,
+      fixedHeight rowKey="id" hoveringRow lastCell fixed actionHeader emptyState actionsPanel sortIcon settingbarIcon
+      searchIcon @updateSettings="updateSettings" dragDrop /> </div>`,
 });
 
 export const Default = Template.bind({});
