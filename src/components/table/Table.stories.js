@@ -581,7 +581,7 @@ const Template = (args) => ({
     return { columns, rows, args, buttons, Actions, values, columnVal, updateSettings };
   },
   // And then the `args` are bound to your component with `v-bind="args"`
-  template: `<div> <dd-table v-bind="args" :rows="rows" :columns="columns" :buttons="buttons" :Actions="Actions" :values="values" /> <br><br><br><br>
+  template: `<div> <dd-table v-bind="args" :rows="rows" :columns="columns" :buttons="buttons" :Actions="Actions" :values="values" rowKey="id"  @updateSettings="updateSettings" /> <br><br><br><br>
   <h1>Table with drag drop</h1> 
   <br>
   <dd-table :rows="rows" :columns="columnVal" :buttons="buttons" :Actions="Actions" :values="values" rowKey="id" @updateSettings="updateSettings" /> </div>`,
