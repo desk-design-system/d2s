@@ -44,7 +44,7 @@
             size="20" @click="openSearch" />
 
           <div class="dd-w-full dd-cursor-pointer" v-if="search && searchIcon">
-            <div class="dd-flex dd-items-center dd-gap-3 !dd-border-b dd-border-gray-200">
+            <div class="dd-flex dd-items-center dd-gap-3">
               <svgIcon v-if="selectedId.length > 0" icon="Search" size="20" class="dd-text-gray-400" />
               <dd-input type="text" v-model="queryInput" @change="searchQuery"
                 class="focus-visible:!dd-border-none dd-w-full" :icon="selectedId.length === 0 ? 'Search' : ''"
@@ -68,7 +68,7 @@
           : '!dd-border-0'
           ">
           <!-- tabel head  -->
-          <thead v-if="setTableHeader" class="!dd-sticky !dd-top-0 !dd-bg-white !dd-z-[1000]"
+          <thead v-if="setTableHeader"
             :class="[limit > 1 ? 'dd-cursor-pointer' : '']">
             <tr class="dd-bg-white">
               <th
@@ -145,7 +145,7 @@
               <slot name="headerActions" />
             </tr>
           </thead>
-          <tbody class="dd-bg-white" v-if="rows.length > 0" ref="parentRef">
+          <tbody class="dd-bg-white [&>*:first-child]:dd-border-t [&>*:first-child]:dd-border-gray-200 [&>*:first-child]:!dd-border-b-0 [&>*:nth-child(2)]:dd-border-t" v-if="rows.length > 0">
             <template v-if="!defaultRow">
               <tr v-for="(row, index) in rows" :key="index"
                 class="[&>*:nth-child(1)]:!dd-font-normal [&>*:nth-child(2)]:!dd-font-medium dd-relative dd-border-b dd-border-gray-100"
@@ -737,7 +737,6 @@ const getHeaderDropdownVal = (data) => {
   bottom: 0;
   left: 0;
   right: 0;
-  border-bottom: 1px solid #E5E7EB !important;
 }
 
 .selected-label {
