@@ -64,8 +64,8 @@
         </div>
         <slot name="actionHeaderSlot" />
         <table class="dd-w-full" :class="selectedId.length > 0 && actionHeader == true
-            ? '!dd-border-t dd-border-gray-200'
-            : '!dd-border-0'
+          ? '!dd-border-t dd-border-gray-200'
+          : '!dd-border-0'
           ">
           <!-- tabel head  -->
           <thead v-if="setTableHeader" class="!dd-sticky !dd-top-0 !dd-bg-white !dd-z-[1000]"
@@ -105,21 +105,31 @@
                 </div>
                 <!-- settings component  -->
                 <div v-if="setting && lastCell" ref="settingElement"
-                  class="dd-px-2 dd-pt-2 dd-w-[250px] dd-bg-white dd-container dd-my-[2.1rem] dd-absolute dd-right-4 dd-top-1 dd-shadow-xl dd-rounded-lg dd-border dd-border-gray-100"
-                  style="z-index: 1100">
-                  <div class="dd-flex !dd-items-center dd-justify-between dd-gap-2 dd-font-sans"
-                    v-for="(col, index) in columns" :key="index">
-                    <div class="dd-flex dd-items-center dd-gap-3 dd-ml-2">
-                      <dd-Checkbox v-model="col.checked" @click="setSetting(col.checked)" :disabled="col.disabled" />
-                      <span class="dd-text-gray-700 dd-text-sm -dd-ml-1">
-                        {{ col.title }}
-                      </span>
-                    </div>
-                    <div class="dd-w-16 dd-mr-2">
-                      <dd-input Right v-model="col.size" type="text" pattern="[0-9]*" :disabled="col.disabled"
-                        class="focus-visible:!dd-border-none dd-my-1" size="xs" />
-                    </div>
-                  </div>
+                  class="dd-pr-2 dd-pt-2 dd-w-[250px] dd-bg-white dd-container dd-my-[2.1rem] dd-absolute dd-right-4 dd-top-1 dd-shadow-xl dd-rounded-lg dd-border dd-border-gray-100 stop-dragger"
+                  style="z-index: 1100;">
+                  <draggable tag="ul" v-model="modelColumn" class="dd-text-left" handle=".handle" item-key="name"
+                    drag-class="drag-class" ghost-class="ghost-class" @change="watchState">
+                    <template #item="{ element }">
+                      <li class="dd-flex dd-items-center dd-justify-between" @mouseenter="showIcon(element)"
+                        @mouseleave="hideIcon(element)">
+                        <div class="dd-flex dd-items-center" v-if="element?.disabled === false">
+                          <div class="dd-w-4">
+                            <svgIcon :disabled="element?.disabled"
+                              class="!dd-text-gray-500 handle dd-relative dd-top-[3px]"
+                              :class="[element.disabled ? 'dd-hidden' : 'dd-cursor-move', { 'dd-hidden': !element.hovered }]"
+                              icon="GripVerticle" size="16" />
+                          </div>
+                          <dd-Checkbox v-model="element.checked" @click="setSetting(element.checked)"
+                            :disabled="element.disabled" class="dd-mb-[2px]" />
+                          <span class="dd-text-gray-700 dd-text-sm dd-ml-2 dd-font-normal">{{ element.title }}</span>
+                        </div>
+                        <div class="dd-w-16 dd-mr-2" v-if="element?.disabled === false">
+                          <dd-input Right v-model="element.size" type="text" pattern="[0-9]*" :disabled="element.disabled"
+                            class="focus-visible:!dd-border-none dd-my-1" size="xs" />
+                        </div>
+                      </li>
+                    </template>
+                  </draggable>
                   <div class="dd-flex dd-items-center dd-justify-end dd-gap-3 dd-my-2 dd-mr-2">
                     <dd-Button color="white"
                       class="[&>button]: dd-ring-0 [&>button]: dd-ring-transparent [&>button]: dd-shadow-none [&>button]: dd-text-teal-600 [&>button]: hover:dd-bg-white [&>button]: dd-font-light dd-cursor-pointer"
@@ -231,6 +241,7 @@ import {
   watch,
   watchEffect,
 } from "vue";
+import draggable from "vuedraggable";
 import hoverRow from "./hoverRow.vue";
 import DdButton from "../buttons/index.vue";
 import svgIcon from "../svgIcon/index.vue";
@@ -252,7 +263,8 @@ const emits = defineEmits([
   "selectedCheckBoxes",
   "sort",
   "dropdownValue",
-  "headerDropdown"
+  "headerDropdown",
+  "updateSettings"
 ]);
 const props = defineProps({
   rowKey: {
@@ -511,11 +523,12 @@ const selectedButton = ref(props.buttonselected);
 const setting = ref(false);
 const limit = ref(props.limitVal);
 const queryInput = ref("");
-const savedData = ref({});
+const savedData = ref([]);
 const settingElement = ref(null);
 const settingIcon = ref(null);
 const allCheckboxesChecked = ref(false);
 const headerActions = ref(props.headerselectedActions);
+const modelColumn = ref(props.columns);
 
 const selectNumberOfRows = (button) => {
   emits("numberOfRow", button);
@@ -622,22 +635,41 @@ const setSetting = (col) => {
   col = !col;
 };
 
-const saveSettings = () => {
-  savedData.value = props.columns;
-  savedData.value.forEach((item) => {
-    emits("saveChanges", item);
+const columnRef = computed(() => {
+  const filteredArray = props.columns.filter((element) => {
+    return !element.disabled;
   });
+
+  return filteredArray;
+});
+// modelColumn.value = columnRef.value;
+
+const watchState = () => {
+  savedData.value = modelColumn.value;
+  console.log(savedData.value, 'savedData.value');
+}
+watch(() => savedData.value,
+(newArr) => {
+  savedData.value = newArr;
+}, {immediate: true})
+
+const saveSettings = () => {
+  emits("updateSettings", modelColumn.value);
   setTimeout(() => {
     handleScroll();
   }, 0);
 };
 
+const showIcon = (element) => {
+  element.disabled ? element.hovered = false : element.hovered = true;
+};
+
+const hideIcon = (element) => {
+  element.hovered = false;
+};
+
 const resetDefault = () => {
-  savedData.value = props.columns;
-  savedData.value.forEach((item) => {
-    item.checked = true;
-    emits("resetData", item);
-  });
+  emits("resetData", modelColumn.value);
   setTimeout(() => {
     handleScroll();
   }, 0);
@@ -834,6 +866,23 @@ tr:hover>td:first-child {
   transition: all 0.5s ease-out;
 }
 
+.drag-class {
+  background-color: #fff;
+  border: 1px solid #e6e6e6;
+}
+
+.ghost-class {
+  background-color: #fcfbfb;
+}
+
+.ghost-class>div {
+  visibility: hidden;
+}
+
+.stop-dragger {
+  -webkit-user-drag: inherit !important;
+}
+
 /* scroll bar  */
 
 /* .custom-scrollbar {
@@ -858,4 +907,5 @@ tr:hover>td:first-child {
 
 .custom-scrollbar::-webkit-scrollbar-thumb:horizontal {
   width: 3px;
-} */</style>
+} */
+</style>
