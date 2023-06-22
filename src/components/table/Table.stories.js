@@ -584,9 +584,7 @@ const Template = (args) => ({
   template: `<div> <dd-table v-bind="args" :rows="rows" :columns="columns" :buttons="buttons" :Actions="Actions" :values="values" /> <br><br><br><br>
   <h1>Table with drag drop</h1> 
   <br>
-  <dd-table :rows="rows" :columns="columnVal" :buttons="buttons" :Actions="Actions" :values="values" footer checkBoxProp
-      fixedHeight rowKey="id" hoveringRow lastCell fixed actionHeader emptyState actionsPanel sortIcon settingbarIcon
-      searchIcon @updateSettings="updateSettings" dragDrop /> </div>`,
+  <dd-table :rows="rows" :columns="columnVal" :buttons="buttons" :Actions="Actions" :values="values" rowKey="id" @updateSettings="updateSettings" /> </div>`,
 });
 
 export const Default = Template.bind({});
