@@ -497,7 +497,6 @@ const getCalculatedHeight = computed(() => {
     if (limit.value < 13) {
       return "dd-max-h-[calc(100vh-200px)] dd-min-h-[calc(100vh-200px)]";
     }
-    return "dd-max-h-[calc(100vh-200px)] dd-min-h-[calc(100vh-200px)]";
   }
 });
 
