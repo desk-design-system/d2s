@@ -1,19 +1,16 @@
 <template>
   <div class="dd-mt-3">
-    <dd-table :rows="rows" :columns="columns" :buttons="buttons" :Actions="Actions" :values="values" footer checkBoxProp
+    <dd-table :rows="rows" :columns="columnVal" :buttons="buttons" :Actions="Actions" :values="values" footer checkBoxProp
       fixedHeight rowKey="id" hoveringRow lastCell fixed actionHeader emptyState actionsPanel sortIcon settingbarIcon
-      searchIcon />
+      searchIcon @updateSettings="updateSettings" dragDrop />
   </div>
 </template>
 
 <script setup>
 import { ref } from "vue";
-import DdGroupButton from "./components/groupButton/index.vue";
-import DdButton from "./components/buttons/index.vue";
-import svgIcon from "./components/svgIcon/index.vue";
 import DdTable from "./components/table/index.vue";
 
-const columns = ref([
+let columns = ref([
   {
     title: "ID",
     value: "id",
@@ -22,6 +19,7 @@ const columns = ref([
     id: 1,
     disabled: true,
     sortDirection: "asc",
+    hovered: false
   },
   {
     title: "User Name",
@@ -31,6 +29,7 @@ const columns = ref([
     id: 2,
     disabled: false,
     sortDirection: "",
+    hovered: false
   },
   {
     title: "First Name",
@@ -38,7 +37,9 @@ const columns = ref([
     checked: true,
     size: "130",
     id: 3,
+    disabled: false,
     sortDirection: "",
+    hovered: false
   },
   {
     title: "Last Name",
@@ -46,7 +47,9 @@ const columns = ref([
     checked: true,
     size: "130",
     id: 4,
+    disabled: false,
     sortDirection: "",
+    hovered: false
   },
   {
     title: "Email",
@@ -54,71 +57,69 @@ const columns = ref([
     checked: true,
     size: "130",
     id: 5,
+    disabled: false,
     sortDirection: "",
+    hovered: false
   },
   {
-    title: "Email",
-    value: "email",
+    title: "Task",
+    value: "task",
     checked: true,
     size: "130",
-    id: 5,
+    id: 6,
+    disabled: false,
     sortDirection: "",
+    hovered: false
   },
   {
-    title: "Email",
-    value: "email",
+    title: "Device",
+    value: "device",
     checked: true,
     size: "130",
-    id: 5,
+    id: 7,
+    disabled: false,
     sortDirection: "",
+    hovered: false
   },
   {
-    title: "Email",
-    value: "email",
+    title: "Model",
+    value: "model",
     checked: true,
     size: "130",
-    id: 5,
+    id: 8,
+    disabled: false,
     sortDirection: "",
+    hovered: false
   },
   {
-    title: "Email",
-    value: "email",
+    title: "Phone",
+    value: "phone",
     checked: true,
     size: "130",
-    id: 5,
+    id: 9,
+    disabled: false,
     sortDirection: "",
+    hovered: false
   },
   {
-    title: "Email",
-    value: "email",
+    title: "Address",
+    value: "address",
     checked: true,
     size: "130",
-    id: 5,
+    id: 10,
+    disabled: false,
     sortDirection: "",
-  },
-  {
-    title: "Email",
-    value: "email",
-    checked: true,
-    size: "130",
-    id: 5,
-    sortDirection: "",
-  },
-  {
-    title: "Email",
-    value: "email",
-    checked: true,
-    size: "130",
-    id: 5,
-    sortDirection: "",
+    hovered: false
   },
   {
     title: "Status",
     value: "status",
     checked: true,
     size: "130",
-    id: 6,
+    id: 11,
+    disabled: false,
     sortDirection: "",
+    hovered: false
   },
 ]);
 const rows = ref([
@@ -129,6 +130,11 @@ const rows = ref([
     lastname: "Brook",
     email: "herry@repairdesk.co",
     status: "in progress",
+    task: "reparing",
+    device: "iphone",
+    model: "2022",
+    phone: "+13232321321",
+    address: "Newyork",
     disabled: false,
   },
   {
@@ -137,6 +143,11 @@ const rows = ref([
     firstname: "David",
     lastname: "Jeman",
     email: "David@repairdesk.co",
+    task: "reparing",
+    device: "iphone",
+    model: "2022",
+    phone: "+13232321321",
+    address: "Newyork",
     status: "Repaired and Collected",
     disabled: false,
   },
@@ -146,6 +157,11 @@ const rows = ref([
     firstname: "Henry",
     lastname: "Cavil",
     email: "henry@repairdesk.co",
+    task: "reparing",
+    device: "iphone",
+    model: "2022",
+    phone: "+13232321321",
+    address: "Newyork",
     status: "in progress",
   },
   {
@@ -154,6 +170,11 @@ const rows = ref([
     firstname: "Herry",
     lastname: "Brook",
     email: "herry@repairdesk.co",
+    task: "reparing",
+    device: "iphone",
+    model: "2022",
+    phone: "+13232321321",
+    address: "Newyork",
     status: "Repaired and Collected",
   },
   {
@@ -162,7 +183,12 @@ const rows = ref([
     firstname: "John",
     lastname: "Smith",
     email: "john.smith@example.com",
+    device: "iphone",
+    model: "2022",
+    phone: "+13232321321",
+    address: "Newyork",
     status: "in progress",
+    task: "reparing",
   },
   {
     id: 5,
@@ -170,7 +196,12 @@ const rows = ref([
     firstname: "Lucy",
     lastname: "Green",
     email: "lucy.green@example.com",
+    device: "iphone",
+    model: "2022",
+    phone: "+13232321321",
+    address: "Newyork",
     status: "Repaired and Collected",
+    task: "reparing",
   },
   {
     id: 6,
@@ -178,7 +209,12 @@ const rows = ref([
     firstname: "Alice",
     lastname: "Miller",
     email: "alice.miller@example.com",
+    device: "iphone",
+    model: "2022",
+    phone: "+13232321321",
+    address: "Newyork",
     status: "in progress",
+    task: "reparing",
   },
   {
     id: 7,
@@ -186,7 +222,12 @@ const rows = ref([
     firstname: "Bob",
     lastname: "Davis",
     email: "bob.davis@example.com",
+    device: "iphone",
+    model: "2022",
+    phone: "+13232321321",
+    address: "Newyork",
     status: "Repaired and Collected",
+    task: "reparing",
   },
   {
     id: 8,
@@ -194,7 +235,12 @@ const rows = ref([
     firstname: "Kate",
     lastname: "Johnson",
     email: "kate.johnson@example.com",
+    device: "iphone",
+    model: "2022",
+    phone: "+13232321321",
+    address: "Newyork",
     status: "in progress",
+    task: "reparing",
   },
   {
     id: 9,
@@ -202,7 +248,12 @@ const rows = ref([
     firstname: "Kate",
     lastname: "Johnson",
     email: "kate.johnson@example.com",
+    device: "iphone",
+    model: "2022",
+    phone: "+13232321321",
+    address: "Newyork",
     status: "in progress",
+    task: "reparing",
   },
   {
     id: 10,
@@ -210,7 +261,12 @@ const rows = ref([
     firstname: "Kate",
     lastname: "Johnson",
     email: "kate.johnson@example.com",
+    device: "iphone",
+    model: "2022",
+    phone: "+13232321321",
+    address: "Newyork",
     status: "in progress",
+    task: "reparing",
   },
   {
     id: 11,
@@ -218,7 +274,12 @@ const rows = ref([
     firstname: "Kate",
     lastname: "Johnson",
     email: "kate.johnson@example.com",
+    device: "iphone",
+    model: "2022",
+    phone: "+13232321321",
+    address: "Newyork",
     status: "in progress",
+    task: "reparing",
   },
   {
     id: 12,
@@ -226,7 +287,12 @@ const rows = ref([
     firstname: "Kate",
     lastname: "Johnson",
     email: "kate.johnson@example.com",
+    device: "iphone",
+    model: "2022",
+    phone: "+13232321321",
+    address: "Newyork",
     status: "in progress",
+    task: "reparing",
   },
   {
     id: 13,
@@ -234,7 +300,12 @@ const rows = ref([
     firstname: "Kate",
     lastname: "Johnson",
     email: "kate.johnson@example.com",
+    device: "iphone",
+    model: "2022",
+    phone: "+13232321321",
+    address: "Newyork",
     status: "in progress",
+    task: "reparing",
   },
   {
     id: 14,
@@ -242,7 +313,12 @@ const rows = ref([
     firstname: "Kate",
     lastname: "Johnson",
     email: "kate.johnson@example.com",
+    device: "iphone",
+    model: "2022",
+    phone: "+13232321321",
+    address: "Newyork",
     status: "in progress",
+    task: "reparing",
   },
   {
     id: 15,
@@ -250,7 +326,12 @@ const rows = ref([
     firstname: "Kate",
     lastname: "Johnson",
     email: "kate.johnson@example.com",
+    device: "iphone",
+    model: "2022",
+    phone: "+13232321321",
+    address: "Newyork",
     status: "in progress",
+    task: "reparing",
   },
   {
     id: 16,
@@ -258,7 +339,12 @@ const rows = ref([
     firstname: "Kate",
     lastname: "Johnson",
     email: "kate.johnson@example.com",
+    device: "iphone",
+    model: "2022",
+    phone: "+13232321321",
+    address: "Newyork",
     status: "in progress",
+    task: "reparing",
   },
   {
     id: 17,
@@ -266,7 +352,12 @@ const rows = ref([
     firstname: "Kate",
     lastname: "Johnson",
     email: "kate.johnson@example.com",
+    device: "iphone",
+    model: "2022",
+    phone: "+13232321321",
+    address: "Newyork",
     status: "in progress",
+    task: "reparing",
   },
   {
     id: 18,
@@ -274,7 +365,12 @@ const rows = ref([
     firstname: "Kate",
     lastname: "Johnson",
     email: "kate.johnson@example.com",
+    device: "iphone",
+    model: "2022",
+    phone: "+13232321321",
+    address: "Newyork",
     status: "in progress",
+    task: "reparing",
   },
   {
     id: 19,
@@ -282,7 +378,12 @@ const rows = ref([
     firstname: "Kate",
     lastname: "Johnson",
     email: "kate.johnson@example.com",
+    device: "iphone",
+    model: "2022",
+    phone: "+13232321321",
+    address: "Newyork",
     status: "in progress",
+    task: "reparing",
   },
   {
     id: 20,
@@ -290,7 +391,12 @@ const rows = ref([
     firstname: "Kate",
     lastname: "Johnson",
     email: "kate.johnson@example.com",
+    device: "iphone",
+    model: "2022",
+    phone: "+13232321321",
+    address: "Newyork",
     status: "in progress",
+    task: "reparing",
   },
   {
     id: 21,
@@ -298,7 +404,12 @@ const rows = ref([
     firstname: "Kate",
     lastname: "Johnson",
     email: "kate.johnson@example.com",
+    device: "iphone",
+    model: "2022",
+    phone: "+13232321321",
+    address: "Newyork",
     status: "in progress",
+    task: "reparing",
   },
   {
     id: 22,
@@ -306,7 +417,12 @@ const rows = ref([
     firstname: "Kate",
     lastname: "Johnson",
     email: "kate.johnson@example.com",
+    device: "iphone",
+    model: "2022",
+    phone: "+13232321321",
+    address: "Newyork",
     status: "in progress",
+    task: "reparing",
   },
   {
     id: 23,
@@ -314,7 +430,12 @@ const rows = ref([
     firstname: "Kate",
     lastname: "Johnson",
     email: "kate.johnson@example.com",
+    device: "iphone",
+    model: "2022",
+    phone: "+13232321321",
+    address: "Newyork",
     status: "in progress",
+    task: "reparing",
   },
   {
     id: 24,
@@ -322,7 +443,12 @@ const rows = ref([
     firstname: "Kate",
     lastname: "Johnson",
     email: "kate.johnson@example.com",
+    device: "iphone",
+    model: "2022",
+    phone: "+13232321321",
+    address: "Newyork",
     status: "in progress",
+    task: "reparing",
   },
   {
     id: 25,
@@ -330,7 +456,12 @@ const rows = ref([
     firstname: "Kate",
     lastname: "Johnson",
     email: "kate.johnson@example.com",
+    device: "iphone",
+    model: "2022",
+    phone: "+13232321321",
+    address: "Newyork",
     status: "in progress",
+    task: "reparing",
   },
   {
     id: 26,
@@ -338,7 +469,12 @@ const rows = ref([
     firstname: "Kate",
     lastname: "Johnson",
     email: "kate.johnson@example.com",
+    device: "iphone",
+    model: "2022",
+    phone: "+13232321321",
+    address: "Newyork",
     status: "in progress",
+    task: "reparing",
   },
   {
     id: 27,
@@ -346,7 +482,12 @@ const rows = ref([
     firstname: "Kate",
     lastname: "Johnson",
     email: "kate.johnson@example.com",
+    device: "iphone",
+    model: "2022",
+    phone: "+13232321321",
+    address: "Newyork",
     status: "in progress",
+    task: "reparing",
   },
   {
     id: 28,
@@ -354,7 +495,12 @@ const rows = ref([
     firstname: "Kate",
     lastname: "Johnson",
     email: "kate.johnson@example.com",
+    device: "iphone",
+    model: "2022",
+    phone: "+13232321321",
+    address: "Newyork",
     status: "in progress",
+    task: "reparing",
   },
   {
     id: 29,
@@ -362,7 +508,12 @@ const rows = ref([
     firstname: "Kate",
     lastname: "Johnson",
     email: "kate.johnson@example.com",
+    device: "iphone",
+    model: "2022",
+    phone: "+13232321321",
+    address: "Newyork",
     status: "in progress",
+    task: "reparing",
   },
   {
     id: 30,
@@ -370,7 +521,12 @@ const rows = ref([
     firstname: "Kate",
     lastname: "Johnson",
     email: "kate.johnson@example.com",
+    device: "iphone",
+    model: "2022",
+    phone: "+13232321321",
+    address: "Newyork",
     status: "in progress",
+    task: "reparing",
   },
   {
     id: 31,
@@ -378,7 +534,12 @@ const rows = ref([
     firstname: "Kate",
     lastname: "Johnson",
     email: "kate.johnson@example.com",
+    device: "iphone",
+    model: "2022",
+    phone: "+13232321321",
+    address: "Newyork",
     status: "in progress",
+    task: "reparing",
   },
   {
     id: 32,
@@ -386,7 +547,12 @@ const rows = ref([
     firstname: "Kate",
     lastname: "Johnson",
     email: "kate.johnson@example.com",
+    device: "iphone",
+    model: "2022",
+    phone: "+13232321321",
+    address: "Newyork",
     status: "in progress",
+    task: "reparing",
   },
   {
     id: 33,
@@ -394,7 +560,12 @@ const rows = ref([
     firstname: "Kate",
     lastname: "Johnson",
     email: "kate.johnson@example.com",
+    device: "iphone",
+    model: "2022",
+    phone: "+13232321321",
+    address: "Newyork",
     status: "in progress",
+    task: "reparing",
   },
   {
     id: 34,
@@ -402,7 +573,12 @@ const rows = ref([
     firstname: "Kate",
     lastname: "Johnson",
     email: "kate.johnson@example.com",
+    device: "iphone",
+    model: "2022",
+    phone: "+13232321321",
+    address: "Newyork",
     status: "in progress",
+    task: "reparing",
   },
 ]);
 
@@ -452,6 +628,20 @@ const values = ref([
     value: 4,
   },
 ]);
+
+
+let columnVal = ref(columns.value);
+const updateSettings = (data) => {
+  const reorderedColumns = [];
+  data.forEach((item) => {
+    const column = columnVal.value.find((col) => col.value === item.value);
+    if (column) {
+      reorderedColumns.push(column);
+    }
+  });
+  columnVal.value = reorderedColumns;
+};
+
 </script>
 
 
