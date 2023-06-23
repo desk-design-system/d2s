@@ -9,7 +9,7 @@
         <!-- header with group button  -->
         <div v-if="actionHeader"
           class="dd-flex dd-items-center dd-justify-between !dd-w-full group_wrapper !dd-bg-white !dd-z-[1000]"
-          :class="[selectedId?.length > 0 ? 'dd-h-[40.5px]' : '']">
+          :class="[selectedId?.length > 0 ? 'dd-h-[40px]' : '']">
           <div v-if="selectedId?.length > 0" class="dd-flex dd-items-center dd-gap-2 dd-py-2 dd-pl-3 dd-pr-3 dd-text-left">
             <DdGroupButton :buttons="buttons">
               <dd-Button color="white" v-if="checkBoxProp" size="sm">
@@ -152,7 +152,7 @@
                 class="[&>*:nth-child(1)]:!dd-font-normal [&>*:nth-child(2)]:!dd-font-medium dd-relative dd-border-b dd-border-gray-100"
                 :class="[
                   selectedId.includes(row?.id)
-                    ? '[&>*:nth-child(1)]:dd-bg-gray-50 [&>*:nth-child(2)]:dd-bg-gray-50  [&>*:last-child]:!dd-bg-gray-50 dd-bg-gray-50'
+                    ? '[&>*:nth-child(1)]:!dd-bg-gray-50 [&>*:nth-child(2)]:!dd-bg-gray-50  [&>*:last-child]:!dd-bg-gray-50 !dd-bg-gray-50'
                     : '',
                   row?.disabled
                     ? '[&>*:nth-child(1)]:dd-bg-gray-50 [&>*:nth-child(2)]:dd-bg-gray-50  [&>*:last-child]:dd-bg-gray-50  dd-bg-gray-50 dd-pointer-event-none dd-cursor-not-allowed'
