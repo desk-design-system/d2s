@@ -2,15 +2,13 @@
   <div>
     <dd-table :rows="rows" :columns="columnVal" :buttons="buttons" :Actions="Actions" :values="values" footer checkBoxProp
       fixedHeight rowKey="id" hoveringRow lastCell fixed actionHeader emptyState actionsPanel sortIcon settingbarIcon
-      searchIcon @updateSettings="updateSettings" dragDrop /> -->
-      <DdButton title="button button button button button button" loader color="warning" prefix suffix size="sm" type="circle" />
+      searchIcon @updateSettings="updateSettings" dragDrop />
   </div>
 </template>
 
 <script setup>
 import { ref } from "vue";
 import DdTable from "./components/table/index.vue";
-import DdButton from "./components/buttons/index.vue";
 
 let columns = ref([
   {
