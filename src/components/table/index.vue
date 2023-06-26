@@ -1,5 +1,5 @@
 <template>
-  <div class="dd-flow-root dd-w-full" v-bind="$attrs">
+  <div class="dd-grid dd-w-full" v-bind="$attrs">
     <div class="dd-min-w-full dd-align-middle dd-bg-white dd-relative">
       <div :class="[
         !fixedHeight ? '' : getCalculatedHeight,
@@ -63,7 +63,7 @@
             @click="closeSearch" :class="[fixed ? 'dd-right-6' : 'dd-right-6']" />
         </div>
         <slot name="actionHeaderSlot" />
-        <table class="dd-w-full" :class="selectedId.length > 0 && actionHeader == true
+        <table class="dd-w-full dd-overflow-y-auto" :class="selectedId.length > 0 && actionHeader == true
           ? '!dd-border-t dd-border-gray-200'
           : '!dd-border-0'
           ">
@@ -72,7 +72,8 @@
             :class="[limit > 1 ? 'dd-cursor-pointer' : '']">
             <tr class="dd-bg-white">
               <th
-                class="dd-py-2 !dd-pl-5 dd-text-left checkbox_wrapper !dd-leading-3 dd-h-[41px] table_head_row dd-sticky dd-top-0"
+                class="dd-py-2 !dd-pl-5 dd-text-left checkbox_wrapper !dd-leading-3 dd-h-[40px] table_head_row dd-sticky dd-top-0"
+                :class="[!search ? 'table_border': '']"
                 v-if="checkBoxProp">
                 <dd-checkbox v-model="allSelected" @click="selectAllFields" :disabled="checkAllDisabled || limit < 1"
                   :rows="rows" @indeterminate="indeterminate" :allCheckboxesChecked="allCheckboxesChecked"
@@ -82,7 +83,7 @@
               <th v-for="col in columns" :key="col?.value" :value="col" scope="col" v-show="col?.checked"
                 class="dd-py-2 dd-text-left dd-text-xs dd-font-medium dd-text-gray-500 !dd-leading-3 dd-h-[41px] table_head_row dd-sticky dd-top-0"
                 :style="`min-width: ${col?.size}px`" @mouseenter="handleMouseEnter(col)" @mouseleave="handleMouseLeave"
-                @click="sortRows(col)" :class="[checkBoxProp ? 'dd-pl-3 dd-pr-3' : 'dd-pl-5']">
+                @click="sortRows(col)" :class="[checkBoxProp ? 'dd-pl-3 dd-pr-3' : 'dd-pl-5', !search ? 'table_border': '']">
                 <div :class="[sortIcon ? 'dd-flex dd-gap-1.5 dd-w-fit' : 'dd-w-fit']">
                   <span class="dd-text-xs">{{ col?.title }}</span>
                   <div v-if="sortIcon">
@@ -96,7 +97,7 @@
                 </div>
               </th>
 
-              <th class="table_head_row dd-sticky dd-top-0" v-if="lastCell">
+              <th class="table_head_row dd-sticky dd-top-0" :class="[!search ? 'table_border': '']" v-if="lastCell">
                 <div
                   class="dd-flex dd-items-center dd-justify-end dd-gap-4 dd-relative dd-right-5 !dd-z-[999] dd-bg-white dd-pl-2.5">
                   <svgIcon v-if="searchIcon" class="!dd-text-gray-500" icon="Search" size="20" @click="openSearch" />
@@ -105,7 +106,7 @@
                 </div>
                 <!-- settings component  -->
                 <div v-if="setting && lastCell" ref="settingElement"
-                  class="dd-pr-2 dd-pt-2 dd-w-[250px] dd-bg-white dd-container dd-my-[2.1rem] dd-absolute dd-right-4 dd-top-1 dd-shadow-xl dd-rounded-lg dd-border dd-border-gray-100 stop-dragger"
+                  class="dd-pr-2 dd-pt-2 dd-w-[250px] dd-bg-white dd-container dd-my-[2.1rem] dd-absolute dd-right-4 dd-top-1 dd-shadow-xl dd-rounded-lg dd-border dd-border-gray-100"
                   style="z-index: 1100;">
                   <draggable tag="ul" v-model="modelColumn" class="dd-text-left" handle=".handle" item-key="name"
                     drag-class="drag-class" ghost-class="ghost-class" @change="watchState">
@@ -145,13 +146,13 @@
               <slot name="headerActions" />
             </tr>
           </thead>
-          <tbody class="dd-bg-white [&>*:first-child]:dd-border-t [&>*:first-child]:dd-border-gray-200 [&>*:first-child]:!dd-border-b-0 [&>*:nth-child(2)]:dd-border-t" v-if="rows.length > 0">
+          <tbody class="dd-bg-white" v-if="rows.length > 0" :class="[search ? '[&>*:first-child]:dd-border-t [&>*:first-child]:dd-border-gray-200 [&>*:first-child]:!dd-border-b-0 [&>*:nth-child(2)]:dd-border-t' : '']">
             <template v-if="!defaultRow">
               <tr v-for="(row, index) in rows" :key="index"
                 class="[&>*:nth-child(1)]:!dd-font-normal [&>*:nth-child(2)]:!dd-font-medium dd-relative dd-border-b dd-border-gray-100"
                 :class="[
                   selectedId.includes(row?.id)
-                    ? '[&>*:nth-child(1)]:dd-bg-gray-50 [&>*:nth-child(2)]:dd-bg-gray-50  [&>*:last-child]:!dd-bg-gray-50 dd-bg-gray-50'
+                    ? '[&>*:nth-child(1)]:!dd-bg-gray-50 [&>*:nth-child(2)]:!dd-bg-gray-50  [&>*:last-child]:!dd-bg-gray-50 !dd-bg-gray-50'
                     : '',
                   row?.disabled
                     ? '[&>*:nth-child(1)]:dd-bg-gray-50 [&>*:nth-child(2)]:dd-bg-gray-50  [&>*:last-child]:dd-bg-gray-50  dd-bg-gray-50 dd-pointer-event-none dd-cursor-not-allowed'
@@ -639,15 +640,6 @@ const setSetting = (col) => {
   col = !col;
 };
 
-const columnRef = computed(() => {
-  const filteredArray = props.columns.filter((element) => {
-    return !element.disabled;
-  });
-
-  return filteredArray;
-});
-// modelColumn.value = columnRef.value;
-
 const watchState = () => {
   savedData.value = modelColumn.value;
   console.log(savedData.value, 'savedData.value');
@@ -802,7 +794,7 @@ tr:hover>td:first-child {
 
 .fixed_cell_two {
   position: sticky;
-  left: 40px;
+  left: 52px;
   background: #ffff;
   margin: 0 !important;
   box-shadow: -2px 0 2px -2px rgba(0, 0, 0, 0.2) inset;
@@ -811,7 +803,7 @@ tr:hover>td:first-child {
 
 .fixed_cell_two_head {
   position: sticky;
-  left: 40px;
+  left: 52px;
   background: #ffff;
   margin: 0 !important;
   z-index: 999 !important;
@@ -882,10 +874,9 @@ tr:hover>td:first-child {
   visibility: hidden;
 }
 
-.stop-dragger {
-  -webkit-user-drag: inherit !important;
+.table_border::after {
+  border-bottom: 1px solid #E5E7EB;
 }
-
 /* scroll bar  */
 
 /* .custom-scrollbar {
