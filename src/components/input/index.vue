@@ -39,6 +39,8 @@
         " :placeholder="placeholder"
         @focus="emits('focus')"
         @blur="emits('blur')"
+        @keydown="emits('keydown')"
+        @keyup="emits('keyup')"
         />
       <!-- $slots.suffix -->
       <div @click="suffixIconClick" v-if="suffix && suffixIcon" class="
@@ -68,7 +70,7 @@ const getRandomInt = (max = 1000) => {
 import { useField } from "vee-validate";
 import svgIcon from "../svgIcon/index.vue";
 import { ref, computed, watch } from "vue";
-const emits = defineEmits(["update:modelValue", "change", "suffixIconClick", 'focus', 'blur']);
+const emits = defineEmits(["update:modelValue", "change", "suffixIconClick", 'focus', 'blur','keyup','keydown']);
 const props = defineProps({
   label: {
     type: String,
