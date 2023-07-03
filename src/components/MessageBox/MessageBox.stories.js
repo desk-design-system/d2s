@@ -127,7 +127,7 @@ const Template = (args) => ({
     return { args, showMessageBoxWarning, showMessageBoxErrorOptions, showMessageBoxSuccessOptions, showMessageBoxInfoOptions };
   },
   // And then the `args` are bound to your component with `v-bind="args"`
-  template: '<div> <dd-button color="warning" @click="showMessageBoxWarning()">button</dd-button> <dd-button color="danger" @click="showMessageBoxErrorOptions()">Options button</dd-button> <dd-button color="success" @click="showMessageBoxSuccessOptions()">Options button</dd-button> <dd-button color="white" @click="showMessageBoxInfoOptions()">Options button</dd-button> </div>',
+  template: '<div> <dd-button color="warning" @click="showMessageBoxWarning()">Warning button</dd-button> <dd-button color="danger" @click="showMessageBoxErrorOptions()">Danger button</dd-button> <dd-button color="success" @click="showMessageBoxSuccessOptions()">Success button</dd-button> <dd-button color="white" @click="showMessageBoxInfoOptions()">Info button</dd-button> </div>',
 });
 
 export const Options = Template.bind({});
