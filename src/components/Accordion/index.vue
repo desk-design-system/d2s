@@ -1,103 +1,165 @@
 <template>
-  <button
-    class="dd-bg-white dd-cursor-pointer dd-w-full"
-    :class="[
-      hasError
-        ? ' !dd-border-red-600 focus:!dd-border-red-600 dd-focus:!dd-ring-red-600'
-        : 'dd-border-gray-300 focus:dd-ring-teal-600 focus:!dd-border-teal-600',
-    ]"
-    @click="open = !open"
+  <div
+    v-for="(tab, index) of tabs"
+    :key="index + 1"
+    class=" dd-border dd-border-gray-200 dd-rounded-md dd-mb-3 dd-bg-white dd-overflow-hidden"
+    v-bind="$attrs"
   >
-    <div
-      class="dd-flex dd-items-center dd-justify-between dd-p-2 focus-visible:dd-outline-none"
-    >
-      <div class="dd-flex dd-items-center dd-gap-4">
-        <ddAvatar v-show="showAvatar" :srcLink="srcLink" size="mini" />
-        <span
-          class="dd-font-medium dd-text-sm dd-text-gray-700 dd-text-left"
-        >
-          {{ label }}
-        </span>
-      </div>
-      <span
-        class="dd-inset-y-0 dd-right-0 dd-flex dd-items-center dd-pr-2 dd-pointer-events-none dd-mt-1"
+    <div class="dd-cursor-pointer" @click="changeActiveIndex(index + 1)">
+      <component
+        v-if="tab.children && tab.children.header"
+        :is="tab.children.header"
       >
-        <ChevronDownIcon
-          class="dd-h-5 dd-w-5 dd-text-gray-400"
-          aria-hidden="true"
-          :class="[
-            open ? 'dd-transform dd-rotate-180' : 'dd-transform dd-rotate-0',
-          ]"
-        />
-      </span>
+      </component>
+      <div v-else class="dd-flex dd-justify-between dd-p-3">
+        <div class="dd-flex">
+            <!-- @slot Use this slot header -->
+          <component
+            v-if="tab.children && tab.children.prepend"
+            :is="tab.children.prepend"
+          >
+          </component>
+          <dd-svg-icon
+            v-else-if="!!getTabProp(tab, 'prepend-icon')"
+            :icon="getTabProp(tab, 'prepend-icon')"
+            size="20"
+            class="dd-mr-2"
+          >
+          </dd-svg-icon>
+
+          <p
+            v-if="tab.props && tab.props.title"
+            class="dd-font-medium dd-text-sm dd-text-gray-700 dd-text-left"
+          >
+            {{ tab.props.title ? tab.props.title : `Tab-${index + 1}` }}
+          </p>
+        </div>
+        <div class="dd-flex">
+          <component
+            v-if="tab.children && tab.children.append"
+            :is="tab.children.append"
+          >
+          </component>
+          <dd-svg-icon
+            v-else-if="!!getTabProp(tab, 'append-icon')"
+            :icon="getTabProp(tab, 'append-icon')"
+            size="20"
+            class="dd-mr-2"
+          >
+          </dd-svg-icon>
+          <div class="dd-flex dd-align-center dd-h-full dd-pt-0.5" >
+            <dd-svg-icon
+              icon="ChevronDown"
+              size="16"
+              class="dd-text-gray-400 dd-text-center"
+              aria-hidden="true"
+              :class="[
+                ddActive == index + 1
+                  ? 'dd-transform dd-rotate-180'
+                  : 'dd-transform dd-rotate-0',
+              ]"
+            />
+          </div>
+        </div>
+      </div>
     </div>
-  </button>
-  <transition
-    leave-active-class="dd-transition dd-ease-in dd-duration-100"
-    leave-from-class="dd-opacity-100"
-    leave-to-class="dd-opacity-0"
-  >
-    <ul v-if="open" class="dd-p-2 dd-w-full dd-ml-2">
-      <slot name="content" />
-    </ul>
-  </transition>
-  <span v-if="errorMessage" class="dd-text-xs dd-text-red-600 dd-capitalize">{{
-    errorMessage
-  }}</span>
+
+    <Transition name="dd-toggleable-content">
+      <div v-if="isTabActive(index + 1)" class="">
+        <component class="dd-px-3 dd-pb-2"  :is="tab"></component>
+      </div>
+    </Transition>
+  </div>
+
 </template>
 
 <script setup>
-import { useField } from "vee-validate";
-import { computed } from "vue";
-import ddAvatar from "../avatars/index.vue";
-import { ChevronDownIcon } from "@heroicons/vue/solid";
+import { computed, ref, useSlots } from "vue";
+import { DdSvgIcon } from "../components";
 
 const props = defineProps({
-  label: {
-    type: String,
-    default: "Customers",
-  },
-  rules: {
-    type: [String, RegExp, Function],
-    default: "",
-  },
-  srcLink: {
-    type: [String],
-    default: null,
-  },
-  showAvatar: {
-    type: Boolean,
-    default: false,
-  },
-  showIcon: {
-    type: Boolean,
-    default: false,
-  },
-  open: {
-    type: Boolean,
-    default: false,
-  },
+active: {
+  type: Number,
+  default: 1,
+},
+multiple: {
+  type: Boolean,
+  default: false,
+},
 });
 
-const getRules = () => {
-  if (props.rules instanceof RegExp) {
-    return { regex: props.rules };
-  }
-  return props.rules;
+const emit = defineEmits(["update:active"]);
+const slots = useSlots();
+
+const ACCORDION_TAB = "AccordionTab";
+let ddActive = ref(props.active);
+
+
+//Methods
+const isAccordionTab = (child) => {
+return child.type.name === ACCORDION_TAB;
 };
 
-const { errorMessage } = useField(props.label, getRules(), {
-  label: props.label,
+const tabs = computed(() => {
+  if(!slots.default){
+    console.error("<AccordionTab> should always be a direct shild of <Accordion>.")
+      return
+  }
+  return slots.default().reduce((tabs, child) => {
+    if (isAccordionTab(child)) {
+      tabs.push(child);
+    }else{
+      console.warn("<AccordionTab> should always be a direct shild of <Accordion>.")
+    }
+    return tabs;
+  }, []);
 });
 
-const hasError = computed(() => {
-  if (errorMessage.value) {
-    return true;
+const changeActiveIndex = (index) => {
+  const active = isTabActive(index);
+  if (props.multiple) {
+    if (active) {
+      ddActive.value = ddActive.value.filter((i) => i !== index);
+    } else {
+      if (ddActive.value) ddActive.value.push(index);
+      else ddActive.value = [index];
+    }
   } else {
-    return false;
+    ddActive.value = ddActive.value === index ? null : index;
   }
-});
+  emit("update:active", index);
+};
+
+const isTabActive = (index) => {
+return props.multiple
+  ? ddActive.value && ddActive.value.includes(index)
+  : ddActive.value === index;
+};
+
+const getTabProp = (tab, name) => {
+return tab.props ? tab.props[name] : undefined;
+};
+
 </script>
 
 <style>
+.dd-toggleable-content-enter-from,
+.dd-toggleable-content-leave-to {
+max-height: 0;
+}
+
+.dd-toggleable-content-enter-to,
+.dd-toggleable-content-leave-from {
+max-height: 1000px;
+}
+
+.dd-toggleable-content-leave-active {
+overflow: hidden;
+transition: max-height 0.4s cubic-bezier(0, 1, 0, 1);
+}
+
+.dd-toggleable-content-enter-active {
+overflow: hidden;
+transition: max-height 0.4s cubic-bezier(1, 0, 1, 0);
+}
 </style>

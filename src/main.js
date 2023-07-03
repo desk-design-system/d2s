@@ -1,15 +1,16 @@
-import { createApp } from 'vue';
-import App from './App.vue';
-import './assets/index.css';
-import {useNotification} from "./components/notification"
-import {defineRule, configure} from "vee-validate"
-import {localize} from "@vee-validate/i18n"
+import { createApp } from "vue";
+import App from "./App.vue";
+import "./assets/index.css";
+import { useNotification } from "./components/notification";
+import { useMessageBox } from "./components/MessageBox";
+import { defineRule, configure } from "vee-validate";
+import { localize } from "@vee-validate/i18n";
 
-import AllRules from "@vee-validate/rules"
+import AllRules from "@vee-validate/rules";
 
 Object.keys(AllRules).forEach((rule) => {
-  defineRule(rule, AllRules[rule])
-})
+  defineRule(rule, AllRules[rule]);
+});
 configure({
   generateMessage: localize("en", {
     messages: {
@@ -22,11 +23,13 @@ configure({
       integer: "This {field} must be an integer",
       max: "This {field} not be greater than 0:{max} values",
       min: "This {field} must be at least 0:{min} values",
-      numeric: "This {field} may only contain numeric values"
-    }
-  })
-})
-const app = createApp(App)
-app.provide('$notification', useNotification())
-app.config.globalProperties.$notification = useNotification()
-app.mount('#app');
+      numeric: "This {field} may only contain numeric values",
+    },
+  }),
+});
+const app = createApp(App);
+app.provide("$notification", useNotification());
+app.config.globalProperties.$notification = useNotification();
+app.provide("$modal", useMessageBox());
+app.config.globalProperties.$modal = useMessageBox();
+app.mount("#app");

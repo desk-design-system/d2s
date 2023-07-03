@@ -16,7 +16,7 @@
       "require": "./dist/style.css"
     }
   },
-  "version": "1.6.26",
+  "version": "1.6.31",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -34,7 +34,8 @@
     "@vue-hero-icons/solid": "^1.7.2",
     "vee-validate": "^4.8.4",
     "vue": "^3.2.40",
-    "vue-tel-input": "^6.0.5"
+    "vue-tel-input": "^6.0.5",
+    "vuedraggable": "^4.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.12",

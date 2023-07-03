@@ -1,8 +1,10 @@
 <template>
   <div class="dd-base" v-bind="$attrs">
-    <label v-if="label" class="dd-block dd-text-sm dd-font-medium dd-text-gray-700 dd-mb-1">{{ label }} <span
-        v-if="isRequired" class="dd-text-red-500">*</span>
-    </label>
+     <slot name="label" >
+      <label v-if="label" class="dd-block dd-text-sm dd-font-medium dd-text-gray-700 dd-mb-1">{{ label }} <span
+          v-if="isRequired" class="dd-text-red-500">*</span>
+      </label>
+    </slot>
     <div class="dd-relative dd-rounded-md">
       <div v-if="prefix" class="
           !dd-pointer-events-none
@@ -11,7 +13,7 @@
           !dd-left-0
           !dd-flex
           !dd-items-center
-          !dd-pl-3
+          !dd-pl-5
           !dd-pr-10
         ">
         <svgIcon class="dd-text-gray-400" :icon="icon" :size="btnIconSize" />
@@ -20,11 +22,11 @@
         inputSize,
         noBorder,
         suffix ? '!dd-pr-10' : '!dd-pr-2',
-        prefix ? '!dd-pl-10' : '!dd-pl-2',
+        prefix ? '!dd-pl-[53px]' : '!dd-pl-2',
         hasError
           ? '!dd-border-red-600 focus:!dd-border-red-600 dd-focus:!dd-ring-red-600'
           : '!dd-border-gray-300 focus:dd-ring-teal-600 focus:!dd-border-teal-600',
-        Right ? 'dd-text-right !dd-text-xs !dd-text-gray-400 !dd-font-normal' : 'dd-text-left',
+        Right ? 'dd-text-right !dd-text-xs !dd-text-gray-700 !dd-font-normal' : 'dd-text-left',
         errorMessage ? 'dd-mb-1' : '',
         disabled
           ? '!dd-text-gray-500 dd-ring-gray-200 dd-bg-gray-50 dd-cursor-not-allowed dd-select-none'
@@ -36,7 +38,10 @@
           focus:ring-2
           focus:dd-ring-inset
           dd-shadow-sm
-        " :placeholder="placeholder" />
+        " :placeholder="placeholder"
+        @focus="emits('focus')"
+        @blur="emits('blur')"
+        />
       <!-- $slots.suffix -->
       <div @click="suffixIconClick" v-if="suffix && suffixIcon" class="
           dd-cursor-pointer
@@ -65,7 +70,7 @@ const getRandomInt = (max = 1000) => {
 import { useField } from "vee-validate";
 import svgIcon from "../svgIcon/index.vue";
 import { ref, computed, watch } from "vue";
-const emits = defineEmits(["update:modelValue", "change", "suffixIconClick"]);
+const emits = defineEmits(["update:modelValue", "change", "suffixIconClick", 'focus', 'blur']);
 const props = defineProps({
   label: {
     type: String,

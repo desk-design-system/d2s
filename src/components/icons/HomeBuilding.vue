@@ -1,0 +1,80 @@
+<template>
+  <svg
+    width="26px"
+    height="26px"
+    viewBox="0 0 26 26"
+    version="1.1"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+  >
+    <title>Group 3</title>
+    <g
+      id="✨-New-Ticket-Design-D2s-1"
+      stroke="none"
+      stroke-width="1"
+      fill="none"
+      fill-rule="evenodd"
+    >
+      <g
+        id="Select-Category-Copy-2"
+        transform="translate(-880.000000, -383.000000)"
+      >
+        <g id="Group" transform="translate(877.000000, 380.000000)">
+          <polygon id="Path" points="0 0 32 0 32 32 0 32"></polygon>
+          <path
+            d="M10.6666667,12 L17.3333333,18.6666667 L17.3333333,28 L10.6666667,28 L10.6666667,22.6666667 M10.6666667,28 L4,28 L4,18.6666667 L10.6666667,12 M12,13.3333333 L12,5.33333333 C12,4.59695367 12.5969537,4 13.3333333,4 L26.6666667,4 C27.4030463,4 28,4.59695367 28,5.33333333 L28,28 L17.3333333,28"
+            id="Shape"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          ></path>
+          <line
+            x1="17.3333333"
+            y1="9.33333333"
+            x2="17.3333333"
+            y2="9.34666667"
+            id="Path"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          ></line>
+          <line
+            x1="22.6666667"
+            y1="9.33333333"
+            x2="22.6666667"
+            y2="9.34666667"
+            id="Path"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          ></line>
+          <line
+            x1="22.6666667"
+            y1="14.6666667"
+            x2="22.6666667"
+            y2="14.68"
+            id="Path"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          ></line>
+          <line
+            x1="22.6666667"
+            y1="20"
+            x2="22.6666667"
+            y2="20.0133333"
+            id="Path"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          ></line>
+        </g>
+      </g>
+    </g>
+  </svg>
+</template>

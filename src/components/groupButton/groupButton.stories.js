@@ -1,10 +1,12 @@
 import { defineComponent } from "vue";
-import DdGroupBtn from "./index.vue";
+import DdButton from "../buttons/index.vue";
+import DdGroupButton from "./index.vue"
+import svgIcon from "../svgIcon/index.vue"
 import { ref } from "vue";
 
 export default {
-  title: "Atoms/DdGroupBtn",
-  component: DdGroupBtn,
+  title: "Atoms/Group button",
+  component: DdGroupButton,
   argTypes: {
     Note: {
       description:
@@ -13,50 +15,28 @@ export default {
   },
 };
 
-const buttons = [
-  { id: 1, label: "Button 1", color: "white", icon: "ChevronLeft" },
-  { id: 2, label: "Button 2", color: "primary", icon: "ChevronRight" },
-  { id: 3, label: "Button 3", color: "danger", icon: "ChevronDown" },
-  { id: 4, label: "Button 4", color: "warning", icon: "ChevronLeft" },
-  { id: 5, label: "Button 5", color: "selected", icon: "ChevronRight" },
-  { id: 6, label: "", size: "xs", color: "white", icon: "ChevronUp" },
-  { id: 7, label: "", size: "xl", color: "white", icon: "ChevronDown" },
-];
 
 const Template = (args) =>
   defineComponent({
-    components: { DdGroupBtn },
+    components: { DdGroupButton, DdButton, svgIcon },
     setup() {
-      const showIcon = ref(true);
-      const buttons = [
-        { id: 1, label: "Button 1", color: "white", icon: "ChevronLeft" },
-        { id: 2, label: "Button 2", color: "primary", icon: "ChevronRight" },
-        { id: 3, label: "Button 3", color: "danger", icon: "ChevronDown" },
-        { id: 4, label: "Button 4", color: "warning", icon: "ChevronLeft" },
-        { id: 5, label: "Button 5", color: "selected", icon: "ChevronRight" },
-        { id: 6, label: "", size: "xs", color: "white", icon: "ChevronUp" },
-        { id: 7, label: "", size: "xl", color: "white", icon: "ChevronDown" },
-        //add more buttons here use same props as defined in dd-button
-      ];
 
-      const onButtonSelected = (button) => {
-        console.log(button, "from parent");
-      };
-      return { args, showIcon, buttons, onButtonSelected };
+      return { args };
     },
     template: `
-    <dd-group-btn
-    v-bind="args"
-    :buttons="buttons"
-    :showIcon="showIcon"
-    :selected="selected"
-    @selected="onButtonSelected"
-  />
+    <DdGroupButton>
+        <dd-Button color="white">
+          <svgIcon icon="Alert" />
+        </dd-Button>
+        <dd-Button color="white">
+          <svgIcon icon="Alert" />
+        </dd-Button>
+        <dd-Button color="white">
+          <span>Button</span>
+        </dd-Button>
+      </DdGroupButton>
     `,
   });
 
 export const Default = Template.bind({});
-Default.args = {
-  buttons,
-  showIcon: true,
-};
+
