@@ -19,7 +19,7 @@
         v-if="isActionHovered(row)"
       >
         <svgIcon
-          class="dd-mt-[5px] dd-text-gray-500"
+          class="dd-flex dd-items-center dd-justify-center dd-text-gray-500"
           color="white"
           icon="Pencil"
           size="20"
@@ -34,7 +34,7 @@
         v-if="isActionHovered(row)"
       >
         <svgIcon
-          class="dd-mt-[5px] dd-text-gray-500"
+          class="dd-flex dd-items-center dd-justify-center dd-text-gray-500"
           color="white"
           icon="Trash"
           size="20"
