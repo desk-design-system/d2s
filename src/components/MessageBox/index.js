@@ -4,16 +4,20 @@ import { createComponent } from "../notification/helpers";
 export const useMessageBox = (globalProps = {}) => {
   return {
     async open(options) {
+      let message = null;
+      if (typeof options === "string") message = options;
+      const defaultProps = {
+        message,
+      };
 
       const promise = new Promise((resolve, reject) => {
-        const propsData = Object.assign({}, globalProps, options);
+        const propsData = Object.assign({}, defaultProps, globalProps, options);
         propsData.resolve = resolve;
         propsData.reject = reject;
         createComponent(MessageComponent, propsData, document.body);
       });
       return promise;
     },
-    // error(title, message, saveTitle, closeTitle, closed, solved, modalWidth) {
     error(options, title, message, saveTitle, closeTitle, closed, solved, modalWidth) {
       return this.open(
         Object.assign(

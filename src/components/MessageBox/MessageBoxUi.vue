@@ -160,7 +160,7 @@ const conditionalIcons = computed(() => {
                 icon: ExclamationIcon,
                 class: "dd-text-blue-500",
                 color: "dd-bg-blue-50",
-                button: "info"
+                button: "white"
             }
 
 
