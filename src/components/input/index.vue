@@ -1,8 +1,10 @@
 <template>
   <div class="dd-base" v-bind="$attrs">
-    <label v-if="label" class="dd-block dd-text-sm dd-font-medium dd-text-gray-700 dd-mb-1">{{ label }} <span
-        v-if="isRequired" class="dd-text-red-500">*</span>
-    </label>
+     <slot name="label" >
+      <label v-if="label" class="dd-block dd-text-sm dd-font-medium dd-text-gray-700 dd-mb-1">{{ label }} <span
+          v-if="isRequired" class="dd-text-red-500">*</span>
+      </label>
+    </slot>
     <div class="dd-relative dd-rounded-md">
       <div v-if="prefix" class="
           !dd-pointer-events-none
