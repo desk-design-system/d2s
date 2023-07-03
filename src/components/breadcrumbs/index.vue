@@ -11,7 +11,7 @@
           </component>
           <p @click.stop="" v-else class="dd-text-sm dd-cursor-not-allowed dd-text-gray-400">{{ item.name }}</p>
           <span v-if="index +1 != items.length" class="dd-flex-shrink-0 dd-text-gray-200 dd-ml-3">
-          <svg v-if="shadow" class="dd-h-full dd-w-6" viewBox="0 0 24 44" preserveAspectRatio="none" fill="currentColor" aria-hidden="true">
+          <svg v-if="shadow" class="dd-mb-[-6px] dd-h-full dd-w-6" viewBox="0 0 24 44" preserveAspectRatio="none" fill="currentColor" aria-hidden="true">
             <path d="M.293 0l22 22-22 22h1.414l22-22-22-22H.293z" />
           </svg>
           <ChevronRightIcon v-else-if="!shadow && seprator == 'chevron'" class="dd-h-5 dd-w-5" aria-hidden="true" />
