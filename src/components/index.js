@@ -2,13 +2,16 @@
 import * as DDSystem from "./components.js"
 export * as DDSystem from "./components.js"
 import {useNotification} from "./notification"
+import { useMessageBox } from "./components/MessageBox";
 import AllRules from "@vee-validate/rules"
 import {defineRule, configure} from "vee-validate"
 import {localize} from "@vee-validate/i18n"
 
 const install = (app, options) =>{
   app.provide('$notification', useNotification())
+  app.provide("$modal", useMessageBox());
   app.config.globalProperties.$notification = useNotification()
+  app.config.globalProperties.$modal = useMessageBox()
   Object.keys(DDSystem).forEach((name) => {
     app.component(name, DDSystem[name]);
   });
