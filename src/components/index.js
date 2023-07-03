@@ -2,7 +2,7 @@
 import * as DDSystem from "./components.js"
 export * as DDSystem from "./components.js"
 import {useNotification} from "./notification"
-import { useMessageBox } from "./components/MessageBox";
+import { useMessageBox } from "./MessageBox";
 import AllRules from "@vee-validate/rules"
 import {defineRule, configure} from "vee-validate"
 import {localize} from "@vee-validate/i18n"
