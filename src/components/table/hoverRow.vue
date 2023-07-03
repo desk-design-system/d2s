@@ -52,7 +52,7 @@
       >
         <DdDropDown
           color="transparent"
-          class="dd-text-gray-700 dd-top-[3px] dd-left-[3px]"
+          class="dd-text-gray-700 dd-top-[3px] dd-left-[1px]"
           :class="[
             isActionHovered(row)
               ? ''
