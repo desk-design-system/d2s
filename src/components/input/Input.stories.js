@@ -83,7 +83,7 @@ const Template = ( args ) => ( {
     return { selected, args, editInput, resetInput, onClickMethod }
   },
   // And then the `args` are bound to your component with `v-bind="args"`
-  template: `<dd-input  v-bind="args" v-model="selected" />  <dd-input label="input" v-model="selected">
+  template: `<dd-input  v-bind="args" v-model="selected">
   <template #suffix>
     <dd-button
       icon="Tick"

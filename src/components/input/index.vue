@@ -16,29 +16,27 @@
           !dd-pl-3
           !dd-pr-3
         ">
-        <svgIcon class="dd-text-gray-400" :icon="icon" :size="btnIconSize" />
+        <svgIcon :class="`!dd-text-${hintTextColor}-600`" :icon="icon" :size="btnIconSize" />
       </div>
       <input :name="name" :disabled="disabled" :class="[
         inputSize,
         noBorder,
         suffix ? '!dd-pr-2' : '!dd-pr-2',
         prefix ? '!dd-pl-10' : '!dd-pl-2',
-        hasError
-          ? '!dd-border-red-600 focus:!dd-border-red-600 dd-focus:!dd-ring-red-600'
-          : '!dd-border-gray-300 focus:dd-ring-teal-600 focus:!dd-border-teal-600',
+        hintTextComputed,
         Right ? 'dd-text-right !dd-text-xs !dd-text-gray-700 !dd-font-normal' : 'dd-text-left',
-        errorMessage ? 'dd-mb-1' : '',
         disabled
           ? '!dd-text-gray-500 dd-ring-gray-200 dd-bg-gray-50 dd-cursor-not-allowed dd-select-none'
-          : ' dd-text-gray-700',
-      ]" v-model="inputModelValue" :type="inputType" class="
-          dd-border-solid
+          : ''
+      ]"
+      v-model="inputModelValue" :type="inputType" class="
           !dd-block !dd-w-full !dd-rounded-md
           sm:!dd-text-sm
           focus:ring-2
           focus:dd-ring-inset
           dd-shadow-sm
-        " :placeholder="placeholder"
+        " 
+        :placeholder="placeholder"
         @focus="emits('focus')"
         @blur="emits('blur')"
         @keydown="emits('usekeydown')"
@@ -55,10 +53,10 @@
           !dd-pl-3
           !dd-pr-3
         ">
-        <svgIcon class="dd-text-gray-400" :icon="suffixIcon" :size="btnIconSize" />
+        <svgIcon :class="`!dd-text-${hintTextColor}-600`" :icon="suffixIcon" :size="btnIconSize" />
       </div>
       <!-- button -->
-      <div v-if="type !== 'password'" class="
+      <div v-if="type !== 'password' && !Right" class="
           dd-cursor-pointer
           !dd-absolute
           !dd-inset-y-0
@@ -72,7 +70,7 @@
         <slot name="suffix" />
       </div>
     </div>
-    <span class="dd-text-sm dd-font-normal dd-text-red-500 dd-pt-px">{{ customErrorMessage }}</span>
+    <span class="dd-text-sm dd-font-normal dd-pt-px" :class="`dd-text-${hintTextColor}-600`">{{ hintText }}</span>
   </div>
 </template>
 
@@ -86,7 +84,7 @@ const props = defineProps({
     type: String,
     default: "",
   },
-  customErrorMessage: {
+  hintText: {
     type: String,
     default: "",
   },
@@ -115,6 +113,10 @@ const props = defineProps({
     default: false,
   },
   icon: {
+    type: String,
+    default: null,
+  },
+  hintTextColor: {
     type: String,
     default: null,
   },
@@ -175,9 +177,20 @@ const getRules = () => {
   return props.rules;
 };
 
-const { errorMessage, value, handleChange } = useField(props.name, getRules(), {
+const { handleChange } = useField(props.name, getRules(), {
   label: props.name,
 });
+
+watch(() => props.hintTextColor,
+(newVal) => {
+  props.hintTextColor = newVal
+  console.log(props.hintTextColor, 'hintTextColor');
+},
+{ immediate: true });
+
+const hintTextComputed = computed(() => {
+  return `!dd-border !dd-border-solid !dd-border-${props.hintTextColor}-600 !dd-text-${props.hintTextColor}-600`
+})
 
 const inputModelValue = computed({
   get() {
@@ -191,7 +204,7 @@ const inputModelValue = computed({
 });
 
 const hasError = computed(() => {
-  if (props.errorMessage || props.customErrorMessage) {
+  if (props.hintText) {
     return true;
   } else {
     return false;

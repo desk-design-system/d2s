@@ -1,14 +1,45 @@
 <template>
-  <div>
-    <dd-table :rows="rows" :columns="columnVal" :buttons="buttons" :Actions="Actions" :values="values" footer checkBoxProp
+  <div class="dd-p-4">
+    <!-- <dd-table :rows="rows" :columns="columnVal" :buttons="buttons" :Actions="Actions" :values="values" footer checkBoxProp
       fixedHeight rowKey="id" hoveringRow lastCell fixed actionHeader emptyState actionsPanel sortIcon settingbarIcon
-      searchIcon @updateSettings="updateSettings" dragDrop />
+      searchIcon @updateSettings="updateSettings" dragDrop /> -->
+    <dd-input label="input" v-model="inputQuery" hintText="error" hintTextColor="teal" prefix icon="Alert">
+      <template #suffix>
+        <dd-button
+          icon="Tick"
+          prefix
+          color="white"
+          size="base"
+          class="!dd-px-1 !dd-h-6"
+          @click="editInput"
+        />
+        <dd-button
+          icon="Close"
+          prefix
+          color="white"
+          size="base"
+          class="!dd-px-1 !dd-h-6"
+          @click="resetInput"
+        />
+      </template>
+    </dd-input>
   </div>
 </template>
 
 <script setup>
 import { ref } from "vue";
 import DdTable from "./components/table/index.vue";
+import DdButton from "./components/buttons/index.vue";
+import DdInput from "./components/input/index.vue";
+
+const inputQuery = ref("");
+
+const editInput = () => {
+  inputQuery.value = inputQuery.value.toUpperCase();
+}
+const resetInput = () => {
+  inputQuery.value = "";
+}
 
 let columns = ref([
   {
