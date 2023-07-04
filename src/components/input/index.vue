@@ -59,8 +59,12 @@
         <!-- <slot name="suffix">
         </slot> -->
       </div>
+      <!-- button -->
+      <div>
+        <dd-button icon="Close" prefix size="xs" color="white" />
+      </div>
     </div>
-    <span v-if="errorMessage" class="dd-text-xs dd-text-red-500 dd-capitalize dd-pt-px">{{ errorMessage }}</span>
+    <span class="dd-text-sm dd-font-normal dd-text-red-500 dd-pt-px">{{ customErrorMessage }}</span>
   </div>
 </template>
 <!-- <script>
@@ -69,8 +73,8 @@ const getRandomInt = (max = 1000) => {
 }
 </script> -->
 <script setup>
-import { useField } from "vee-validate";
 import svgIcon from "../svgIcon/index.vue";
+import DdButton from "../buttons/index.vue";
 import { ref, computed, watch } from "vue";
 const emits = defineEmits(["update:modelValue", "change", "suffixIconClick", 'focus', 'blur','usekeyup','usekeydown']);
 const props = defineProps({
@@ -140,24 +144,6 @@ const props = defineProps({
   },
 });
 
-const getRules = () => {
-  if (props.rules instanceof RegExp) {
-    return { regex: props.rules };
-  }
-  return props.rules;
-};
-
-const { errorMessage, value, handleChange } = useField(props.name, getRules(), {
-  label: props.name,
-});
-
-watch(
-  () => value,
-  (newValue) => {
-    inputModelValue.value = newValue;
-  }
-);
-
 const inputType = ref("text");
 const inputSize = computed(() => {
   return {
@@ -185,7 +171,7 @@ const inputModelValue = computed({
 });
 
 const hasError = computed(() => {
-  if (errorMessage.value || props.customErrorMessage) {
+  if (props.errorMessage || props.customErrorMessage) {
     return true;
   } else {
     return false;

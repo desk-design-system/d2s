@@ -1,14 +1,18 @@
 <template>
-  <div>
-    <dd-table :rows="rows" :columns="columnVal" :buttons="buttons" :Actions="Actions" :values="values" footer checkBoxProp
+  <div class="dd-p-4">
+    <!-- <dd-table :rows="rows" :columns="columnVal" :buttons="buttons" :Actions="Actions" :values="values" footer checkBoxProp
       fixedHeight rowKey="id" hoveringRow lastCell fixed actionHeader emptyState actionsPanel sortIcon settingbarIcon
-      searchIcon @updateSettings="updateSettings" dragDrop />
+      searchIcon @updateSettings="updateSettings" dragDrop /> -->
+      <DdInput label="input" v-model="inpputQuery" prefix suffix icon="Plus" customErrorMessage="error" />
   </div>
 </template>
 
 <script setup>
 import { ref } from "vue";
 import DdTable from "./components/table/index.vue";
+import DdInput from "./components/input/index.vue";
+
+const inpputQuery = ref("");
 
 let columns = ref([
   {
