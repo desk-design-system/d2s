@@ -60,18 +60,12 @@
         </slot> -->
       </div>
       <!-- button -->
-      <div>
-        <dd-button icon="Close" prefix size="xs" color="white" />
-      </div>
     </div>
     <span class="dd-text-sm dd-font-normal dd-text-red-500 dd-pt-px">{{ customErrorMessage }}</span>
   </div>
+  <DdButton icon="Tick" iconSize="24" size="xs" prefix color="white" />
 </template>
-<!-- <script>
-const getRandomInt = (max = 1000) => {
-  return Math.floor(Math.random() * max);
-}
-</script> -->
+
 <script setup>
 import svgIcon from "../svgIcon/index.vue";
 import DdButton from "../buttons/index.vue";

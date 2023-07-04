@@ -10,6 +10,7 @@
 <script setup>
 import { ref } from "vue";
 import DdTable from "./components/table/index.vue";
+import DdButton from "./components/buttons/index.vue"
 import DdInput from "./components/input/index.vue";
 
 const inpputQuery = ref("");
