@@ -47,10 +47,6 @@ export default {
       type: Boolean,
       default: false,
     },
-    iconSize: {
-      type: String,
-      default: "20",
-    },
     icon: {
       type: String,
       default: null,
@@ -230,7 +226,9 @@ export default {
       if (this.size == 'xs') {
         return '10'
       } else if (this.size == 'sm') {
-        return '12'
+        return '14'
+      } else if (this.size == 'base') {
+        return '16'
       } else {
         return '16'
       }
