@@ -13,16 +13,16 @@
           !dd-left-0
           !dd-flex
           !dd-items-center
-          !dd-pl-5
-          !dd-pr-10
+          !dd-pl-3
+          !dd-pr-3
         ">
         <svgIcon class="dd-text-gray-400" :icon="icon" :size="btnIconSize" />
       </div>
       <input :name="name" :disabled="disabled" :class="[
         inputSize,
         noBorder,
-        suffix ? '!dd-pr-10' : '!dd-pr-2',
-        prefix ? '!dd-pl-[53px]' : '!dd-pl-2',
+        suffix ? '!dd-pr-2' : '!dd-pr-2',
+        prefix ? '!dd-pl-10' : '!dd-pl-2',
         hasError
           ? '!dd-border-red-600 focus:!dd-border-red-600 dd-focus:!dd-ring-red-600'
           : '!dd-border-gray-300 focus:dd-ring-teal-600 focus:!dd-border-teal-600',
@@ -45,7 +45,7 @@
         @keyup="emits('usekeyup')"
         />
       <!-- $slots.suffix -->
-      <div @click="suffixIconClick" v-if="suffix && suffixIcon" class="
+      <div @click="suffixIconClick" v-if="suffix" class="
           dd-cursor-pointer
           !dd-absolute
           !dd-inset-y-0
@@ -56,19 +56,29 @@
           !dd-pr-3
         ">
         <svgIcon class="dd-text-gray-400" :icon="suffixIcon" :size="btnIconSize" />
-        <!-- <slot name="suffix">
-        </slot> -->
       </div>
       <!-- button -->
+      <div v-if="type !== 'password'" class="
+          dd-cursor-pointer
+          !dd-absolute
+          !dd-inset-y-0
+          !dd-right-0
+          !dd-flex
+          !dd-items-center
+          !dd-pl-1
+          !dd-pr-1
+          dd-gap-1
+        ">
+        <slot name="suffix" />
+      </div>
     </div>
     <span class="dd-text-sm dd-font-normal dd-text-red-500 dd-pt-px">{{ customErrorMessage }}</span>
   </div>
-  <DdButton icon="Tick" iconSize="24" size="xs" prefix color="white" />
 </template>
 
 <script setup>
+import { useField } from "vee-validate";
 import svgIcon from "../svgIcon/index.vue";
-import DdButton from "../buttons/index.vue";
 import { ref, computed, watch } from "vue";
 const emits = defineEmits(["update:modelValue", "change", "suffixIconClick", 'focus', 'blur','usekeyup','usekeydown']);
 const props = defineProps({
@@ -93,6 +103,10 @@ const props = defineProps({
     default: false,
   },
   suffix: {
+    type: Boolean,
+    default: false,
+  },
+  InputActions: {
     type: Boolean,
     default: false,
   },
@@ -153,6 +167,18 @@ const noBorder = computed(() => {
     "!dd-border-none focus:!dd-ring-0 !dd-shadow-none": props.Border === "none"
   }
 })
+
+const getRules = () => {
+  if (props.rules instanceof RegExp) {
+    return { regex: props.rules };
+  }
+  return props.rules;
+};
+
+const { errorMessage, value, handleChange } = useField(props.name, getRules(), {
+  label: props.name,
+});
+
 const inputModelValue = computed({
   get() {
     return props.modelValue;
