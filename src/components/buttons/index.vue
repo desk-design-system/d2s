@@ -105,13 +105,13 @@ export default {
         "dd-px-4 dd-h-10 dd-text-sm dd-font-normal dd-rounded-md": this.size === "xl",
         "dd-cursor-not-allowed !dd-bg-gray-200 !dd-text-gray-400 hover:dd-bg-gray-300":
           this.disable,
-        "dd-bg-teal-600 dd-text-white hover:dd-bg-teal-700":
+        "dd-bg-teal-600 dd-text-white hover:dd-bg-teal-500":
           this.color === "primary",
-        "dd-bg-yellow-600 dd-text-white hover:dd-bg-yellow-700":
+        "dd-bg-yellow-600 dd-text-white hover:dd-bg-yellow-500":
           this.color === "warning",
-        "dd-bg-green-600 dd-text-white hover:dd-bg-green-700":
+        "dd-bg-green-600 dd-text-white hover:dd-bg-green-500":
           this.color === "success",
-        "dd-bg-red-600 dd-text-white hover:dd-bg-red-700":
+        "dd-bg-red-600 dd-text-white hover:dd-bg-red-500":
           this.color === "danger",
         "dd-w-full dd-justify-center": this.block,
         "dd-bg-white dd-ring-1 dd-ring-inset dd-ring-gray-300 dd-text-gray-700 hover:dd-bg-gray-50 focus:dd-outline-none":
@@ -132,13 +132,13 @@ export default {
         "dd-px-4 dd-h-10 dd-text-sm dd-font-normal dd-rounded-xl ": this.size === "xl",
         "dd-cursor-not-allowed !dd-bg-gray-200 !dd-text-gray-400 hover:dd-bg-gray-300":
           this.disable,
-        "dd-bg-teal-600 dd-text-white hover:dd-bg-teal-700":
+        "dd-bg-teal-600 dd-text-white hover:dd-bg-teal-500":
           this.color === "primary",
-        "dd-bg-yellow-600 dd-text-white hover:dd-bg-yellow-700":
+        "dd-bg-yellow-600 dd-text-white hover:dd-bg-yellow-500":
           this.color === "warning",
-        "dd-bg-green-600 dd-text-white hover:dd-bg-green-700":
+        "dd-bg-green-600 dd-text-white hover:dd-bg-green-500":
           this.color === "success",
-        "dd-bg-red-600 dd-text-white hover:dd-bg-red-700":
+        "dd-bg-red-600 dd-text-white hover:dd-bg-red-500":
           this.color === "danger",
         "dd-w-full dd-justify-center": this.block,
         "dd-bg-white dd-ring-1 dd-ring-inset dd-ring-gray-300 dd-text-gray-700 hover:dd-bg-gray-50 focus:dd-outline-none":
@@ -157,7 +157,7 @@ export default {
         "dd-px-2.5 dd-bg-white d-h-8 dd-text-sm dd-font-normal dd-rounded-md ": this.size === "base",
         "dd-px-3 dd-bg-white dd-h-9 dd-text-sm dd-font-normal dd-rounded-md ": this.size === "lg",
         "dd-px-4 dd-bg-white dd-h-10 dd-text-sm dd-font-normal dd-rounded-md ": this.size === "xl",
-        "dd-cursor-not-allowed !dd-text-gray-400 hover:dd-bg-gray-300":
+        "dd-cursor-not-allowed !dd-text-gray-200 !dd-border-gray-200 hover:!dd-bg-transparent":
           this.disable,
         "dd-border dd-border-teal-600 dd-text-teal-600 hover:dd-bg-teal-50":
           this.color === "primary",
@@ -186,13 +186,13 @@ export default {
         "dd-px-4 dd-h-10 dd-text-sm dd-font-normal dd-rounded-full ": this.size === "xl",
         "dd-cursor-not-allowed !dd-bg-gray-200 !dd-text-gray-400 hover:dd-bg-gray-300":
           this.disable,
-        "dd-bg-teal-600 dd-text-white hover:dd-bg-teal-700":
+        "dd-bg-teal-600 dd-text-white hover:dd-bg-teal-500":
           this.color === "primary",
-        "dd-bg-yellow-600 dd-text-white hover:dd-bg-yellow-700":
+        "dd-bg-yellow-600 dd-text-white hover:dd-bg-yellow-500":
           this.color === "warning",
-        "dd-bg-green-600 dd-text-white hover:dd-bg-green-700":
+        "dd-bg-green-600 dd-text-white hover:dd-bg-green-500":
           this.color === "success",
-        "dd-bg-red-600 dd-text-white hover:dd-bg-red-700":
+        "dd-bg-red-600 dd-text-white hover:dd-bg-red-500":
           this.color === "danger",
         "dd-w-full dd-justify-center": this.block,
         "dd-bg-white dd-ring-1 dd-ring-inset dd-ring-gray-300 dd-text-gray-700 hover:dd-bg-gray-50 focus:dd-outline-none":
