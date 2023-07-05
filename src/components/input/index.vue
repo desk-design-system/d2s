@@ -23,7 +23,9 @@
         noBorder,
         suffix ? '!dd-pr-2' : '!dd-pr-2',
         prefix ? '!dd-pl-10' : '!dd-pl-2',
-        hintTextComputed,
+        hintTextColor == 'red'  ? '!dd-border !dd-border-solid !dd-border-red-600 dd-text-red-600' : '',
+        hintTextColor == 'teal' ? '!dd-border !dd-border-solid !dd-border-teal-600 dd-text-teal-600': '',
+        hintTextColor == 'gray' ? '!dd-border !dd-border-solid !dd-border-gray-600 dd-text-gray-600' : '',
         Right ? 'dd-text-right !dd-text-xs !dd-text-gray-700 !dd-font-normal' : 'dd-text-left',
         disabled
           ? '!dd-text-gray-500 dd-ring-gray-200 dd-bg-gray-50 dd-cursor-not-allowed dd-select-none'
@@ -184,13 +186,8 @@ const { handleChange } = useField(props.name, getRules(), {
 watch(() => props.hintTextColor,
 (newVal) => {
   props.hintTextColor = newVal
-  console.log(props.hintTextColor, 'hintTextColor');
 },
 { immediate: true });
-
-const hintTextComputed = computed(() => {
-  return `!dd-border !dd-border-solid !dd-border-${props.hintTextColor}-600 !dd-text-${props.hintTextColor}-600`
-})
 
 const inputModelValue = computed({
   get() {
@@ -203,13 +200,6 @@ const inputModelValue = computed({
   },
 });
 
-const hasError = computed(() => {
-  if (props.hintText) {
-    return true;
-  } else {
-    return false;
-  }
-});
 const btnIconSize = computed(() => {
   if (props.size == "xs") {
     return "10";
