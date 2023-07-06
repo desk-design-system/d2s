@@ -1,28 +1,50 @@
 <template>
-  <div class="">
+  <div v-bind="$attrs" class="dd-relative">
     <div v-if="!item.children.length" class="dd-flex dd-items-center dd-gap-2">
-      <div>{{ item.label }}</div>
+      <svgIcon
+        icon="Curved"
+        size="16"
+        class="dd-relative -dd-left-[12px] dd-top-[2px]"
+      />
+      <div class="dd-bg-white dd-text-sm dd-font-normal dd-text-gray-700">
+        {{ item.label }}
+      </div>
     </div>
 
     <Disclosure v-else>
       <template v-slot="{ open }">
-        <div
-          class="show-on-hover dd-min-w-[568px] dd-max-w-[568px]"
-        >
-          <DisclosureButton class="dd-bg-gray-400 dd-flex flex dd-items-center dd-w-full dd-justify-between dd-h-8">
+        <div class="show-on-hover">
+          <DisclosureButton
+            class="dd-bg-white dd-flex dd-items-center dd-w-full dd-justify-between dd-h-8 dd-cursor-pointer"
+          >
             <div class="dd-flex items-center dd-gap-3">
-              <svgIcon
-                :icon="open ? 'SquareMinus' : 'SquarePlus'"
-                size="16"
-                class="dd-cursor-pointer"
-              />
-              <span>{{ item.label }}</span>
-              <actions-button
-                :buttons="buttons"
-                @selected="getClickedButton"
-              />
+              <div>
+                <svgIcon
+                  :icon="open ? 'SquareMinus' : 'SquarePlus'"
+                  size="16"
+                  class="dd-cursor-pointer"
+                />
+                <span
+                  :class="[
+                    item.children.length > 1 && open ? 'straight-line' : '',
+                  ]"
+                ></span>
+              </div>
+              <span class="dd-text-sm dd-font-normal dd-text-gray-700">
+                {{ item.label }}
+              </span>
             </div>
-            <Badge v-if="item.count !== ''" :badge="item.count" />
+            <actions-button
+              :buttons="buttons"
+              class="hide-on-hover"
+              @selected="getClickedButton"
+              @click.stop="open"
+            />
+            <Badge
+              v-if="item.count !== ''"
+              :badge="item.count"
+              class="!dd-sticky !dd-right-0"
+            />
           </DisclosureButton>
         </div>
 
@@ -32,7 +54,7 @@
             :key="child.id"
             :item="child"
             :buttons="buttons"
-            class="flex"
+            class="dd-relative"
           />
         </DisclosurePanel>
       </template>
@@ -72,5 +94,15 @@ const getClickedButton = (data) => {
 
 .show-on-hover:hover .hide-on-hover {
   display: block;
+}
+
+.straight-line::before {
+  content: "";
+  width: 1px;
+  height: 100%;
+  background-color: #e5e7eb;
+  position: absolute;
+  margin-top: 15px;
+  margin-left: -9px;
 }
 </style>
