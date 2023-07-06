@@ -6,13 +6,24 @@
 
     <Disclosure v-else>
       <template v-slot="{ open }">
-        <div class="show-on-hover dd-flex flex dd-items-center dd-gap-6">
-          <DisclosureButton>
-            <svgIcon :icon="open ? 'SquareMinus' : 'SquarePlus'" size="16" class="dd-cursor-pointer" />
+        <div
+          class="show-on-hover dd-min-w-[568px] dd-max-w-[568px]"
+        >
+          <DisclosureButton class="dd-bg-gray-400 dd-flex flex dd-items-center dd-w-full dd-justify-between dd-h-8">
+            <div class="dd-flex items-center dd-gap-3">
+              <svgIcon
+                :icon="open ? 'SquareMinus' : 'SquarePlus'"
+                size="16"
+                class="dd-cursor-pointer"
+              />
+              <span>{{ item.label }}</span>
+              <actions-button
+                :buttons="buttons"
+                @selected="getClickedButton"
+              />
+            </div>
+            <Badge v-if="item.count !== ''" :badge="item.count" />
           </DisclosureButton>
-          <span>{{ item.label }}</span>
-          <actions-button :buttons="buttons" class="hide-on-hover" @selected="getClickedButton" />
-          <Badge v-if="item.count !== ''" :badge="item.count" />
         </div>
 
         <DisclosurePanel class="dd-ml-6">
@@ -51,7 +62,7 @@ const props = defineProps({
 
 const getClickedButton = (data) => {
   console.log(data);
-}
+};
 </script>
 
 <style scoped>
