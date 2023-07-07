@@ -1,22 +1,26 @@
 <template>
   <div v-bind="$attrs" class="dd-relative">
     <div v-if="!item.children.length" class="dd-flex dd-items-center dd-gap-2">
-      <div
-        class="dd-bg-white "
-      >
+      <div class="dd-bg-white">
         <span class="curved_line"></span>
-        <span class=" dd-text-sm dd-font-normal dd-text-gray-700 dd-ml-2">{{ item.label }}</span>
+        <span class="dd-text-sm dd-font-normal dd-text-gray-700 dd-ml-2">{{
+          item.label
+        }}</span>
       </div>
     </div>
 
     <Disclosure v-else>
       <template v-slot="{ open }">
-        <div :class="{'show-on-hover': isHovered}" @click="showActionsItem(item)">
+        <div
+          :class="{ 'show-on-hover': isHovered }"
+          @click="showActionsItem(item)"
+        >
           <DisclosureButton
-            class="dd-bg-white dd-flex dd-items-center dd-w-full dd-justify-between dd-h-8 dd-cursor-pointer"
+            class="test-this-button dd-bg-white dd-flex dd-items-center dd-w-full dd-justify-between dd-h-8 dd-cursor-pointer hover:dd-bg-gray-50 dd-rounded-[4px] dd-px-1.5"
+            :class="[!isHovered ? 'dd-bg-gray-50' : '']"
           >
-            <div class="dd-flex items-center dd-gap-3">
-              <div>
+            <div class="dd-flex dd-items-center dd-gap-2">
+              <div :class="[open ? 'dd-mt-[1px]' : 'dd-mt-0']">
                 <svgIcon
                   :icon="open ? 'SquareMinus' : 'SquarePlus'"
                   size="16"
@@ -28,13 +32,21 @@
                   ]"
                 ></span>
               </div>
-              <span class="dd-text-sm dd-font-normal dd-text-gray-700">
+              <dd-input
+                v-model="inputValue"
+                v-if="editListData"
+                :placeholder="item.label"
+                @click.stop="open = false"
+                size="base"
+                @change="editListValue"
+              />
+              <span v-else class="dd-text-sm dd-font-normal dd-text-gray-700">
                 {{ item.label }}
               </span>
             </div>
             <actions-button
               :buttons="buttons"
-              :class="{'hide-on-hover': isHovered}"
+              :class="{ 'hide-on-hover': isHovered }"
               @selected="getClickedButton"
               @click.stop="open = false"
             />
@@ -43,6 +55,15 @@
               :badge="item.count"
               class="!dd-sticky !dd-right-0"
             />
+          </DisclosureButton>
+          <DisclosureButton v-if="addNewNode" class="dd-h-10 dd-bg-white dd-w-[163.5px] dd-ml-6">
+            <dd-input
+                v-model="newListNode"
+                placeholder="Add new node"
+                @click.stop="open = false" 
+                @keydown.enter.prevent="open = false"
+                size="base"
+              />
           </DisclosureButton>
         </div>
 
@@ -63,8 +84,9 @@
 import svgIcon from "../svgIcon/index.vue";
 import ActionsButton from "./Actions.vue";
 import Badge from "./Badge.vue";
+import DdInput from "../input/index.vue";
 import { Disclosure, DisclosureButton, DisclosurePanel } from "@headlessui/vue";
-import { ref } from "vue";
+import { onBeforeUnmount, onMounted, ref } from "vue";
 const props = defineProps({
   item: {
     type: Object,
@@ -79,14 +101,45 @@ const props = defineProps({
     default: "",
   },
 });
+
 const isHovered = ref(true);
+const editListData = ref(false);
+const inputValue = ref("");
+const newListNode = ref("");
+const addNewNode = ref(false);
+
+onMounted(() => {
+  document.addEventListener("click", handleDomEvent);
+});
+
+onBeforeUnmount(() => {
+  document.addEventListener("click", handleDomEvent);
+});
+
+
 const getClickedButton = (data) => {
-  console.log(data, 'datadata');
+  if (data.id === 2) {
+    editListData.value = !editListData.value;
+  } else if(data.id === 1) {
+    addNewNode.value = !addNewNode.value;
+  }
 };
 
 const showActionsItem = (item) => {
-  isHovered.value = false;
-  console.log(item, 'item');
+  isHovered.value = !isHovered.value;
+  editListData.value = false;
+  console.log(item, "list");
+};
+
+const handleDomEvent = (e) => {
+  if (e.target && editListData.value === true || addNewNode.value === true) {
+    editListData.value = false;
+    addNewNode.value = false;
+  }
+};
+
+const editListValue = (e) => {
+  console.log(inputValue.value);
 }
 </script>
 
@@ -117,6 +170,5 @@ const showActionsItem = (item) => {
   top: -4px;
   border-left: 1px solid #e5e7eb;
   border-radius: 0 0 0 4px;
-
 }
 </style>
