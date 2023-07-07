@@ -80,25 +80,26 @@
                   :selectedId="selectedId" />
               </th>
               <slot name="th" />
-              <slot name="thead" :column="columns" :rows="rows">
-                <th v-for="col in columns" :key="col?.value" :value="col" scope="col" v-show="col?.checked"
-                  class="dd-py-2 dd-text-left dd-text-xs dd-font-medium dd-text-gray-500 !dd-leading-3 dd-h-[41px] table_head_row dd-sticky dd-top-0"
-                  :style="`min-width: ${col?.size}px`" @mouseenter="handleMouseEnter(col)" @mouseleave="handleMouseLeave"
-                  @click="sortRows(col)"
-                  :class="[checkBoxProp ? 'dd-pl-3 dd-pr-3' : 'dd-pl-5', !search ? 'table_border' : '']">
-                  <div :class="[sortIcon ? 'dd-flex dd-gap-1.5 dd-w-fit' : 'dd-w-fit']">
+
+              <th v-for="col in columns" :key="col?.value" :value="col" scope="col" v-show="col?.checked"
+                class="dd-py-2 dd-text-left dd-text-xs dd-font-medium dd-text-gray-500 !dd-leading-3 dd-h-[41px] table_head_row dd-sticky dd-top-0"
+                :style="`min-width: ${col?.size}px`" @mouseenter="handleMouseEnter(col)" @mouseleave="handleMouseLeave"
+                @click="sortRows(col)"
+                :class="[checkBoxProp ? 'dd-pl-3 dd-pr-3' : 'dd-pl-5', !search ? 'table_border' : '']">
+                <div :class="[sortIcon ? 'dd-flex dd-gap-1.5 dd-w-fit' : 'dd-w-fit']">
+                  <slot name="thead" :col="col">
                     <span class="dd-text-xs">{{ col?.title }}</span>
-                    <div v-if="sortIcon">
-                      <svgIcon class="!dd-text-gray-500 dd-relative dd-top-[3px]" icon="Selector" size="10" v-show="isHovered(col) && !limit < 1 && col?.sortDirection === ''
-                        " :disabled="col?.disabled || limit < 1" v-if="limit" />
-                      <svgIcon class="!dd-text-gray-500 dd-relative dd-top-[3px]" icon="SelectorUp" size="10"
-                        v-show="col?.sortDirection === 'desc'" @click="sortRows(col)" v-if="limit" />
-                      <svgIcon class="!dd-text-gray-500 dd-relative dd-top-[3px]" icon="SelectorDown" size="10"
-                        v-show="col?.sortDirection === 'asc'" @click="sortRows(col)" v-if="limit" />
-                    </div>
+                  </slot>
+                  <div v-if="sortIcon">
+                    <svgIcon class="!dd-text-gray-500 dd-relative dd-top-[3px]" icon="Selector" size="10" v-show="isHovered(col) && !limit < 1 && col?.sortDirection === ''
+                      " :disabled="col?.disabled || limit < 1" v-if="limit" />
+                    <svgIcon class="!dd-text-gray-500 dd-relative dd-top-[3px]" icon="SelectorUp" size="10"
+                      v-show="col?.sortDirection === 'desc'" @click="sortRows(col)" v-if="limit" />
+                    <svgIcon class="!dd-text-gray-500 dd-relative dd-top-[3px]" icon="SelectorDown" size="10"
+                      v-show="col?.sortDirection === 'asc'" @click="sortRows(col)" v-if="limit" />
                   </div>
-                </th>
-              </slot>
+                </div>
+              </th>
 
               <th class="table_head_row dd-sticky dd-top-0" :class="[!search ? 'table_border' : '']" v-if="lastCell">
                 <div
@@ -270,7 +271,7 @@ const emits = defineEmits([
   "sort",
   "dropdownValue",
   "headerDropdown",
-  "updateSettings"
+  "updateSettings",
 ]);
 const props = defineProps({
   rowKey: {
@@ -507,7 +508,9 @@ const getCalculatedHeight = computed(() => {
 
 const setActiveButton = computed(() => {
   return (label) => {
-    return selectedButton.value === label ? '!dd-text-gray-700 !dd-font-medium' : '';
+    return selectedButton.value === label
+      ? "!dd-text-gray-700 !dd-font-medium"
+      : "";
   };
 });
 
@@ -647,12 +650,15 @@ const setSetting = (col) => {
 
 const watchState = () => {
   savedData.value = modelColumn.value;
-  console.log(savedData.value, 'savedData.value');
-}
-watch(() => savedData.value,
+  console.log(savedData.value, "savedData.value");
+};
+watch(
+  () => savedData.value,
   (newArr) => {
     savedData.value = newArr;
-  }, { immediate: true })
+  },
+  { immediate: true }
+);
 
 const saveSettings = () => {
   emits("updateSettings", modelColumn.value);
@@ -662,7 +668,7 @@ const saveSettings = () => {
 };
 
 const showIcon = (element) => {
-  element.disabled ? element.hovered = false : element.hovered = true;
+  element.disabled ? (element.hovered = false) : (element.hovered = true);
 };
 
 const hideIcon = (element) => {
@@ -728,7 +734,7 @@ const dropdownValue = (data) => {
 };
 const getHeaderDropdownVal = (data) => {
   emits("headerDropdown", data);
-}
+};
 </script>
 
 <style scoped>
@@ -880,7 +886,7 @@ tr:hover>td:first-child {
 }
 
 .table_border::after {
-  border-bottom: 1px solid #E5E7EB;
+  border-bottom: 1px solid #e5e7eb;
 }
 
 /* scroll bar  */
@@ -907,4 +913,5 @@ tr:hover>td:first-child {
 
 .custom-scrollbar::-webkit-scrollbar-thumb:horizontal {
   width: 3px;
-} */</style>
+} */
+</style>
