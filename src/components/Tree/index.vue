@@ -1,5 +1,5 @@
 <template>
-  <div  class="dd-overflow-scroll">
+  <div  class="dd-overflow-scroll dd-w-full">
     <listItems v-for="item in list" :key="item.id" :item="item" :buttons="buttons"  :showIcon="showIcon" />
   </div>
 </template>

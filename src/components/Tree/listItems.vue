@@ -1,19 +1,17 @@
 <template>
   <div v-bind="$attrs" class="dd-relative">
     <div v-if="!item.children.length" class="dd-flex dd-items-center dd-gap-2">
-      <svgIcon
-        icon="Curved"
-        size="16"
-        class="dd-relative -dd-left-[12px] dd-top-[2px]"
-      />
-      <div class="dd-bg-white dd-text-sm dd-font-normal dd-text-gray-700">
-        {{ item.label }}
+      <div
+        class="dd-bg-white "
+      >
+        <span class="curved_line"></span>
+        <span class=" dd-text-sm dd-font-normal dd-text-gray-700 dd-ml-2">{{ item.label }}</span>
       </div>
     </div>
 
     <Disclosure v-else>
       <template v-slot="{ open }">
-        <div class="show-on-hover">
+        <div :class="{'show-on-hover': isHovered}" @click="showActionsItem(item)">
           <DisclosureButton
             class="dd-bg-white dd-flex dd-items-center dd-w-full dd-justify-between dd-h-8 dd-cursor-pointer"
           >
@@ -36,9 +34,9 @@
             </div>
             <actions-button
               :buttons="buttons"
-              class="hide-on-hover"
+              :class="{'hide-on-hover': isHovered}"
               @selected="getClickedButton"
-              @click.stop="open"
+              @click.stop="open = false"
             />
             <Badge
               v-if="item.count !== ''"
@@ -54,7 +52,6 @@
             :key="child.id"
             :item="child"
             :buttons="buttons"
-            class="dd-relative"
           />
         </DisclosurePanel>
       </template>
@@ -67,6 +64,7 @@ import svgIcon from "../svgIcon/index.vue";
 import ActionsButton from "./Actions.vue";
 import Badge from "./Badge.vue";
 import { Disclosure, DisclosureButton, DisclosurePanel } from "@headlessui/vue";
+import { ref } from "vue";
 const props = defineProps({
   item: {
     type: Object,
@@ -81,10 +79,15 @@ const props = defineProps({
     default: "",
   },
 });
-
+const isHovered = ref(true);
 const getClickedButton = (data) => {
-  console.log(data);
+  console.log(data, 'datadata');
 };
+
+const showActionsItem = (item) => {
+  isHovered.value = false;
+  console.log(item, 'item');
+}
 </script>
 
 <style scoped>
@@ -99,10 +102,21 @@ const getClickedButton = (data) => {
 .straight-line::before {
   content: "";
   width: 1px;
-  height: 100%;
+  height: calc(100% - 49px);
   background-color: #e5e7eb;
   position: absolute;
-  margin-top: 15px;
+  margin-top: 30px;
   margin-left: -9px;
+}
+.curved_line {
+  position: absolute;
+  border-bottom: 1px solid #e5e7eb;
+  height: 18px;
+  left: -11px;
+  width: 16px;
+  top: -4px;
+  border-left: 1px solid #e5e7eb;
+  border-radius: 0 0 0 4px;
+
 }
 </style>
