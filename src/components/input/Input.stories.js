@@ -61,7 +61,17 @@ export default {
           summary: null
         }
       }
-    }
+    },
+    hintTextColor: {
+      control: { type: 'select' },
+      options: ["red", "teal", "gray"],
+      description: "select input color",
+      table: {
+        defaultValue: {
+          summary: ""
+        }
+      }
+    },
   },
 }
 
