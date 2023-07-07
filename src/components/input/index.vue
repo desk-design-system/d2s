@@ -1,74 +1,60 @@
 <template>
   <div class="dd-base" v-bind="$attrs">
-     <slot name="label" >
+    <slot name="label">
       <label v-if="label" class="dd-block dd-text-sm dd-font-medium dd-text-gray-700 dd-mb-1">{{ label }} <span
           v-if="isRequired" class="dd-text-red-500">*</span>
       </label>
     </slot>
     <div class="dd-relative dd-rounded-md">
-      <div v-if="prefix" class="
-          !dd-pointer-events-none
-          !dd-absolute
-          !dd-inset-y-0
-          !dd-left-0
-          !dd-flex
-          !dd-items-center
-          !dd-pl-3
-          !dd-pr-3
-        ">
-        <svgIcon :class="`!dd-text-${hintTextColor}-600`" :icon="icon" :size="btnIconSize" />
+      <div v-if="prefix"
+        class="!dd-pointer-events-none !dd-absolute !dd-inset-y-0 !dd-left-0 !dd-flex !dd-items-center !dd-pl-3 !dd-pr-3">
+        <svgIcon :class="[
+          hintTextColor == 'red'
+            ? 'dd-text-red-600'
+            : '',
+          hintTextColor == 'teal'
+            ? 'dd-text-teal-600'
+            : '',
+          hintTextColor == 'gray'
+            ? 'dd-text-gray-600'
+            : '',
+          Right
+            ? 'dd-text-right !dd-text-xs !dd-text-gray-700 !dd-font-normal'
+            : 'dd-text-left',
+        ]" :icon="icon" :size="btnIconSize" />
       </div>
       <input :name="name" :disabled="disabled" :class="[
         inputSize,
         noBorder,
         suffix ? '!dd-pr-2' : '!dd-pr-2',
         prefix ? '!dd-pl-10' : '!dd-pl-2',
-        hintTextColor == 'red'  ? '!dd-border !dd-border-solid !dd-border-red-600 dd-text-red-600' : '',
-        hintTextColor == 'teal' ? '!dd-border !dd-border-solid !dd-border-teal-600 dd-text-teal-600': '',
-        hintTextColor == 'gray' ? '!dd-border !dd-border-solid !dd-border-gray-600 dd-text-gray-600' : '',
-        Right ? 'dd-text-right !dd-text-xs !dd-text-gray-700 !dd-font-normal' : 'dd-text-left',
+        hintTextColor == 'red'
+          ? '!dd-border !dd-border-solid !dd-border-red-600 dd-text-red-600'
+          : '',
+        hintTextColor == 'teal'
+          ? '!dd-border !dd-border-solid !dd-border-teal-600 dd-text-teal-600'
+          : '',
+        hintTextColor == 'gray'
+          ? '!dd-border !dd-border-solid !dd-border-gray-600 dd-text-gray-600'
+          : '',
+        Right
+          ? 'dd-text-right !dd-text-xs !dd-text-gray-700 !dd-font-normal'
+          : 'dd-text-left',
         disabled
           ? '!dd-text-gray-500 dd-ring-gray-200 dd-bg-gray-50 dd-cursor-not-allowed dd-select-none'
-          : ''
-      ]"
-      v-model="inputModelValue" :type="inputType" class="
-          !dd-block !dd-w-full !dd-rounded-md
-          sm:!dd-text-sm
-          focus:ring-2
-          focus:dd-ring-inset
-          dd-shadow-sm
-        " 
-        :placeholder="placeholder"
-        @focus="emits('focus')"
-        @blur="emits('blur')"
-        @keydown="emits('usekeydown')"
-        @keyup="emits('usekeyup')"
-        />
+          : '',
+      ]" v-model="inputModelValue" :type="inputType"
+        class="!dd-block !dd-w-full !dd-rounded-md sm:!dd-text-sm focus:ring-2 focus:dd-ring-inset dd-shadow-sm"
+        :placeholder="placeholder" @focus="emits('focus')" @blur="emits('blur')" @keydown="emits('usekeydown')"
+        @keyup="emits('usekeyup')" />
       <!-- $slots.suffix -->
-      <div @click="suffixIconClick" v-if="suffix" class="
-          dd-cursor-pointer
-          !dd-absolute
-          !dd-inset-y-0
-          !dd-right-0
-          !dd-flex
-          !dd-items-center
-          !dd-pl-3
-          !dd-pr-3
-        ">
+      <div @click="suffixIconClick" v-if="suffix"
+        class="dd-cursor-pointer !dd-absolute !dd-inset-y-0 !dd-right-0 !dd-flex !dd-items-center !dd-pl-3 !dd-pr-3">
         <svgIcon :class="`!dd-text-${hintTextColor}-600`" :icon="suffixIcon" :size="btnIconSize" />
       </div>
       <!-- button -->
-      <div v-if="type !== 'password' && !Right" class="
-          dd-cursor-pointer
-          !dd-absolute
-          !dd-inset-y-0
-          !dd-right-0
-          !dd-flex
-          !dd-items-center
-          !dd-pl-1
-          !dd-pr-1
-          dd-gap-1
-        ">
+      <div v-if="type !== 'password' && !Right"
+        class="dd-cursor-pointer !dd-absolute !dd-inset-y-0 !dd-right-0 !dd-flex !dd-items-center !dd-pl-1 !dd-pr-1 dd-gap-1">
         <slot name="suffix" />
       </div>
     </div>
@@ -80,7 +66,15 @@
 import { useField } from "vee-validate";
 import svgIcon from "../svgIcon/index.vue";
 import { ref, computed, watch } from "vue";
-const emits = defineEmits(["update:modelValue", "change", "suffixIconClick", 'focus', 'blur','usekeyup','usekeydown']);
+const emits = defineEmits([
+  "update:modelValue",
+  "change",
+  "suffixIconClick",
+  "focus",
+  "blur",
+  "usekeyup",
+  "usekeydown",
+]);
 const props = defineProps({
   label: {
     type: String,
@@ -168,9 +162,9 @@ const inputSize = computed(() => {
 });
 const noBorder = computed(() => {
   return {
-    "!dd-border-none focus:!dd-ring-0 !dd-shadow-none": props.Border === "none"
-  }
-})
+    "!dd-border-none focus:!dd-ring-0 !dd-shadow-none": props.Border === "none",
+  };
+});
 
 const getRules = () => {
   if (props.rules instanceof RegExp) {
@@ -182,12 +176,6 @@ const getRules = () => {
 const { handleChange } = useField(props.name, getRules(), {
   label: props.name,
 });
-
-watch(() => props.hintTextColor,
-(newVal) => {
-  props.hintTextColor = newVal
-},
-{ immediate: true });
 
 const inputModelValue = computed({
   get() {
