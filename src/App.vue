@@ -1,45 +1,14 @@
 <template>
-  <div class="dd-p-4">
-    <!-- <dd-table :rows="rows" :columns="columnVal" :buttons="buttons" :Actions="Actions" :values="values" footer checkBoxProp
+  <div>
+    <dd-table :rows="rows" :columns="columnVal" :buttons="buttons" :Actions="Actions" :values="values" footer checkBoxProp
       fixedHeight rowKey="id" hoveringRow lastCell fixed actionHeader emptyState actionsPanel sortIcon settingbarIcon
-      searchIcon @updateSettings="updateSettings" dragDrop /> -->
-    <dd-input label="input" v-model="inputQuery" hintText="error" hintTextColor="gray" prefix icon="Alert">
-      <template #suffix>
-        <dd-button
-          icon="Tick"
-          prefix
-          color="white"
-          size="base"
-          class="!dd-px-1 !dd-h-6"
-          @click="editInput"
-        />
-        <dd-button
-          icon="Close"
-          prefix
-          color="white"
-          size="base"
-          class="!dd-px-1 !dd-h-6"
-          @click="resetInput"
-        />
-      </template>
-    </dd-input>
+      searchIcon @updateSettings="updateSettings" dragDrop />
   </div>
 </template>
 
 <script setup>
 import { ref } from "vue";
 import DdTable from "./components/table/index.vue";
-import DdButton from "./components/buttons/index.vue";
-import DdInput from "./components/input/index.vue";
-
-const inputQuery = ref("");
-
-const editInput = () => {
-  inputQuery.value = inputQuery.value.toUpperCase();
-}
-const resetInput = () => {
-  inputQuery.value = "";
-}
 
 let columns = ref([
   {
@@ -50,7 +19,7 @@ let columns = ref([
     id: 1,
     disabled: true,
     sortDirection: "asc",
-    hovered: false,
+    hovered: false
   },
   {
     title: "User Name",
@@ -60,7 +29,7 @@ let columns = ref([
     id: 2,
     disabled: false,
     sortDirection: "",
-    hovered: false,
+    hovered: false
   },
   {
     title: "First Name",
@@ -70,7 +39,7 @@ let columns = ref([
     id: 3,
     disabled: false,
     sortDirection: "",
-    hovered: false,
+    hovered: false
   },
   {
     title: "Last Name",
@@ -80,7 +49,7 @@ let columns = ref([
     id: 4,
     disabled: false,
     sortDirection: "",
-    hovered: false,
+    hovered: false
   },
   {
     title: "Email",
@@ -90,7 +59,7 @@ let columns = ref([
     id: 5,
     disabled: false,
     sortDirection: "",
-    hovered: false,
+    hovered: false
   },
   {
     title: "Task",
@@ -100,7 +69,7 @@ let columns = ref([
     id: 6,
     disabled: false,
     sortDirection: "",
-    hovered: false,
+    hovered: false
   },
   {
     title: "Device",
@@ -110,7 +79,7 @@ let columns = ref([
     id: 7,
     disabled: false,
     sortDirection: "",
-    hovered: false,
+    hovered: false
   },
   {
     title: "Model",
@@ -120,7 +89,7 @@ let columns = ref([
     id: 8,
     disabled: false,
     sortDirection: "",
-    hovered: false,
+    hovered: false
   },
   {
     title: "Phone",
@@ -130,7 +99,7 @@ let columns = ref([
     id: 9,
     disabled: false,
     sortDirection: "",
-    hovered: false,
+    hovered: false
   },
   {
     title: "Address",
@@ -140,7 +109,7 @@ let columns = ref([
     id: 10,
     disabled: false,
     sortDirection: "",
-    hovered: false,
+    hovered: false
   },
   {
     title: "Status",
@@ -150,7 +119,7 @@ let columns = ref([
     id: 11,
     disabled: false,
     sortDirection: "",
-    hovered: false,
+    hovered: false
   },
 ]);
 const rows = ref([
@@ -660,6 +629,7 @@ const values = ref([
   },
 ]);
 
+
 let columnVal = ref(columns.value);
 const updateSettings = (data) => {
   const reorderedColumns = [];
@@ -671,6 +641,7 @@ const updateSettings = (data) => {
   });
   columnVal.value = reorderedColumns;
 };
+
 </script>
 
 
