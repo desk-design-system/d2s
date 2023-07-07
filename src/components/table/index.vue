@@ -10,7 +10,8 @@
         <div v-if="actionHeader"
           class="dd-flex dd-items-center dd-justify-between !dd-w-full group_wrapper !dd-bg-white !dd-z-[1000]"
           :class="[selectedId?.length > 0 ? 'dd-h-[40px]' : '']">
-          <div v-if="selectedId?.length > 0" class="dd-flex dd-items-center dd-gap-2 dd-py-2 dd-pl-3 dd-pr-3 dd-text-left">
+          <div v-if="selectedId?.length > 0"
+            class="dd-flex dd-items-center dd-gap-2 dd-py-2 dd-pl-3 dd-pr-3 dd-text-left">
             <DdGroupButton :buttons="buttons">
               <dd-Button color="white" v-if="checkBoxProp" size="sm">
                 <div class="dd-flex dd-items-center">
@@ -73,31 +74,33 @@
             <tr class="dd-bg-white">
               <th
                 class="dd-py-2 !dd-pl-5 dd-text-left checkbox_wrapper !dd-leading-3 dd-h-[40px] table_head_row dd-sticky dd-top-0"
-                :class="[!search ? 'table_border': '']"
-                v-if="checkBoxProp">
+                :class="[!search ? 'table_border' : '']" v-if="checkBoxProp">
                 <dd-checkbox v-model="allSelected" @click="selectAllFields" :disabled="checkAllDisabled || limit < 1"
                   :rows="rows" @indeterminate="indeterminate" :allCheckboxesChecked="allCheckboxesChecked"
                   :selectedId="selectedId" />
               </th>
               <slot name="th" />
-              <th v-for="col in columns" :key="col?.value" :value="col" scope="col" v-show="col?.checked"
-                class="dd-py-2 dd-text-left dd-text-xs dd-font-medium dd-text-gray-500 !dd-leading-3 dd-h-[41px] table_head_row dd-sticky dd-top-0"
-                :style="`min-width: ${col?.size}px`" @mouseenter="handleMouseEnter(col)" @mouseleave="handleMouseLeave"
-                @click="sortRows(col)" :class="[checkBoxProp ? 'dd-pl-3 dd-pr-3' : 'dd-pl-5', !search ? 'table_border': '']">
-                <div :class="[sortIcon ? 'dd-flex dd-gap-1.5 dd-w-fit' : 'dd-w-fit']">
-                  <span class="dd-text-xs">{{ col?.title }}</span>
-                  <div v-if="sortIcon">
-                    <svgIcon class="!dd-text-gray-500 dd-relative dd-top-[3px]" icon="Selector" size="10" v-show="isHovered(col) && !limit < 1 && col?.sortDirection === ''
-                      " :disabled="col?.disabled || limit < 1" v-if="limit" />
-                    <svgIcon class="!dd-text-gray-500 dd-relative dd-top-[3px]" icon="SelectorUp" size="10"
-                      v-show="col?.sortDirection === 'desc'" @click="sortRows(col)" v-if="limit" />
-                    <svgIcon class="!dd-text-gray-500 dd-relative dd-top-[3px]" icon="SelectorDown" size="10"
-                      v-show="col?.sortDirection === 'asc'" @click="sortRows(col)" v-if="limit" />
+              <slot name="thead" :column="columns" :rows="rows">
+                <th v-for="col in columns" :key="col?.value" :value="col" scope="col" v-show="col?.checked"
+                  class="dd-py-2 dd-text-left dd-text-xs dd-font-medium dd-text-gray-500 !dd-leading-3 dd-h-[41px] table_head_row dd-sticky dd-top-0"
+                  :style="`min-width: ${col?.size}px`" @mouseenter="handleMouseEnter(col)" @mouseleave="handleMouseLeave"
+                  @click="sortRows(col)"
+                  :class="[checkBoxProp ? 'dd-pl-3 dd-pr-3' : 'dd-pl-5', !search ? 'table_border' : '']">
+                  <div :class="[sortIcon ? 'dd-flex dd-gap-1.5 dd-w-fit' : 'dd-w-fit']">
+                    <span class="dd-text-xs">{{ col?.title }}</span>
+                    <div v-if="sortIcon">
+                      <svgIcon class="!dd-text-gray-500 dd-relative dd-top-[3px]" icon="Selector" size="10" v-show="isHovered(col) && !limit < 1 && col?.sortDirection === ''
+                        " :disabled="col?.disabled || limit < 1" v-if="limit" />
+                      <svgIcon class="!dd-text-gray-500 dd-relative dd-top-[3px]" icon="SelectorUp" size="10"
+                        v-show="col?.sortDirection === 'desc'" @click="sortRows(col)" v-if="limit" />
+                      <svgIcon class="!dd-text-gray-500 dd-relative dd-top-[3px]" icon="SelectorDown" size="10"
+                        v-show="col?.sortDirection === 'asc'" @click="sortRows(col)" v-if="limit" />
+                    </div>
                   </div>
-                </div>
-              </th>
+                </th>
+              </slot>
 
-              <th class="table_head_row dd-sticky dd-top-0" :class="[!search ? 'table_border': '']" v-if="lastCell">
+              <th class="table_head_row dd-sticky dd-top-0" :class="[!search ? 'table_border' : '']" v-if="lastCell">
                 <div
                   class="dd-flex dd-items-center dd-justify-end dd-gap-4 dd-relative dd-right-5 !dd-z-[999] dd-bg-white dd-pl-2.5">
                   <svgIcon v-if="searchIcon" class="!dd-text-gray-500" icon="Search" size="20" @click="openSearch" />
@@ -146,7 +149,8 @@
               <slot name="headerActions" />
             </tr>
           </thead>
-          <tbody class="dd-bg-white" v-if="rows.length > 0" :class="[search ? '[&>*:first-child]:dd-border-t [&>*:first-child]:dd-border-gray-200 [&>*:first-child]:!dd-border-b-0 [&>*:nth-child(2)]:dd-border-t' : '']">
+          <tbody class="dd-bg-white" v-if="rows.length > 0"
+            :class="[search ? '[&>*:first-child]:dd-border-t [&>*:first-child]:dd-border-gray-200 [&>*:first-child]:!dd-border-b-0 [&>*:nth-child(2)]:dd-border-t' : '']">
             <template v-if="!defaultRow">
               <tr v-for="(row, index) in rows" :key="index"
                 class="[&>*:nth-child(1)]:!dd-font-normal [&>*:nth-child(2)]:!dd-font-medium dd-relative dd-border-b dd-border-gray-100"
@@ -218,7 +222,8 @@
             :disabled="button?.disabled"
             class="dd-text-sm [&>span]:!dd-text-gray-500 [&>span]:!dd-font-normal !dd-w-[41px] !dd-p-0 dd-flex dd-items-center dd-justify-center"
             :class="setActiveButton(button?.label)" :loader="button?.loader" :title="button?.label" :type="button?.type"
-            :block="button?.block" :icon="button?.icon" :iconSize="button?.iconSize" @click="selectNumberOfRows(button)" />
+            :block="button?.block" :icon="button?.icon" :iconSize="button?.iconSize"
+            @click="selectNumberOfRows(button)" />
         </DdGroupButton>
 
         <dd-Button color="white" size="sm" v-model="selectedButton" :disable="disabledLoadmore" :loader="loadmoreLoader"
@@ -645,9 +650,9 @@ const watchState = () => {
   console.log(savedData.value, 'savedData.value');
 }
 watch(() => savedData.value,
-(newArr) => {
-  savedData.value = newArr;
-}, {immediate: true})
+  (newArr) => {
+    savedData.value = newArr;
+  }, { immediate: true })
 
 const saveSettings = () => {
   emits("updateSettings", modelColumn.value);
@@ -877,6 +882,7 @@ tr:hover>td:first-child {
 .table_border::after {
   border-bottom: 1px solid #E5E7EB;
 }
+
 /* scroll bar  */
 
 /* .custom-scrollbar {
@@ -901,5 +907,4 @@ tr:hover>td:first-child {
 
 .custom-scrollbar::-webkit-scrollbar-thumb:horizontal {
   width: 3px;
-} */
-</style>
+} */</style>
