@@ -248,7 +248,7 @@ import {
   watch,
   watchEffect,
 } from "vue";
-import draggable from "vuedraggable";
+import draggable from 'vuedraggable/src/vuedraggable'
 import hoverRow from "./hoverRow.vue";
 import DdButton from "../buttons/index.vue";
 import svgIcon from "../svgIcon/index.vue";

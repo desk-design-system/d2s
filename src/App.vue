@@ -653,5 +653,6 @@ body {
   padding: 0;
   margin: 0;
   overflow-x: hidden !important;
+  background: #f3f4f6 !important;
 }
 </style>
