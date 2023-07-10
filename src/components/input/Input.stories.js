@@ -1,5 +1,6 @@
 import DdInput from "./index.vue"
 import { action } from "@storybook/addon-actions"
+import DdButton from "../buttons/index.vue";
 import { ref } from 'vue'
 // More on default export: https://storybook.js.org/docs/vue/writing-stories/introduction#default-export
 export default {
@@ -60,23 +61,58 @@ export default {
           summary: null
         }
       }
-    }
+    },
+    hintTextColor: {
+      control: { type: 'select' },
+      options: ["red", "teal", "gray"],
+      description: "select input color",
+      table: {
+        defaultValue: {
+          summary: ""
+        }
+      }
+    },
   },
 }
 
 // More on component templates: https://storybook.js.org/docs/vue/writing-stories/introduction#using-args
 const Template = ( args ) => ( {
   // Components used in your story `template` are defined in the `components` object
-  components: { DdInput },
+  components: { DdInput, DdButton },
   // The story's `args` need to be mapped into the template through the `setup()` method
   setup () {
     const onClickMethod = ( () => action( "clicked" ) )
     const selected = ref( '' )
-    return { selected, args, onClickMethod }
+    const editInput = () => {
+      selected.value = selected.value.toUpperCase();
+    }
+    const resetInput = () => {
+      selected.value = "";
+    }
 
+    return { selected, args, editInput, resetInput, onClickMethod }
   },
   // And then the `args` are bound to your component with `v-bind="args"`
-  template: '<dd-input  v-bind="args" v-model="selected" />',
+  template: `<dd-input  v-bind="args" v-model="selected">
+  <template #suffix>
+    <dd-button
+      icon="Tick"
+      prefix
+      color="white"
+      size="base"
+      class="!dd-px-1 !dd-h-6"
+      @click="editInput"
+    />
+    <dd-button
+      icon="Close"
+      prefix
+      color="white"
+      size="base"
+      class="!dd-px-1 !dd-h-6"
+      @click="resetInput"
+    />
+  </template>
+</dd-input>`,
 } )
 
 

@@ -1,84 +1,86 @@
 <template>
   <div class="dd-base" v-bind="$attrs">
-     <slot name="label" >
+    <slot name="label">
       <label v-if="label" class="dd-block dd-text-sm dd-font-medium dd-text-gray-700 dd-mb-1">{{ label }} <span
           v-if="isRequired" class="dd-text-red-500">*</span>
       </label>
     </slot>
     <div class="dd-relative dd-rounded-md">
-      <div v-if="prefix" class="
-          !dd-pointer-events-none
-          !dd-absolute
-          !dd-inset-y-0
-          !dd-left-0
-          !dd-flex
-          !dd-items-center
-          !dd-pl-5
-          !dd-pr-10
-        ">
-        <svgIcon class="dd-text-gray-400" :icon="icon" :size="btnIconSize" />
+      <div v-if="prefix"
+        class="!dd-pointer-events-none !dd-absolute !dd-inset-y-0 !dd-left-0 !dd-flex !dd-items-center !dd-pl-3 !dd-pr-3">
+        <svgIcon :class="[
+          hintTextColor == 'red'
+            ? 'dd-text-red-600'
+            : '',
+          hintTextColor == 'teal'
+            ? 'dd-text-teal-600'
+            : '',
+          hintTextColor == 'gray'
+            ? 'dd-text-gray-600'
+            : '',
+          Right
+            ? 'dd-text-right !dd-text-xs !dd-text-gray-700 !dd-font-normal'
+            : 'dd-text-left',
+        ]" :icon="icon" :size="btnIconSize" />
       </div>
       <input :name="name" :disabled="disabled" :class="[
         inputSize,
         noBorder,
-        suffix ? '!dd-pr-10' : '!dd-pr-2',
-        prefix ? '!dd-pl-[53px]' : '!dd-pl-2',
-        hasError
-          ? '!dd-border-red-600 focus:!dd-border-red-600 dd-focus:!dd-ring-red-600'
-          : '!dd-border-gray-300 focus:dd-ring-teal-600 focus:!dd-border-teal-600',
-        Right ? 'dd-text-right !dd-text-xs !dd-text-gray-700 !dd-font-normal' : 'dd-text-left',
-        errorMessage ? 'dd-mb-1' : '',
+        suffix ? '!dd-pr-2' : '!dd-pr-2',
+        prefix ? '!dd-pl-10' : '!dd-pl-2',
+        hintTextColor == 'red'
+          ? '!dd-border !dd-border-solid !dd-border-red-600 !dd-text-red-600'
+          : '',
+        hintTextColor == 'teal'
+          ? '!dd-border !dd-border-solid !dd-border-teal-600 !dd-text-teal-600'
+          : '',
+        hintTextColor == 'gray'
+          ? '!dd-border !dd-border-solid !dd-border-gray-600 !dd-text-gray-600'
+          : '',
+        Right
+          ? 'dd-text-right !dd-text-xs !dd-text-gray-700 !dd-font-normal'
+          : 'dd-text-left',
         disabled
           ? '!dd-text-gray-500 dd-ring-gray-200 dd-bg-gray-50 dd-cursor-not-allowed dd-select-none'
-          : ' dd-text-gray-700',
-      ]" v-model="inputModelValue" :type="inputType" class="
-          dd-border-solid
-          !dd-block !dd-w-full !dd-rounded-md
-          sm:!dd-text-sm
-          focus:ring-2
-          focus:dd-ring-inset
-          dd-shadow-sm
-        " :placeholder="placeholder"
-        @focus="emits('focus')"
-        @blur="emits('blur')"
-        @keydown="emits('usekeydown')"
-        @keyup="emits('usekeyup')"
-        />
+          : '',
+      ]" v-model="inputModelValue" :type="inputType"
+        class="!dd-block !dd-w-full !dd-rounded-md sm:!dd-text-sm focus:ring-2 focus:dd-ring-inset dd-shadow-sm"
+        :placeholder="placeholder" @focus="emits('focus')" @blur="emits('blur')" @keydown="emits('usekeydown')"
+        @keyup="emits('usekeyup')" />
       <!-- $slots.suffix -->
-      <div @click="suffixIconClick" v-if="suffix && suffixIcon" class="
-          dd-cursor-pointer
-          !dd-absolute
-          !dd-inset-y-0
-          !dd-right-0
-          !dd-flex
-          !dd-items-center
-          !dd-pl-3
-          !dd-pr-3
-        ">
-        <svgIcon class="dd-text-gray-400" :icon="suffixIcon" :size="btnIconSize" />
-        <!-- <slot name="suffix">
-        </slot> -->
+      <div @click="suffixIconClick" v-if="suffix"
+        class="dd-cursor-pointer !dd-absolute !dd-inset-y-0 !dd-right-0 !dd-flex !dd-items-center !dd-pl-3 !dd-pr-3">
+        <svgIcon :class="`!dd-text-${hintTextColor}-600`" :icon="suffixIcon" :size="btnIconSize" />
+      </div>
+      <!-- button -->
+      <div v-if="type !== 'password' && !Right"
+        class="dd-cursor-pointer !dd-absolute !dd-inset-y-0 !dd-right-0 !dd-flex !dd-items-center !dd-pl-1 !dd-pr-1 dd-gap-1">
+        <slot name="suffix" />
       </div>
     </div>
-    <span v-if="errorMessage" class="dd-text-xs dd-text-red-500 dd-capitalize dd-pt-px">{{ errorMessage }}</span>
+    <span class="dd-text-sm dd-font-normal dd-pt-px" :class="`dd-text-${hintTextColor}-600`">{{ hintText }}</span>
   </div>
 </template>
-<!-- <script>
-const getRandomInt = (max = 1000) => {
-  return Math.floor(Math.random() * max);
-}
-</script> -->
+
 <script setup>
 import { useField } from "vee-validate";
 import svgIcon from "../svgIcon/index.vue";
 import { ref, computed, watch } from "vue";
-const emits = defineEmits(["update:modelValue", "change", "suffixIconClick", 'focus', 'blur','usekeyup','usekeydown']);
+const emits = defineEmits([
+  "update:modelValue",
+  "change",
+  "suffixIconClick",
+  "focus",
+  "blur",
+  "usekeyup",
+  "usekeydown",
+]);
 const props = defineProps({
   label: {
     type: String,
     default: "",
   },
-  customErrorMessage: {
+  hintText: {
     type: String,
     default: "",
   },
@@ -98,11 +100,19 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  InputActions: {
+    type: Boolean,
+    default: false,
+  },
   disabled: {
     type: Boolean,
     default: false,
   },
   icon: {
+    type: String,
+    default: null,
+  },
+  hintTextColor: {
     type: String,
     default: null,
   },
@@ -140,24 +150,6 @@ const props = defineProps({
   },
 });
 
-const getRules = () => {
-  if (props.rules instanceof RegExp) {
-    return { regex: props.rules };
-  }
-  return props.rules;
-};
-
-const { errorMessage, value, handleChange } = useField(props.name, getRules(), {
-  label: props.name,
-});
-
-watch(
-  () => value,
-  (newValue) => {
-    inputModelValue.value = newValue;
-  }
-);
-
 const inputType = ref("text");
 const inputSize = computed(() => {
   return {
@@ -170,9 +162,21 @@ const inputSize = computed(() => {
 });
 const noBorder = computed(() => {
   return {
-    "!dd-border-none focus:!dd-ring-0 !dd-shadow-none": props.Border === "none"
+    "!dd-border-none focus:!dd-ring-0 !dd-shadow-none": props.Border === "none",
+  };
+});
+
+const getRules = () => {
+  if (props.rules instanceof RegExp) {
+    return { regex: props.rules };
   }
-})
+  return props.rules;
+};
+
+const { handleChange } = useField(props.name, getRules(), {
+  label: props.name,
+});
+
 const inputModelValue = computed({
   get() {
     return props.modelValue;
@@ -184,13 +188,6 @@ const inputModelValue = computed({
   },
 });
 
-const hasError = computed(() => {
-  if (errorMessage.value || props.customErrorMessage) {
-    return true;
-  } else {
-    return false;
-  }
-});
 const btnIconSize = computed(() => {
   if (props.size == "xs") {
     return "10";

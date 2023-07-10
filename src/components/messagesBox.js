@@ -5,7 +5,7 @@ import AllRules from "@vee-validate/rules";
 import { defineRule, configure } from "vee-validate";
 import { localize } from "@vee-validate/i18n";
 
-const install = (app, options) => {
+const install = (app) => {
   app.provide("$modal", useMessageBox());
   app.config.globalProperties.$modal = useMessageBox();
   Object.keys(DDSystem).forEach((name) => {
