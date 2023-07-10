@@ -11,10 +11,7 @@
 
     <Disclosure v-else>
       <template v-slot="{ open }">
-        <div
-          :class="{ 'show-on-hover': !isSelected }"
-          @click="toggleActive"
-        >
+        <div :class="{ 'show-on-hover': !isSelected }" @click="toggleActive">
           <DisclosureButton
             class="dd-bg-white dd-flex dd-items-center dd-w-full dd-justify-between dd-h-8 dd-cursor-pointer hover:dd-bg-gray-50 dd-rounded-[4px] dd-px-1.5 dd-z-0"
             :class="[isSelected ? 'dd-bg-gray-50' : '']"
@@ -39,10 +36,10 @@
             <div :class="{ 'hide-on-hover': !isSelected }" class="dd-w-fit">
               <slot name="actions" :selectedItem="selectedItem" :item="item">
                 <actions-button
-                :buttons="buttons"
-                @selected="getClickedButton"
-                @click.stop="open = false"
-              />
+                  :buttons="buttons"
+                  @selected="getClickedButton($event, item.id)"
+                  @click.stop="open = false"
+                />
               </slot>
             </div>
             <slot name="badge">
@@ -51,24 +48,14 @@
           </DisclosureButton>
           <div class="dd-absolute dd-top-[1px] dd-left-[30px] dd-z-10">
             <dd-input
-                v-model="inputValue"
-                v-if="editListData"
-                :placeholder="item.label"
-                @click.stop="open = false" 
-                size="sm"
-                @change="editListValue"
-              />
+              v-model="inputValue"
+              v-if="editListData && item.id == activeListId"
+              :placeholder="item.label"
+              @click.stop="open = false"
+              size="sm"
+              @change="editListValue"
+            />
           </div>
-          <DisclosureButton v-if="addNewNode" class="dd-bg-white dd-flex dd-items-center dd-w-full dd-justify-between dd-h-8 dd-cursor-pointer hover:dd-bg-gray-50 dd-rounded-[4px] dd-ml-6">
-            <dd-input
-                v-model="newListNode"
-                placeholder="Add new node"
-                @click.stop="open = false" 
-                @keydown.enter.prevent="open = false"
-                size="sm"
-              />
-              <span class="curved_line_two"></span>
-          </DisclosureButton>
         </div>
 
         <DisclosurePanel class="dd-ml-6">
@@ -78,8 +65,23 @@
             :item="child"
             :buttons="buttons"
             :selectedItem="selectedItem"
+            :activeListId="activeListId"
             @set-selected="emits('setSelected', $event)"
+            @setTempId="emits('setTempId', $event)"
           />
+          <DisclosureButton
+            v-if="addNewNode"
+            class="dd-bg-white dd-flex dd-items-center dd-w-full dd-justify-between dd-h-8 dd-cursor-pointer hover:dd-bg-gray-50 dd-rounded-[4px]"
+          >
+            <dd-input
+              v-model="newListNode"
+              placeholder="Add new node"
+              @click.stop="open = false"
+              @keydown.enter.prevent="open = false"
+              size="sm"
+            />
+            <span class="curved_line_two"></span>
+          </DisclosureButton>
         </DisclosurePanel>
       </template>
     </Disclosure>
@@ -90,9 +92,9 @@
 import svgIcon from "../svgIcon/index.vue";
 import ActionsButton from "./Actions.vue";
 import DdInput from "../input/index.vue";
-import DdBage from "../badges/index.vue"
+import DdBage from "../badges/index.vue";
 import { Disclosure, DisclosureButton, DisclosurePanel } from "@headlessui/vue";
-import { onBeforeUnmount, onMounted, ref, computed } from "vue";
+import { onBeforeUnmount, onMounted, ref, computed, watchEffect } from "vue";
 const props = defineProps({
   item: {
     type: Object,
@@ -108,17 +110,20 @@ const props = defineProps({
   },
   selectedItem: {
     type: Object,
-    default: () => ({})
-  }
+    default: () => ({}),
+  },
+  activeListId: {
+    type: Number,
+    default: 0,
+  },
 });
 
-const emits = defineEmits(["setSelected"])
+const emits = defineEmits(["setSelected", "setTempId"]);
 
-const editListData = ref(false);
 const inputValue = ref("");
 const newListNode = ref("");
 const addNewNode = ref(false);
-const activeListId = ref(0);
+const editListData = ref(false);
 
 onMounted(() => {
   document.addEventListener("click", handleDomEvent);
@@ -128,29 +133,28 @@ onBeforeUnmount(() => {
   document.addEventListener("click", handleDomEvent);
 });
 
-
 const isSelected = computed(() => {
-  return props.selectedItem?.id == props.item.id
+  return props.selectedItem?.id == props.item.id;
 });
-
 const toggleActive = () => {
   if (isSelected.value) {
-     emits("setSelected", {})
+    emits("setSelected", {});
   } else {
-    emits("setSelected", props.item)
+    emits("setSelected", props.item);
   }
-}
+};
 
-const getClickedButton = (data) => {
+const getClickedButton = (data, id) => {
   if (data.id === 2) {
     editListData.value = !editListData.value;
-  } else if(data.id === 1) {
+    emits("setTempId", id);
+  } else if (data.id === 1) {
     addNewNode.value = !addNewNode.value;
   }
 };
 
 const handleDomEvent = (e) => {
-  if (e.target && editListData.value === true || addNewNode.value === true) {
+  if ((e.target && editListData.value === true) || addNewNode.value === true) {
     editListData.value = false;
     addNewNode.value = false;
   }
@@ -158,7 +162,7 @@ const handleDomEvent = (e) => {
 
 const editListValue = (e) => {
   console.log(inputValue.value);
-}
+};
 </script>
 
 <style scoped>
@@ -195,7 +199,7 @@ const editListValue = (e) => {
   height: 18px;
   left: 13px;
   width: 16px;
-  top: 30px;
+  bottom: 11px;
   border-left: 1px solid #e5e7eb;
   border-radius: 0 0 0 4px;
 }
