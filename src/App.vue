@@ -1,14 +1,17 @@
 <template>
-  <div>
-    <dd-table :rows="rows" :columns="columnVal" :buttons="buttons" :Actions="Actions" :values="values" footer checkBoxProp
+  <div class="dd-p-4">
+    <!-- <dd-table :rows="rows" :columns="columnVal" :buttons="buttons" :Actions="Actions" :values="values" footer checkBoxProp
       fixedHeight rowKey="id" hoveringRow lastCell fixed actionHeader emptyState actionsPanel sortIcon settingbarIcon
-      searchIcon @updateSettings="updateSettings" dragDrop />
+      searchIcon @updateSettings="updateSettings" dragDrop /> -->
+      <DdbButton icon="Alert" prefix iconSize="5" />
   </div>
 </template>
 
 <script setup>
 import { ref } from "vue";
+import DdbButton from "./components/buttons/index.vue"
 import DdTable from "./components/table/index.vue";
+
 
 let columns = ref([
   {
