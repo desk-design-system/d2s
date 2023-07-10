@@ -12,12 +12,12 @@
     <Disclosure v-else>
       <template v-slot="{ open }">
         <div
-          :class="{ 'show-on-hover': isHovered }"
-          @click="showActionsItem(item)"
+          :class="{ 'show-on-hover': !isSelected }"
+          @click="toggleActive"
         >
           <DisclosureButton
-            class="test-this-button dd-bg-white dd-flex dd-items-center dd-w-full dd-justify-between dd-h-8 dd-cursor-pointer hover:dd-bg-gray-50 dd-rounded-[4px] dd-px-1.5"
-            :class="[!isHovered ? 'dd-bg-gray-50' : '']"
+            class="dd-bg-white dd-flex dd-items-center dd-w-full dd-justify-between dd-h-8 dd-cursor-pointer hover:dd-bg-gray-50 dd-rounded-[4px] dd-px-1.5 dd-z-0"
+            :class="[isSelected ? 'dd-bg-gray-50' : '']"
           >
             <div class="dd-flex dd-items-center dd-gap-2">
               <div :class="[open ? 'dd-mt-[1px]' : 'dd-mt-0']">
@@ -32,38 +32,42 @@
                   ]"
                 ></span>
               </div>
-              <dd-input
-                v-model="inputValue"
-                v-if="editListData"
-                :placeholder="item.label"
-                @click.stop="open = false"
-                size="base"
-                @change="editListValue"
-              />
-              <span v-else class="dd-text-sm dd-font-normal dd-text-gray-700">
+              <span class="dd-text-sm dd-font-normal dd-text-gray-700">
                 {{ item.label }}
               </span>
             </div>
-            <actions-button
-              :buttons="buttons"
-              :class="{ 'hide-on-hover': isHovered }"
-              @selected="getClickedButton"
-              @click.stop="open = false"
-            />
-            <Badge
-              v-if="item.count !== ''"
-              :badge="item.count"
-              class="!dd-sticky !dd-right-0"
-            />
+            <div :class="{ 'hide-on-hover': !isSelected }" class="dd-w-fit">
+              <slot name="actions" :selectedItem="selectedItem" :item="item">
+                <actions-button
+                :buttons="buttons"
+                @selected="getClickedButton"
+                @click.stop="open = false"
+              />
+              </slot>
+            </div>
+            <slot name="badge">
+              <DdBage type="basic">{{ item.count }}</DdBage>
+            </slot>
           </DisclosureButton>
-          <DisclosureButton v-if="addNewNode" class="dd-h-10 dd-bg-white dd-w-[163.5px] dd-ml-6">
+          <div class="dd-absolute dd-top-[1px] dd-left-[30px] dd-z-10">
+            <dd-input
+                v-model="inputValue"
+                v-if="editListData"
+                :placeholder="item.label"
+                @click.stop="open = false" 
+                size="sm"
+                @change="editListValue"
+              />
+          </div>
+          <DisclosureButton v-if="addNewNode" class="dd-bg-white dd-flex dd-items-center dd-w-full dd-justify-between dd-h-8 dd-cursor-pointer hover:dd-bg-gray-50 dd-rounded-[4px] dd-ml-6">
             <dd-input
                 v-model="newListNode"
                 placeholder="Add new node"
                 @click.stop="open = false" 
                 @keydown.enter.prevent="open = false"
-                size="base"
+                size="sm"
               />
+              <span class="curved_line_two"></span>
           </DisclosureButton>
         </div>
 
@@ -73,6 +77,8 @@
             :key="child.id"
             :item="child"
             :buttons="buttons"
+            :selectedItem="selectedItem"
+            @set-selected="emits('setSelected', $event)"
           />
         </DisclosurePanel>
       </template>
@@ -83,10 +89,10 @@
 <script setup>
 import svgIcon from "../svgIcon/index.vue";
 import ActionsButton from "./Actions.vue";
-import Badge from "./Badge.vue";
 import DdInput from "../input/index.vue";
+import DdBage from "../badges/index.vue"
 import { Disclosure, DisclosureButton, DisclosurePanel } from "@headlessui/vue";
-import { onBeforeUnmount, onMounted, ref } from "vue";
+import { onBeforeUnmount, onMounted, ref, computed } from "vue";
 const props = defineProps({
   item: {
     type: Object,
@@ -100,13 +106,19 @@ const props = defineProps({
     type: String,
     default: "",
   },
+  selectedItem: {
+    type: Object,
+    default: () => ({})
+  }
 });
 
-const isHovered = ref(true);
+const emits = defineEmits(["setSelected"])
+
 const editListData = ref(false);
 const inputValue = ref("");
 const newListNode = ref("");
 const addNewNode = ref(false);
+const activeListId = ref(0);
 
 onMounted(() => {
   document.addEventListener("click", handleDomEvent);
@@ -117,18 +129,24 @@ onBeforeUnmount(() => {
 });
 
 
+const isSelected = computed(() => {
+  return props.selectedItem?.id == props.item.id
+});
+
+const toggleActive = () => {
+  if (isSelected.value) {
+     emits("setSelected", {})
+  } else {
+    emits("setSelected", props.item)
+  }
+}
+
 const getClickedButton = (data) => {
   if (data.id === 2) {
     editListData.value = !editListData.value;
   } else if(data.id === 1) {
     addNewNode.value = !addNewNode.value;
   }
-};
-
-const showActionsItem = (item) => {
-  isHovered.value = !isHovered.value;
-  editListData.value = false;
-  console.log(item, "list");
 };
 
 const handleDomEvent = (e) => {
@@ -168,6 +186,16 @@ const editListValue = (e) => {
   left: -11px;
   width: 16px;
   top: -4px;
+  border-left: 1px solid #e5e7eb;
+  border-radius: 0 0 0 4px;
+}
+.curved_line_two {
+  position: absolute;
+  border-bottom: 1px solid #e5e7eb;
+  height: 18px;
+  left: 13px;
+  width: 16px;
+  top: 30px;
   border-left: 1px solid #e5e7eb;
   border-radius: 0 0 0 4px;
 }
