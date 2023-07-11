@@ -1,20 +1,14 @@
 <template>
-  <div class="dd-p-5">
-    <!-- <dd-table :rows="rows" :columns="columnVal" :buttons="buttons" :Actions="Actions" :values="values" footer checkBoxProp
+  <div>
+    <dd-table :rows="rows" :columns="columnVal" :buttons="buttons" :Actions="Actions" :values="values" footer checkBoxProp
       fixedHeight rowKey="id" hoveringRow lastCell fixed actionHeader emptyState actionsPanel sortIcon settingbarIcon
-      searchIcon @updateSettings="updateSettings" dragDrop /> -->
-      <dd-button title="base button" prefix suffix icon="Mail" @onClick="onClickHandler" />
+      searchIcon @updateSettings="updateSettings" dragDrop />
   </div>
 </template>
 
 <script setup>
 import { ref } from "vue";
 import DdTable from "./components/table/index.vue";
-import DdButton  from "./components/buttons/index.vue"
-
-const onClickHandler = () => {
-  console.log('called');
-}
 
 let columns = ref([
   {
