@@ -3,7 +3,7 @@
     <!-- <dd-table :rows="rows" :columns="columnVal" :buttons="buttons" :Actions="Actions" :values="values" footer checkBoxProp
       fixedHeight rowKey="id" hoveringRow lastCell fixed actionHeader emptyState actionsPanel sortIcon settingbarIcon
       searchIcon @updateSettings="updateSettings" dragDrop /> -->
-      <dd-button title="base button" type="text" prefix suffix icon="Mail" />
+      <dd-button title="base button" prefix suffix icon="Mail" @onClick="onClickHandler" />
   </div>
 </template>
 
@@ -11,6 +11,10 @@
 import { ref } from "vue";
 import DdTable from "./components/table/index.vue";
 import DdButton  from "./components/buttons/index.vue"
+
+const onClickHandler = () => {
+  console.log('called');
+}
 
 let columns = ref([
   {

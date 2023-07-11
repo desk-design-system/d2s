@@ -1,5 +1,5 @@
 <template>
-  <button v-bind="$attrs" :id="id" :class="{ ...defaultButton }" class="
+  <button @click="handleClick" v-bind="$attrs" :id="id" :class="{ ...defaultButton }" class="
               dd-inline-flex
               dd-items-center
               dd-font-semibold
@@ -234,6 +234,11 @@ export default {
   },
   data() {
     return {}
+  },
+  methods: {
+    handleClick() {
+      this.$emit('onClick');
+    },
   },
   components: {
     svgIcon
