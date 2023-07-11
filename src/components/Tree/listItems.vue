@@ -33,11 +33,12 @@
                 {{ item.label }}
               </span>
             </div>
-            <div :class="{ 'hide-on-hover': !isSelected }" class="dd-w-fit">
+            <div class="dd-w-fit">
               <slot name="actions" :selectedItem="selectedItem" :item="item">
                 <actions-button
+                  :class="{ 'hide-on-hover': !isSelected }"
                   :buttons="buttons"
-                  @selected="getClickedButton($event, item.id)"
+                  @selected="getClickedButton($event, item.id, open)"
                   @click.stop="open = false"
                 />
               </slot>
@@ -49,7 +50,7 @@
           <div class="dd-absolute dd-top-[1px] dd-left-[30px] dd-z-10">
             <dd-input
               v-model="inputValue"
-              v-if="editListData && item.id == activeListId"
+              v-if="item.id == activeListId"
               :placeholder="item.label"
               @click.stop="open = false"
               size="sm"
@@ -66,11 +67,13 @@
             :buttons="buttons"
             :selectedItem="selectedItem"
             :activeListId="activeListId"
+            :newNode="newNode"
             @set-selected="emits('setSelected', $event)"
-            @setTempId="emits('setTempId', $event)"
+            @setEditId="emits('setEditId', $event)"
+            @SetNewNode="emits('SetNewNode', $event)"
           />
           <DisclosureButton
-            v-if="addNewNode"
+            v-if="item.id === newNode"
             class="dd-bg-white dd-flex dd-items-center dd-w-full dd-justify-between dd-h-8 dd-cursor-pointer hover:dd-bg-gray-50 dd-rounded-[4px]"
           >
             <dd-input
@@ -116,9 +119,13 @@ const props = defineProps({
     type: Number,
     default: 0,
   },
+  newNode: {
+    type: Number,
+    default: 0,
+  },
 });
 
-const emits = defineEmits(["setSelected", "setTempId"]);
+const emits = defineEmits(["setSelected", "setEditId", "SetNewNode"]);
 
 const inputValue = ref("");
 const newListNode = ref("");
@@ -146,10 +153,17 @@ const toggleActive = () => {
 
 const getClickedButton = (data, id) => {
   if (data.id === 2) {
-    editListData.value = !editListData.value;
-    emits("setTempId", id);
+    if(props.activeListId == id) {
+      emits("setEditId", null);
+    } else {
+      emits("setEditId", id);
+    } 
   } else if (data.id === 1) {
-    addNewNode.value = !addNewNode.value;
+    if (props.newNode == id) {
+      emits("SetNewNode", null);
+    } else {
+      emits("SetNewNode", id);
+    }
   }
 };
 

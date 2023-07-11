@@ -1,6 +1,6 @@
 <template>
   <div  class="dd-overflow-scroll dd-w-full">
-    <listItems v-for="item in list" :key="item.id" :item="item" :buttons="buttons"  :showIcon="showIcon" :selectedItem="currentSelected" @setSelected="setSelected" :activeListId="tempId"  @setTempId="setTempId"/>
+    <listItems v-for="item in list" :key="item.id" :item="item" :buttons="buttons"  :showIcon="showIcon" :selectedItem="currentSelected" @setSelected="setSelected" :activeListId="editId" :newNode="childNode"  @setEditId="setEditId" @SetNewNode="SetNewNode"/>
   </div>
 </template>
 
@@ -18,16 +18,21 @@ const props = defineProps({
   },
 });
 
-const tempId =ref(null);
+const editId =ref(null);
 const currentSelected = ref({});
+const childNode = ref(null);
 
 const setSelected = (selectedValue) => {
   currentSelected.value = selectedValue
 };
 
-const setTempId = (data) => {
-  tempId.value = data;
+const setEditId = (data) => {
+  editId.value = data;
 };
+
+const SetNewNode = (data) => {
+  childNode.value = data;
+}
 </script>
 
 <style scoped></style>
