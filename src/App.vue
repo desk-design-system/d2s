@@ -1,18 +1,14 @@
 <template>
   <div>
-    <!-- <dd-table :rows="rows" :columns="columnVal" :buttons="buttons" :Actions="Actions" :values="values" footer checkBoxProp
+    <dd-table :rows="rows" :columns="columnVal" :buttons="buttons" :Actions="Actions" :values="values" footer checkBoxProp
       fixedHeight rowKey="id" hoveringRow lastCell fixed actionHeader emptyState actionsPanel sortIcon settingbarIcon
-      searchIcon @updateSettings="updateSettings" dragDrop /> -->
-      <dd-navigation active prefix suffix />
+      searchIcon @updateSettings="updateSettings" dragDrop />
   </div>
 </template>
 
 <script setup>
 import { ref } from "vue";
-import DdNavigation from "./components/SideNavigation/index.vue"
 import DdTable from "./components/table/index.vue";
-import svgIcon from "./components/svgIcon/index.vue";
-
 
 let columns = ref([
   {
@@ -650,4 +646,9 @@ const updateSettings = (data) => {
 
 
 <style>
+body {
+  padding: 0;
+  margin: 0;
+  overflow-x: hidden !important;
+}
 </style>
