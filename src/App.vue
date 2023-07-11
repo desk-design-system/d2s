@@ -1,16 +1,17 @@
 <template>
-  <div class="dd-p-4">
+  <div>
     <!-- <dd-table :rows="rows" :columns="columnVal" :buttons="buttons" :Actions="Actions" :values="values" footer checkBoxProp
       fixedHeight rowKey="id" hoveringRow lastCell fixed actionHeader emptyState actionsPanel sortIcon settingbarIcon
       searchIcon @updateSettings="updateSettings" dragDrop /> -->
-      <DdbButton icon="Alert" prefix iconSize="5" />
+      <dd-navigation active prefix suffix />
   </div>
 </template>
 
 <script setup>
 import { ref } from "vue";
-import DdbButton from "./components/buttons/index.vue"
+import DdNavigation from "./components/SideNavigation/index.vue"
 import DdTable from "./components/table/index.vue";
+import svgIcon from "./components/svgIcon/index.vue";
 
 
 let columns = ref([
@@ -649,10 +650,4 @@ const updateSettings = (data) => {
 
 
 <style>
-body {
-  padding: 0;
-  margin: 0;
-  overflow-x: hidden !important;
-  background: #f3f4f6 !important;
-}
 </style>
