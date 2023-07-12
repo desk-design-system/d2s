@@ -46,7 +46,7 @@
         ]"
         v-model="inputModelValue"
         :type="inputType"
-        class="!dd-block !dd-w-full !dd-rounded-md sm:!dd-text-sm focus:ring-2 focus:dd-ring-inset dd-shadow-sm"
+        class="!dd-block !dd-border-solid focus:!dd-border-teal-600 !dd-border-gray-300 !dd-w-full !dd-rounded-md sm:!dd-text-sm focus:ring-2 focus:dd-ring-inset dd-shadow-sm"
         :placeholder="placeholder"
         @focus="emits('focus')"
         @blur="emits('blur')"
@@ -60,10 +60,11 @@
         class="dd-cursor-pointer !dd-absolute !dd-inset-y-0 !dd-right-0 !dd-flex !dd-items-center !dd-pl-3 !dd-pr-3"
       >
         <svgIcon
+          class="dd-text-gray-500"
           :class="[
             hasError
               ? ' !dd-border-red-600 focus:!dd-border-red-600 dd-focus:!dd-ring-red-600'
-              : 'dd-border-gray-300 focus:dd-ring-teal-600 focus:!dd-border-teal-600',
+              : 'dd-border-gray-300 dd-text-gray-500 focus:dd-ring-teal-600 focus:!dd-border-teal-600',
             hintTextPropertyIcon,
           ]"
           :icon="suffixIcon"
@@ -265,11 +266,13 @@ const hintTextProperty = computed(() => {
     return "!dd-border !dd-border-red-600 dd-text-red-600";
   } else if (props.hintText && !errorMessage?.value) {
     if (props.hintTextColor === "red") {
-      return "!dd-border !dd-border-solid !dd-border-red-600 !dd-text-red-600 focus:!dd-border-red-600";
+      return "!dd-border !dd-border-red-600 !dd-text-red-600 focus:!dd-border-red-600";
     } else if (props.hintTextColor === "teal") {
-      return "!dd-border !dd-border-solid !dd-border-teal-600 !dd-text-teal-600 focus:!dd-border-teal-600";
+      return "!dd-border !dd-border-teal-600 !dd-text-teal-600 focus:!dd-border-teal-600";
     } else if (props.hintTextColor === "gray") {
-      return "!dd-border !dd-border-solid !dd-border-gray-300 !dd-text-gray-600 focus:!dd-border-teal-600";
+      return "!dd-border !dd-border-gray-300 !dd-text-gray-600 focus:!dd-border-teal-600";
+    } else {
+      return "!dd-border !dd-border-gray-300 !dd-text-gray-600 focus:!dd-border-teal-600";
     }
   }
 });
@@ -285,6 +288,8 @@ const hintTextPropertyIcon = computed(() => {
     } else if (props.hintTextColor === "teal") {
       return "!dd-text-teal-600";
     } else if (props.hintTextColor === "gray") {
+      return "!dd-text-gray-600";
+    } else {
       return "!dd-text-gray-600";
     }
   }
