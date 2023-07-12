@@ -53,9 +53,22 @@
               v-if="item.id == activeListId"
               :placeholder="item.label"
               @click.stop="open = false"
-              size="sm"
+              @keydown.enter.prevent="open = false"
+              size="base"
+              class="dd-w-[260px]"
               @change="editListValue"
-            />
+            >
+            <template #suffix>
+              <div class="dd-h-8 dd-w-8 dd-gap-1 dd-flex dd-items-center dd-justify-center dd-relative dd-right-2.5">
+                <dd-button color="white" size="xs" class="!dd-p-1">
+                  <svgIcon icon="Check" size="16" class="dd-mb-1" @click="updateList(item)" />
+                </dd-button>
+                <dd-button color="white" size="xs" class="!dd-p-1">
+                <svgIcon icon="Close" size="16" class="dd-mb-1" @click="discardChanges(item)" />
+              </dd-button>
+              </div>
+            </template>
+          </dd-input>
           </div>
         </div>
 
@@ -82,10 +95,24 @@
               placeholder="Add new node"
               @click.stop="open = false"
               @keydown.enter.prevent="open = false"
-              size="sm"
-              class="dd-pointer-events-auto"
-            />
-            <span v-if="item.children.length > 0" class="curved_line_two"></span>
+              size="base"
+              class="dd-pointer-events-auto dd-w-[260px]"
+            >
+              <template #suffix>
+                <div class="dd-h-8 dd-w-8 dd-gap-1 dd-flex dd-items-center dd-justify-center dd-relative dd-right-2.5">
+                  <dd-button color="white" size="xs" class="!dd-p-1">
+                    <svgIcon icon="Check" size="16" />
+                  </dd-button>
+                  <dd-button color="white" size="xs" class="!dd-p-1">
+                  <svgIcon icon="Close" size="16" />
+                </dd-button>
+                </div>
+              </template>
+            </dd-input>
+            <span
+              v-if="item.children.length > 0"
+              class="curved_line_two"
+            ></span>
           </DisclosureButton>
         </DisclosurePanel>
       </template>
@@ -98,8 +125,9 @@ import svgIcon from "../svgIcon/index.vue";
 import ActionsButton from "./Actions.vue";
 import DdInput from "../input/index.vue";
 import DdBage from "../badges/index.vue";
+import DdButton from "../buttons/index.vue";
 import { Disclosure, DisclosureButton, DisclosurePanel } from "@headlessui/vue";
-import { onBeforeUnmount, onMounted, ref, computed, watchEffect } from "vue";
+import { onBeforeUnmount, onMounted, ref, computed } from "vue";
 const props = defineProps({
   item: {
     type: Object,
@@ -127,7 +155,7 @@ const props = defineProps({
   },
 });
 
-const emits = defineEmits(["setSelected", "setEditId", "SetNewNode"]);
+const emits = defineEmits(["setSelected", "setEditId", "SetNewNode", "updateList", "discardChanges"]);
 
 const inputValue = ref("");
 const newListNode = ref("");
@@ -155,11 +183,11 @@ const toggleActive = () => {
 
 const getClickedButton = (data, id) => {
   if (data.id === 2) {
-    if(props.activeListId == id) {
+    if (props.activeListId == id) {
       emits("setEditId", null);
     } else {
       emits("setEditId", id);
-    } 
+    }
   } else if (data.id === 1) {
     if (props.newNode == id && props.item.id !== props.newNode) {
       emits("SetNewNode", null);
@@ -179,6 +207,14 @@ const handleDomEvent = (e) => {
 const editListValue = (e) => {
   console.log(inputValue.value);
 };
+
+const updateList = (item) => {
+  emits("updateList", item)
+};
+
+const discardChanges = (item) => {
+  emits("discardChanges", item);
+}
 </script>
 
 <style scoped>
