@@ -36,10 +36,10 @@
             <div class="dd-w-fit">
               <slot name="actions" :selectedItem="selectedItem" :item="item">
                 <actions-button
+                  :open="open"
                   :class="{ 'hide-on-hover': !isSelected }"
                   :buttons="buttons"
-                  @selected="getClickedButton($event, item.id, open)"
-                  @click.stop="open = false"
+                  @selected="getClickedButton($event, item.id)"
                 />
               </slot>
             </div>
@@ -64,6 +64,7 @@
             v-for="child in item.children"
             :key="child.id"
             :item="child"
+            :open="open"
             :buttons="buttons"
             :selectedItem="selectedItem"
             :activeListId="activeListId"
@@ -71,6 +72,7 @@
             @set-selected="emits('setSelected', $event)"
             @setEditId="emits('setEditId', $event)"
             @SetNewNode="emits('SetNewNode', $event)"
+            @click.stop="open = false"
           />
           <DisclosureButton
             v-if="item.id === newNode"
