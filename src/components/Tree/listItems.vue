@@ -72,11 +72,10 @@
             @set-selected="emits('setSelected', $event)"
             @setEditId="emits('setEditId', $event)"
             @SetNewNode="emits('SetNewNode', $event)"
-            @click.stop="open = false"
           />
           <DisclosureButton
             v-if="item.id === newNode"
-            class="dd-bg-white dd-flex dd-items-center dd-w-full dd-justify-between dd-h-8 dd-cursor-pointer hover:dd-bg-gray-50 dd-rounded-[4px]"
+            class="dd-bg-white dd-flex dd-items-center dd-w-full dd-justify-between dd-h-8 dd-pointer-events-none dd-rounded-[4px]"
           >
             <dd-input
               v-model="newListNode"
@@ -84,8 +83,9 @@
               @click.stop="open = false"
               @keydown.enter.prevent="open = false"
               size="sm"
+              class="dd-pointer-events-auto"
             />
-            <span class="curved_line_two"></span>
+            <span v-if="item.children.length > 0" class="curved_line_two"></span>
           </DisclosureButton>
         </DisclosurePanel>
       </template>
@@ -161,7 +161,7 @@ const getClickedButton = (data, id) => {
       emits("setEditId", id);
     } 
   } else if (data.id === 1) {
-    if (props.newNode == id) {
+    if (props.newNode == id && props.item.id !== props.newNode) {
       emits("SetNewNode", null);
     } else {
       emits("SetNewNode", id);
