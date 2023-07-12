@@ -6,7 +6,7 @@
       :key="button?.id"
       :color="button?.color"
       :size="button?.size"
-      @click="selectButton(button)"
+      @click="selectButton(button, $event)"
       class="!dd-h-6"
     >
       {{ button?.label }}
@@ -30,10 +30,19 @@ const props = defineProps({
     type: Array,
     required: true,
   },
+  open: {
+    type: Boolean,
+    default: false,
+  },
 });
 
-const selectButton = (button) => {
-  emit("selected", button);
+const selectButton = (button, event) => {
+  if(button.id === 1 && props.open == false) {
+    emit("selected", button);
+  } else {
+    emit("selected", button);
+    event.stopPropagation();
+  }
 };
 </script>
 
