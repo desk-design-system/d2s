@@ -74,7 +74,7 @@ const Template = (args) => ({
 
   },
   // And then the `args` are bound to your component with `v-bind="args"`
-  template: '<dd-button @click="onClickMethod" v-bind="args" />  ',
+  template: '<dd-button @click="buttonClickEvent" v-bind="args" />  ',
 });
 
 

@@ -1,8 +1,7 @@
 <template>
-  <button v-bind="$attrs" :id="id" :class="{ ...defaultButton }" class="
+  <button @click="handleClick" v-bind="$attrs" :id="id" :class="{ ...defaultButton }" class="
               dd-inline-flex
               dd-items-center
-              dd-shadow-sm
               dd-font-semibold
               dd-capitalize
               dd-whitespace-nowrap
@@ -91,15 +90,15 @@ export default {
     defaultButton() {
       if (this.type == 'default') {
       return {
-        "dd-border-gray-300 dd-text-gray-700 dd-border  focus:dd-outline-none":
+        "dd-border-gray-300 dd-text-gray-700 dd-border dd-shadow-sm focus:dd-outline-none":
           this.color == "",
-        "dd-px-2 dd-h-6 dd-text-xs dd-font-normal dd-rounded": this.size === "xs",
-        "dd-px-2 dd-h-7 dd-text-sm  dd-font-normal dd-rounded-md":
+        "dd-px-2 dd-h-6 dd-text-xs dd-font-normal dd-shadow-sm dd-rounded": this.size === "xs",
+        "dd-px-2 dd-h-7 dd-text-sm  dd-font-normal dd-shadow-sm dd-rounded-md":
           this.size === "sm",
-        "dd-px-2.5 dd-h-8 dd-text-sm dd-font-normal dd-rounded-md": this.size === "base",
-        "dd-px-3 dd-h-9 dd-text-sm dd-font-normal dd-rounded-md": this.size === "lg",
-        "dd-px-4 dd-h-10 dd-text-sm dd-font-normal dd-rounded-md": this.size === "xl",
-        "dd-cursor-not-allowed !dd-bg-gray-200 !dd-text-gray-400 hover:dd-bg-gray-300":
+        "dd-px-2.5 dd-h-8 dd-text-sm dd-font-normal dd-shadow-sm dd-rounded-md": this.size === "base",
+        "dd-px-3 dd-h-9 dd-text-sm dd-font-normal dd-shadow-sm dd-rounded-md": this.size === "lg",
+        "dd-px-4 dd-h-10 dd-text-sm dd-font-normal dd-shadow-sm dd-rounded-md": this.size === "xl",
+        "dd-cursor-not-allowed !dd-bg-gray-200 dd-shadow-sm !dd-text-gray-400 hover:dd-bg-gray-300":
           this.disable,
         "dd-bg-teal-600 dd-text-white hover:dd-bg-teal-500":
           this.color === "primary",
@@ -110,7 +109,7 @@ export default {
         "dd-bg-red-600 dd-text-white hover:dd-bg-red-500":
           this.color === "danger",
         "dd-w-full dd-justify-center": this.block,
-        "dd-bg-white dd-ring-1 dd-ring-inset dd-ring-gray-300 dd-text-gray-700 hover:dd-bg-gray-50 focus:dd-outline-none":
+        "!dd-bg-white dd-ring-1 dd-ring-inset dd-ring-gray-300 dd-text-gray-700 hover:dd-bg-gray-50 focus:dd-outline-none":
           this.color === "white",
         "dd-border dd-border-teal-500 dd-bg-teal-50 dd-text-gray-700":
           this.color === "selected",
@@ -118,15 +117,15 @@ export default {
     };
     if (this.type == 'round') {
       return {
-        "dd-border-gray-300 dd-text-gray-700 dd-border  focus:dd-outline-none":
+        "dd-border-gray-300 dd-text-gray-700 dd-border dd-shadow-sm focus:dd-outline-none":
           this.color == "",
-        "dd-px-2 dd-h-6 dd-text-xs dd-font-normal dd-rounded-lg": this.size === "xs",
-        "dd-px-2 dd-h-7 dd-text-sm  dd-font-normal dd-rounded-xl ":
+        "dd-px-2 dd-h-6 dd-text-xs dd-font-normal dd-shadow-sm dd-rounded-lg": this.size === "xs",
+        "dd-px-2 dd-h-7 dd-text-sm  dd-font-normal dd-shadow-sm dd-rounded-xl ":
           this.size === "sm",
-        "dd-px-2.5 dd-h-8 dd-text-sm dd-font-normal dd-rounded-xl ": this.size === "base",
-        "dd-px-3 dd-h-9 dd-text-sm dd-font-normal dd-rounded-xl ": this.size === "lg",
-        "dd-px-4 dd-h-10 dd-text-sm dd-font-normal dd-rounded-xl ": this.size === "xl",
-        "dd-cursor-not-allowed !dd-bg-gray-200 !dd-text-gray-400 hover:dd-bg-gray-300":
+        "dd-px-2.5 dd-h-8 dd-text-sm dd-font-normal dd-shadow-sm dd-rounded-xl ": this.size === "base",
+        "dd-px-3 dd-h-9 dd-text-sm dd-font-normal dd-shadow-sm dd-rounded-xl ": this.size === "lg",
+        "dd-px-4 dd-h-10 dd-text-sm dd-font-normal dd-shadow-sm dd-rounded-xl ": this.size === "xl",
+        "dd-cursor-not-allowed !dd-bg-gray-200 dd-shadow-sm !dd-text-gray-400 hover:dd-bg-gray-300":
           this.disable,
         "dd-bg-teal-600 dd-text-white hover:dd-bg-teal-500":
           this.color === "primary",
@@ -145,41 +144,39 @@ export default {
     };
     if (this.type == 'text') {
       return {
-        "dd-border-gray-300 dd-text-gray-700 dd-border  focus:dd-outline-none":
+        "dd-bg-white dd-text-gray-700 focus:dd-outline-none hover:!dd-bg-white":
           this.color == "",
-        "dd-px-2 dd-bg-white dd-h-6 dd-text-xs dd-font-normal dd-rounded": this.size === "xs",
-        "dd-px-2 dd-bg-white dd-h-7 dd-text-sm dd-font-normal dd-rounded-md ":
+        "dd-px-2 dd-h-6 dd-text-xs dd-bg-white dd-rounded dd-font-normal": this.size === "xs",
+        "dd-px-2 dd-h-7 dd-text-sm  dd-bg-white dd-rounded dd-font-normal":
           this.size === "sm",
-        "dd-px-2.5 dd-bg-white d-h-8 dd-text-sm dd-font-normal dd-rounded-md ": this.size === "base",
-        "dd-px-3 dd-bg-white dd-h-9 dd-text-sm dd-font-normal dd-rounded-md ": this.size === "lg",
-        "dd-px-4 dd-bg-white dd-h-10 dd-text-sm dd-font-normal dd-rounded-md ": this.size === "xl",
-        "dd-cursor-not-allowed !dd-text-gray-200 !dd-border-gray-200 hover:!dd-bg-transparent":
+        "dd-px-2.5 dd-h-8 dd-text-sm dd-bg-white dd-rounded dd-font-normal": this.size === "base",
+        "dd-px-3 dd-h-9 dd-text-sm dd-bg-white dd-rounded dd-font-normal": this.size === "lg",
+        "dd-px-4 dd-h-10 dd-text-sm dd-bg-white dd-rounded dd-font-normal": this.size === "xl",
+        "dd-cursor-not-allowed !dd-text-gray-300 hover:!dd-bg-white dd-rounded":
           this.disable,
-        "dd-border dd-border-teal-600 dd-text-teal-600 hover:dd-bg-teal-50":
+        "dd-text-teal-600 !dd-bd-white hover:dd-bg-gray-50":
           this.color === "primary",
-        "dd-border dd-border-yellow-600 dd-text-yellow-600 hover:dd-bg-yellow-50":
+        "dd-text-yellow-600 !dd-bd-white hover:dd-bg-gray-50":
           this.color === "warning",
-        "dd-border dd-border-green-600 dd-text-green-600 hover:dd-bg-green-50":
+        "dd-text-green-600 !dd-bd-white hover:dd-bg-gray-50":
           this.color === "success",
-        "dd-border dd-border-red-600 dd-text-red-600 hover:dd-bg-red-50":
+        "dd-text-red-600 !dd-bd-white hover:dd-bg-gray-50":
           this.color === "danger",
         "dd-w-full dd-justify-center": this.block,
-        "dd-bg-transparent dd-ring-1 dd-ring-inset dd-ring-gray-300 dd-text-gray-700 hover:dd-bg-gray-50 focus:dd-outline-none":
+        "dd-text-gray-700 !dd-bd-white hover:dd-bg-gray-50 focus:dd-outline-none":
           this.color === "white",
-        "dd-border dd-border-teal-500 dd-bg-teal-50 dd-text-gray-700":
-          this.color === "selected",
       }
     };
     if (this.type == 'circle') {
       return {
-        "dd-border-gray-300 dd-text-gray-700 dd-border  focus:dd-outline-none":
+        "dd-border-gray-300 dd-text-gray-700 dd-border dd-shadow-sm focus:dd-outline-none":
           this.color == "",
-        "dd-px-2 dd-h-6 dd-text-xs dd-font-normal dd-rounded-full": this.size === "xs",
-        "dd-px-2 dd-h-7 dd-text-sm  dd-font-normal dd-rounded-full ":
+        "dd-px-2 dd-h-6 dd-text-xs dd-font-normal dd-shadow-sm dd-rounded-full": this.size === "xs",
+        "dd-px-2 dd-h-7 dd-text-sm  dd-font-normal dd-shadow-sm dd-rounded-full ":
           this.size === "sm",
-        "dd-px-2.5 dd-h-8 dd-text-sm dd-font-normal dd-rounded-full ": this.size === "base",
-        "dd-px-3 dd-h-9 dd-text-sm dd-font-normal dd-rounded-full ": this.size === "lg",
-        "dd-px-4 dd-h-10 dd-text-sm dd-font-normal dd-rounded-full ": this.size === "xl",
+        "dd-px-2.5 dd-h-8 dd-text-sm dd-font-normal dd-shadow-sm dd-rounded-full ": this.size === "base",
+        "dd-px-3 dd-h-9 dd-text-sm dd-font-normal dd-shadow-sm dd-rounded-full ": this.size === "lg",
+        "dd-px-4 dd-h-10 dd-text-sm dd-font-normal dd-shadow-sm dd-rounded-full ": this.size === "xl",
         "dd-cursor-not-allowed !dd-bg-gray-200 !dd-text-gray-400 hover:dd-bg-gray-300":
           this.disable,
         "dd-bg-teal-600 dd-text-white hover:dd-bg-teal-500":
@@ -237,6 +234,11 @@ export default {
   },
   data() {
     return {}
+  },
+  methods: {
+    handleClick() {
+      this.$emit('onClick');
+    },
   },
   components: {
     svgIcon
