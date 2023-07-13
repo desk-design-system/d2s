@@ -8,6 +8,7 @@
       :size="button?.size"
       @click="selectButton(button, $event)"
       class="!dd-h-6"
+      :disabled="disabled"
     >
       {{ button?.label }}
       <svgIcon
@@ -34,10 +35,14 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  disabled: {
+    type: Boolean,
+    default: false,
+  }
 });
 
 const selectButton = (button, event) => {
-  if(button.id === 1 && props.open == false) {
+  if(button.buttonType === "Create" && props.open == false) {
     emit("selected", button);
   } else {
     emit("selected", button);

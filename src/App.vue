@@ -3,7 +3,7 @@
     <!-- <dd-table :rows="rows" :columns="columnVal" :buttons="buttons" :Actions="Actions" :values="values" footer checkBoxProp
       fixedHeight rowKey="id" hoveringRow lastCell fixed actionHeader emptyState actionsPanel sortIcon settingbarIcon
       searchIcon @updateSettings="updateSettings" dragDrop /> -->
-    <dd-tree :list="generatedArray" :buttons="buttons" />
+    <dd-tree :list="generatedArray" :buttons="buttons" badge="2345" @keydownEditNode="keydownEditNode" checkBoxProp customContent actionButton />
   </div>
 </template>
 
@@ -14,10 +14,18 @@ import DdTree from "./components/Tree/index.vue";
 
 const buttons = ref([
   // { id: 0, label: "button", color: "white", size: "16", icon: "" },
-  { id: 1, label: "", color: "white", size: "16", icon: "Plus" },
-  { id: 2, label: "", color: "white", size: "16", icon: "Pencil" },
-  { id: 3, label: "", color: "white", size: "16", icon: "DotHorizontal" },
+  { id: 1, buttonType: "Create", label: "", color: "white", size: "16", icon: "Plus" },
+  { id: 2, buttonType: "Edit", label: "", color: "white", size: "16", icon: "Pencil" },
+  { id: 3, buttonType: "Options", label: "", color: "white", size: "16", icon: "DotHorizontal" },
 ]);
+
+
+const keydownEditNode = (data) => {
+  console.log(data, 'emitted data');
+}
+
+
+
 function generateArrayWithUniqueIds(count) {
   let nextId = 1;
 
@@ -33,7 +41,7 @@ function generateArrayWithUniqueIds(count) {
         label: childLabel,
         icon: "",
         checkbox: true,
-        checked: true,
+        checked: false,
         badge: true,
         actions: true,
         disabled: false,
@@ -62,7 +70,7 @@ function generateArrayWithUniqueIds(count) {
       label: topLevelLabel,
       icon: "",
       checkbox: true,
-      checked: true,
+      checked: false,
       badge: true,
       actions: true,
       disabled: false,
