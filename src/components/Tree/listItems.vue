@@ -57,9 +57,13 @@
                   v-if="actionButton"
                   :open="open"
                   :class="{ 'hide-on-hover': !isSelected }"
+                  :style="`z-index: ${item.length - index} `"
                   :buttons="buttons"
                   @selected="getClickedButton($event, item?.id)"
                   :disabled="item?.disabled"
+                  :values="values"
+                  :showIcon="showIcon"
+                  @setDropDownEvent="setDropDownEvent"
                 />
               </slot>
             </div>
@@ -125,6 +129,8 @@
             :badge="badge"
             :customContent="customContent"
             :actionButton="actionButton"
+            :values="values"
+            :showIcon="showIcon"
             @set-selected="emits('setSelected', $event)"
             @setEditId="emits('setEditId', $event)"
             @SetNewNode="emits('SetNewNode', $event)"
@@ -244,6 +250,14 @@ const props = defineProps({
     type: String,
     default: "id",
   },
+  showIcon: {
+    type: Boolean,
+    default: false,
+  },
+  values: {
+    type: Array,
+    required: true,
+  },
 });
 
 const emits = defineEmits([
@@ -299,13 +313,13 @@ const toggleActive = () => {
 };
 
 const getClickedButton = (data, id) => {
-  if (data.id === 2) {
-    if (props.activeListId == id) {
+  if (data.buttonType === "Edit") {
+    if (props.activeListId == id && props.item.id !== props.activeListId) {
       emits("setEditId", null);
     } else {
       emits("setEditId", id);
     }
-  } else if (data.id === 1) {
+  } else if (data.buttonType === "Create") {
     if (props.newNode == id && props.item.id !== props.newNode) {
       emits("SetNewNode", null);
     } else {
@@ -313,6 +327,10 @@ const getClickedButton = (data, id) => {
     }
   }
 };
+
+const setDropDownEvent = (event) => {
+  event.stopPropagation();
+}
 
 const handleDomEvent = (e) => {
   if ((e.target && editListData.value === true) || addNewNode.value === true) {

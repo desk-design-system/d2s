@@ -3,7 +3,17 @@
     <!-- <dd-table :rows="rows" :columns="columnVal" :buttons="buttons" :Actions="Actions" :values="values" footer checkBoxProp
       fixedHeight rowKey="id" hoveringRow lastCell fixed actionHeader emptyState actionsPanel sortIcon settingbarIcon
       searchIcon @updateSettings="updateSettings" dragDrop /> -->
-    <dd-tree :list="generatedArray" :buttons="buttons" badge="2345" @keydownEditNode="keydownEditNode" checkBoxProp customContent actionButton />
+    <dd-tree
+      :list="generatedArray"
+      :buttons="buttons"
+      badge="2345"
+      @keydownEditNode="keydownEditNode"
+      checkBoxProp
+      customContent
+      actionButton
+      :values="values"
+      showIcon
+    />
   </div>
 </template>
 
@@ -13,18 +23,51 @@ import DdTable from "./components/table/index.vue";
 import DdTree from "./components/Tree/index.vue";
 
 const buttons = ref([
-  // { id: 0, label: "button", color: "white", size: "16", icon: "" },
-  { id: 1, buttonType: "Create", label: "", color: "white", size: "16", icon: "Plus" },
-  { id: 2, buttonType: "Edit", label: "", color: "white", size: "16", icon: "Pencil" },
-  { id: 3, buttonType: "Options", label: "", color: "white", size: "16", icon: "DotHorizontal" },
+  { id: 0, label: "button", color: "white", size: "16", icon: "" },
+  {
+    id: 1,
+    buttonType: "Create",
+    label: "",
+    color: "white",
+    size: "16",
+    icon: "Plus",
+  },
+  {
+    id: 2,
+    buttonType: "Edit",
+    label: "",
+    color: "white",
+    size: "16",
+    icon: "Pencil",
+  },
 ]);
 
+const values = ref([
+  {
+    name: "DropDown Menu 1",
+    value: 1,
+    icon: "Plus",
+  },
+  {
+    name: "DropDown Menu 2",
+    value: 2,
+    icon: "Pencil",
+  },
+  {
+    name: "DropDown Menu 3",
+    value: 3,
+    icon: "Trash",
+  },
+  {
+    name: "DropDown Menu 4",
+    value: 4,
+    icon: "Alert",
+  },
+]);
 
 const keydownEditNode = (data) => {
-  console.log(data, 'emitted data');
-}
-
-
+  console.log(data, "emitted data");
+};
 
 function generateArrayWithUniqueIds(count) {
   let nextId = 1;
@@ -85,9 +128,6 @@ function generateArrayWithUniqueIds(count) {
 }
 
 const generatedArray = generateArrayWithUniqueIds(10);
-
-
-
 </script>
 
 
@@ -95,6 +135,6 @@ const generatedArray = generateArrayWithUniqueIds(10);
 body {
   padding: 0;
   margin: 0;
-  overflow-x: hidden !important;
+  z-index: 0;
 }
 </style>

@@ -2,21 +2,38 @@
   <div class="dd-flex dd-items-center dd-justify-center">
     <DdGroupButton>
       <dd-Button
-      v-for="button in buttons"
-      :key="button?.id"
-      :color="button?.color"
-      :size="button?.size"
-      @click="selectButton(button, $event)"
-      class="!dd-h-6"
-      :disabled="disabled"
-    >
-      {{ button?.label }}
-      <svgIcon
-        class="dd-flex dd-items-center dd-justify-center"
-        :icon="button?.icon ?? ''"
+        v-for="button in buttons"
+        :key="button?.id"
+        :color="button?.color"
         :size="button?.size"
-      />
-    </dd-Button>
+        @click="selectButton(button, $event)"
+        class="!dd-h-6"
+        :disabled="disabled"
+      >
+        {{ button?.label }}
+        <div ref="svgRef" class="svgContainer" :value="button.id">
+          <svgIcon
+            class="dd-flex dd-items-center dd-justify-center"
+            :icon="button?.icon ?? ''"
+            :size="button?.size"
+          />
+        </div>
+      </dd-Button>
+      <dd-button color="white" class="!dd-p-[2px] !dd-h-6" @click="setDropDownEvent($event)">
+        <dd-dropdown
+          color="transparent"
+          class="[&>svg]:dd-relative dd-top-[2px]"
+          v-model="treeActions"
+          :options="values"
+          type="icon"
+          placement="right"
+          defaultIcon="DotHorizontal"
+          size="base"
+          :showIcon="showIcon"
+          :disabled="disabled"
+          @command="getDropdownVal"
+        />
+      </dd-button>
     </DdGroupButton>
   </div>
 </template>
@@ -24,8 +41,10 @@
 <script setup>
 import DdButton from "../buttons/index.vue";
 import DdGroupButton from "../groupButton/index.vue";
-import svgIcon from "../svgIcon/index.vue"
-const emit = defineEmits(["selected"]);
+import DdDropdown from "../dropdown/index.vue";
+import svgIcon from "../svgIcon/index.vue";
+import { ref } from "vue";
+const emits = defineEmits(["selected", "dropdownValue", "setDropDownEvent"]);
 const props = defineProps({
   buttons: {
     type: Array,
@@ -35,22 +54,41 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  showIcon: {
+    type: Boolean,
+    default: false,
+  },
+  values: {
+    type: Array,
+    required: true,
+  },
   disabled: {
     type: Boolean,
     default: false,
-  }
+  },
+  isSelected: {
+    type: Boolean,
+    default: false,
+  },
 });
 
+const treeActions = ref("");
+
 const selectButton = (button, event) => {
-  if(button.buttonType === "Create" && props.open == false) {
-    emit("selected", button);
+  if (button.buttonType === "Create" && props.open == false) {
+    emits("selected", button);
   } else {
-    emit("selected", button);
+    emits("selected", button);
     event.stopPropagation();
   }
 };
+const getDropdownVal = (data) => {
+  emits("dropdownValue", data);
+};
+const setDropDownEvent = (event) => {
+  emits('setDropDownEvent', event)
+}
 </script>
 
-<style>
-
+<style scoped>
 </style>

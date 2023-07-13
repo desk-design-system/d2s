@@ -7,14 +7,15 @@
       :buttons="buttons"
       :showIcon="showIcon"
       :selectedItem="currentSelected"
-      @setSelected="setSelected"
       :activeListId="editId"
       :newNode="childNode"
       :checkBoxProp="checkBoxProp"
       :customContent="customContent"
       :badge="badge"
       :actionButton="actionButton"
+      :values="values"
       itemKey="id"
+      @setSelected="setSelected"
       @setEditId="setEditId"
       @SetNewNode="SetNewNode"
       @editListInput="emits('editListInput', $event)"
@@ -82,6 +83,14 @@ const props = defineProps({
   actionButton: {
     type: Boolean,
     default: false,
+  },
+  showIcon: {
+    type: Boolean,
+    default: false,
+  },
+  values: {
+    type: Array,
+    required: true,
   },
 });
 
