@@ -23,6 +23,10 @@ const props = defineProps({
   watchEffect(() => {
   import(`../icons/${props.icon}.vue`).then((val) => {
     currentIcon.value = val.default;
+  }).catch((error) => {
+    if(error) {
+      return;
+    }
   });
 });
 </script>

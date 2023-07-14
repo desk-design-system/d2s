@@ -7,13 +7,18 @@
       :list="generatedArray"
       :buttons="buttons"
       badge="2345"
-      @keydownEditNode="keydownEditNode"
+      @dropdownValue="dropdownValue"
       checkBoxProp
       customContent
       actionButton
       :values="values"
       showIcon
-    />
+      dropdownProp
+    >
+      <template #badge>
+        test
+      </template>
+  </dd-tree>
   </div>
 </template>
 
@@ -61,11 +66,11 @@ const values = ref([
   {
     name: "DropDown Menu 4",
     value: 4,
-    icon: "Alert",
+    icon: "Mail",
   },
 ]);
 
-const keydownEditNode = (data) => {
+const dropdownValue = (data) => {
   console.log(data, "emitted data");
 };
 

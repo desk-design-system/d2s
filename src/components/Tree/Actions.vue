@@ -19,21 +19,23 @@
           />
         </div>
       </dd-Button>
-      <dd-button color="white" class="!dd-p-[2px] !dd-h-6" @click="setDropDownEvent($event)">
-        <dd-dropdown
-          color="transparent"
-          class="[&>svg]:dd-relative dd-top-[2px]"
-          v-model="treeActions"
-          :options="values"
-          type="icon"
-          placement="right"
-          defaultIcon="DotHorizontal"
-          size="base"
-          :showIcon="showIcon"
-          :disabled="disabled"
-          @command="getDropdownVal"
-        />
-      </dd-button>
+      <slot name="dropdown">
+        <dd-button v-if="dropdownProp" color="white" class="!dd-p-[2px] !dd-h-6" @click="setDropDownEvent($event)">
+          <dd-dropdown
+            color="transparent"
+            class="[&>svg]:dd-relative dd-top-[2px]"
+            v-model="treeActions"
+            :options="values"
+            type="icon"
+            placement="right"
+            defaultIcon="DotHorizontal"
+            :showIcon="showIcon"
+            :disabled="disabled"
+            @command="getDropdownVal"
+            @click="assignToNode($event)"
+          />
+        </dd-button>
+      </slot>
     </DdGroupButton>
   </div>
 </template>
@@ -44,7 +46,7 @@ import DdGroupButton from "../groupButton/index.vue";
 import DdDropdown from "../dropdown/index.vue";
 import svgIcon from "../svgIcon/index.vue";
 import { ref } from "vue";
-const emits = defineEmits(["selected", "dropdownValue", "setDropDownEvent"]);
+const emits = defineEmits(["selected", "dropdownValue", "setDropDownEvent", "assignToNode"]);
 const props = defineProps({
   buttons: {
     type: Array,
@@ -70,6 +72,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  dropdownProp: {
+    type: Boolean,
+    default: false,
+  }
 });
 
 const treeActions = ref("");
@@ -87,6 +93,10 @@ const getDropdownVal = (data) => {
 };
 const setDropDownEvent = (event) => {
   emits('setDropDownEvent', event)
+}
+const assignToNode = (event) => {
+  event.stopPropagation();
+  emits('assignToNode')
 }
 </script>
 

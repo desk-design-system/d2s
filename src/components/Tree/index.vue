@@ -15,6 +15,7 @@
       :actionButton="actionButton"
       :values="values"
       itemKey="id"
+      :dropdownProp="dropdownProp"
       @setSelected="setSelected"
       @setEditId="setEditId"
       @SetNewNode="SetNewNode"
@@ -31,7 +32,21 @@
       @keyupEditNode="emits('keyupEditNode', $event)"
       @TrackEditNode="emits('TrackEditNode', $event)"
       @selectedCheckBoxes="emits('selectedCheckBoxes', $event)"
-    />
+      @dropdownValue="emits('dropdownValue', $event)"
+    >
+    <template #dropdown="{disabled, isSelected, open}">
+        <slot name="dropdown" :disabled="disabled" :isSelected="isSelected" :open="open"></slot>
+    </template>
+    <template #checkbox="{checkBoxProp, open, item, disabled}">
+      <slot name="checkbox" :checkBoxProp="checkBoxProp" :item="item" :open="open" :disabled="disabled"></slot>
+    </template>
+    <template #content="{customContent, open, item, disabled}">
+      <slot name="content" :customContent="customContent" :item="item" :open="open" :disabled="disabled"></slot>
+    </template>
+    <template  v-if="badge" #badge>
+      <slot name="badge"></slot>
+    </template>
+  </listItems>
   </div>
 </template>
 
@@ -57,16 +72,17 @@ const emits = defineEmits([
   "keyupEditNode",
   "TrackEditNode",
   "selectedCheckBoxes",
+  "dropdownValue",
 ]);
 
 const props = defineProps({
   list: {
     type: Array,
-    required: true,
+    default: () => ({}),
   },
   buttons: {
     type: Array,
-    required: true,
+    default: () => ({}),
   },
   checkBoxProp: {
     type: Boolean,
@@ -92,6 +108,10 @@ const props = defineProps({
     type: Array,
     required: true,
   },
+  dropdownProp: {
+    type: Boolean,
+    default: false,
+  }
 });
 
 const editId = ref(null);

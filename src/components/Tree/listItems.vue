@@ -37,14 +37,39 @@
                   ]"
                 ></span>
               </div>
-              <div v-if="checkBoxProp" @click.stop="open = false" class="dd-h-5 dd-w-5 dd-text-center dd-rounded-[4px] dd-py-[2px] dd-px-[3px]">
-                <slot name="checkbox" :item="item" :open="open" :checkBoxProp="checkBoxProp">
-                  <dd-checkbox v-if="checkBoxProp" v-model="item.checked" :disabled="item?.disabled" @click="setChecked(item[itemKey])" />
+              <div
+                v-if="checkBoxProp"
+                @click.stop="open = false"
+                class="dd-h-5 dd-w-5 dd-text-center dd-rounded-[4px] dd-py-[2px] dd-px-[3px]"
+              >
+                <slot
+                  name="checkbox"
+                  :item="item"
+                  :open="open"
+                  :checkBoxProp="checkBoxProp"
+                  :disabled="item?.disabled"
+                >
+                  <dd-checkbox
+                    v-if="checkBoxProp"
+                    v-model="item.checked"
+                    :disabled="item?.disabled"
+                    @click="setChecked(item[itemKey])"
+                  />
                 </slot>
               </div>
-              <div v-if="customContent" @click.stop="open = false" class="dd-h-5 dd-w-5 dd-text-center dd-rounded-[4px] dd-py-[2px] dd-px-[3px]">
-                <slot name="content" :item="item" :open="open" :customContent="customContent">
-                  <svgIcon v-if="customContent" icon="Alert" size="16" />
+              <div
+                v-if="customContent"
+                @click.stop="open = false"
+                class="dd-h-5 dd-w-5 dd-text-center dd-rounded-[4px] dd-py-[2px] dd-px-[3px]"
+              >
+                <slot
+                  name="content"
+                  :item="item"
+                  :open="open"
+                  :customContent="customContent"
+                  :disabled="item?.disabled"
+                >
+                  <svgIcon v-if="customContent" icon="Mail" size="16" />
                 </slot>
               </div>
               <span class="dd-text-sm dd-font-normal dd-text-gray-700">
@@ -52,19 +77,41 @@
               </span>
             </div>
             <div class="dd-w-fit">
-              <slot name="actions" :selectedItem="selectedItem" :item="item">
+              <slot
+                v-if="actionButton"
+                name="actions"
+                :selectedItem="selectedItem"
+                :item="item"
+                :values="values"
+                :buttons="buttons"
+                :isSelected="isSelected"
+                :showIcon="showIcon"
+              >
                 <actions-button
                   v-if="actionButton"
                   :open="open"
                   :class="{ 'hide-on-hover': !isSelected }"
                   :style="`z-index: ${item.length - index} `"
                   :buttons="buttons"
-                  @selected="getClickedButton($event, item?.id)"
                   :disabled="item?.disabled"
                   :values="values"
+                  :isSelected="isSelected"
                   :showIcon="showIcon"
+                  :dropdownProp="dropdownProp"
                   @setDropDownEvent="setDropDownEvent"
-                />
+                  @selected="getClickedButton($event, item?.id)"
+                  @assignToNode="assignToNode"
+                  @dropdownValue="emits('dropdownValue', $event)"
+                >
+                  <template #dropdown>
+                    <slot
+                      name="dropdown"
+                      :disabled="item?.disabled"
+                      :isSelected="isSelected"
+                      :open="open"
+                    ></slot>
+                  </template>
+                </actions-button>
               </slot>
             </div>
             <slot name="badge" v-if="badge">
@@ -131,6 +178,7 @@
             :actionButton="actionButton"
             :values="values"
             :showIcon="showIcon"
+            :dropdownProp="dropdownProp"
             @set-selected="emits('setSelected', $event)"
             @setEditId="emits('setEditId', $event)"
             @SetNewNode="emits('SetNewNode', $event)"
@@ -147,7 +195,51 @@
             @keyupEditNode="emits('keyupEditNode', $event)"
             @TrackEditNode="emits('TrackEditNode', $event)"
             @selectedCheckBoxes="emits('selectedCheckBoxes', $event)"
-          />
+            @dropdownValue="emits('dropdownValue', $event)"
+          >
+            <template v-if="checkBoxProp" #checkbox>
+              <slot
+                name="checkbox"
+                :item="item"
+                :open="open"
+                :checkBoxProp="checkBoxProp"
+                :disabled="item?.disabled"
+              ></slot>
+            </template>
+            <template v-if="customContent" #content>
+              <slot
+                name="content"
+                :item="item"
+                :open="open"
+                :customContent="customContent"
+                :disabled="item?.disabled"
+              ></slot>
+            </template>
+            <template #actions>
+              <slot
+                v-if="actionButton"
+                name="actions"
+                :selectedItem="selectedItem"
+                :item="item"
+                :values="values"
+                :buttons="buttons"
+                :isSelected="isSelected"
+                :showIcon="showIcon"
+              >
+              </slot>
+            </template>
+            <template v-if="badge" #badge>
+              <slot name="badge"></slot>
+            </template>
+            <template #dropdown="{ isSelected, disabled, open }">
+              <slot
+                name="dropdown"
+                :disabled="disabled"
+                :isSelected="isSelected"
+                :open="open"
+              ></slot>
+            </template>
+          </listItems>
           <DisclosureButton
             v-if="item?.id === newNode"
             class="dd-bg-white dd-flex dd-items-center dd-w-full dd-justify-between dd-h-8 dd-pointer-events-none dd-rounded-[4px] focus-visible:dd-outline-none"
@@ -258,6 +350,10 @@ const props = defineProps({
     type: Array,
     required: true,
   },
+  dropdownProp: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const emits = defineEmits([
@@ -281,12 +377,11 @@ const emits = defineEmits([
   "keyupEditNode",
   "TrackEditNode",
   "selectedCheckBoxes",
+  "dropdownValue"
 ]);
 
 const inputValue = ref("");
 const newListNode = ref("");
-const addNewNode = ref(false);
-const editListData = ref(false);
 const selectedId = ref([]);
 
 onMounted(() => {
@@ -330,13 +425,12 @@ const getClickedButton = (data, id) => {
 
 const setDropDownEvent = (event) => {
   event.stopPropagation();
-}
+};
 
 const handleDomEvent = (e) => {
-  if ((e.target && editListData.value === true) || addNewNode.value === true) {
-    editListData.value = false;
-    addNewNode.value = false;
-  }
+  if (e.target && props.item?.id == props.activeListId) {
+    emits("setEditId", null);
+  };
 };
 
 const editListInput = () => {
@@ -387,6 +481,14 @@ const setChecked = (id) => {
     emits("selectedCheckBoxes", selectedId.value);
   } else {
     selectedId.value.splice(index, 1);
+  }
+};
+
+const assignToNode = () => {
+  if (toggleActive && props.selectedItem?.id == props.item.id) {
+    return;
+  } else {
+    toggleActive();
   }
 };
 </script>
