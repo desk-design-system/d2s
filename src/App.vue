@@ -3,7 +3,6 @@
     <!-- <dd-table :rows="rows" :columns="columnVal" :buttons="buttons" :Actions="Actions" :values="values" footer checkBoxProp
       fixedHeight rowKey="id" hoveringRow lastCell fixed actionHeader emptyState actionsPanel sortIcon settingbarIcon
       searchIcon @updateSettings="updateSettings" dragDrop /> -->
-<<<<<<< HEAD
     <dd-tree
       :list="generatedArray"
       :buttons="buttons"
@@ -20,9 +19,6 @@
         test
       </template>
   </dd-tree>
-=======
-    <dd-tree :list="generatedArray" :buttons="buttons" />
->>>>>>> origin/Tree-component
   </div>
 </template>
 
@@ -32,7 +28,6 @@ import DdTable from "./components/table/index.vue";
 import DdTree from "./components/Tree/index.vue";
 
 const buttons = ref([
-<<<<<<< HEAD
   { id: 0, label: "button", color: "white", size: "16", icon: "" },
   {
     id: 1,
@@ -78,74 +73,6 @@ const values = ref([
 const dropdownValue = (data) => {
   console.log(data, "emitted data");
 };
-=======
-  // { id: 0, label: "button", color: "white", size: "16", icon: "" },
-  { id: 1, label: "", color: "white", size: "16", icon: "Plus" },
-  { id: 2, label: "", color: "white", size: "16", icon: "Pencil" },
-  { id: 3, label: "", color: "white", size: "16", icon: "DotHorizontal" },
-]);
-function generateArrayWithUniqueIds(count) {
-  let nextId = 1;
-
-  function generateChildrenArray(level, maxLevel) {
-    const children = [];
-    const numChildren = Math.floor(Math.random() * count) + 1;
-
-    for (let i = 0; i < numChildren; i++) {
-      const childId = nextId++;
-      const childLabel = `Child ${childId}`;
-      const child = {
-        id: childId,
-        label: childLabel,
-        icon: "",
-        checkbox: true,
-        checked: true,
-        badge: true,
-        actions: true,
-        disabled: false,
-        count: count.toString(),
-        children: [],
-      };
-
-      if (level < maxLevel) {
-        child.children = generateChildrenArray(level + 1, maxLevel);
-      }
-
-      children.push(child);
-    }
-
-    return children;
-  }
-
-  const topLevelArray = [];
-  const numTopLevelItems = Math.floor(Math.random() * count) + 1;
-
-  for (let i = 0; i < numTopLevelItems; i++) {
-    const topLevelId = nextId++;
-    const topLevelLabel = `Top Level ${topLevelId}`;
-    const topLevelItem = {
-      id: topLevelId,
-      label: topLevelLabel,
-      icon: "",
-      checkbox: true,
-      checked: true,
-      badge: true,
-      actions: true,
-      disabled: false,
-      count: count.toString(),
-      children: generateChildrenArray(1, 3),
-    };
-
-    topLevelArray.push(topLevelItem);
-  }
-
-  return topLevelArray;
-}
-
-const generatedArray = generateArrayWithUniqueIds(10);
-
-
->>>>>>> origin/Tree-component
 
 function generateArrayWithUniqueIds(count) {
   let nextId = 1;

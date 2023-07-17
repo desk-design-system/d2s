@@ -2,7 +2,6 @@
   <div class="dd-flex dd-items-center dd-justify-center">
     <DdGroupButton>
       <dd-Button
-<<<<<<< HEAD
         v-for="button in buttons"
         :key="button?.id"
         :color="button?.color"
@@ -37,22 +36,6 @@
           />
         </dd-button>
       </slot>
-=======
-      v-for="button in buttons"
-      :key="button?.id"
-      :color="button?.color"
-      :size="button?.size"
-      @click="selectButton(button, $event)"
-      class="!dd-h-6"
-    >
-      {{ button?.label }}
-      <svgIcon
-        class="dd-flex dd-items-center dd-justify-center"
-        :icon="button?.icon ?? ''"
-        :size="button?.size"
-      />
-    </dd-Button>
->>>>>>> origin/Tree-component
     </DdGroupButton>
   </div>
 </template>
@@ -60,15 +43,10 @@
 <script setup>
 import DdButton from "../buttons/index.vue";
 import DdGroupButton from "../groupButton/index.vue";
-<<<<<<< HEAD
 import DdDropdown from "../dropdown/index.vue";
 import svgIcon from "../svgIcon/index.vue";
 import { ref } from "vue";
 const emits = defineEmits(["selected", "dropdownValue", "setDropDownEvent", "assignToNode"]);
-=======
-import svgIcon from "../svgIcon/index.vue"
-const emit = defineEmits(["selected"]);
->>>>>>> origin/Tree-component
 const props = defineProps({
   buttons: {
     type: Array,
@@ -78,7 +56,6 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-<<<<<<< HEAD
   showIcon: {
     type: Boolean,
     default: false,
@@ -124,20 +101,4 @@ const assignToNode = (event) => {
 </script>
 
 <style scoped>
-=======
-});
-
-const selectButton = (button, event) => {
-  if(button.id === 1 && props.open == false) {
-    emit("selected", button);
-  } else {
-    emit("selected", button);
-    event.stopPropagation();
-  }
-};
-</script>
-
-<style>
-
->>>>>>> origin/Tree-component
 </style>
