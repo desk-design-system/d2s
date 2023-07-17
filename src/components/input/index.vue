@@ -16,7 +16,7 @@
           :class="[
             hasError
               ? ' !dd-border-red-600 focus:!dd-border-red-600 dd-focus:!dd-ring-red-600'
-              : 'dd-border-gray-300 focus:dd-ring-teal-600 focus:!dd-border-teal-600',
+              : 'dd-border-gray-300 focus:dd-ring-teal-600 focus:dd-border-teal-600',
             hintTextPropertyIcon,
             Right
               ? 'dd-text-right !dd-text-xs !dd-text-gray-700 !dd-font-normal'
@@ -37,6 +37,7 @@
           hasError
             ? ' !dd-border-red-600 focus:!dd-border-red-600 dd-focus:!dd-ring-red-600'
             : hintTextProperty,
+          hintBroderColor,  
           Right
             ? 'dd-text-right !dd-text-xs !dd-text-gray-700 !dd-font-normal'
             : 'dd-text-left',
@@ -57,10 +58,10 @@
       <div
         @click="suffixIconClick"
         v-if="suffix"
-        class="dd-cursor-pointer !dd-absolute !dd-inset-y-0 !dd-right-0 !dd-flex !dd-items-center !dd-pl-3 !dd-pr-3"
+        class="dd-cursor-pointer dd-absolute dd-top-[2px] dd-right-1 dd-bg-white dd-h-fit dd-w-8 dd-text-center"
       >
         <svgIcon
-          class="dd-text-gray-500"
+          class="dd-text-gray-400"
           :class="[
             hasError
               ? ' !dd-border-red-600 focus:!dd-border-red-600 dd-focus:!dd-ring-red-600'
@@ -140,6 +141,10 @@ const props = defineProps({
     default: null,
   },
   hintTextColor: {
+    type: String,
+    default: "gray",
+  },
+  hintTextBorder: {
     type: String,
     default: "gray",
   },
@@ -266,16 +271,36 @@ const hintTextProperty = computed(() => {
     return "!dd-border !dd-border-red-600 dd-text-red-600";
   } else if (props.hintText && !errorMessage?.value) {
     if (props.hintTextColor === "red") {
-      return "!dd-border !dd-border-red-600 !dd-text-red-600 focus:!dd-border-red-600";
+      return "!dd-text-red-600";
     } else if (props.hintTextColor === "teal") {
-      return "!dd-border !dd-border-teal-600 !dd-text-teal-600 focus:!dd-border-teal-600";
+      return "!dd-text-teal-600";
     } else if (props.hintTextColor === "gray") {
-      return "!dd-border !dd-border-gray-300 !dd-text-gray-600 focus:!dd-border-teal-600";
+      return "!dd-text-gray-600";
     } else {
-      return "!dd-border !dd-border-gray-300 !dd-text-gray-600 focus:!dd-border-teal-600";
+      return "!dd-text-gray-600";
     }
   }
 });
+
+const hintBroderColor = computed(() => {
+  if (errorMessage?.value) {
+    return "dd-border-red-600";
+  } else if (props.hintTextBorder && props.hintText && errorMessage?.value) {
+    return "!dd-border !dd-border-red-600 dd-text-red-600";
+  } else if (props.hintTextBorder && !errorMessage?.value) {
+    return `!dd-border !dd-border-${props.hintTextBorder}-600 focus:!dd-border-${props.hintTextBorder}-600`
+  } else if (props.hintText && !errorMessage?.value) {
+    if (props.hintTextBorder === "red") {
+      return "!dd-border !dd-border-red-600";
+    } else if (props.hintTextBorder === "teal") {
+      return "!dd-border !dd-border-teal-600";
+    } else if (props.hintTextBorder === "gray") {
+      return "!dd-border !dd-border-gray-300";
+    } else {
+      return "!dd-border !dd-border-gray-300";
+    }
+  }
+})
 
 const hintTextPropertyIcon = computed(() => {
   if (errorMessage?.value) {
