@@ -35,6 +35,7 @@
         <div class="dd-py-1">
           <MenuItem @click="getClick(item)" v-for="(item, index) in options" :key="index" v-slot="{ active }">
           <span href="#"
+          class="dd-flex dd-items-center dd-gap-1"
             :class="[active ? 'dd-bg-teal-50 dd-text-teal-600' : 'dd-text-gray-700', '!dd-font-normal dd-block dd-py-1 dd-px-4 dd-cursor-pointer', size == 'xs' ? 'dd-text-xs' : 'dd-text-sm']">
             <slot name="items" :item="item">
               <svgIcon v-if="showIcon" :color="item.color ? item.color : ''" :icon="item.icon ? item.icon : ''"
