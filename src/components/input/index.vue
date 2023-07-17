@@ -32,7 +32,7 @@
         :class="[
           inputSize,
           noBorder,
-          suffix ? '!dd-pr-2' : '!dd-pr-2',
+          suffix ? '!dd-pr-10' : '!dd-pr-2',
           prefix ? '!dd-pl-10' : '!dd-pl-2',
           hasError
             ? ' !dd-border-red-600 focus:!dd-border-red-600 dd-focus:!dd-ring-red-600'
@@ -58,7 +58,7 @@
       <div
         @click="suffixIconClick"
         v-if="suffix"
-        class="dd-cursor-pointer dd-absolute dd-top-[2px] dd-right-1 dd-bg-white dd-h-fit dd-w-8 dd-text-center"
+        class="dd-cursor-pointer !dd-absolute !dd-inset-y-0 !dd-right-0 !dd-flex !dd-items-center !dd-pl-3 !dd-pr-3"
       >
         <svgIcon
           class="dd-text-gray-400"
