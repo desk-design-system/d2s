@@ -18,7 +18,7 @@
             leave-to="dd-opacity-0 dd-translate-y-4 sm:dd-translate-y-0 sm:dd-scale-95">
             <DialogPanel :style="{ 'width': modalWidth }"
               class="dd-relative dd-bg-white dd-rounded-lg   dd-overflow-hidden dd-shadow-xl dd-transform dd-transition-all ">
-              <div v-if="header" class="dd-p-6 dd-pb-3">
+              <div v-if="header" :class="headerClass" class="dd-p-6 dd-pb-3">
                 <slot name="header">
                   <div class="dd-flex dd-items-start dd-justify-between">
                     <DialogTitle class="dd-text-lg dd-font-medium dd-text-gray-900">
@@ -34,13 +34,13 @@
                   </div>
                 </slot>
               </div>
-              <div :class="[header ? 'dd-pt-3' : 'dd-pt-6']"
-                class="dd-text-left dd-px-6 dd-max-h-96 dd-pb-6  overflow-auto ">
+              <div :class="[header ? 'dd-pt-3' : 'dd-pt-6',contentClass]"
+                class="dd-text-left dd-px-6 dd-max-h-96 dd-pb-6  dd-overflow-auto ">
                 <slot>
                   {{ content }}
                 </slot>
               </div>
-              <div v-if="footer" :class="[shadow ? 'dd-bg-zinc-100' : 'dd-bg-white']"
+              <div v-if="footer" :class="[shadow ? 'dd-bg-zinc-100' : 'dd-bg-white',footerClass]"
                 class=" dd-flex  dd-flex-shrink-0 dd-justify-end dd-px-6 dd-py-3">
                 <slot name="footer">
                   <span class="dd-mr-4">
@@ -121,6 +121,18 @@ const props = defineProps( {
   show: {
     type: Boolean,
     default: true,
+  },
+  headerClass: {
+    type: String,
+    default: null,
+  },
+  contentClass: {
+    type: String,
+    default: null,
+  },
+  footerClass: {
+    type: String,
+    default: null,
   },
   modelValue: {
     type: [String, Number, Boolean],
