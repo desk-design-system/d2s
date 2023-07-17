@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
   <div class="dd-overflow-scroll dd-w-full">
     <listItems
       v-for="item in list"
@@ -47,12 +48,17 @@
       <slot name="badge"></slot>
     </template>
   </listItems>
+=======
+  <div  class="dd-overflow-scroll dd-w-full">
+    <listItems v-for="item in list" :key="item.id" :item="item" :buttons="buttons"  :showIcon="showIcon" :selectedItem="currentSelected" @setSelected="setSelected" :activeListId="editId" :newNode="childNode"  @setEditId="setEditId" @SetNewNode="SetNewNode"/>
+>>>>>>> origin/Tree-component
   </div>
 </template>
 
 <script setup>
 import { ref } from "vue";
 import listItems from "./listItems.vue";
+<<<<<<< HEAD
 
 const emits = defineEmits([
   "updateEditList",
@@ -115,11 +121,29 @@ const props = defineProps({
 });
 
 const editId = ref(null);
+=======
+const props = defineProps({
+  list: {
+    type: Array,
+    required: true,
+  },
+  buttons: {
+    type: Array,
+    required: true,
+  },
+});
+
+const editId =ref(null);
+>>>>>>> origin/Tree-component
 const currentSelected = ref({});
 const childNode = ref(null);
 
 const setSelected = (selectedValue) => {
+<<<<<<< HEAD
   currentSelected.value = selectedValue;
+=======
+  currentSelected.value = selectedValue
+>>>>>>> origin/Tree-component
 };
 
 const setEditId = (data) => {
@@ -128,7 +152,11 @@ const setEditId = (data) => {
 
 const SetNewNode = (data) => {
   childNode.value = data;
+<<<<<<< HEAD
 };
+=======
+}
+>>>>>>> origin/Tree-component
 </script>
 
 <style scoped></style>

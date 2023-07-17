@@ -1,16 +1,25 @@
 <template>
   <div v-bind="$attrs" class="dd-relative">
+<<<<<<< HEAD
     <div v-if="!item?.children.length" class="dd-flex dd-items-center dd-gap-2">
       <div class="dd-bg-white">
         <span class="curved_line"></span>
         <span class="dd-text-sm dd-font-normal dd-text-gray-700 dd-ml-2">{{
           item?.label
+=======
+    <div v-if="!item.children.length" class="dd-flex dd-items-center dd-gap-2">
+      <div class="dd-bg-white">
+        <span class="curved_line"></span>
+        <span class="dd-text-sm dd-font-normal dd-text-gray-700 dd-ml-2">{{
+          item.label
+>>>>>>> origin/Tree-component
         }}</span>
       </div>
     </div>
 
     <Disclosure v-else>
       <template v-slot="{ open }">
+<<<<<<< HEAD
         <div
           :class="{ 'show-on-hover': !isSelected && !item.disabled }"
           @click="toggleActive"
@@ -23,6 +32,12 @@
                 ? 'dd-opacity-50 dd-cursor-not-allowed dd-pointer-events-none hover:!dd-bg-white'
                 : '',
             ]"
+=======
+        <div :class="{ 'show-on-hover': !isSelected }" @click="toggleActive">
+          <DisclosureButton
+            class="dd-bg-white dd-flex dd-items-center dd-w-full dd-justify-between dd-h-8 dd-cursor-pointer hover:dd-bg-gray-50 dd-rounded-[4px] dd-px-1.5 dd-z-0"
+            :class="[isSelected ? 'dd-bg-gray-50' : '']"
+>>>>>>> origin/Tree-component
           >
             <div class="dd-flex dd-items-center dd-gap-2">
               <div :class="[open ? 'dd-mt-[1px]' : 'dd-mt-0']">
@@ -33,6 +48,7 @@
                 />
                 <span
                   :class="[
+<<<<<<< HEAD
                     item?.children.length > 1 && open ? 'straight-line' : '',
                   ]"
                 ></span>
@@ -72,11 +88,18 @@
                   <svgIcon v-if="customContent" icon="Mail" size="16" />
                 </slot>
               </div>
+=======
+                    item.children.length > 1 && open ? 'straight-line' : '',
+                  ]"
+                ></span>
+              </div>
+>>>>>>> origin/Tree-component
               <span class="dd-text-sm dd-font-normal dd-text-gray-700">
                 {{ item.label }}
               </span>
             </div>
             <div class="dd-w-fit">
+<<<<<<< HEAD
               <slot
                 v-if="actionButton"
                 name="actions"
@@ -157,19 +180,49 @@
                 </div>
               </template>
             </dd-input>
+=======
+              <slot name="actions" :selectedItem="selectedItem" :item="item">
+                <actions-button
+                  :open="open"
+                  :class="{ 'hide-on-hover': !isSelected }"
+                  :buttons="buttons"
+                  @selected="getClickedButton($event, item.id)"
+                />
+              </slot>
+            </div>
+            <slot name="badge">
+              <DdBage type="basic">{{ item.count }}</DdBage>
+            </slot>
+          </DisclosureButton>
+          <div class="dd-absolute dd-top-[1px] dd-left-[30px] dd-z-10">
+            <dd-input
+              v-model="inputValue"
+              v-if="item.id == activeListId"
+              :placeholder="item.label"
+              @click.stop="open = false"
+              size="sm"
+              @change="editListValue"
+            />
+>>>>>>> origin/Tree-component
           </div>
         </div>
 
         <DisclosurePanel class="dd-ml-6">
           <listItems
+<<<<<<< HEAD
             v-for="child in item?.children"
             :key="child?.id"
+=======
+            v-for="child in item.children"
+            :key="child.id"
+>>>>>>> origin/Tree-component
             :item="child"
             :open="open"
             :buttons="buttons"
             :selectedItem="selectedItem"
             :activeListId="activeListId"
             :newNode="newNode"
+<<<<<<< HEAD
             :disabled="item?.disabled"
             :checkBoxProp="checkBoxProp"
             :checked="item?.checked"
@@ -243,12 +296,22 @@
           <DisclosureButton
             v-if="item?.id === newNode"
             class="dd-bg-white dd-flex dd-items-center dd-w-full dd-justify-between dd-h-8 dd-pointer-events-none dd-rounded-[4px] focus-visible:dd-outline-none"
+=======
+            @set-selected="emits('setSelected', $event)"
+            @setEditId="emits('setEditId', $event)"
+            @SetNewNode="emits('SetNewNode', $event)"
+          />
+          <DisclosureButton
+            v-if="item.id === newNode"
+            class="dd-bg-white dd-flex dd-items-center dd-w-full dd-justify-between dd-h-8 dd-pointer-events-none dd-rounded-[4px]"
+>>>>>>> origin/Tree-component
           >
             <dd-input
               v-model="newListNode"
               placeholder="Add new node"
               @click.stop="open = false"
               @keydown.enter.prevent="open = false"
+<<<<<<< HEAD
               size="base"
               class="dd-pointer-events-auto dd-w-[260px]"
               @change="addNewListNode"
@@ -285,6 +348,12 @@
               v-if="item?.children.length > 0"
               class="curved_line_two"
             ></span>
+=======
+              size="sm"
+              class="dd-pointer-events-auto"
+            />
+            <span v-if="item.children.length > 0" class="curved_line_two"></span>
+>>>>>>> origin/Tree-component
           </DisclosureButton>
         </DisclosurePanel>
       </template>
@@ -297,10 +366,15 @@ import svgIcon from "../svgIcon/index.vue";
 import ActionsButton from "./Actions.vue";
 import DdInput from "../input/index.vue";
 import DdBage from "../badges/index.vue";
+<<<<<<< HEAD
 import DdButton from "../buttons/index.vue";
 import DdCheckbox from "../checkbox/index.vue";
 import { Disclosure, DisclosureButton, DisclosurePanel } from "@headlessui/vue";
 import { onBeforeUnmount, onMounted, ref, computed } from "vue";
+=======
+import { Disclosure, DisclosureButton, DisclosurePanel } from "@headlessui/vue";
+import { onBeforeUnmount, onMounted, ref, computed, watchEffect } from "vue";
+>>>>>>> origin/Tree-component
 const props = defineProps({
   item: {
     type: Object,
@@ -326,6 +400,7 @@ const props = defineProps({
     type: Number,
     default: 0,
   },
+<<<<<<< HEAD
   checkBoxProp: {
     type: Boolean,
     default: false,
@@ -383,6 +458,16 @@ const emits = defineEmits([
 const inputValue = ref("");
 const newListNode = ref("");
 const selectedId = ref([]);
+=======
+});
+
+const emits = defineEmits(["setSelected", "setEditId", "SetNewNode"]);
+
+const inputValue = ref("");
+const newListNode = ref("");
+const addNewNode = ref(false);
+const editListData = ref(false);
+>>>>>>> origin/Tree-component
 
 onMounted(() => {
   document.addEventListener("click", handleDomEvent);
@@ -396,6 +481,7 @@ const isSelected = computed(() => {
   return props.selectedItem?.id == props.item.id;
 });
 const toggleActive = () => {
+<<<<<<< HEAD
   if (props.item.disabled === true) {
     return false;
   } else {
@@ -404,10 +490,17 @@ const toggleActive = () => {
     } else {
       emits("setSelected", props.item);
     }
+=======
+  if (isSelected.value) {
+    emits("setSelected", {});
+  } else {
+    emits("setSelected", props.item);
+>>>>>>> origin/Tree-component
   }
 };
 
 const getClickedButton = (data, id) => {
+<<<<<<< HEAD
   if (data.buttonType === "Edit") {
     if (props.activeListId == id && props.item.id !== props.activeListId) {
       emits("setEditId", null);
@@ -415,6 +508,15 @@ const getClickedButton = (data, id) => {
       emits("setEditId", id);
     }
   } else if (data.buttonType === "Create") {
+=======
+  if (data.id === 2) {
+    if(props.activeListId == id) {
+      emits("setEditId", null);
+    } else {
+      emits("setEditId", id);
+    } 
+  } else if (data.id === 1) {
+>>>>>>> origin/Tree-component
     if (props.newNode == id && props.item.id !== props.newNode) {
       emits("SetNewNode", null);
     } else {
@@ -423,6 +525,7 @@ const getClickedButton = (data, id) => {
   }
 };
 
+<<<<<<< HEAD
 const setDropDownEvent = (event) => {
   event.stopPropagation();
 };
@@ -490,6 +593,17 @@ const assignToNode = () => {
   } else {
     toggleActive();
   }
+=======
+const handleDomEvent = (e) => {
+  if ((e.target && editListData.value === true) || addNewNode.value === true) {
+    editListData.value = false;
+    addNewNode.value = false;
+  }
+};
+
+const editListValue = (e) => {
+  console.log(inputValue.value);
+>>>>>>> origin/Tree-component
 };
 </script>
 
