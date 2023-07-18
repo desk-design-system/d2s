@@ -1,5 +1,5 @@
 <template>
-  <div v-bind="$attrs" class="dd-w-full dd-inline-flex dd-items-center dd-justify-between dd-py-1.5 dd-rounded-md dd-text-gray-600" :class="[!props.disabled ? 'hover:dd-bg-gray-50 dd-cursor-pointer ' : 'dd-cursor-not-allowed']" @click="onClick">
+  <div v-bind="$attrs" class="dd-w-full dd-inline-flex dd-items-center dd-justify-between dd-p-1.5 dd-rounded-md dd-text-gray-600" :class="[!props.disabled ? 'hover:dd-bg-gray-50 dd-cursor-pointer ' : 'dd-cursor-not-allowed']" @click="onClick">
     <div v-if="prefix" class="dd-w-5 dd-h-5 dd-flex dd-items-center dd-justify-center dd-cursor-pointer dd-mr-1.5">
       <slot name="prefixSlot" :active="active">
         <svgIcon v-if="prefix" :icon="prefixIcon" :class="[getActiveState, getDisabledState]" />

@@ -1,5 +1,5 @@
 <template>
-  <div class="dd-w-[209px] dd-flex dd-flex-col dd-rounded-md dd-bg-white">
+  <div v-bind="$attrs" class="dd-w-[209px] dd-flex dd-flex-col dd-rounded-md dd-bg-white">
     <div
       v-if="searchItem"
       class="dd-flex dd-items-center dd-justify-between dd-p-3 dd-w-full"
@@ -41,18 +41,20 @@
     <div
       v-for="(value, index) in settings"
       :key="index"
+      v-bind="$attrs"
       class="dd-p-3 dd-text-left dd-relative"
     >
       <div class="dd-w-full">
-        <div class="dd-text-gray-500 dd-text-xs dd-font-bold">
+        <div class="dd-text-gray-500 dd-text-xs dd-font-bold" @click="getNavTitle(value)">
           {{ value?.title }}
         </div>
-        <div v-for="(item, index) in value.items" :key="index">
+        <div v-for="(item, index) in value.items" :key="index" class="dd-relative -dd-left-1.5">
           <dd-nav
             :label="item?.title"
             :active="item?.active"
             :disabled="item?.disable"
             class="dd-text-sm dd-font-medium"
+            @onClick="getNavValue(item)"
           />
         </div>
       </div>
@@ -78,6 +80,8 @@ const emits = defineEmits([
   "blur",
   "usekeyup",
   "usekeydown",
+  "getNavValue",
+  "getNavTitle"
 ]);
 
 const props = defineProps({
@@ -114,10 +118,18 @@ const inputModelValue = computed({
 });
 
 watch(
+  () => inputModelValue.value,
   (newValue) => {
     inputModelValue.value = newValue;
   }
 );
+
+const getNavValue = (item) => {
+  emits('getNavValue', item);
+};
+const getNavTitle = (value) => {
+  emits('getNavTitle', value)
+}
 </script>
   
   <style>

@@ -1,13 +1,18 @@
 <template>
   <div>
     <!-- <DdNavigation label="side navs" prefix suffix active /> -->
-    <DdSettings :settings="settings" />
+    <DdSettings :settings="settings" v-model="modelValue" @getNavTitle="getNavTitle" />
   </div>
 </template>
 
 <script setup>
 import { ref } from "vue";
-import DdSettings from "./components/SettingsBar/index.vue"
+import DdSettings from "./components/SettingsBar/index.vue";
+
+const modelValue = ref('');
+const getNavTitle = (item) => {
+  console.log(item, 'onClick');
+}
 
 const settings = ref([
   {
