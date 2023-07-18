@@ -1,9 +1,9 @@
 import { ref } from "vue";
-import DdSettings from "./index.vue";
+import DdSetting from "./index.vue";
 
 export default {
   title: "Atoms/Setings",
-  component: DdSettings,
+  component: DdSetting,
   // More on argTypes: https://storybook.js.org/docs/vue/api/argtypes
   argTypes: {
     settings: {
@@ -122,7 +122,7 @@ export default {
 };
 
 const Template = (args) => ({
-  components: { DdSettings },
+  components: { DdSetting },
 
   setup() {
     const settings = ref([
