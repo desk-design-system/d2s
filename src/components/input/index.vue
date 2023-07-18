@@ -199,7 +199,7 @@ watch(() => value, (newValue) => {
 const inputType = ref("text");
 const inputSize = computed(() => {
   return {
-    "dd-h-6 !dd-text-xs": props.size === "xs",
+    "dd-h-5 !dd-text-xs": props.size === "xs",
     "dd-h-7  ": props.size === "sm",
     "dd-h-8 ": props.size === "base",
     "dd-h-9 ": props.size === "lg",
