@@ -384,7 +384,8 @@ const Template = (args) => ({
     :list="generatedArray"
     :buttons="buttons"
     :values="values"
-  /><div>`,
+  />
+  </div>`,
 });
 
 export const Default = Template.bind({});
