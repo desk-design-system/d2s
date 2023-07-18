@@ -1,5 +1,5 @@
 <template>
-  <div v-bind="$attrs" class="dd-w-[209px] dd-flex dd-flex-col dd-rounded-md dd-bg-white">
+  <div v-bind="$attrs" class="dd-w-full dd-flex dd-flex-col dd-rounded-md dd-bg-white">
     <div
       v-if="searchItem"
       class="dd-flex dd-items-center dd-justify-between dd-p-3 dd-w-full"
@@ -52,6 +52,10 @@
           <dd-nav
             :label="item?.title"
             :active="item?.active"
+            :prefix="prefix"
+            :suffix="suffix"
+            :prefixIcon="prefixIcon"
+            :suffixIcon="suffixIcon"
             :disabled="item?.disable"
             class="dd-text-sm dd-font-medium"
             @onClick="getNavValue(item)"
@@ -96,6 +100,22 @@ const props = defineProps({
   placeholder: {
     type: String,
     default: "",
+  },
+  prefixIcon: {
+    type: String,
+    default: "Circle",
+  },
+  suffixIcon: {
+    type: String,
+    default: "Circle",
+  },
+  prefix: {
+    type: Boolean,
+    default: false,
+  },
+  suffix: {
+    type: Boolean,
+    default: false,
   },
 });
 
