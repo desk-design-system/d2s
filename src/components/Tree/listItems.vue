@@ -21,13 +21,14 @@
               isSelected && !item.disabled ? 'dd-bg-gray-50' : '',
               item?.disabled == true
                 ? 'dd-opacity-50 dd-cursor-not-allowed dd-pointer-events-none hover:!dd-bg-white'
-                : '',
+                : ''
             ]"
           >
             <div class="dd-flex dd-items-center dd-gap-2">
               <div :class="[open ? 'dd-mt-[1px]' : 'dd-mt-0']">
                 <svgIcon
                   :icon="open ? 'SquareMinus' : 'SquarePlus'"
+                  :class="[open ? 'dd-mb-[0.1px]' : '']"
                   size="16"
                   class="dd-cursor-pointer"
                 />
