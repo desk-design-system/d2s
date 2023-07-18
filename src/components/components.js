@@ -33,4 +33,5 @@ export { default as DdPagination } from "./Pagination/index.vue";
 export { default as DdTextarea } from "./textarea/index.vue";
 export { default as DdGroupButton } from "./textarea/index.vue";
 export { default as DdTooltip } from "./tooltip/index.vue";
-export { default as DdTree } from "./Tree/index.vue"
+export { default as DdTree } from "./Tree/index.vue";
+export { default as DdSetting } from "./SettingsBar/index.vue";
