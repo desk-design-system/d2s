@@ -27,6 +27,7 @@
         />
       </div>
       <input
+      v-bind="$attrs"
         :name="name"
         :disabled="disabled"
         :class="[
