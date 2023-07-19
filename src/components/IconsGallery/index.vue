@@ -43,12 +43,8 @@ let fileNames = ref([]);
 
 const importComponents = async () => {
   const modules = import.meta.glob("../../components/icons/*.vue");
-  const files = await Promise.all(
-    Object.values(modules).map((module) => module())
-  );
-  const components = files.map((file) => file.default);
-  const names = components.map((comp) => {
-    const pathSplit = comp.__file.split("/");
+  const names = Object.values(modules).map((mod) => {
+    const pathSplit = mod.name.split("/");
     const fileName = pathSplit[pathSplit.length - 1].replace(".vue", "");
     return fileName;
   });
