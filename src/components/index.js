@@ -26,7 +26,7 @@ const install = (app, options) =>{
         alpha: "Only alphabetic values allowed",
         alpha_num: "Only alphabetic and numeric values allowed",
         alpha_spaces: "Only alphabetic values allowed",
-        confirmed: "This {field} confirmation does not match",
+        confirmed: "The entered passwords don't match. Try again!",
         email: "This {field} must be a valid email",
         integer: "This {field} must be an integer",
         max: "This {field} not be greater than 0:{max} values",
