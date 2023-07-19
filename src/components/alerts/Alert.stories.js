@@ -1,87 +1,264 @@
-// import MyButton from './Button.vue';
-import ddAlert from "./index.vue"
+import ddAlert from "./index.vue";
 // More on default export: https://storybook.js.org/docs/vue/writing-stories/introduction#default-export
 export default {
-    title: 'Atoms/Alert',
-    component: ddAlert,
-    // More on argTypes: https://storybook.js.org/docs/vue/api/argtypes
-    argTypes: {
-        type: {
-            control: {
-                type: 'select'
-            },
-            options: ['warning', 'danger', 'success', 'info'],
-            description: "Change type value as per the requirement warning / danger / success / info",
-            table: {
-                defaultValue: {
-                    summary: "warning"
-                }
-            }
-        },
-        title: {
-            description: "You can simply pass the heading of your alert in title slot",
-            table: {
-                defaultValue: {
-                    summary: "Slot"
-                }
-            }
-        },
-        closable: {
-            description: "To make your alert close able simple pass true value to closable prop",
-            table: {
-                defaultValue: {
-                    summary: "False"
-                }
-            }
-        },
-        close: {
-            description: "Trigger when alert is closed.",
-            table: {
-                defaultValue: {
-                    summary: "Function"
-                }
-            }
-        },
-        onClick: { action: 'clicked' }
-    },
-
+  title: "Atoms/Alert",
+  component: ddAlert,
 };
 
-// More on component templates: https://storybook.js.org/docs/vue/writing-stories/introduction#using-args
-const Template = (args) => ({
-    // Components used in your story `template` are defined in the `components` object
-    components: { ddAlert },
+export const Warning = {
+  render: (args) => ({
+    components: {
+      ddAlert,
+    },
     setup() {
-        return { args };
-
+      return {
+        args,
+      };
     },
-    // The story's `args` need to be mapped into the template through the `setup()` method
-    // And then the `args` are bound to your component with `v-bind="args"`
-    template: '<dd-alert  v-bind="args" />  ',
-});
-
-
-
-export const Warning = Template.bind({});
-export const success = Template.bind({});
-export const Danger = Template.bind({});
-export const Info = Template.bind({});
-// More on args: https://storybook.js.org/docs/vue/writing-stories/args
-Warning.args = {
-    title: 'The face of the moon in shadow.',
-    type: 'warning'
+    template: `<dd-alert  type="warning" title="warning alert" />`,
+  }),
+  argTypes: {
+    type: {
+      control: {
+        type: "select",
+      },
+      options: ["warning", "danger", "success", "info"],
+      description:
+        "Change type value as per the requirement warning / danger / success / info",
+      table: {
+        defaultValue: {
+          summary: "warning",
+        },
+      },
+    },
+    title: {
+      description:
+        "You can simply pass the heading of your alert in title slot",
+      table: {
+        defaultValue: {
+          summary: "Slot",
+        },
+      },
+    },
+    closable: {
+      description:
+        "To make your alert close able simple pass true value to closable prop",
+      table: {
+        defaultValue: {
+          summary: "False",
+        },
+      },
+    },
+    close: {
+      description: "Trigger when alert is closed.",
+      table: {
+        defaultValue: {
+          summary: "Function",
+        },
+      },
+    },
+    onClick: { action: "clicked" },
+  },
 };
-success.args = {
-    title: 'The face of the moon in shadow.',
-    type: 'success'
-};
-Danger.args = {
-    title: 'The face of the moon in shadow.',
-    type: 'danger'
-};
-Info.args = {
-    title: 'The face of the moon in shadow.',
-    type: 'info'
+
+export const Success = {
+  render: (args) => ({
+    components: {
+      ddAlert,
+    },
+    setup() {
+      return {
+        args,
+      };
+    },
+    template: `<dd-alert  type="success" title="success alert" />`,
+  }),
+  argTypes: {
+    type: {
+      control: {
+        type: "select",
+      },
+      options: ["warning", "danger", "success", "info"],
+      description:
+        "Change type value as per the requirement warning / danger / success / info",
+      table: {
+        defaultValue: {
+          summary: "warning",
+        },
+      },
+    },
+    title: {
+      description:
+        "You can simply pass the heading of your alert in title slot",
+      table: {
+        defaultValue: {
+          summary: "Slot",
+        },
+      },
+    },
+    closable: {
+      description:
+        "To make your alert close able simple pass true value to closable prop",
+      table: {
+        defaultValue: {
+          summary: "False",
+        },
+      },
+    },
+    close: {
+      description: "Trigger when alert is closed.",
+      table: {
+        defaultValue: {
+          summary: "Function",
+        },
+      },
+    },
+    onClick: { action: "clicked" },
+  },
 };
 
+export const Danger = {
+  render: (args) => ({
+    components: {
+      ddAlert,
+    },
+    setup() {
+      return {
+        args,
+      };
+    },
+    template: `<dd-alert  type="danger" title="danger alert" />`,
+  }),
+  argTypes: {
+    type: {
+      control: {
+        type: "select",
+      },
+      options: ["warning", "danger", "success", "info"],
+      description:
+        "Change type value as per the requirement warning / danger / success / info",
+      table: {
+        defaultValue: {
+          summary: "warning",
+        },
+      },
+    },
+    title: {
+      description:
+        "You can simply pass the heading of your alert in title slot",
+      table: {
+        defaultValue: {
+          summary: "Slot",
+        },
+      },
+    },
+    closable: {
+      description:
+        "To make your alert close able simple pass true value to closable prop",
+      table: {
+        defaultValue: {
+          summary: "False",
+        },
+      },
+    },
+    close: {
+      description: "Trigger when alert is closed.",
+      table: {
+        defaultValue: {
+          summary: "Function",
+        },
+      },
+    },
+    onClick: { action: "clicked" },
+  },
+};
 
+export const Info = {
+  render: (args) => ({
+    components: {
+      ddAlert,
+    },
+    setup() {
+      return {
+        args,
+      };
+    },
+    template: `<dd-alert  type="info" title="info alert" />`,
+  }),
+  argTypes: {
+    type: {
+      control: {
+        type: "select",
+      },
+      options: ["warning", "danger", "success", "info"],
+      description:
+        "Change type value as per the requirement warning / danger / success / info",
+      table: {
+        defaultValue: {
+          summary: "warning",
+        },
+      },
+    },
+    title: {
+      description:
+        "You can simply pass the heading of your alert in title slot",
+      table: {
+        defaultValue: {
+          summary: "Slot",
+        },
+      },
+    },
+    closable: {
+      description:
+        "To make your alert close able simple pass true value to closable prop",
+      table: {
+        defaultValue: {
+          summary: "False",
+        },
+      },
+    },
+    close: {
+      description: "Trigger when alert is closed.",
+      table: {
+        defaultValue: {
+          summary: "Function",
+        },
+      },
+    },
+    onClick: { action: "clicked" },
+  },
+};
+
+Warning.parameters = {
+  docs: {
+    source: {
+      code: ` 
+        <dd-alert  type="warning" title="warning alert" />`,
+    },
+  },
+};
+
+Success.parameters = {
+  docs: {
+    source: {
+      code: ` 
+        <dd-alert  type="success" title="success alert" />`,
+    },
+  },
+};
+Danger.parameters = {
+  docs: {
+    source: {
+      code: ` 
+        <dd-alert  type="danger" title="danger alert" />`,
+    },
+  },
+};
+Info.parameters = {
+  docs: {
+    source: {
+      code: ` 
+        <dd-alert  type="info" title="info alert" />`,
+    },
+  },
+};
