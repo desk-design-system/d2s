@@ -37,6 +37,9 @@
     <template #dropdown="{disabled, isSelected, open}">
         <slot name="dropdown" :disabled="disabled" :isSelected="isSelected" :open="open"></slot>
     </template>
+    <template #actions="{selectedItem, item, values, buttons, isSelected, showIcon}">
+      <slot name="actions" :selectedItem="selectedItem" :item="item" :values="values" :buttons="buttons" :isSelected="isSelected" :showIcon="showIcon"></slot>
+  </template>
     <template #checkbox="{checkBoxProp, open, item, disabled}">
       <slot name="checkbox" :checkBoxProp="checkBoxProp" :item="item" :open="open" :disabled="disabled"></slot>
     </template>
