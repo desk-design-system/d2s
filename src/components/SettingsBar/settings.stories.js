@@ -131,7 +131,21 @@ export const Default = {
   }),
   argTypes: {
     settings: {
-      description: "Array prop",
+      description: `Example settings array 
+      [
+        {
+          id: 1,
+          title: "Module Configure",
+          items: [
+            {
+              id: 1,
+              title: "Ticket Management",
+              active: false,
+              disable: true,
+            },
+          ],
+        }
+      ]`,
       table: {
         defaultValue: {
           summary: Array,

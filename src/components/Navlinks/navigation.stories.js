@@ -18,7 +18,7 @@ export const Default = {
         args,
       };
     },
-    template: `<div class="dd-w-[15rem]"> <dd-navigation label="Side Navigation with Slots" /> </div>`,
+    template: `<dd-navigation label="Side Navigation with Slots" />`,
   }),
   argTypes: {
     label: {

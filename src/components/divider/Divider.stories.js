@@ -1,59 +1,131 @@
-import DdDivider from "./index.vue"
-import { action } from "@storybook/addon-actions"
-import {ref} from 'vue'
-// More on default export: https://storybook.js.org/docs/vue/writing-stories/introduction#default-export
+import DdDivider from "./index.vue";
 export default {
-  title: 'Atoms/Divider',
+  title: "Atoms/Divider",
   component: DdDivider,
-  // More on argTypes: https://storybook.js.org/docs/vue/api/argtypes
+};
+
+export const Default = {
+  render: (args) => ({
+    components: {
+      DdDivider,
+    },
+    setup() {
+      return {
+        args,
+      };
+    },
+    template: `<dd-divider  /> `,
+  }),
   argTypes: {
     title: {
       description: "Change title value as per the requirement",
       table: {
-          defaultValue: {
-              summary: "Content"
-          }
-      }
-  },
+        defaultValue: {
+          summary: "Content",
+        },
+      },
+    },
     placement: {
-      control: { type: 'select' },
-      options: ['center', 'start'],
+      control: { type: "select" },
+      options: ["center", "start"],
       description: "Accepted value start / center",
-      table:{
-        defaultValue:{
-          summary: "center"
-        }
-      }
+      table: {
+        defaultValue: {
+          summary: "center",
+        },
+      },
     },
   },
 };
 
-// More on component templates: https://storybook.js.org/docs/vue/writing-stories/introduction#using-args
-const Template = (args) => ({
-  // Components used in your story `template` are defined in the `components` object
-  components: { DdDivider },
-  // The story's `args` need to be mapped into the template through the `setup()` method
-  setup() {
-    return {  args,};
-
+export const Title = {
+  render: (args) => ({
+    components: {
+      DdDivider,
+    },
+    setup() {
+      return {
+        args,
+      };
+    },
+    template: `<dd-divider title="Content" /> `,
+  }),
+  argTypes: {
+    title: {
+      description: "Change title value as per the requirement",
+      table: {
+        defaultValue: {
+          summary: "Content",
+        },
+      },
+    },
+    placement: {
+      control: { type: "select" },
+      options: ["center", "start"],
+      description: "Accepted value start / center",
+      table: {
+        defaultValue: {
+          summary: "center",
+        },
+      },
+    },
   },
-  // And then the `args` are bound to your component with `v-bind="args"`
-  template: '<dd-divider  v-bind="args"  />  ',
-});
-
-
-
-
-export const Default = Template.bind({});
-export const Title = Template.bind({});
-export const TitleLeft = Template.bind({});
-// More on args: https://storybook.js.org/docs/vue/writing-stories/args
-Title.args = {
-  title: 'Content',
-};
-TitleLeft.args = {
-  title: 'Content',
-  placement: 'start'
 };
 
+export const TitleLeft = {
+  render: (args) => ({
+    components: {
+      DdDivider,
+    },
+    setup() {
+      return {
+        args,
+      };
+    },
+    template: `<dd-divider title="Content" placement="start" /> `,
+  }),
+  argTypes: {
+    title: {
+      description: "Change title value as per the requirement",
+      table: {
+        defaultValue: {
+          summary: "Content",
+        },
+      },
+    },
+    placement: {
+      control: { type: "select" },
+      options: ["center", "start"],
+      description: "Accepted value start / center",
+      table: {
+        defaultValue: {
+          summary: "center",
+        },
+      },
+    },
+  },
+};
 
+Default.parameters = {
+  docs: {
+    source: {
+      code: ` <dd-divider />`,
+    },
+  },
+};
+
+Title.parameters = {
+  docs: {
+    source: {
+      code: `<dd-divider title="Content" />`,
+    },
+  },
+};
+
+TitleLeft.parameters = {
+  docs: {
+    source: {
+      code: ` <dd-divider title="Content" placement='start' /> `,
+    },
+  },
+};
