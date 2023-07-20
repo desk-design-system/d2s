@@ -86,7 +86,7 @@
 </template>
   
   <script setup>
-import { ref, defineProps, watch, computed, nextTick } from "vue";
+import { ref, defineProps, computed } from "vue";
 import DdNav from "../Navlinks/index.vue";
 import DdInput from "../input/index.vue";
 import svgIcon from "../svgIcon/index.vue";

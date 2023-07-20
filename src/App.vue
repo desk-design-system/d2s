@@ -9,7 +9,6 @@
 <script setup>
 import { ref } from "vue";
 import DdTable from "./components/table/index.vue";
-import DdButton from "./components/buttons/index.vue"
 
 
 let columns = ref([
