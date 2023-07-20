@@ -28,6 +28,7 @@
       </div>
       <input
       v-bind="$attrs"
+        ref="inputRef"
         :name="name"
         :disabled="disabled"
         :class="[
@@ -181,6 +182,12 @@ const props = defineProps({
     },
     default: "base",
   },
+});
+
+const inputRef = ref(null);
+
+defineExpose({
+  inputRef
 });
 
 const getRules = () => {
