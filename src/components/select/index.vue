@@ -9,10 +9,12 @@
             ? ' !dd-border-red-600 focus:!dd-border-red-600 dd-focus:!dd-ring-red-600'
             : 'dd-border-gray-300 focus:dd-ring-teal-600 focus:!dd-border-teal-600',
           inputSize,
+          disabled ? 'dd-pointer-events-none dd-cursor-not-allowed' : ''
         ]" :readonly="!filterable"
           class="dd-border-solid focus-visible:dd-outline-none dd-flex dd-items-center dd-cursor-pointer dd-bg-white dd-relative dd-w-full dd-border dd-rounded-md dd-shadow-sm dd-pl-3 dd-pr-10 dd-py-2 dd-text-left dd-h-9 sm:dd-text-sm"
           @change="searchQuery($event.target.value)" :displayValue="(val) => findItem(val)"
-          @click="setDropDown()" :placeholder="props.placeholder">
+          @click="setDropDown()" :placeholder="props.placeholder"
+          :disabled="disabled">
           <ddAvatar v-if="selectedValue && showAvatar" size="mini" class="dd-mr-3"
             :srcLink="selectedValue[props.defaultProps.avatar]" />
           <span class="dd-absolute dd-inset-y-0 dd-right-0 dd-flex dd-items-center dd-pr-2 dd-pointer-events-none">
@@ -21,7 +23,7 @@
         </ComboboxInput>
         <button
           class="dd-absolute dd-inset-y-0 dd-right-2 dd-flex dd-items-center dd-pr-2 dd-bg-white dd-border-solid dd-h-5 dd-top-[7px] dd-transform"
-          @click="setDropDown()" :class="{ 'rotate-icon': isIconRotated }">
+          @click="setDropDown()" :class="{ 'rotate-icon': isIconRotated }" :disabled="disabled">
           <svgIcon icon="ChevronDown" size="12" aria-hidden="true" />
         </button>
           <ComboboxOptions v-if="filteredOptions.length > 0" :static="showDropdown" :class="listClass"
@@ -108,6 +110,10 @@ const props = defineProps({
     default: false,
   },
   isRequired: {
+    type: Boolean,
+    default: false,
+  },
+  disabled: {
     type: Boolean,
     default: false,
   },

@@ -72,5 +72,6 @@ Basic.args = {
   filterable: true,
   label: "select",
   addNewItem: true,
-  placeholder: 'choose option'
+  placeholder: 'choose option',
+  disabled: false
 };
