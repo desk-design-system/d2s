@@ -52,10 +52,6 @@
         class="!dd-block !dd-border-solid focus:!dd-border-teal-600 !dd-border-gray-300 !dd-w-full !dd-rounded-md sm:!dd-text-sm focus:ring-2 focus:dd-ring-inset dd-shadow-sm"
         :placeholder="placeholder"
         />
-        <!-- @focus="emits('focus')"
-        @blur="emits('blur')"
-        @keydown="emits('usekeydown')"
-        @keyup="emits('usekeyup')" -->
       <!-- $slots.suffix -->
       <div
         @click="suffixIconClick"
@@ -92,6 +88,12 @@
   </div>
 </template>
 
+<!-- fallthrough attribute -->
+<script>
+export default {
+  inheritAttrs: false,
+}
+</script>
 <script setup>
 import { useField } from "vee-validate";
 import svgIcon from "../svgIcon/index.vue";
@@ -100,10 +102,6 @@ const emits = defineEmits([
   "update:modelValue",
   "change",
   "suffixIconClick",
-  "focus",
-  "blur",
-  "usekeyup",
-  "usekeydown",
 ]);
 const props = defineProps({
   label: {
