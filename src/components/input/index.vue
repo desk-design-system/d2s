@@ -1,5 +1,5 @@
 <template>
-  <div class="dd-base" >
+  <div class="dd-base" :class="$attrs.class" >
     <slot name="label">
       <label
         v-if="label"
@@ -27,7 +27,7 @@
         />
       </div>
       <input
-      v-bind="$attrs"
+      v-bind="{...$attrs, class:undefined}"
         ref="inputRef"
         :name="name"
         :disabled="disabled"
