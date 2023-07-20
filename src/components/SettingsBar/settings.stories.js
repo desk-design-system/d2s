@@ -57,6 +57,22 @@ export default {
         },
       },
     },
+    scrollProperty: {
+      description: "set height or max-height or min-height",
+      table: {
+        defaultValue: {
+          summary: String,
+        },
+      },
+    },
+    scrollValue: {
+      description: "set height in px or rem or %",
+      table: {
+        defaultValue: {
+          summary: String,
+        },
+      },
+    },
     prefixIcon: {
       description: "Set prefix icon",
       table: {

@@ -1,7 +1,7 @@
 <template>
   <div
     v-bind="$attrs"
-    class="dd-w-full dd-flex dd-flex-col dd-rounded-md dd-bg-white dd-overflow-y-scrolls"
+    class="dd-flex dd-flex-col dd-rounded-md dd-bg-white"
   >
     <div class="dd-sticky dd-z-50 dd-bg-white dd-top-0">
       <div
@@ -45,42 +45,44 @@
       </div>
       <dd-divider class="!dd-my-0" />
     </div>
-    <div
-      v-for="(value, index) in filteredItems"
-      :key="index"
-      v-bind="$attrs"
-      class="dd-p-3 dd-text-left dd-relative"
-    >
-      <div class="dd-w-full">
-        <div
-          class="dd-text-gray-500 dd-text-xs dd-font-bold"
-          @click="getNavTitle(value)"
-        >
-          {{ value?.title }}
+    <div :style="styles" class="dd-overflow-auto">
+      <div
+        v-for="(value, index) in filteredItems"
+        :key="index"
+        v-bind="$attrs"
+        class="dd-p-3 dd-text-left dd-relative"
+      >
+        <div class="dd-w-full">
+          <div
+            class="dd-text-gray-500 dd-text-xs dd-font-bold"
+            @click="getNavTitle(value)"
+          >
+            {{ value?.title }}
+          </div>
+          <div
+            v-for="(item, index) in value.items"
+            :key="index"
+            class="dd-relative -dd-left-1.5"
+            :class="[item?.active ? '!dd-bg-gray-50' : '']"
+          >
+            <dd-nav
+              :label="item?.title"
+              :active="item?.id == activeNav"
+              :prefix="prefix"
+              :suffix="suffix"
+              :prefixIcon="prefixIcon"
+              :suffixIcon="suffixIcon"
+              :disabled="item?.disable"
+              class="dd-text-sm dd-font-medium"
+              @onClick="getNavValue(item)"
+            />
+          </div>
         </div>
-        <div
-          v-for="(item, index) in value.items"
-          :key="index"
-          class="dd-relative -dd-left-1.5"
-          :class="[item?.active ? '!dd-bg-gray-50' : '']"
-        >
-          <dd-nav
-            :label="item?.title"
-            :active="item?.id == activeNav"
-            :prefix="prefix"
-            :suffix="suffix"
-            :prefixIcon="prefixIcon"
-            :suffixIcon="suffixIcon"
-            :disabled="item?.disable"
-            class="dd-text-sm dd-font-medium"
-            @onClick="getNavValue(item)"
-          />
-        </div>
+        <dd-divider
+          v-if="index !== settings.length - 1"
+          class="dd-absolute dd-top-3"
+        />
       </div>
-      <dd-divider
-        v-if="index !== settings.length - 1"
-        class="dd-absolute dd-top-3"
-      />
     </div>
   </div>
 </template>
@@ -131,6 +133,14 @@ const props = defineProps({
     type: Number || String,
     default: "",
   },
+  scrollProperty: {
+    type: String,
+    default: "height",
+  },
+  scrollValue: {
+    type: String,
+    default: "",
+  },
 });
 
 const searchItem = ref(false);
@@ -147,6 +157,12 @@ const openSearch = () => {
 const focusInput = () => {
   searchInputRef.value.inputRef.focus();
 };
+
+const styles = computed(() => {
+  const styleObj = {};
+  styleObj[props.scrollProperty] = `calc(100vh - ${props.scrollValue})`;
+  return styleObj;
+});
 
 const filteredItems = computed(() => {
   if (!searchInput.value) {
