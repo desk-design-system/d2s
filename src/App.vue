@@ -1,18 +1,15 @@
 <template>
   <div>
-    <!-- <dd-table :rows="rows" :columns="columnVal" :buttons="buttons" :Actions="Actions" :values="values" footer checkBoxProp
+    <dd-table :rows="rows" :columns="columnVal" :buttons="buttons" :Actions="Actions" :values="values" footer checkBoxProp
       fixedHeight rowKey="id" hoveringRow lastCell fixed actionHeader emptyState actionsPanel sortIcon settingbarIcon
-      searchIcon @updateSettings="updateSettings" dragDrop /> -->
-      <dd-tel-input v-model="selected" />
+      searchIcon @updateSettings="updateSettings" dragDrop />
   </div>
 </template>
 
 <script setup>
 import { ref } from "vue";
 import DdTable from "./components/table/index.vue";
-import DdTelInput from "./components/Telinput/index.vue"
 
-const selected = ref("");
 
 let columns = ref([
   {
