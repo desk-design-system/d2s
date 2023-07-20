@@ -1,5 +1,5 @@
 <template>
-  <div class="dd-base" v-bind="$attrs">
+  <div class="dd-base" >
     <slot name="label">
       <label
         v-if="label"
@@ -51,11 +51,11 @@
         :type="inputType"
         class="!dd-block !dd-border-solid focus:!dd-border-teal-600 !dd-border-gray-300 !dd-w-full !dd-rounded-md sm:!dd-text-sm focus:ring-2 focus:dd-ring-inset dd-shadow-sm"
         :placeholder="placeholder"
-        @focus="emits('focus')"
+        />
+        <!-- @focus="emits('focus')"
         @blur="emits('blur')"
         @keydown="emits('usekeydown')"
-        @keyup="emits('usekeyup')"
-      />
+        @keyup="emits('usekeyup')" -->
       <!-- $slots.suffix -->
       <div
         @click="suffixIconClick"
