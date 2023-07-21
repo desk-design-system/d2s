@@ -1,24 +1,28 @@
 <template>
   <div>
-    <label
-      class="dd-block dd-text-sm dd-font-medium dd-text-gray-700 dd-mb-1"
-      >{{ label }} <span v-if="isRequired" class="dd-text-red-500">*</span></label
+    <label class="dd-block dd-text-sm dd-font-medium dd-text-gray-700 dd-mb-1"
+      >{{ label }}
+      <span v-if="isRequired" class="dd-text-red-500">*</span></label
     >
     <vue-tel-input
-    :name="name"
-      :style="{ height: `${inputSize} !important`, borderColor: `${hasError ? '#dc2626' : '#d1d5db'} !important` }"
+      :name="name"
+      :style="{
+        height: `${inputSize} !important`,
+        borderColor: `${hasError ? '#dc2626' : '#d1d5db'} !important`,
+      }"
       v-bind="config"
       :id="id"
       v-model="value"
     ></vue-tel-input>
-     <span
+    <span
       v-if="errorMessage"
       class="dd-text-xs dd-text-red-500 dd-capitalize dd-pt-px"
-      >{{ errorMessage }}</span>
+      >{{ errorMessage }}</span
+    >
   </div>
 </template>
 <script setup>
-import { ref, computed,watch } from "vue";
+import { ref, computed, watch } from "vue";
 import { VueTelInput } from "vue-tel-input";
 import { useField } from "vee-validate";
 import "vue-tel-input/dist/vue-tel-input.css";
@@ -64,11 +68,11 @@ const props = defineProps({
 });
 
 const propModelValue = computed(() => {
-  if(!props.modelValue) {
-    return ''
+  if (!props.modelValue) {
+    return "";
   }
-  return props.modelValue.toString()
-})
+  return props.modelValue.toString();
+});
 const inputModelValue = computed({
   get() {
     return propModelValue;
@@ -111,7 +115,7 @@ const getRules = () => {
 
 const { errorMessage, value, handleChange } = useField(props.name, getRules(), {
   label: props.name,
-  initialValue: propModelValue.value
+  initialValue: propModelValue.value,
 });
 watch(
   () => value,
@@ -126,10 +130,9 @@ watch(
     handleChange(newValue.value);
   },
   {
-    immediate: true
+    immediate: true,
   }
 );
-
 </script>
 <style>
 .vue-tel-input {
@@ -143,10 +146,9 @@ watch(
   border-bottom-right-radius: 6px !important;
   box-shadow: unset !important;
 }
-.vue-tel-input input::placeholder{
-  font-size: .875rem!important;
-color: #6b7280 !important;
-
+.vue-tel-input input::placeholder {
+  font-size: 0.875rem !important;
+  color: #6b7280 !important;
 }
 .vue-tel-input:focus-within {
   box-shadow: unset !important;
@@ -156,5 +158,29 @@ color: #6b7280 !important;
 .vti__dropdown {
   border-top-left-radius: 6px !important;
   border-bottom-left-radius: 6px !important;
+}
+.vti__dropdown-item strong,
+.vti__dropdown-item span {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.25rem;
+  color: #4B5563 !important; 
+}
+.vti__dropdown-list.below {
+  border-radius: 6px;
+}
+.vti__flag {
+  margin-right: 0px;
+  margin-left: 0px;
+}
+.vti__dropdown-item .vti__flag {
+  margin-right: 8px;
+}
+.vti__dropdown-item {
+  cursor: pointer;
+  padding: 4px 10px;
+}
+.vti__dropdown-arrow {
+  margin-left: 5px;
 }
 </style>
