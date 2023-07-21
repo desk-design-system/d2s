@@ -23,11 +23,11 @@
           :key="`${index}-pagination-index${paginatedNumber}`"
         >
           <dd-button
-            class="dd-w-10 dd-h-8 dd-text-center dd-flex dd-items-center dd-justify-center dd-rounded-none"
+            class="dd-w-10 dd-h-8 dd-text-center dd-flex dd-items-center dd-justify-center dd-rounded-none !dd-ring-0 dd-border-gray-300 dd-border-t dd-border-b dd-border-r"
             color="white"
             :class="`${
               Number(currentPage) === Number(paginatedNumber)
-                ? 'dd-text-gray-700 hover:dd-text-gray-700 dd-bg-teal-50 hover:dd-bg-teal-100 dd-border-[1px] dd-border-teal-500 dd-outline-none'
+                ? 'dd-text-gray-700 hover:dd-text-gray-700 !dd-bg-teal-50 hover:dd-bg-teal-100 dd-border-[1px] dd-border-teal-500 dd-outline-none'
                 : ''
             }`"
             @click.prevent="setCurrentPage(Number(paginatedNumber))"
