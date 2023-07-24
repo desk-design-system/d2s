@@ -3,7 +3,7 @@
     v-bind="$attrs"
     class="dd-flex dd-flex-col dd-rounded-md dd-bg-white"
   >
-    <div class="dd-sticky dd-z-50 dd-bg-white dd-top-0">
+    <div class="dd-sticky dd-rounded-t-md	 dd-z-50 dd-bg-white dd-top-0">
       <div
         v-if="searchItem"
         class="dd-flex dd-items-center dd-justify-between dd-p-3 dd-w-full dd-gap-1"
