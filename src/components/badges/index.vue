@@ -56,7 +56,6 @@ export default {
     type: {
       type: String,
       validator: function (value) {
-        // The value must match one of these strings
         return (
           ["basic", "danger", "warning", "success", "info", "purple"].indexOf(
             value
