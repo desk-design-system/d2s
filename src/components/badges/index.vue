@@ -1,7 +1,7 @@
 <template>
   <span
     :class="[badgeStyling]"
-    class="dd-inline-flex dd-items-center dd-font-medium dd-rounded dd-py-0.5"
+    class="dd-inline-flex dd-items-center dd-font-medium dd-rounded"
   >
     <svg
       v-if="dot"
@@ -15,12 +15,16 @@
       <circle cx="4" cy="4" r="3" />
     </svg>
     <slot name="prefix"></slot>
-    <slot>
-      <span class="dd-flex dd-items-center dd-justify-center">
-        {{ title }}
-      </span>
-    </slot>
+    <slot>{{ title }}</slot>
     <slot name="suffix"></slot>
+    <!-- <dd-button
+      v-if="closable"
+      @click="$emit('close')"
+      type="text"
+      class="!dd-py-0 !dd-px-0"
+    >
+      
+    </dd-button> -->
     <XIcon
     v-if="closable "
       @click="$emit('close')"
@@ -95,8 +99,8 @@ export default {
     },
     badgeStyling() {
       return {
-        ' dd-px-2 dd-text-[12px]': this.size === 'medium',
-        ' dd-px-3 dd-text-[14px]': this.size === 'large',
+        ' dd-px-2 dd-py-0.5 dd-text-xs ': this.size === 'medium',
+        ' dd-px-2.5 dd-py-0.5 dd-text-sm ': this.size === 'large',
         ' !dd-px-2 ': this.closable && this.size === 'large',
         ' dd-rounded-xl ': this.rounded,
         ' dd-bg-gray-100 dd-text-gray-700 ': this.type === 'basic',
