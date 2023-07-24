@@ -29,7 +29,7 @@
           'dd-h-3.5 dd-w-3.5 ': size === 'medium',
           'dd-h-4 dd-w-4 ': size === 'large',
         }"
-        class="dd-ml-1.5 dd-inline-flex hover:!dd-text-teal-700 "
+        class="dd-ml-1.5 dd-inline-flex"
         aria-hidden="true"
       />
   </span>
