@@ -4,10 +4,22 @@ import DdStepper from "./index.vue";
 export default {
   title: "Atoms/Stepper",
   component: DdStepper,
-  // More on argTypes: https://storybook.js.org/docs/vue/api/argtypes
+};
+
+
+export const Default = {
+  render: (args) => ({
+    components: { DdStepper },
+  setup() {
+    const value = ref(["Job details", "Application form", "Preview"]);
+    const activeStep = ref(0);
+    return { args, value, activeStep };
+  },
+    template: `<dd-stepper :steps="value" :active="activeStep" />`,
+  }),
   argTypes: {
     steps: {
-      description: "Pass the array of step titles",
+      description: `Pass the array of step titles sample = ["Job details", "Application form", "Preview"]`,
       table: {
         defaultValue: {
           summary: "null",
@@ -25,23 +37,10 @@ export default {
   },
 };
 
-// More on component templates: https://storybook.js.org/docs/vue/writing-stories/introduction#using-args
-const Template = (args) => ({
-  // Components used in your story `template` are defined in the `components` object
-  components: { DdStepper },
-  setup() {
-    const value = ref(["Job details", "Application form", "Preview"]);
-    const activeStep = ref(0);
-    return { args, value, activeStep };
+Default.parameters = {
+  docs: {
+    source: {
+      code: ` <dd-stepper :steps="value" :active="activeStep" />`,
+    },
   },
-  // The story's `args` need to be mapped into the template through the `setup()` method
-  // And then the `args` are bound to your component with `v-bind="args"`
-  template:
-    '<dd-stepper  v-bind="args" :steps="value" :active="activeStep" />  ',
-});
-
-export const Default = Template.bind({});
-// More on args: https://storybook.js.org/docs/vue/writing-stories/args
-Default.args = {
-  active: 0,
 };

@@ -76,7 +76,31 @@ export const Default = {
       },
     },
     options: {
-      description: "Pass data array in options",
+      description: `Pass data array in options sample Array people = [
+        { value: 1, name: "Leslie Alexander" },
+        { value: 2, name: "Aeslie Blexander" },
+        { value: 3, name: "Ceslie Dlexander" },
+        { value: 4, name: "Eeslie Flexander" },
+        { value: 5, name: "Geslie Hlexander" },
+        { value: 6, name: "Ieslie Jlexander" },
+        { value: 7, name: "Jeslie KJlexander" },
+      ]`,
+      table: {
+        defaultValue: {
+          summary: null,
+        },
+      },
+    },
+    filteredData: {
+      description: `const filteredData = computed(() =>
+      query.value === ""
+        ? []
+        : people.filter((person) => {
+            return person.name
+              .toLowerCase()
+              .includes(query.value.toLowerCase());
+          })
+    );`,
       table: {
         defaultValue: {
           summary: null,

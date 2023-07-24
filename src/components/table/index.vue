@@ -46,21 +46,21 @@
 
           <div class="dd-w-full dd-cursor-pointer" v-if="search && searchIcon">
             <div class="dd-flex dd-items-center dd-gap-3">
-              <svgIcon v-if="selectedId?.length > 0" icon="Search" size="20" class="dd-text-gray-400" />
+              <svgIcon v-if="selectedId?.length > 0" icon="Search" size="20" class="!dd-text-gray-400" />
               <dd-input type="text" v-model="queryInput" @change="searchQuery"
                 class="focus-visible:!dd-border-none dd-w-full" :icon="selectedId?.length === 0 ? 'Search' : ''"
                 Border="none" placeholder="Search Ticket" size="xl" :prefix="selectedId?.length === 0 ? true : false" />
             </div>
-            <svgIcon icon="Close" size="12" class="dd-absolute dd-text-gray-400 dd-top-4 hover:dd-text-gray-500"
+            <svgIcon icon="Close" size="16" class="dd-absolute dd-text-gray-400 dd-top-4 hover:dd-text-gray-500"
               @click="closeSearch" :class="[fixed ? 'dd-right-6' : 'dd-right-6']" />
           </div>
         </div>
         <div class="dd-w-full dd-cursor-pointer" v-if="search && !actionHeader && searchIcon"
           :class="[fixed ? 'group_wrapper' : '']">
-          <dd-input type="text" v-model="queryInput" @change="searchQuery" class="focus-visible:!dd-border-none"
+          <dd-input type="text" v-model="queryInput" @change="searchQuery" class="focus-visible:!dd-border-none [&>svg]:!dd-text-gray-400"
             :icon="selectedId?.length === 0 ? 'Search' : ''" Border="none" placeholder="Search Ticket"
             :size="selectedId?.length > 0 ? 'lg' : 'xl'" :prefix="selectedId?.length === 0 ? true : false" />
-          <svgIcon icon="Close" size="12" class="dd-absolute dd-text-gray-400 dd-top-4 hover:dd-text-gray-500"
+          <svgIcon icon="Close" size="12" class="dd-absolute !dd-text-gray-400 dd-top-4 hover:dd-text-gray-500"
             @click="closeSearch" :class="[fixed ? 'dd-right-6' : 'dd-right-6']" />
         </div>
         <slot name="actionHeaderSlot" />
