@@ -197,7 +197,7 @@
                       : 'dd-cursor-pointer',
                   ]">
                   <hoverRow :actionsPanel="actionsPanel" :values="Actions" :rowDisabled="row?.disabled"
-                    :selected="selected" :showIcon="showIcon" :hoveredRow="hoveredRow" :row="row" @editRow="editRow"
+                    :selected="selected" :showIcon="showIcon" :hoveredRow="hoveredRow" :presistAction="presistAction" :row="row" @editRow="editRow"
                     @deleteRow="deleteRow" :selectedId="selectedId" @dropdownValue="dropdownValue" />
                   <slot name="rowActions" />
                 </td>
@@ -359,6 +359,10 @@ const props = defineProps({
     default: false,
   },
   settingbarIcon: {
+    type: Boolean,
+    default: false,
+  },
+  presistAction: {
     type: Boolean,
     default: false,
   },
@@ -705,11 +709,13 @@ const handleMouseLeave = () => {
 };
 
 const handleMouseEnterActions = (rowData) => {
+  if(props.presistAction == true) return;
   hoveredRow.value = rowData;
   isMouseHovered.value = true;
 };
 
 const handleMouseLeaveActions = () => {
+  if(props.presistAction == true) return;
   hoveredRow.value = null;
   isMouseHovered.value = false;
 };
