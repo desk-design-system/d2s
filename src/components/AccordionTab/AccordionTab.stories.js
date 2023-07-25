@@ -45,12 +45,15 @@ export const Default = {
                 args
             };
         },
-        template: ` <dd-accordion  :active="0" :multiple='false'>
-                          <dd-accordion-tab  :title="args.title" >
-                              <h3>This is tab</h3>
-                          </dd-accordion-tab>
-                        
-                    </dd-accordion>`,
+        template: `<dd-accordion :active="0" gradient="fuchsia" class="!dd-w-[770px]">
+        <dd-accordion-tab
+          title="Tab-1"
+          prepend-icon="SquareDot"
+          badge="Page $100.00"
+        >
+          <h3>This is tab 1</h3>
+        </dd-accordion-tab>
+      </dd-accordion>`,
     }),
     args: {
       
