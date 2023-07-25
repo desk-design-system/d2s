@@ -44,6 +44,10 @@ export const Default = {
       description: "Using DdBadge with same name props",
       defaultValue: "",
     },
+    gradient: {
+        description: "Use any tialwind color for gradient",
+        defaultValue: "",
+      },
     "#append": {
       description: "Append slot.",
     },
@@ -132,7 +136,7 @@ export const Badge = {
         args,
       };
     },
-    template: `<dd-accordion :active="1" gradient="blue">
+    template: `<dd-accordion :active="0">
           <dd-accordion-tab
             title="Tab-1"
             prepend-icon="SquareDot"
@@ -171,6 +175,59 @@ export const Badge = {
     },
   },
 };
+
+export const Gradient = {
+    render: (args) => ({
+      components: {
+        DdAccordion,
+        DdAccordionTab,
+      },
+      setup() {
+        return {
+          args,
+        };
+      },
+      template: `<dd-accordion :active="1" gradient="blue">
+          <dd-accordion-tab
+            title="Tab-1"
+            prepend-icon="SquareDot"
+          >
+            <h3>This is tab 1</h3>
+          </dd-accordion-tab>
+        </dd-accordion>`,
+    }),
+    argTypes: {
+      "prepend-icon": {
+        description: "Pass name of the icon to prepend in the titlw box",
+      },
+      "append-icon": {
+        description: "Pass name of the icon to append in the titlw box",
+      },
+      title: {
+        description: "Title for the header.",
+        type: { name: "string", required: true },
+        defaultValue: "",
+      },
+      badge: {
+        description: "Using DdBadge with same name props",
+        defaultValue: "",
+      },
+      gradient: {
+        description: "Use any tialwind color for gradient",
+        defaultValue: "",
+      },
+      "#append": {
+        description: "Append slot.",
+      },
+      "#prepend": {
+        description: "Prepend slot.",
+      },
+      "#title": {
+        description: "Header slot.",
+      },
+    },
+  };
+
 
 Default.parameters = {
   docs: {
@@ -214,7 +271,7 @@ AppendIcon.parameters = {
 Badge.parameters = {
   docs: {
     source: {
-      code: `<dd-accordion :active="1" gradient="blue">
+      code: `<dd-accordion :active="1">
         <dd-accordion-tab
           title="Tab-1"
           prepend-icon="SquareDot"
@@ -228,3 +285,18 @@ Badge.parameters = {
     },
   },
 };
+
+Gradient.parameters = {
+    docs: {
+      source: {
+        code: `<dd-accordion :active="1" gradient="blue">
+        <dd-accordion-tab
+          title="Tab-1"
+          prepend-icon="SquareDot"
+        >
+          <h3>This is tab 1</h3>
+        </dd-accordion-tab>
+      </dd-accordion>`,
+      },
+    },
+  };
