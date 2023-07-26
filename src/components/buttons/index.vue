@@ -269,7 +269,7 @@ export default {
     prefixSpace() {
       if (
         (this.prefix && this.icon && !this.loader && this.$slots.default) ||
-        this.title
+        this.loader
       ) {
         return "dd-ml-1.5";
       }
@@ -277,7 +277,7 @@ export default {
     sufixSpace() {
       if (
         (this.suffix && this.icon && !this.loader && this.$slots.default) ||
-        this.title
+        this.loader
       ) {
         return "dd-mr-1.5";
       }
