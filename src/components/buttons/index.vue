@@ -135,15 +135,15 @@ export default {
         return {
           "dd-border-gray-300 dd-text-gray-700 dd-border dd-shadow-sm focus:dd-outline-none":
             this.color == "",
-          "dd-px-2 dd-h-6 dd-text-xs dd-font-normal dd-shadow-sm dd-rounded":
+          "dd-px-[7px] dd-h-6 dd-text-xs dd-font-normal dd-shadow-sm dd-rounded":
             this.size === "xs",
-          "dd-px-2 dd-h-7 dd-text-sm  dd-font-normal dd-shadow-sm dd-rounded-md":
+          "dd-px-[7px] dd-h-7 dd-text-sm  dd-font-normal dd-shadow-sm dd-rounded-md":
             this.size === "sm",
-          "dd-px-2.5 dd-h-8 dd-text-sm dd-font-normal dd-shadow-sm dd-rounded-md":
+          "dd-px-2 dd-h-8 dd-text-sm dd-font-normal dd-shadow-sm dd-rounded-md":
             this.size === "base",
-          "dd-px-3 dd-h-9 dd-text-sm dd-font-normal dd-shadow-sm dd-rounded-md":
+          "dd-px-2.5 dd-h-9 dd-text-sm dd-font-normal dd-shadow-sm dd-rounded-md":
             this.size === "lg",
-          "dd-px-4 dd-h-10 dd-text-sm dd-font-normal dd-shadow-sm dd-rounded-md":
+          "dd-px-3 dd-h-10 dd-text-sm dd-font-normal dd-shadow-sm dd-rounded-md":
             this.size === "xl",
           "dd-cursor-not-allowed !dd-bg-gray-200 dd-shadow-sm !dd-text-gray-400 hover:dd-bg-gray-300":
             this.disable,
@@ -166,15 +166,15 @@ export default {
         return {
           "dd-border-gray-300 dd-text-gray-700 dd-border dd-shadow-sm focus:dd-outline-none":
             this.color == "",
-          "dd-px-2 dd-h-6 dd-text-xs dd-font-normal dd-shadow-sm dd-rounded-lg":
+          "dd-px-[7px] dd-h-6 dd-text-xs dd-font-normal dd-shadow-sm dd-rounded-lg":
             this.size === "xs",
-          "dd-px-2 dd-h-7 dd-text-sm  dd-font-normal dd-shadow-sm dd-rounded-xl ":
+          "dd-px-[7px] dd-h-7 dd-text-sm  dd-font-normal dd-shadow-sm dd-rounded-xl ":
             this.size === "sm",
-          "dd-px-2.5 dd-h-8 dd-text-sm dd-font-normal dd-shadow-sm dd-rounded-xl ":
+          "dd-px-2 dd-h-8 dd-text-sm dd-font-normal dd-shadow-sm dd-rounded-xl ":
             this.size === "base",
-          "dd-px-3 dd-h-9 dd-text-sm dd-font-normal dd-shadow-sm dd-rounded-xl ":
+          "dd-px-2.5 dd-h-9 dd-text-sm dd-font-normal dd-shadow-sm dd-rounded-xl ":
             this.size === "lg",
-          "dd-px-4 dd-h-10 dd-text-sm dd-font-normal dd-shadow-sm dd-rounded-xl ":
+          "dd-px-3 dd-h-10 dd-text-sm dd-font-normal dd-shadow-sm dd-rounded-xl ":
             this.size === "xl",
           "dd-cursor-not-allowed !dd-bg-gray-200 dd-shadow-sm !dd-text-gray-400 hover:dd-bg-gray-300":
             this.disable,
@@ -197,15 +197,15 @@ export default {
         return {
           "dd-bg-white dd-text-gray-700 focus:dd-outline-none hover:!dd-bg-white":
             this.color == "",
-          "dd-px-2 dd-h-6 dd-text-xs dd-bg-white dd-rounded dd-font-normal":
+          "dd-px-[7px] dd-h-6 dd-text-xs dd-bg-white dd-rounded dd-font-normal":
             this.size === "xs",
-          "dd-px-2 dd-h-7 dd-text-sm  dd-bg-white dd-rounded dd-font-normal":
+          "dd-px-[7px] dd-h-7 dd-text-sm  dd-bg-white dd-rounded dd-font-normal":
             this.size === "sm",
-          "dd-px-2.5 dd-h-8 dd-text-sm dd-bg-white dd-rounded dd-font-normal":
+          "dd-px-2 dd-h-8 dd-text-sm dd-bg-white dd-rounded dd-font-normal":
             this.size === "base",
-          "dd-px-3 dd-h-9 dd-text-sm dd-bg-white dd-rounded dd-font-normal":
+          "dd-px-2.5 dd-h-9 dd-text-sm dd-bg-white dd-rounded dd-font-normal":
             this.size === "lg",
-          "dd-px-4 dd-h-10 dd-text-sm dd-bg-white dd-rounded dd-font-normal":
+          "dd-px-3 dd-h-10 dd-text-sm dd-bg-white dd-rounded dd-font-normal":
             this.size === "xl",
           "dd-cursor-not-allowed !dd-text-gray-300 hover:!dd-bg-white dd-rounded":
             this.disable,
@@ -226,15 +226,15 @@ export default {
         return {
           "dd-border-gray-300 dd-text-gray-700 dd-border dd-shadow-sm focus:dd-outline-none":
             this.color == "",
-          "dd-px-2 dd-h-6 dd-text-xs dd-font-normal dd-shadow-sm dd-rounded-full":
+          "dd-px-[7px] dd-h-6 dd-text-xs dd-font-normal dd-shadow-sm dd-rounded-full":
             this.size === "xs",
-          "dd-px-2 dd-h-7 dd-text-sm  dd-font-normal dd-shadow-sm dd-rounded-full ":
+          "dd-px-[7px] dd-h-7 dd-text-sm  dd-font-normal dd-shadow-sm dd-rounded-full ":
             this.size === "sm",
-          "dd-px-2.5 dd-h-8 dd-text-sm dd-font-normal dd-shadow-sm dd-rounded-full ":
+          "dd-px-2 dd-h-8 dd-text-sm dd-font-normal dd-shadow-sm dd-rounded-full ":
             this.size === "base",
-          "dd-px-3 dd-h-9 dd-text-sm dd-font-normal dd-shadow-sm dd-rounded-full ":
+          "dd-px-2.5 dd-h-9 dd-text-sm dd-font-normal dd-shadow-sm dd-rounded-full ":
             this.size === "lg",
-          "dd-px-4 dd-h-10 dd-text-sm dd-font-normal dd-shadow-sm dd-rounded-full ":
+          "dd-px-3 dd-h-10 dd-text-sm dd-font-normal dd-shadow-sm dd-rounded-full ":
             this.size === "xl",
           "dd-cursor-not-allowed !dd-bg-gray-200 !dd-text-gray-400 hover:dd-bg-gray-300":
             this.disable,
