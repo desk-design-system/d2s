@@ -1,14 +1,37 @@
 <template>
-  <div>
-    <dd-table :rows="rows" :columns="columnVal" :buttons="buttons" :Actions="Actions" :values="values" footer checkBoxProp
+  <div class="dd-flex dd-items-center dd-justify-center dd-mt-5">
+    <!-- <dd-table :rows="rows" :columns="columnVal" :buttons="buttons" :Actions="Actions" :values="values" footer checkBoxProp
       fixedHeight rowKey="id" hoveringRow lastCell fixed actionHeader emptyState actionsPanel sortIcon settingbarIcon
-      searchIcon @updateSettings="updateSettings" dragDrop />
+      searchIcon @updateSettings="updateSettings" dragDrop /> -->
+    <dd-toggle v-model="switchState" />
   </div>
 </template>
 
 <script setup>
 import { ref } from "vue";
 import DdTable from "./components/table/index.vue";
+import DdToggle from "./components/toggle/index.vue";
+
+const switchState = ref(false)
+
+const value = ref([
+  {
+    name: "Option 1",
+    value: 1,
+  },
+  {
+    name: "Option 2",
+    value: 2,
+  },
+  {
+    name: "Option 3",
+    value: 3,
+  },
+  {
+    name: "Option 4",
+    value: 4,
+  },
+]);
 
 let columns = ref([
   {
