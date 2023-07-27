@@ -1,10 +1,5 @@
 <template>
   <div class="dd-grid dd-w-full" v-bind="$attrs">
-
-      <h2 class="dd-text-center dd-text-xl ">
-        Selected : {{ selectedRow }}
-      </h2>
-  
     <div class="dd-min-w-full dd-align-middle dd-bg-white dd-relative">
       <div :class="[
         !fixedHeight ? '' : getCalculatedHeight,
