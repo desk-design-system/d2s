@@ -1,5 +1,5 @@
 <template>
-  <div class="dd-ml-1 dd-flex dd-items-center">
+  <div class="dd-flex dd-items-center">
     <svg v-for="rating in [0, 1, 2, 3, 4]" :key="rating" xmlns="http://www.w3.org/2000/svg" v-bind="$attrs"
       class="icon icon-tabler icon-tabler-star" :width="starWidth" :height="starHeight" viewBox="0 0 24 24"
       stroke-width="1.5" stroke="none" :fill="productRating > rating ? '#ffec00' : '#E5E7EB'" stroke-linecap="round"
