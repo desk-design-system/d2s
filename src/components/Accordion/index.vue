@@ -130,7 +130,7 @@ const tabs = computed(() => {
     return tabs;
   }, []);
 });
-//gradient
+
 const getGradientClasess = computed(() => {
     return {
     " dd-bg-gradient-to-l dd-from-slat-100 dd-border-slat-200":
