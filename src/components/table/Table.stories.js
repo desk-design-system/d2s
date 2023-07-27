@@ -107,6 +107,14 @@ export default {
         },
       },
     },
+    presistAction: {
+      description: "presist the row actrion",
+      table: {
+        defaultValue: {
+          summary: Boolean,
+        },
+      },
+    },
     checkBoxProp: {
       description: "Remove checkboxes from tabel",
       table: {
@@ -621,6 +629,7 @@ stickySide.args = {
   buttonselected: "",
   headerselectedActions: "",
   actionsPanel: true,
+  presistAction: true,
 };
 
 noHeight.args = {
