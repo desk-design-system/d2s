@@ -23,7 +23,7 @@
       </div> -->
       <dd-drop
         type="avatar"
-        placement="left"
+        placement="right"
         avatarSize="small"
         @command="command"
         :avatarLink="props.srcLink"
