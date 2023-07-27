@@ -16,7 +16,7 @@
         size="base"
         class="!dd-px-1 dd-w-[28px] dd-h-[28px]"
         :class="[selectedId.includes(row.id) ? '!dd-bg-gray-50' : '']"
-        v-if="isActionHovered(row)"
+        v-if="presistAction ? true : isActionHovered(row)"
       >
         <svgIcon
           class="dd-flex dd-items-center dd-justify-center dd-text-gray-500"
@@ -31,7 +31,7 @@
         size="base"
         class="!dd-px-1 dd-w-[28px] dd-h-[28px]"
         :class="[selectedId.includes(row.id) ? '!dd-bg-gray-50' : '']"
-        v-if="isActionHovered(row)"
+        v-if="presistAction ? true : isActionHovered(row)"
       >
         <svgIcon
           class="dd-flex dd-items-center dd-justify-center dd-text-gray-500"
@@ -45,9 +45,9 @@
         class="!dd-p-0 !dd-h-7 !dd-w-7"
         size="base"
         :class="[
-          !isActionHovered(row)
-            ? '!dd-p-0 dd-rounded-none !dd-border-none dd-ring-0 !dd-shadow-none !dd-bg-transparent'
-            : '!dd-px-0 !dd-bg-white',
+          presistAction ? true : !isActionHovered(row)
+          ? '!dd-p-0 dd-rounded-none !dd-border-none dd-ring-0 !dd-shadow-none !dd-bg-transparent'
+          : '!dd-px-0 !dd-bg-white',
         ]"
       >
         <DdDropDown
@@ -57,8 +57,8 @@
             isActionHovered(row)
               ? ''
               : 'dd-rounded-none dd-border-none dd-ring-0 dd-bg-transparent [&>button]:!dd-shadow-none',
-              rowDisabled ? '!dd-bg-gray-50' : 'dd-bg-white',
-              selectedId.includes(row.id) ? '!dd-bg-gray-50' : ''
+            rowDisabled ? '!dd-bg-gray-50' : 'dd-bg-white',
+            selectedId.includes(row.id) ? '!dd-bg-gray-50' : '',
           ]"
           type="icon"
           v-model="rowActionsIcons"
@@ -103,6 +103,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  presistAction: {
+    type: Boolean,
+    default: false,
+  },
   row: {
     tyep: Object,
     default: {},
@@ -116,7 +120,7 @@ const props = defineProps({
     default: () => ({
       name: "1",
     }),
-  }
+  },
 });
 
 const rowActionsIcons = ref(props.selected);
@@ -127,7 +131,7 @@ const isActionHovered = (rows) => {
 
 const getDropdownVal = (data) => {
   emits("dropdownValue", data);
-}
+};
 
 const editRow = () => {
   emits("editRow", props.row);
