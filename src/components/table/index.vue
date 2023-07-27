@@ -1,5 +1,10 @@
 <template>
   <div class="dd-grid dd-w-full" v-bind="$attrs">
+
+      <h2 class="dd-text-center dd-text-xl ">
+        Selected : {{ selectedRow }}
+      </h2>
+  
     <div class="dd-min-w-full dd-align-middle dd-bg-white dd-relative">
       <div :class="[
         !fixedHeight ? '' : getCalculatedHeight,
@@ -78,6 +83,11 @@
                 <dd-checkbox v-model="allSelected" @click="selectAllFields" :disabled="checkAllDisabled || limit < 1"
                   :rows="rows" @indeterminate="indeterminate" :allCheckboxesChecked="allCheckboxesChecked"
                   :selectedId="selectedId" />
+              </th>
+              <th
+                class="dd-py-2 !dd-pl-5 dd-text-left checkbox_wrapper !dd-leading-3 dd-h-[40px] table_head_row dd-sticky dd-top-0"
+                :class="[!search ? 'table_border' : '']" v-if="radioButton && !checkBoxProp">
+               
               </th>
               <slot name="th" />
 
@@ -159,6 +169,9 @@
                   selectedId.includes(row?.id)
                     ? '[&>*:nth-child(1)]:!dd-bg-gray-50 [&>*:nth-child(2)]:!dd-bg-gray-50  [&>*:last-child]:!dd-bg-gray-50 !dd-bg-gray-50'
                     : '',
+                  selectedRow == row?.id || selectedRow == row[rowKey] 
+                    ? '[&>*:nth-child(1)]:!dd-bg-gray-50 [&>*:nth-child(2)]:!dd-bg-gray-50  [&>*:last-child]:!dd-bg-gray-50 !dd-bg-gray-50'
+                    : '',
                   row?.disabled
                     ? '[&>*:nth-child(1)]:dd-bg-gray-50 [&>*:nth-child(2)]:dd-bg-gray-50  [&>*:last-child]:dd-bg-gray-50  dd-bg-gray-50 dd-pointer-event-none dd-cursor-not-allowed'
                     : 'dd-cursor-pointer',
@@ -178,6 +191,18 @@
                     </div>
                   </div>
                 </td>
+                <td v-if="radioButton && !checkBoxProp" class="dd-py-2.5 dd-pl-5 dd-pr-1 dd-text-xs dd-font-medium dd-text-gray-700">
+                  <div lass="dd-w-full" :class="[
+                    selectedRow == row?.id || selectedRow == row[rowKey] 
+                      ? '[&>*:nth-child(1)]:after:!dd-border-l-[3px] [&>*:nth-child(1)]:after:!dd-border-t-gray-200 [&>*:nth-child(1)]:after:!dd-border-b-gray-200 [&>*:nth-child(1)]:after:!dd-border-teal-600 [&>*:nth-child(1)]:after:dd-left-0 [&>*:nth-child(1)]:after:dd-absolute [&>*:nth-child(1)]:after:dd-top-0 [&>*:nth-child(1)]:after:dd-bottom-0'
+                      : '',
+                  ]" >
+                    <div class="dd-h-full -dd-my-2.5">
+                      <DdRadioButton :options="[{name:'', value:row[rowKey]}]" v-model="singleRow" />
+                    </div>
+                  </div>
+                </td>
+
                 <slot name="td" />
                 <td v-for="col in columns" :key="col?.value" v-show="col?.checked"
                   class="dd-whitespace-nowrap dd-py-2.5 dd-pl-3 dd-pr-3 dd-text-sm dd-text-gray-500" :class="[
@@ -256,6 +281,7 @@ import DdCheckbox from "../checkbox/index.vue";
 import DdGroupButton from "../groupButton/index.vue";
 import DdDropDown from "../dropdown/index.vue";
 import DdInput from "../input/index.vue";
+import DdRadioButton from '../radiobutton/index.vue'
 const emits = defineEmits([
   "update:modelValue",
   "saveChanges",
@@ -315,6 +341,10 @@ const props = defineProps({
     default: true,
   },
   checkBoxProp: {
+    type: Boolean,
+    default: false,
+  },
+  radioButton: {
     type: Boolean,
     default: false,
   },
@@ -401,6 +431,10 @@ const props = defineProps({
       value: "value",
       avatar: "avatar",
     }),
+  },
+  singleSelectedRow: {
+    type: String,
+    default: null,
   },
 });
 
@@ -542,6 +576,7 @@ const settingIcon = ref(null);
 const allCheckboxesChecked = ref(false);
 const headerActions = ref(props.headerselectedActions);
 const modelColumn = ref(props.columns);
+const selectedRow = ref(null)
 
 const selectNumberOfRows = (button) => {
   emits("numberOfRow", button);
@@ -735,6 +770,15 @@ const dropdownValue = (data) => {
 const getHeaderDropdownVal = (data) => {
   emits("headerDropdown", data);
 };
+
+const singleRow = computed( {
+  get () {
+    return props.singleSelectedRow
+  },
+  set ( val ) {
+    emits( "update:singleSelectedRow", val )
+  }
+} )
 </script>
 
 <style scoped>
