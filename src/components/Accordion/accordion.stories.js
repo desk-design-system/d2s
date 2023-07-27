@@ -1,5 +1,6 @@
 import DdAccordion from "./index.vue"
 import DdAccordionTab from "../AccordionTab/index.vue"
+import { ref } from "vue";
 // More on default export: https://storybook.js.org/docs/vue/writing-stories/introduction#default-export
 export default {
     title: 'Atoms/Accordion',
@@ -153,3 +154,4 @@ MultipleActive.parameters = {
     }
 
 }
+
