@@ -45,16 +45,16 @@
       </div>
       <dd-divider class="!dd-my-0" />
     </div>
-    <div :style="styles" class="dd-overflow-auto">
+    <div :style="styles" class="dd-overflow-auto ">
       <div
         v-for="(value, index) in filteredItems"
         :key="index"
         v-bind="$attrs"
-        class="dd-p-3 dd-text-left dd-relative"
+        class="dd-py-3 dd-px-4 dd-text-left dd-relative"
       >
         <div class="dd-w-full">
           <div
-            class="dd-text-gray-500 dd-text-xs dd-font-bold"
+            class="dd-text-gray-500 dd-text-xs dd-uppercase dd-pb-2"
             @click="getNavTitle(value)"
           >
             {{ value?.title }}
@@ -73,7 +73,7 @@
               :prefixIcon="prefixIcon"
               :suffixIcon="suffixIcon"
               :disabled="item?.disable"
-              class="dd-text-sm dd-font-medium"
+              class="dd-text-sm"
               @onClick="getNavValue(item)"
             />
           </div>
