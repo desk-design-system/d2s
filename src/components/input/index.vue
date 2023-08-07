@@ -1,5 +1,5 @@
 <template>
-  <div class="dd-base" :class="$attrs.class" >
+  <div class="dd-base" :class="$attrs.class">
     <slot name="label">
       <label
         v-if="label"
@@ -27,7 +27,7 @@
         />
       </div>
       <input
-      v-bind="{...$attrs, class:undefined}"
+        v-bind="{ ...$attrs, class: undefined }"
         ref="inputRef"
         :name="name"
         :disabled="disabled"
@@ -39,7 +39,7 @@
           hasError
             ? ' !dd-border-red-600 focus:!dd-border-red-600 dd-focus:!dd-ring-red-600'
             : hintTextProperty,
-          hintBroderColor,  
+          hintBroderColor,
           Right
             ? 'dd-text-right !dd-text-xs !dd-text-gray-700 !dd-font-normal'
             : 'dd-text-left',
@@ -51,7 +51,7 @@
         :type="inputType"
         class="!dd-block !dd-border-solid focus:!dd-border-teal-600 !dd-border-gray-300 !dd-w-full !dd-rounded-md sm:!dd-text-sm focus:ring-2 focus:dd-ring-inset dd-shadow-sm"
         :placeholder="placeholder"
-        />
+      />
       <!-- $slots.suffix -->
       <div
         @click="suffixIconClick"
@@ -75,10 +75,33 @@
         v-if="type !== 'password' && !Right"
         class="dd-cursor-pointer !dd-absolute !dd-inset-y-0 !dd-right-0 !dd-flex !dd-items-center !dd-pl-1 !dd-pr-1 dd-gap-1"
       >
-        <slot name="suffix" />
+        <div
+          :class="[
+            successButton || closeButton
+              ? 'dd-h-8 dd-w-8 dd-gap-1 dd-flex dd-items-center dd-justify-center dd-relative dd-right-2.5'
+              : '',
+          ]"
+        >
+          <dd-button
+            v-if="successButton"
+            color="white"
+            size="xs"
+            class="!dd-p-1"
+            @click="emits('success')"
+          >
+            <svgIcon :icon="successIcon" size="16" class="dd-mb-1" />
+          </dd-button>
+          <dd-button v-if="closeButton" color="white" size="xs" class="!dd-p-1" @click="emits('close')">
+            <svgIcon :icon="closeIcon" size="16" class="dd-mb-1" />
+          </dd-button>
+        </div>
       </div>
     </div>
-    <span v-if="errorMessage" class="dd-text-xs dd-text-red-500 dd-capitalize dd-pt-px">{{ errorMessage }}</span>
+    <span
+      v-if="errorMessage"
+      class="dd-text-xs dd-text-red-500 dd-capitalize dd-pt-px"
+      >{{ errorMessage }}</span
+    >
     <span
       v-if="hintText && !errorMessage"
       class="dd-text-sm dd-font-normal dd-pt-px"
@@ -92,16 +115,19 @@
 <script>
 export default {
   inheritAttrs: false,
-}
+};
 </script>
 <script setup>
 import { useField } from "vee-validate";
 import svgIcon from "../svgIcon/index.vue";
+import DdButton from "../buttons/index.vue";
 import { ref, computed, watch, watchEffect } from "vue";
 const emits = defineEmits([
   "update:modelValue",
   "change",
   "suffixIconClick",
+  "success",
+  "close",
 ]);
 const props = defineProps({
   label: {
@@ -123,6 +149,22 @@ const props = defineProps({
   prefix: {
     type: Boolean,
     default: false,
+  },
+  successButton: {
+    type: Boolean,
+    default: false,
+  },
+  closeButton: {
+    type: Boolean,
+    default: false,
+  },
+  successIcon: {
+    type: String,
+    default: "Check",
+  },
+  closeIcon: {
+    type: String,
+    default: "Close",
   },
   suffix: {
     type: Boolean,
@@ -185,21 +227,26 @@ const props = defineProps({
 const inputRef = ref(null);
 
 defineExpose({
-  inputRef
+  inputRef,
 });
 
 const getRules = () => {
-  if(props.rules instanceof RegExp) {
-    return {regex: props.rules}
+  if (props.rules instanceof RegExp) {
+    return { regex: props.rules };
   }
-  return props.rules
-}
+  return props.rules;
+};
 
-const { errorMessage, value, handleChange } = useField(( props.name ), getRules(), {label: props.name});
+const { errorMessage, value, handleChange } = useField(props.name, getRules(), {
+  label: props.name,
+});
 
-watch(() => value, (newValue) => {
-  inputModelValue.value = newValue
-})
+watch(
+  () => value,
+  (newValue) => {
+    inputModelValue.value = newValue;
+  }
+);
 
 const inputType = ref("text");
 const inputSize = computed(() => {
@@ -253,22 +300,25 @@ const suffixIconClick = () => {
   emits("suffixIconClick", true);
 };
 
-watch( () => props.type, ( newVal ) => {
-  inputType.value = newVal
-},{immediate: true} )
+watch(
+  () => props.type,
+  (newVal) => {
+    inputType.value = newVal;
+  },
+  { immediate: true }
+);
 
-
-const hasError = computed( () => {
-  if ( errorMessage.value ) {
-    return true
+const hasError = computed(() => {
+  if (errorMessage.value) {
+    return true;
   } else {
-    return false
+    return false;
   }
-} );
+});
 
 watchEffect(() => {
-  console.log(props.hintText && errorMessage.value == '');
-})
+  console.log(props.hintText && errorMessage.value == "");
+});
 
 const hintTextProperty = computed(() => {
   if (errorMessage?.value) {
@@ -294,7 +344,7 @@ const hintBroderColor = computed(() => {
   } else if (props.hintTextBorder && props.hintText && errorMessage?.value) {
     return "!dd-border !dd-border-red-600 dd-text-red-600";
   } else if (props.hintTextBorder && !errorMessage?.value) {
-    return `!dd-border !dd-border-${props.hintTextBorder}-600 focus:!dd-border-${props.hintTextBorder}-600`
+    return `!dd-border !dd-border-${props.hintTextBorder}-600 focus:!dd-border-${props.hintTextBorder}-600`;
   } else if (props.hintText && !errorMessage?.value) {
     if (props.hintTextBorder === "red") {
       return "!dd-border !dd-border-red-600";
@@ -306,7 +356,7 @@ const hintBroderColor = computed(() => {
       return "!dd-border !dd-border-gray-300";
     }
   }
-})
+});
 
 const hintTextPropertyIcon = computed(() => {
   if (errorMessage?.value) {
