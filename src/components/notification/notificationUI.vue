@@ -9,7 +9,7 @@
         leave-active-class="transition ease-in duration-100" leave-from-class="dd-opacity-100"
         leave-to-class="dd-opacity-0">
         <div ref="root" v-show="show"
-          class="dd-mt-5 dd-pointer-events-auto dd-w-[350px] dd-overflow-hidden dd-rounded-lg dd-bg-white dd-shadow-lg dd-ring-1 dd-ring-black dd-ring-opacity-5">
+          class="dd-mt-5 dd-pointer-events-auto dd-w-[350px] dd-overflow-hidden dd-rounded-lg dd-bg-white dd-shadow-lg dd-ring-1 dd-ring-black dd-ring-opacity-5 dd-z-[10000]">
           <div class="dd-p-4">
             <div class="dd-flex dd-items-start">
               <div class="dd-flex-shrink-0">

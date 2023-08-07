@@ -1,6 +1,6 @@
 <template>
   <TransitionRoot as="template" :show="inputModelValue">
-    <Dialog as="div" class="dd-relative dd-z-50" @close="show = false">
+    <Dialog as="div" class="dd-relative dd-z-50">
       <TransitionChild as="template" enter="dd-ease-in-out dd-duration-500" enter-from="dd-opacity-0"
         enter-to="dd-opacity-100" leave="dd-ease-in-out dd-duration-500" leave-from="dd-opacity-100"
         leave-to="dd-opacity-0">
@@ -9,7 +9,7 @@
 
       <div class="dd-fixed dd-inset-0 dd-overflow-hidden">
         <div class="dd-absolute dd-inset-0 dd-overflow-hidden dd-flex">
-          <div @click="$emit('clickDrawer')" style="height: 100%;width: 100%;"></div>
+          <div @click="$emit('clickOutside')" style="height: 100%;width: 100%;"></div>
           <div :style="{ 'width': size }"
             :class="`dd-pointer-events-none dd-fixed dd-inset-y-0 dd-${position}-0 dd-flex `">
             <TransitionChild as="template"
@@ -72,7 +72,7 @@ import {
   DialogPanel
 } from "@headlessui/vue"
 import { XIcon } from "@heroicons/vue/outline"
-const emits = defineEmits( ['update:modelValue', "change"] )
+const emits = defineEmits( ['update:modelValue', "change",'clickOutside', 'close'] )
 const props = defineProps( {
   title: {
     type: String,
@@ -110,10 +110,10 @@ const props = defineProps( {
     type: Boolean,
     default: false,
   },
-  show: {
-    type: Boolean,
-    default: true,
-  },
+  // show: {
+  //   type: Boolean,
+  //   default: true,
+  // },
   modelValue: {
     type: [String, Number, Boolean],
     default: null,
