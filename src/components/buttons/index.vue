@@ -1,7 +1,6 @@
 <template>
   <button
     v-if="!loader"
-    @click="handleClick"
     v-bind="$attrs"
     :id="id"
     :class="{ ...defaultButton }"
@@ -38,6 +37,7 @@
       :size="btnIconSize"
     />
     <span
+      v-if="content !== 'iconOnly'"
       :class="[leftIconSpace, rightIconSpace, loader ? 'dd-invisible' : '']"
     >
       <slot v-if="content !== 'iconOnly'"> {{ title }}</slot>
@@ -78,6 +78,7 @@
     </svg>
     <div :class="loaderProperty"></div>
     <span
+      v-if="content !== 'iconOnly'"
       :class="[leftIconSpace, rightIconSpace, loader ? 'dd-invisible' : '']"
     >
       <slot> {{ title }}</slot>
@@ -142,7 +143,7 @@ export default {
         );
       },
       required: true,
-      default: "primary",
+      default: "textOnly",
     },
   },
   inheritAttrs: false,
@@ -253,22 +254,20 @@ export default {
     },
     leftIconSpace() {
       if (
-        (this.content === "leftIcon" &&
-          this.icon &&
-          !this.loader &&
-          this.$slots.default) ||
-        this.loader
+        this.content === "leftIcon" &&
+        this.icon &&
+        !this.loader &&
+        this.$slots.default
       ) {
         return "dd-ml-1.5";
       }
     },
     rightIconSpace() {
       if (
-        (this.content === "rightIcon" &&
-          this.icon &&
-          !this.loader &&
-          this.$slots.default) ||
-        this.loader
+        this.content === "rightIcon" &&
+        this.icon &&
+        !this.loader &&
+        this.$slots.default
       ) {
         return "dd-mr-1.5";
       }
@@ -287,26 +286,32 @@ export default {
       }
     },
     loaderProperty() {
-        if (this.size == "xs") {
-          return "!dd-w-1 !dd-h-1";
-        } else if (this.size == "sm") {
-          return "!dd-w-1 !dd-h-1";
-        } else if (this.size == "base") {
-          return "!dd-w-1 !dd-h-1";
-        } else if (this.size == "lg") {
-          return "!dd-w-1.5 !dd-h-1.5";
-        } else if (this.size == "xl") {
-          return "!dd-w-1.5 !dd-h-1.5";
-        }
-    },
-  },
-  methods: {
-    handleClick(event) {
-      if (this.loader === false) {
-        event.stopPropagation();
+      if (this.content === "textOnly") {
         return;
+      } else if (this.content === "iconOnly") {
+        if (this.size == "xs") {
+          return "!dd-w-2 !dd-h-2";
+        } else if (this.size == "sm") {
+          return "!dd-w-2 !dd-h-2";
+        } else if (this.size == "base") {
+          return "!dd-w-2 !dd-h-2";
+        } else if (this.size == "lg") {
+          return "!dd-w-2.5 !dd-h-2.5";
+        } else if (this.size == "xl") {
+          return "!dd-w-2.5 !dd-h-2.5";
+        }
       } else {
-        this.$emit("click");
+        if (this.size == "xs") {
+          return "!dd-w-2.5 !dd-h-2.5";
+        } else if (this.size == "sm") {
+          return "!dd-w-2.5 !dd-h-2.5";
+        } else if (this.size == "base") {
+          return "!dd-w-2.5 !dd-h-2.5";
+        } else if (this.size == "lg") {
+          return "!dd-w-3 !dd-h-3";
+        } else if (this.size == "xl") {
+          return "!dd-w-3 !dd-h-3";
+        }
       }
     },
   },
