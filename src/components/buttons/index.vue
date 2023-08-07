@@ -5,7 +5,10 @@
     v-bind="$attrs"
     :id="id"
     :class="{ ...defaultButton }"
-    :style="[loader ? 'cursor: not-allowed;' : 'cursor: pointer;']"
+    :style="[
+      loader ? 'cursor: not-allowed;' : 'cursor: pointer;',
+      title && content !== 'iconOnly' ? 'gap: 4px' : 'gap: 0px',
+    ]"
     class="dd-inline-flex dd-items-center dd-font-semibold dd-capitalize dd-whitespace-nowrap dd-cursor-pointer dd-justify-center"
   >
     <svg
@@ -13,7 +16,7 @@
       aria-hidden="true"
       :class="[
         size == 'xs' || size == 'sm' ? 'dd-h-3.5 dd-w-3.5' : 'dd-h-4 dd-w-4',
-        color ? setSpinnerColor : '',
+        setSpinnerColor,
       ]"
       class="dd-animate-spin dd-text-white-50 dd-absolute"
       viewBox="0 0 100 101"
@@ -29,11 +32,21 @@
         fill="currentFill"
       />
     </svg>
-    <svgIcon v-if="prefix && !loader" :icon="icon" :size="btnIconSize" />
-    <span :class="[prefixSpace, sufixSpace, loader ? 'dd-invisible' : '']">
-      <slot> {{ title }}</slot>
+    <svgIcon
+      v-if="leftIconProperty"
+      :icon="!loader ? icon : ''"
+      :size="btnIconSize"
+    />
+    <span
+      :class="[leftIconSpace, rightIconSpace, loader ? 'dd-invisible' : '']"
+    >
+      <slot v-if="content !== 'iconOnly'"> {{ title }}</slot>
     </span>
-    <svgIcon v-if="suffix && !loader" :icon="icon" :size="btnIconSize" />
+    <svgIcon
+      v-if="rightIconProperty"
+      :icon="!loader ? icon : ''"
+      :size="btnIconSize"
+    />
   </button>
   <button
     v-else
@@ -47,7 +60,7 @@
       aria-hidden="true"
       :class="[
         size == 'xs' || size == 'sm' ? 'dd-h-3.5 dd-w-3.5' : 'dd-h-4 dd-w-4',
-        color ? setSpinnerColor : '',
+        setSpinnerColor,
       ]"
       class="dd-animate-spin dd-text-white-50 dd-absolute"
       viewBox="0 0 100 101"
@@ -63,11 +76,13 @@
         fill="currentFill"
       />
     </svg>
-    <svgIcon v-if="prefix && !loader" :icon="icon" :size="btnIconSize" />
-    <span :class="[prefixSpace, sufixSpace, loader ? 'dd-invisible' : '']">
+    <div :class="loaderProperty"></div>
+    <span
+      :class="[leftIconSpace, rightIconSpace, loader ? 'dd-invisible' : '']"
+    >
       <slot> {{ title }}</slot>
     </span>
-    <svgIcon v-if="suffix && !loader" :icon="icon" :size="btnIconSize" />
+    <div :class="loaderProperty"></div>
   </button>
 </template>
 
@@ -75,10 +90,6 @@
 import svgIcon from "../svgIcon/index.vue";
 export default {
   props: {
-    prefix: {
-      type: Boolean,
-      default: false,
-    },
     loader: {
       type: Boolean,
       default: false,
@@ -86,10 +97,6 @@ export default {
     id: {
       type: String || Number,
       default: null,
-    },
-    suffix: {
-      type: Boolean,
-      default: false,
     },
     icon: {
       type: String,
@@ -99,12 +106,7 @@ export default {
       type: String,
       default: "",
     },
-    color: {
-      type: String,
-      default: "primary",
-    },
-
-    disable: {
+    disabled: {
       type: Boolean,
       default: false,
     },
@@ -124,17 +126,30 @@ export default {
       type: String,
       validator: function (value) {
         // The value must match one of these strings
-        return ["default", "round", "text", "circle"].indexOf(value) !== -1;
+        return (
+          ["primary", "secondary", "tertiary", "danger"].indexOf(value) !== -1
+        );
       },
-      default: "default",
+      default: "primary",
+    },
+    content: {
+      type: String,
+      validator: function (value) {
+        // The value must match one of these strings
+        return (
+          ["textOnly", "leftIcon", "rightIcon", "iconOnly"].indexOf(value) !==
+          -1
+        );
+      },
+      required: true,
+      default: "primary",
     },
   },
+  inheritAttrs: false,
   computed: {
     defaultButton() {
-      if (this.type == "default") {
+      if (this.type == "primary") {
         return {
-          "dd-border-gray-300 dd-text-gray-700 dd-border dd-shadow-sm focus:dd-outline-none":
-            this.color == "",
           "dd-px-[7px] dd-h-6 dd-text-xs dd-font-normal dd-shadow-sm dd-rounded":
             this.size === "xs",
           "dd-px-[7px] dd-h-7 dd-text-sm  dd-font-normal dd-shadow-sm dd-rounded-md":
@@ -145,58 +160,53 @@ export default {
             this.size === "lg",
           "dd-px-3 dd-h-10 dd-text-sm dd-font-normal dd-shadow-sm dd-rounded-md":
             this.size === "xl",
-          "dd-cursor-not-allowed !dd-bg-gray-200 dd-shadow-sm !dd-text-gray-400 hover:dd-bg-gray-300":
-            this.disable,
-          "dd-bg-teal-600 dd-text-white hover:dd-bg-teal-500":
-            this.color === "primary",
-          "dd-bg-yellow-600 dd-text-white hover:dd-bg-yellow-500":
-            this.color === "warning",
-          "dd-bg-green-600 dd-text-white hover:dd-bg-green-500":
-            this.color === "success",
-          "dd-bg-red-600 dd-text-white hover:dd-bg-red-500":
-            this.color === "danger",
+          "dd-cursor-not-allowed !dd-bg-gray-100 dd-shadow-sm !dd-text-gray-400 hover:dd-bg-gray-300":
+            this.disabled,
           "dd-w-full dd-justify-center": this.block,
-          "!dd-bg-white dd-ring-1 dd-ring-inset dd-ring-gray-300 dd-text-gray-700 hover:dd-bg-gray-50 focus:dd-outline-none":
-            this.color === "white",
-          "dd-border dd-border-teal-500 dd-bg-teal-50 dd-text-gray-700":
-            this.color === "selected",
+          "dd-bg-teal-600 dd-text-white hover:dd-bg-teal-500":
+            this.type == "primary",
         };
       }
-      if (this.type == "round") {
+      if (this.type == "secondary") {
         return {
-          "dd-border-gray-300 dd-text-gray-700 dd-border dd-shadow-sm focus:dd-outline-none":
-            this.color == "",
-          "dd-px-[7px] dd-h-6 dd-text-xs dd-font-normal dd-shadow-sm dd-rounded-lg":
+          "dd-px-[7px] dd-h-6 dd-text-xs dd-font-normal dd-shadow-sm dd-rounded":
             this.size === "xs",
-          "dd-px-[7px] dd-h-7 dd-text-sm  dd-font-normal dd-shadow-sm dd-rounded-xl ":
+          "dd-px-[7px] dd-h-7 dd-text-sm  dd-font-normal dd-shadow-sm dd-rounded-md":
             this.size === "sm",
-          "dd-px-2 dd-h-8 dd-text-sm dd-font-normal dd-shadow-sm dd-rounded-xl ":
+          "dd-px-2 dd-h-8 dd-text-sm dd-font-normal dd-shadow-sm dd-rounded-md":
             this.size === "base",
-          "dd-px-2.5 dd-h-9 dd-text-sm dd-font-normal dd-shadow-sm dd-rounded-xl ":
+          "dd-px-2.5 dd-h-9 dd-text-sm dd-font-normal dd-shadow-sm dd-rounded-md":
             this.size === "lg",
-          "dd-px-3 dd-h-10 dd-text-sm dd-font-normal dd-shadow-sm dd-rounded-xl ":
+          "dd-px-3 dd-h-10 dd-text-sm dd-font-normal dd-shadow-sm dd-rounded-md":
             this.size === "xl",
-          "dd-cursor-not-allowed !dd-bg-gray-200 dd-shadow-sm !dd-text-gray-400 hover:dd-bg-gray-300":
-            this.disable,
-          "dd-bg-teal-600 dd-text-white hover:dd-bg-teal-500":
-            this.color === "primary",
-          "dd-bg-yellow-600 dd-text-white hover:dd-bg-yellow-500":
-            this.color === "warning",
-          "dd-bg-green-600 dd-text-white hover:dd-bg-green-500":
-            this.color === "success",
-          "dd-bg-red-600 dd-text-white hover:dd-bg-red-500":
-            this.color === "danger",
+          "dd-cursor-not-allowed !dd-bg-gray-100 !dd-border-0 dd-shadow-sm !dd-text-gray-400 hover:dd-bg-gray-300":
+            this.disabled,
           "dd-w-full dd-justify-center": this.block,
-          "dd-bg-white dd-ring-1 dd-ring-inset dd-ring-gray-300 dd-text-gray-700 hover:dd-bg-gray-50 focus:dd-outline-none":
-            this.color === "white",
-          "dd-border dd-border-teal-500 dd-bg-teal-50 dd-text-gray-700":
-            this.color === "selected",
+          "dd-border-gray-300 dd-text-gray-700 dd-border dd-bg-white dd-shadow-sm focus:dd-outline-none":
+            this.type == "secondary",
         };
       }
-      if (this.type == "text") {
+      if (this.type == "danger") {
         return {
-          "dd-bg-white dd-text-gray-700 focus:dd-outline-none hover:!dd-bg-white":
-            this.color == "",
+          "dd-px-[7px] dd-h-6 dd-text-xs dd-font-normal dd-shadow-sm dd-rounded":
+            this.size === "xs",
+          "dd-px-[7px] dd-h-7 dd-text-sm  dd-font-normal dd-shadow-sm dd-rounded-md":
+            this.size === "sm",
+          "dd-px-2 dd-h-8 dd-text-sm dd-font-normal dd-shadow-sm dd-rounded-md":
+            this.size === "base",
+          "dd-px-2.5 dd-h-9 dd-text-sm dd-font-normal dd-shadow-sm dd-rounded-md":
+            this.size === "lg",
+          "dd-px-3 dd-h-10 dd-text-sm dd-font-normal dd-shadow-sm dd-rounded-md":
+            this.size === "xl",
+          "dd-cursor-not-allowed !dd-bg-gray-100 dd-shadow-sm !dd-text-gray-400 hover:dd-bg-gray-300":
+            this.disabled,
+          "dd-bg-red-600 dd-text-white hover:dd-bg-red-400":
+            this.type == "danger",
+          "dd-w-full dd-justify-center": this.block,
+        };
+      }
+      if (this.type == "tertiary") {
+        return {
           "dd-px-[7px] dd-h-6 dd-text-xs dd-bg-white dd-rounded dd-font-normal":
             this.size === "xs",
           "dd-px-[7px] dd-h-7 dd-text-sm  dd-bg-white dd-rounded dd-font-normal":
@@ -208,75 +218,56 @@ export default {
           "dd-px-3 dd-h-10 dd-text-sm dd-bg-white dd-rounded dd-font-normal":
             this.size === "xl",
           "dd-cursor-not-allowed !dd-text-gray-300 hover:!dd-bg-white dd-rounded":
-            this.disable,
+            this.disabled,
           "dd-text-teal-600 !dd-bd-white hover:dd-bg-gray-50":
-            this.color === "primary",
-          "dd-text-yellow-600 !dd-bd-white hover:dd-bg-gray-50":
-            this.color === "warning",
-          "dd-text-green-600 !dd-bd-white hover:dd-bg-gray-50":
-            this.color === "success",
-          "dd-text-red-600 !dd-bd-white hover:dd-bg-gray-50":
-            this.color === "danger",
+            this.type == "tertiary",
           "dd-w-full dd-justify-center": this.block,
-          "dd-text-gray-700 !dd-bd-white hover:dd-bg-gray-50 focus:dd-outline-none":
-            this.color === "white",
         };
       }
-      if (this.type == "circle") {
-        return {
-          "dd-border-gray-300 dd-text-gray-700 dd-border dd-shadow-sm focus:dd-outline-none":
-            this.color == "",
-          "dd-px-[7px] dd-h-6 dd-text-xs dd-font-normal dd-shadow-sm dd-rounded-full":
-            this.size === "xs",
-          "dd-px-[7px] dd-h-7 dd-text-sm  dd-font-normal dd-shadow-sm dd-rounded-full ":
-            this.size === "sm",
-          "dd-px-2 dd-h-8 dd-text-sm dd-font-normal dd-shadow-sm dd-rounded-full ":
-            this.size === "base",
-          "dd-px-2.5 dd-h-9 dd-text-sm dd-font-normal dd-shadow-sm dd-rounded-full ":
-            this.size === "lg",
-          "dd-px-3 dd-h-10 dd-text-sm dd-font-normal dd-shadow-sm dd-rounded-full ":
-            this.size === "xl",
-          "dd-cursor-not-allowed !dd-bg-gray-200 !dd-text-gray-400 hover:dd-bg-gray-300":
-            this.disable,
-          "dd-bg-teal-600 dd-text-white hover:dd-bg-teal-500":
-            this.color === "primary",
-          "dd-bg-yellow-600 dd-text-white hover:dd-bg-yellow-500":
-            this.color === "warning",
-          "dd-bg-green-600 dd-text-white hover:dd-bg-green-500":
-            this.color === "success",
-          "dd-bg-red-600 dd-text-white hover:dd-bg-red-500":
-            this.color === "danger",
-          "dd-w-full dd-justify-center": this.block,
-          "dd-bg-white dd-ring-1 dd-ring-inset dd-ring-gray-300 dd-text-gray-700 hover:dd-bg-gray-50 focus:dd-outline-none":
-            this.color === "white",
-          "dd-border dd-border-teal-500 dd-bg-teal-50 dd-text-gray-700":
-            this.color === "selected",
-        };
+    },
+    leftIconProperty() {
+      if (this.content === "leftIcon") {
+        return true;
+      } else if (this.content === "iconOnly") {
+        return true;
+      }
+    },
+    rightIconProperty() {
+      if (this.content === "rightIcon") {
+        return true;
+      } else if (this.content === "iconOnly") {
+        return false;
       }
     },
     setSpinnerColor() {
-      if (this.color === "danger") {
-        return "dd-fill-red-600";
-      } else if (this.color === "primary") {
-        return "dd-fill-teal-600";
-      } else if (this.color === "warning") {
-        return "dd-fill-yellow-600";
-      } else if (this.color === "white") {
-        return "dd-fill-teal-600";
+      if (this.type === "danger") {
+        return "dd-fill-red-400";
+      } else if (this.type === "primary") {
+        return "dd-fill-teal-400";
+      } else if (this.type === "secondary") {
+        return "dd-fill-gray-300";
+      } else if (this.type === "tertiary") {
+        return "dd-fill-gray-200";
       }
-      return "dd-fill-gray-600";
+      return "dd-fill-gray-200";
     },
-    prefixSpace() {
+    leftIconSpace() {
       if (
-        (this.prefix && this.icon && !this.loader && this.$slots.default) ||
+        (this.content === "leftIcon" &&
+          this.icon &&
+          !this.loader &&
+          this.$slots.default) ||
         this.loader
       ) {
         return "dd-ml-1.5";
       }
     },
-    sufixSpace() {
+    rightIconSpace() {
       if (
-        (this.suffix && this.icon && !this.loader && this.$slots.default) ||
+        (this.content === "rightIcon" &&
+          this.icon &&
+          !this.loader &&
+          this.$slots.default) ||
         this.loader
       ) {
         return "dd-mr-1.5";
@@ -284,19 +275,30 @@ export default {
     },
     btnIconSize() {
       if (this.size == "xs") {
-        return "10";
+        return "16";
       } else if (this.size == "sm") {
-        return "14";
+        return "16";
       } else if (this.size == "base") {
         return "16";
-      } else {
-        return "16";
+      } else if (this.size == "lg") {
+        return "20";
+      } else if (this.size == "xl") {
+        return "20";
       }
     },
-  },
-  inheritAttrs: false,
-  data() {
-    return {};
+    loaderProperty() {
+        if (this.size == "xs") {
+          return "!dd-w-1 !dd-h-1";
+        } else if (this.size == "sm") {
+          return "!dd-w-1 !dd-h-1";
+        } else if (this.size == "base") {
+          return "!dd-w-1 !dd-h-1";
+        } else if (this.size == "lg") {
+          return "!dd-w-1.5 !dd-h-1.5";
+        } else if (this.size == "xl") {
+          return "!dd-w-1.5 !dd-h-1.5";
+        }
+    },
   },
   methods: {
     handleClick(event) {
