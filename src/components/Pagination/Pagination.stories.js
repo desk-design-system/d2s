@@ -1,4 +1,3 @@
-import { defineComponent } from "vue";
 import DdPagination from "./index.vue";
 
 export default {
@@ -30,23 +29,40 @@ export default {
   },
 };
 
-const Template = (args) =>
-  defineComponent({
-    components: { DdPagination },
-    setup() {
-      return { args };
+export const Default = {
+  render: (args) => ({
+    components: {
+      DdPagination,
     },
-    template: `<DdPagination
-      :count="count"
-      :limit="limit"
+    setup() {
+      return {
+        args,
+      };
+    },
+    template: ` <DdPagination
+      :count="100"
+      :limit="10"
       :offset="offset"
       @fetch-data="getData"
     />`,
-  });
+  }),
+  args: {
+    count: 100,
+    limit: 10,
+    offset: 0,
+  },
+};
 
-export const Default = Template.bind({});
-Default.args = {
-  count: 100,
-  limit: 10,
-  offset: 0,
+Default.parameters = {
+  docs: {
+    source: {
+      code: ` 
+      <DdPagination
+      :count="100"
+      :limit="10"
+      :offset="0"
+      @fetch-data="getData"
+    />`,
+    },
+  },
 };
