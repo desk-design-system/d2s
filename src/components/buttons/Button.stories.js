@@ -18,19 +18,28 @@ export const Default = {
       const onClickMethod = () => action("clicked");
       return { args, onClickMethod };
     },
-    template: `<dd-button title="Default Button" color="white" size="base" type="default" />`,
+    template: `<dd-button title="button text" />`,
   }),
   argTypes: {
-    color: {
-      control: {
-        type: "select",
-      },
-      options: ["primary", "danger", "warning", "white"],
+    type: {
+      control: { type: "select" },
+      options: ["primary", "secondary", "tertiary", "danger"],
       description:
-        "Change color value as per the requirement primary / danger  / white",
+        "By default button type is color less so change the props default / primary / tertiary / danger",
       table: {
         defaultValue: {
-          summary: "-",
+          summary: "default",
+        },
+      },
+    },
+    content: {
+      control: { type: "select" },
+      options: ["textOnly", "leftIcon", "rightIcon", "iconOnly"],
+      description:
+        "By default button type is simple button so change the props textOnly / leftIcon / rightIcon / iconOnly",
+      table: {
+        defaultValue: {
+          summary: "default",
         },
       },
     },
@@ -62,80 +71,12 @@ export const Default = {
         },
       },
     },
-    type: {
-      control: { type: "select" },
-      options: ["default", "round", "text", "circle"],
-      description:
-        "By default button type is color less so change the props default / round / text / circle",
-      table: {
-        defaultValue: {
-          summary: "default",
-        },
-      },
-    },
-  },
-};
-
-export const Round = {
-  render: (args) => ({
-    components: {
-      DdButton,
-    },
-    setup() {
-      return { args };
-    },
-    template: `<dd-button title="Default Button" color="danger" size="base" type="round" />`,
-  }),
-  argTypes: {
-    color: {
-      control: {
-        type: "select",
-      },
-      options: ["primary", "danger", "warning", "white"],
-      description:
-        "Change color value as per the requirement primary / danger  / white",
-      table: {
-        defaultValue: {
-          summary: "-",
-        },
-      },
-    },
-    title: {
-      description: "Change title value as per the requirement",
-      table: {
-        defaultValue: {
-          summary: "Button",
-        },
-      },
-    },
-    size: {
-      control: { type: "select" },
-      options: ["xs", "sm", "base", "lg", "xl"],
-      description: "Accepted value xs / sm / base / lg / xl ",
-      table: {
-        defaultValue: {
-          summary: "base",
-        },
-      },
-    },
-    block: {
+    disabled: {
       type: "boolean",
-      description:
-        "To make button width full to parent div chnage boolean value to true",
+      description: "To make button disable",
       table: {
         defaultValue: {
           summary: "False",
-        },
-      },
-    },
-    type: {
-      control: { type: "select" },
-      options: ["default", "round", "text", "circle"],
-      description:
-        "By default button type is color less so change the props default / round / text / circle",
-      table: {
-        defaultValue: {
-          summary: "default",
         },
       },
     },
@@ -150,22 +91,9 @@ export const Text = {
     setup() {
       return { args };
     },
-    template: `<dd-button title="Text Button" color="primary" size="base" type="text" />`,
+    template: `<dd-button title="button text" content="textOnly" type="secondary" />`,
   }),
   argTypes: {
-    color: {
-      control: {
-        type: "select",
-      },
-      options: ["primary", "danger", "warning", "white"],
-      description:
-        "Change color value as per the requirement primary / danger  / white",
-      table: {
-        defaultValue: {
-          summary: "-",
-        },
-      },
-    },
     title: {
       description: "Change title value as per the requirement",
       table: {
@@ -194,11 +122,31 @@ export const Text = {
         },
       },
     },
+    disabled: {
+      type: "boolean",
+      description: "To make button disable",
+      table: {
+        defaultValue: {
+          summary: "False",
+        },
+      },
+    },
     type: {
       control: { type: "select" },
-      options: ["default", "round", "text", "circle"],
+      options: ["primary", "secondary", "tertiary", "danger"],
       description:
-        "By default button type is color less so change the props default / round / text / circle",
+        "By default button type is color less so change the props default / primary / tertiary / danger",
+      table: {
+        defaultValue: {
+          summary: "default",
+        },
+      },
+    },
+    content: {
+      control: { type: "select" },
+      options: ["textOnly", "leftIcon", "rightIcon", "iconOnly"],
+      description:
+        "By default button type is simple button so change the props textOnly / leftIcon / rightIcon / iconOnly",
       table: {
         defaultValue: {
           summary: "default",
@@ -208,7 +156,7 @@ export const Text = {
   },
 };
 
-export const Circle = {
+export const leftIcon = {
   render: (args) => ({
     components: {
       DdButton,
@@ -216,22 +164,9 @@ export const Circle = {
     setup() {
       return { args };
     },
-    template: `<dd-button icon="Users" color="primary" size="base" type="circle" prefix />`,
+    template: `<dd-button title="button text" content="leftIcon" type="secondary" icon="Circle"/>`,
   }),
   argTypes: {
-    color: {
-      control: {
-        type: "select",
-      },
-      options: ["primary", "danger", "warning", "white"],
-      description:
-        "Change color value as per the requirement primary / danger  / white",
-      table: {
-        defaultValue: {
-          summary: "-",
-        },
-      },
-    },
     title: {
       description: "Change title value as per the requirement",
       table: {
@@ -260,11 +195,104 @@ export const Circle = {
         },
       },
     },
+    disabled: {
+      type: "boolean",
+      description: "To make button disable",
+      table: {
+        defaultValue: {
+          summary: "False",
+        },
+      },
+    },
     type: {
       control: { type: "select" },
-      options: ["default", "round", "text", "circle"],
+      options: ["primary", "secondary", "tertiary", "danger"],
       description:
-        "By default button type is color less so change the props default / round / text / circle",
+        "By default button type is color less so change the props default / primary / tertiary / danger",
+      table: {
+        defaultValue: {
+          summary: "default",
+        },
+      },
+    },
+    content: {
+      control: { type: "select" },
+      options: ["textOnly", "leftIcon", "rightIcon", "iconOnly"],
+      description:
+        "By default button type is simple button so change the props textOnly / leftIcon / rightIcon / iconOnly",
+      table: {
+        defaultValue: {
+          summary: "default",
+        },
+      },
+    },
+  },
+};
+
+export const rightIcon = {
+  render: (args) => ({
+    components: {
+      DdButton,
+    },
+    setup() {
+      return { args };
+    },
+    template: `<dd-button title="button text" content="rightIcon" type="danger" icon="Circle"/>`,
+  }),
+  argTypes: {
+    title: {
+      description: "Change title value as per the requirement",
+      table: {
+        defaultValue: {
+          summary: "Button",
+        },
+      },
+    },
+    size: {
+      control: { type: "select" },
+      options: ["xs", "sm", "base", "lg", "xl"],
+      description: "Accepted value xs / sm / base / lg / xl ",
+      table: {
+        defaultValue: {
+          summary: "base",
+        },
+      },
+    },
+    block: {
+      type: "boolean",
+      description:
+        "To make button width full to parent div chnage boolean value to true",
+      table: {
+        defaultValue: {
+          summary: "False",
+        },
+      },
+    },
+    disabled: {
+      type: "boolean",
+      description: "To make button disable",
+      table: {
+        defaultValue: {
+          summary: "False",
+        },
+      },
+    },
+    type: {
+      control: { type: "select" },
+      options: ["primary", "secondary", "tertiary", "danger"],
+      description:
+        "By default button type is color less so change the props default / primary / tertiary / danger",
+      table: {
+        defaultValue: {
+          summary: "default",
+        },
+      },
+    },
+    content: {
+      control: { type: "select" },
+      options: ["textOnly", "leftIcon", "rightIcon", "iconOnly"],
+      description:
+        "By default button type is simple button so change the props textOnly / leftIcon / rightIcon / iconOnly",
       table: {
         defaultValue: {
           summary: "default",
@@ -277,15 +305,7 @@ export const Circle = {
 Default.parameters = {
   docs: {
     source: {
-      code: `<dd-button title="Default Button" color="white" size="base" type="default" />`,
-    },
-  },
-};
-
-Round.parameters = {
-  docs: {
-    source: {
-      code: ` <dd-button title="Default Button" color="danger" size="base" type="round" />`,
+      code: `<dd-button title="button text" />`,
     },
   },
 };
@@ -293,15 +313,23 @@ Round.parameters = {
 Text.parameters = {
   docs: {
     source: {
-      code: ` <dd-button title="Text Button" color="white" size="base" type="text" />`,
+      code: ` <dd-button title="button text" content="textOnly" type="secondary" />`,
     },
   },
 };
 
-Circle.parameters = {
+leftIcon.parameters = {
   docs: {
     source: {
-      code: `<dd-button icon="Users" color="primary" size="base" type="circle" prefix />`,
+      code: `<dd-button title="button text" content="leftIcon" type="secondary" icon="Circle"/>`,
+    },
+  },
+};
+
+rightIcon.parameters = {
+  docs: {
+    source: {
+      code: `<dd-button title="button text" content="rightIcon" type="danger" icon="Circle"/>`,
     },
   },
 };
