@@ -27,16 +27,7 @@ const props = defineProps({
     default: "#374151"
   }
   })
-//   const currentIcon = shallowRef('')
-//   watchEffect(() => {
-//   import(`../icons/${props.icon}.vue`).then((val) => {
-//     currentIcon.value = val.default;
-//   }).catch((error) => {
-//     if(error) {
-//       return;
-//     }
-//   });
-// });
+
 
 const myIcon = defineAsyncComponent(async () => {
   try {

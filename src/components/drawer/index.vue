@@ -110,10 +110,6 @@ const props = defineProps( {
     type: Boolean,
     default: false,
   },
-  // show: {
-  //   type: Boolean,
-  //   default: true,
-  // },
   modelValue: {
     type: [String, Number, Boolean],
     default: null,
