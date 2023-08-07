@@ -108,7 +108,7 @@ export default {
           ["none", "sm", "md", "lg", "xl", "2xl", "full"].indexOf(value) !== -1
         );
       },
-      default: "",
+      default: "none",
     },
   },
 };

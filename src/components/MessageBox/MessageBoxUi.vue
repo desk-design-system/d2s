@@ -1,7 +1,7 @@
 <!-- This example requires Tailwind CSS v2.0+ -->
 <template>
   <TransitionRoot as="template" :show="messageBoxValue">
-    <Dialog as="div" class="dd-relative dd-z-10" @close="close()">
+    <Dialog as="div" class="dd-relative dd-z-[10001]" @close="close()">
       <TransitionChild
         as="template"
         enter="dd-ease-out dd-duration-300"
