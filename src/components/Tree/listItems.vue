@@ -21,7 +21,7 @@
               isSelected && !item.disabled ? 'dd-bg-gray-50' : '',
               item?.disabled == true
                 ? 'dd-opacity-50 dd-cursor-not-allowed dd-pointer-events-none hover:!dd-bg-white'
-                : ''
+                : '',
             ]"
           >
             <div class="dd-flex dd-items-center dd-gap-2">
@@ -340,7 +340,7 @@ const emits = defineEmits([
   "keyupEditNode",
   "TrackEditNode",
   "selectedCheckBoxes",
-  "dropdownValue"
+  "dropdownValue",
 ]);
 
 const inputValue = ref("");
@@ -393,7 +393,7 @@ const setDropDownEvent = (event) => {
 const handleDomEvent = (e) => {
   if (e.target && props.item?.id == props.activeListId) {
     emits("setEditId", null);
-  };
+  }
 };
 
 const editListInput = () => {
