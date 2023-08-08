@@ -4,9 +4,9 @@
       <dd-Button
         v-for="button in buttons"
         :key="button?.id"
-        :color="button?.color"
         :size="button?.size"
         @click="selectButton(button, $event)"
+        type="secondary"
         class="!dd-h-6"
         :disabled="disabled"
       >
@@ -20,7 +20,7 @@
         </div>
       </dd-Button>
       <slot name="dropdown">
-        <dd-button v-if="dropdownProp" color="white" class="!dd-p-[2px] !dd-h-6" @click="setDropDownEvent($event)">
+        <dd-button v-if="dropdownProp" type="secondary" class="!dd-p-[2px] !dd-h-6" @click="setDropDownEvent($event)">
           <dd-dropdown
             color="transparent"
             class="[&>svg]:dd-relative dd-top-[2px]"
