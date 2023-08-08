@@ -6,7 +6,7 @@
       :buttons="buttons"
       :values="values"
       checkBoxProp
-      badge="ttitle"
+      badge="title"
       dropdownProp
     />
   </div>
@@ -78,7 +78,7 @@ function generateArrayWithUniqueIds(count, maxDepth) {
   return topLevelArray;
 }
 
-const generatedArray = generateArrayWithUniqueIds(4, 4);
+const generatedArray = generateArrayWithUniqueIds(10, 3);
 
 const buttons = ref([
   {

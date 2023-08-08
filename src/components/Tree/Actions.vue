@@ -7,7 +7,7 @@
         :size="button?.size"
         @click="selectButton(button, $event)"
         type="secondary"
-        class="!dd-h-6 dd-text-gray-500"
+        class="!dd-h-[28px] dd-text-gray-500"
         :disabled="disabled"
       >
         <span class="dd-text-sm dd-font-medium">{{ button?.label }}</span>
@@ -20,7 +20,7 @@
         </div>
       </dd-Button>
       <slot name="dropdown">
-        <dd-button v-if="dropdownProp" type="secondary" class="!dd-p-[2px] !dd-h-6" @click="setDropDownEvent($event)">
+        <dd-button v-if="dropdownProp" type="secondary" class="!dd-p-[2px] !dd-h-[28px] !dd-w-[28px]" @click="setDropDownEvent($event)">
           <dd-dropdown
             color="transparent"
             class="[&>svg]:dd-relative dd-top-[2px]"

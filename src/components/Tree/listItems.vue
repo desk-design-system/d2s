@@ -70,50 +70,50 @@
                   :customContent="customContent"
                   :disabled="item?.disabled"
                 >
-                  <svgIcon v-if="customContent" icon="Mail" size="16" />
+                  <svgIcon v-if="customContent" icon="Searcg" size="16" class="dd-text-gray-500" />
                 </slot>
               </div>
               <span class="dd-text-sm dd-font-normal dd-text-gray-700">
                 {{ item.label }}
               </span>
-            </div>
-            <div class="dd-w-fit">
-              <slot
-                v-if="actionButton"
-                name="actions"
-                :selectedItem="selectedItem"
-                :item="item"
-                :values="values"
-                :buttons="buttons"
-                :isSelected="isSelected"
-                :showIcon="showIcon"
-              >
-                <actions-button
+              <div class="dd-w-fit">
+                <slot
                   v-if="actionButton"
-                  :open="open"
-                  :class="{ 'hide-on-hover': !isSelected }"
-                  :style="`z-index: ${item.length - index} `"
-                  :buttons="buttons"
-                  :disabled="item?.disabled"
+                  name="actions"
+                  :selectedItem="selectedItem"
+                  :item="item"
                   :values="values"
+                  :buttons="buttons"
                   :isSelected="isSelected"
                   :showIcon="showIcon"
-                  :dropdownProp="dropdownProp"
-                  @setDropDownEvent="setDropDownEvent"
-                  @selected="getClickedButton($event, item?.id)"
-                  @assignToNode="assignToNode"
-                  @dropdownValue="emits('dropdownValue', $event)"
                 >
-                  <template #dropdown>
-                    <slot
-                      name="dropdown"
-                      :disabled="item?.disabled"
-                      :isSelected="isSelected"
-                      :open="open"
-                    ></slot>
-                  </template>
-                </actions-button>
-              </slot>
+                  <actions-button
+                    v-if="actionButton"
+                    :open="open"
+                    :class="{ 'hide-on-hover': !isSelected }"
+                    :style="`z-index: ${item.length - index} `"
+                    :buttons="buttons"
+                    :disabled="item?.disabled"
+                    :values="values"
+                    :isSelected="isSelected"
+                    :showIcon="showIcon"
+                    :dropdownProp="dropdownProp"
+                    @setDropDownEvent="setDropDownEvent"
+                    @selected="getClickedButton($event, item?.id)"
+                    @assignToNode="assignToNode"
+                    @dropdownValue="emits('dropdownValue', $event)"
+                  >
+                    <template #dropdown>
+                      <slot
+                        name="dropdown"
+                        :disabled="item?.disabled"
+                        :isSelected="isSelected"
+                        :open="open"
+                      ></slot>
+                    </template>
+                  </actions-button>
+                </slot>
+              </div>
             </div>
             <slot name="badge" v-if="badge">
               <DdBage type="basic">{{ badge }}</DdBage>
