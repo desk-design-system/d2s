@@ -200,7 +200,7 @@
           >
             <template v-if="checkBoxProp" #checkbox>
               <slot
-                name="checkbox"
+                name="leftSlotOne"
                 :item="item"
                 :open="open"
                 :checkBoxProp="checkBoxProp"
@@ -209,7 +209,7 @@
             </template>
             <template v-if="customContent" #content>
               <slot
-                name="content"
+                name="leftSlotTwo"
                 :item="item"
                 :open="open"
                 :customContent="customContent"
@@ -230,7 +230,7 @@
               </slot>
             </template>
             <template v-if="badge" #badge>
-              <slot name="badge"></slot>
+              <slot name="rightSlot"></slot>
             </template>
             <template #dropdown="{ isSelected, disabled, open }">
               <slot

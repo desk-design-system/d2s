@@ -636,16 +636,16 @@ export const Actions = {
         },
       },
     },
-    checkbox: {
-      description: `Slot to add content at checkbox place use #checkbox="{checkBoxProp, open, item, disabled}"`,
+    leftSlotOne: {
+      description: `Slot to add content at leftSlotOne place use #leftSlotOne="{checkBoxProp, open, item, disabled}"`,
       table: {
         defaultValue: {
           summary: [],
         },
       },
     },
-    content: {
-      description: `Slot to add content after checkbox use #content="{customContent, open, item, disabled}"`,
+    leftSlotTwo: {
+      description: `Slot to add leftSlotTwo after checkbox use #leftSlotTwo="{customContent, open, item, disabled}"`,
       table: {
         defaultValue: {
           summary: Boolean,
@@ -660,8 +660,8 @@ export const Actions = {
         },
       },
     },
-    badge: {
-      description: "Slot to add custom badge content",
+    rightSlot: {
+      description: "Slot to add custom rightSlot content",
       table: {
         defaultValue: {
           summary: Boolean,
