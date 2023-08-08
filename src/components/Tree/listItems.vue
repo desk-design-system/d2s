@@ -24,12 +24,12 @@
                 : '',
             ]"
           >
-            <div class="dd-flex dd-items-center dd-gap-2">
-              <div :class="[open ? 'dd-mt-[1px]' : 'dd-mt-0']">
+            <div class="dd-flex dd-items-center dd-text-center dd-gap-2">
+              <div :class="[open ? 'dd-mt-[3.1px]' : 'dd-mt-[3px]']">
                 <svgIcon
                   :icon="open ? 'SquareMinus' : 'SquarePlus'"
                   :class="[open ? 'dd-mb-[0.1px]' : '']"
-                  size="16"
+                  size="20"
                   class="dd-cursor-pointer"
                 />
                 <span
@@ -478,7 +478,7 @@ const assignToNode = () => {
   position: absolute;
   border-bottom: 1px solid #e5e7eb;
   height: 18px;
-  left: -11px;
+  left: -7px;
   width: 16px;
   top: -4px;
   border-left: 1px solid #e5e7eb;
@@ -488,7 +488,7 @@ const assignToNode = () => {
   position: absolute;
   border-bottom: 1px solid #e5e7eb;
   height: 18px;
-  left: 13px;
+  left: 17px;
   width: 16px;
   bottom: 11px;
   border-left: 1px solid #e5e7eb;

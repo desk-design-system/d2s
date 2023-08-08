@@ -7,7 +7,7 @@
         :size="button?.size"
         @click="selectButton(button, $event)"
         type="secondary"
-        class="!dd-h-6"
+        class="!dd-h-6 dd-text-gray-500"
         :disabled="disabled"
       >
         <span class="dd-text-sm dd-font-medium">{{ button?.label }}</span>

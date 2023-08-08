@@ -78,7 +78,7 @@
         <div
           :class="[
             successButton || closeButton
-              ? 'dd-h-8 dd-w-8 dd-gap-1 dd-flex dd-items-center dd-justify-center dd-relative dd-right-2.5'
+              ? '!dd-h-8 !dd-w-8 dd-gap-1 dd-flex dd-items-center dd-justify-center dd-relative dd-right-2.5'
               : '',
           ]"
         >
@@ -86,8 +86,8 @@
             v-if="successButton"
             content="iconOnly"
             type="secondary"
-            size="sm"
-            class="!dd-p-1"
+            size="xs"
+            class="!dd-py-1 !dd-px-[3px] dd-text-gray-500"
             :icon="successIcon"
             @click="emits('success')"
           />
@@ -96,8 +96,8 @@
             content="iconOnly"
             type="secondary"
             :icon="closeIcon"
-            size="sm"
-            class="!dd-p-1"
+            size="xs"
+            class="!dd-py-1 !dd-px-[3px] dd-text-gray-500"
             @click="emits('close')"
           />
         </div>
