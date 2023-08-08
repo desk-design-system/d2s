@@ -88,15 +88,17 @@
             type="secondary"
             size="sm"
             class="!dd-p-1"
-            icon="Circle"
+            :icon="successIcon"
+            @click="emits('success')"
           />
           <dd-button
             v-if="closeButton"
             content="iconOnly"
             type="secondary"
-            icon="closeIcon"
+            :icon="closeIcon"
             size="sm"
             class="!dd-p-1"
+            @click="emits('close')"
           />
         </div>
       </div>

@@ -3,7 +3,7 @@
       fixedHeight rowKey="id" hoveringRow lastCell fixed actionHeader emptyState actionsPanel sortIcon settingbarIcon
       searchIcon @updateSettings="updateSettings" dragDrop /> -->
       <dd-input successButton closeButton />
-      <dd-button icon="Circle" type="secondary" />
+      <dd-button icon="Circle" type="secondary" content="iconOnly" />
 </template>
 
 <script setup>

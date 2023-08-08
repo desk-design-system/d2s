@@ -127,6 +127,8 @@
               @click.stop="open = false"
               @keydown.enter.prevent="open = false"
               size="base"
+              successButton
+              closeButton
               class="dd-w-[260px]"
               @change="editListInput"
               @focus="emits('focusEditNode', { item, inputValue })"
@@ -134,30 +136,9 @@
               @keydown="emits('keydownEditNode', { item, inputValue })"
               @keyup="emits('keyupEditNode', { item, inputValue })"
               @input="emits('TrackEditNode', { item, inputValue })"
-            >
-              <template #suffix>
-                <div
-                  class="dd-h-8 dd-w-8 dd-gap-1 dd-flex dd-items-center dd-justify-center dd-relative dd-right-2.5"
-                >
-                  <dd-button
-                    color="white"
-                    size="xs"
-                    class="!dd-p-1"
-                    @click="updateEditList(item)"
-                  >
-                    <svgIcon icon="Check" size="16" class="dd-mb-1" />
-                  </dd-button>
-                  <dd-button
-                    color="white"
-                    size="xs"
-                    class="!dd-p-1"
-                    @click="discardEditChanges(item)"
-                  >
-                    <svgIcon icon="Close" size="16" class="dd-mb-1" />
-                  </dd-button>
-                </div>
-              </template>
-            </dd-input>
+              @success="updateEditList(item)"
+              @close="discardEditChanges(item)"
+            />
           </div>
         </div>
 
@@ -251,6 +232,8 @@
               @click.stop="open = false"
               @keydown.enter.prevent="open = false"
               size="base"
+              successButton
+              closeButton
               class="dd-pointer-events-auto dd-w-[260px]"
               @change="addNewListNode"
               @focus="emits('focusNewNode', { item, newListNode })"
@@ -258,30 +241,9 @@
               @keydown="emits('keydownNewNode', { item, newListNode })"
               @keyup="emits('keyupNewNode', { item, newListNode })"
               @input="emits('TrackNewNode', { item, newListNode })"
-            >
-              <template #suffix>
-                <div
-                  class="dd-h-8 dd-w-8 dd-gap-1 dd-flex dd-items-center dd-justify-center dd-relative dd-right-2.5"
-                >
-                  <dd-button
-                    color="white"
-                    size="xs"
-                    class="!dd-p-1"
-                    @click="addListInNode(item)"
-                  >
-                    <svgIcon icon="Check" size="16" />
-                  </dd-button>
-                  <dd-button
-                    color="white"
-                    size="xs"
-                    class="!dd-p-1"
-                    @click="discardListInNode(item)"
-                  >
-                    <svgIcon icon="Close" size="16" />
-                  </dd-button>
-                </div>
-              </template>
-            </dd-input>
+              @success="addListInNode(item)"
+              @close="discardListInNode(item)"
+            />
             <span
               v-if="item?.children.length > 0"
               class="curved_line_two"
