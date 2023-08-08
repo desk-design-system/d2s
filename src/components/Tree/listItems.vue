@@ -140,7 +140,7 @@
                   class="dd-h-8 dd-w-8 dd-gap-1 dd-flex dd-items-center dd-justify-center dd-relative dd-right-2.5"
                 >
                   <dd-button
-                    color="white"
+                    type="secondary"
                     size="xs"
                     class="!dd-p-1"
                     @click="updateEditList(item)"
@@ -148,7 +148,7 @@
                     <svgIcon icon="Check" size="16" class="dd-mb-1" />
                   </dd-button>
                   <dd-button
-                    color="white"
+                    type="secondary"
                     size="xs"
                     class="!dd-p-1"
                     @click="discardEditChanges(item)"
@@ -264,7 +264,7 @@
                   class="dd-h-8 dd-w-8 dd-gap-1 dd-flex dd-items-center dd-justify-center dd-relative dd-right-2.5"
                 >
                   <dd-button
-                    color="white"
+                    type="secondary"
                     size="xs"
                     class="!dd-p-1"
                     @click="addListInNode(item)"
@@ -272,7 +272,7 @@
                     <svgIcon icon="Check" size="16" />
                   </dd-button>
                   <dd-button
-                    color="white"
+                    type="secondary"
                     size="xs"
                     class="!dd-p-1"
                     @click="discardListInNode(item)"

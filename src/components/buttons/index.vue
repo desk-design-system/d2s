@@ -131,7 +131,7 @@ export default {
           ["primary", "secondary", "tertiary", "danger"].indexOf(value) !== -1
         );
       },
-      default: "primary",
+      default: "secondary",
     },
     content: {
       type: String,
