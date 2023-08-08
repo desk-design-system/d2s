@@ -136,7 +136,7 @@
                     </template>
                   </draggable>
                   <div class="dd-flex dd-items-center dd-justify-end dd-gap-3 dd-my-2 dd-mr-2">
-                    <dd-Button color="white"
+                    <dd-Button type="tertiary"
                       class="[&>button]: dd-ring-0 [&>button]: dd-ring-transparent [&>button]: dd-shadow-none [&>button]: dd-text-teal-600 [&>button]: hover:dd-bg-white [&>button]: dd-font-light dd-cursor-pointer"
                       @click="resetDefault()">
                       Reset
@@ -185,7 +185,7 @@
                       ? '!dd-pl-5'
                       : 'dd-cursor-pointer',
                   ]" :style="`min-width: ${col?.size}px`">
-                  <slot name="row" :column="col" :row="row" :value="row[col?.value]" :disabled="row?.disabled">
+                  <slot name="row" :column="col" :row="row" :value="row[col?.value]" :rowIndex="index" :disabled="row?.disabled">
                     {{ row[col?.value] }}
                   </slot>
                 </td>
@@ -219,7 +219,7 @@
       </div>
       <div v-if="footer && limit > 1" class="dd-flex dd-items-center dd-justify-between dd-py-3 dd-px-3">
         <DdGroupButton :buttons="buttons">
-          <dd-Button v-for="button in buttons" :key="button?.id" :color="button?.color" :size="button?.size"
+          <dd-Button v-for="button in buttons" :key="button?.id" type="secondary" :size="button?.size"
             :disabled="button?.disabled"
             class="dd-text-sm [&>span]:!dd-text-gray-500 [&>span]:!dd-font-normal !dd-w-[41px] !dd-p-0 dd-flex dd-items-center dd-justify-center"
             :class="setActiveButton(button?.label)" :loader="button?.loader" :title="button?.label" :type="button?.type"
@@ -227,7 +227,7 @@
             @click="selectNumberOfRows(button)" />
         </DdGroupButton>
 
-        <dd-Button color="white" size="sm" v-model="selectedButton" :disable="disabledLoadmore" :loader="loadmoreLoader"
+        <dd-Button type="secondary" size="sm" v-model="selectedButton" :disable="disabledLoadmore" :loader="loadmoreLoader"
           @click="loadMore()">
           Load More
         </dd-Button>
