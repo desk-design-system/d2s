@@ -84,16 +84,20 @@
         >
           <dd-button
             v-if="successButton"
-            color="white"
-            size="xs"
+            content="iconOnly"
+            type="secondary"
+            size="sm"
             class="!dd-p-1"
-            @click="emits('success')"
-          >
-            <svgIcon :icon="successIcon" size="16" class="dd-mb-1" />
-          </dd-button>
-          <dd-button v-if="closeButton" color="white" size="xs" class="!dd-p-1" @click="emits('close')">
-            <svgIcon :icon="closeIcon" size="16" class="dd-mb-1" />
-          </dd-button>
+            icon="Circle"
+          />
+          <dd-button
+            v-if="closeButton"
+            content="iconOnly"
+            type="secondary"
+            icon="closeIcon"
+            size="sm"
+            class="!dd-p-1"
+          />
         </div>
       </div>
     </div>

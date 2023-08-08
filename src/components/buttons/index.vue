@@ -1,7 +1,6 @@
 <template>
   <button
     v-if="!loader"
-    @click="handleClick"
     v-bind="$attrs"
     :id="id"
     :class="{ ...defaultButton }"
@@ -297,16 +296,6 @@ export default {
   inheritAttrs: false,
   data() {
     return {};
-  },
-  methods: {
-    handleClick(event) {
-      if (this.loader === false) {
-        event.stopPropagation();
-        return;
-      } else {
-        this.$emit("click");
-      }
-    },
   },
   components: {
     svgIcon,
