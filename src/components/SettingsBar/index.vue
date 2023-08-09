@@ -12,7 +12,7 @@
         <div class="dd-w-full">
           <dd-input
             ref="searchInputRef"
-            v-model="searchInput"
+            v-model.trim="searchInput"
             Border="none"
             type="text"
             :placeholder="placeholder"
