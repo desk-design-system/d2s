@@ -17,13 +17,9 @@ export const Default = {
     },
     template: `
     <DdGroupButton>
-        <dd-Button color="white">
-          <svgIcon icon="Alert" />
-        </dd-Button>
-        <dd-Button color="white">
-          <svgIcon icon="Alert" />
-        </dd-Button>
-        <dd-Button color="white">
+        <dd-Button type="secondary" content="iconOnly" icon="Circle" />
+        <dd-Button type="secondary" content="iconOnly" icon="Plus" />
+        <dd-Button type="secondary">
           <span>Button</span>
         </dd-Button>
       </DdGroupButton>
@@ -42,13 +38,9 @@ Default.parameters = {
     source: {
       code: ` 
       <DdGroupButton>
-        <dd-Button color="white">
-          <svgIcon icon="Alert" />
-        </dd-Button>
-        <dd-Button color="white">
-          <svgIcon icon="Alert" />
-        </dd-Button>
-        <dd-Button color="white">
+      <dd-Button type="secondary" content="iconOnly" icon="Circle" />
+      <dd-Button type="secondary" content="iconOnly" icon="Plus" />
+        <dd-Button type="secondary">
           <span>Button</span>
         </dd-Button>
       </DdGroupButton>`,

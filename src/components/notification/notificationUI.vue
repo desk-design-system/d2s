@@ -17,7 +17,7 @@
                   class="dd-h-6 dd-w-6" aria-hidden="true" />
 
               </div>
-              <div class="dd-ml-3 dd-w-0 dd-flex-1 dd-pt-0.5">
+              <div class="dd-ml-2 dd-w-0 dd-flex-1 dd-pt-0.5">
                 <p class="dd-text-sm dd-font-medium dd-text-gray-900">{{ title }}</p>
                 <p class="dd-mt-1 dd-text-sm dd-text-gray-500"> {{ message }}</p>
               </div>
@@ -25,7 +25,7 @@
                 <button type="button" @click="closeNotification()"
                   class="dd-inline-flex dd-rounded-md dd-bg-white dd-text-gray-400 hover:dd-text-gray-700 ">
                   <span class="dd-sr-only">Close</span>
-                  <XIcon class="dd-h-4 dd-w-4 " aria-hidden="true" />
+                  <XIcon class="dd-h-5 dd-w-5 " aria-hidden="true" />
                 </button>
               </div>
             </div>

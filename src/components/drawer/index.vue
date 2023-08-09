@@ -29,7 +29,7 @@
                           </DialogTitle>
                           <div class="dd-ml-3 dd-flex dd-h-7 dd-items-center">
                             <button type="button" :class="[primaryHeader ? 'dd-text-gray-100 hover:dd-text-teal-100' : 'dd-text-gray-500 hover:dd-text-gray-500']"
-                              class="dd-rounded-md    focus:dd-outline-none"
+                              class="dd-rounded-md  dd-flex dd-items-center  focus:dd-outline-none"
                               @click="$emit('close')">
                               <XIcon class="dd-h-6 dd-w-6" aria-hidden="true" />
                             </button>

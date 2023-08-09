@@ -53,8 +53,8 @@ export const Default = {
     },
     size: {
       control: { type: "select" },
-      options: ["mini", "small", "medium", "large", "xLarge"],
-      description: "Accepted value mini / small / medium / large / xLarge ",
+      options: ["16", "24", "28", "32", "40", "48", "56"],
+      description: "Accepted value 16 / 24 / 28 / 32 / 40 / 48 / 56 only",
       table: {
         defaultValue: {
           summary: "medium",

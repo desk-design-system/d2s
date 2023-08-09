@@ -19,7 +19,7 @@ export const Basic = {
     template: `<dd-badge title="Badge" />`,
   }),
   argTypes: {
-    type: {
+    color: {
       control: {
         type: "select",
       },
@@ -47,7 +47,6 @@ export const Basic = {
         "cyan",
         "sky",
         "indigo",
-        "voilet",
         "fuchsia",
         "pink",
         "rose",
@@ -129,7 +128,7 @@ export const COLORED = {
     template: `<dd-badge type="teal" title="Badge" />`,
   }),
   argTypes: {
-    type: {
+    color: {
       control: {
         type: "select",
       },
@@ -212,7 +211,7 @@ export const Closable = {
     dot type="purple" />`,
   }),
   argTypes: {
-    type: {
+    color: {
       control: {
         type: "select",
       },

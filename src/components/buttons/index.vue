@@ -2,7 +2,6 @@
   <button
     v-if="!loader"
     v-bind="$attrs"
-    @click="handleClick($event)"
     :id="id"
     :class="{ ...defaultButton }"
     :style="[
@@ -315,14 +314,6 @@ export default {
         }
       }
     },
-  },
-  methods: {
-    handleClick(evet) {
-      if(this.disabled === true) {
-        evet.stopPropagation();
-        return;
-      }
-    }
   },
   components: {
     svgIcon,

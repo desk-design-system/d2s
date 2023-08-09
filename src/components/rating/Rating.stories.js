@@ -8,7 +8,7 @@ export default {
 
 
 
-export const Small = {
+export const XS = {
   render: (args) => ({
     components: {
       DdRating,
@@ -18,7 +18,43 @@ export const Small = {
         args,
       };
     },
-    template: `<dd-rating productRating="3" starWidth="20" starHeight="20" />`,
+    template: `<dd-rating productRating="3" size="xs" />`,
+  }),
+  argTypes: {
+    productRating: {
+      control: {
+        type: 'select'
+      },
+      options: [1, 2, 3, 4, 5],
+      description: "Change rating values",
+      table: {
+        defaultValue: {
+          summary: 3
+        }
+      }
+    },
+    size: {
+      control: {
+        type: 'select'
+      },
+      options: ['xs', 'sm', 'base'],
+      description: "Change star rating width",
+    },
+  }
+};
+
+
+export const SM = {
+  render: (args) => ({
+    components: {
+      DdRating,
+    },
+    setup() {
+      return {
+        args,
+      };
+    },
+    template: `<dd-rating productRating="3" size="sm" />`,
   }),
   argTypes: {
     productRating: {
@@ -51,7 +87,7 @@ export const Small = {
 };
 
 
-export const Medium = {
+export const BASE = {
   render: (args) => ({
     components: {
       DdRating,
@@ -61,7 +97,7 @@ export const Medium = {
         args,
       };
     },
-    template: `<dd-rating productRating="3" starWidth="24" starHeight="24" />`,
+    template: `<dd-rating productRating="3" size="base" />`,
   }),
   argTypes: {
     productRating: {
@@ -93,69 +129,26 @@ export const Medium = {
   }
 };
 
-
-export const Large = {
-  render: (args) => ({
-    components: {
-      DdRating,
-    },
-    setup() {
-      return {
-        args,
-      };
-    },
-    template: `<dd-rating productRating="3" starWidth="28" starHeight="28" />`,
-  }),
-  argTypes: {
-    productRating: {
-      control: {
-        type: 'select'
-      },
-      options: [1, 2, 3, 4, 5],
-      description: "Change rating values",
-      table: {
-        defaultValue: {
-          summary: 3
-        }
-      }
-    },
-    starWidth: {
-      control: {
-        type: 'select'
-      },
-      options: ['20', '24', '28'],
-      description: "Change star rating width",
-    },
-    starHeight: {
-      control: {
-        type: 'select'
-      },
-      options: ['20', '24', '28'],
-      description: "Change star rating height",
-    },
-  }
-};
-
-Small.parameters = {
+XS.parameters = {
   docs: {
     source: {
-      code: `<dd-rating productRating="3" starWidth="20" starHeight="20" />`,
+      code: `<dd-rating productRating="3" size="xs" />`,
     },
   },
 };
 
-Medium.parameters = {
+SM.parameters = {
   docs: {
     source: {
-      code: `<dd-rating productRating="3" starWidth="24" starHeight="24" />`,
+      code: `<dd-rating productRating="3" size="sm" />`,
     },
   },
 };
 
-Large.parameters = {
+BASE.parameters = {
   docs: {
     source: {
-      code: `<dd-rating productRating="3" starWidth="28" starHeight="28" />`,
+      code: `<dd-rating productRating="3" size="base" />`,
     },
   },
 };

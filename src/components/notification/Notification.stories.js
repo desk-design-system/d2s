@@ -19,7 +19,7 @@ export default {
     },
     timeout:{
       control: { type: 'select' },
-      options: [1000, 2000, 3000, 4000],
+      options: [1000, 2000, 3000, 4000, 5000],
       description: "You can pass time in mili seconds as per the requirement",
       table:{
         defaultValue:{
@@ -53,7 +53,7 @@ const Template = (args) => ({
 
   },
   // And then the `args` are bound to your component with `v-bind="args"`
-  template: '<div> <dd-button color="success"  @click="showAlertSuccess">Success</dd-button> <dd-button color="warning" @click="showAlertWarning">Warning</dd-button> <dd-button color="danger" @click="showAlertError">Error</dd-button> <dd-button color="white" @click="showAlertInfo">Info</dd-button></div>  ',
+  template: '<div> <dd-button type="primary"  @click="showAlertSuccess">Success</dd-button> <dd-button type="secondary" @click="showAlertWarning">Warning</dd-button> <dd-button type="danger" @click="showAlertError">Error</dd-button> <dd-button type="tertiary" @click="showAlertInfo">Info</dd-button></div>  ',
 });
 
 

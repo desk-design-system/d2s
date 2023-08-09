@@ -1,7 +1,6 @@
 <template>
   <div>
-    <dd-badge title="Badge" closable
-    dot type="green" />
+    <dd-rating productRating="3" size="base" />
     <!-- <dd-tree
       :list="generatedArray"
       actionButton
@@ -17,7 +16,7 @@
 <script setup>
 import { ref } from "vue";
 import DdTree from "./components/Tree/index.vue"
-import DdBadge from "./components/badges/index.vue"
+import DdRating from "./components/rating/index.vue"
 
 
 function generateArrayWithUniqueIds(count, maxDepth) {
