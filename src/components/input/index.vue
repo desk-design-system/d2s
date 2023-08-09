@@ -49,7 +49,7 @@
         ]"
         v-model="inputModelValue"
         :type="inputType"
-        class="!dd-block !dd-border-solid focus:!dd-border-teal-600 !dd-border-gray-300 !dd-w-full !dd-rounded-md sm:!dd-text-sm focus:ring-2 focus:dd-ring-inset dd-shadow-sm"
+        class="!dd-block !dd-border-solid focus:!dd-border-teal-600 !dd-border-gray-300 !dd-w-full !dd-rounded-md sm:!dd-text-sm focus:ring-2 focus:dd-ring-inset dd-shadow-sm focus:dd-shadow-sm focus-within:dd-shadow-sm"
         :placeholder="placeholder"
       />
       <!-- $slots.suffix -->

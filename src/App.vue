@@ -1,6 +1,8 @@
 <template>
   <div>
-    <dd-tree
+    <dd-badge title="Badge" closable
+    dot type="green" />
+    <!-- <dd-tree
       :list="generatedArray"
       actionButton
       :buttons="buttons"
@@ -8,13 +10,15 @@
       checkBoxProp
       badge="title"
       dropdownProp
-    />
+    /> -->
   </div>
 </template>
 
 <script setup>
 import { ref } from "vue";
 import DdTree from "./components/Tree/index.vue"
+import DdBadge from "./components/badges/index.vue"
+
 
 function generateArrayWithUniqueIds(count, maxDepth) {
   let nextId = 1;

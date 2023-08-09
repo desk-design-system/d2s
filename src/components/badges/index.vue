@@ -17,25 +17,17 @@
     <slot name="prefix"></slot>
     <slot>{{ title }}</slot>
     <slot name="suffix"></slot>
-    <!-- <dd-button
+    <XIcon
       v-if="closable"
       @click="$emit('close')"
-      type="text"
-      class="!dd-py-0 !dd-px-0"
-    >
-      
-    </dd-button> -->
-    <XIcon
-    v-if="closable "
-      @click="$emit('close')"
-        :class="{
-          ...tagText,
-          'dd-h-3.5 dd-w-3.5 ': size === 'medium',
-          'dd-h-4 dd-w-4 ': size === 'large',
-        }"
-        class="dd-ml-1.5 dd-inline-flex"
-        aria-hidden="true"
-      />
+      :class="{
+        ...tagText,
+        'dd-h-3 dd-w-3 ': size === 'xs',
+        'dd-h-3.5 dd-w-3.5 ': size === 'base',
+      }"
+      class="dd-ml-1 dd-inline-flex"
+      aria-hidden="true"
+    />
   </span>
 </template>
 
@@ -61,20 +53,46 @@ export default {
       type: String,
       validator: function (value) {
         return (
-          ["white", "gray", "danger", "warning", "green", "lime", "info", "purple"].indexOf(
-            value
-          ) !== -1
+          [
+            "white",
+            "green",
+            "gray",
+            "blue",
+            "red",
+            "yellow",
+            "green",
+            "lime",
+            "info",
+            "purple",
+            "slat",
+            "neutral",
+            "zinc",
+            "stone",
+            "red",
+            "orange",
+            "amber",
+            "lime",
+            "teal",
+            "emerald",
+            "cyan",
+            "sky",
+            "indigo",
+            "voilet",
+            "fuchsia",
+            "pink",
+            "rose",
+          ].indexOf(value) !== -1
         );
       },
-      default: "white",
+      default: "gray",
     },
     size: {
       type: String,
       validator: function (value) {
         // The value must match one of these strings
-        return ["medium", "large"].indexOf(value) !== -1;
+        return ["xs", "base"].indexOf(value) !== -1;
       },
-      default: "medium",
+      default: "base",
     },
     dot: {
       type: Boolean,
@@ -88,32 +106,63 @@ export default {
   computed: {
     tagText() {
       return {
-        "!dd-text-gray-600": this.type === "white",
+        "!dd-text-white-600": this.type === "white",
+        "!dd-text-green-600": this.type === "green",
+        "!dd-text-rose-600": this.type === "rose",
+        "!dd-text-pink-600": this.type === "pink",
+        "!dd-text-fuchsia-600": this.type === "fuchsia",
+        "!dd-text-voilet-600": this.type === "voilet",
+        "!dd-text-indigo-600": this.type === "indigo",
+        "!dd-text-sky-600": this.type === "sky",
+        "!dd-text-cyan-600": this.type === "cyan",
+        "!dd-text-emerald-600": this.type === "emerald",
+        "!dd-text-amber-600": this.type === "amber",
+        "!dd-text-orange-600": this.type === "orange",
+        "!dd-text-red-600": this.type === "red",
+        "!dd-text-stone-600": this.type === "stone",
+        "!dd-text-zinc-600": this.type === "zinc",
         "!dd-text-gray-600": this.type === "gray",
-        "!dd-text-amber-600": this.type === "warning",
-        "!dd-text-teal-600": this.type === "success",
+        "!dd-text-slat-600": this.type === "slat",
+        "!dd-text-neutral-600": this.type === "neutral",
+        "!dd-text-amber-600": this.type === "yellow",
+        "!dd-text-teal-600": this.type === "teal",
         "!dd-text-lime-600": this.type === "lime",
-        "!dd-text-red-600": this.type === "danger",
-        "!dd-text-sky-600": this.type === "info",
+        "!dd-text-red-600": this.type === "red",
+        "!dd-text-blue-600": this.type === "blue",
         "!dd-text-purple-600": this.type === "purple",
       };
     },
     badgeStyling() {
       return {
-        ' dd-px-2 dd-py-0.5 dd-text-xs ': this.size === 'medium',
-        ' dd-px-2.5 dd-py-0.5 dd-text-sm ': this.size === 'large',
-        ' !dd-px-2 ': this.closable && this.size === 'large',
-        ' dd-rounded-xl ': this.rounded,
-        ' dd-bg-gray-50 dd-text-gray-700 ': this.type === 'white',
-        ' dd-bg-gray-200 dd-text-gray-700 ': this.type === 'gray',
-        ' dd-bg-amber-100 dd-text-amber-800 ': this.type === 'warning',
-        ' dd-bg-teal-100 dd-text-teal-800 ': this.type === 'success',
-        ' dd-bg-lime-100 dd-text-lime-800 ': this.type === 'lime',
-        ' dd-bg-red-100 dd-text-red-800 ': this.type === 'danger',
-        ' dd-bg-sky-100 dd-text-sky-800 ': this.type === 'info',
-        ' dd-bg-purple-100 dd-text-purple-800 ': this.type === 'purple',
-      }
-    }
-  }
+        " dd-px-1.5 dd-py-0.5 dd-text-xs ": this.size === "xs",
+        " dd-px-2 dd-py-1 dd-text-sm ": this.size === "base",
+        " dd-rounded-xl ": this.rounded,
+        " !dd-bg-gray-50 dd-text-gray-700 ": this.type === "white",
+        " !dd-bg-green-100 dd-text-green-700 ": this.type === "green",
+        " !dd-bg-rose-100 dd-text-rose-700 ": this.type === "rose",
+        " !dd-bg-pink-100 dd-text-pink-700 ": this.type === "pink",
+        " !dd-bg-fuchsia-100 dd-text-fuchsia-700 ": this.type === "fuchsia",
+        " !dd-bg-voilet-100 dd-text-voilet-700 ": this.type === "voilet",
+        " !dd-bg-indigo-100 dd-text-indigo-700 ": this.type === "indigo",
+        " !dd-bg-sky-100 dd-text-sky-700 ": this.type === "sky",
+        " !dd-bg-cyan-100 dd-text-cyan-700 ": this.type === "cyan",
+        " !dd-bg-emerald-100 dd-text-emerald-700 ": this.type === "emerald",
+        " !dd-bg-amber-100 dd-text-amber-700 ": this.type === "amber",
+        " !dd-bg-orange-100 dd-text-orange-700 ": this.type === "orange",
+        " !dd-bg-red-100 dd-text-red-700 ": this.type === "red",
+        " !dd-bg-stone-100 dd-text-stone-700 ": this.type === "stone",
+        " !dd-bg-zinc-100 dd-text-zinc-700 ": this.type === "zinc",
+        " !dd-bg-gray-200 dd-text-gray-700 ": this.type === "gray",
+        "!dd-bg-slat-100 dd-text-slat-700 ": this.type === "slat",
+        "!dd-bg-neutral-100 dd-text-neutral-700 ": this.type === "neutral",
+        " dd-bg-amber-100 dd-text-amber-700 ": this.type === "yellow",
+        " dd-bg-teal-100 dd-text-teal-700 ": this.type === "teal",
+        " dd-bg-lime-100 dd-text-lime-700 ": this.type === "lime",
+        " dd-bg-red-100 dd-text-red-700 ": this.type === "red",
+        " dd-bg-blue-100 dd-text-blue-700 ": this.type === "blue",
+        " dd-bg-purple-100 dd-text-purple-700 ": this.type === "purple",
+      };
+    },
+  },
 };
 </script>

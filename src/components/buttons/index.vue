@@ -2,6 +2,7 @@
   <button
     v-if="!loader"
     v-bind="$attrs"
+    @click="handleClick($event)"
     :id="id"
     :class="{ ...defaultButton }"
     :style="[
@@ -161,7 +162,7 @@ export default {
             this.size === "lg",
           "dd-px-3 dd-h-10 dd-text-sm dd-font-normal dd-shadow-sm dd-rounded-md":
             this.size === "xl",
-          "dd-cursor-not-allowed !dd-bg-gray-100 dd-shadow-sm !dd-text-gray-400 hover:dd-bg-gray-300":
+          "!dd-cursor-not-allowed !dd-bg-gray-100 dd-shadow-sm !dd-text-gray-400 hover:dd-bg-gray-300":
             this.disabled,
           "dd-w-full dd-justify-center": this.block,
           "dd-bg-teal-600 dd-text-white hover:dd-bg-teal-500":
@@ -180,7 +181,7 @@ export default {
             this.size === "lg",
           "dd-px-3 dd-h-10 dd-text-sm dd-font-normal dd-shadow-sm dd-rounded-md":
             this.size === "xl",
-          "dd-cursor-not-allowed !dd-bg-gray-100 !dd-border-0 dd-shadow-sm !dd-text-gray-400 hover:dd-bg-gray-300":
+          "!dd-cursor-not-allowed !dd-bg-gray-100 !dd-border-0 dd-shadow-sm !dd-text-gray-400 hover:dd-bg-gray-300":
             this.disabled,
           "dd-w-full dd-justify-center": this.block,
           "dd-border-gray-300 dd-text-gray-700 dd-border dd-bg-white dd-shadow-sm focus:dd-outline-none":
@@ -199,7 +200,7 @@ export default {
             this.size === "lg",
           "dd-px-3 dd-h-10 dd-text-sm dd-font-normal dd-shadow-sm dd-rounded-md":
             this.size === "xl",
-          "dd-cursor-not-allowed !dd-bg-gray-100 dd-shadow-sm !dd-text-gray-400 hover:dd-bg-gray-300":
+          "!dd-cursor-not-allowed !dd-bg-gray-100 dd-shadow-sm !dd-text-gray-400 hover:dd-bg-gray-300":
             this.disabled,
           "dd-bg-red-600 dd-text-white hover:dd-bg-red-400":
             this.type == "danger",
@@ -218,7 +219,7 @@ export default {
             this.size === "lg",
           "dd-px-3 dd-h-10 dd-text-sm dd-bg-white dd-rounded dd-font-normal":
             this.size === "xl",
-          "dd-cursor-not-allowed !dd-text-gray-300 hover:!dd-bg-white dd-rounded":
+          "!dd-cursor-not-allowed !dd-text-gray-300 hover:!dd-bg-white dd-rounded":
             this.disabled,
           "dd-text-teal-600 !dd-bd-white hover:dd-bg-gray-50":
             this.type == "tertiary",
@@ -314,6 +315,14 @@ export default {
         }
       }
     },
+  },
+  methods: {
+    handleClick(evet) {
+      if(this.disabled === true) {
+        evet.stopPropagation();
+        return;
+      }
+    }
   },
   components: {
     svgIcon,

@@ -41,7 +41,7 @@
               <div
                 v-if="checkBoxProp"
                 @click.stop="open = false"
-                class="dd-h-5 dd-w-5 dd-text-center dd-rounded-[4px] dd-py-[2px] dd-px-[3px]"
+                class="dd-h-5 dd-w-5 dd-text-center dd-rounded-[4px] dd-px-[3px]"
               >
                 <slot
                   name="checkbox"
@@ -472,14 +472,14 @@ const assignToNode = () => {
   background-color: #e5e7eb;
   position: absolute;
   margin-top: 30px;
-  margin-left: -9px;
+  margin-left: -11px;
 }
 .curved_line {
   position: absolute;
   border-bottom: 1px solid #e5e7eb;
   height: 18px;
-  left: -7px;
-  width: 16px;
+  left: -9px;
+  width: 12px;
   top: -4px;
   border-left: 1px solid #e5e7eb;
   border-radius: 0 0 0 4px;
@@ -488,7 +488,7 @@ const assignToNode = () => {
   position: absolute;
   border-bottom: 1px solid #e5e7eb;
   height: 18px;
-  left: 17px;
+  left: 15px;
   width: 16px;
   bottom: 11px;
   border-left: 1px solid #e5e7eb;
