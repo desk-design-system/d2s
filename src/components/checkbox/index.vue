@@ -14,7 +14,8 @@
           ? ' !dd-cursor-not-allowed !dd-border-gray-200 !dd-text-gray-400'
           : 'dd-cursor-pointer !dd-text-teal-600',
       ]"
-      class="!dd-h-4 !dd-w-4 !dd-rounded !dd-border-solid dd-border-gray-300 focus:!dd-ring-teal-500"
+      class="!dd-h-4 !dd-w-4 !dd-rounded !dd-border-solid focus:!dd-ring-teal-500"
+      style="border-color: rgb(209, 213, 219);"
       @click="getChecked"
     />
     <slot name="label">
