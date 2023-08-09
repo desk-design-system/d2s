@@ -65,14 +65,14 @@
                     <span class="dd-mr-4" v-if="closed">
                       <rdButton
                         @click="cancel()"
-                        color="white"
+                        type="secondary"
                         :title="closeTitle"
                       />
                     </span>
                     <rdButton
                       v-if="solved"
                       @click="solvedItem()"
-                      :color="conditionalIcons.button"
+                      :type="conditionalIcons.button"
                       :title="saveTitle"
                     />
                   </slot>
@@ -170,13 +170,6 @@ const solvedItem = () => {
 
 const conditionalIcons = computed(() => {
   switch (props.type) {
-    case "Warning":
-      return {
-        icon: ExclamationIcon,
-        class: "dd-text-yellow-500",
-        color: "dd-bg-yellow-50",
-        button: "warning",
-      };
     case "Error":
       return {
         icon: ExclamationIcon,
@@ -187,16 +180,9 @@ const conditionalIcons = computed(() => {
     case "Success":
       return {
         icon: ExclamationIcon,
-        class: "dd-text-green-500",
-        color: "dd-bg-green-50",
-        button: "success",
-      };
-    case "Info":
-      return {
-        icon: ExclamationIcon,
-        class: "dd-text-blue-500",
-        color: "dd-bg-blue-50",
-        button: "white",
+        class: "dd-text-teal-500",
+        color: "dd-bg-teal-50",
+        button: "primary",
       };
 
     default:

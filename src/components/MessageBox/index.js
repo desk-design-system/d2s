@@ -18,7 +18,16 @@ export const useMessageBox = (globalProps = {}) => {
       });
       return promise;
     },
-    error(options, title, message, saveTitle, closeTitle, closed, solved, modalWidth) {
+    error(
+      options,
+      title,
+      message,
+      saveTitle,
+      closeTitle,
+      closed,
+      solved,
+      modalWidth
+    ) {
       return this.open(
         Object.assign(
           {},
@@ -35,7 +44,16 @@ export const useMessageBox = (globalProps = {}) => {
         )
       );
     },
-    success(options, title, message, saveTitle, closeTitle, closed, solved, modalWidth) {
+    success(
+      options,
+      title,
+      message,
+      saveTitle,
+      closeTitle,
+      closed,
+      solved,
+      modalWidth
+    ) {
       return this.open(
         Object.assign(
           {},
@@ -45,40 +63,6 @@ export const useMessageBox = (globalProps = {}) => {
             saveTitle: saveTitle ?? options.saveTitle,
             closeTitle: closeTitle ?? options.closeTitle,
             type: "Success" ?? options.type,
-            closed: closed ?? options.closed,
-            solved: solved ?? options.solved,
-            modalWidth: modalWidth ?? options.modalWidth,
-          }
-        )
-      );
-    },
-    info(options, title, message, saveTitle, closeTitle, closed, solved, modalWidth) {
-      return this.open(
-        Object.assign(
-          {},
-          {
-            title: title ?? options.title,
-            message: message ? message : options.message,
-            saveTitle: saveTitle ?? options.saveTitle,
-            closeTitle: closeTitle ?? options.closeTitle,
-            type: "Info" ?? options.type,
-            closed: closed ?? options.closed,
-            solved: solved ?? options.solved,
-            modalWidth: modalWidth ?? options.modalWidth,
-          }
-        )
-      );
-    },
-    warning(options, title, message, saveTitle, closeTitle, closed, solved, modalWidth) {
-      return this.open(
-        Object.assign(
-          {},
-          {
-            title: title ?? options.title,
-            message: message ? message : options.message,
-            saveTitle: saveTitle ?? options.saveTitle,
-            closeTitle: closeTitle ?? options.closeTitle,
-            type: "Warning" ?? options.type,
             closed: closed ?? options.closed,
             solved: solved ?? options.solved,
             modalWidth: modalWidth ?? options.modalWidth,
