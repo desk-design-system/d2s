@@ -1,11 +1,14 @@
 <!-- This example requires Tailwind CSS v2.0+ -->
 <template>
-  <div  :class="{
+  <div
+    :class="{
       'dd-bg-yellow-50': type === 'warning',
       'dd-bg-green-50': type === 'success',
       'dd-bg-red-50': type === 'danger',
       'dd-bg-blue-50': type === 'info',
-    }" class="dd-rounded-md dd-p-4">
+    }"
+    class="dd-rounded-md dd-p-4"
+  >
     <div>
       <div class="dd-flex dd-justify-between dd-pb-2">
         <div class="dd-flex justify-start">
@@ -31,7 +34,7 @@
               aria-hidden="true"
             />
           </div>
-          <div class="dd-ml-3 dd-break-normal">
+          <div class="dd-ml-2 dd-break-normal">
             <p
               class="dd-text-sm dd-font-medium dd-normal-case"
               :class="{
@@ -48,18 +51,27 @@
           </div>
         </div>
         <dd-button
-        v-if="closable"
-        @click="$emit('close')"
-          
+          v-if="closable"
+          @click="$emit('close')"
           type="text"
           class="dd-py-0 dd-px-0"
+          :class="{
+            'dd-bg-yellow-50 hover:dd-text-yellow-500 hover:!dd-bg-transparent': type === 'warning',
+            'dd-bg-green-50 hover:dd-text-green-500 hover:!dd-bg-transparent': type === 'success',
+            'dd-bg-red-50 hover:dd-text-red-500 hover:!dd-bg-transparent': type === 'danger',
+            'dd-bg-blue-50 hover:dd-text-blue-500 hover:!dd-bg-transparent': type === 'info',
+          }"
         >
-          <XIcon :class="{
-            'dd-text-yellow-400 hover:dd-text-yellow-500': type === 'warning',
-            'dd-text-green-400 hover:dd-text-green-500': type === 'success',
-            'dd-text-red-400 hover:dd-text-red-500': type === 'danger',
-            'dd-text-blue-400 hover:dd-text-blue-500': type === 'info',
-          }" class="dd-h-4 dd-w-4" aria-hidden="true" />
+          <XIcon
+            :class="{
+              'dd-text-yellow-400': type === 'warning',
+              'dd-text-green-400': type === 'success',
+              'dd-text-red-400': type === 'danger',
+              'dd-text-blue-400': type === 'info',
+            }"
+            class="dd-h-4 dd-w-4"
+            aria-hidden="true"
+          />
         </dd-button>
       </div>
     </div>
@@ -85,9 +97,9 @@ export default {
     ddButton,
   },
   props: {
-    closable:{
-       type: Boolean,
-      default: false, 
+    closable: {
+      type: Boolean,
+      default: false,
     },
     title: {
       type: String,

@@ -33,7 +33,7 @@
           'dd-h-3.5 dd-w-3.5 ': size === 'medium',
           'dd-h-4 dd-w-4 ': size === 'large',
         }"
-        class="dd-ml-1.5 dd-inline-flex hover:!dd-text-teal-700 "
+        class="dd-ml-1.5 dd-inline-flex"
         aria-hidden="true"
       />
   </span>
@@ -60,14 +60,13 @@ export default {
     type: {
       type: String,
       validator: function (value) {
-        // The value must match one of these strings
         return (
-          ["basic", "danger", "warning", "success", "info", "purple"].indexOf(
+          ["white", "gray", "danger", "warning", "green", "lime", "info", "purple"].indexOf(
             value
           ) !== -1
         );
       },
-      default: "basic",
+      default: "white",
     },
     size: {
       type: String,
@@ -89,12 +88,14 @@ export default {
   computed: {
     tagText() {
       return {
-        "!dd-text-gray-700": this.type === "basic",
-        "!dd-text-yellow-800": this.type === "warning",
-        "!dd-text-green-800": this.type === "success",
-        "!dd-text-red-800": this.type === "danger",
-        "!dd-text-blue-800": this.type === "info",
-        "!dd-text-purple-800": this.type === "purple",
+        "!dd-text-gray-600": this.type === "white",
+        "!dd-text-gray-600": this.type === "gray",
+        "!dd-text-amber-600": this.type === "warning",
+        "!dd-text-teal-600": this.type === "success",
+        "!dd-text-lime-600": this.type === "lime",
+        "!dd-text-red-600": this.type === "danger",
+        "!dd-text-sky-600": this.type === "info",
+        "!dd-text-purple-600": this.type === "purple",
       };
     },
     badgeStyling() {
@@ -103,11 +104,13 @@ export default {
         ' dd-px-2.5 dd-py-0.5 dd-text-sm ': this.size === 'large',
         ' !dd-px-2 ': this.closable && this.size === 'large',
         ' dd-rounded-xl ': this.rounded,
-        ' dd-bg-gray-100 dd-text-gray-700 ': this.type === 'basic',
-        ' dd-bg-yellow-100 dd-text-yellow-800 ': this.type === 'warning',
-        ' dd-bg-green-100 dd-text-green-800 ': this.type === 'success',
+        ' dd-bg-gray-50 dd-text-gray-700 ': this.type === 'white',
+        ' dd-bg-gray-200 dd-text-gray-700 ': this.type === 'gray',
+        ' dd-bg-amber-100 dd-text-amber-800 ': this.type === 'warning',
+        ' dd-bg-teal-100 dd-text-teal-800 ': this.type === 'success',
+        ' dd-bg-lime-100 dd-text-lime-800 ': this.type === 'lime',
         ' dd-bg-red-100 dd-text-red-800 ': this.type === 'danger',
-        ' dd-bg-blue-100 dd-text-blue-800 ': this.type === 'info',
+        ' dd-bg-sky-100 dd-text-sky-800 ': this.type === 'info',
         ' dd-bg-purple-100 dd-text-purple-800 ': this.type === 'purple',
       }
     }

@@ -1,156 +1,299 @@
-import DdAccordion from "../Accordion/index.vue"
-import DdAccordionTab from "./index.vue"
-import { ref } from "vue";
+import DdAccordion from "../Accordion/index.vue";
+import DdAccordionTab from "./index.vue";
+
 // More on default export: https://storybook.js.org/docs/vue/writing-stories/introduction#default-export
 export default {
-    title: 'Atoms/AccordionTab',
-    component: DdAccordion,
-    argTypes: {
-        'prepend-icon': {
-          description: 'Pass name of the icon to prepend in the titlw box',
-     
-
-        },
-        'append-icon': {
-          description: 'Pass name of the icon to append in the titlw box', 
-
-        },
-        title: {
-          description: 'Title for the header.', 
-          type: { name: 'string', required: true },
-          defaultValue: '',
-        },
-        '#append': {
-          description: 'Append slot.', 
-        },
-        '#prepend': {
-          description: 'Prepend slot.', 
-        },
-        '#title': {
-          description: 'Header slot.', 
-        },
-      },
-    
+  title: "Atoms/AccordionTab",
+  component: DdAccordion,
 };
 
 // More on component templates: https://storybook.js.org/docs/vue/writing-stories/introduction#using-args
 export const Default = {
-    render: (args) => ({
-        components: {
-            DdAccordion,
-            DdAccordionTab
-        },
-        setup() {
-            return {
-                args
-            };
-        },
-        template: ` <dd-accordion  :active="0" :multiple='false'>
-                          <dd-accordion-tab  :title="args.title" >
-                              <h3>This is tab</h3>
-                          </dd-accordion-tab>
-                        
-                    </dd-accordion>`,
-    }),
-    args: {
-      
-        title:'Tab',
-       
-
+  render: (args) => ({
+    components: {
+      DdAccordion,
+      DdAccordionTab,
     },
-
+    setup() {
+      return {
+        args,
+      };
+    },
+    template: `<dd-accordion :active="0">
+        <dd-accordion-tab
+          title="Tab-1"
+          prepend-icon="SquareDot"
+        >
+          <h3>This is tab 1</h3>
+        </dd-accordion-tab>
+      </dd-accordion>`,
+  }),
+  argTypes: {
+    "prepend-icon": {
+      description: "Pass name of the icon to prepend in the titlw box",
+    },
+    "append-icon": {
+      description: "Pass name of the icon to append in the titlw box",
+    },
+    title: {
+      description: "Title for the header.",
+      type: { name: "string", required: true },
+      defaultValue: "",
+    },
+    badge: {
+      description: "Using DdBadge with same name props",
+      defaultValue: "",
+    },
+    gradient: {
+      description: "use any tailwind color for gradient",
+    },
+    "#append": {
+      description: "Append slot.",
+    },
+    "#prepend": {
+      description: "Prepend slot.",
+    },
+    "#title": {
+      description: "Header slot.",
+    },
+  },
 };
 export const PrependIcon = {
-    render: (args) => ({
-        components: {
-            DdAccordion,
-            DdAccordionTab
-        },
-        setup() {
-            return {
-                args
-            };
-        },
-        template: ` <dd-accordion  :active="0" :multiple='false'>
+  render: (args) => ({
+    components: {
+      DdAccordion,
+      DdAccordionTab,
+    },
+    setup() {
+      return {
+        args,
+      };
+    },
+    template: ` <dd-accordion  :active="0" :multiple='false'>
                           <dd-accordion-tab  prepend-icon="Checklist" :title="args.title" >
                               <h3>This is tab</h3>
                           </dd-accordion-tab>
                           
                     </dd-accordion>`,
-    }),
-    args: {
-        'prepend-icon': 'Mobile',
-        title:'Tab',
-       
-
+  }),
+  argTypes: {
+    "prepend-icon": {
+      description: "Pass name of the icon to prepend in the titlw box",
     },
-
+    "append-icon": {
+      description: "Pass name of the icon to append in the titlw box",
+    },
+    title: {
+      description: "Title for the header.",
+      type: { name: "string", required: true },
+      defaultValue: "",
+    },
+    "#append": {
+      description: "Append slot.",
+    },
+    "#prepend": {
+      description: "Prepend slot.",
+    },
+    "#title": {
+      description: "Header slot.",
+    },
+  },
 };
 export const AppendIcon = {
-    render: (args) => ({
-        components: {
-            DdAccordion,
-            DdAccordionTab
-        },
-        setup() {
-            return {
-                args
-            };
-        },
-        template: ` <dd-accordion  :active="0" :multiple='false'>
+  render: (args) => ({
+    components: {
+      DdAccordion,
+      DdAccordionTab,
+    },
+    setup() {
+      return {
+        args,
+      };
+    },
+    template: ` <dd-accordion  :active="0" :multiple='false'>
                           <dd-accordion-tab  append-icon="Checklist" :title="args.title" >
                               <h3>This is tab</h3>
                           </dd-accordion-tab>
                          
                     </dd-accordion>`,
-    }),
-    args: {
-        'prepend-icon': 'Mobile',
-        title:'Tab',
-        'append-icon':''
+  }),
+  args: {
+    "prepend-icon": "Mobile",
+    title: "Tab",
+    "append-icon": "",
+  },
+};
 
+export const Badge = {
+  render: (args) => ({
+    components: {
+      DdAccordion,
+      DdAccordionTab,
     },
+    setup() {
+      return {
+        args,
+      };
+    },
+    template: `<dd-accordion :active="0">
+          <dd-accordion-tab
+            title="Tab-1"
+            prepend-icon="SquareDot"
+            badge="Page $100.00"
+            closable
+            dot
+          >
+            <h3>This is tab 1</h3>
+          </dd-accordion-tab>
+        </dd-accordion>`,
+  }),
+  argTypes: {
+    "prepend-icon": {
+      description: "Pass name of the icon to prepend in the titlw box",
+    },
+    "append-icon": {
+      description: "Pass name of the icon to append in the titlw box",
+    },
+    title: {
+      description: "Title for the header.",
+      type: { name: "string", required: true },
+      defaultValue: "",
+    },
+    badge: {
+      description: "Using DdBadge with same name props",
+      defaultValue: "",
+    },
+    "#append": {
+      description: "Append slot.",
+    },
+    "#prepend": {
+      description: "Prepend slot.",
+    },
+    "#title": {
+      description: "Header slot.",
+    },
+  },
+};
 
+export const Gradient = {
+  render: (args) => ({
+    components: {
+      DdAccordion,
+      DdAccordionTab,
+    },
+    setup() {
+      return {
+        args,
+      };
+    },
+    template: `<dd-accordion :active="1" gradient="blue">
+          <dd-accordion-tab
+            title="Tab-1"
+            prepend-icon="SquareDot"
+            badge="Page $100.00"
+            closable
+            dot
+          >
+            <h3>This is tab 1</h3>
+          </dd-accordion-tab>
+        </dd-accordion>`,
+  }),
+  argTypes: {
+    "prepend-icon": {
+      description: "Pass name of the icon to prepend in the titlw box",
+    },
+    "append-icon": {
+      description: "Pass name of the icon to append in the titlw box",
+    },
+    title: {
+      description: "Title for the header.",
+      type: { name: "string", required: true },
+      defaultValue: "",
+    },
+    badge: {
+      description: "Using DdBadge with same name props",
+      defaultValue: "",
+    },
+    "#append": {
+      description: "Append slot.",
+    },
+    "#prepend": {
+      description: "Prepend slot.",
+    },
+    "#title": {
+      description: "Header slot.",
+    },
+  },
 };
 
 Default.parameters = {
-    docs: {
-      
-      source: {
-        code:  ` <dd-accordion  :active="1" :multiple='false'>
-    <dd-accordion-tab title="Tab-1" >
-        <h3>This is tab</h3>
-    </dd-accordion-tab>
-  
-</dd-accordion>`,
-      },
+  docs: {
+    source: {
+      code: `<dd-accordion :active="0">
+      <dd-accordion-tab
+        title="Tab-1"
+        prepend-icon="SquareDot"
+      >
+        <h3>This is tab 1</h3>
+      </dd-accordion-tab>
+    </dd-accordion>`,
     },
+  },
 };
 PrependIcon.parameters = {
-    docs: {
-      
-      source: {
-        code:  ` <dd-accordion  :active="1" :multiple='false'>
+  docs: {
+    source: {
+      code: ` <dd-accordion  :active="1" :multiple='false'>
     <dd-accordion-tab  prepend-icon="Checklist" title="Tab-1" >
         <h3>This is tab</h3>
     </dd-accordion-tab>
    
 </dd-accordion>`,
-      },
     },
+  },
 };
 AppendIcon.parameters = {
-    docs: {
-      
-      source: {
-        code:  ` <dd-accordion  :active="1" :multiple='false'>
+  docs: {
+    source: {
+      code: ` <dd-accordion  :active="1" :multiple='false'>
     <dd-accordion-tab  append-icon="Checklist" title="Tab-1" >
         <h3>This is tab</h3>
     </dd-accordion-tab>
 
 </dd-accordion>`,
-      },
     },
+  },
 };
 
+Badge.parameters = {
+  docs: {
+    source: {
+      code: `<dd-accordion :active="1">
+        <dd-accordion-tab
+          title="Tab-1"
+          prepend-icon="SquareDot"
+          badge="Page $100.00"
+          closable
+          dot
+        >
+          <h3>This is tab 1</h3>
+        </dd-accordion-tab>
+      </dd-accordion>`,
+    },
+  },
+};
 
+Gradient.parameters = {
+  docs: {
+    source: {
+      code: `<dd-accordion :active="1" gradient="blue">
+        <dd-accordion-tab
+          title="Tab-1"
+          prepend-icon="SquareDot"
+        >
+          <h3>This is tab 1</h3>
+        </dd-accordion-tab>
+      </dd-accordion>`,
+    },
+  },
+};

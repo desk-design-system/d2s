@@ -1,7 +1,10 @@
 <template>
   <div v-bind="$attrs" ref="componentRef">
-    <label v-if="label" class="dd-block dd-text-sm dd-font-medium dd-text-gray-700 dd-mb-1">{{ label }} <span
-        v-if="isRequired" class="dd-text-red-500">*</span></label>
+    <slot name="label">
+      <label v-if="label" class="dd-block dd-text-sm dd-font-medium dd-text-gray-700 dd-mb-1">{{ label }} <span
+          v-if="isRequired" class="dd-text-red-500">*</span></label>
+    </slot>
+      
     <Combobox as="div" v-bind="$attrs" v-model="inputModelValue">
       <div class="dd-mt-1 dd-relative">
         <ComboboxInput :class="[
@@ -9,10 +12,12 @@
             ? ' !dd-border-red-600 focus:!dd-border-red-600 dd-focus:!dd-ring-red-600'
             : 'dd-border-gray-300 focus:dd-ring-teal-600 focus:!dd-border-teal-600',
           inputSize,
+          disabled ? 'dd-pointer-events-none dd-cursor-not-allowed' : ''
         ]" :readonly="!filterable"
           class="dd-border-solid focus-visible:dd-outline-none dd-flex dd-items-center dd-cursor-pointer dd-bg-white dd-relative dd-w-full dd-border dd-rounded-md dd-shadow-sm dd-pl-3 dd-pr-10 dd-py-2 dd-text-left dd-h-9 sm:dd-text-sm"
           @change="searchQuery($event.target.value)" :displayValue="(val) => findItem(val)"
-          @click="setDropDown()" :placeholder="props.placeholder">
+          @click="setDropDown()" :placeholder="props.placeholder"
+          :disabled="disabled">
           <ddAvatar v-if="selectedValue && showAvatar" size="mini" class="dd-mr-3"
             :srcLink="selectedValue[props.defaultProps.avatar]" />
         </ComboboxInput>
@@ -103,6 +108,10 @@ const props = defineProps({
     default: false,
   },
   isRequired: {
+    type: Boolean,
+    default: false,
+  },
+  disabled: {
     type: Boolean,
     default: false,
   },

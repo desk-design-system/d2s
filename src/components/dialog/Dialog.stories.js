@@ -79,6 +79,30 @@ export default {
         }
       }
     },
+    headerClass: {
+      description: "You can add the classes in the header of dialog",
+      table: {
+        defaultValue: {
+          summary: "null"
+        }
+      }
+    },
+    contentClass: {
+      description: "You can add the classes in the content area of dialog",
+      table: {
+        defaultValue: {
+          summary: "null"
+        }
+      }
+    },
+    footerClass: {
+      description: "You can add the classes in the footer of dialog",
+      table: {
+        defaultValue: {
+          summary: "null"
+        }
+      }
+    },
   },
 }
 

@@ -1,33 +1,20 @@
 <template>
   <svg
-    width="15px"
-    height="10px"
-    viewBox="0 0 15 10"
-    version="1.1"
+    width="16"
+    height="16"
+    viewBox="0 0 16 16"
+    fill="none"
     xmlns="http://www.w3.org/2000/svg"
-    xmlns:xlink="http://www.w3.org/1999/xlink"
   >
-    <title>Icons/20px/Check</title>
-    <g
-      id="☮️-Icons"
-      stroke="none"
-      stroke-width="1"
-      fill="none"
-      fill-rule="evenodd"
-    >
-      <g id="Icon-20px" transform="translate(-337.000000, -209.000000)">
-        <g id="Icons/20px/Check" transform="translate(334.000000, 204.000000)">
-          <polygon id="Path" points="0 0 20 0 20 20 0 20"></polygon>
-          <polyline
-            id="Path"
-            stroke="currentColor"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            points="4.16666667 10 8.33333333 14.1666667 16.6666667 5.83333333"
-          ></polyline>
-        </g>
-      </g>
+    <g id="16/Check">
+      <path
+        id="Path"
+        d="M3.33203 8.00002L6.66536 11.3334L13.332 4.66669"
+        stroke="#6B7280"
+        stroke-width="1.25"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
     </g>
   </svg>
 </template>

@@ -5,7 +5,20 @@ import { ref } from "vue";
 export default {
   title: "Atoms/TextArea",
   component: DdTextarea,
-  // More on argTypes: https://storybook.js.org/docs/vue/api/argtypes
+};
+
+
+
+export const Default = {
+  render: (args) => ({
+    components: { DdTextarea },
+    setup() {
+      const onClickMethod = () => action("clicked");
+      const selected = ref("");
+      return { selected, args, onClickMethod };
+    },
+    template: `<dd-textarea v-model="selected" />`,
+  }),
   argTypes: {
     label: {
       description: "Change label value as per the requirement",
@@ -45,25 +58,10 @@ export default {
   },
 };
 
-// More on component templates: https://storybook.js.org/docs/vue/writing-stories/introduction#using-args
-const Template = (args) => ({
-  // Components used in your story `template` are defined in the `components` object
-  components: { DdTextarea },
-  // The story's `args` need to be mapped into the template through the `setup()` method
-  setup() {
-    const onClickMethod = () => action("clicked");
-    const selected = ref("");
-    return { selected, args, onClickMethod };
+Default.parameters = {
+  docs: {
+    source: {
+      code: `<dd-textarea v-model="selected" />`,
+    },
   },
-  // And then the `args` are bound to your component with `v-bind="args"`
-  template: '<dd-textarea  v-bind="args" v-model="selected" />',
-});
-
-export const Basic = Template.bind({});
-// export const Validation = Template.bind( {} )
-
-// export const CheckLeft = Template.bind( {} )
-// More on args: https://storybook.js.org/docs/vue/writing-stories/args
-Basic.args = {
-  Label: "Basic Input",
 };

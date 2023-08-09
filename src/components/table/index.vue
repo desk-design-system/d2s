@@ -10,7 +10,8 @@
         <div v-if="actionHeader"
           class="dd-flex dd-items-center dd-justify-between !dd-w-full group_wrapper !dd-bg-white !dd-z-[1000]"
           :class="[selectedId?.length > 0 ? 'dd-h-[40px]' : '']">
-          <div v-if="selectedId?.length > 0" class="dd-flex dd-items-center dd-gap-2 dd-py-2 dd-pl-3 dd-pr-3 dd-text-left">
+          <div v-if="selectedId?.length > 0"
+            class="dd-flex dd-items-center dd-gap-2 dd-py-2 dd-pl-3 dd-pr-3 dd-text-left">
             <DdGroupButton :buttons="buttons">
               <dd-Button color="white" v-if="checkBoxProp" size="sm">
                 <div class="dd-flex dd-items-center">
@@ -50,7 +51,7 @@
                 class="focus-visible:!dd-border-none dd-w-full" :icon="selectedId?.length === 0 ? 'Search' : ''"
                 Border="none" placeholder="Search Ticket" size="xl" :prefix="selectedId?.length === 0 ? true : false" />
             </div>
-            <svgIcon icon="Close" size="12" class="dd-absolute dd-text-gray-400 dd-top-4 hover:dd-text-gray-500"
+            <svgIcon icon="Close" size="20" class="dd-absolute dd-text-gray-400 dd-top-3 hover:dd-text-gray-500"
               @click="closeSearch" :class="[fixed ? 'dd-right-6' : 'dd-right-6']" />
           </div>
         </div>
@@ -73,19 +74,22 @@
             <tr class="dd-bg-white">
               <th
                 class="dd-py-2 !dd-pl-5 dd-text-left checkbox_wrapper !dd-leading-3 dd-h-[40px] table_head_row dd-sticky dd-top-0"
-                :class="[!search ? 'table_border': '']"
-                v-if="checkBoxProp">
+                :class="[!search ? 'table_border' : '']" v-if="checkBoxProp">
                 <dd-checkbox v-model="allSelected" @click="selectAllFields" :disabled="checkAllDisabled || limit < 1"
                   :rows="rows" @indeterminate="indeterminate" :allCheckboxesChecked="allCheckboxesChecked"
                   :selectedId="selectedId" />
               </th>
               <slot name="th" />
+
               <th v-for="col in columns" :key="col?.value" :value="col" scope="col" v-show="col?.checked"
                 class="dd-py-2 dd-text-left dd-text-xs dd-font-medium dd-text-gray-500 !dd-leading-3 dd-h-[41px] table_head_row dd-sticky dd-top-0"
                 :style="`min-width: ${col?.size}px`" @mouseenter="handleMouseEnter(col)" @mouseleave="handleMouseLeave"
-                @click="sortRows(col)" :class="[checkBoxProp ? 'dd-pl-3 dd-pr-3' : 'dd-pl-5', !search ? 'table_border': '']">
+                @click="sortRows(col)"
+                :class="[checkBoxProp ? 'dd-pl-3 dd-pr-3' : 'dd-pl-5', !search ? 'table_border' : '']">
                 <div :class="[sortIcon ? 'dd-flex dd-gap-1.5 dd-w-fit' : 'dd-w-fit']">
-                  <span class="dd-text-xs">{{ col?.title }}</span>
+                  <slot name="thead" :col="col">
+                    <span class="dd-text-xs">{{ col?.title }}</span>
+                  </slot>
                   <div v-if="sortIcon">
                     <svgIcon class="!dd-text-gray-500 dd-relative dd-top-[3px]" icon="Selector" size="10" v-show="isHovered(col) && !limit < 1 && col?.sortDirection === ''
                       " :disabled="col?.disabled || limit < 1" v-if="limit" />
@@ -97,7 +101,7 @@
                 </div>
               </th>
 
-              <th class="table_head_row dd-sticky dd-top-0" :class="[!search ? 'table_border': '']" v-if="lastCell">
+              <th class="table_head_row dd-sticky dd-top-0" :class="[!search ? 'table_border' : '']" v-if="lastCell">
                 <div
                   class="dd-flex dd-items-center dd-justify-end dd-gap-4 dd-relative dd-right-5 !dd-z-[999] dd-bg-white dd-pl-2.5">
                   <svgIcon v-if="searchIcon" class="!dd-text-gray-500" icon="Search" size="20" @click="openSearch" />
@@ -132,7 +136,7 @@
                     </template>
                   </draggable>
                   <div class="dd-flex dd-items-center dd-justify-end dd-gap-3 dd-my-2 dd-mr-2">
-                    <dd-Button color="white"
+                    <dd-Button type="tertiary"
                       class="[&>button]: dd-ring-0 [&>button]: dd-ring-transparent [&>button]: dd-shadow-none [&>button]: dd-text-teal-600 [&>button]: hover:dd-bg-white [&>button]: dd-font-light dd-cursor-pointer"
                       @click="resetDefault()">
                       Reset
@@ -146,7 +150,8 @@
               <slot name="headerActions" />
             </tr>
           </thead>
-          <tbody class="dd-bg-white" v-if="rows.length > 0" :class="[search ? '[&>*:first-child]:dd-border-t [&>*:first-child]:dd-border-gray-200 [&>*:first-child]:!dd-border-b-0 [&>*:nth-child(2)]:dd-border-t' : '']">
+          <tbody class="dd-bg-white" v-if="rows.length > 0"
+            :class="[search ? '[&>*:first-child]:dd-border-t [&>*:first-child]:dd-border-gray-200 [&>*:first-child]:!dd-border-b-0 [&>*:nth-child(2)]:dd-border-t' : '']">
             <template v-if="!defaultRow">
               <tr v-for="(row, index) in rows" :key="index"
                 class="[&>*:nth-child(1)]:!dd-font-normal [&>*:nth-child(2)]:!dd-font-medium dd-relative dd-border-b dd-border-gray-100"
@@ -180,7 +185,7 @@
                       ? '!dd-pl-5'
                       : 'dd-cursor-pointer',
                   ]" :style="`min-width: ${col?.size}px`">
-                  <slot name="row" :column="col" :row="row" :value="row[col?.value]" :disabled="row?.disabled">
+                  <slot name="row" :column="col" :row="row" :value="row[col?.value]" :rowIndex="index" :disabled="row?.disabled">
                     {{ row[col?.value] }}
                   </slot>
                 </td>
@@ -192,7 +197,7 @@
                       : 'dd-cursor-pointer',
                   ]">
                   <hoverRow :actionsPanel="actionsPanel" :values="Actions" :rowDisabled="row?.disabled"
-                    :selected="selected" :showIcon="showIcon" :hoveredRow="hoveredRow" :row="row" @editRow="editRow"
+                    :selected="selected" :showIcon="showIcon" :hoveredRow="hoveredRow" :presistAction="presistAction" :row="row" @editRow="editRow"
                     @deleteRow="deleteRow" :selectedId="selectedId" @dropdownValue="dropdownValue" />
                   <slot name="rowActions" />
                 </td>
@@ -214,14 +219,15 @@
       </div>
       <div v-if="footer && limit > 1" class="dd-flex dd-items-center dd-justify-between dd-py-3 dd-px-3">
         <DdGroupButton :buttons="buttons">
-          <dd-Button v-for="button in buttons" :key="button?.id" :color="button?.color" :size="button?.size"
+          <dd-Button v-for="button in buttons" :key="button?.id" type="secondary" :size="button?.size"
             :disabled="button?.disabled"
             class="dd-text-sm [&>span]:!dd-text-gray-500 [&>span]:!dd-font-normal !dd-w-[41px] !dd-p-0 dd-flex dd-items-center dd-justify-center"
             :class="setActiveButton(button?.label)" :loader="button?.loader" :title="button?.label" :type="button?.type"
-            :block="button?.block" :icon="button?.icon" :iconSize="button?.iconSize" @click="selectNumberOfRows(button)" />
+            :block="button?.block" :icon="button?.icon" :iconSize="button?.iconSize"
+            @click="selectNumberOfRows(button)" />
         </DdGroupButton>
 
-        <dd-Button color="white" size="sm" v-model="selectedButton" :disable="disabledLoadmore" :loader="loadmoreLoader"
+        <dd-Button type="secondary" size="sm" v-model="selectedButton" :disable="disabledLoadmore" :loader="loadmoreLoader"
           @click="loadMore()">
           Load More
         </dd-Button>
@@ -242,7 +248,7 @@ import {
   watch,
   watchEffect,
 } from "vue";
-import draggable from "vuedraggable";
+import draggable from 'vuedraggable/src/vuedraggable'
 import hoverRow from "./hoverRow.vue";
 import DdButton from "../buttons/index.vue";
 import svgIcon from "../svgIcon/index.vue";
@@ -265,7 +271,7 @@ const emits = defineEmits([
   "sort",
   "dropdownValue",
   "headerDropdown",
-  "updateSettings"
+  "updateSettings",
 ]);
 const props = defineProps({
   rowKey: {
@@ -353,6 +359,10 @@ const props = defineProps({
     default: false,
   },
   settingbarIcon: {
+    type: Boolean,
+    default: false,
+  },
+  presistAction: {
     type: Boolean,
     default: false,
   },
@@ -502,7 +512,9 @@ const getCalculatedHeight = computed(() => {
 
 const setActiveButton = computed(() => {
   return (label) => {
-    return selectedButton.value === label ? '!dd-text-gray-700 !dd-font-medium' : '';
+    return selectedButton.value === label
+      ? "!dd-text-gray-700 !dd-font-medium"
+      : "";
   };
 });
 
@@ -642,12 +654,15 @@ const setSetting = (col) => {
 
 const watchState = () => {
   savedData.value = modelColumn.value;
-  console.log(savedData.value, 'savedData.value');
-}
-watch(() => savedData.value,
-(newArr) => {
-  savedData.value = newArr;
-}, {immediate: true})
+  console.log(savedData.value, "savedData.value");
+};
+watch(
+  () => savedData.value,
+  (newArr) => {
+    savedData.value = newArr;
+  },
+  { immediate: true }
+);
 
 const saveSettings = () => {
   emits("updateSettings", modelColumn.value);
@@ -657,7 +672,7 @@ const saveSettings = () => {
 };
 
 const showIcon = (element) => {
-  element.disabled ? element.hovered = false : element.hovered = true;
+  element.disabled ? (element.hovered = false) : (element.hovered = true);
 };
 
 const hideIcon = (element) => {
@@ -694,11 +709,13 @@ const handleMouseLeave = () => {
 };
 
 const handleMouseEnterActions = (rowData) => {
+  if(props.presistAction == true) return;
   hoveredRow.value = rowData;
   isMouseHovered.value = true;
 };
 
 const handleMouseLeaveActions = () => {
+  if(props.presistAction == true) return;
   hoveredRow.value = null;
   isMouseHovered.value = false;
 };
@@ -723,7 +740,7 @@ const dropdownValue = (data) => {
 };
 const getHeaderDropdownVal = (data) => {
   emits("headerDropdown", data);
-}
+};
 </script>
 
 <style scoped>
@@ -875,8 +892,9 @@ tr:hover>td:first-child {
 }
 
 .table_border::after {
-  border-bottom: 1px solid #E5E7EB;
+  border-bottom: 1px solid #e5e7eb;
 }
+
 /* scroll bar  */
 
 /* .custom-scrollbar {

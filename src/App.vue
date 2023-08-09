@@ -1,9 +1,7 @@
 <template>
-  <div>
     <dd-table :rows="rows" :columns="columnVal" :buttons="buttons" :Actions="Actions" :values="values" footer checkBoxProp
       fixedHeight rowKey="id" hoveringRow lastCell fixed actionHeader emptyState actionsPanel sortIcon settingbarIcon
       searchIcon @updateSettings="updateSettings" dragDrop />
-  </div>
 </template>
 
 <script setup>
@@ -19,7 +17,7 @@ let columns = ref([
     id: 1,
     disabled: true,
     sortDirection: "asc",
-    hovered: false
+    hovered: false,
   },
   {
     title: "User Name",
@@ -29,7 +27,7 @@ let columns = ref([
     id: 2,
     disabled: false,
     sortDirection: "",
-    hovered: false
+    hovered: false,
   },
   {
     title: "First Name",
@@ -39,7 +37,7 @@ let columns = ref([
     id: 3,
     disabled: false,
     sortDirection: "",
-    hovered: false
+    hovered: false,
   },
   {
     title: "Last Name",
@@ -49,7 +47,7 @@ let columns = ref([
     id: 4,
     disabled: false,
     sortDirection: "",
-    hovered: false
+    hovered: false,
   },
   {
     title: "Email",
@@ -59,7 +57,7 @@ let columns = ref([
     id: 5,
     disabled: false,
     sortDirection: "",
-    hovered: false
+    hovered: false,
   },
   {
     title: "Task",
@@ -69,7 +67,7 @@ let columns = ref([
     id: 6,
     disabled: false,
     sortDirection: "",
-    hovered: false
+    hovered: false,
   },
   {
     title: "Device",
@@ -79,7 +77,7 @@ let columns = ref([
     id: 7,
     disabled: false,
     sortDirection: "",
-    hovered: false
+    hovered: false,
   },
   {
     title: "Model",
@@ -89,7 +87,7 @@ let columns = ref([
     id: 8,
     disabled: false,
     sortDirection: "",
-    hovered: false
+    hovered: false,
   },
   {
     title: "Phone",
@@ -99,7 +97,7 @@ let columns = ref([
     id: 9,
     disabled: false,
     sortDirection: "",
-    hovered: false
+    hovered: false,
   },
   {
     title: "Address",
@@ -109,7 +107,7 @@ let columns = ref([
     id: 10,
     disabled: false,
     sortDirection: "",
-    hovered: false
+    hovered: false,
   },
   {
     title: "Status",
@@ -119,7 +117,7 @@ let columns = ref([
     id: 11,
     disabled: false,
     sortDirection: "",
-    hovered: false
+    hovered: false,
   },
 ]);
 const rows = ref([
@@ -629,7 +627,6 @@ const values = ref([
   },
 ]);
 
-
 let columnVal = ref(columns.value);
 const updateSettings = (data) => {
   const reorderedColumns = [];
@@ -641,7 +638,6 @@ const updateSettings = (data) => {
   });
   columnVal.value = reorderedColumns;
 };
-
 </script>
 
 

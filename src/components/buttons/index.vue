@@ -1,40 +1,96 @@
 <template>
-  <button v-bind="$attrs" :id="id" :class="{ ...defaultButton }" class="
-              dd-inline-flex
-              dd-items-center
-              dd-shadow-sm
-              dd-font-semibold
-              dd-capitalize
-              dd-whitespace-nowrap
-              dd-cursor-pointer
-              dd-justify-center
-            ">
-    <svg v-if="loader" aria-hidden="true" :class="[size == 'xs' || size == 'sm' ? 'dd-h-3.5 dd-w-3.5' : 'dd-h-4 dd-w-4', color ? setSpinnerColor : '']"
-      class="dd-animate-spin dd-text-white-50 dd-absolute" viewBox="0 0 100 101" fill="none"
-      xmlns="http://www.w3.org/2000/svg">
+  <button
+    v-if="!loader"
+    v-bind="$attrs"
+    :id="id"
+    :class="{ ...defaultButton }"
+    :style="[
+      loader ? 'cursor: not-allowed;' : 'cursor: pointer;',
+      title && content !== 'iconOnly' ? 'gap: 4px' : 'gap: 0px',
+    ]"
+    class="dd-inline-flex dd-items-center dd-font-semibold dd-capitalize dd-whitespace-nowrap dd-cursor-pointer dd-justify-center"
+  >
+    <svg
+      v-if="loader"
+      aria-hidden="true"
+      :class="[
+        size == 'xs' || size == 'sm' ? 'dd-h-3.5 dd-w-3.5' : 'dd-h-4 dd-w-4',
+        setSpinnerColor,
+      ]"
+      class="dd-animate-spin dd-text-white-50 dd-absolute"
+      viewBox="0 0 100 101"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <path
         d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
-        fill="currentColor" />
+        fill="currentColor"
+      />
       <path
         d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
-        fill="currentFill" />
+        fill="currentFill"
+      />
     </svg>
-    <svgIcon v-if="prefix && !loader" :icon="icon" :size="btnIconSize" />
-    <span :class="[prefixSpace, sufixSpace, loader ? 'dd-invisible' : '']">
+    <svgIcon
+      v-if="leftIconProperty"
+      :icon="!loader ? icon : ''"
+      :size="btnIconSize"
+    />
+    <span
+      v-if="content !== 'iconOnly'"
+      :class="[leftIconSpace, rightIconSpace, loader ? 'dd-invisible' : '']"
+    >
+      <slot v-if="content !== 'iconOnly'"> {{ title }}</slot>
+    </span>
+    <svgIcon
+      v-if="rightIconProperty"
+      :icon="!loader ? icon : ''"
+      :size="btnIconSize"
+    />
+  </button>
+  <button
+    v-else
+    :id="id"
+    :class="{ ...defaultButton }"
+    :style="[loader ? 'cursor: not-allowed;' : 'cursor: pointer;']"
+    class="dd-inline-flex dd-items-center dd-font-semibold dd-capitalize dd-whitespace-nowrap dd-cursor-pointer dd-justify-center"
+  >
+    <svg
+      v-if="loader"
+      aria-hidden="true"
+      :class="[
+        size == 'xs' || size == 'sm' ? 'dd-h-3.5 dd-w-3.5' : 'dd-h-4 dd-w-4',
+        setSpinnerColor,
+      ]"
+      class="dd-animate-spin dd-text-white-50 dd-absolute"
+      viewBox="0 0 100 101"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+        fill="currentColor"
+      />
+      <path
+        d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+        fill="currentFill"
+      />
+    </svg>
+    <div :class="loaderProperty"></div>
+    <span
+      v-if="content !== 'iconOnly'"
+      :class="[leftIconSpace, rightIconSpace, loader ? 'dd-invisible' : '']"
+    >
       <slot> {{ title }}</slot>
     </span>
-    <svgIcon v-if="suffix && !loader" :icon="icon" :size="btnIconSize" />
+    <div :class="loaderProperty"></div>
   </button>
 </template>
 
 <script>
-import svgIcon from "../svgIcon/index.vue"
+import svgIcon from "../svgIcon/index.vue";
 export default {
   props: {
-    prefix: {
-      type: Boolean,
-      default: false,
-    },
     loader: {
       type: Boolean,
       default: false,
@@ -42,14 +98,6 @@ export default {
     id: {
       type: String || Number,
       default: null,
-    },
-    suffix: {
-      type: Boolean,
-      default: false,
-    },
-    iconSize: {
-      type: String,
-      default: "20",
     },
     icon: {
       type: String,
@@ -59,12 +107,7 @@ export default {
       type: String,
       default: "",
     },
-    color: {
-      type: String,
-      default: "primary",
-    },
-
-    disable: {
+    disabled: {
       type: Boolean,
       default: false,
     },
@@ -76,9 +119,7 @@ export default {
       type: String,
       validator: function (value) {
         // The value must match one of these strings
-        return (
-          ["xs", "sm", "base", "lg", "xl"].indexOf(value) !== -1
-        )
+        return ["xs", "sm", "base", "lg", "xl"].indexOf(value) !== -1;
       },
       default: "base",
     },
@@ -86,164 +127,198 @@ export default {
       type: String,
       validator: function (value) {
         // The value must match one of these strings
-        return ["default", "round", "text", "circle"].indexOf(value) !== -1
+        return (
+          ["primary", "secondary", "tertiary", "danger"].indexOf(value) !== -1
+        );
       },
-      default: "default",
+      default: "primary",
+    },
+    content: {
+      type: String,
+      validator: function (value) {
+        // The value must match one of these strings
+        return (
+          ["textOnly", "leftIcon", "rightIcon", "iconOnly"].indexOf(value) !==
+          -1
+        );
+      },
+      required: true,
+      default: "textOnly",
     },
   },
+  inheritAttrs: false,
   computed: {
     defaultButton() {
-      if (this.type == 'default') {
-      return {
-        "dd-border-gray-300 dd-text-gray-700 dd-border  focus:dd-outline-none":
-          this.color == "",
-        "dd-px-2 dd-h-6 dd-text-xs dd-font-normal dd-rounded": this.size === "xs",
-        "dd-px-2 dd-h-7 dd-text-sm  dd-font-normal dd-rounded-md":
-          this.size === "sm",
-        "dd-px-2.5 dd-h-8 dd-text-sm dd-font-normal dd-rounded-md": this.size === "base",
-        "dd-px-3 dd-h-9 dd-text-sm dd-font-normal dd-rounded-md": this.size === "lg",
-        "dd-px-4 dd-h-10 dd-text-sm dd-font-normal dd-rounded-md": this.size === "xl",
-        "dd-cursor-not-allowed !dd-bg-gray-200 !dd-text-gray-400 hover:dd-bg-gray-300":
-          this.disable,
-        "dd-bg-teal-600 dd-text-white hover:dd-bg-teal-700":
-          this.color === "primary",
-        "dd-bg-yellow-600 dd-text-white hover:dd-bg-yellow-700":
-          this.color === "warning",
-        "dd-bg-green-600 dd-text-white hover:dd-bg-green-700":
-          this.color === "success",
-        "dd-bg-red-600 dd-text-white hover:dd-bg-red-700":
-          this.color === "danger",
-        "dd-w-full dd-justify-center": this.block,
-        "dd-bg-white dd-ring-1 dd-ring-inset dd-ring-gray-300 dd-text-gray-700 hover:dd-bg-gray-50 focus:dd-outline-none":
-          this.color === "white",
-        "dd-border dd-border-teal-500 dd-bg-teal-50 dd-text-gray-700":
-          this.color === "selected",
+      if (this.type == "primary") {
+        return {
+          "dd-px-[7px] dd-h-6 dd-text-xs dd-font-normal dd-shadow-sm dd-rounded":
+            this.size === "xs",
+          "dd-px-[7px] dd-h-7 dd-text-sm  dd-font-normal dd-shadow-sm dd-rounded-md":
+            this.size === "sm",
+          "dd-px-2 dd-h-8 dd-text-sm dd-font-normal dd-shadow-sm dd-rounded-md":
+            this.size === "base",
+          "dd-px-2.5 dd-h-9 dd-text-sm dd-font-normal dd-shadow-sm dd-rounded-md":
+            this.size === "lg",
+          "dd-px-3 dd-h-10 dd-text-sm dd-font-normal dd-shadow-sm dd-rounded-md":
+            this.size === "xl",
+          "dd-cursor-not-allowed !dd-bg-gray-100 dd-shadow-sm !dd-text-gray-400 hover:dd-bg-gray-300":
+            this.disabled,
+          "dd-w-full dd-justify-center": this.block,
+          "dd-bg-teal-600 dd-text-white hover:dd-bg-teal-500":
+            this.type == "primary",
+        };
       }
-    };
-    if (this.type == 'round') {
-      return {
-        "dd-border-gray-300 dd-text-gray-700 dd-border  focus:dd-outline-none":
-          this.color == "",
-        "dd-px-2 dd-h-6 dd-text-xs dd-font-normal dd-rounded-lg": this.size === "xs",
-        "dd-px-2 dd-h-7 dd-text-sm  dd-font-normal dd-rounded-xl ":
-          this.size === "sm",
-        "dd-px-2.5 dd-h-8 dd-text-sm dd-font-normal dd-rounded-xl ": this.size === "base",
-        "dd-px-3 dd-h-9 dd-text-sm dd-font-normal dd-rounded-xl ": this.size === "lg",
-        "dd-px-4 dd-h-10 dd-text-sm dd-font-normal dd-rounded-xl ": this.size === "xl",
-        "dd-cursor-not-allowed !dd-bg-gray-200 !dd-text-gray-400 hover:dd-bg-gray-300":
-          this.disable,
-        "dd-bg-teal-600 dd-text-white hover:dd-bg-teal-700":
-          this.color === "primary",
-        "dd-bg-yellow-600 dd-text-white hover:dd-bg-yellow-700":
-          this.color === "warning",
-        "dd-bg-green-600 dd-text-white hover:dd-bg-green-700":
-          this.color === "success",
-        "dd-bg-red-600 dd-text-white hover:dd-bg-red-700":
-          this.color === "danger",
-        "dd-w-full dd-justify-center": this.block,
-        "dd-bg-white dd-ring-1 dd-ring-inset dd-ring-gray-300 dd-text-gray-700 hover:dd-bg-gray-50 focus:dd-outline-none":
-          this.color === "white",
-        "dd-border dd-border-teal-500 dd-bg-teal-50 dd-text-gray-700":
-          this.color === "selected",
+      if (this.type == "secondary") {
+        return {
+          "dd-px-[7px] dd-h-6 dd-text-xs dd-font-normal dd-shadow-sm dd-rounded":
+            this.size === "xs",
+          "dd-px-[7px] dd-h-7 dd-text-sm  dd-font-normal dd-shadow-sm dd-rounded-md":
+            this.size === "sm",
+          "dd-px-2 dd-h-8 dd-text-sm dd-font-normal dd-shadow-sm dd-rounded-md":
+            this.size === "base",
+          "dd-px-2.5 dd-h-9 dd-text-sm dd-font-normal dd-shadow-sm dd-rounded-md":
+            this.size === "lg",
+          "dd-px-3 dd-h-10 dd-text-sm dd-font-normal dd-shadow-sm dd-rounded-md":
+            this.size === "xl",
+          "dd-cursor-not-allowed !dd-bg-gray-100 !dd-border-0 dd-shadow-sm !dd-text-gray-400 hover:dd-bg-gray-300":
+            this.disabled,
+          "dd-w-full dd-justify-center": this.block,
+          "dd-border-gray-300 dd-text-gray-700 dd-border dd-bg-white dd-shadow-sm focus:dd-outline-none":
+            this.type == "secondary",
+        };
       }
-    };
-    if (this.type == 'text') {
-      return {
-        "dd-border-gray-300 dd-text-gray-700 dd-border  focus:dd-outline-none":
-          this.color == "",
-        "dd-px-2 dd-bg-white dd-h-6 dd-text-xs dd-font-normal dd-rounded": this.size === "xs",
-        "dd-px-2 dd-bg-white dd-h-7 dd-text-sm dd-font-normal dd-rounded-md ":
-          this.size === "sm",
-        "dd-px-2.5 dd-bg-white d-h-8 dd-text-sm dd-font-normal dd-rounded-md ": this.size === "base",
-        "dd-px-3 dd-bg-white dd-h-9 dd-text-sm dd-font-normal dd-rounded-md ": this.size === "lg",
-        "dd-px-4 dd-bg-white dd-h-10 dd-text-sm dd-font-normal dd-rounded-md ": this.size === "xl",
-        "dd-cursor-not-allowed !dd-text-gray-400 hover:dd-bg-gray-300":
-          this.disable,
-        "dd-border dd-border-teal-600 dd-text-teal-600 hover:dd-bg-teal-50":
-          this.color === "primary",
-        "dd-border dd-border-yellow-600 dd-text-yellow-600 hover:dd-bg-yellow-50":
-          this.color === "warning",
-        "dd-border dd-border-green-600 dd-text-green-600 hover:dd-bg-green-50":
-          this.color === "success",
-        "dd-border dd-border-red-600 dd-text-red-600 hover:dd-bg-red-50":
-          this.color === "danger",
-        "dd-w-full dd-justify-center": this.block,
-        "dd-bg-transparent dd-ring-1 dd-ring-inset dd-ring-gray-300 dd-text-gray-700 hover:dd-bg-gray-50 focus:dd-outline-none":
-          this.color === "white",
-        "dd-border dd-border-teal-500 dd-bg-teal-50 dd-text-gray-700":
-          this.color === "selected",
+      if (this.type == "danger") {
+        return {
+          "dd-px-[7px] dd-h-6 dd-text-xs dd-font-normal dd-shadow-sm dd-rounded":
+            this.size === "xs",
+          "dd-px-[7px] dd-h-7 dd-text-sm  dd-font-normal dd-shadow-sm dd-rounded-md":
+            this.size === "sm",
+          "dd-px-2 dd-h-8 dd-text-sm dd-font-normal dd-shadow-sm dd-rounded-md":
+            this.size === "base",
+          "dd-px-2.5 dd-h-9 dd-text-sm dd-font-normal dd-shadow-sm dd-rounded-md":
+            this.size === "lg",
+          "dd-px-3 dd-h-10 dd-text-sm dd-font-normal dd-shadow-sm dd-rounded-md":
+            this.size === "xl",
+          "dd-cursor-not-allowed !dd-bg-gray-100 dd-shadow-sm !dd-text-gray-400 hover:dd-bg-gray-300":
+            this.disabled,
+          "dd-bg-red-600 dd-text-white hover:dd-bg-red-400":
+            this.type == "danger",
+          "dd-w-full dd-justify-center": this.block,
+        };
       }
-    };
-    if (this.type == 'circle') {
-      return {
-        "dd-border-gray-300 dd-text-gray-700 dd-border  focus:dd-outline-none":
-          this.color == "",
-        "dd-px-2 dd-h-6 dd-text-xs dd-font-normal dd-rounded-full": this.size === "xs",
-        "dd-px-2 dd-h-7 dd-text-sm  dd-font-normal dd-rounded-full ":
-          this.size === "sm",
-        "dd-px-2.5 dd-h-8 dd-text-sm dd-font-normal dd-rounded-full ": this.size === "base",
-        "dd-px-3 dd-h-9 dd-text-sm dd-font-normal dd-rounded-full ": this.size === "lg",
-        "dd-px-4 dd-h-10 dd-text-sm dd-font-normal dd-rounded-full ": this.size === "xl",
-        "dd-cursor-not-allowed !dd-bg-gray-200 !dd-text-gray-400 hover:dd-bg-gray-300":
-          this.disable,
-        "dd-bg-teal-600 dd-text-white hover:dd-bg-teal-700":
-          this.color === "primary",
-        "dd-bg-yellow-600 dd-text-white hover:dd-bg-yellow-700":
-          this.color === "warning",
-        "dd-bg-green-600 dd-text-white hover:dd-bg-green-700":
-          this.color === "success",
-        "dd-bg-red-600 dd-text-white hover:dd-bg-red-700":
-          this.color === "danger",
-        "dd-w-full dd-justify-center": this.block,
-        "dd-bg-white dd-ring-1 dd-ring-inset dd-ring-gray-300 dd-text-gray-700 hover:dd-bg-gray-50 focus:dd-outline-none":
-          this.color === "white",
-        "dd-border dd-border-teal-500 dd-bg-teal-50 dd-text-gray-700":
-          this.color === "selected",
+      if (this.type == "tertiary") {
+        return {
+          "dd-px-[7px] dd-h-6 dd-text-xs dd-bg-white dd-rounded dd-font-normal":
+            this.size === "xs",
+          "dd-px-[7px] dd-h-7 dd-text-sm  dd-bg-white dd-rounded dd-font-normal":
+            this.size === "sm",
+          "dd-px-2 dd-h-8 dd-text-sm dd-bg-white dd-rounded dd-font-normal":
+            this.size === "base",
+          "dd-px-2.5 dd-h-9 dd-text-sm dd-bg-white dd-rounded dd-font-normal":
+            this.size === "lg",
+          "dd-px-3 dd-h-10 dd-text-sm dd-bg-white dd-rounded dd-font-normal":
+            this.size === "xl",
+          "dd-cursor-not-allowed !dd-text-gray-300 hover:!dd-bg-white dd-rounded":
+            this.disabled,
+          "dd-text-teal-600 !dd-bd-white hover:dd-bg-gray-50":
+            this.type == "tertiary",
+          "dd-w-full dd-justify-center": this.block,
+        };
       }
-    };
+    },
+    leftIconProperty() {
+      if (this.content === "leftIcon") {
+        return true;
+      } else if (this.content === "iconOnly") {
+        return true;
+      }
+    },
+    rightIconProperty() {
+      if (this.content === "rightIcon") {
+        return true;
+      } else if (this.content === "iconOnly") {
+        return false;
+      }
     },
     setSpinnerColor() {
-      if(this.color === 'danger') {
-        return 'dd-fill-red-600'
-      } else if(this.color === 'primary') {
-        return 'dd-fill-teal-600'
-      } else if(this.color === 'warning') {
-        return 'dd-fill-yellow-600'
-      } else if(this.color === 'white') {
-        return 'dd-fill-teal-600'
-      } 
-      return 'dd-fill-gray-600'
+      if (this.type === "danger") {
+        return "dd-fill-red-400";
+      } else if (this.type === "primary") {
+        return "dd-fill-teal-400";
+      } else if (this.type === "secondary") {
+        return "dd-fill-gray-300";
+      } else if (this.type === "tertiary") {
+        return "dd-fill-gray-200";
+      }
+      return "dd-fill-gray-200";
     },
-    prefixSpace() {
-      if (this.prefix && this.icon && !this.loader && this.$slots.default || this.title) {
-        return 'dd-ml-1.5'
-
+    leftIconSpace() {
+      if (
+        this.content === "leftIcon" &&
+        this.icon &&
+        !this.loader &&
+        this.$slots.default
+      ) {
+        return "dd-ml-1.5";
       }
     },
-    sufixSpace() {
-      if (this.suffix && this.icon && !this.loader && this.$slots.default || this.title) {
-        return 'dd-mr-1.5'
-
+    rightIconSpace() {
+      if (
+        this.content === "rightIcon" &&
+        this.icon &&
+        !this.loader &&
+        this.$slots.default
+      ) {
+        return "dd-mr-1.5";
       }
     },
     btnIconSize() {
-      if (this.size == 'xs') {
-        return '10'
-      } else if (this.size == 'sm') {
-        return '12'
-      } else {
-        return '16'
+      if (this.size == "xs") {
+        return "16";
+      } else if (this.size == "sm") {
+        return "16";
+      } else if (this.size == "base") {
+        return "16";
+      } else if (this.size == "lg") {
+        return "20";
+      } else if (this.size == "xl") {
+        return "20";
       }
-    }
-
-  },
-  data() {
-    return {}
+    },
+    loaderProperty() {
+      if (this.content === "textOnly") {
+        return;
+      } else if (this.content === "iconOnly") {
+        if (this.size == "xs") {
+          return "!dd-w-2 !dd-h-2";
+        } else if (this.size == "sm") {
+          return "!dd-w-2 !dd-h-2";
+        } else if (this.size == "base") {
+          return "!dd-w-2 !dd-h-2";
+        } else if (this.size == "lg") {
+          return "!dd-w-2.5 !dd-h-2.5";
+        } else if (this.size == "xl") {
+          return "!dd-w-2.5 !dd-h-2.5";
+        }
+      } else {
+        if (this.size == "xs") {
+          return "!dd-w-2.5 !dd-h-2.5";
+        } else if (this.size == "sm") {
+          return "!dd-w-2.5 !dd-h-2.5";
+        } else if (this.size == "base") {
+          return "!dd-w-2.5 !dd-h-2.5";
+        } else if (this.size == "lg") {
+          return "!dd-w-3 !dd-h-3";
+        } else if (this.size == "xl") {
+          return "!dd-w-3 !dd-h-3";
+        }
+      }
+    },
   },
   components: {
-    svgIcon
-  }
-}
+    svgIcon,
+  },
+};
 </script>
 
 <style lang="scss" scoped></style>
