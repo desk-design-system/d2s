@@ -369,7 +369,7 @@ export const suffixButton = {
     },
     template: `<dd-input v-model="selected" label="Basic Input">
     <template #suffix>
-    <dd-button icon="Plus" suffix color="white"></dd-button>
+    <dd-button icon="Plus" suffix typ="secondary"></dd-button>
     </template>
     </dd-input>`,
   }),
@@ -475,7 +475,7 @@ suffixButton.parameters = {
     source: {
       code: `<dd-input v-model="selected" label="Basic Input">
       <template #suffix>
-      <dd-button icon="Plus" suffix color="white"></dd-button>
+      <dd-button icon="Plus" suffix typ="secondary"></dd-button>
       </template>
       </dd-input>`,
     },

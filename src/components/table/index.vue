@@ -13,7 +13,7 @@
           <div v-if="selectedId?.length > 0"
             class="dd-flex dd-items-center dd-gap-2 dd-py-2 dd-pl-3 dd-pr-3 dd-text-left">
             <DdGroupButton :buttons="buttons">
-              <dd-Button color="white" v-if="checkBoxProp" size="sm">
+              <dd-Button type="secondary" v-if="checkBoxProp" size="sm">
                 <div class="dd-flex dd-items-center">
                   <dd-checkbox v-model="allSelected" @click="selectAllFields" :disabled="checkAllDisabled || limit < 1"
                     :rows="rows" @indeterminate="indeterminate" :allCheckboxesChecked="allCheckboxesChecked"
@@ -22,21 +22,21 @@
                     selectedId.length }} Selected</span>
                 </div>
               </dd-Button>
-              <dd-Button color="white" :disabled="buttons?.disabled" size="sm">
+              <dd-Button type="secondary" :disabled="buttons?.disabled" size="sm">
                 <div class="dd-flex dd-items-center dd-gap-2">
-                  <svgIcon color="white" icon="Printer" size="16" />
+                  <svgIcon type="secondary" icon="Printer" size="16" />
                   <span class="dd-text-sm dd-font-medium dd-text-gray-700">Print</span>
                 </div>
               </dd-Button>
-              <dd-Button color="white" :disabled="buttons?.disabled" size="sm">
+              <dd-Button type="secondary" :disabled="buttons?.disabled" size="sm">
                 <div class="dd-flex dd-items-center dd-gap-2">
-                  <svgIcon color="white" icon="Printer" size="16" />
+                  <svgIcon type="secondary" icon="Printer" size="16" />
                   <span class="dd-text-sm dd-font-medium dd-text-gray-700">Print</span>
                 </div>
               </dd-Button>
               <slot name="groupActions" />
             </DdGroupButton>
-            <DdDropDown v-if="actionsPanel" color="white" label="Actions" v-model="headerActions" :options="values"
+            <DdDropDown v-if="actionsPanel" type="secondary" label="Actions" v-model="headerActions" :options="values"
               size="sm" :showIcon="showIcon" @command="getHeaderDropdownVal" />
             <slot name="customDropDown" />
           </div>
@@ -210,7 +210,7 @@
               <td :colspan="columns.length + 2" class="dd-h-full hover:!dd-bg-transparent">
                 <slot name="noData" />
                 <div class="dd-flex dd-items-center dd-justify-center dd-min-h-[60vh]" v-if="emptyState">
-                  <svgIcon size="140" color="white" icon="noData" />
+                  <svgIcon size="140" type="secondary" icon="noData" />
                 </div>
               </td>
             </tr>

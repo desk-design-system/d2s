@@ -12,38 +12,36 @@
       <slot name="customActions" />
       <dd-Button
         @click="editRow()"
-        color="white"
-        size="base"
         type="secondary"
+        size="base"
         class="!dd-px-1 dd-w-[28px] dd-h-[28px]"
         :class="[selectedId.includes(row.id) ? '!dd-bg-gray-50' : '']"
         v-if="presistAction ? true : isActionHovered(row)"
       >
         <svgIcon
           class="dd-flex dd-items-center dd-justify-center dd-text-gray-500"
-          color="white"
+          type="secondary"
           icon="Pencil"
           size="20"
         />
       </dd-Button>
       <dd-Button
         @click="deleteRow()"
-        color="white"
-        size="base"
         type="secondary"
+        size="base"
         class="!dd-px-1 dd-w-[28px] dd-h-[28px]"
         :class="[selectedId.includes(row.id) ? '!dd-bg-gray-50' : '']"
         v-if="presistAction ? true : isActionHovered(row)"
       >
         <svgIcon
           class="dd-flex dd-items-center dd-justify-center dd-text-gray-500"
-          color="white"
+          type="secondary"
           icon="Trash"
           size="20"
         />
       </dd-Button>
       <dd-Button
-        color="white"
+        type="secondary"
         class="!dd-p-0 !dd-h-7 !dd-w-7"
         size="base"
         :class="[
