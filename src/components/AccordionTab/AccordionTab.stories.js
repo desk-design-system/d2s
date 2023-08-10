@@ -44,8 +44,8 @@ export const Default = {
       description: "Using DdBadge with same name props",
       defaultValue: "",
     },
-    gradient: {
-      description: "use any tailwind color for gradient",
+    color: {
+      description: "use any tailwind color for color",
     },
     "#append": {
       description: "Append slot.",
@@ -175,7 +175,7 @@ export const Badge = {
   },
 };
 
-export const Gradient = {
+export const Color = {
   render: (args) => ({
     components: {
       DdAccordion,
@@ -186,7 +186,7 @@ export const Gradient = {
         args,
       };
     },
-    template: `<dd-accordion :active="1" gradient="blue">
+    template: `<dd-accordion :active="1" color="blue">
           <dd-accordion-tab
             title="Tab-1"
             prepend-icon="SquareDot"
@@ -283,10 +283,10 @@ Badge.parameters = {
   },
 };
 
-Gradient.parameters = {
+Color.parameters = {
   docs: {
     source: {
-      code: `<dd-accordion :active="1" gradient="blue">
+      code: `<dd-accordion :active="1" color="blue">
         <dd-accordion-tab
           title="Tab-1"
           prepend-icon="SquareDot"
