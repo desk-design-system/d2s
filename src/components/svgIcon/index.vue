@@ -12,6 +12,9 @@
 import {
   defineProps,
   defineAsyncComponent,
+  watch,
+  ref,
+  watchEffect,
 } from "vue";
 
 const props = defineProps({
@@ -30,8 +33,14 @@ const props = defineProps({
   },
 });
 
-const myIcon = defineAsyncComponent(async () => {
-  return await import(`../icons/${props.icon}.vue`);
+const myIcon = ref(null);
+
+watchEffect(async () => {
+  const iconProp = ref(props.icon);
+
+  myIcon.value = defineAsyncComponent(async () => {
+    return await import(`../icons/${iconProp.value}.vue`);
+  });
 });
 </script>
 
