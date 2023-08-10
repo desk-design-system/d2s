@@ -193,6 +193,7 @@ export const Color = {
             badge="Page $100.00"
             closable
             dot
+            color="fuchsia"
           >
             <h3>This is tab 1</h3>
           </dd-accordion-tab>
@@ -287,13 +288,17 @@ Color.parameters = {
   docs: {
     source: {
       code: `<dd-accordion :active="1" color="blue">
-        <dd-accordion-tab
-          title="Tab-1"
-          prepend-icon="SquareDot"
-        >
-          <h3>This is tab 1</h3>
-        </dd-accordion-tab>
-      </dd-accordion>`,
+      <dd-accordion-tab
+        title="Tab-1"
+        prepend-icon="SquareDot"
+        badge="Page $100.00"
+        closable
+        dot
+        color="fuchsia"
+      >
+        <h3>This is tab 1</h3>
+      </dd-accordion-tab>
+    </dd-accordion>`,
     },
   },
 };

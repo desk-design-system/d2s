@@ -1,31 +1,36 @@
 <template>
   <div v-bind="$attrs" class="dd-relative">
-    <div v-if="!item?.children.length" class="dd-flex dd-items-center dd-gap-2">
+    <!-- <div v-if="!item?.children.length" class="dd-flex dd-items-center dd-gap-2">
       <div class="dd-bg-white">
         <span class="curved_line"></span>
         <span class="dd-text-sm dd-font-normal dd-text-gray-700 dd-ml-2">{{
           item?.label
         }}</span>
       </div>
-    </div>
+    </div> -->
 
-    <Disclosure v-else>
+    <Disclosure>
       <template v-slot="{ open }">
         <div
           :class="{ 'show-on-hover': !isSelected && !item.disabled }"
           @click="toggleActive"
         >
           <DisclosureButton
-            class="dd-bg-white dd-flex dd-items-center dd-w-full dd-justify-between dd-h-8 dd-cursor-pointer hover:dd-bg-gray-50 dd-rounded-[4px] dd-px-1.5 dd-z-0 focus-visible:dd-outline-none"
+            class="dd-bg-white dd-flex dd-items-center dd-w-full dd-justify-between dd-h-8 dd-cursor-pointer hover:dd-bg-gray-50 dd-rounded-[4px] dd-px-1.5 dd-z-0 focus-visible:dd-outline-none dd-py-1"
             :class="[
               isSelected && !item.disabled ? 'dd-bg-gray-50' : '',
               item?.disabled == true
                 ? 'dd-opacity-50 dd-cursor-not-allowed dd-pointer-events-none hover:!dd-bg-white'
                 : '',
+              !item.children.length ? 'dd-ml-1' : '',
             ]"
           >
             <div class="dd-flex dd-items-center dd-text-center dd-gap-2">
-              <div :class="[open ? 'dd-mt-[3.1px]' : 'dd-mt-[3px]']">
+              <span v-if="!item?.children.length" class="curved_line"></span>
+              <div
+                :class="[open ? 'dd-mt-[3.1px]' : 'dd-mt-[3px]']"
+                v-if="item?.children.length"
+              >
                 <svgIcon
                   :icon="open ? 'SquareMinus' : 'SquarePlus'"
                   :class="[open ? 'dd-mb-[0.1px]' : '']"
@@ -34,7 +39,7 @@
                 />
                 <span
                   :class="[
-                    item?.children.length > 1 && open ? 'straight-line' : '',
+                    item?.children.length > 0 && open ? 'straight-line' : '',
                   ]"
                 ></span>
               </div>
@@ -70,7 +75,12 @@
                   :customContent="customContent"
                   :disabled="item?.disabled"
                 >
-                  <svgIcon v-if="customContent" icon="Searcg" size="16" class="dd-text-gray-500" />
+                  <svgIcon
+                    v-if="customContent"
+                    icon="Searcg"
+                    size="16"
+                    class="dd-text-gray-500"
+                  />
                 </slot>
               </div>
               <span class="dd-text-sm dd-font-normal dd-text-gray-700">
@@ -138,6 +148,7 @@
               @input="emits('TrackEditNode', { item, inputValue })"
               @success="updateEditList(item)"
               @close="discardEditChanges(item)"
+              :class="[!item.children.length ? '-dd-ml-[15px]' : '']"
             />
           </div>
         </div>
@@ -224,7 +235,7 @@
           </listItems>
           <DisclosureButton
             v-if="item?.id === newNode"
-            class="dd-bg-white dd-flex dd-items-center dd-w-full dd-justify-between dd-h-8 dd-pointer-events-none dd-rounded-[4px] focus-visible:dd-outline-none"
+            class="dd-bg-white dd-flex dd-items-center dd-w-full dd-justify-between dd-h-8 dd-pointer-events-none dd-rounded-[4px] focus-visible:dd-outline-none dd-mt-1"
           >
             <dd-input
               v-model="newListNode"
@@ -243,11 +254,9 @@
               @input="emits('TrackNewNode', { item, newListNode })"
               @success="addListInNode(item)"
               @close="discardListInNode(item)"
+              :class="[!item.children.length ? 'dd-ml-1.5' : '']"
             />
-            <span
-              v-if="item?.children.length > 0"
-              class="curved_line_two"
-            ></span>
+            <span class="curved_line_two"></span>
           </DisclosureButton>
         </DisclosurePanel>
       </template>
@@ -471,7 +480,7 @@ const assignToNode = () => {
   height: calc(100% - 49px);
   background-color: #e5e7eb;
   position: absolute;
-  margin-top: 30px;
+  margin-top: 26px;
   margin-left: -11px;
 }
 .curved_line {
@@ -479,8 +488,8 @@ const assignToNode = () => {
   border-bottom: 1px solid #e5e7eb;
   height: 18px;
   left: -9px;
-  width: 12px;
-  top: -4px;
+  width: 16px;
+  top: -1px;
   border-left: 1px solid #e5e7eb;
   border-radius: 0 0 0 4px;
 }
