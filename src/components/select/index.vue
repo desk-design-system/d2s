@@ -20,15 +20,10 @@
           :disabled="disabled">
           <ddAvatar v-if="selectedValue && showAvatar" size="mini" class="dd-mr-3"
             :srcLink="selectedValue[props.defaultProps.avatar]" />
-          <span class="dd-absolute dd-inset-y-0 dd-right-0 dd-flex dd-items-center dd-pr-2 dd-pointer-events-none">
-            <ChevronDownIcon class="dd-h-5 dd-w-5 dd-text-gray-400" aria-hidden="true" />
-          </span>
         </ComboboxInput>
-        <button
-          class="dd-absolute dd-inset-y-0 dd-right-2 dd-flex dd-items-center dd-pr-2 dd-bg-white dd-border-solid dd-h-5 dd-top-[7px] dd-transform"
-          @click="setDropDown()" :class="{ 'rotate-icon': isIconRotated }" :disabled="disabled">
-          <svgIcon icon="ChevronDown" size="12" aria-hidden="true" />
-        </button>
+        <span class="dd-absolute dd-inset-y-0 dd-right-0 dd-flex dd-items-center dd-pr-2 dd-pointer-events-none">
+          <ChevronDownIcon @click="setDropDown" class="dd-h-5 dd-w-5 dd-text-gray-400" aria-hidden="true" />
+        </span>
           <ComboboxOptions v-if="filteredOptions.length > 0" :static="showDropdown" :class="listClass"
             class="dd-absolute dd-z-10 dd-mt-1 dd-w-full dd-bg-white dd-shadow-lg dd-max-h-60 dd-rounded-md dd-py-1 dd-text-base dd-ring-1 dd-ring-black dd-ring-opacity-5 dd-overflow-auto focus:dd-outline-none sm:dd-text-sm">
             <ComboboxOption as="template" v-for="item in filteredOptions" :key="item[props.defaultProps.id]"
