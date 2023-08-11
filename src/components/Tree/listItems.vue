@@ -254,7 +254,7 @@
               @input="emits('TrackNewNode', { item, newListNode })"
               @success="addListInNode(item)"
               @close="discardListInNode(item)"
-              :class="[!item.children.length ? 'dd-ml-1.5' : '']"
+              :class="[!item.children.length ? 'dd-ml-2' : '']"
             />
             <span class="curved_line_two"></span>
           </DisclosureButton>
