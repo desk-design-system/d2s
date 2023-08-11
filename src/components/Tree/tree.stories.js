@@ -11,7 +11,7 @@ export const Default = {
     components: { DdTree },
     // The story's `args` need to be mapped into the template through the `setup()` method
     setup() {
-      const select = ref(10);
+      const select = ref(3);
 
       const buttons = ref([
         {
@@ -446,7 +446,7 @@ export const Actions = {
     components: { DdTree },
     // The story's `args` need to be mapped into the template through the `setup()` method
     setup() {
-      const select = ref(10);
+      const select = ref(3);
 
       const buttons = ref([
         {
@@ -828,7 +828,7 @@ export const Badge = {
     components: { DdTree },
     // The story's `args` need to be mapped into the template through the `setup()` method
     setup() {
-      const select = ref(10);
+      const select = ref(3);
 
       const buttons = ref([
         {
@@ -1211,7 +1211,7 @@ export const Dropdown = {
     components: { DdTree },
     // The story's `args` need to be mapped into the template through the `setup()` method
     setup() {
-      const select = ref(10);
+      const select = ref(3);
 
       const buttons = ref([
         {
@@ -1592,7 +1592,7 @@ export const checkbox = {
     components: { DdTree },
     // The story's `args` need to be mapped into the template through the `setup()` method
     setup() {
-      const select = ref(10);
+      const select = ref(3);
 
       const buttons = ref([
         {
@@ -1979,7 +1979,7 @@ export const customContent = {
     components: { DdTree },
     // The story's `args` need to be mapped into the template through the `setup()` method
     setup() {
-      const select = ref(10);
+      const select = ref(3);
 
       const buttons = ref([
         {

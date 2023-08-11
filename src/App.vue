@@ -1,609 +1,101 @@
 <template>
-    <dd-table :rows="rows" :columns="columnVal" :buttons="buttons" :Actions="Actions" :values="values" footer checkBoxProp
-      fixedHeight rowKey="id" hoveringRow lastCell fixed actionHeader emptyState actionsPanel sortIcon settingbarIcon
-      searchIcon @updateSettings="updateSettings" dragDrop />
+  <div>
+    <dd-tree
+      :list="generatedArray"
+      actionButton
+      :buttons="buttons"
+      :values="values"
+      checkBoxProp
+      badge="ttitle"
+      dropdownProp
+    />
+  </div>
 </template>
 
 <script setup>
 import { ref } from "vue";
-import DdTable from "./components/table/index.vue";
+import DdTree from "./components/Tree/index.vue"
 
-let columns = ref([
-  {
-    title: "ID",
-    value: "id",
-    checked: true,
-    size: "60",
-    id: 1,
-    disabled: true,
-    sortDirection: "asc",
-    hovered: false,
-  },
-  {
-    title: "User Name",
-    value: "username",
-    checked: true,
-    size: "130",
-    id: 2,
-    disabled: false,
-    sortDirection: "",
-    hovered: false,
-  },
-  {
-    title: "First Name",
-    value: "firstname",
-    checked: true,
-    size: "130",
-    id: 3,
-    disabled: false,
-    sortDirection: "",
-    hovered: false,
-  },
-  {
-    title: "Last Name",
-    value: "lastname",
-    checked: true,
-    size: "130",
-    id: 4,
-    disabled: false,
-    sortDirection: "",
-    hovered: false,
-  },
-  {
-    title: "Email",
-    value: "email",
-    checked: true,
-    size: "130",
-    id: 5,
-    disabled: false,
-    sortDirection: "",
-    hovered: false,
-  },
-  {
-    title: "Task",
-    value: "task",
-    checked: true,
-    size: "130",
-    id: 6,
-    disabled: false,
-    sortDirection: "",
-    hovered: false,
-  },
-  {
-    title: "Device",
-    value: "device",
-    checked: true,
-    size: "130",
-    id: 7,
-    disabled: false,
-    sortDirection: "",
-    hovered: false,
-  },
-  {
-    title: "Model",
-    value: "model",
-    checked: true,
-    size: "130",
-    id: 8,
-    disabled: false,
-    sortDirection: "",
-    hovered: false,
-  },
-  {
-    title: "Phone",
-    value: "phone",
-    checked: true,
-    size: "130",
-    id: 9,
-    disabled: false,
-    sortDirection: "",
-    hovered: false,
-  },
-  {
-    title: "Address",
-    value: "address",
-    checked: true,
-    size: "130",
-    id: 10,
-    disabled: false,
-    sortDirection: "",
-    hovered: false,
-  },
-  {
-    title: "Status",
-    value: "status",
-    checked: true,
-    size: "130",
-    id: 11,
-    disabled: false,
-    sortDirection: "",
-    hovered: false,
-  },
-]);
-const rows = ref([
+function generateArrayWithUniqueIds(count, maxDepth) {
+  let nextId = 1;
+
+  function generateChildrenArray(level, maxLevel) {
+    const children = [];
+    const numChildren = Math.floor(Math.random() * count) + 1;
+
+    for (let i = 0; i < numChildren; i++) {
+      const childId = nextId++;
+      const childLabel = `Child ${childId}`;
+      const child = {
+        id: childId,
+        label: childLabel,
+        icon: "",
+        checkbox: true,
+        checked: false,
+        badge: true,
+        actions: true,
+        disabled: false,
+        count: count.toString(),
+        children: [],
+      };
+
+      if (level < maxLevel) {
+        child.children = generateChildrenArray(level + 1, maxLevel);
+      }
+
+      children.push(child);
+    }
+
+    return children;
+  }
+
+  const topLevelArray = [];
+  const numTopLevelItems = Math.floor(Math.random() * count) + 1;
+
+  for (let i = 0; i < numTopLevelItems; i++) {
+    const topLevelId = nextId++;
+    const topLevelLabel = `Top Level ${topLevelId}`;
+    const topLevelItem = {
+      id: topLevelId,
+      label: topLevelLabel,
+      icon: "",
+      checkbox: true,
+      checked: false,
+      badge: true,
+      actions: true,
+      disabled: false,
+      count: count.toString(),
+      children: [],
+    };
+
+    if (maxDepth > 1) {
+      topLevelItem.children = generateChildrenArray(2, maxDepth);
+    }
+
+    topLevelArray.push(topLevelItem);
+  }
+
+  return topLevelArray;
+}
+
+const generatedArray = generateArrayWithUniqueIds(5, 5);
+
+const buttons = ref([
   {
     id: 0,
-    username: "Herry007",
-    firstname: "Herry",
-    lastname: "Brook",
-    email: "herry@repairdesk.co",
-    status: "in progress",
-    task: "reparing",
-    device: "iphone",
-    model: "2022",
-    phone: "+13232321321",
-    address: "Newyork",
-    disabled: false,
+    buttonType: "Create",
+    label: "",
+    color: "white",
+    size: "16",
+    icon: "Plus",
   },
   {
     id: 1,
-    username: "David2",
-    firstname: "David",
-    lastname: "Jeman",
-    email: "David@repairdesk.co",
-    task: "reparing",
-    device: "iphone",
-    model: "2022",
-    phone: "+13232321321",
-    address: "Newyork",
-    status: "Repaired and Collected",
-    disabled: false,
-  },
-  {
-    id: 2,
-    username: "Henry0",
-    firstname: "Henry",
-    lastname: "Cavil",
-    email: "henry@repairdesk.co",
-    task: "reparing",
-    device: "iphone",
-    model: "2022",
-    phone: "+13232321321",
-    address: "Newyork",
-    status: "in progress",
-  },
-  {
-    id: 3,
-    username: "Herry007",
-    firstname: "Herry",
-    lastname: "Brook",
-    email: "herry@repairdesk.co",
-    task: "reparing",
-    device: "iphone",
-    model: "2022",
-    phone: "+13232321321",
-    address: "Newyork",
-    status: "Repaired and Collected",
-  },
-  {
-    id: 4,
-    username: "JSmith",
-    firstname: "John",
-    lastname: "Smith",
-    email: "john.smith@example.com",
-    device: "iphone",
-    model: "2022",
-    phone: "+13232321321",
-    address: "Newyork",
-    status: "in progress",
-    task: "reparing",
-  },
-  {
-    id: 5,
-    username: "LGreen",
-    firstname: "Lucy",
-    lastname: "Green",
-    email: "lucy.green@example.com",
-    device: "iphone",
-    model: "2022",
-    phone: "+13232321321",
-    address: "Newyork",
-    status: "Repaired and Collected",
-    task: "reparing",
-  },
-  {
-    id: 6,
-    username: "AMiller",
-    firstname: "Alice",
-    lastname: "Miller",
-    email: "alice.miller@example.com",
-    device: "iphone",
-    model: "2022",
-    phone: "+13232321321",
-    address: "Newyork",
-    status: "in progress",
-    task: "reparing",
-  },
-  {
-    id: 7,
-    username: "BDavis",
-    firstname: "Bob",
-    lastname: "Davis",
-    email: "bob.davis@example.com",
-    device: "iphone",
-    model: "2022",
-    phone: "+13232321321",
-    address: "Newyork",
-    status: "Repaired and Collected",
-    task: "reparing",
-  },
-  {
-    id: 8,
-    username: "KJohnson",
-    firstname: "Kate",
-    lastname: "Johnson",
-    email: "kate.johnson@example.com",
-    device: "iphone",
-    model: "2022",
-    phone: "+13232321321",
-    address: "Newyork",
-    status: "in progress",
-    task: "reparing",
-  },
-  {
-    id: 9,
-    username: "KJohnson",
-    firstname: "Kate",
-    lastname: "Johnson",
-    email: "kate.johnson@example.com",
-    device: "iphone",
-    model: "2022",
-    phone: "+13232321321",
-    address: "Newyork",
-    status: "in progress",
-    task: "reparing",
-  },
-  {
-    id: 10,
-    username: "KJohnson",
-    firstname: "Kate",
-    lastname: "Johnson",
-    email: "kate.johnson@example.com",
-    device: "iphone",
-    model: "2022",
-    phone: "+13232321321",
-    address: "Newyork",
-    status: "in progress",
-    task: "reparing",
-  },
-  {
-    id: 11,
-    username: "KJohnson",
-    firstname: "Kate",
-    lastname: "Johnson",
-    email: "kate.johnson@example.com",
-    device: "iphone",
-    model: "2022",
-    phone: "+13232321321",
-    address: "Newyork",
-    status: "in progress",
-    task: "reparing",
-  },
-  {
-    id: 12,
-    username: "KJohnson",
-    firstname: "Kate",
-    lastname: "Johnson",
-    email: "kate.johnson@example.com",
-    device: "iphone",
-    model: "2022",
-    phone: "+13232321321",
-    address: "Newyork",
-    status: "in progress",
-    task: "reparing",
-  },
-  {
-    id: 13,
-    username: "KJohnson",
-    firstname: "Kate",
-    lastname: "Johnson",
-    email: "kate.johnson@example.com",
-    device: "iphone",
-    model: "2022",
-    phone: "+13232321321",
-    address: "Newyork",
-    status: "in progress",
-    task: "reparing",
-  },
-  {
-    id: 14,
-    username: "KJohnson",
-    firstname: "Kate",
-    lastname: "Johnson",
-    email: "kate.johnson@example.com",
-    device: "iphone",
-    model: "2022",
-    phone: "+13232321321",
-    address: "Newyork",
-    status: "in progress",
-    task: "reparing",
-  },
-  {
-    id: 15,
-    username: "KJohnson",
-    firstname: "Kate",
-    lastname: "Johnson",
-    email: "kate.johnson@example.com",
-    device: "iphone",
-    model: "2022",
-    phone: "+13232321321",
-    address: "Newyork",
-    status: "in progress",
-    task: "reparing",
-  },
-  {
-    id: 16,
-    username: "KJohnson",
-    firstname: "Kate",
-    lastname: "Johnson",
-    email: "kate.johnson@example.com",
-    device: "iphone",
-    model: "2022",
-    phone: "+13232321321",
-    address: "Newyork",
-    status: "in progress",
-    task: "reparing",
-  },
-  {
-    id: 17,
-    username: "KJohnson",
-    firstname: "Kate",
-    lastname: "Johnson",
-    email: "kate.johnson@example.com",
-    device: "iphone",
-    model: "2022",
-    phone: "+13232321321",
-    address: "Newyork",
-    status: "in progress",
-    task: "reparing",
-  },
-  {
-    id: 18,
-    username: "KJohnson",
-    firstname: "Kate",
-    lastname: "Johnson",
-    email: "kate.johnson@example.com",
-    device: "iphone",
-    model: "2022",
-    phone: "+13232321321",
-    address: "Newyork",
-    status: "in progress",
-    task: "reparing",
-  },
-  {
-    id: 19,
-    username: "KJohnson",
-    firstname: "Kate",
-    lastname: "Johnson",
-    email: "kate.johnson@example.com",
-    device: "iphone",
-    model: "2022",
-    phone: "+13232321321",
-    address: "Newyork",
-    status: "in progress",
-    task: "reparing",
-  },
-  {
-    id: 20,
-    username: "KJohnson",
-    firstname: "Kate",
-    lastname: "Johnson",
-    email: "kate.johnson@example.com",
-    device: "iphone",
-    model: "2022",
-    phone: "+13232321321",
-    address: "Newyork",
-    status: "in progress",
-    task: "reparing",
-  },
-  {
-    id: 21,
-    username: "KJohnson",
-    firstname: "Kate",
-    lastname: "Johnson",
-    email: "kate.johnson@example.com",
-    device: "iphone",
-    model: "2022",
-    phone: "+13232321321",
-    address: "Newyork",
-    status: "in progress",
-    task: "reparing",
-  },
-  {
-    id: 22,
-    username: "KJohnson",
-    firstname: "Kate",
-    lastname: "Johnson",
-    email: "kate.johnson@example.com",
-    device: "iphone",
-    model: "2022",
-    phone: "+13232321321",
-    address: "Newyork",
-    status: "in progress",
-    task: "reparing",
-  },
-  {
-    id: 23,
-    username: "KJohnson",
-    firstname: "Kate",
-    lastname: "Johnson",
-    email: "kate.johnson@example.com",
-    device: "iphone",
-    model: "2022",
-    phone: "+13232321321",
-    address: "Newyork",
-    status: "in progress",
-    task: "reparing",
-  },
-  {
-    id: 24,
-    username: "KJohnson",
-    firstname: "Kate",
-    lastname: "Johnson",
-    email: "kate.johnson@example.com",
-    device: "iphone",
-    model: "2022",
-    phone: "+13232321321",
-    address: "Newyork",
-    status: "in progress",
-    task: "reparing",
-  },
-  {
-    id: 25,
-    username: "KJohnson",
-    firstname: "Kate",
-    lastname: "Johnson",
-    email: "kate.johnson@example.com",
-    device: "iphone",
-    model: "2022",
-    phone: "+13232321321",
-    address: "Newyork",
-    status: "in progress",
-    task: "reparing",
-  },
-  {
-    id: 26,
-    username: "KJohnson",
-    firstname: "Kate",
-    lastname: "Johnson",
-    email: "kate.johnson@example.com",
-    device: "iphone",
-    model: "2022",
-    phone: "+13232321321",
-    address: "Newyork",
-    status: "in progress",
-    task: "reparing",
-  },
-  {
-    id: 27,
-    username: "KJohnson",
-    firstname: "Kate",
-    lastname: "Johnson",
-    email: "kate.johnson@example.com",
-    device: "iphone",
-    model: "2022",
-    phone: "+13232321321",
-    address: "Newyork",
-    status: "in progress",
-    task: "reparing",
-  },
-  {
-    id: 28,
-    username: "KJohnson",
-    firstname: "Kate",
-    lastname: "Johnson",
-    email: "kate.johnson@example.com",
-    device: "iphone",
-    model: "2022",
-    phone: "+13232321321",
-    address: "Newyork",
-    status: "in progress",
-    task: "reparing",
-  },
-  {
-    id: 29,
-    username: "KJohnson",
-    firstname: "Kate",
-    lastname: "Johnson",
-    email: "kate.johnson@example.com",
-    device: "iphone",
-    model: "2022",
-    phone: "+13232321321",
-    address: "Newyork",
-    status: "in progress",
-    task: "reparing",
-  },
-  {
-    id: 30,
-    username: "KJohnson",
-    firstname: "Kate",
-    lastname: "Johnson",
-    email: "kate.johnson@example.com",
-    device: "iphone",
-    model: "2022",
-    phone: "+13232321321",
-    address: "Newyork",
-    status: "in progress",
-    task: "reparing",
-  },
-  {
-    id: 31,
-    username: "KJohnson",
-    firstname: "Kate",
-    lastname: "Johnson",
-    email: "kate.johnson@example.com",
-    device: "iphone",
-    model: "2022",
-    phone: "+13232321321",
-    address: "Newyork",
-    status: "in progress",
-    task: "reparing",
-  },
-  {
-    id: 32,
-    username: "KJohnson",
-    firstname: "Kate",
-    lastname: "Johnson",
-    email: "kate.johnson@example.com",
-    device: "iphone",
-    model: "2022",
-    phone: "+13232321321",
-    address: "Newyork",
-    status: "in progress",
-    task: "reparing",
-  },
-  {
-    id: 33,
-    username: "KJohnson",
-    firstname: "Kate",
-    lastname: "Johnson",
-    email: "kate.johnson@example.com",
-    device: "iphone",
-    model: "2022",
-    phone: "+13232321321",
-    address: "Newyork",
-    status: "in progress",
-    task: "reparing",
-  },
-  {
-    id: 34,
-    username: "KJohnson",
-    firstname: "Kate",
-    lastname: "Johnson",
-    email: "kate.johnson@example.com",
-    device: "iphone",
-    model: "2022",
-    phone: "+13232321321",
-    address: "Newyork",
-    status: "in progress",
-    task: "reparing",
-  },
-]);
-
-const buttons = [
-  { id: 1, label: "5", color: "white", size: "sm", active: "15" },
-  { id: 2, label: "10", color: "white", size: "sm" },
-  { id: 3, label: "15", color: "white", size: "sm" },
-];
-
-const Actions = ref([
-  {
-    name: "DropDown Menu 1",
-    icon: "DotHorizontal",
-    size: 12,
-    value: 1,
-  },
-  {
-    name: "DropDown Menu 2",
-    icon: "Trash",
-    size: 12,
-    value: 2,
-  },
-  {
-    name: "DropDown Menu 3",
+    buttonType: "Edit",
+    label: "",
+    color: "white",
+    size: "16",
     icon: "Pencil",
-    size: 12,
-    value: 3,
   },
 ]);
 
@@ -611,33 +103,24 @@ const values = ref([
   {
     name: "DropDown Menu 1",
     value: 1,
-    disabled: true,
+    icon: "Plus",
   },
   {
     name: "DropDown Menu 2",
     value: 2,
+    icon: "Pencil",
   },
   {
     name: "DropDown Menu 3",
     value: 3,
+    icon: "Trash",
   },
   {
     name: "DropDown Menu 4",
     value: 4,
+    icon: "Alert",
   },
 ]);
-
-let columnVal = ref(columns.value);
-const updateSettings = (data) => {
-  const reorderedColumns = [];
-  data.forEach((item) => {
-    const column = columnVal.value.find((col) => col.value === item.value);
-    if (column) {
-      reorderedColumns.push(column);
-    }
-  });
-  columnVal.value = reorderedColumns;
-};
 </script>
 
 
@@ -645,6 +128,6 @@ const updateSettings = (data) => {
 body {
   padding: 0;
   margin: 0;
-  overflow-x: hidden !important;
+  z-index: 0;
 }
 </style>

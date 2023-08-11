@@ -40,14 +40,14 @@
     <template #actions="{selectedItem, item, values, buttons, isSelected, showIcon}">
       <slot name="actions" :selectedItem="selectedItem" :item="item" :values="values" :buttons="buttons" :isSelected="isSelected" :showIcon="showIcon"></slot>
   </template>
-    <template #checkbox="{checkBoxProp, open, item, disabled}">
-      <slot name="checkbox" :checkBoxProp="checkBoxProp" :item="item" :open="open" :disabled="disabled"></slot>
+    <template #leftSlotOne="{checkBoxProp, open, item, disabled}">
+      <slot name="leftSlotOne" :checkBoxProp="checkBoxProp" :item="item" :open="open" :disabled="disabled"></slot>
     </template>
-    <template #content="{customContent, open, item, disabled}">
-      <slot name="content" :customContent="customContent" :item="item" :open="open" :disabled="disabled"></slot>
+    <template #leftSlotTwo="{customContent, open, item, disabled}">
+      <slot name="leftSlotTwo" :customContent="customContent" :item="item" :open="open" :disabled="disabled"></slot>
     </template>
-    <template  v-if="badge" #badge>
-      <slot name="badge"></slot>
+    <template  v-if="badge" #rightSlot>
+      <slot name="rightSlot"></slot>
     </template>
   </listItems>
   </div>

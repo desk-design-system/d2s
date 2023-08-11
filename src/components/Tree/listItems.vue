@@ -41,7 +41,7 @@
                 class="dd-h-5 dd-w-5 dd-text-center dd-rounded-[4px]"
               >
                 <slot
-                  name="checkbox"
+                  name="leftSlotOne"
                   :item="item"
                   :open="open"
                   :checkBoxProp="checkBoxProp"
@@ -61,7 +61,7 @@
                 class="dd-h-5 dd-w-5 dd-text-center dd-rounded-[4px] dd-py-[2px]"
               >
                 <slot
-                  name="content"
+                  name="leftSlotTwo"
                   :item="item"
                   :open="open"
                   :customContent="customContent"
@@ -117,9 +117,11 @@
                 </slot>
               </div>
             </div>
-            <slot name="badge" v-if="badge">
-              <DdBage type="basic">{{ badge }}</DdBage>
+            <div :class="[!item.children.length ? 'dd-mr-1' : '']">
+            <slot name="rightSlot">
+                <DdBage v-if="badge" type="red">{{ badge }}</DdBage>
             </slot>
+          </div>
           </DisclosureButton>
           <div class="dd-absolute dd-top-[0px] dd-left-[30px] dd-z-10">
             <dd-input
@@ -182,8 +184,9 @@
             @selectedCheckBoxes="emits('selectedCheckBoxes', $event)"
             @dropdownValue="emits('dropdownValue', $event)"
           >
-            <template v-if="checkBoxProp" #checkbox>
+            <template #leftSlotOne>
               <slot
+                v-if="checkBoxProp"
                 name="leftSlotOne"
                 :item="item"
                 :open="open"
@@ -191,8 +194,9 @@
                 :disabled="item?.disabled"
               ></slot>
             </template>
-            <template v-if="customContent" #content>
+            <template #leftSlotTwo>
               <slot
+                v-if="customContent"
                 name="leftSlotTwo"
                 :item="item"
                 :open="open"
@@ -213,8 +217,8 @@
               >
               </slot>
             </template>
-            <template v-if="badge" #badge>
-              <slot name="rightSlot"></slot>
+            <template #rightSlot>
+              <slot v-if="badge" name="rightSlot"></slot>
             </template>
             <template #dropdown="{ isSelected, disabled, open }">
               <slot
