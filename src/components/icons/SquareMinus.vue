@@ -12,14 +12,14 @@
       width="10.6667"
       height="10.6667"
       rx="1.33333"
-      stroke="#6B7280"
+      stroke="currentColor"
       stroke-width="1.25"
       stroke-linecap="round"
       stroke-linejoin="round"
     />
     <path
       d="M6 8.00001H10"
-      stroke="#6B7280"
+      stroke="currentColor"
       stroke-width="1.25"
       stroke-linecap="round"
       stroke-linejoin="round"

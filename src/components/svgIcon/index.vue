@@ -1,7 +1,7 @@
 <template>
   <component
     v-bind="$attrs"
-    :stroke="color"
+    :stroke="'#d12026'"
     :style="{ width: `${props.size + 'px'}`, height: `${props.size + 'px'}` }"
     :is="myIcon"
     class="dd-svg"
@@ -12,6 +12,7 @@
 import {
   defineProps,
   defineAsyncComponent,
+  watch,
   ref,
   watchEffect,
 } from "vue";
@@ -28,7 +29,7 @@ const props = defineProps({
   },
   color: {
     type: String,
-    default: "#fff",
+    default: "#374151",
   },
 });
 

@@ -4,7 +4,7 @@ import { action } from "@storybook/addon-actions";
 
 // More on default export: https://storybook.js.org/docs/vue/writing-stories/introduction#default-export
 export default {
-  title: "Atoms/Button",
+  title: "Molecules/Button",
   component: DdButton,
   // More on argTypes: https://storybook.js.org/docs/vue/api/argtypes
 };

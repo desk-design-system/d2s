@@ -8,14 +8,14 @@
   >
     <path
       d="M8.0013 3.50003V12.8334"
-      stroke="#6B7280"
+      stroke="currentColor"
       stroke-width="1.25"
       stroke-linecap="round"
       stroke-linejoin="round"
     />
     <path
       d="M3.33203 8.16668H12.6654"
-      stroke="#6B7280"
+      stroke="currentColor"
       stroke-width="1.25"
       stroke-linecap="round"
       stroke-linejoin="round"
