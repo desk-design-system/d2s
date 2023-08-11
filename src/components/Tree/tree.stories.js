@@ -1587,7 +1587,7 @@ export const Dropdown = {
   },
 };
 
-export const CustomData = {
+export const checkbox = {
   render: (args) => ({
     components: { DdTree },
     // The story's `args` need to be mapped into the template through the `setup()` method
@@ -1617,18 +1617,22 @@ export const CustomData = {
         {
           name: "DropDown Menu 1",
           value: 1,
+          icon: "Plus",
         },
         {
           name: "DropDown Menu 2",
           value: 2,
+          icon: "Pencil",
         },
         {
           name: "DropDown Menu 3",
           value: 3,
+          icon: "Trash",
         },
         {
           name: "DropDown Menu 4",
           value: 4,
+          icon: "Alert",
         },
       ]);
 
@@ -1703,7 +1707,7 @@ export const CustomData = {
       actionButton
       dropdownProp
       showIcon
-      CustomData
+      checkBoxProp
       badge="2345"
     />
     </div>`,
@@ -1969,7 +1973,7 @@ export const CustomData = {
   },
 };
 
-export const checkbox = {
+export const customContent = {
   render: (args) => ({
     components: { DdTree },
     // The story's `args` need to be mapped into the template through the `setup()` method
@@ -1999,22 +2003,18 @@ export const checkbox = {
         {
           name: "DropDown Menu 1",
           value: 1,
-          icon: "Plus",
         },
         {
           name: "DropDown Menu 2",
           value: 2,
-          icon: "Pencil",
         },
         {
           name: "DropDown Menu 3",
           value: 3,
-          icon: "Trash",
         },
         {
           name: "DropDown Menu 4",
           value: 4,
-          icon: "Alert",
         },
       ]);
 
@@ -2089,8 +2089,8 @@ export const checkbox = {
       actionButton
       dropdownProp
       showIcon
-      CustomData
       checkBoxProp
+      customContent
       badge="2345"
     />
     </div>`,
@@ -2419,26 +2419,6 @@ Dropdown.parameters = {
   },
 };
 
-CustomData.parameters = {
-  docs: {
-    source: {
-      code: `<div> 
-      <dd-tree
-        v-bind="args"
-        :list="generatedArray"
-        :buttons="buttons"
-        :values="values"
-        actionButton
-        dropdownProp
-        showIcon
-        CustomData
-        badge="2345"
-      />
-      </div>`,
-    },
-  },
-};
-
 checkbox.parameters = {
   docs: {
     source: {
@@ -2451,8 +2431,28 @@ checkbox.parameters = {
         actionButton
         dropdownProp
         showIcon
-        CustomData
+        customContent
         checkBoxProp
+        badge="2345"
+      />
+      </div>`,
+    },
+  },
+};
+
+customContent.parameters = {
+  docs: {
+    source: {
+      code: `<div> 
+      <dd-tree
+        v-bind="args"
+        :list="generatedArray"
+        :buttons="buttons"
+        :values="values"
+        actionButton
+        dropdownProp
+        showIcon
+        customContent
         badge="2345"
       />
       </div>`,
