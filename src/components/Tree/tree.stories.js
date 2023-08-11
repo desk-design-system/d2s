@@ -1236,22 +1236,18 @@ export const Dropdown = {
         {
           name: "DropDown Menu 1",
           value: 1,
-          icon: "Plus",
         },
         {
           name: "DropDown Menu 2",
           value: 2,
-          icon: "Pencil",
         },
         {
           name: "DropDown Menu 3",
           value: 3,
-          icon: "Trash",
         },
         {
           name: "DropDown Menu 4",
           value: 4,
-          icon: "Alert",
         },
       ]);
 
@@ -1621,22 +1617,18 @@ export const CustomData = {
         {
           name: "DropDown Menu 1",
           value: 1,
-          icon: "Plus",
         },
         {
           name: "DropDown Menu 2",
           value: 2,
-          icon: "Pencil",
         },
         {
           name: "DropDown Menu 3",
           value: 3,
-          icon: "Trash",
         },
         {
           name: "DropDown Menu 4",
           value: 4,
-          icon: "Alert",
         },
       ]);
 
