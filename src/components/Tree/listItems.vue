@@ -46,7 +46,7 @@
               <div
                 v-if="checkBoxProp"
                 @click.stop="open = false"
-                class="dd-h-5 dd-w-5 dd-text-center dd-rounded-[4px]"
+                class="dd-h-5 dd-w-5 dd-text-center dd-rounded-[4px] dd-px-[3px]"
               >
                 <slot
                   name="checkbox"
@@ -77,7 +77,7 @@
                 >
                   <svgIcon
                     v-if="customContent"
-                    icon="Circle"
+                    icon="Searcg"
                     size="16"
                     class="dd-text-gray-500"
                   />
@@ -148,7 +148,7 @@
               @input="emits('TrackEditNode', { item, inputValue })"
               @success="updateEditList(item)"
               @close="discardEditChanges(item)"
-              :class="[!item.children.length ? '-dd-ml-[18px]' : '']"
+              :class="[!item.children.length ? '-dd-ml-[15px]' : '']"
             />
           </div>
         </div>
@@ -254,7 +254,7 @@
               @input="emits('TrackNewNode', { item, newListNode })"
               @success="addListInNode(item)"
               @close="discardListInNode(item)"
-              :class="[!item.children.length ? 'dd-ml-2' : '']"
+              :class="[!item.children.length ? 'dd-ml-1.5' : '']"
             />
             <span class="curved_line_two"></span>
           </DisclosureButton>
@@ -269,6 +269,7 @@ import svgIcon from "../svgIcon/index.vue";
 import ActionsButton from "./Actions.vue";
 import DdInput from "../input/index.vue";
 import DdBage from "../badges/index.vue";
+import DdButton from "../buttons/index.vue";
 import DdCheckbox from "../checkbox/index.vue";
 import { Disclosure, DisclosureButton, DisclosurePanel } from "@headlessui/vue";
 import { onBeforeUnmount, onMounted, ref, computed } from "vue";
