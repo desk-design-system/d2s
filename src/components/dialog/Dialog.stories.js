@@ -153,4 +153,3 @@ CardOnly.args = {
   header: false,
   content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam at velit quis erat ornare dignissim eu vel est. Praesent in nisl nec augue volutpat eleifend. Phasellus pulvinar lobortis massa eu tempus. Sed ut mauris ac nunc scelerisque molestie. Donec tristique odio at lacus bibendum suscipit.'
 }
-

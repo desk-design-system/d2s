@@ -1,14 +1,6 @@
 <template>
   <div v-bind="$attrs" class="dd-relative">
-    <!-- <div v-if="!item?.children.length" class="dd-flex dd-items-center dd-gap-2">
-      <div class="dd-bg-white">
-        <span class="curved_line"></span>
-        <span class="dd-text-sm dd-font-normal dd-text-gray-700 dd-ml-2">{{
-          item?.label
-        }}</span>
-      </div>
-    </div> -->
-
+    
     <Disclosure>
       <template v-slot="{ open }">
         <div
@@ -46,7 +38,7 @@
               <div
                 v-if="checkBoxProp"
                 @click.stop="open = false"
-                class="dd-h-5 dd-w-5 dd-text-center dd-rounded-[4px] dd-px-[3px]"
+                class="dd-h-5 dd-w-5 dd-text-center dd-rounded-[4px]"
               >
                 <slot
                   name="checkbox"
@@ -66,7 +58,7 @@
               <div
                 v-if="customContent"
                 @click.stop="open = false"
-                class="dd-h-5 dd-w-5 dd-text-center dd-rounded-[4px] dd-py-[2px] dd-px-[3px]"
+                class="dd-h-5 dd-w-5 dd-text-center dd-rounded-[4px] dd-py-[2px]"
               >
                 <slot
                   name="content"
@@ -77,7 +69,7 @@
                 >
                   <svgIcon
                     v-if="customContent"
-                    icon="Searcg"
+                    icon="Circle"
                     size="16"
                     class="dd-text-gray-500"
                   />
@@ -148,7 +140,7 @@
               @input="emits('TrackEditNode', { item, inputValue })"
               @success="updateEditList(item)"
               @close="discardEditChanges(item)"
-              :class="[!item.children.length ? '-dd-ml-[15px]' : '']"
+              :class="[!item.children.length ? '-dd-ml-[18px]' : '']"
             />
           </div>
         </div>
@@ -254,7 +246,7 @@
               @input="emits('TrackNewNode', { item, newListNode })"
               @success="addListInNode(item)"
               @close="discardListInNode(item)"
-              :class="[!item.children.length ? 'dd-ml-1.5' : '']"
+              :class="[!item.children.length ? 'dd-ml-2' : '']"
             />
             <span class="curved_line_two"></span>
           </DisclosureButton>
@@ -269,7 +261,6 @@ import svgIcon from "../svgIcon/index.vue";
 import ActionsButton from "./Actions.vue";
 import DdInput from "../input/index.vue";
 import DdBage from "../badges/index.vue";
-import DdButton from "../buttons/index.vue";
 import DdCheckbox from "../checkbox/index.vue";
 import { Disclosure, DisclosureButton, DisclosurePanel } from "@headlessui/vue";
 import { onBeforeUnmount, onMounted, ref, computed } from "vue";

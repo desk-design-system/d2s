@@ -186,7 +186,7 @@ export const Color = {
         args,
       };
     },
-    template: `<dd-accordion :active="1" color="blue">
+    template: `<dd-accordion :active="1" color="red">
           <dd-accordion-tab
             title="Tab-1"
             prepend-icon="SquareDot"

@@ -125,7 +125,7 @@ export const COLORED = {
         args,
       };
     },
-    template: `<dd-badge type="teal" title="Badge" />`,
+    template: `<dd-badge color="teal" title="Badge" />`,
   }),
   argTypes: {
     color: {
@@ -208,7 +208,7 @@ export const Closable = {
       };
     },
     template: `<dd-badge title="Badge" closable
-    dot type="purple" />`,
+    dot color="red" />`,
   }),
   argTypes: {
     color: {
@@ -291,7 +291,7 @@ Basic.parameters = {
 COLORED.parameters = {
   docs: {
     source: {
-      code: ` <dd-badge type="teal" title="Badge" />`,
+      code: ` <dd-badge color="teal" title="Badge" />`,
     },
   },
 };
@@ -300,7 +300,7 @@ Closable.parameters = {
   docs: {
     source: {
       code: ` <dd-badge title="Badge" closable
-      dot type="purple" />`,
+      dot color="red" />`,
     },
   },
 };
