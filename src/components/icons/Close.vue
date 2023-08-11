@@ -10,7 +10,7 @@
       <path
         id="Path"
         d="M12 4L4 12"
-        stroke="currentColor"
+        stroke="#6B7280"
         stroke-width="1.25"
         stroke-linecap="round"
         stroke-linejoin="round"
@@ -18,7 +18,7 @@
       <path
         id="Path_2"
         d="M4 4L12 12"
-        stroke="currentColor"
+        stroke="#6B7280"
         stroke-width="1.25"
         stroke-linecap="round"
         stroke-linejoin="round"

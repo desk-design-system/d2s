@@ -10,7 +10,7 @@
       <path
         id="Path"
         d="M3.33203 8.00002L6.66536 11.3334L13.332 4.66669"
-        stroke="currentColor"
+        stroke="#6B7280"
         stroke-width="1.25"
         stroke-linecap="round"
         stroke-linejoin="round"
