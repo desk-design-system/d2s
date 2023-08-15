@@ -21,7 +21,7 @@ export const Default = {
       ]);
       return { value, args };
     },
-    template: `<dd-breadcrumb  :items="value"  />`,
+    template: `<dd-breadcrumb  :items="value" v-bind="args" />`,
   }),
   argTypes: {
     shadow: {
@@ -79,7 +79,7 @@ export const FullWidth = {
       ]);
       return { value, args };
     },
-    template: `<dd-breadcrumb  :items="value" full="true" shadow="true"  />`,
+    template: `<dd-breadcrumb  :items="value" full="true" shadow="true" v-bind="args" />`,
   }),
   argTypes: {
     shadow: {
@@ -137,7 +137,7 @@ export const Chevron = {
       ]);
       return { value, args };
     },
-    template: `<dd-breadcrumb  :items="value" seprator='chevron'  />`,
+    template: `<dd-breadcrumb  :items="value" seprator='chevron' v-bind="args" />`,
   }),
   argTypes: {
     shadow: {

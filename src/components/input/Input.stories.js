@@ -23,7 +23,7 @@ export const Default = {
 
       return { selected, args, editInput, resetInput, onClickMethod };
     },
-    template: `<dd-input v-model="selected" label="Basic Input"></dd-input>`,
+    template: `<dd-input v-model="selected" label="Basic Input" v-bind="args" />`,
   }),
   argTypes: {
     label: {
@@ -109,7 +109,7 @@ export const PrefixIcon = {
 
       return { selected, args, editInput, resetInput, onClickMethod };
     },
-    template: `<dd-input v-model="selected" label="Basic Input" prefix="true" icon="Search" ></dd-input>`,
+    template: `<dd-input v-model="selected" label="Basic Input" prefix="true" icon="Search" v-bind="args" />`,
   }),
   argTypes: {
     label: {
@@ -195,7 +195,7 @@ export const SuffixIcon = {
 
       return { selected, args, editInput, resetInput, onClickMethod };
     },
-    template: `<dd-input v-model="selected" label="Basic Input" suffix icon="Search" ></dd-input>`,
+    template: `<dd-input v-model="selected" label="Basic Input" suffix icon="Search" v-bind="args" />`,
   }),
   argTypes: {
     label: {
@@ -281,7 +281,7 @@ export const Password = {
 
       return { selected, args, editInput, resetInput, onClickMethod };
     },
-    template: `<dd-input v-model="selected" label="Basic Input" suffix type="password" ></dd-input>`,
+    template: `<dd-input v-model="selected" label="Basic Input" suffix type="password" v-bind="args" />`,
   }),
   argTypes: {
     label: {

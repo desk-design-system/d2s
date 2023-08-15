@@ -34,7 +34,7 @@ export const Default = {
       ]);
       return { value, selected, args, onClickMethod };
     },
-    template: `<dd-dropdown v-model="selected"  :options="value" />  `,
+    template: `<dd-dropdown v-model="selected"  :options="value" v-bind="args" />  `,
   }),
   argTypes: {
     title: {
@@ -143,7 +143,7 @@ export const Primary = {
       ]);
       return { value, selected, args, onClickMethod };
     },
-    template: `<dd-dropdown v-model="selected"  :options="value" title="Drop Down" color="primary" />  `,
+    template: `<dd-dropdown v-model="selected"  :options="value" title="Drop Down" color="primary" v-bind="args" />  `,
   }),
   argTypes: {
     title: {

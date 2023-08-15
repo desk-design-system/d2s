@@ -16,7 +16,7 @@ export const Basic = {
         args,
       };
     },
-    template: `<dd-badge title="Badge" />`,
+    template: `<dd-badge title="Badge" v-bind="args" />`,
   }),
   argTypes: {
     color: {
@@ -32,7 +32,6 @@ export const Basic = {
         "yellow",
         "green",
         "lime",
-        "info",
         "purple",
         "slat",
         "neutral",
@@ -125,7 +124,7 @@ export const COLORED = {
         args,
       };
     },
-    template: `<dd-badge color="teal" title="Badge" />`,
+    template: `<dd-badge color="teal" title="Badge" v-bind="args"/>`,
   }),
   argTypes: {
     color: {
@@ -208,7 +207,7 @@ export const Closable = {
       };
     },
     template: `<dd-badge title="Badge" closable
-    dot color="red" />`,
+    dot color="red" v-bind="args"/>`,
   }),
   argTypes: {
     color: {

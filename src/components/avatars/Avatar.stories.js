@@ -16,7 +16,7 @@ export const Default = {
       const onClickMethod = () => action("clicked");
       return { args, onClickMethod };
     },
-    template: `<dd-avatar srcLink="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg" />`,
+    template: `<dd-avatar srcLink="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg" v-bind="args" />`,
   }),
   argTypes: {
     color: {

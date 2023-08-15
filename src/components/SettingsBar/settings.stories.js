@@ -127,7 +127,7 @@ export const Default = {
         settings,
       };
     },
-    template: ` <dd-setting :settings="settings" />`,
+    template: ` <dd-setting :settings="settings" v-bind="args" />`,
   }),
   argTypes: {
     settings: {

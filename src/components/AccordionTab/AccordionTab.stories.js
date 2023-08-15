@@ -19,10 +19,11 @@ export const Default = {
         args,
       };
     },
-    template: `<dd-accordion :active="0">
+    template: `<dd-accordion :active="0" v-bind="args">
         <dd-accordion-tab
           title="Tab-1"
           prepend-icon="SquareDot"
+          v-bind="args"
         >
           <h3>This is tab 1</h3>
         </dd-accordion-tab>
@@ -69,8 +70,8 @@ export const PrependIcon = {
         args,
       };
     },
-    template: ` <dd-accordion  :active="0" :multiple='false'>
-                          <dd-accordion-tab  prepend-icon="Checklist" :title="args.title" >
+    template: ` <dd-accordion  :active="0" :multiple='false' v-bind="args">
+                          <dd-accordion-tab  prepend-icon="Checklist" :title="args.title" v-bind="args">
                               <h3>This is tab</h3>
                           </dd-accordion-tab>
                           
@@ -110,8 +111,8 @@ export const AppendIcon = {
         args,
       };
     },
-    template: ` <dd-accordion  :active="0" :multiple='false'>
-                          <dd-accordion-tab  append-icon="Checklist" :title="args.title" >
+    template: ` <dd-accordion  :active="0" :multiple='false' v-bind="args">
+                          <dd-accordion-tab  append-icon="Checklist" :title="args.title" v-bind="args">
                               <h3>This is tab</h3>
                           </dd-accordion-tab>
                          
@@ -135,13 +136,14 @@ export const Badge = {
         args,
       };
     },
-    template: `<dd-accordion :active="0">
+    template: `<dd-accordion :active="0" v-bind="args">
           <dd-accordion-tab
             title="Tab-1"
             prepend-icon="SquareDot"
             badge="Page $100.00"
             closable
             dot
+            v-bind="args"
           >
             <h3>This is tab 1</h3>
           </dd-accordion-tab>

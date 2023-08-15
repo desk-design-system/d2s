@@ -30,9 +30,7 @@
                 ? 'dd-text-gray-700 hover:dd-text-gray-700 !dd-bg-teal-50 hover:dd-bg-teal-100 dd-border-[1px] dd-border-teal-500 dd-outline-none'
                 : ''
             }`"
-            :style="[paginatedNumber === '...' ? 'border-top: 1px solid #D1D5DB !important;     border-bottom: 1px solid #D1D5DB !important;' : '']"
             @click.prevent="setCurrentPage(paginatedNumber)"
-            :disabled="paginatedNumber === '...'"
           >
             {{ paginatedNumber }}
           </dd-button>

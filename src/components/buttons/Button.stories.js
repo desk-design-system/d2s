@@ -18,7 +18,7 @@ export const Default = {
       const onClickMethod = () => action("clicked");
       return { args, onClickMethod };
     },
-    template: `<dd-button title="button text" />`,
+    template: `<dd-button title="button text" v-bind="args" />`,
   }),
   argTypes: {
     type: {
@@ -91,7 +91,7 @@ export const Text = {
     setup() {
       return { args };
     },
-    template: `<dd-button title="button text" content="textOnly" type="secondary" />`,
+    template: `<dd-button title="button text" content="textOnly" type="secondary" v-bind="args"/>`,
   }),
   argTypes: {
     title: {
@@ -164,7 +164,7 @@ export const leftIcon = {
     setup() {
       return { args };
     },
-    template: `<dd-button title="button text" content="leftIcon" type="secondary" icon="Circle"/>`,
+    template: `<dd-button title="button text" content="leftIcon" type="secondary" icon="Circle" v-bind="args"/>`,
   }),
   argTypes: {
     title: {
@@ -237,7 +237,7 @@ export const rightIcon = {
     setup() {
       return { args };
     },
-    template: `<dd-button title="button text" content="rightIcon" type="danger" icon="Circle"/>`,
+    template: `<dd-button title="button text" content="rightIcon" type="danger" icon="Circle" v-bind="args"/>`,
   }),
   argTypes: {
     title: {

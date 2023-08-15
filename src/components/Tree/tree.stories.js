@@ -2361,7 +2361,6 @@ Default.parameters = {
   docs: {
     source: {
       code: `<dd-tree
-      v-bind="args"
       :list="generatedArray"
     />`,
     },
@@ -2373,7 +2372,6 @@ Actions.parameters = {
     source: {
       code: `<div> 
       <dd-tree
-        v-bind="args"
         :list="generatedArray"
         :buttons="buttons"
         :values="values"
@@ -2389,7 +2387,6 @@ Badge.parameters = {
     source: {
       code: `<div> 
       <dd-tree
-        v-bind="args"
         :list="generatedArray"
         :buttons="buttons"
         :values="values"
@@ -2406,7 +2403,6 @@ Dropdown.parameters = {
     source: {
       code: `<div> 
       <dd-tree
-        v-bind="args"
         :list="generatedArray"
         :buttons="buttons"
         :values="values"
@@ -2425,7 +2421,6 @@ customContent.parameters = {
     source: {
       code: `<div> 
       <dd-tree
-        v-bind="args"
         :list="generatedArray"
         :buttons="buttons"
         :values="values"
@@ -2446,7 +2441,6 @@ checkbox.parameters = {
     source: {
       code: `<div> 
       <dd-tree
-        v-bind="args"
         :list="generatedArray"
         :buttons="buttons"
         :values="values"

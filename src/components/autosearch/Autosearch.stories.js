@@ -56,7 +56,7 @@ export const Default = {
         query,
       };
     },
-    template: `<dd-autoSearch v-model="selected"  :options="filteredData" @searchQuery="query = $event"  />`,
+    template: `<dd-autoSearch v-model="selected"  :options="filteredData" @searchQuery="query = $event" v-bind="args" />`,
   }),
   argTypes: {
     label: {

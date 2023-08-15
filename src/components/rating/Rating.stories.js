@@ -18,7 +18,7 @@ export const XS = {
         args,
       };
     },
-    template: `<dd-rating productRating="3" size="xs" />`,
+    template: `<dd-rating productRating="3" size="xs" v-bind="args" />`,
   }),
   argTypes: {
     productRating: {
@@ -54,7 +54,7 @@ export const SM = {
         args,
       };
     },
-    template: `<dd-rating productRating="3" size="sm" />`,
+    template: `<dd-rating productRating="3" size="sm" v-bind="args" />`,
   }),
   argTypes: {
     productRating: {
@@ -97,7 +97,7 @@ export const BASE = {
         args,
       };
     },
-    template: `<dd-rating productRating="3" size="base" />`,
+    template: `<dd-rating productRating="3" size="base" v-bind="args" />`,
   }),
   argTypes: {
     productRating: {
