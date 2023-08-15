@@ -125,7 +125,7 @@ export default {
             " " +
             addAnimation +
             " " +
-            "after:-dd-right-1 after:dd-top-2 -dd-left-20 dd-top-0 "
+            "after:-dd-right-1 after:dd-top-2 dd-right-24 dd-top-0 "
           );
 
         case "left":
@@ -134,7 +134,7 @@ export default {
             " " +
             addAnimation +
             " " +
-            "after:-dd-right-1 after:dd-top-3 -dd-left-20 dd-top-0 "
+            "after:-dd-right-1 after:dd-top-3 dd-right-24 dd-top-0 "
           );
 
         case "left-end":
@@ -143,7 +143,7 @@ export default {
             " " +
             addAnimation +
             " " +
-            "after:-dd-right-1 after:dd-top-4 -dd-left-20 dd-top-0 "
+            "after:-dd-right-1 after:dd-top-4 dd-right-24 dd-top-0 "
           );
 
         case "right-start":
