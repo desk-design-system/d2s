@@ -18,7 +18,7 @@ export const Default = {
         args,
       };
     },
-    template: `<dd-navigation label="Side Navigation with Slots" />`,
+    template: `<dd-navigation label="Side Navigation with Slots" v-bind="args" />`,
   }),
   argTypes: {
     label: {
@@ -108,7 +108,7 @@ export const PrefixIcon = {
         args,
       };
     },
-    template: `<div class="dd-w-[15rem]"> <dd-navigation label="Side Navigation with Slots" prefix prefixIcon="Circle" /> </div>`,
+    template: `<div class="dd-w-[15rem]"> <dd-navigation label="Side Navigation with Slots" prefix prefixIcon="Circle" v-bind="args" /> </div>`,
   }),
   argTypes: {
     label: {
@@ -199,7 +199,7 @@ export const suffixIcon = {
         args,
       };
     },
-    template: `<div class="dd-w-[15rem]"> <dd-navigation label="Side Navigation with Slots" suffix suffixIcon="Circle" /> </div>`,
+    template: `<div class="dd-w-[15rem]"> <dd-navigation label="Side Navigation with Slots" suffix suffixIcon="Circle" v-bind="args" /> </div>`,
   }),
   argTypes: {
     label: {
@@ -289,7 +289,7 @@ export const Active = {
         args,
       };
     },
-    template: `<div class="dd-w-[15rem]"> <dd-navigation label="Side Navigation with Slots" active /> </div>`,
+    template: `<div class="dd-w-[15rem]"> <dd-navigation label="Side Navigation with Slots" active v-bind="args" /> </div>`,
   }),
   argTypes: {
     label: {
@@ -380,7 +380,7 @@ export const Disabled = {
         args,
       };
     },
-    template: `<div class="dd-w-[15rem]"> <dd-navigation label="Side Navigation with Slots" disabled /> </div>`,
+    template: `<div class="dd-w-[15rem]"> <dd-navigation label="Side Navigation with Slots" disabled v-bind="args" /> </div>`,
   }),
   argTypes: {
     label: {
@@ -471,7 +471,7 @@ export const Featured = {
         args,
       };
     },
-    template: `<div class="dd-w-[15rem]"> <dd-navigation label="Side Navigation with Slots" prefix  prefixIcon="Circle" suffix suffixIcon="Circle" active /> </div>`,
+    template: `<div class="dd-w-[15rem]"> <dd-navigation label="Side Navigation with Slots" prefix  prefixIcon="Circle" suffix suffixIcon="Circle" active v-bind="args" /> </div>`,
   }),
   argTypes: {
     label: {

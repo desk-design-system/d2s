@@ -15,14 +15,14 @@ export const Default = {
       const selected = ref("");
       return { selected, args };
     },
-    template: `<dd-checkbox v-model="selected" label="CheckBox Label" /> `,
+    template: `<dd-checkbox v-model="selected" label="CheckBox Label" v-bind="args" /> `,
   }),
   argTypes: {
     label: {
       description: "Change label value as per the requirement",
       table: {
         defaultValue: {
-          summary: "",
+          summary: "test",
         },
       },
     },

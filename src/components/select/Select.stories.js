@@ -42,7 +42,7 @@ export const Default = {
         onClickMethod,
       };
     },
-    template: `<ddSelect v-model="selected" :options="optionsArr" /> `,
+    template: `<ddSelect v-model="selected" :options="optionsArr" v-bind="args" /> `,
   }),
   argTypes: {
     placeholder: {

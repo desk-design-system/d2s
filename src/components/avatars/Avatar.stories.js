@@ -16,7 +16,7 @@ export const Default = {
       const onClickMethod = () => action("clicked");
       return { args, onClickMethod };
     },
-    template: `<dd-avatar srcLink="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg" />`,
+    template: `<dd-avatar srcLink="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg" v-bind="args" />`,
   }),
   argTypes: {
     color: {
@@ -53,8 +53,8 @@ export const Default = {
     },
     size: {
       control: { type: "select" },
-      options: ["mini", "small", "medium", "large", "xLarge"],
-      description: "Accepted value mini / small / medium / large / xLarge ",
+      options: ["16", "24", "28", "32", "40", "48", "56"],
+      description: "Accepted value 16 / 24 / 28 / 32 / 40 / 48 / 56 only",
       table: {
         defaultValue: {
           summary: "medium",
@@ -82,4 +82,3 @@ Default.parameters = {
     },
   },
 };
-

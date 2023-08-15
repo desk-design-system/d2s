@@ -49,7 +49,7 @@
         ]"
         v-model="inputModelValue"
         :type="inputType"
-        class="!dd-block !dd-border-solid focus:!dd-border-teal-600 !dd-border-gray-300 !dd-w-full !dd-rounded-md sm:!dd-text-sm focus:ring-2 focus:dd-ring-inset dd-shadow-sm"
+        class="!dd-block !dd-border-solid focus:!dd-border-teal-600 !dd-border-gray-300 !dd-w-full !dd-rounded-md sm:!dd-text-sm focus:ring-2 focus:dd-ring-inset dd-shadow-sm focus:dd-shadow-sm focus-within:dd-shadow-sm"
         :placeholder="placeholder"
       />
       <!-- $slots.suffix -->
@@ -78,22 +78,28 @@
         <div
           :class="[
             successButton || closeButton
-              ? 'dd-h-8 dd-w-8 dd-gap-1 dd-flex dd-items-center dd-justify-center dd-relative dd-right-2.5'
+              ? '!dd-h-8 !dd-w-8 dd-gap-1 dd-flex dd-items-center dd-justify-center dd-relative dd-right-2.5'
               : '',
           ]"
         >
           <dd-button
             v-if="successButton"
-            color="white"
+            content="iconOnly"
+            type="secondary"
             size="xs"
-            class="!dd-p-1"
+            class="!dd-py-1 !dd-px-[3px] dd-text-gray-500"
+            :icon="successIcon"
             @click="emits('success')"
-          >
-            <svgIcon :icon="successIcon" size="16" class="dd-mb-1" />
-          </dd-button>
-          <dd-button v-if="closeButton" color="white" size="xs" class="!dd-p-1" @click="emits('close')">
-            <svgIcon :icon="closeIcon" size="16" class="dd-mb-1" />
-          </dd-button>
+          />
+          <dd-button
+            v-if="closeButton"
+            content="iconOnly"
+            type="secondary"
+            :icon="closeIcon"
+            size="xs"
+            class="!dd-py-1 !dd-px-[3px] dd-text-gray-500"
+            @click="emits('close')"
+          />
         </div>
       </div>
     </div>

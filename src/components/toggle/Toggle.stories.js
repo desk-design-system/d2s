@@ -16,7 +16,7 @@ export const Primary = {
       const switchState = ref(false);
       return { switchState, args, onClickMethod };
     },
-    template: `<dd-toggle v-model="switchState" size="base" />`,
+    template: `<dd-toggle v-model="switchState" size="base" v-bind="args"/>`,
   }),
   argTypes: {
     size: {
@@ -49,7 +49,7 @@ export const Icon = {
       const switchState = ref(false);
       return { switchState, args, onClickMethod };
     },
-    template: `<dd-toggle v-model="switchState" size="base" showIcon />`,
+    template: `<dd-toggle v-model="switchState" size="base" showIcon v-bind="args"/>`,
   }),
   argTypes: {
     size: {

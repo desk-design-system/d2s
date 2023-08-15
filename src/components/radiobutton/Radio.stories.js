@@ -33,7 +33,7 @@ export const Default = {
       ]);
       return { value, selected, args };
     },
-    template: `<dd-radio v-model="selected"  :options="value"  />`,
+    template: `<dd-radio v-model="selected"  :options="value" v-bind="args" />`,
   }),
   argTypes: {
     options: {

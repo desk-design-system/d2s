@@ -44,6 +44,7 @@ export const Default = {
       :limit="10"
       :offset="offset"
       @fetch-data="getData"
+      v-bind="args"
     />`,
   }),
   args: {

@@ -17,7 +17,7 @@ export const Default = {
       const selected = ref("");
       return { selected, args, onClickMethod };
     },
-    template: `<dd-textarea v-model="selected" />`,
+    template: `<dd-textarea v-model="selected" v-bind="args"/>`,
   }),
   argTypes: {
     label: {

@@ -1,11 +1,28 @@
 <template>
-  <div class="dd-base dd-flex dd-items-center">
-    <input :disabled="disabled" :indeterminate="selectedId.length > 0 ? indeterminate : null" :checked="checked"
-      :value="value" v-bind="$attrs" :id="id" v-model="inputModelValue" type="checkbox"
-      :class="[disabled ? ' !dd-cursor-not-allowed !dd-border-gray-200 !dd-text-gray-400' : 'dd-cursor-pointer !dd-border-gray-300 !dd-text-teal-600']"
-      class=" !dd-h-4 !dd-w-4 !dd-rounded  !dd-border-solid  focus:!dd-ring-teal-500 " @click="getChecked" />
+  <div class="dd-base dd-flex dd-items-center dd-p-[2px] !dd-h-5">
+    <input
+      :disabled="disabled"
+      :indeterminate="selectedId.length > 0 ? indeterminate : null"
+      :checked="checked"
+      :value="value"
+      v-bind="$attrs"
+      :id="id"
+      v-model="inputModelValue"
+      type="checkbox"
+      :class="[
+        disabled
+          ? ' !dd-cursor-not-allowed !dd-border-gray-200 !dd-text-gray-400'
+          : 'dd-cursor-pointer !dd-text-teal-600',
+      ]"
+      class="!dd-h-4 !dd-w-4 !dd-rounded !dd-border-solid focus:!dd-ring-teal-500"
+      style="border-color: rgb(209, 213, 219);"
+      @click="getChecked"
+    />
     <slot name="label">
-      <label :class="[disabled ? '!dd-text-gray-300' : '!dd-text-gray-700']" class="!dd-ml-3 !dd-block !dd-text-sm">
+      <label
+        :class="[disabled ? '!dd-text-gray-300' : '!dd-text-gray-700']"
+        class="!dd-ml-2 !dd-block !dd-text-sm"
+      >
         {{ label }}
       </label>
     </slot>
@@ -13,8 +30,13 @@
 </template>
 
 <script setup>
-import { computed } from "vue"
-const emits = defineEmits(['update:modelValue', 'change', 'click', 'indeterminate'])
+import { computed } from "vue";
+const emits = defineEmits([
+  "update:modelValue",
+  "change",
+  "click",
+  "indeterminate",
+]);
 const props = defineProps({
   label: {
     type: String,
@@ -30,7 +52,7 @@ const props = defineProps({
   },
   disabled: {
     type: Boolean,
-    default: false
+    default: false,
   },
   checked: {
     type: Boolean,
@@ -54,32 +76,31 @@ const props = defineProps({
       id: "1",
     }),
   },
-})
+});
 
 const inputModelValue = computed({
   get() {
-    return props.modelValue
+    return props.modelValue;
   },
   set(val) {
-    emits("update:modelValue", val)
-    emits("change", val)
-  }
-})
+    emits("update:modelValue", val);
+    emits("change", val);
+  },
+});
 
 function getChecked() {
-  emits("click")
+  emits("click");
 }
 
 const indeterminate = computed(() => {
   if (inputModelValue.value === null || props.modelValue == true) {
     return false;
   } else {
-    const allChecked = props.rows.every(row => row.disabled);
-    emits('indeterminate')
+    const allChecked = props.rows.every((row) => row.disabled);
+    emits("indeterminate");
     return !allChecked;
   }
 });
-
 </script>
 
 <style lang="scss" scoped></style>

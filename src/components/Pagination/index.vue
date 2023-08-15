@@ -2,7 +2,7 @@
   <div class="dd-flex dd-justify-center dd-items-center dd-w-fit">
     <dd-button
       class="dd-rounded-tl-lg dd-rounded-tr-none dd-rounded-bl-lg dd-rounded-br-none"
-      color="white"
+      type="secondary"
       :disable="currentPage === 1"
       @click="moveToPreviousPage"
     >
@@ -10,7 +10,7 @@
       <svgIcon
         class="dd-flex dd-items-center"
         icon="ChevronLeft"
-        color="white"
+        type="secondary"
         size="12"
       />
     </dd-button>
@@ -24,14 +24,13 @@
         >
           <dd-button
             class="dd-w-10 dd-h-8 dd-text-center dd-flex dd-items-center dd-justify-center dd-rounded-none !dd-ring-0 dd-border-gray-300 dd-border-t dd-border-b dd-border-r"
-            color="white"
+            type="secondary"
             :class="`${
               Number(currentPage) === Number(paginatedNumber)
                 ? 'dd-text-gray-700 hover:dd-text-gray-700 !dd-bg-teal-50 hover:dd-bg-teal-100 dd-border-[1px] dd-border-teal-500 dd-outline-none'
                 : ''
             }`"
-            @click.prevent="setCurrentPage(Number(paginatedNumber))"
-            :disabled="paginatedNumber === '...'"
+            @click.prevent="setCurrentPage(paginatedNumber)"
           >
             {{ paginatedNumber }}
           </dd-button>
@@ -40,14 +39,14 @@
     </div>
     <dd-button
       class="dd-rounded-tl-none dd-rounded-br-lg dd-rounded-bl-none"
-      color="white"
+      type="secondary"
       :disable="currentPage === numberOfPages"
       @click="moveToNextPage"
     >
       <span class="dd-sr-only">Next</span>
       <svgIcon
         class="dd-flex dd-items-center"
-        color="white"
+        type="secondary"
         icon="ChevronRight"
         size="12"
       />
@@ -78,6 +77,10 @@ const props = defineProps({
     type: Number,
     default: 0,
   },
+  disabled: {
+    type: Boolean,
+    default: false,
+  }
 });
 
 onBeforeUpdate(() => {
@@ -138,6 +141,9 @@ const fetchData = () => {
 };
 
 const setCurrentPage = (currentPageValue) => {
+  if(currentPageValue === '...') {
+    return;
+  }
   pageOffset.value = props.limit * (currentPageValue - 1);
   pageOffset.value = props.limit;
   currentPage.value = currentPageValue;

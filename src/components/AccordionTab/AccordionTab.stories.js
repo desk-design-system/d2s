@@ -3,7 +3,7 @@ import DdAccordionTab from "./index.vue";
 
 // More on default export: https://storybook.js.org/docs/vue/writing-stories/introduction#default-export
 export default {
-  title: "Atoms/AccordionTab",
+  title: "Atoms/Accordion",
   component: DdAccordion,
 };
 
@@ -19,10 +19,11 @@ export const Default = {
         args,
       };
     },
-    template: `<dd-accordion :active="0">
+    template: `<dd-accordion :active="0" v-bind="args">
         <dd-accordion-tab
           title="Tab-1"
           prepend-icon="SquareDot"
+          v-bind="args"
         >
           <h3>This is tab 1</h3>
         </dd-accordion-tab>
@@ -44,8 +45,8 @@ export const Default = {
       description: "Using DdBadge with same name props",
       defaultValue: "",
     },
-    gradient: {
-      description: "use any tailwind color for gradient",
+    color: {
+      description: "use any tailwind color for color",
     },
     "#append": {
       description: "Append slot.",
@@ -69,8 +70,8 @@ export const PrependIcon = {
         args,
       };
     },
-    template: ` <dd-accordion  :active="0" :multiple='false'>
-                          <dd-accordion-tab  prepend-icon="Checklist" :title="args.title" >
+    template: ` <dd-accordion  :active="0" :multiple='false' v-bind="args">
+                          <dd-accordion-tab  prepend-icon="Checklist" :title="args.title" v-bind="args">
                               <h3>This is tab</h3>
                           </dd-accordion-tab>
                           
@@ -110,8 +111,8 @@ export const AppendIcon = {
         args,
       };
     },
-    template: ` <dd-accordion  :active="0" :multiple='false'>
-                          <dd-accordion-tab  append-icon="Checklist" :title="args.title" >
+    template: ` <dd-accordion  :active="0" :multiple='false' v-bind="args">
+                          <dd-accordion-tab  append-icon="Checklist" :title="args.title" v-bind="args">
                               <h3>This is tab</h3>
                           </dd-accordion-tab>
                          
@@ -135,13 +136,14 @@ export const Badge = {
         args,
       };
     },
-    template: `<dd-accordion :active="0">
+    template: `<dd-accordion :active="0" v-bind="args">
           <dd-accordion-tab
             title="Tab-1"
             prepend-icon="SquareDot"
             badge="Page $100.00"
             closable
             dot
+            v-bind="args"
           >
             <h3>This is tab 1</h3>
           </dd-accordion-tab>
@@ -175,7 +177,7 @@ export const Badge = {
   },
 };
 
-export const Gradient = {
+export const Color = {
   render: (args) => ({
     components: {
       DdAccordion,
@@ -186,13 +188,14 @@ export const Gradient = {
         args,
       };
     },
-    template: `<dd-accordion :active="1" gradient="blue">
+    template: `<dd-accordion :active="1" color="red">
           <dd-accordion-tab
             title="Tab-1"
             prepend-icon="SquareDot"
             badge="Page $100.00"
             closable
             dot
+            color="fuchsia"
           >
             <h3>This is tab 1</h3>
           </dd-accordion-tab>
@@ -283,17 +286,21 @@ Badge.parameters = {
   },
 };
 
-Gradient.parameters = {
+Color.parameters = {
   docs: {
     source: {
-      code: `<dd-accordion :active="1" gradient="blue">
-        <dd-accordion-tab
-          title="Tab-1"
-          prepend-icon="SquareDot"
-        >
-          <h3>This is tab 1</h3>
-        </dd-accordion-tab>
-      </dd-accordion>`,
+      code: `<dd-accordion :active="1" color="blue">
+      <dd-accordion-tab
+        title="Tab-1"
+        prepend-icon="SquareDot"
+        badge="Page $100.00"
+        closable
+        dot
+        color="fuchsia"
+      >
+        <h3>This is tab 1</h3>
+      </dd-accordion-tab>
+    </dd-accordion>`,
     },
   },
 };

@@ -15,7 +15,7 @@ export const Warning = {
         args,
       };
     },
-    template: `<dd-alert  type="warning" title="warning alert" />`,
+    template: `<dd-alert  type="warning" title="warning alert" v-bind="args" />`,
   }),
   argTypes: {
     type: {
@@ -71,7 +71,7 @@ export const Success = {
         args,
       };
     },
-    template: `<dd-alert  type="success" title="success alert" />`,
+    template: `<dd-alert  type="success" title="success alert" v-bind="args"/>`,
   }),
   argTypes: {
     type: {
@@ -127,7 +127,7 @@ export const Danger = {
         args,
       };
     },
-    template: `<dd-alert  type="danger" title="danger alert" />`,
+    template: `<dd-alert  type="danger" title="danger alert" v-bind="args"/>`,
   }),
   argTypes: {
     type: {
@@ -183,7 +183,7 @@ export const Info = {
         args,
       };
     },
-    template: `<dd-alert  type="info" title="info alert" />`,
+    template: `<dd-alert  type="info" title="info alert" v-bind="args"/>`,
   }),
   argTypes: {
     type: {

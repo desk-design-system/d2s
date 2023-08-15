@@ -2,7 +2,7 @@ import { ref } from "vue";
 import DdSetting from "./index.vue";
 
 export default {
-  title: "Atoms/Settings",
+  title: "Atoms/Inner Page Menu",
   component: DdSetting,
   // More on argTypes: https://storybook.js.org/docs/vue/api/argtypes
 };
@@ -127,7 +127,7 @@ export const Default = {
         settings,
       };
     },
-    template: ` <dd-setting :settings="settings" />`,
+    template: ` <dd-setting :settings="settings" v-bind="args" />`,
   }),
   argTypes: {
     settings: {

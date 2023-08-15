@@ -19,7 +19,7 @@ export const Default = {
       const show = ref(true);
       return { args, show, onClickMethod };
     },
-    template: `<dd-drawer @close="onClickMethod" v-model="show" title="Header" size="30" />`,
+    template: `<dd-drawer @close="onClickMethod" v-model="show" title="Header" size="30" v-bind="args" />`,
   }),
   argTypes: {
     title: {
@@ -102,7 +102,7 @@ export const PrimaryHeader = {
       const show = ref(true);
       return { args, show, onClickMethod };
     },
-    template: `<dd-drawer @close="onClickMethod" v-model="show" title="Header" size="30" primaryHeader="true" footer="false" />`,
+    template: `<dd-drawer @close="onClickMethod" v-model="show" title="Header" size="30" primaryHeader="true" footer="false" v-bind="args" />`,
   }),
   argTypes: {
     title: {
@@ -185,7 +185,7 @@ export const LeftDrawer = {
       const show = ref(true);
       return { args, show, onClickMethod };
     },
-    template: `<dd-drawer @close="onClickMethod" v-model="show" title="Header" size="30" primaryHeader="true" footer="true" position="left" />`,
+    template: `<dd-drawer @close="onClickMethod" v-model="show" title="Header" size="30" primaryHeader="true" footer="true" position="left" v-bind="args" />`,
   }),
   argTypes: {
     title: {
@@ -268,7 +268,7 @@ export const Footer = {
       const show = ref(true);
       return { args, show, onClickMethod };
     },
-    template: `<dd-drawer @close="onClickMethod" v-model="show" title="Header" footer="true" size="40" />`,
+    template: `<dd-drawer @close="onClickMethod" v-model="show" title="Header" footer="true" size="40" v-bind="args" />`,
   }),
   argTypes: {
     title: {

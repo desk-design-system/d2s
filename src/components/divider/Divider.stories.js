@@ -14,7 +14,7 @@ export const Default = {
         args,
       };
     },
-    template: `<dd-divider  /> `,
+    template: `<dd-divider v-bind="args" /> `,
   }),
   argTypes: {
     title: {
@@ -48,7 +48,7 @@ export const Title = {
         args,
       };
     },
-    template: `<dd-divider title="Content" /> `,
+    template: `<dd-divider title="Content" v-bind="args" /> `,
   }),
   argTypes: {
     title: {
@@ -82,7 +82,7 @@ export const TitleLeft = {
         args,
       };
     },
-    template: `<dd-divider title="Content" placement="start" /> `,
+    template: `<dd-divider title="Content" placement="start" v-bind="args" /> `,
   }),
   argTypes: {
     title: {

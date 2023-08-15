@@ -15,7 +15,7 @@ export const Default = {
       const selected = ref("");
       return { selected, args, onClickMethod };
     },
-    template: `<dd-tel-input v-model="selected" />`,
+    template: `<dd-tel-input v-model="selected" v-bind="args" />`,
   }),
   argTypes: {
     config: {

@@ -10,7 +10,7 @@
       </div>
     </div>
     <div v-if="isButton" class="dd-flex dd-items-center">
-      <dd-button @click="$emit('onCancel')" size="base" color="white" :title="cancelLabel" class="dd-mr-4" />
+      <dd-button @click="$emit('onCancel')" size="base" type="secondary" :title="cancelLabel" class="dd-mr-4" />
       <dd-button @click="$emit('onSave')" size="base" :title="saveLabel" />
     </div>
   </div>

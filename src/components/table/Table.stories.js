@@ -288,7 +288,7 @@ export const Default = {
         values,
       };
     },
-    template: `<dd-table :rows="rows" :columns="columns" :buttons="buttons" :Actions="Actions" :values="values" />`,
+    template: `<dd-table :rows="rows" :columns="columns" :buttons="buttons" :Actions="Actions" :values="values" v-bind="args" />`,
   }),
   argTypes: {
     rows: {
@@ -1108,7 +1108,7 @@ export const DragDrop = {
     template: `
     <dd-table :rows="rows" :columns="columnVal" :buttons="buttons" :Actions="Actions" :values="values" footer checkBoxProp
         fixedHeight rowKey="id" hoveringRow lastCell fixed actionHeader emptyState actionsPanel sortIcon settingbarIcon
-        searchIcon @updateSettings="updateSettings" dragDrop />`,
+        searchIcon @updateSettings="updateSettings" dragDrop v-bind="args" />`,
   }),
   argTypes: {
     rows: {
@@ -1744,7 +1744,7 @@ export const stickySide = {
         values,
       };
     },
-    template: `<dd-table :rows="rows" :columns="columns" :buttons="buttons" :Actions="Actions" :values="values" fixed footer rowKey="id" hoveringRow checkBoxProp settingbarIcon searchIcon lastCell actionHeader emptyState sortIcon actionsPanel />`,
+    template: `<dd-table :rows="rows" :columns="columns" :buttons="buttons" :Actions="Actions" :values="values" fixed footer rowKey="id" hoveringRow checkBoxProp settingbarIcon searchIcon lastCell actionHeader emptyState sortIcon actionsPanel v-bind="args" />`,
   }),
   argTypes: {
     rows: {
@@ -2331,7 +2331,7 @@ export const noHeaderAction = {
         values,
       };
     },
-    template: `<dd-table :rows="rows" :columns="columns" :buttons="buttons" :Actions="Actions" :values="values" fixed footer rowKey="id" hoveringRow checkBoxProp settingbarIcon searchIcon lastCell emptyState sortIcon actionsPanel />`,
+    template: `<dd-table :rows="rows" :columns="columns" :buttons="buttons" :Actions="Actions" :values="values" fixed footer rowKey="id" hoveringRow checkBoxProp settingbarIcon searchIcon lastCell emptyState sortIcon actionsPanel v-bind="args" />`,
   }),
   argTypes: {
     rows: {
@@ -2910,7 +2910,7 @@ export const noHoveringRow = {
         values,
       };
     },
-    template: `<dd-table :rows="rows" :columns="columns" :buttons="buttons" :Actions="Actions" :values="values" fixed footer rowKey="id" hoveringRow checkBoxProp settingbarIcon searchIcon lastCell emptyState sortIcon actionsPanel />`,
+    template: `<dd-table :rows="rows" :columns="columns" :buttons="buttons" :Actions="Actions" :values="values" fixed footer rowKey="id" hoveringRow checkBoxProp settingbarIcon searchIcon lastCell emptyState sortIcon actionsPanel v-bind="args" />`,
   }),
   argTypes: {
     rows: {
@@ -3489,7 +3489,7 @@ export const noSortingIcon = {
         values,
       };
     },
-    template: `<dd-table :rows="rows" :columns="columns" :buttons="buttons" :Actions="Actions" :values="values" fixed footer rowKey="id" hoveringRow checkBoxProp settingbarIcon searchIcon lastCell emptyState actionsPanel />`,
+    template: `<dd-table :rows="rows" :columns="columns" :buttons="buttons" :Actions="Actions" :values="values" fixed footer rowKey="id" hoveringRow checkBoxProp settingbarIcon searchIcon lastCell emptyState actionsPanel v-bind="args" />`,
   }),
   argTypes: {
     rows: {
@@ -4068,7 +4068,7 @@ export const removeFooter = {
         values,
       };
     },
-    template: `<dd-table :rows="rows" :columns="columns" :buttons="buttons" :Actions="Actions" :values="values" fixed rowKey="id" hoveringRow checkBoxProp settingbarIcon searchIcon lastCell emptyState actionsPanel />`,
+    template: `<dd-table :rows="rows" :columns="columns" :buttons="buttons" :Actions="Actions" :values="values" fixed rowKey="id" hoveringRow checkBoxProp settingbarIcon searchIcon lastCell emptyState actionsPanel v-bind="args" />`,
   }),
   argTypes: {
     rows: {

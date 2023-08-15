@@ -17,7 +17,7 @@ export const Default = {
         args,
       };
     },
-    template: `<typography title="The face of the moon in shadow." class="dd-text-xl"  />`,
+    template: `<typography title="The face of the moon in shadow." class="dd-text-xl" v-bind="args" />`,
   }),
   argTypes: {
     title: {
