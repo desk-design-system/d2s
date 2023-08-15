@@ -13,7 +13,9 @@ export const ToolTip = {
         args,
       };
     },
-    template: `<ddTooltip toolTipPosition="top" toolTipText="i'm Tooltip"> Mouse on me </ddTooltip>`,
+    template: `<div class="dd-flex dd-items-center dd-justify-center"> 
+      <ddTooltip toolTipPosition="right" toolTipText="i'm Tooltip"> Hover on me </ddTooltip>
+    </div>`,
   }),
   args: {
   },
@@ -22,7 +24,9 @@ export const ToolTip = {
 ToolTip.parameters = {
   docs: {
     source: {
-      code: `<ddTooltip toolTipPosition="top" toolTipText="i'm Tooltip"> Mouse on me </ddTooltip>`,
+      code: `<div class="dd-flex dd-items-center dd-justify-center"> 
+        <ddTooltip toolTipPosition="right" toolTipText="i'm Tooltip"> Hover on me </ddTooltip>
+      </div>`,
     },
   },
 };

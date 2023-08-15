@@ -1,7 +1,7 @@
 <!-- This example requires Tailwind CSS v2.0+ -->
 <template>
   <TransitionRoot as="template" :show="inputModelValue">
-    <Dialog as="div" class="dd-relative dd-z-10" @close="close()">
+    <Dialog as="div" class="dd-relative dd-z-10 custom-z-index" @close="close()">
       <TransitionChild as="template" enter="dd-ease-out dd-duration-300" enter-from="dd-opacity-0"
         enter-to="dd-opacity-100" leave="dd-ease-in dd-duration-200" leave-from="dd-opacity-100"
         leave-to="dd-opacity-0">
@@ -17,7 +17,7 @@
             leave-from="dd-opacity-100 dd-translate-y-0 sm:dd-scale-100"
             leave-to="dd-opacity-0 dd-translate-y-4 sm:dd-translate-y-0 sm:dd-scale-95">
             <DialogPanel :style="{ 'width': modalWidth }"
-              class="dd-relative dd-bg-white dd-rounded-lg   dd-overflow-hidden dd-shadow-xl dd-transform dd-transition-all ">
+              class="dd-relative dd-bg-white dd-rounded-lg custom-dialog-overflow dd-overflow-hidden dd-shadow-xl dd-transform dd-transition-all ">
               <div v-if="header" :class="headerClass" class="dd-p-6 dd-pb-3">
                 <slot name="header">
                   <div class="dd-flex dd-items-start dd-justify-between">

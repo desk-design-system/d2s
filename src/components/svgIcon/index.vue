@@ -14,6 +14,7 @@ import {
   defineAsyncComponent,
   watch,
   ref,
+  shallowRef,
   watchEffect,
 } from "vue";
 
@@ -33,7 +34,7 @@ const props = defineProps({
   },
 });
 
-const myIcon = ref(null);
+const myIcon = shallowRef(null);
 
 watchEffect(async () => {
   const iconProp = ref(props.icon);
