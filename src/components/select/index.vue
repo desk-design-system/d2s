@@ -25,7 +25,7 @@
           <ChevronDownIcon @click="setDropDown" class="dd-h-5 dd-w-5 dd-text-gray-400" aria-hidden="true" />
         </span>
           <ComboboxOptions v-if="filteredOptions.length > 0" :static="showDropdown" :class="listClass"
-            class="dd-absolute dd-z-10 dd-mt-1 dd-w-full dd-bg-white dd-shadow-lg dd-max-h-60 dd-rounded-md dd-py-1 dd-text-base dd-ring-1 dd-ring-black dd-ring-opacity-5 dd-overflow-auto focus:dd-outline-none sm:dd-text-sm">
+            class="dd-absolute dd-z-10 dd-mt-1 dd-w-full dd-bg-white dd-shadow-lg dd-max-h-60 dd-rounded-md dd-py-1 dd-text-base dd-ring-1 dd-ring-black dd-ring-opacity-5 custom-select-overflow dd-overflow-auto focus:dd-outline-none sm:dd-text-sm">
             <ComboboxOption as="template" v-for="item in filteredOptions" :key="item[props.defaultProps.id]"
               :value="item[props.defaultProps.value]" v-slot="{ active, selected }">
               <slot name="items" :isSelected="selected ??
