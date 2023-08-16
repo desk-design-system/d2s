@@ -1,6 +1,6 @@
 <template>
   <nav class="flex dd-my-3" aria-label="Breadcrumb">
-    <ol :class="[shadow ? 'dd-shadow dd-bg-white' : '', full ? 'dd-w-full' : 'dd-w-fit']" role="list" class="dd-flex dd-space-x-4 dd-rounded-md  dd-px-6">
+    <ol :class="[shadow ? 'dd-shadow dd-bg-white' : '', full ? 'dd-w-full' : 'dd-w-fit']" role="list" class="dd-flex dd-rounded-md dd-gap-4">
       <li v-for="(item, index ) in items" :key="index" class="dd-flex">
         <div class="dd-flex dd-items-center">
           <component v-if="(index +1) != items.length" v-bind="matchProperties(item)"
