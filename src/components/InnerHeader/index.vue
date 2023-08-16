@@ -9,9 +9,9 @@
         <p class="dd-text-sm dd-text-gray-500">{{ subTitle }}</p>
       </div>
     </div>
-    <div v-if="isButton" class="dd-flex dd-items-center">
-      <dd-button @click="$emit('onCancel')" size="base" type="secondary" :title="cancelLabel" class="dd-mr-4" />
-      <dd-button @click="$emit('onSave')" size="base" :title="saveLabel" />
+    <div v-if="isButton" class="dd-flex dd-items-center dd-gap-4">
+      <dd-button @click="$emit('onCancel')" size="base" content="textOnly" type="secondary" :title="cancelLabel" :loader="cancelLoader" />
+      <dd-button @click="$emit('onSave')" size="base" content="textOnly" type="primary" :title="saveLabel" :loader="saveLoader" />
     </div>
   </div>
 </template>
@@ -36,6 +36,14 @@ const props = defineProps( {
   cancelLabel: {
     type: String,
     default: "Cancel",
+  },
+  saveLoader: {
+    type: Boolean,
+    default: false,
+  },
+  cancelLoader: {
+    type: Boolean,
+    default: false,
   },
   isButton: {
     type: Boolean,

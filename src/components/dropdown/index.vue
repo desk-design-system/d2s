@@ -79,7 +79,7 @@ const props = defineProps({
   },
   avatarSize: {
     type: String,
-    default: "medium",
+    default: "32",
   },
   avatarLink: {
     type: String,
