@@ -11,7 +11,7 @@
       >
     </div>
     <div class="md:dd-hidden dd-p-3">
-        <ddButton class="dd-text-gray-500" color="white">
+        <ddButton class="dd-text-gray-500" type="secondary">
           <svgIcon class="-dd-mb-[3px]" icon="AlignLeft" size="12" />
         </ddButton>
       </div>
@@ -23,8 +23,8 @@
       </div> -->
       <dd-drop
         type="avatar"
-        placement="right"
-        avatarSize="small"
+        placement="left"
+        avatarSize="32"
         @command="command"
         :avatarLink="props.srcLink"
         :options="props.options"

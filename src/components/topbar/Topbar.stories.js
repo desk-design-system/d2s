@@ -14,7 +14,7 @@ const Template = (args) => ({
     return { args };
   },
   // And then the `args` are bound to your component with `v-bind="args"`
-  template: `<ddTopbar v-bind="args"> </ddTopbar>`,
+  template: `<div class="dd-relative -dd-top-5"><ddTopbar v-bind="args" class="dd-absolute"> </ddTopbar></div>`,
 });
 
 export const Default = Template.bind({});

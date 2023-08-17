@@ -6,7 +6,7 @@
       </slot>
     </div>
     <span class="dd-text-sm  dd-text-left dd-text-gray-800" :class="[getActiveState, getDisabledState]">{{ label }}</span>
-    <div v-if="suffix" class="dd-w-5 dd-h-5 dd-flex dd-items-center dd-cursor-pointer dd-ml-1.5" :class="[getActiveState, getDisabledState]">
+    <div v-if="suffix" class="dd-w-7 dd-h-5 dd-flex dd-items-center dd-cursor-pointer dd-ml-1.5" :class="[getActiveState, getDisabledState]">
       <slot name="suffixSlot" :active="active">
         <svgIcon v-if="suffix" :icon="suffixIcon" :size="size" />
       </slot>
