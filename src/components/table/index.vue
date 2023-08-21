@@ -288,15 +288,15 @@ const props = defineProps({
   },
   buttons: {
     type: Array,
-    required: true,
+    default: null,
   },
   Actions: {
     type: Array,
-    required: true,
+    default: null,
   },
   values: {
     type: Array,
-    required: true,
+    default: null,
   },
   fixedHeight: {
     type: Boolean,
