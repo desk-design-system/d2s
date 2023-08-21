@@ -23,7 +23,7 @@
       :class="{
         ...tagText,
         'dd-h-3 dd-w-3 ': size === 'xs',
-        'dd-h-3.5 dd-w-3.5 ': size === 'base',
+        'dd-h-3 dd-w-3 ': size === 'base',
       }"
       class="dd-ml-1 dd-inline-flex"
       aria-hidden="true"
