@@ -2,7 +2,7 @@
   <div v-for="(tab, index) of tabs" :key="index + 1"
     class="dd-border dd-border-gray-200 dd-rounded-md dd-mb-3 dd-overflow-hidden dd-shadow-sm" :class="[
       isActive && isActive == index + 1
-        ? colorClass
+        ? colorClass[color]
         : 'dd-bg-white dd-border-gray-200',
     ]" v-bind="$attrs">
     <div class="dd-cursor-pointer" @click="changeActiveIndex(index + 1)">
@@ -63,7 +63,7 @@ const props = defineProps({
   },
   color: {
     type: String,
-    default: null,
+    default: "",
   },
 });
 
@@ -72,6 +72,7 @@ const slots = useSlots();
 
 const ACCORDION_TAB = "AccordionTab";
 let isActive = ref(props.active);
+const colorProp = ref(props.color)
 
 //Methods
 const isAccordionTab = (child) => {
@@ -97,9 +98,31 @@ const tabs = computed(() => {
   }, []);
 });
 
-const colorClass = computed(() => {
-  return ` dd-bg-gradient-to-l dd-from-${props.color}-100 dd-border-${props.color}-200`;
-});
+const colorClass = ref({
+  slate: 'dd-bg-gradient-to-l dd-from-slate-100 dd-border-slate-200',
+  gray: 'dd-bg-gradient-to-l dd-from-gray-100 dd-border-gray-200',
+  zinc: 'dd-bg-gradient-to-l dd-from-zinc-100 dd-border-zinc-200',
+  neutral: 'dd-bg-gradient-to-l dd-from-neutral-100 dd-border-neutral-200',
+  stone: 'dd-bg-gradient-to-l dd-from-stone-100 dd-border-stone-200',
+  red: 'dd-bg-gradient-to-l dd-from-red-100 dd-border-red-200',
+  orange: 'dd-bg-gradient-to-l dd-from-orange-100 dd-border-orange-200',
+  amber: 'dd-bg-gradient-to-l dd-from-amber-100 dd-border-amber-200',
+  yellow: 'dd-bg-gradient-to-l dd-from-yellow-100 dd-border-yellow-200',
+  lime: 'dd-bg-gradient-to-l dd-from-lime-100 dd-border-lime-200',
+  green: 'dd-bg-gradient-to-l dd-from-green-100 dd-border-green-200',
+  emerald: 'dd-bg-gradient-to-l dd-from-emerald-100 dd-border-emerald-200',
+  teal: 'dd-bg-gradient-to-l dd-from-teal-100 dd-border-teal-200',
+  cyan: 'dd-bg-gradient-to-l dd-from-cyan-100 dd-border-cyan-200',
+  sky: 'dd-bg-gradient-to-l dd-from-sky-100 dd-border-sky-200',
+  blue: 'dd-bg-gradient-to-l dd-from-blue-100 dd-border-blue-200',
+  indigo: 'dd-bg-gradient-to-l dd-from-indigo-100 dd-border-indigo-200',
+  violet: 'dd-bg-gradient-to-l dd-from-violet-100 dd-border-violet-200',
+  purple: 'dd-bg-gradient-to-l dd-from-purple-100 dd-border-purple-200',
+  fuchsia: 'dd-bg-gradient-to-l dd-from-fuchsia-100 dd-border-fuchsia-200',
+  pink: 'dd-bg-gradient-to-l dd-from-pink-100 dd-border-pink-200',
+  rose: 'dd-bg-gradient-to-l dd-from-rose-100 dd-border-rose-200',
+})
+
 
 const changeActiveIndex = (index) => {
   const active = isTabActive(index);

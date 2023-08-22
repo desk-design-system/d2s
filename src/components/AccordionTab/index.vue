@@ -21,11 +21,11 @@ title: {
 },
 appendIcon: {
   type: String,
-  default: false,
+  default: null,
 },
 prependIcon: {
   type: String,
-  default: false,
+  default: null,
 },
 });
 
