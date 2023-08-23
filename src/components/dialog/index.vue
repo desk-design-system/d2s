@@ -120,7 +120,7 @@ const props = defineProps( {
   },
   show: {
     type: Boolean,
-    default: true,
+    default: false,
   },
   headerClass: {
     type: String,
