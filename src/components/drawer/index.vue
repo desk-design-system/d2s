@@ -31,7 +31,7 @@
                             <button type="button" :class="[primaryHeader ? 'dd-text-gray-100 hover:dd-text-teal-100' : 'dd-text-gray-500 hover:dd-text-gray-500']"
                               class="dd-rounded-md  dd-flex dd-items-center  focus:dd-outline-none"
                               @click="$emit('close')">
-                              <XIcon class="dd-h-6 dd-w-6" aria-hidden="true" />
+                              <XIcon class="dd-h-6 dd-w-6 dd-text-gray-500" aria-hidden="true" />
                             </button>
                           </div>
                         </div>
