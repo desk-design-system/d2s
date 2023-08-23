@@ -20,7 +20,7 @@
               <DialogPanel :class="size" class="dd-pointer-events-auto dd-w-screen">
                 <div class="dd-flex dd-h-full dd-flex-col dd-divide-y dd-divide-gray-200 dd-bg-white dd-shadow-xl">
                   <div class="dd-flex dd-min-h-0 dd-flex-1 dd-flex-col dd-overflow-y-scroll ">
-                    <div :class="{ 'dd-bg-teal-600 ': primaryHeader }" class="dd-p-6 ">
+                    <div v-if="header" :class="{ 'dd-bg-teal-600 ': primaryHeader }" class="dd-p-6 ">
                       <slot name="header">
                         <div class="dd-flex dd-items-start dd-justify-between">
                           <DialogTitle :class="[primaryHeader ? 'dd-text-white' : 'dd-text-gray-900']"
@@ -38,7 +38,7 @@
                         <p v-if="primaryHeader" class="dd-test-sm dd-text-teal-100 dd-pt-1">{{ description }}</p>
                       </slot>
                     </div>
-                    <div class="dd-relative dd-mt-6 dd-flex-1 dd-px-4 sm:dd-px-6">
+                    <div :class="[header ? 'dd-mt-6' : 'dd-py-6']" class="dd-relative  dd-flex-1 dd-px-6 ">
                       <slot></slot>
                     </div>
                   </div>
@@ -93,6 +93,10 @@ const props = defineProps( {
   primaryHeader: {
     type: Boolean,
     default: false,
+  },
+  header: {
+    type: Boolean,
+    default: true,
   },
   size: {
     type: String,
