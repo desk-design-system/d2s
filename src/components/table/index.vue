@@ -8,7 +8,7 @@
       ]" ref="containerRef" @scroll="handleScroll">
         <!-- header with group button  -->
         <div v-if="actionHeader"
-          class="dd-flex dd-items-center dd-justify-between !dd-w-full group_wrapper !dd-bg-white !dd-z-[1000]"
+          class="dd-flex dd-items-center dd-justify-between !dd-w-full group_wrapper !dd-bg-white !dd-z-[100]"
           :class="[selectedId?.length > 0 ? 'dd-h-[40px]' : '']">
           <div v-if="selectedId?.length > 0"
             class="dd-flex dd-items-center dd-gap-2 dd-py-2 dd-pl-3 dd-pr-3 dd-text-left">
@@ -47,7 +47,7 @@
           <div class="dd-w-full dd-cursor-pointer" v-if="search && searchIcon">
             <div class="dd-flex dd-items-center dd-gap-3">
               <svgIcon v-if="selectedId?.length > 0" icon="Search" size="20" class="dd-text-gray-400" />
-              <dd-input type="text" v-model="queryInput" @change="searchQuery"
+              <dd-input type="text" v-model.trim="queryInput" @change="searchQuery"
                 class="focus-visible:!dd-border-none dd-w-full" :icon="selectedId?.length === 0 ? 'Search' : ''"
                 Border="none" placeholder="Search Ticket" size="xl" :prefix="selectedId?.length === 0 ? true : false" />
             </div>
@@ -57,7 +57,7 @@
         </div>
         <div class="dd-w-full dd-cursor-pointer" v-if="search && !actionHeader && searchIcon"
           :class="[fixed ? 'group_wrapper' : '']">
-          <dd-input type="text" v-model="queryInput" @change="searchQuery" class="focus-visible:!dd-border-none"
+          <dd-input type="text" v-model.trim="queryInput" @change="searchQuery" class="focus-visible:!dd-border-none"
             :icon="selectedId?.length === 0 ? 'Search' : ''" Border="none" placeholder="Search Ticket"
             :size="selectedId?.length > 0 ? 'lg' : 'xl'" :prefix="selectedId?.length === 0 ? true : false" />
           <svgIcon icon="Close" size="12" class="dd-absolute dd-text-gray-400 dd-top-4 hover:dd-text-gray-500"
@@ -69,8 +69,11 @@
           : '!dd-border-0'
           ">
           <!-- tabel head  -->
-          <thead class="!dd-sticky !dd-top-0 !dd-bg-white !dd-z-[1000]" v-if="setTableHeader"
-            :class="[limit > 1 ? 'dd-cursor-pointer' : '']">
+          <thead class="!dd-sticky !dd-top-0 !dd-bg-white" v-if="setTableHeader"
+            :class="[limit > 1 ? 'dd-cursor-pointer' : '',
+            searchIcon ? '!dd-z-[99]' : '',
+            settingbarIcon ? '!dd-z-[99]' : ''
+            ]">
             <tr class="dd-bg-white">
               <th
                 class="dd-py-2 !dd-pl-5 dd-text-left checkbox_wrapper !dd-leading-3 dd-h-[40px] table_head_row dd-sticky dd-top-0"
@@ -103,7 +106,7 @@
 
               <th class="table_head_row dd-sticky dd-top-0" :class="[!search ? 'table_border' : '']" v-if="lastCell">
                 <div
-                  class="dd-flex dd-items-center dd-justify-end dd-gap-4 dd-relative dd-right-5 !dd-z-[999] dd-bg-white dd-pl-2.5">
+                  class="dd-flex dd-items-center dd-justify-end dd-gap-4 dd-relative dd-right-5 !dd-z-[99] dd-bg-white dd-pl-2.5">
                   <svgIcon v-if="searchIcon" class="!dd-text-gray-500" icon="Search" size="20" @click="openSearch" />
                   <svgIcon v-if="settingbarIcon" ref="settingIcon" class="!dd-text-gray-500" icon="Settings" size="20"
                     @click="openSettingsBar" />
@@ -111,7 +114,7 @@
                 <!-- settings component  -->
                 <div v-if="setting && lastCell" ref="settingElement"
                   class="dd-pr-2 dd-pt-2 dd-w-[250px] dd-bg-white dd-container dd-my-[2.1rem] dd-absolute dd-right-4 dd-top-1 dd-shadow-xl dd-rounded-lg dd-border dd-border-gray-100"
-                  style="z-index: 1100;">
+                  >
                   <draggable tag="ul" v-model="modelColumn" class="dd-text-left" handle=".handle" item-key="name"
                     drag-class="drag-class" ghost-class="ghost-class" @change="watchState">
                     <template #item="{ element }">
@@ -129,7 +132,7 @@
                           <span class="dd-text-gray-700 dd-text-sm dd-ml-2 dd-font-normal">{{ element.title }}</span>
                         </div>
                         <div class="dd-w-16 dd-mr-2" v-if="element?.disabled === false">
-                          <dd-input Right v-model="element.size" type="text" pattern="[0-9]*" :disabled="element.disabled"
+                          <dd-input Right v-model.trim="element.size" type="text" pattern="[0-9]*" :disabled="element.disabled"
                             class="focus-visible:!dd-border-none dd-my-1" size="xs" />
                         </div>
                       </li>
@@ -222,7 +225,7 @@
           <dd-Button v-for="button in buttons" :key="button?.id" type="secondary" :size="button?.size"
             :disabled="button?.disabled"
             class="dd-text-sm [&>span]:!dd-text-gray-500 [&>span]:!dd-font-normal !dd-w-[41px] !dd-p-0 dd-flex dd-items-center dd-justify-center"
-            :class="setActiveButton(button?.label)" :loader="button?.loader" :title="button?.label" :type="button?.type"
+            :class="setActiveButton(button?.label)" :loader="button?.loader" :title="button?.label"
             :block="button?.block" :icon="button?.icon" :iconSize="button?.iconSize"
             @click="selectNumberOfRows(button)" />
         </DdGroupButton>

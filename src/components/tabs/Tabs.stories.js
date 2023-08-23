@@ -250,7 +250,7 @@ export const Pill = {
   },
 };
 
-export const UnderlinedFeatured = {
+export const UnderlinedWithBadge = {
   render: (args) => ({
     components: {
       DdTabs,
@@ -326,7 +326,7 @@ export const UnderlinedFeatured = {
   },
 };
 
-export const PillFeatured = {
+export const PillWithBadge = {
   render: (args) => ({
     components: {
       DdTabs,
@@ -426,7 +426,7 @@ Pill.parameters = {
   },
 };
 
-UnderlinedFeatured.parameters = {
+UnderlinedWithBadge.parameters = {
   docs: {
     source: {
       code: `<dd-tabs v-model="selected" :tabs="value" type="underlined44" rightBadge borderBottom />`,
@@ -434,7 +434,7 @@ UnderlinedFeatured.parameters = {
   },
 };
 
-PillFeatured.parameters = {
+PillWithBadge.parameters = {
   docs: {
     source: {
       code: `<dd-tabs v-model="selected" :tabs="value" type="pill" rightBadge />`,

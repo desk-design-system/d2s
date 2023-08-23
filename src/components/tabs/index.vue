@@ -5,12 +5,22 @@
     <div class="dd-hidden sm:dd-block">
       <div :class="borderBottomProperty">
         <nav class="-dd-mb-px dd-flex dd-space-x-8" aria-label="Tabs">
-          <span class="dd-flex dd-gap-2" @click="updateTabValue(tab)" v-for="tab in tabs" :key="tab.name"
-            :class="tabStyle(tab)">
+          <span
+            class="dd-flex dd-gap-2"
+            @click="updateTabValue(tab)"
+            v-for="tab in tabs"
+            :key="tab.name"
+            :class="tabStyle(tab)"
+          >
             <slot name="tabLabel" :tab="tab">
               {{ tab.name }}
             </slot>
-            <dd-badge v-if="rightBadge" title="2" :color="badgeColor(tab)" size="xs" />
+            <dd-badge
+              v-if="rightBadge"
+              title="2"
+              :color="badgeColor(tab)"
+              size="xs"
+            />
           </span>
         </nav>
       </div>
@@ -87,8 +97,8 @@ const tabStyle = (tab) => {
   } else {
     return (
       (definedValue === inputModelValue.value
-        ? "dd-bg-teal-100 dd-text-teal-700 dd-cursor-pointer "
-        : "dd-bg-gray-100 dd-text-gray-700 dd-px-3 dd-cursor-pointer dd-text-gray-500 hover:dd-text-gray-700") +
+        ? "dd-bg-gray-100 dd-text-gray-700 dd-cursor-pointer "
+        : "dd-bg-white dd-text-gray-500 dd-px-3 dd-cursor-pointer dd-text-gray-500 hover:dd-text-gray-700") +
       "dd-px-3 dd-py-1.5 dd-font-medium dd-text-sm dd-rounded-md"
     );
   }
@@ -96,7 +106,13 @@ const tabStyle = (tab) => {
 
 const badgeColor = computed(() => {
   return (tab) => {
-    if (tab.value === inputModelValue.value) return "teal";
+    if (props.type === "pill") {
+      return;
+    } else {
+      if (tab.value === inputModelValue.value) {
+        return "teal";
+      }
+    }
   };
 });
 
