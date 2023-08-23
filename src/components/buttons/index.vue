@@ -214,7 +214,7 @@ export default {
           "!dd-cursor-not-allowed !dd-bg-gray-100 focus:!dd-border-0 dd-shadow-sm !dd-text-gray-400 hover:dd-bg-gray-300":
             this.disabled,
           "dd-w-full dd-justify-center": this.block,
-          "dd-bg-teal-600 dd-text-white hover:dd-bg-teal-500 focus:!dd-border-2 focus:!dd-border-teal-400":
+          "dd-bg-teal-600 dd-text-white hover:dd-bg-teal-500 focus:!dd-ring focus:!dd-ring-teal-400":
             this.type == "primary",
         };
       }
@@ -233,7 +233,7 @@ export default {
           "!dd-cursor-not-allowed !dd-bg-gray-100 !dd-border-0 dd-shadow-sm !dd-text-gray-400 hover:dd-bg-gray-300":
             this.disabled,
           "dd-w-full dd-justify-center": this.block,
-          "dd-border-gray-300 dd-text-gray-700 focus:!dd-border-2 focus:!dd-border-teal-500 dd-border dd-bg-white dd-shadow-sm focus:dd-outline-none":
+          "dd-border-gray-300 dd-text-gray-700 focus:!dd-ring focus:!dd-ring-teal-500 dd-border dd-bg-white dd-shadow-sm focus:dd-outline-none":
             this.type == "secondary",
         };
       }
@@ -251,7 +251,7 @@ export default {
             this.size === "xl",
           "!dd-cursor-not-allowed !dd-bg-gray-100 dd-shadow-sm !dd-text-gray-400 hover:dd-bg-gray-300":
             this.disabled,
-          "dd-bg-red-600 dd-text-white hover:dd-bg-red-400 focus:!dd-border-2 focus:!dd-border-red-400":
+          "dd-bg-red-600 dd-text-white hover:dd-bg-red-400 focus:!dd-ring focus:!dd-ring-red-400":
             this.type == "danger",
           "dd-w-full dd-justify-center": this.block,
         };
@@ -270,7 +270,7 @@ export default {
             this.size === "xl",
           "!dd-cursor-not-allowed !dd-text-gray-300 hover:!dd-bg-white dd-rounded":
             this.disabled,
-          "dd-text-teal-600 !dd-bd-white hover:dd-bg-gray-50 focus:!dd-border-2 focus:!dd-border-teal-500":
+          "dd-text-teal-600 !dd-bd-white hover:dd-bg-gray-50 focus:!dd-ring focus:!dd-ring-teal-500":
             this.type == "tertiary",
           "dd-w-full dd-justify-center": this.block,
         };
