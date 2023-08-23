@@ -89,10 +89,10 @@ export const PrependIcon = {
       type: { name: "string", required: true },
       defaultValue: "",
     },
-    "#append": {
+    "#right": {
       description: "Append slot.",
     },
-    "#prepend": {
+    "#left": {
       description: "Prepend slot.",
     },
     "#title": {
