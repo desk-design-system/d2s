@@ -1,6 +1,6 @@
 <template>
   <TransitionRoot as="template" :show="inputModelValue">
-    <Dialog as="div" class="dd-relative dd-z-50">
+    <Dialog  :style="{ 'z-index': zIndex }" as="div" class="dd-relative dd-z-50">
       <TransitionChild as="template" enter="dd-ease-in-out dd-duration-500" enter-from="dd-opacity-0"
         enter-to="dd-opacity-100" leave="dd-ease-in-out dd-duration-500" leave-from="dd-opacity-100"
         leave-to="dd-opacity-0">
@@ -81,6 +81,10 @@ const props = defineProps( {
   saveTitle: {
     type: String,
     default: "Save",
+  },
+  zIndex:{
+    type: Number,
+    default: 50,
   },
   closeTitle: {
     type: String,

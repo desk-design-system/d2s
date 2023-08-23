@@ -160,6 +160,22 @@ export const PrimaryHeader = {
         },
       },
     },
+    header: {
+      description: "If you want header less Drawer you can set prop false",
+      table: {
+        defaultValue: {
+          summary: true,
+        },
+      },
+    },
+    zIndex: {
+      description: "If you want to change the Z-index value you use this prop",
+      table: {
+        defaultValue: {
+          summary: 50,
+        },
+      },
+    },
     size: {
       description:
         "Change the width of the drawer with your required unints for example  400px ,50% , 50em and etc and defaults value is 30% ",
