@@ -49,7 +49,7 @@
           <slot></slot>
         </div>
       </div>
-      <div class="dd-flex dd-items-center dd-gap-[14px]">
+      <div class="dd-flex dd-items-center dd-gap-3">
         <slot name="rightSlot"></slot>
         <XIcon
           v-if="closable"
