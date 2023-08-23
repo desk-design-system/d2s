@@ -1,14 +1,23 @@
 <template>
-  <div>
-    <dd-table :rows="rows" :columns="columnVal" :buttons="buttons" :Actions="Actions" :values="values" footer checkBoxProp
+  <div class="dd-mt-12">
+    <!-- <dd-table :rows="rows" :columns="columnVal" :buttons="buttons" :Actions="Actions" :values="values" footer checkBoxProp
       fixedHeight rowKey="id" hoveringRow lastCell fixed actionHeader emptyState actionsPanel sortIcon settingbarIcon
-      searchIcon @updateSettings="updateSettings" dragDrop />
+      searchIcon @updateSettings="updateSettings" dragDrop /> -->
+      <dd-alert  type="warning" title="warning alert" description="Your password must be at least 8 characters.
+      Your password must include at least one pro wrestling finishing move.">
+        <template #rightSlot>
+          <dd-button title="button 1" type="secondary" />
+          <dd-button title="button 2" type="secondary" />
+        </template>
+      </dd-alert>
   </div>
 </template>
 
 <script setup>
 import { ref } from "vue";
 import DdTable from "./components/table/index.vue";
+import DdAlert from "./components/alerts/index.vue";
+import DdButton from "./components/buttons/index.vue"
 
 let columns = ref([
   {
