@@ -46,9 +46,9 @@
                   <div v-if="footer" class="dd-flex dd-bg-white dd-flex-shrink-0 dd-justify-end dd-px-6 dd-py-4">
                     <slot name="footer">
                       <span class="dd-mr-4">
-                        <rdButton @click="$emit('cancel')" color="white" :title="closeTitle" />
+                        <rdButton @click="$emit('cancel')" type="tertiary" :title="closeTitle" />
                       </span>
-                      <rdButton @click="$emit('submit')" color="primary" :title="saveTitle" />
+                      <rdButton @click="$emit('submit')" type="primary" :title="saveTitle" />
                     </slot>
                   </div>
                 </div>
