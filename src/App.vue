@@ -8,7 +8,6 @@
 import { ref } from "vue";
 import DdTable from "./components/table/index.vue";
 
-
 let columns = ref([
   {
     title: "ID",
