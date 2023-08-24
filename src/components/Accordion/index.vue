@@ -8,7 +8,7 @@
     <div class="dd-cursor-pointer" @click="changeActiveIndex(index + 1)">
       <component v-if="tab.children && tab.children.header" :is="tab.children.header">
       </component>
-      <div v-else class="dd-flex dd-justify-between dd-px-6 dd-py-5">
+      <div v-else class="dd-flex dd-justify-between dd-px-6 dd-pt-5 dd-pb-3">
         <div class="dd-flex dd-items-center dd-gap-x-2">
           <!-- @slot Use this slot header -->
           <component v-if="tab.children && tab.children.left" :is="tab.children.left">
@@ -41,7 +41,7 @@
 
     <Transition name="dd-toggleable-content">
       <div v-if="isTabActive(index + 1)" class="">
-        <component class="dd-px-3 dd-pb-2" :is="tab"></component>
+        <component class=" dd-pb-2" :is="tab"></component>
       </div>
     </Transition>
   </div>
