@@ -35,6 +35,46 @@ export const Default = {
         },
       },
     },
+    buttonTitle: {
+      description: "Add title to button",
+      table: {
+        defaultValue: {
+          summary: "button",
+        },
+      },
+    },
+    buttonContent: {
+      description: "Set content type using button content prop here",
+      table: {
+        defaultValue: {
+          summary: "textOnly",
+        },
+      },
+    },
+    buttonType: {
+      description: "Set button type using button type prop here",
+      table: {
+        defaultValue: {
+          summary: "secondary",
+        },
+      },
+    },
+    buttonSize: {
+      description: "Set button size using button size prop here",
+      table: {
+        defaultValue: {
+          summary: "base",
+        },
+      },
+    },
+    buttonIcon: {
+      description: "Set button icon using button icon prop here",
+      table: {
+        defaultValue: {
+          summary: "Plus",
+        },
+      },
+    },
   },
 };
 
@@ -66,6 +106,46 @@ export const Title = {
       table: {
         defaultValue: {
           summary: "center",
+        },
+      },
+    },
+    buttonTitle: {
+      description: "Add title to button",
+      table: {
+        defaultValue: {
+          summary: "button",
+        },
+      },
+    },
+    buttonContent: {
+      description: "Set content type using button content prop here",
+      table: {
+        defaultValue: {
+          summary: "button",
+        },
+      },
+    },
+    buttonType: {
+      description: "Set button type using button type prop here",
+      table: {
+        defaultValue: {
+          summary: "button",
+        },
+      },
+    },
+    buttonSize: {
+      description: "Set button size using button size prop here",
+      table: {
+        defaultValue: {
+          summary: "button",
+        },
+      },
+    },
+    buttonIcon: {
+      description: "Set button icon using button icon prop here",
+      table: {
+        defaultValue: {
+          summary: "base",
         },
       },
     },
@@ -103,6 +183,121 @@ export const TitleLeft = {
         },
       },
     },
+    buttonTitle: {
+      description: "Add title to button",
+      table: {
+        defaultValue: {
+          summary: "button",
+        },
+      },
+    },
+    buttonContent: {
+      description: "Set content type using button content prop here",
+      table: {
+        defaultValue: {
+          summary: "textOnly",
+        },
+      },
+    },
+    buttonType: {
+      description: "Set button type using button type prop here",
+      table: {
+        defaultValue: {
+          summary: "secondary",
+        },
+      },
+    },
+    buttonSize: {
+      description: "Set button size using button size prop here",
+      table: {
+        defaultValue: {
+          summary: "base",
+        },
+      },
+    },
+    buttonIcon: {
+      description: "Set button icon using button icon prop here",
+      table: {
+        defaultValue: {
+          summary: "Plus",
+        },
+      },
+    },
+  },
+};
+
+
+export const DivierWithButton = {
+  render: (args) => ({
+    components: {
+      DdDivider,
+    },
+    setup() {
+      return {
+        args,
+      };
+    },
+    template: `<dd-divider buttonTitle="button" buttonContent="leftIcon" buttonType="secondary" buttonIcon="Plus" buttonSiza="base" /> `,
+  }),
+  argTypes: {
+    title: {
+      description: "Change title value as per the requirement",
+      table: {
+        defaultValue: {
+          summary: "Content",
+        },
+      },
+    },
+    placement: {
+      control: { type: "select" },
+      options: ["center", "start"],
+      description: "Accepted value start / center",
+      table: {
+        defaultValue: {
+          summary: "center",
+        },
+      },
+    },
+    buttonTitle: {
+      description: "Add title to button",
+      table: {
+        defaultValue: {
+          summary: "button",
+        },
+      },
+    },
+    buttonContent: {
+      description: "Set content type using button content prop here",
+      table: {
+        defaultValue: {
+          summary: "textOnly",
+        },
+      },
+    },
+    buttonType: {
+      description: "Set button type using button type prop here",
+      table: {
+        defaultValue: {
+          summary: "secondary",
+        },
+      },
+    },
+    buttonSize: {
+      description: "Set button size using button size prop here",
+      table: {
+        defaultValue: {
+          summary: "base",
+        },
+      },
+    },
+    buttonIcon: {
+      description: "Set button icon using button icon prop here",
+      table: {
+        defaultValue: {
+          summary: "Plus",
+        },
+      },
+    },
   },
 };
 
@@ -126,6 +321,14 @@ TitleLeft.parameters = {
   docs: {
     source: {
       code: ` <dd-divider title="Content" placement='start' /> `,
+    },
+  },
+};
+
+DivierWithButton.parameters = {
+  docs: {
+    source: {
+      code: `<dd-divider buttonTitle="button" buttonContent="leftIcon" buttonType="secondary" buttonIcon="Plus" buttonSiza="base" />`,
     },
   },
 };

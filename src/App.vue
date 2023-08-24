@@ -1,21 +1,13 @@
 <template>
-  <div>
-    <!-- <dd-table :rows="rows" :columns="columnVal" :buttons="buttons" :Actions="Actions" :values="values" footer checkBoxProp
+    <dd-table :rows="rows" :columns="columnVal" :buttons="buttons" :Actions="Actions" :values="values" footer checkBoxProp
       fixedHeight rowKey="id" hoveringRow lastCell fixed actionHeader emptyState actionsPanel sortIcon settingbarIcon
-      searchIcon @updateSettings="updateSettings" dragDrop /> -->
-      <dd-drawer @close="onClickMethod" v-model="show" title="Header" size="30" primaryHeader="true" footer="false" v-bind="args"  @cancel="cancel" />
-  </div>
+      searchIcon @updateSettings="updateSettings" dragDrop />
 </template>
 
 <script setup>
 import { ref } from "vue";
 import DdTable from "./components/table/index.vue";
-import DdDrawer from "./components/drawer/index.vue"
 
-const show = ref(true)
-const cancel = () => {
-  show.value = false;
-}
 
 let columns = ref([
   {
