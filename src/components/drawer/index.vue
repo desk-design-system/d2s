@@ -72,7 +72,7 @@ import {
   DialogPanel
 } from "@headlessui/vue"
 import { XIcon } from "@heroicons/vue/outline"
-const emits = defineEmits( ['update:modelValue', "change",'clickOutside', 'close'] )
+const emits = defineEmits( ['update:modelValue', "change",'clickOutside', 'close','submit'] )
 const props = defineProps( {
   title: {
     type: String,
