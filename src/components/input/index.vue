@@ -77,7 +77,7 @@
       >
         <div
           :class="[
-            successButton || closeButton
+            successButton && closeButton
               ? '!dd-h-8 !dd-w-8 dd-gap-1 dd-flex dd-items-center dd-justify-center dd-relative dd-right-2.5'
               : '',
           ]"
