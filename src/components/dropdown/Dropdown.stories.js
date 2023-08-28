@@ -4,6 +4,7 @@ import { ref } from "vue";
 export default {
   title: "Atoms/Dropdown",
   component: DdDropdown,
+  tags: ['autodocs'],
 };
 
 export const Default = {

@@ -12,6 +12,7 @@ export const Default = {
   render: (args) => ({
     components: {
       DdSelect,
+      tags: ["autodocs"],
     },
     setup() {
       const onClickMethod = () => action("clicked");

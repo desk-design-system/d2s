@@ -5,6 +5,7 @@ import { ref, computed } from "vue";
 export default {
   title: "Atoms/Auto Search",
   component: DdAutoSearch,
+  tags: ['autodocs'],
 };
 
 export const Default = {

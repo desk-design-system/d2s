@@ -5,6 +5,7 @@ import { action } from "@storybook/addon-actions";
 export default {
   title: "Atoms/Avatar",
   component: DdAvatar,
+  tags: ['autodocs'],
 };
 
 export const Default = {

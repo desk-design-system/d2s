@@ -4,6 +4,7 @@ import { ref } from "vue";
 export default {
   title: "Atoms/Tree",
   component: DdTree,
+  tags: ["autodocs"],
 };
 
 export const Default = {
@@ -135,7 +136,7 @@ export const Default = {
 
           for (let i = 0; i < numChildren; i++) {
             const childId = nextId++;
-            const childLabel = 'Child ${'childId'}';
+            const childLabel = 'Child ${"childId"}';
             const child = {
               id: childId,
               label: childLabel,
@@ -164,7 +165,7 @@ export const Default = {
 
         for (let i = 0; i < numTopLevelItems; i++) {
           const topLevelId = nextId++;
-          const topLevelLabel = 'Top Level ${'topLevelId'}';
+          const topLevelLabel = 'Top Level ${"topLevelId"}';
           const topLevelItem = {
             id: topLevelId,
             label: topLevelLabel,

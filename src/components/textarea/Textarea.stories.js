@@ -5,9 +5,8 @@ import { ref } from "vue";
 export default {
   title: "Atoms/TextArea",
   component: DdTextarea,
+  tags: ["autodocs"],
 };
-
-
 
 export const Default = {
   render: (args) => ({

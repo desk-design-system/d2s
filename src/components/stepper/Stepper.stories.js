@@ -4,6 +4,7 @@ import DdStepper from "./index.vue";
 export default {
   title: "Atoms/Stepper",
   component: DdStepper,
+  tags: ["autodocs"],
 };
 
 

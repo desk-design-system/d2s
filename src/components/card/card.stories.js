@@ -4,6 +4,7 @@ import ddCard from "./index.vue";
 export default {
   title: "Atoms/Card",
   component: ddCard,
+  tags: ['autodocs'],
 };
 
 export const Default = {

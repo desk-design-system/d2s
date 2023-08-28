@@ -4,6 +4,7 @@ import { ref } from "vue";
 export default {
   title: "Atoms/Table",
   component: DdTable,
+  tags: ["autodocs"],
 };
 
 export const Default = {

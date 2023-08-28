@@ -4,6 +4,7 @@ import { ref } from "vue";
 export default {
   title: "Atoms/RadioGroup",
   component: DdRadio,
+  tags: ['autodocs'],
 };
 
 export const Default = {

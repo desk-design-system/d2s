@@ -4,6 +4,7 @@ import DdButton from "../buttons/index.vue"
 export default {
   title: "Atoms/Alert",
   component: ddAlert,
+  tags: ['autodocs'],
 };
 
 export const Warning = {

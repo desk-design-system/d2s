@@ -21,9 +21,9 @@
     "dev": "vite",
     "build": "vite build",
     "serve": "vite preview",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook",
-    "watch": "vite build --watch"
+    "watch": "vite build --watch",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "@headlessui/vue": "^1.6.4",
@@ -39,13 +39,13 @@
   },
   "devDependencies": {
     "@babel/core": "^7.20.12",
-    "@storybook/addon-actions": "^6.5.15",
-    "@storybook/addon-essentials": "^6.5.15",
-    "@storybook/addon-interactions": "^6.5.15",
-    "@storybook/addon-links": "^6.5.15",
-    "@storybook/builder-vite": "^0.3.0",
-    "@storybook/testing-library": "^0.0.13",
-    "@storybook/vue3": "^6.5.15",
+    "@storybook/addon-essentials": "^7.3.2",
+    "@storybook/addon-interactions": "^7.3.2",
+    "@storybook/addon-links": "^7.3.2",
+    "@storybook/blocks": "^7.3.2",
+    "@storybook/testing-library": "^0.2.0",
+    "@storybook/vue3": "^7.3.2",
+    "@storybook/vue3-vite": "^7.3.2",
     "@tailwindcss/forms": "^0.5.0",
     "@vitejs/plugin-vue": "^1.9.3",
     "autoprefixer": "^10.3.7",
@@ -54,6 +54,9 @@
     "html-webpack-plugin": "^5.5.0",
     "postcss": "^8.4.12",
     "postcss-loader": "^6.2.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "storybook": "^7.3.2",
     "tailwindcss": "^3.0.23",
     "vite": "^3.2.5",
     "vue-loader": "^16.8.3"

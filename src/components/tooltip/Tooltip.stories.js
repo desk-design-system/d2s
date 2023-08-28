@@ -3,6 +3,7 @@ import ddTooltip from "./index.vue";
 export default {
   title: "Atoms/Tooltip",
   component: ddTooltip,
+  tags: ["autodocs"],
 };
 
 export const ToolTip = {

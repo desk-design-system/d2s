@@ -3,6 +3,7 @@ import DdPagination from "./index.vue";
 export default {
   title: "Atoms/Pagination",
   component: DdPagination,
+  tags: ['autodocs'],
   argTypes: {
     count: {
       control: { type: "number" },

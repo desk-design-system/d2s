@@ -5,6 +5,7 @@ import DdAccordionTab from "./index.vue";
 export default {
   title: "Atoms/Accordion",
   component: DdAccordion,
+  tags: ['autodocs'],
 };
 
 // More on component templates: https://storybook.js.org/docs/vue/writing-stories/introduction#using-args

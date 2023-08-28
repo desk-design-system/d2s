@@ -4,6 +4,7 @@ import { ref } from "vue";
 export default {
   title: "Atoms/Checkbox",
   component: DdCheckbox,
+  tags: ['autodocs'],
 };
 
 export const Default = {

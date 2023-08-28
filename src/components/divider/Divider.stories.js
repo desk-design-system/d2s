@@ -2,6 +2,7 @@ import DdDivider from "./index.vue";
 export default {
   title: "Atoms/Divider",
   component: DdDivider,
+  tags: ["autodocs"],
 };
 
 export const Default = {
@@ -225,7 +226,6 @@ export const TitleLeft = {
     },
   },
 };
-
 
 export const DivierWithButton = {
   render: (args) => ({

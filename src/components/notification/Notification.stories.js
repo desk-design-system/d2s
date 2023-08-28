@@ -5,6 +5,7 @@ import { inject, onMounted } from "vue";
 export default {
   title: 'Atoms/Notification',
   component: DdButton,
+  tags: ['autodocs'],
   // More on argTypes: https://storybook.js.org/docs/vue/api/argtypes
   argTypes: {
     placement: {

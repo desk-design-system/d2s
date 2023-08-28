@@ -8,6 +8,7 @@ import { ref } from "vue";
 export default {
   title: "Molecules/Dialog",
   component: DdDialog,
+  tags: ['autodocs'],
   // More on argTypes: https://storybook.js.org/docs/vue/api/argtypes
 };
 

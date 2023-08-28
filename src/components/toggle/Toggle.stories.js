@@ -5,6 +5,7 @@ import { ref } from "vue";
 export default {
   title: "Atoms/Switch",
   component: DdToggle,
+  tags: ["autodocs"],
 };
 
 export const Primary = {

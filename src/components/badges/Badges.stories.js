@@ -4,6 +4,7 @@ import ddBadge from "./index.vue";
 export default {
   title: "Atoms/Badge",
   component: ddBadge,
+  tags: ['autodocs'],
 };
 
 export const Basic = {

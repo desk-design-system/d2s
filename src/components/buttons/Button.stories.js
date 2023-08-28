@@ -6,6 +6,7 @@ import { action } from "@storybook/addon-actions";
 export default {
   title: "Atoms/Button",
   component: DdButton,
+  tags: ['autodocs'],
   // More on argTypes: https://storybook.js.org/docs/vue/api/argtypes
 };
 

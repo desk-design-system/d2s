@@ -11,6 +11,7 @@ import {
 export default {
   title: "Molecules/Tabs",
   component: DdTabs,
+  tags: ["autodocs"],
 };
 
 export const Underline36 = {

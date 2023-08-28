@@ -7,6 +7,7 @@ import { ref } from "vue";
 export default {
   title: "Molecules/Drawer",
   component: DdDrawer,
+  tags: ['autodocs'],
 };
 
 export const Default = {

@@ -4,6 +4,7 @@ import DdSetting from "./index.vue";
 export default {
   title: "Atoms/Inner Page Menu",
   component: DdSetting,
+  tags: ["autodocs"],
   // More on argTypes: https://storybook.js.org/docs/vue/api/argtypes
 };
 

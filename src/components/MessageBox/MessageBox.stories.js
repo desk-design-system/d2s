@@ -4,6 +4,7 @@ import DdButton from "../buttons/index.vue";
 export default {
   title: "Atoms/Confirmation Modal",
   component: DdButton,
+  tags: ['autodocs'],
   // More on argTypes: https://storybook.js.org/docs/vue/api/argtypes
   argTypes: {
     title: {

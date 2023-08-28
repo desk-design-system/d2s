@@ -3,10 +3,9 @@ import DdNavigation from "./index.vue";
 export default {
   title: "Atoms/Nav links",
   component: DdNavigation,
+  tags: ["autodocs"],
   // More on argTypes: https://storybook.js.org/docs/vue/api/argtypes
-  
 };
-
 
 export const Default = {
   render: (args) => ({
@@ -188,7 +187,6 @@ export const PrefixIcon = {
   },
 };
 
-
 export const suffixIcon = {
   render: (args) => ({
     components: {
@@ -369,7 +367,6 @@ export const Active = {
   },
 };
 
-
 export const Disabled = {
   render: (args) => ({
     components: {
@@ -460,7 +457,6 @@ export const Disabled = {
   },
 };
 
-
 export const Featured = {
   render: (args) => ({
     components: {
@@ -550,7 +546,6 @@ export const Featured = {
     },
   },
 };
-
 
 Default.parameters = {
   docs: {

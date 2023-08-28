@@ -3,6 +3,7 @@ import ddTopbar from "./index.vue";
 export default {
   title: "Molecules/Topbar",
   component: ddTopbar,
+  tags: ["autodocs"],
 };
 
 // More on component templates: https://storybook.js.org/docs/vue/writing-stories/introduction#using-args

@@ -4,6 +4,7 @@ import { ref } from "vue";
 export default {
   title: "Atoms/Breadcrumbs",
   component: DdBreadcrumb,
+  tags: ['autodocs'],
 };
 
 export const Default = {
