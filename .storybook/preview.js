@@ -1,4 +1,3 @@
-import { Title, Subtitle, Description, Primary, Controls, Stories } from '@storybook/blocks';
 /** @type { import('@storybook/vue3').Preview } */
 const preview = {
   parameters: {
@@ -10,7 +9,9 @@ const preview = {
       },
     },
     docs: {
-      toc: true,
+      toc: {
+        disable: false,
+      },
     },
   },
 };

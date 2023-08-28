@@ -5,6 +5,7 @@ import { ref } from "vue";
 export default {
   title: "Atoms/FormElement",
   component: DdFormElement,
+  tags: ['autodocs'],
 };
 
 export const Default = {

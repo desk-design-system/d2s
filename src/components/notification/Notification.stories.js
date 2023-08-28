@@ -1,5 +1,4 @@
 import DdButton from "../buttons/index.vue"
-import { action } from "@storybook/addon-actions"
 // More on default export: https://storybook.js.org/docs/vue/writing-stories/introduction#default-export
 import { inject, onMounted } from "vue";
 export default {
