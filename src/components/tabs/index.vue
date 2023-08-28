@@ -29,7 +29,7 @@
 </template>
 
 <script setup>
-import { computed, onBeforeUnmount, onMounted, onUnmounted } from "vue";
+import { computed, onMounted, onUnmounted } from "vue";
 import DdBadge from "../badges/index.vue";
 const emits = defineEmits(["update:modelValue", "change"]);
 const props = defineProps({
@@ -57,9 +57,9 @@ const props = defineProps({
     type: String,
     validator: function (value) {
       // The value must match one of these strings
-      return ["underlined36", "underlined44", "pill"].indexOf(value) !== -1;
+      return ["underline", "underlined44", "pill"].indexOf(value) !== -1;
     },
-    default: "underlined36",
+    default: "underline",
   },
   defaultProps: {
     type: Object,
@@ -80,19 +80,12 @@ const inputModelValue = computed({
 
 const tabStyle = (tab) => {
   var definedValue = tab[props.defaultProps.value];
-  if (props.type === "underlined36") {
+  if (props.type === "underline") {
     return (
       (definedValue === inputModelValue.value
         ? "dd-border-teal-500 dd-text-teal-600 dd-cursor-pointer"
         : "dd-cursor-pointer dd-border-transparent dd-text-gray-500 hover:dd-text-gray-700 hover:dd-border-gray-300") +
       " dd-whitespace-nowrap dd-py-[7px] dd-px-1 dd-border-b-2 dd-font-medium dd-text-sm"
-    );
-  } else if (props.type === "underlined44") {
-    return (
-      (definedValue === inputModelValue.value
-        ? "dd-border-teal-500 dd-text-teal-600 dd-cursor-pointer"
-        : "dd-cursor-pointer dd-border-transparent dd-text-gray-500 hover:dd-text-gray-700 hover:dd-border-gray-300") +
-      " dd-whitespace-nowrap dd-py-[11px] dd-px-1 dd-border-b-2 dd-font-medium dd-text-sm"
     );
   } else {
     return (
