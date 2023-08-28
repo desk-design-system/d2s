@@ -8,7 +8,7 @@
     <div class="dd-cursor-pointer" @click="changeActiveIndex(index + 1)">
       <component v-if="tab.children && tab.children.header" :is="tab.children.header">
       </component>
-      <div v-else class="dd-flex dd-justify-between dd-px-6 dd-pt-5 dd-pb-3">
+      <div :class="[isActive ? 'dd-pt-5 dd-pb-3' : 'dd-py-5' ]" v-else class="dd-flex dd-justify-between dd-px-6 ">
         <div class="dd-flex dd-items-center dd-gap-x-2">
           <!-- @slot Use this slot header -->
           <component v-if="tab.children && tab.children.left" :is="tab.children.left">

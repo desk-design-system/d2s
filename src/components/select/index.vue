@@ -6,7 +6,7 @@
     </slot>
       
     <Combobox as="div" v-bind="$attrs" v-model="inputModelValue">
-      <div class="dd-mt-1 dd-relative">
+      <div class=" dd-relative">
         <ComboboxInput :class="[
           hasError
             ? ' !dd-border-red-600 focus:!dd-border-red-600 dd-focus:!dd-ring-red-600'
