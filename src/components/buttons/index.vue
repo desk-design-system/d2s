@@ -215,7 +215,7 @@ export default {
             this.size === "lg",
           "dd-px-3 dd-h-10 dd-text-sm dd-font-normal dd-shadow-sm dd-rounded-md":
             this.size === "xl",
-          "!dd-cursor-not-allowed !dd-bg-gray-100 focus:!dd-ring-0 dd-shadow-sm !dd-text-gray-400 hover:dd-bg-gray-300":
+          "!dd-cursor-not-allowed !dd-bg-gray-100 focus:!dd-ring-0 dd-shadow-sm dd-relative !dd-text-gray-400 hover:dd-bg-gray-300":
             this.disabled,
           "dd-w-full dd-justify-center": this.block,
           "dd-bg-teal-600 dd-text-white hover:dd-bg-teal-500 focus:dd-ring focus:!dd-ring-teal-400":
@@ -234,7 +234,7 @@ export default {
             this.size === "lg",
           "dd-px-3 dd-h-10 dd-text-sm dd-font-normal dd-shadow-sm dd-rounded-md":
             this.size === "xl",
-          "!dd-cursor-not-allowed !dd-bg-gray-100 focus:!dd-ring-0 dd-shadow-sm !dd-text-gray-400 hover:dd-bg-gray-300":
+          "!dd-cursor-not-allowed !dd-bg-gray-100 focus:!dd-ring-0 dd-shadow-sm dd-relative !dd-text-gray-400 hover:dd-bg-gray-300":
             this.disabled,
           "dd-w-full dd-justify-center": this.block,
           "dd-border-gray-300 dd-text-gray-700 focus:dd-ring focus:!dd-ring-teal-500 dd-border dd-bg-white dd-shadow-sm focus:dd-outline-none":
@@ -253,7 +253,7 @@ export default {
             this.size === "lg",
           "dd-px-3 dd-h-10 dd-text-sm dd-font-normal dd-shadow-sm dd-rounded-md":
             this.size === "xl",
-          "!dd-cursor-not-allowed !dd-bg-gray-100 focus:!dd-ring-0 dd-shadow-sm !dd-text-gray-400 hover:dd-bg-gray-300":
+          "!dd-cursor-not-allowed !dd-bg-gray-100 focus:!dd-ring-0 dd-shadow-sm dd-relative !dd-text-gray-400 hover:dd-bg-gray-300":
             this.disabled,
           "dd-bg-red-600 dd-text-white hover:dd-bg-red-400 focus:dd-ring focus:!dd-ring-red-400":
             this.type == "danger",
@@ -272,9 +272,9 @@ export default {
             this.size === "lg",
           "dd-px-3 dd-h-10 dd-text-sm dd-bg-white dd-rounded dd-font-normal":
             this.size === "xl",
-          "!dd-cursor-not-allowed !dd-text-gray-300 focus:!dd-ring-0 hover:!dd-bg-white dd-rounded":
+          "!dd-cursor-not-allowed !dd-text-gray-300 dd-relative focus:!dd-ring-0 hover:!dd-bg-white dd-rounded":
             this.disabled,
-          "dd-text-teal-600 !dd-bd-white hover:dd-bg-gray-50 focus:dd-ring focus:!dd-ring-teal-500":
+          "dd-text-teal-600 !dd-bd-white hover:dd-bg-gray-50 focus:dd-ring focus:!dd-ring-gray-200":
             this.type == "tertiary",
           "dd-w-full dd-justify-center": this.block,
         };
