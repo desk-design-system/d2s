@@ -73,9 +73,9 @@
               Add as new: {{ queries }}
             </ComboboxOption>
           </ComboboxOptions>
-        <span v-if="errorMessage" class="dd-text-xs dd-text-red-600 dd-capitalize">{{ errorMessage }}</span>
-      </div>
+        </div>
     </Combobox>
+    <span v-if="errorMessage" class="dd-text-xs dd-text-red-600 dd-ml-3">{{ errorMessage }}</span>
   </div>
 </template>
 <script setup>
