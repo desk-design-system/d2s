@@ -7,7 +7,7 @@
     xmlns="http://www.w3.org/2000/svg"
     xmlns:xlink="http://www.w3.org/1999/xlink"
   >
-    <title>Icons/20px/Piechart</title>
+    
     <g
       id="☮️-Icons"
       stroke="none"

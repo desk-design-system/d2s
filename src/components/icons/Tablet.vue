@@ -7,7 +7,7 @@
     xmlns="http://www.w3.org/2000/svg"
     xmlns:xlink="http://www.w3.org/1999/xlink"
   >
-    <title>Icons/20px/Tablet</title>
+    
     <g
       id="📝-Book-a-Demo-Form-Final"
       stroke="none"
