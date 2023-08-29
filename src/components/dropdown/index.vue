@@ -38,7 +38,7 @@
           class="dd-flex dd-items-center dd-gap-1"
             :class="[active ? 'dd-bg-teal-50 dd-text-teal-600' : 'dd-text-gray-700', '!dd-font-normal dd-block dd-py-1 dd-px-4 dd-cursor-pointer', size == 'xs' ? 'dd-text-xs' : 'dd-text-sm']">
             <slot name="items" :item="item">
-              <svgIcon v-if="showIcon" :color="item.color ? item.color : ''" :icon="item.icon ? item.icon : ''"
+              <svgIcon v-if="showIcon" :color="item.color ? item.color : ''" :icon="item.icon ? item.icon : 'Circle'"
                 :size="item.size ? item.size : ''" />
               {{ item[props.defaultProps.name] }}
             </slot>
@@ -51,7 +51,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from "vue"
+import { computed } from "vue"
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
 import svgIcon from "../svgIcon/index.vue";
 import ddAvatar from "../avatars/index.vue"
@@ -89,16 +89,6 @@ const props = defineProps({
     type: Array,
     required: true
   },
-  // type: {
-  //     type: String,
-  //     validator: function ( value ) {
-  //       // The value must match one of these strings
-  //       return (
-  //         ["text", "button", "avatar"].indexOf( value ) !== -1
-  //       )
-  //     },
-  //     default: "button",
-  //   },
   defaultProps: {
     type: Object,
     default: () => ({
@@ -137,7 +127,7 @@ const props = defineProps({
         ["right", "left",].indexOf(value) !== -1
       )
     },
-    default: "right",
+    default: "left",
   },
   size: {
     type: String,

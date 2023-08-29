@@ -17,7 +17,7 @@ export const Default = {
       const onClickMethod = () => action("clicked");
       return { args, onClickMethod };
     },
-    template: `<dd-avatar srcLink="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg" v-bind="args" />`,
+    template: `<dd-avatar :srcLink=args.srcLink :title=args.title :color=args.color :altName=args.altName :size=args.size :type=args.type />`,
   }),
   argTypes: {
     color: {
@@ -72,14 +72,6 @@ export const Default = {
           summary: "-",
         },
       },
-    },
-  },
-};
-
-Default.parameters = {
-  docs: {
-    source: {
-      code: `<dd-avatar srcLink="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg" />`,
     },
   },
 };

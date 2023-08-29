@@ -17,7 +17,7 @@ export const Basic = {
         args,
       };
     },
-    template: `<dd-badge title="Badge" v-bind="args" />`,
+    template: `<dd-badge :title=args.title :rounded=args.rounded :closable=args.closable :color=args.color :size=args.size :dot=args.dot />`,
   }),
   argTypes: {
     color: {
@@ -277,14 +277,6 @@ export const Closable = {
       },
     },
     onClick: { action: "clicked" },
-  },
-};
-
-Basic.parameters = {
-  docs: {
-    source: {
-      code: ` <dd-badge title="Badge" />`,
-    },
   },
 };
 

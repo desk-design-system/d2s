@@ -18,7 +18,7 @@ export const Default = {
         args,
       };
     },
-    template: `<dd-form-element title="Title" description="Extra message or notification." v-bind="args" /> `,
+    template: `<dd-form-element :title=args.title :description=args.description :size=args.size /> `,
   }),
   argTypes: {
     title: {
@@ -185,14 +185,6 @@ export const WrapperWithSlot = {
         },
     },
   };
-
-Default.parameters = {
-  docs: {
-    source: {
-      code: ` <dd-form-element title="Title" description="Extra message or notification." /> `,
-    },
-  },
-};
 
 WrapperWithSlot.parameters = {
     docs: {

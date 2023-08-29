@@ -22,7 +22,7 @@ export const Default = {
       ]);
       return { value, args };
     },
-    template: `<dd-breadcrumb  :items="value" v-bind="args" />`,
+    template: `<dd-breadcrumb :items="value" :shadow=args.shadow :full=args.full :seprator=args.seprator />`,
   }),
   argTypes: {
     shadow: {
@@ -177,14 +177,6 @@ export const Chevron = {
           summary: "slash",
         },
       },
-    },
-  },
-};
-
-Default.parameters = {
-  docs: {
-    source: {
-      code: ` <dd-breadcrumb  :items="value"  />`,
     },
   },
 };

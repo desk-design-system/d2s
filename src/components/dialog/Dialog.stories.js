@@ -27,7 +27,7 @@ export const Default = {
       return { args, show, onClickMethod, OpenDialog };
     },
     template: `<dd-button title="Default Dialog" content="textOnly" type="secondary" @click="OpenDialog"/>
-    <dd-dialog @close="onClickMethod" v-model="show" v-bind="args" content="Lorem ipsum dolor sit amet." title="Header" color="primary" modalWidth="100%" />`,
+    <dd-dialog @close="onClickMethod" v-model="show" :title=args.title :header=args.header :saveTitle=args.saveTitle :closeTitle=args.closeTitle :modalWidth=args.modalWidth :position=args.position :footer=args.footer :color=args.color />`,
   }),
   argTypes: {
     title: {
@@ -472,14 +472,6 @@ export const CardOnly = {
   },
 };
 
-Default.parameters = {
-  docs: {
-    source: {
-      code: `<dd-dialog @close="onClickMethod" v-model="show" v-bind="args" content="Lorem ipsum dolor sit amet." title="Header" color="primary" modalWidth="100%" />`,
-    },
-  },
-};
-
 HeaderLess.parameters = {
   docs: {
     source: {
@@ -503,41 +495,3 @@ CardOnly.parameters = {
     },
   },
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Default.args = {
-//   title: 'Header',
-//   modalWidth: 40,
-//   color: 'primary',
-//   content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam at velit quis erat ornare dignissim eu vel est. Praesent in nisl nec augue volutpat eleifend. Phasellus pulvinar lobortis massa eu tempus. Sed ut mauris ac nunc scelerisque molestie. Donec tristique odio at lacus bibendum suscipit.'
-// }
-// HeaderLess.args = {
-//   header: false,
-//   modalWidth: 40,
-//   color: 'primary',
-//   content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam at velit quis erat ornare dignissim eu vel est. Praesent in nisl nec augue volutpat eleifend. Phasellus pulvinar lobortis massa eu tempus. Sed ut mauris ac nunc scelerisque molestie. Donec tristique odio at lacus bibendum suscipit.'
-// }
-// FooterLess.args = {
-//   title: 'Footer Less',
-//   modalWidth: 40,
-//   footer: false,
-//   color: 'primary',
-//   content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam at velit quis erat ornare dignissim eu vel est. Praesent in nisl nec augue volutpat eleifend. Phasellus pulvinar lobortis massa eu tempus. Sed ut mauris ac nunc scelerisque molestie. Donec tristique odio at lacus bibendum suscipit.'
-// }
-// CardOnly.args = {
-//   modalWidth: 50,
-//   footer: false,
-//   header: false,
-//   content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam at velit quis erat ornare dignissim eu vel est. Praesent in nisl nec augue volutpat eleifend. Phasellus pulvinar lobortis massa eu tempus. Sed ut mauris ac nunc scelerisque molestie. Donec tristique odio at lacus bibendum suscipit.'
-// }

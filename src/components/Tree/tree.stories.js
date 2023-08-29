@@ -118,12 +118,17 @@ export const Default = {
 
       return { generatedArray, args, buttons, values };
     },
-    template: `<div> 
-    <dd-tree
-      v-bind="args"
+    template: `<dd-tree
       :list="generatedArray"
-    />
-    </div>`,
+      :buttons="buttons"
+      :values="values"
+      :checkBoxProp=args.checkBoxProp
+      :customContent=args.customContent
+      :badge=args.badge
+      :actionButton=args.actionButton
+      :showIcon=args.showIcon
+      :dropdownProp=args.dropdownProp
+    />`,
   }),
   argTypes: {
     list: {
@@ -2358,15 +2363,6 @@ export const customContent = {
   },
 };
 
-Default.parameters = {
-  docs: {
-    source: {
-      code: `<dd-tree
-      :list="generatedArray"
-    />`,
-    },
-  },
-};
 
 Actions.parameters = {
   docs: {

@@ -50,7 +50,7 @@ export default {
     },
     srcLink: {
       type: String,
-      default: "https://img.freepik.com/free-icon/user_318-563642.jpg",
+      default: "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg",
     },
     altName: {
       type: String,

@@ -18,24 +18,28 @@ export const Default = {
       const value = ref([
         {
           name: "DropDown Menu 1",
+          icon: "DotHorizontal",
           value: 1,
         },
         {
           name: "DropDown Menu 2",
+          icon: "Trash",
           value: 2,
         },
         {
           name: "DropDown Menu 3",
+          icon: "Pencil",
           value: 3,
         },
         {
           name: "DropDown Menu 4",
+          icon: "Circle",
           value: 4,
         },
       ]);
       return { value, selected, args, onClickMethod };
     },
-    template: `<dd-dropdown v-model="selected"  :options="value" v-bind="args" />  `,
+    template: `<dd-dropdown v-model="selected"  :options="value" :label=args.label :type=args.type :showIcon=args.showIcon :color=args.color :size=args.size />  `,
   }),
   argTypes: {
     title: {
@@ -74,11 +78,19 @@ export const Default = {
     },
     type: {
       control: { type: "select" },
-      options: ["button", "text"],
-      description: "Accepted value button / text",
+      options: ["button"],
+      description: "Accepted value button",
       table: {
         defaultValue: {
-          summary: "text",
+          summary: "button",
+        },
+      },
+    },
+    showIcon: {
+      description: "show icon in list",
+      table: {
+        defaultValue: {
+          summary: true,
         },
       },
     },
@@ -208,13 +220,6 @@ export const Primary = {
   },
 };
 
-Default.parameters = {
-  docs: {
-    source: {
-      code: `<dd-dropdown v-model="selected"  :options="value" /> `,
-    },
-  },
-};
 Primary.parameters = {
   docs: {
     source: {

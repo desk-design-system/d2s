@@ -155,15 +155,11 @@ export default {
     },
     icon: {
       type: String,
-      default: null,
+      default: "Circle",
     },
     title: {
       type: String,
-      default: "",
-    },
-    disabled: {
-      type: Boolean,
-      default: false,
+      default: "button text",
     },
     block: {
       type: Boolean,
@@ -198,6 +194,10 @@ export default {
       },
       required: true,
       default: "textOnly",
+    },
+    disabled: {
+      type: Boolean,
+      default: false,
     },
   },
   inheritAttrs: false,

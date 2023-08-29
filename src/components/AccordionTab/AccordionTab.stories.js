@@ -16,14 +16,14 @@ export const Default = {
       DdAccordionTab,
     },
     setup() {
+      console.log(args.active, 'args');
       return {
         args,
       };
     },
-    template: `<dd-accordion :active="0" v-bind="args">
+    template: `<dd-accordion :active=args.active :title=args.title>
         <dd-accordion-tab
           title="Tab-1"
-          prepend-icon="SquareDot"
           v-bind="args"
         >
           <h3>This is tab 1</h3>
@@ -32,10 +32,14 @@ export const Default = {
   }),
   argTypes: {
     "prepend-icon": {
-      description: "Pass name of the icon to prepend in the titlw box",
+      description: "Pass name of the icon to prepend in the title box",
+      control: { type: "select" },
+      options: ["Alert", "SquareDot", "Circle", "Plus"],
     },
     "append-icon": {
-      description: "Pass name of the icon to append in the titlw box",
+      description: "Pass name of the icon to append in the title box",
+      control: { type: "select" },
+      options: ["Alert", "SquareDot", "Circle", "Plus"],
     },
     title: {
       description: "Title for the header.",
@@ -44,6 +48,7 @@ export const Default = {
     },
     badge: {
       description: "Using DdBadge with same name props",
+      type: { name: "string", required: true },
       defaultValue: "",
     },
     color: {

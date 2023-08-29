@@ -17,7 +17,7 @@ export const Default = {
         args,
       };
     },
-    template: `<dd-card content='The face of the moon in shadow.' elevation='sm' v-bind="args" /> `,
+    template: `<dd-card :content=args.content :elevation=args.elevation :headerX=args.headerX :headerY=args.headerY :x=args.x :y=args.y :header=args.header :title=args.title :subTitle=args.subTitle :className=args.className :rounded=args.rounded /> `,
   }),
   argTypes: {
     content: {
@@ -141,14 +141,6 @@ export const DefaultHeader = {
           summary: "-",
         },
       },
-    },
-  },
-};
-
-Default.parameters = {
-  docs: {
-    source: {
-      code: `<dd-card content='The face of the moon in shadow.' elevation='sm' /> `,
     },
   },
 };

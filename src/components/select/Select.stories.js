@@ -5,6 +5,7 @@ import { ref, computed } from "vue";
 export default {
   title: "Atoms/Select",
   component: DdSelect,
+  tags: ['autodocs'],
 };
 
 
@@ -12,7 +13,6 @@ export const Default = {
   render: (args) => ({
     components: {
       DdSelect,
-      tags: ["autodocs"],
     },
     setup() {
       const onClickMethod = () => action("clicked");
@@ -43,11 +43,12 @@ export const Default = {
         onClickMethod,
       };
     },
-    template: `<ddSelect v-model="selected" :options="optionsArr" v-bind="args" /> `,
+    template: `<ddSelect v-model="selected" :options="optionsArr" :label=args.label :showOnline=args.showOnline :isRequired=args.isRequired :placeholder=args.placeholder :listClass=args.listClass :showAvatar=args.showAvatar :srcLink=args.srcLink :size=args.size :checkIcon=args.checkIcon :addNewItem=args.addNewItem :filterable=args.filterable :disabled=args.disabled /> `,
   }),
   argTypes: {
     placeholder: {
       description: "Change placeholder value as per the requirement",
+      type: { name: "string", required: false },
       table: {
         defaultValue: {
           summary: "Search",
@@ -79,14 +80,6 @@ export const Default = {
           summary: null,
         },
       },
-    },
-  },
-};
-
-Default.parameters = {
-  docs: {
-    source: {
-      code: `<ddSelect v-model="selected" :options="optionsArr" />`,
     },
   },
 };

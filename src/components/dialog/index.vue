@@ -76,7 +76,7 @@ const props = defineProps( {
   },
   content: {
     type: String,
-    default: "",
+    default: "Lorem ipsum dolor sit amet.",
   },
   saveTitle: {
     type: String,

@@ -4,7 +4,6 @@ export default {
   title: "Atoms/Nav links",
   component: DdNavigation,
   tags: ["autodocs"],
-  // More on argTypes: https://storybook.js.org/docs/vue/api/argtypes
 };
 
 export const Default = {
@@ -17,7 +16,7 @@ export const Default = {
         args,
       };
     },
-    template: `<dd-navigation label="Side Navigation with Slots" v-bind="args" />`,
+    template: `<dd-navigation :label=args.label :active=args.active :prefixIcon=args.prefixIcon :suffixIcon=args.suffixIcon :prefix=args.prefix :suffix=args.suffix :disabled=args.disabled />`,
   }),
   argTypes: {
     label: {
@@ -547,13 +546,6 @@ export const Featured = {
   },
 };
 
-Default.parameters = {
-  docs: {
-    source: {
-      code: ` <dd-navigation label="Side Navigation with Slots" />`,
-    },
-  },
-};
 PrefixIcon.parameters = {
   docs: {
     source: {

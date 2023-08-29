@@ -16,7 +16,7 @@ export const Default = {
     const activeStep = ref(0);
     return { args, value, activeStep };
   },
-    template: `<dd-stepper :steps="value" :active="activeStep" v-bind="args" />`,
+    template: `<dd-stepper :steps="value" :active=args.active />`,
   }),
   argTypes: {
     steps: {

@@ -17,7 +17,7 @@ export const XS = {
         args,
       };
     },
-    template: `<dd-rating productRating="3" size="xs" v-bind="args" />`,
+    template: `<dd-rating :productRating=args.productRating :size=args.size />`,
   }),
   argTypes: {
     productRating: {
@@ -122,14 +122,6 @@ export const BASE = {
       },
       options: ["20", "24", "28"],
       description: "Change star rating height",
-    },
-  },
-};
-
-XS.parameters = {
-  docs: {
-    source: {
-      code: `<dd-rating productRating="3" size="xs" />`,
     },
   },
 };

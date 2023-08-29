@@ -11,6 +11,7 @@ export default {
   props: {
     toolTipText: {
       type: String,
+      default: "i'm Tooltip"
     },
     tooltipWidth: {
       type: String,

@@ -74,7 +74,7 @@ export default {
     },
     content: {
       type: String,
-      default: "",
+      default: "The face of the moon in shadow.",
     },
     customStyle: {
       type: String,
@@ -98,7 +98,7 @@ export default {
         // The value must match one of these strings
         return ["none", "sm", "lg", "xl"].indexOf(value) !== -1;
       },
-      default: "none",
+      default: "sm",
     },
     rounded: {
       type: String,

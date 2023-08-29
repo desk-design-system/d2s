@@ -17,7 +17,7 @@
             </slot>
             <dd-badge
               v-if="rightBadge"
-              title="2"
+              :title="title"
               :color="badgeColor(tab)"
               size="xs"
             />
@@ -35,7 +35,7 @@ const emits = defineEmits(["update:modelValue", "change"]);
 const props = defineProps({
   title: {
     type: String,
-    default: "",
+    default: "2",
   },
   rightBadge: {
     type: Boolean,

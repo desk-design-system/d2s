@@ -28,7 +28,6 @@
 
 <script setup>
 import { HomeIcon,ChevronRightIcon } from '@heroicons/vue/solid'
-import { ref, computed } from "vue"
 const emits = defineEmits( ['update:modelValue', "change"] )
 const props = defineProps( {
   items: {
@@ -41,7 +40,7 @@ const props = defineProps( {
   },
   full:{
     type: Boolean,
-    default: false
+    default: true
   },
   seprator: {
     type: String,

@@ -263,19 +263,23 @@ export const Default = {
       const values = ref([
         {
           name: "DropDown Menu 1",
+          icon: "DotHorizontal",
           value: 1,
           disabled: true,
         },
         {
           name: "DropDown Menu 2",
+          icon: "Trash",
           value: 2,
         },
         {
           name: "DropDown Menu 3",
+          icon: "Pencil",
           value: 3,
         },
         {
           name: "DropDown Menu 4",
+          icon: "Circle",
           value: 4,
         },
       ]);
@@ -289,7 +293,7 @@ export const Default = {
         values,
       };
     },
-    template: `<dd-table :rows="rows" :columns="columns" :buttons="buttons" :Actions="Actions" :values="values" v-bind="args" />`,
+    template: `<dd-table :rows="rows" :columns="columns" :buttons="buttons" :Actions="Actions" :values="values" :fixedHeight=args.fixedHeight :fixed=args.fixed :checkBoxProp=args.checkBoxProp :actionHeader=args.actionHeader :checkAllDisabled=args.checkAllDisabled :selected=args.selected :headerselectedActions=args.headerselectedActions :showIcon=args.showIcon :defaultRow=args.defaultRow :emptyState=args.emptyState :footer=args.footer :disabledLoadmore=args.disabledLoadmore :loadmoreLoader=args.loadmoreLoader :searchIcon=args.searchIcon :settingbarIcon=args.settingbarIcon :presistAction=args.presistAction :lastCell=args.lastCell :actionsPanel=args.actionsPanel :hoveringRow=args.hoveringRow :sortIcon=args.sortIcon :dragDrop=args.dragDrop />`,
   }),
   argTypes: {
     rows: {
@@ -796,14 +800,6 @@ export const Default = {
           summary: [],
         },
       },
-    },
-  },
-};
-
-Default.parameters = {
-  docs: {
-    source: {
-      code: `<dd-table :rows="rows" :columns="columns" :buttons="buttons" :Actions="Actions" :values="values" />`,
     },
   },
 };

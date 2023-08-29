@@ -23,7 +23,7 @@ const emits = defineEmits('onClick',)
 const props = defineProps({
   label: {
     type: String,
-    default: "",
+    default: "Side Navigation with Slots",
   },
   active: {
     type: Boolean,
