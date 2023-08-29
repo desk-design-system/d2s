@@ -40,7 +40,11 @@ watchEffect(async () => {
   const iconProp = ref(props.icon);
 
   myIcon.value = defineAsyncComponent(async () => {
-    return await import(`../icons/${iconProp.value}.vue`);
+    try {
+      return await import(`../icons/${iconProp.value}.vue`);
+    } catch (error) {
+      return await import("../icons/RoundX.vue");
+    }
   });
 });
 </script>
