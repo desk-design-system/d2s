@@ -1,7 +1,7 @@
 <template>
 
 <svg width="15.3333333px" height="26px" viewBox="0 0 15.3333333 26" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <title>Group 10</title>
+    
     <g id="✨-New-Ticket-Design-D2s-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <g id="Select-Category-Copy-2" transform="translate(-1308.333333, -175.000000)">
             <g id="Group" transform="translate(1300.000000, 172.000000)">

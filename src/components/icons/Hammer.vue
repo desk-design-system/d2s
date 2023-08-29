@@ -1,6 +1,6 @@
 <template>
     <svg width="25.4482299px" height="25.4464546px" viewBox="0 0 25.4482299 25.4464546" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <title>Group 13</title>
+    
     <g id="✨-New-Ticket-Design-D2s-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <g id="Select-Category-Copy-2" transform="translate(-1303.551472, -487.552298)">
             <g id="Group" transform="translate(1300.000000, 484.000000)">
