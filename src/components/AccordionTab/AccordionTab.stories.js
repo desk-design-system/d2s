@@ -32,9 +32,12 @@ export const Default = {
   argTypes: {
     "prepend-icon": {
       description: "Pass name of the icon to prepend in the titlw box",
+      type: { name: "string", required: true },
+
     },
     "append-icon": {
       description: "Pass name of the icon to append in the titlw box",
+      type: { name: "string", required: true },
     },
     title: {
       description: "Title for the header.",
@@ -80,9 +83,11 @@ export const PrependIcon = {
   argTypes: {
     "prepend-icon": {
       description: "Pass name of the icon to prepend in the titlw box",
+      type: { name: "string", required: true },
     },
     "append-icon": {
       description: "Pass name of the icon to append in the titlw box",
+      type: { name: "string", required: true },
     },
     title: {
       description: "Title for the header.",
