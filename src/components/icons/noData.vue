@@ -1,6 +1,6 @@
 <template>
 <svg width="137.37037px" height="124.468436px" viewBox="0 0 137.37037 124.468436" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <title>Atoms/illustrations/Generic window</title>
+    
     <defs>
         <rect id="path-1" x="0" y="0.00547303594" width="104.740741" height="75.8333333" rx="4.66666667"></rect>
         <filter x="-29.1%" y="-20.4%" width="158.2%" height="181.8%" filterUnits="objectBoundingBox" id="filter-2">

@@ -1,6 +1,6 @@
 <template>
 <svg width="35.8671586px" height="27.4994323px" viewBox="0 0 35.8671586 27.4994323" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <title>Game console repair</title>
+    
     <g id="Tickets-1.0" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <g id="POS-Icons" transform="translate(-829.1119, -269.0833)">
             <g id="Game-console-repair" transform="translate(827, 262)">
