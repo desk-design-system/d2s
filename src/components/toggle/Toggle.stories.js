@@ -5,6 +5,7 @@ import { ref } from "vue";
 export default {
   title: "Atoms/Switch",
   component: DdToggle,
+  tags: ["autodocs"],
 };
 
 export const Primary = {
@@ -16,7 +17,7 @@ export const Primary = {
       const switchState = ref(false);
       return { switchState, args, onClickMethod };
     },
-    template: `<dd-toggle v-model="switchState" size="base" v-bind="args"/>`,
+    template: `<dd-toggle v-model="switchState" :size=args.size :showIcon=args.showIcon />`,
   }),
   argTypes: {
     size: {
@@ -29,7 +30,7 @@ export const Primary = {
         },
       },
     },
-    showUocn: {
+    showIcon: {
       description: "Trigger to show icon",
       table: {
         defaultValue: {
@@ -69,14 +70,6 @@ export const Icon = {
           summary: "False",
         },
       },
-    },
-  },
-};
-
-Primary.parameters = {
-  docs: {
-    source: {
-      code: `<dd-toggle v-model="switchState" size="base" />`,
     },
   },
 };

@@ -13,6 +13,7 @@
         class="!dd-pointer-events-none !dd-absolute !dd-inset-y-0 !dd-left-0 !dd-flex !dd-items-center !dd-pl-3 !dd-pr-3"
       >
         <svgIcon
+          class="dd-text-gray-400"
           :class="[
             hasError
               ? ' !dd-border-red-600 focus:!dd-border-red-600 dd-focus:!dd-ring-red-600'
@@ -186,7 +187,7 @@ const props = defineProps({
   },
   icon: {
     type: String,
-    default: null,
+    default: "Search",
   },
   hintTextColor: {
     type: String,

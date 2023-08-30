@@ -4,6 +4,7 @@ import DdStepper from "./index.vue";
 export default {
   title: "Atoms/Stepper",
   component: DdStepper,
+  tags: ["autodocs"],
 };
 
 
@@ -15,7 +16,7 @@ export const Default = {
     const activeStep = ref(0);
     return { args, value, activeStep };
   },
-    template: `<dd-stepper :steps="value" :active="activeStep" v-bind="args" />`,
+    template: `<dd-stepper :steps="value" :active=args.active />`,
   }),
   argTypes: {
     steps: {

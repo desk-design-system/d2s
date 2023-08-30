@@ -2,6 +2,7 @@ import DdDivider from "./index.vue";
 export default {
   title: "Atoms/Divider",
   component: DdDivider,
+  tags: ["autodocs"],
 };
 
 export const Default = {
@@ -14,7 +15,7 @@ export const Default = {
         args,
       };
     },
-    template: `<dd-divider v-bind="args" /> `,
+    template: `<dd-divider :title=args.title :placement=args.placement :buttonTitle=args.buttonTitle :buttonContent=args.buttonContent :buttonType=args.buttonType :buttonSize=args.buttonSize :buttonIcon=args.buttonIcon /> `,
   }),
   argTypes: {
     title: {
@@ -45,6 +46,8 @@ export const Default = {
     },
     buttonContent: {
       description: "Set content type using button content prop here",
+      control: { type: "select" },
+      options: ["textOnly", "leftIcon", "rightIcon", "iconOnly"],
       table: {
         defaultValue: {
           summary: "textOnly",
@@ -53,6 +56,8 @@ export const Default = {
     },
     buttonType: {
       description: "Set button type using button type prop here",
+      control: { type: "select" },
+      options: ["primary", "secondary", "tertiary", "danger"],
       table: {
         defaultValue: {
           summary: "secondary",
@@ -60,6 +65,8 @@ export const Default = {
       },
     },
     buttonSize: {
+      control: { type: "select" },
+      options: ["xs", "sm", "base", "lg", "xl"],
       description: "Set button size using button size prop here",
       table: {
         defaultValue: {
@@ -69,6 +76,8 @@ export const Default = {
     },
     buttonIcon: {
       description: "Set button icon using button icon prop here",
+      control: { type: "select" },
+      options: ["Alert", "SquareDot", "Circle", "Plus"],
       table: {
         defaultValue: {
           summary: "Plus",
@@ -226,7 +235,6 @@ export const TitleLeft = {
   },
 };
 
-
 export const DivierWithButton = {
   render: (args) => ({
     components: {
@@ -297,14 +305,6 @@ export const DivierWithButton = {
           summary: "Plus",
         },
       },
-    },
-  },
-};
-
-Default.parameters = {
-  docs: {
-    source: {
-      code: ` <dd-divider />`,
     },
   },
 };

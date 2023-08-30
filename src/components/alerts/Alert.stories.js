@@ -1,12 +1,13 @@
 import ddAlert from "./index.vue";
 import DdButton from "../buttons/index.vue"
-// More on default export: https://storybook.js.org/docs/vue/writing-stories/introduction#default-export
+
 export default {
   title: "Atoms/Alert",
   component: ddAlert,
+  tags: ['autodocs'],
 };
 
-export const Warning = {
+export const Default = {
   render: (args) => ({
     components: {
       ddAlert,
@@ -16,7 +17,7 @@ export const Warning = {
         args,
       };
     },
-    template: `<dd-alert  type="warning" title="warning alert" v-bind="args" />`,
+    template: `<dd-alert :title="args.title" :type="args.type" :description="args.description" :closable="args.closable" /> `,
   }),
   argTypes: {
     type: {
@@ -317,15 +318,6 @@ export const AlertWithSlot = {
       },
     },
     onClick: { action: "clicked" },
-  },
-};
-
-Warning.parameters = {
-  docs: {
-    source: {
-      code: ` 
-        <dd-alert  type="warning" title="warning alert" />`,
-    },
   },
 };
 

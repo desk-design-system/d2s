@@ -4,6 +4,7 @@ import { ref } from "vue";
 export default {
   title: "Atoms/Checkbox",
   component: DdCheckbox,
+  tags: ['autodocs'],
 };
 
 export const Default = {
@@ -15,24 +16,17 @@ export const Default = {
       const selected = ref("");
       return { selected, args };
     },
-    template: `<dd-checkbox v-model="selected" label="CheckBox Label" v-bind="args" /> `,
+    template: `<dd-checkbox v-model="selected" :label=args.label :checked=args.checked :value=args.value :disabled=args.disabled /> `,
   }),
   argTypes: {
     label: {
       description: "Change label value as per the requirement",
+      type: { name: "string", required: true },
       table: {
         defaultValue: {
-          summary: "test",
+          summary: "String",
         },
       },
-    },
-  },
-};
-
-Default.parameters = {
-  docs: {
-    source: {
-      code: `<dd-checkbox v-model="selected" label="CheckBox Label" />`,
     },
   },
 };

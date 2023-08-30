@@ -359,11 +359,11 @@ const props = defineProps({
   },
   searchIcon: {
     type: Boolean,
-    default: false,
+    default: true,
   },
   settingbarIcon: {
     type: Boolean,
-    default: false,
+    default: true,
   },
   presistAction: {
     type: Boolean,
@@ -375,7 +375,7 @@ const props = defineProps({
   },
   actionsPanel: {
     type: Boolean,
-    default: false,
+    default: true,
   },
   limitVal: {
     type: Number,

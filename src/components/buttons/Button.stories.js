@@ -6,6 +6,7 @@ import { action } from "@storybook/addon-actions";
 export default {
   title: "Atoms/Button",
   component: DdButton,
+  tags: ["autodocs"],
   // More on argTypes: https://storybook.js.org/docs/vue/api/argtypes
 };
 
@@ -18,7 +19,7 @@ export const Default = {
       const onClickMethod = () => action("clicked");
       return { args, onClickMethod };
     },
-    template: `<dd-button title="button text" v-bind="args" />`,
+    template: `<dd-button :title=args.title :type=args.type :content=args.content :size=args.size :block=args.block :loader=args.loader :disabled=args.disabled />`,
   }),
   argTypes: {
     type: {
@@ -26,6 +27,16 @@ export const Default = {
       options: ["primary", "secondary", "tertiary", "danger"],
       description:
         "By default button type is color less so change the props default / primary / tertiary / danger",
+      table: {
+        defaultValue: {
+          summary: "default",
+        },
+      },
+    },
+    icon: {
+      control: { type: "select" },
+      options: ["Alert", "SquareDot", "Circle", "Plus"],
+      description: "Pass name of the icon to prepend in the title box",
       table: {
         defaultValue: {
           summary: "default",
@@ -298,14 +309,6 @@ export const rightIcon = {
           summary: "default",
         },
       },
-    },
-  },
-};
-
-Default.parameters = {
-  docs: {
-    source: {
-      code: `<dd-button title="button text" />`,
     },
   },
 };

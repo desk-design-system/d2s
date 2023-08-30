@@ -3,6 +3,26 @@ import DdPagination from "./index.vue";
 export default {
   title: "Atoms/Pagination",
   component: DdPagination,
+  tags: ["autodocs"],
+};
+
+export const Default = {
+  render: (args) => ({
+    components: {
+      DdPagination,
+    },
+    setup() {
+      return {
+        args,
+      };
+    },
+    template: ` <DdPagination
+      :count="args.count"
+      :limit="args.limit"
+      :offset="args.offset"
+      @fetch-data="getData"
+    />`,
+  }),
   argTypes: {
     count: {
       control: { type: "number" },
@@ -29,41 +49,16 @@ export default {
   },
 };
 
-export const Default = {
-  render: (args) => ({
-    components: {
-      DdPagination,
-    },
-    setup() {
-      return {
-        args,
-      };
-    },
-    template: ` <DdPagination
-      :count="100"
-      :limit="10"
-      :offset="offset"
-      @fetch-data="getData"
-      v-bind="args"
-    />`,
-  }),
-  args: {
-    count: 100,
-    limit: 10,
-    offset: 0,
-  },
-};
-
-Default.parameters = {
-  docs: {
-    source: {
-      code: ` 
-      <DdPagination
-      :count="100"
-      :limit="10"
-      :offset="0"
-      @fetch-data="getData"
-    />`,
-    },
-  },
-};
+// Default.parameters = {
+//   docs: {
+//     source: {
+//       code: ` 
+//       <DdPagination
+//       :count="100"
+//       :limit="10"
+//       :offset="0"
+//       @fetch-data="getData"
+//     />`,
+//     },
+//   },
+// };

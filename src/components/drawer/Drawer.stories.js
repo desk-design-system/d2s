@@ -7,6 +7,7 @@ import { ref } from "vue";
 export default {
   title: "Molecules/Drawer",
   component: DdDrawer,
+  tags: ['autodocs'],
 };
 
 export const Default = {
@@ -23,7 +24,7 @@ export const Default = {
       return { args, show, openDrawer };
     },
     template: `<dd-button title="Default Drawer" content="textOnly" type="secondary" @click="openDrawer"/>
-    <dd-drawer @close="show = false" v-model="show" title="Header" size="30" v-bind="args" />`,
+    <dd-drawer @close="show = false" v-model="show" :title=args.title :saveTitle=args.saveTitle :closeTitle=args.closeTitle :size=args.size :position=args.position :footer=args.footer :primaryHeader=args.primaryHeader :zIndex=args.zIndex />`,
   }),
   argTypes: {
     title: {
@@ -359,14 +360,6 @@ export const Footer = {
           summary: false,
         },
       },
-    },
-  },
-};
-
-Default.parameters = {
-  docs: {
-    source: {
-      code: `<dd-drawer @close="show = false" v-model="show" title="Header" size="30" />`,
     },
   },
 };

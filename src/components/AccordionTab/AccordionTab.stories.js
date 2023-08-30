@@ -5,6 +5,7 @@ import DdAccordionTab from "./index.vue";
 export default {
   title: "Atoms/Accordion",
   component: DdAccordion,
+  tags: ['autodocs'],
 };
 
 // More on component templates: https://storybook.js.org/docs/vue/writing-stories/introduction#using-args
@@ -15,14 +16,14 @@ export const Default = {
       DdAccordionTab,
     },
     setup() {
+      console.log(args.active, 'args');
       return {
         args,
       };
     },
-    template: `<dd-accordion :active="0" v-bind="args">
+    template: `<dd-accordion :active=args.active :title=args.title>
         <dd-accordion-tab
           title="Tab-1"
-          prepend-icon="SquareDot"
           v-bind="args"
         >
           <h3>This is tab 1</h3>
@@ -31,13 +32,14 @@ export const Default = {
   }),
   argTypes: {
     "prepend-icon": {
-      description: "Pass name of the icon to prepend in the titlw box",
-      type: { name: "string", required: true },
-
+      description: "Pass name of the icon to prepend in the title box",
+      control: { type: "select" },
+      options: ["Alert", "SquareDot", "Circle", "Plus"],
     },
     "append-icon": {
-      description: "Pass name of the icon to append in the titlw box",
-      type: { name: "string", required: true },
+      description: "Pass name of the icon to append in the title box",
+      control: { type: "select" },
+      options: ["Alert", "SquareDot", "Circle", "Plus"],
     },
     title: {
       description: "Title for the header.",
@@ -46,6 +48,7 @@ export const Default = {
     },
     badge: {
       description: "Using DdBadge with same name props",
+      type: { name: "string", required: true },
       defaultValue: "",
     },
     color: {
@@ -83,11 +86,9 @@ export const PrependIcon = {
   argTypes: {
     "prepend-icon": {
       description: "Pass name of the icon to prepend in the titlw box",
-      type: { name: "string", required: true },
     },
     "append-icon": {
       description: "Pass name of the icon to append in the titlw box",
-      type: { name: "string", required: true },
     },
     title: {
       description: "Title for the header.",
@@ -230,82 +231,6 @@ export const Color = {
     },
     "#title": {
       description: "Header slot.",
-    },
-  },
-};
-
-Default.parameters = {
-  docs: {
-    source: {
-      code: `<dd-accordion :active="0">
-      <dd-accordion-tab
-        title="Tab-1"
-        prepend-icon="SquareDot"
-      >
-        <h3>This is tab 1</h3>
-      </dd-accordion-tab>
-    </dd-accordion>`,
-    },
-  },
-};
-PrependIcon.parameters = {
-  docs: {
-    source: {
-      code: ` <dd-accordion  :active="1" :multiple='false'>
-    <dd-accordion-tab  prepend-icon="Checklist" title="Tab-1" >
-        <h3>This is tab</h3>
-    </dd-accordion-tab>
-   
-</dd-accordion>`,
-    },
-  },
-};
-AppendIcon.parameters = {
-  docs: {
-    source: {
-      code: ` <dd-accordion  :active="1" :multiple='false'>
-    <dd-accordion-tab  append-icon="Checklist" title="Tab-1" >
-        <h3>This is tab</h3>
-    </dd-accordion-tab>
-
-</dd-accordion>`,
-    },
-  },
-};
-
-Badge.parameters = {
-  docs: {
-    source: {
-      code: `<dd-accordion :active="1">
-        <dd-accordion-tab
-          title="Tab-1"
-          prepend-icon="SquareDot"
-          badge="Page $100.00"
-          closable
-          dot
-        >
-          <h3>This is tab 1</h3>
-        </dd-accordion-tab>
-      </dd-accordion>`,
-    },
-  },
-};
-
-Color.parameters = {
-  docs: {
-    source: {
-      code: `<dd-accordion :active="1" color="blue">
-      <dd-accordion-tab
-        title="Tab-1"
-        prepend-icon="SquareDot"
-        badge="Page $100.00"
-        closable
-        dot
-        color="fuchsia"
-      >
-        <h3>This is tab 1</h3>
-      </dd-accordion-tab>
-    </dd-accordion>`,
     },
   },
 };

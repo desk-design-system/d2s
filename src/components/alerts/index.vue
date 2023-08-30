@@ -97,11 +97,11 @@ export default {
     },
     title: {
       type: String,
-      default: "",
+      default: "warning alert",
     },
     description: {
       type: String,
-      default: "",
+      default: "warning alert description",
     },
     type: {
       type: String,

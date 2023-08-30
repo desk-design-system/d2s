@@ -4,10 +4,12 @@ import DdButton from "../buttons/index.vue";
 export default {
   title: "Atoms/Confirmation Modal",
   component: DdButton,
+  tags: ['autodocs'],
   // More on argTypes: https://storybook.js.org/docs/vue/api/argtypes
   argTypes: {
     title: {
       description: "Add modal Title",
+      type: { name: "string", required: true },
       table: {
         defaultValue: {
           summary: "Delete Unit",
@@ -16,6 +18,7 @@ export default {
     },
     message: {
       description: "Add modal message",
+      type: { name: "string", required: true },
       table: {
         defaultValue: {
           summary:
@@ -25,6 +28,7 @@ export default {
     },
     saveTitle: {
       description: "Success button title",
+      type: { name: "string", required: true },
       table: {
         defaultValue: {
           summary: "Yes, Delete",
@@ -33,6 +37,7 @@ export default {
     },
     closeTitle: {
       description: "Close button title",
+      type: { name: "string", required: true },
       table: {
         defaultValue: {
           summary: "Close",
@@ -57,6 +62,7 @@ export default {
     },
     type: {
       description: "primary, succeess, warning, error types",
+      type: { name: "string", required: true },
       table: {
         defaultValue: {
           summary: "",
@@ -65,6 +71,7 @@ export default {
     },
     modalWidth: {
       description: "Modal width",
+      type: { name: "string", required: true },
       table: {
         defaultValue: {
           summary: "45%",
@@ -90,21 +97,6 @@ const Template = (args) => ({
       modalWidth: "45%",
     };
 
-    const showMessageBoxWarning = () => {
-      modal
-        .warning(
-          "Delete Unit",
-          "Are you sure you want to delete this unit from the multistore? This action cannot be undone",
-          "",
-          "Yes, Delete",
-          "Close",
-          true,
-          true,
-          "45%"
-        )
-        .then(() => console.log("accepted"))
-        .catch(() => console.log("rejected"));
-    };
     const showMessageBoxErrorOptions = () => {
       modal
         .error(options)

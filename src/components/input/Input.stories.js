@@ -6,6 +6,7 @@ import { ref } from "vue";
 export default {
   title: "Atoms/Input",
   component: DdInput,
+  tags: ['autodocs'],
 };
 
 export const Default = {
@@ -23,11 +24,12 @@ export const Default = {
 
       return { selected, args, editInput, resetInput, onClickMethod };
     },
-    template: `<dd-input v-model="selected" label="Basic Input" v-bind="args" />`,
+    template: `<dd-input v-model="selected" :label=args.label :size=args.size :placeholder=args.placeholder :prefix=args.prefix :suffix=args.suffix :icon=args.icon :rules=args.rules :closeButton=args.closeButton :successIcon=args.successIcon :closeIcon=args.closeIcon :disabled=args.disabled :hintText=args.hintText :hintTextColor=args.hintTextColor :hintTextBorder=args.hintTextBorder :type=args.type :Border=args.Border />`,
   }),
   argTypes: {
     label: {
       description: "Change label value as per the requirement",
+      type: { name: "string", required: true },
       table: {
         defaultValue: {
           summary: "",
@@ -442,13 +444,6 @@ export const suffixButton = {
   },
 };
 
-Default.parameters = {
-  docs: {
-    source: {
-      code: `<dd-input v-model="selected" label="Basic Input"></dd-input>`,
-    },
-  },
-};
 PrefixIcon.parameters = {
   docs: {
     source: {

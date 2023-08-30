@@ -5,9 +5,8 @@ import { ref } from "vue";
 export default {
   title: "Atoms/TextArea",
   component: DdTextarea,
+  tags: ["autodocs"],
 };
-
-
 
 export const Default = {
   render: (args) => ({
@@ -17,7 +16,7 @@ export const Default = {
       const selected = ref("");
       return { selected, args, onClickMethod };
     },
-    template: `<dd-textarea v-model="selected" v-bind="args"/>`,
+    template: `<dd-textarea v-model="selected" :label=args.label :placeholder=args.placeholder :rows=args.rows :rules=args.rules />`,
   }),
   argTypes: {
     label: {
@@ -54,14 +53,6 @@ export const Default = {
           summary: null,
         },
       },
-    },
-  },
-};
-
-Default.parameters = {
-  docs: {
-    source: {
-      code: `<dd-textarea v-model="selected" />`,
     },
   },
 };

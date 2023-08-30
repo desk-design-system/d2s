@@ -4,6 +4,7 @@ import DdSetting from "./index.vue";
 export default {
   title: "Atoms/Inner Page Menu",
   component: DdSetting,
+  tags: ["autodocs"],
   // More on argTypes: https://storybook.js.org/docs/vue/api/argtypes
 };
 
@@ -127,7 +128,7 @@ export const Default = {
         settings,
       };
     },
-    template: ` <dd-setting :settings="settings" v-bind="args" />`,
+    template: ` <dd-setting :settings="settings" :prefixIcon=args.prefixIcon :suffixIcon=args.suffixIcon :prefix=args.prefix :suffix=args.suffix :scrollProperty=args.scrollProperty :scrollValue=args.scrollValue />`,
   }),
   argTypes: {
     settings: {
@@ -255,14 +256,6 @@ export const Default = {
           summary: null,
         },
       },
-    },
-  },
-};
-
-Default.parameters = {
-  docs: {
-    source: {
-      code: ` <dd-setting :settings="settings" />`,
     },
   },
 };

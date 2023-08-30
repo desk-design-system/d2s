@@ -1,12 +1,11 @@
-import DdRating from "./index.vue"
+import DdRating from "./index.vue";
 
 // More on default export: https://storybook.js.org/docs/vue/writing-stories/introduction#default-export
 export default {
-  title: 'Atoms/Rating',
+  title: "Atoms/Rating",
   component: DdRating,
-}
-
-
+  tags: ["autodocs"],
+};
 
 export const XS = {
   render: (args) => ({
@@ -18,31 +17,30 @@ export const XS = {
         args,
       };
     },
-    template: `<dd-rating productRating="3" size="xs" v-bind="args" />`,
+    template: `<dd-rating :productRating=args.productRating :size=args.size />`,
   }),
   argTypes: {
     productRating: {
       control: {
-        type: 'select'
+        type: "select",
       },
       options: [1, 2, 3, 4, 5],
       description: "Change rating values",
       table: {
         defaultValue: {
-          summary: 3
-        }
-      }
+          summary: 3,
+        },
+      },
     },
     size: {
       control: {
-        type: 'select'
+        type: "select",
       },
-      options: ['xs', 'sm', 'base'],
+      options: ["xs", "sm", "base"],
       description: "Change star rating width",
     },
-  }
+  },
 };
-
 
 export const SM = {
   render: (args) => ({
@@ -59,33 +57,32 @@ export const SM = {
   argTypes: {
     productRating: {
       control: {
-        type: 'select'
+        type: "select",
       },
       options: [1, 2, 3, 4, 5],
       description: "Change rating values",
       table: {
         defaultValue: {
-          summary: 3
-        }
-      }
+          summary: 3,
+        },
+      },
     },
     starWidth: {
       control: {
-        type: 'select'
+        type: "select",
       },
-      options: ['20', '24', '28'],
+      options: ["20", "24", "28"],
       description: "Change star rating width",
     },
     starHeight: {
       control: {
-        type: 'select'
+        type: "select",
       },
-      options: ['20', '24', '28'],
+      options: ["20", "24", "28"],
       description: "Change star rating height",
     },
-  }
+  },
 };
-
 
 export const BASE = {
   render: (args) => ({
@@ -102,37 +99,29 @@ export const BASE = {
   argTypes: {
     productRating: {
       control: {
-        type: 'select'
+        type: "select",
       },
       options: [1, 2, 3, 4, 5],
       description: "Change rating values",
       table: {
         defaultValue: {
-          summary: 3
-        }
-      }
+          summary: 3,
+        },
+      },
     },
     starWidth: {
       control: {
-        type: 'select'
+        type: "select",
       },
-      options: ['20', '24', '28'],
+      options: ["20", "24", "28"],
       description: "Change star rating width",
     },
     starHeight: {
       control: {
-        type: 'select'
+        type: "select",
       },
-      options: ['20', '24', '28'],
+      options: ["20", "24", "28"],
       description: "Change star rating height",
-    },
-  }
-};
-
-XS.parameters = {
-  docs: {
-    source: {
-      code: `<dd-rating productRating="3" size="xs" />`,
     },
   },
 };

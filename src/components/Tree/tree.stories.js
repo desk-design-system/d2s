@@ -4,6 +4,7 @@ import { ref } from "vue";
 export default {
   title: "Atoms/Tree",
   component: DdTree,
+  tags: ["autodocs"],
 };
 
 export const Default = {
@@ -117,12 +118,17 @@ export const Default = {
 
       return { generatedArray, args, buttons, values };
     },
-    template: `<div> 
-    <dd-tree
-      v-bind="args"
+    template: `<dd-tree
       :list="generatedArray"
-    />
-    </div>`,
+      :buttons="buttons"
+      :values="values"
+      :checkBoxProp=args.checkBoxProp
+      :customContent=args.customContent
+      :badge=args.badge
+      :actionButton=args.actionButton
+      :showIcon=args.showIcon
+      :dropdownProp=args.dropdownProp
+    />`,
   }),
   argTypes: {
     list: {
@@ -135,7 +141,7 @@ export const Default = {
 
           for (let i = 0; i < numChildren; i++) {
             const childId = nextId++;
-            const childLabel = 'Child ${'childId'}';
+            const childLabel = 'Child ${"childId"}';
             const child = {
               id: childId,
               label: childLabel,
@@ -164,7 +170,7 @@ export const Default = {
 
         for (let i = 0; i < numTopLevelItems; i++) {
           const topLevelId = nextId++;
-          const topLevelLabel = 'Top Level ${'topLevelId'}';
+          const topLevelLabel = 'Top Level ${"topLevelId"}';
           const topLevelItem = {
             id: topLevelId,
             label: topLevelLabel,
@@ -2357,15 +2363,6 @@ export const customContent = {
   },
 };
 
-Default.parameters = {
-  docs: {
-    source: {
-      code: `<dd-tree
-      :list="generatedArray"
-    />`,
-    },
-  },
-};
 
 Actions.parameters = {
   docs: {

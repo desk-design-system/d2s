@@ -5,6 +5,7 @@ import { ref } from "vue";
 export default {
   title: "Atoms/TelInput",
   component: DdTelInput,
+  tags: ["autodocs"],
 };
 
 export const Default = {

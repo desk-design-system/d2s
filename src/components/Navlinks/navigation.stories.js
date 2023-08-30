@@ -3,10 +3,8 @@ import DdNavigation from "./index.vue";
 export default {
   title: "Atoms/Nav links",
   component: DdNavigation,
-  // More on argTypes: https://storybook.js.org/docs/vue/api/argtypes
-  
+  tags: ["autodocs"],
 };
-
 
 export const Default = {
   render: (args) => ({
@@ -18,7 +16,7 @@ export const Default = {
         args,
       };
     },
-    template: `<dd-navigation label="Side Navigation with Slots" v-bind="args" />`,
+    template: `<dd-navigation :label=args.label :active=args.active :prefixIcon=args.prefixIcon :suffixIcon=args.suffixIcon :prefix=args.prefix :suffix=args.suffix :disabled=args.disabled />`,
   }),
   argTypes: {
     label: {
@@ -187,7 +185,6 @@ export const PrefixIcon = {
     },
   },
 };
-
 
 export const suffixIcon = {
   render: (args) => ({
@@ -369,7 +366,6 @@ export const Active = {
   },
 };
 
-
 export const Disabled = {
   render: (args) => ({
     components: {
@@ -459,7 +455,6 @@ export const Disabled = {
     },
   },
 };
-
 
 export const Featured = {
   render: (args) => ({
@@ -551,14 +546,6 @@ export const Featured = {
   },
 };
 
-
-Default.parameters = {
-  docs: {
-    source: {
-      code: ` <dd-navigation label="Side Navigation with Slots" />`,
-    },
-  },
-};
 PrefixIcon.parameters = {
   docs: {
     source: {

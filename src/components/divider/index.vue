@@ -1,7 +1,7 @@
 <template>
   <div class="dd-relative dd-my-2">
     <div class="dd-absolute dd-inset-0 dd-flex dd-items-center" aria-hidden="true">
-      <div class="dd-w-full dd-border-t dd-border-gray-300" />
+      <div class="dd-w-full dd-border-t !dd-border-gray-300" />
     </div>
     <div v-if="title && !buttonTitle" :class="`dd-relative dd-flex dd-justify-${placement}`">
       <span class="dd-bg-white dd-px-2 dd-text-sm dd-text-gray-500">{{ title }}</span>

@@ -39,7 +39,7 @@ export default {
   props: {
     title: {
       type: String,
-      default: "",
+      default: "badge",
     },
     rounded: {
       type: Boolean,

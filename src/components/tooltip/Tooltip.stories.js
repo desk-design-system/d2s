@@ -3,6 +3,7 @@ import ddTooltip from "./index.vue";
 export default {
   title: "Atoms/Tooltip",
   component: ddTooltip,
+  tags: ["autodocs"],
 };
 
 export const ToolTip = {
@@ -13,16 +14,8 @@ export const ToolTip = {
         args,
       };
     },
-    template: `<ddTooltip toolTipPosition="top" toolTipText="i'm Tooltip"> Hover on me </ddTooltip>`,
+    template: `<ddTooltip toolTipPosition="top" toolTipText="i'm Tooltip" :toolTipPosition=args.toolTipPosition :isAnimate=args.isAnimate :fixedStyle=args.fixedStyle :fixedStylePin=args.fixedStylePin :disabled=args.disabled > Hover on me </ddTooltip>`,
   }),
   args: {
-  },
-};
-
-ToolTip.parameters = {
-  docs: {
-    source: {
-      code: `<ddTooltip toolTipPosition="top" toolTipText="i'm Tooltip"> Hover on me </ddTooltip>`,
-    },
   },
 };

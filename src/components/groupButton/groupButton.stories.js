@@ -5,6 +5,7 @@ import svgIcon from "../svgIcon/index.vue";
 export default {
   title: "Atoms/Group button",
   component: DdGroupButton,
+  tags: ['autodocs'],
 };
 
 export const Default = {

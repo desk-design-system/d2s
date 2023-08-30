@@ -5,6 +5,7 @@ import { ref, computed } from "vue";
 export default {
   title: "Atoms/Auto Search",
   component: DdAutoSearch,
+  tags: ['autodocs'],
 };
 
 export const Default = {
@@ -54,9 +55,10 @@ export const Default = {
         people,
         onClickMethod,
         query,
+        args
       };
     },
-    template: `<dd-autoSearch v-model="selected"  :options="filteredData" @searchQuery="query = $event" v-bind="args" />`,
+    template: `<dd-autoSearch v-model="selected"  :options="filteredData" @searchQuery="query = $event" :label=args.label :prefix=args.prefix :suffix=args.suffix :loader=args.loader :disabled=args.disabled :icon=args.icon :placeholder=args.placeholder :size=args.size />`,
   }),
   argTypes: {
     label: {
@@ -134,14 +136,6 @@ export const Default = {
           summary: null,
         },
       },
-    },
-  },
-};
-
-Default.parameters = {
-  docs: {
-    source: {
-      code: ` <dd-autoSearch v-model="selected"  :options="filteredData" @searchQuery="query = $event"  />`,
     },
   },
 };

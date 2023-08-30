@@ -4,6 +4,7 @@ import { ref } from "vue";
 export default {
   title: "Atoms/RadioGroup",
   component: DdRadio,
+  tags: ['autodocs'],
 };
 
 export const Default = {
@@ -33,7 +34,7 @@ export const Default = {
       ]);
       return { value, selected, args };
     },
-    template: `<dd-radio v-model="selected"  :options="value" v-bind="args" />`,
+    template: `<dd-radio v-model="selected"  :options="value" :list=args.list :disabled=args.disabled />`,
   }),
   argTypes: {
     options: {
@@ -100,14 +101,6 @@ export const list = {
           summary: false,
         },
       },
-    },
-  },
-};
-
-Default.parameters = {
-  docs: {
-    source: {
-      code: `<dd-radio v-model="selected" :options="value" />`,
     },
   },
 };

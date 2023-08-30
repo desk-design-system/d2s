@@ -11,6 +11,7 @@ import {
 export default {
   title: "Molecules/Tabs",
   component: DdTabs,
+  tags: ["autodocs"],
 };
 
 export const Underline36 = {
@@ -45,7 +46,7 @@ export const Underline36 = {
       ]);
       return { value, selected, args, onClickMethod };
     },
-    template: `<dd-tabs v-model="selected" :tabs="value" v-bind="args" />`,
+    template: `<dd-tabs v-model="selected" :tabs="value" :type=args.type :rightBadge=args.rightBadge :title=args.title :borderBottom=args.borderBottom  />`,
   }),
   argTypes: {
     tabs: {
@@ -246,14 +247,6 @@ export const PillWithBadge = {
           summary: false,
         },
       },
-    },
-  },
-};
-
-Underline36.parameters = {
-  docs: {
-    source: {
-      code: `<dd-tabs v-model="selected" :tabs="value" />`,
     },
   },
 };
