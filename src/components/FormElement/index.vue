@@ -1,15 +1,28 @@
 <template>
   <div v-bind="$attrs" class="dd-flex dd-flex-col dd-gap-1">
-    <div class="dd-text-gray-700 dd-text-sm dd-font-medium">{{ label }}</div>
+    <div class="dd-block dd-text-gray-700 dd-text-sm dd-font-medium">
+      {{ label }} <span v-if="isRequired" class="dd-text-red-500">*</span>
+    </div>
     <div :class="[slotSizes]">
       <slot></slot>
     </div>
-    <div :class="[size === 'flexible' && counter ? 'dd-flex dd-items-center dd-justify-between' : '']">
+    <div
+      v-if="!errorMessage"
+      :class="[
+        size === 'flexible' && counter
+          ? 'dd-flex dd-items-center dd-justify-between'
+          : '',
+      ]"
+    >
       <div class="dd-text-sm dd-font-medium" :class="colorProperty">
         {{ description }}
       </div>
-      <div class="dd-text-sm dd-font-medium" v-if="size === 'flexible' && counter" :class="colorProperty">
-        {{ counter ? `(${counter})` : '' }}
+      <div
+        class="dd-text-sm dd-font-medium"
+        v-if="size === 'flexible' && counter"
+        :class="colorProperty"
+      >
+        {{ counter ? `(${counter})` : "" }}
       </div>
     </div>
   </div>
@@ -27,16 +40,24 @@ const props = defineProps({
     type: String,
     default: "Extra message or notification.",
   },
-  counter : {
+  errorMessage: {
+    type: Boolean,
+    default: null,
+  },
+  counter: {
     type: String,
     default: "",
+  },
+  isRequired: {
+    type: Boolean,
+    default: false,
   },
   hintTextColor: {
     type: String,
     validator: function (value) {
-      return ["default", "error"].indexOf(value) !== -1;
+      return ["gray", "red"].indexOf(value) !== -1;
     },
-    default: "default",
+    default: "gray",
   },
   size: {
     type: String,
@@ -44,7 +65,7 @@ const props = defineProps({
       // The value must match one of these strings
       return ["base", "lg", "flexible"].indexOf(value) !== -1;
     },
-    default: "base",
+    default: "flexible",
   },
 });
 
@@ -59,7 +80,7 @@ const slotSizes = computed(() => {
 });
 
 const colorProperty = computed(() => {
-  if (props.hintTextColor === "error") {
+  if (props.hintTextColor === "red") {
     return "dd-text-red-500";
   } else {
     return "dd-text-gray-500";
@@ -67,5 +88,4 @@ const colorProperty = computed(() => {
 });
 </script>
 
-<style>
-</style>
+<style></style>

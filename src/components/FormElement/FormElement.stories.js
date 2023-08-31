@@ -18,7 +18,7 @@ export const Default = {
         args,
       };
     },
-    template: `<dd-form-element :title=args.title :description=args.description :size=args.size :hintTextColor=args.hintTextColor :counter=args.counter /> `,
+    template: `<dd-form-element :title=args.title :description=args.description :size=args.size :hintTextColor=args.hintTextColor :counter=args.counter :isRequired=args.isRequired /> `,
   }),
   argTypes: {
     label: {
@@ -39,6 +39,10 @@ export const Default = {
         },
       },
     },
+    isRequired: {
+      description: "Title for the header.",
+      defaultValue: "",
+    },
     description: {
       description: "Set title for wrapper",
       table: {
@@ -49,7 +53,7 @@ export const Default = {
     },
     hintTextColor: {
       description:
-        "Set text error state when need pass error in prop for red color",
+        "Set text red state when need pass error in prop for red color",
       table: {
         defaultValue: {
           summary: "String",
