@@ -1,11 +1,11 @@
 import DdFormElement from "./index.vue";
-import DdInput from "../input/index.vue"
+import DdInput from "../input/index.vue";
 import { ref } from "vue";
 
 export default {
   title: "Atoms/FormElement",
   component: DdFormElement,
-  tags: ['autodocs'],
+  tags: ["autodocs"],
 };
 
 export const Default = {
@@ -18,12 +18,11 @@ export const Default = {
         args,
       };
     },
-    template: `<dd-form-element :title=args.title :description=args.description :size=args.size /> `,
+    template: `<dd-form-element :title=args.title :description=args.description :size=args.size :hintTextColor=args.hintTextColor :counter=args.counter /> `,
   }),
   argTypes: {
-    title: {
-      description:
-        "Set title for wrapper",
+    label: {
+      description: "Set title for wrapper",
       table: {
         defaultValue: {
           summary: "String",
@@ -41,98 +40,110 @@ export const Default = {
       },
     },
     description: {
-        description:
-          "Set title for wrapper",
-        table: {
-          defaultValue: {
-            summary: "String",
-          },
+      description: "Set title for wrapper",
+      table: {
+        defaultValue: {
+          summary: "String",
         },
       },
-      Slot: {
-        description:
-          "There slot between title and description",
-        table: {
-          defaultValue: {
-            summary: "Slot",
-          },
+    },
+    hintTextColor: {
+      description:
+        "Set text error state when need pass error in prop for red color",
+      table: {
+        defaultValue: {
+          summary: "String",
         },
       },
+    },
+    counter: {
+      description: "Set counter for textarea pass 0/500. Only work for flexible size",
+      table: {
+        defaultValue: {
+          summary: "String",
+        },
+      },
+    },
+    Slot: {
+      description: "There slot between title and description",
+      table: {
+        defaultValue: {
+          summary: "Slot",
+        },
+      },
+    },
   },
 };
 
 export const WrapperWithSlot = {
-    render: (args) => ({
-      components: {
-        DdFormElement,
-        DdInput
-      },
-      setup() {
-        const selected = ref("");
-        return {
-          args,
-          selected
-        };
-      },
-      template: ` <dd-form-element title="Title" description="Extra message or notification." size="lg">
+  render: (args) => ({
+    components: {
+      DdFormElement,
+      DdInput,
+    },
+    setup() {
+      const selected = ref("");
+      return {
+        args,
+        selected,
+      };
+    },
+    template: ` <dd-form-element title="Title" description="Extra message or notification." size="lg">
       <dd-input v-model="selected" />
     </dd-form-element> `,
-    }),
-    argTypes: {
-      title: {
-        description:
-          "Set title for wrapper",
-        table: {
-          defaultValue: {
-            summary: "String",
-          },
+  }),
+  argTypes: {
+    title: {
+      description: "Set title for wrapper",
+      table: {
+        defaultValue: {
+          summary: "String",
         },
       },
-      size: {
-        control: { type: "select" },
-        options: ["base", "lg", "flexible"],
-        description: "Accepted value base, lg, flexible",
-        table: {
-          defaultValue: {
-            summary: "base",
-          },
-        },
-      },
-      description: {
-          description:
-            "Set title for wrapper",
-          table: {
-            defaultValue: {
-              summary: "String",
-            },
-          },
-        },
-        Slot: {
-          description:
-            "There slot between title and description",
-          table: {
-            defaultValue: {
-              summary: "Slot",
-            },
-          },
-        },
     },
-  };
+    size: {
+      control: { type: "select" },
+      options: ["base", "lg", "flexible"],
+      description: "Accepted value base, lg, flexible",
+      table: {
+        defaultValue: {
+          summary: "base",
+        },
+      },
+    },
+    description: {
+      description: "Set title for wrapper",
+      table: {
+        defaultValue: {
+          summary: "String",
+        },
+      },
+    },
+    Slot: {
+      description: "There slot between title and description",
+      table: {
+        defaultValue: {
+          summary: "Slot",
+        },
+      },
+    },
+  },
+};
 
-  export const FlexibleWithSlot = {
-    render: (args) => ({
-      components: {
-        DdFormElement,
-        DdInput
-      },
-      setup() {
-        const selected = ref("");
-        return {
-          args,
-          selected
-        };
-      },
-      template: ` <dd-form-element title="Title" description="Extra message or notification." size="flexible">
+export const FlexibleWithSlot = {
+  render: (args) => ({
+    components: {
+      DdFormElement,
+      DdInput,
+    },
+    setup() {
+      const selected = ref("");
+      return {
+        args,
+        selected,
+      };
+    },
+    template: ` <dd-form-element title="Title" description="Extra message or notification." size="flexible">
       <div>
       <div class="dd-mb-2">
       <dd-input v-model="selected" label="First Name" class="dd-mb-2" />
@@ -144,62 +155,59 @@ export const WrapperWithSlot = {
       </div>
       </div>
     </dd-form-element> `,
-    }),
-    argTypes: {
-      title: {
-        description:
-          "Set title for wrapper",
-        table: {
-          defaultValue: {
-            summary: "String",
-          },
+  }),
+  argTypes: {
+    title: {
+      description: "Set title for wrapper",
+      table: {
+        defaultValue: {
+          summary: "String",
         },
       },
-      size: {
-        control: { type: "select" },
-        options: ["base", "lg", "flexible"],
-        description: "Accepted value base, lg, flexible",
-        table: {
-          defaultValue: {
-            summary: "base",
-          },
-        },
-      },
-      description: {
-          description:
-            "Set title for wrapper",
-          table: {
-            defaultValue: {
-              summary: "String",
-            },
-          },
-        },
-        Slot: {
-          description:
-            "There slot between title and description",
-          table: {
-            defaultValue: {
-              summary: "Slot",
-            },
-          },
-        },
     },
-  };
+    size: {
+      control: { type: "select" },
+      options: ["base", "lg", "flexible"],
+      description: "Accepted value base, lg, flexible",
+      table: {
+        defaultValue: {
+          summary: "base",
+        },
+      },
+    },
+    description: {
+      description: "Set title for wrapper",
+      table: {
+        defaultValue: {
+          summary: "String",
+        },
+      },
+    },
+    Slot: {
+      description: "There slot between title and description",
+      table: {
+        defaultValue: {
+          summary: "Slot",
+        },
+      },
+    },
+  },
+};
 
 WrapperWithSlot.parameters = {
-    docs: {
-      source: {
-        code: ` <dd-form-element title="Title" description="Extra message or notification." size="lg">
+  docs: {
+    source: {
+      code: ` <dd-form-element title="Title" description="Extra message or notification." size="lg">
         <dd-input v-model="selected" />
       </dd-form-element>  `,
-      },
     },
-  };
+  },
+};
 
-  FlexibleWithSlot.parameters = {
-    docs: {
-      source: {
-        code: ` <dd-form-element title="Title" description="Extra message or notification." size="flexible">
+FlexibleWithSlot.parameters = {
+  docs: {
+    source: {
+      code: ` <dd-form-element title="Title" description="Extra message or notification." size="flexible">
         <div>
         <div class="dd-mb-2">
         <dd-input v-model="selected" label="First Name" class="dd-mb-2" />
@@ -211,6 +219,6 @@ WrapperWithSlot.parameters = {
         </div>
         </div>
       </dd-form-element> `,
-      },
     },
-  };
+  },
+};
