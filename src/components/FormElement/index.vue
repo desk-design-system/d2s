@@ -1,5 +1,5 @@
 <template>
-  <div v-bind="$attrs" class="dd-flex dd-flex-col dd-gap-1">
+  <div v-bind="$attrs" :class="description ? 'dd-flex dd-flex-col dd-gap-1' : '' ">
     <div class="dd-block dd-text-gray-700 dd-text-sm dd-font-medium">
       {{ label }} <span v-if="isRequired" class="dd-text-red-500">*</span>
     </div>
@@ -34,11 +34,11 @@ import { computed } from "vue";
 const props = defineProps({
   label: {
     type: String,
-    default: "Title",
+    default: "",
   },
   description: {
     type: String,
-    default: "Extra message or notification.",
+    default: "",
   },
   errorMessage: {
     type: Boolean,

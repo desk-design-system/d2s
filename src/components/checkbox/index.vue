@@ -15,17 +15,14 @@
           : 'dd-cursor-pointer !dd-text-teal-600',
       ]"
       class="!dd-h-4 !dd-w-4 !dd-rounded !dd-border-solid focus:!dd-ring-teal-500"
-      style="border-color: rgb(209, 213, 219);"
+      style="border-color: rgb(209, 213, 219)"
       @click="getChecked"
     />
-    <slot name="label">
-      <label
-        :class="[disabled ? '!dd-text-gray-300' : '!dd-text-gray-700']"
-        class="!dd-ml-2 !dd-block !dd-text-sm"
-      >
-        {{ label }}
-      </label>
-    </slot>
+    <dd-form-element
+      :label="label"
+      class="!dd-ml-2"
+      :class="[disabled ? '!dd-text-gray-300' : '!dd-text-gray-700']"
+    />
   </div>
 </template>
 
@@ -37,6 +34,8 @@ const emits = defineEmits([
   "click",
   "indeterminate",
 ]);
+import DdFormElement from "../FormElement/index.vue";
+
 const props = defineProps({
   label: {
     type: String,
