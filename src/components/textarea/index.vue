@@ -1,8 +1,10 @@
 <template>
   <div class="dd-base dd-w-full" v-bind="$attrs">
-    <label v-if="label" class="dd-input-label"
-      >{{ label }} <span v-if="isRequired" class="dd-text-red-500">*</span>
-    </label>
+    <slot name="label">
+      <label v-if="label" class="dd-input-label"
+        >{{ label }} <span v-if="isRequired" class="dd-text-red-500">*</span>
+      </label>
+    </slot>
     <div class="dd-w-full dd-rounded-md">
       <textarea
         :name="name"
