@@ -34,7 +34,7 @@
       v-if="leftIconProperty"
       :icon="!loader ? icon : ''"
       :size="btnIconSize"
-      class="dd-text-gray-500"
+      
     />
     <span
       v-if="content !== 'iconOnly'"
@@ -46,7 +46,7 @@
       v-if="rightIconProperty"
       :icon="!loader ? icon : ''"
       :size="btnIconSize"
-      class="dd-text-gray-500"
+      
     />
   </button>
 
@@ -86,7 +86,7 @@
       v-if="leftIconProperty"
       :icon="!loader ? icon : ''"
       :size="btnIconSize"
-      class="dd-text-gray-500"
+      
     />
     <span
       v-if="content !== 'iconOnly'"
@@ -98,7 +98,6 @@
       v-if="rightIconProperty"
       :icon="!loader ? icon : ''"
       :size="btnIconSize"
-      class="dd-text-gray-500"
     />
   </button>
 
