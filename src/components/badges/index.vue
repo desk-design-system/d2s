@@ -1,19 +1,20 @@
 <template>
+  <button
+    v-if="tagAdder"
+    @click="$emit('click')"
+    class="dd-inline-flex dd-rounded dd-border dd-border-dashed dd-border-gray-300 dd-bg-white dd-items-center dd-justify-center dd-gap-1 dd-py-1 dd-px-2 hover:dd-bg-gray-50 focus:dd-border-solid focus:dd-border-teal-400"
+  >
+    <svgIcon class="dd-text-gray-700" icon="Plus" size="12" />
+    <span class="dd-text-xs dd-font-medium dd-text-gray-700 dd-text-center">
+      {{ label }}
+    </span>
+  </button>
   <span
+    v-else
     :class="[badgeStyling]"
+    v-bind="$attrs"
     class="dd-inline-flex dd-items-center dd-font-medium dd-rounded"
   >
-    <svg
-      v-if="dot"
-      :class="{
-        tagText,
-      }"
-      class="dd-mr-1.5 dd-h-2 dd-w-2"
-      fill="currentColor"
-      viewBox="0 0 8 8"
-    >
-      <circle cx="4" cy="4" r="3" />
-    </svg>
     <slot name="prefix"></slot>
     <slot>{{ title }}</slot>
     <slot name="suffix"></slot>
@@ -34,12 +35,21 @@
 <script >
 import { XIcon } from "@heroicons/vue/solid";
 import ddButton from "../buttons/index.vue";
+import svgIcon from "../svgIcon/index.vue";
 // const emits = defineEmits( [ "close"] )
 export default {
   props: {
+    tagAdder: {
+      type: Boolean,
+      default: false,
+    },
     title: {
       type: String,
       default: "badge",
+    },
+    label: {
+      type: String,
+      default: "Add Filter",
     },
     rounded: {
       type: Boolean,
@@ -94,14 +104,12 @@ export default {
       },
       default: "base",
     },
-    dot: {
-      type: Boolean,
-      default: false,
-    },
   },
+  inheritAttrs: false,
   components: {
     XIcon,
     ddButton,
+    svgIcon,
   },
   computed: {
     tagText() {
