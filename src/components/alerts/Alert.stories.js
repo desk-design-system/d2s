@@ -34,13 +34,9 @@ export const Default = {
       },
     },
     title: {
-      description:
-        "You can simply pass the heading of your alert in title slot",
-      table: {
-        defaultValue: {
-          summary: "Slot",
-        },
-      },
+      description: "Title for the Alert.",
+      type: { name: "string", required: true },
+      defaultValue: "",
     },
     description: {
       description:
@@ -99,13 +95,9 @@ export const Success = {
       },
     },
     title: {
-      description:
-        "You can simply pass the heading of your alert in title slot",
-      table: {
-        defaultValue: {
-          summary: "Slot",
-        },
-      },
+      description: "Title for the Alert.",
+      type: { name: "string", required: true },
+      defaultValue: "",
     },
     description: {
       description:
@@ -164,13 +156,9 @@ export const Danger = {
       },
     },
     title: {
-      description:
-        "You can simply pass the heading of your alert in title slot",
-      table: {
-        defaultValue: {
-          summary: "Slot",
-        },
-      },
+      description: "Title for the Alert.",
+      type: { name: "string", required: true },
+      defaultValue: "",
     },
     description: {
       description:
@@ -229,13 +217,9 @@ export const Info = {
       },
     },
     title: {
-      description:
-        "You can simply pass the heading of your alert in title slot",
-      table: {
-        defaultValue: {
-          summary: "Slot",
-        },
-      },
+      description: "Title for the Alert.",
+      type: { name: "string", required: true },
+      defaultValue: "",
     },
     closable: {
       description:
@@ -278,6 +262,20 @@ export const AlertWithSlot = {
     </dd-alert>`,
   }),
   argTypes: {
+    title: {
+      description: "Title for the Alert.",
+      type: { name: "string", required: true },
+      defaultValue: "",
+    },
+    closable: {
+      description:
+        "To make your alert close able simple pass true value to closable prop",
+      table: {
+        defaultValue: {
+          summary: "False",
+        },
+      },
+    },
     type: {
       control: {
         type: "select",
@@ -288,24 +286,6 @@ export const AlertWithSlot = {
       table: {
         defaultValue: {
           summary: "warning",
-        },
-      },
-    },
-    title: {
-      description:
-        "You can simply pass the heading of your alert in title slot",
-      table: {
-        defaultValue: {
-          summary: "Slot",
-        },
-      },
-    },
-    closable: {
-      description:
-        "To make your alert close able simple pass true value to closable prop",
-      table: {
-        defaultValue: {
-          summary: "False",
         },
       },
     },

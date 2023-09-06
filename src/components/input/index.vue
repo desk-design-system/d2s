@@ -1,20 +1,11 @@
 <template>
   <div class="dd-base" :class="$attrs.class">
-    <slot name="label">
-      <label
-        v-if="label"
-        class="dd-block dd-text-sm dd-font-medium dd-text-gray-700 dd-mb-1"
-        >{{ label }} <span v-if="isRequired" class="dd-text-red-500">*</span>
-      </label>
-    </slot>
-    <div class="dd-relative dd-rounded-md">
-      <div
-        v-if="prefix"
-        class="!dd-pointer-events-none !dd-absolute !dd-inset-y-0 !dd-left-0 !dd-flex !dd-items-center !dd-pl-3 !dd-pr-3"
-      >
-        <svgIcon
-          class="dd-text-gray-400"
-          :class="[
+    <dd-form-element :label="label" :description="hintText" size="flexible" :hintTextColor="hintTextColor"
+      :isRequired="isRequired" :errorMessage="errorMessage">
+      <div class="dd-relative dd-rounded-md">
+        <div v-if="prefix"
+          class="!dd-pointer-events-none !dd-absolute !dd-inset-y-0 !dd-left-0 !dd-flex !dd-items-center !dd-pl-3 !dd-pr-3">
+          <svgIcon class="dd-text-gray-400" :class="[
             hasError
               ? ' !dd-border-red-600 focus:!dd-border-red-600 dd-focus:!dd-ring-red-600'
               : 'dd-border-gray-300 focus:dd-ring-teal-600 focus:dd-border-teal-600',
@@ -22,17 +13,9 @@
             Right
               ? 'dd-text-right !dd-text-xs !dd-text-gray-700 !dd-font-normal'
               : 'dd-text-left',
-          ]"
-          :icon="icon"
-          :size="btnIconSize"
-        />
-      </div>
-      <input
-        v-bind="{ ...$attrs, class: undefined }"
-        ref="inputRef"
-        :name="name"
-        :disabled="disabled"
-        :class="[
+          ]" :icon="icon" :size="btnIconSize" />
+        </div>
+        <input v-bind="{ ...$attrs, class: undefined }" ref="inputRef" :name="name" :disabled="disabled" :class="[
           inputSize,
           noBorder,
           suffix ? '!dd-pr-10' : '!dd-pr-2',
@@ -47,74 +30,36 @@
           disabled
             ? '!dd-text-gray-500 dd-ring-gray-200 dd-bg-gray-50 dd-cursor-not-allowed dd-select-none'
             : '',
-        ]"
-        v-model="inputModelValue"
-        :type="inputType"
-        class="!dd-block !dd-border-solid focus:!dd-border-teal-600 !dd-border-gray-300 !dd-w-full !dd-rounded-md sm:!dd-text-sm focus:ring-2 focus:dd-ring-inset dd-shadow-sm focus:dd-shadow-sm focus-within:dd-shadow-sm"
-        :placeholder="placeholder"
-      />
-      <!-- $slots.suffix -->
-      <div
-        @click="suffixIconClick"
-        v-if="suffix"
-        class="dd-cursor-pointer !dd-absolute !dd-inset-y-0 !dd-right-0 !dd-flex !dd-items-center !dd-pl-3 !dd-pr-3"
-      >
-        <svgIcon
-          class="dd-text-gray-400"
-          :class="[
+        ]" v-model="inputModelValue" :type="inputType"
+          class="!dd-block !dd-border-solid focus:!dd-border-teal-600 !dd-border-gray-300 !dd-w-full !dd-rounded-md sm:!dd-text-sm focus:ring-2 focus:dd-ring-inset dd-shadow-sm focus:dd-shadow-sm focus-within:dd-shadow-sm"
+          :placeholder="placeholder" />
+        <!-- $slots.suffix -->
+        <div @click="suffixIconClick" v-if="suffix"
+          class="dd-cursor-pointer !dd-absolute !dd-inset-y-0 !dd-right-0 !dd-flex !dd-items-center !dd-pl-3 !dd-pr-3">
+          <svgIcon class="dd-text-gray-400" :class="[
             hasError
               ? ' !dd-border-red-600 focus:!dd-border-red-600 dd-focus:!dd-ring-red-600'
               : 'dd-border-gray-300 dd-text-gray-500 focus:dd-ring-teal-600 focus:!dd-border-teal-600',
             hintTextPropertyIcon,
-          ]"
-          :icon="suffixIcon"
-          :size="btnIconSize"
-        />
-      </div>
-      <!-- button -->
-      <div
-        v-if="type !== 'password' && !Right"
-        class="dd-cursor-pointer !dd-absolute !dd-inset-y-0 !dd-right-0 !dd-flex !dd-items-center !dd-pl-1 !dd-pr-1 dd-gap-1"
-      >
-        <div
-          :class="[
+          ]" :icon="suffixIcon" :size="btnIconSize" />
+        </div>
+        <!-- button -->
+        <div v-if="type !== 'password' && !Right"
+          class="dd-cursor-pointer !dd-absolute !dd-inset-y-0 !dd-right-0 !dd-flex !dd-items-center !dd-pl-1 !dd-pr-1 dd-gap-1">
+          <div :class="[
             successButton && closeButton
               ? '!dd-h-8 !dd-w-8 dd-gap-1 dd-flex dd-items-center dd-justify-center dd-relative dd-right-2.5'
               : '',
-          ]"
-        >
-          <dd-button
-            v-if="successButton"
-            content="iconOnly"
-            type="secondary"
-            size="xs"
-            class="!dd-py-1 !dd-px-[3px] dd-text-gray-500"
-            :icon="successIcon"
-            @click="emits('success')"
-          />
-          <dd-button
-            v-if="closeButton"
-            content="iconOnly"
-            type="secondary"
-            :icon="closeIcon"
-            size="xs"
-            class="!dd-py-1 !dd-px-[3px] dd-text-gray-500"
-            @click="emits('close')"
-          />
+          ]">
+            <dd-button v-if="successButton" content="iconOnly" type="secondary" size="xs"
+              class="!dd-py-1 !dd-px-[3px] dd-text-gray-500" :icon="successIcon" @click="emits('success')" />
+            <dd-button v-if="closeButton" content="iconOnly" type="secondary" :icon="closeIcon" size="xs"
+              class="!dd-py-1 !dd-px-[3px] dd-text-gray-500" @click="emits('close')" />
+          </div>
         </div>
       </div>
-    </div>
-    <span
-      v-if="errorMessage"
-      class="dd-text-xs dd-text-red-500 dd-capitalize dd-pt-px"
-      >{{ errorMessage }}</span
-    >
-    <span
-      v-if="hintText && !errorMessage"
-      class="dd-text-sm dd-font-normal dd-pt-px"
-      :class="`dd-text-${hintTextColor}-600`"
-      >{{ hintText }}</span
-    >
+      <span v-if="errorMessage" class="dd-text-xs dd-text-red-500 dd-capitalize dd-pt-px">{{ errorMessage }}</span>
+    </dd-form-element>
   </div>
 </template>
 
@@ -128,7 +73,8 @@ export default {
 import { useField } from "vee-validate";
 import svgIcon from "../svgIcon/index.vue";
 import DdButton from "../buttons/index.vue";
-import { ref, computed, watch, watchEffect } from "vue";
+import DdFormElement from "../FormElement/index.vue";
+import { ref, computed, watch } from "vue";
 const emits = defineEmits([
   "update:modelValue",
   "change",
@@ -323,10 +269,6 @@ const hasError = computed(() => {
   }
 });
 
-watchEffect(() => {
-  console.log(props.hintText && errorMessage.value == "");
-});
-
 const hintTextProperty = computed(() => {
   if (errorMessage?.value) {
     return "dd-border-red-600";
@@ -335,8 +277,6 @@ const hintTextProperty = computed(() => {
   } else if (props.hintText && !errorMessage?.value) {
     if (props.hintTextColor === "red") {
       return "!dd-text-red-600";
-    } else if (props.hintTextColor === "teal") {
-      return "!dd-text-teal-600";
     } else if (props.hintTextColor === "gray") {
       return "!dd-text-gray-600";
     } else {

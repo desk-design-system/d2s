@@ -58,7 +58,7 @@ export const Default = {
         args
       };
     },
-    template: `<dd-autoSearch v-model="selected"  :options="filteredData" @searchQuery="query = $event" :label=args.label :prefix=args.prefix :suffix=args.suffix :loader=args.loader :disabled=args.disabled :icon=args.icon :placeholder=args.placeholder :size=args.size />`,
+    template: `<dd-autoSearch v-model="selected"  :options="filteredData" @searchQuery="query = $event" :label=args.label :prefix=args.prefix :suffix=args.suffix :loader=args.loader :disabled=args.disabled :icon=args.icon :placeholder=args.placeholder :size=args.size :hintText=args.hintText :isRequired=args.isRequired :hintTextColor=args.hintTextColor />`,
   }),
   argTypes: {
     label: {

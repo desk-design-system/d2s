@@ -1,40 +1,63 @@
 <template>
   <div class="dd-base dd-w-full" v-bind="$attrs">
-    <slot name="label">
-      <label v-if="label" class="dd-input-label"
-        >{{ label }} <span v-if="isRequired" class="dd-text-red-500">*</span>
-      </label>
-    </slot>
-    <div class="dd-w-full dd-rounded-md">
-      <textarea
-        :name="name"
-        :disabled="disabled"
-        :class="[
-          inputSize,
-          hasError ? 'dd-input-error' : 'dd-input-no-error',
-          errorMessage ? 'dd-mb-1' : '',
-          disabled ? 'dd-input-disabled' : ' dd-text-gray-700',
-        ]"
-        v-model="inputModelValue"
-        class="dd-textarea dd-w-full !dd-rounded"
-        :placeholder="placeholder"
-        :rows="rows"
-        @focus="emits('focus')"
-        @blur="emits('blur')"
-      />
-    </div>
-    <span v-if="errorMessage" class="dd-input-error-message">{{
-      errorMessage
-    }}</span>
+    <dd-form-element
+      :label="label"
+      :description="hintText"
+      :size="size"
+      :hintTextColor="hintTextColor"
+      :counter="counter"
+      :isRequired="isRequired"
+    >
+      <div class="dd-w-full dd-rounded-md">
+        <textarea
+          :name="name"
+          :disabled="disabled"
+          :class="[
+            inputSize,
+            hasError ? 'dd-input-error' : 'dd-input-no-error',
+            errorMessage ? 'dd-mb-1' : '',
+            disabled ? 'dd-input-disabled' : ' dd-text-gray-700',
+          ]"
+          v-model="inputModelValue"
+          class="dd-textarea dd-w-full !dd-rounded"
+          :placeholder="placeholder"
+          :rows="rows"
+          @focus="emits('focus')"
+          @blur="emits('blur')"
+        />
+      </div>
+    </dd-form-element>
   </div>
 </template>
 <script setup>
 import { useField } from "vee-validate";
-import svgIcon from "../svgIcon/index.vue";
-import { ref, computed, watch } from "vue";
-const emits = defineEmits(["update:modelValue", "change", "suffixIconClick", 'focus', 'blur']);
+import { computed, watch } from "vue";
+import DdFormElement from "../FormElement/index.vue";
+const emits = defineEmits([
+  "update:modelValue",
+  "change",
+  "suffixIconClick",
+  "focus",
+  "blur",
+]);
 const props = defineProps({
   label: {
+    type: String,
+    default: "",
+  },
+  hintText: {
+    type: String,
+    default: "",
+  },
+  hintTextColor: {
+    type: String,
+    default: "gray",
+  },
+  counter: {
+    type: String,
+    default: "",
+  },
+  size: {
     type: String,
     default: "",
   },
@@ -64,7 +87,7 @@ const props = defineProps({
     default: null,
   },
   rows: {
-    type:  Number,
+    type: Number,
     default: 4,
   },
 });
