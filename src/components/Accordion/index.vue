@@ -125,7 +125,6 @@ const colorProp = ref(props.color);
 
 //Methods
 const isAccordionTab = (child) => {
-  console.log("Child name", child);
   return child.type.name === ACCORDION_TAB;
 };
 
@@ -146,12 +145,10 @@ const tabs = computed(() => {
         }
       });
     } else {
-      console.log("Inside else");
       console.warn(
         "<AccordionTab> should always be a direct shild of <Accordion>."
       );
     }
-    console.log("Tabs", tabs);
     return tabs;
   }, []);
 });
