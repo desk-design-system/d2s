@@ -174,7 +174,7 @@
                       : '',
                   ]">
                     <div class="dd-h-full -dd-my-2.5">
-                      <dd-checkbox @click="setChecked(row[rowKey])" :checked="selectedId &&
+                      <dd-checkbox @change="setChecked(row[rowKey])" :checked="selectedId &&
                         selectedId.includes(row?.id) &&
                         !row?.disabled
                         " :value="row?.id" :disabled="row?.disabled || checkAllDisabled" />
@@ -622,13 +622,14 @@ const selectAllFields = () => {
 const setChecked = (id) => {
   if (props.checkBoxProp === false || props.checkAllDisabled === true) return;
   const index = selectedId.value.indexOf(id);
-  if (index === -1) {
+  if (index < 0) {
     selectedId.value.push(id);
     setting.value = false;
     emits("selectedCheckBoxes", selectedId.value);
   } else {
     search.value = false;
     selectedId.value.splice(index, 1);
+    emits('selectedCheckBoxes', selectedId.value)
     setTimeout(() => {
       handleScroll();
     }, 0);
