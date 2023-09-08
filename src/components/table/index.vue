@@ -592,6 +592,13 @@ onBeforeMount(() => {
   document.addEventListener("click", handleDomClick);
 });
 
+watchEffect(()=>{
+  if(props.rows.length){
+    limit.value = props.rows.length;
+
+  }
+})
+
 watch(
   () => selectedId.value,
   (newValue) => {
