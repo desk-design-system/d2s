@@ -185,7 +185,7 @@
                 <td v-for="col in columns" :key="col?.value" v-show="col?.checked"
                   class="dd-whitespace-nowrap dd-py-2.5 dd-pl-3 dd-pr-3 dd-text-sm dd-text-gray-500" :class="[
                     row?.disabled || !checkBoxProp
-                      ? '!dd-pl-5'
+                      ? ''
                       : 'dd-cursor-pointer',
                   ]" :style="`min-width: ${col?.size}px`">
                   <slot name="row" :column="col" :row="row" :value="row[col?.value]" :rowIndex="index" :disabled="row?.disabled">
