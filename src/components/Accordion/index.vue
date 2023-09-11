@@ -80,16 +80,22 @@ const isAccordionTab = (child) => {
 const tabs = computed(() => {
   if (!slots.default) {
     console.error(
-      "<AccordionTab> should always be a direct shild of <Accordion>."
+      "<AccordionTab> should always be a direct child of <Accordion>."
     );
     return;
   }
-  return slots.default().reduce((tabs, child) => {
+ return slots.default().reduce((tabs, child) => {
     if (isAccordionTab(child)) {
       tabs.push(child);
+    } else if (child.children.length) {
+      child.children.forEach((tab) => {
+        if (isAccordionTab(tab)) {
+          tabs.push(tab);
+        }
+      });
     } else {
       console.warn(
-        "<AccordionTab> should always be a direct shild of <Accordion>."
+        "<AccordionTab> should always be a direct child of <Accordion>."
       );
     }
     return tabs;
