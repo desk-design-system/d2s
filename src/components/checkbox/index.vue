@@ -1,8 +1,7 @@
 <template>
   <div class="dd-base dd-flex dd-items-center dd-p-[2px] !dd-h-5">
-    {{ checkedProp }}
     <input
-      :checked="checkedProp"
+      :checked="checked"
       :disabled="disabled"
       :indeterminate="selectedId.length > 0 ? indeterminate : null"
       :value="value ? value : modelValue"
@@ -85,19 +84,14 @@ const props = defineProps({
 });
 
 
-const checkedProp = computed(()=>{
-  return modelValArray.value.includes(props.value)
-})
 
-const inputModelValue = ref(false)
+const inputModelValue = ref(props.modelValue)
 
 const modelValArray = ref([])
-console.log("Modwith", modelValArray.value);
-
-const onChange = (event) => {
+const onChange = () => {
   if (Array.isArray(toRaw(props.modelValue))) {
     modelValArray.value = [...props.modelValue]
-    if(checkedProp.value) modelValArray.value = modelValArray.value.filter(el => el!== ( props.value || props.modelValue ))
+    if(modelValArray.value.includes(props.value)) modelValArray.value = modelValArray.value.filter(el => el!== ( props.value || props.modelValue ))
     else modelValArray.value.push(props.value)
       emits("update:modelValue", modelValArray.value);
       emits("change", modelValArray.value);
