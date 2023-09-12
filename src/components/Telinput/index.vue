@@ -3,11 +3,12 @@
     <slot name="label">
       <label class="dd-block dd-text-sm dd-font-medium dd-text-gray-700 dd-mb-1"
         >{{ label }}
-        <span v-if="isRequired" class="dd-text-red-500">*</span></label
+        <span  v-if="isRequired" class="dd-text-red-500">*</span></label
       >
     </slot>
     
     <vue-tel-input
+    ref="vueTelRef"
       :name="name"
       :style="{
         height: `${inputSize} !important`,
@@ -31,6 +32,7 @@ import { useField } from "vee-validate";
 import "vue-tel-input/dist/vue-tel-input.css";
 
 const emits = defineEmits(["update:modelValue", "change"]);
+const vueTelRef = ref()
 const props = defineProps({
   id: {
     type: String,
@@ -136,6 +138,9 @@ watch(
     immediate: true,
   }
 );
+defineExpose({
+  vueTelRef
+})
 </script>
 <style>
 .vue-tel-input {
