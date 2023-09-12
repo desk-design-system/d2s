@@ -1,22 +1,27 @@
 <template>
   <div class="dd-base dd-flex dd-items-center dd-p-[2px] !dd-h-5">
+    {{ checkedProp }}
     <input
+      :checked="checkedProp"
       :disabled="disabled"
       :indeterminate="selectedId.length > 0 ? indeterminate : null"
-      :checked="checked"
-      :value="value"
+      :value="value ? value : modelValue"
       v-bind="$attrs"
-      :id="id"
       v-model="inputModelValue"
+      :id="id"
       type="checkbox"
       :class="[
         disabled
           ? ' !dd-cursor-not-allowed !dd-border-gray-200 !dd-text-gray-400'
           : 'dd-cursor-pointer !dd-text-teal-600',
       ]"
-      class="!dd-h-4 !dd-w-4 !dd-rounded !dd-border-solid focus:!dd-ring-teal-500"
+      class="
+        !dd-h-4 !dd-w-4 !dd-rounded !dd-border-solid
+        focus:!dd-ring-teal-500
+      "
       style="border-color: rgb(209, 213, 219)"
       @click="getChecked"
+      @change="onChange"
     />
     <dd-form-element
       :label="label"
@@ -27,7 +32,7 @@
 </template>
 
 <script setup>
-import { computed } from "vue";
+import { computed, ref, toRaw } from "vue";
 const emits = defineEmits([
   "update:modelValue",
   "change",
@@ -46,7 +51,7 @@ const props = defineProps({
     default: "",
   },
   modelValue: {
-    type: [String, Number, Boolean],
+    type: [String, Number, Boolean, Array],
     default: null,
   },
   disabled: {
@@ -58,34 +63,49 @@ const props = defineProps({
     default: false,
   },
   value: {
-    type: Number,
-    default: 0,
+    type: [String, Number, Boolean],
+    default: null,
   },
   rows: {
-    type: Array,
+    type: [Array, Object],
     default: () => ({
       name: "name",
       value: "value",
       avatar: "avatar",
     }),
+    required: false,
   },
   selectedId: {
-    type: Array,
+    type: [Array, Object],
     default: () => ({
       id: "1",
     }),
+    required: false,
   },
 });
 
-const inputModelValue = computed({
-  get() {
-    return props.modelValue;
-  },
-  set(val) {
-    emits("update:modelValue", val);
-    emits("change", val);
-  },
-});
+
+const checkedProp = computed(()=>{
+  return modelValArray.value.includes(props.value)
+})
+
+const inputModelValue = ref(false)
+
+const modelValArray = ref([])
+console.log("Modwith", modelValArray.value);
+
+const onChange = (event) => {
+  if (Array.isArray(toRaw(props.modelValue))) {
+    modelValArray.value = [...props.modelValue]
+    if(checkedProp.value) modelValArray.value = modelValArray.value.filter(el => el!== ( props.value || props.modelValue ))
+    else modelValArray.value.push(props.value)
+      emits("update:modelValue", modelValArray.value);
+      emits("change", modelValArray.value);
+    } else {
+      emits("update:modelValue", props.value == props.modelValue  ? null : props.value || inputModelValue.value);
+      emits("change", props.value );
+    }
+}
 
 function getChecked() {
   emits("click");
