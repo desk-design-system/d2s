@@ -41,7 +41,7 @@
               ? ' dd-pl-8 dd-pr-4'
               : ' dd-pl-3 dd-pr-9'
           ]" @click="selectItem(item)">
-          <!----- show online items for single select ----->
+          <!-- show online items for single select -->
           <div class="dd-flex dd-items-center">
             <span v-show="showOnline && props.checkIcon != 'left'" class="dd-mr-3" :class="[
                inputModelValue == item[props.defaultProps.name] ? 'dd-bg-green-400' : 'dd-bg-gray-200',
@@ -55,7 +55,7 @@
             ]">
               {{ item[props.defaultProps.name] }}
             </span>
-            <!----- tick icon single select ----->
+            <!-- tick icon single select -->
           </div>
           <span
             v-if="(!multiple && props.checkIcon != 'none' && inputModelValue == item[props.defaultProps.name])"
@@ -69,7 +69,7 @@
           </span>
         </li>
       </ul>
-      <!---- add new ---->
+      <!-- add new -->
       <ul class="dd-shadow-md dd-text-center dd-rounded-md add-new"
         v-if="queries !== '' && filteredOptions.length === 0 && addNewItem">
         <li class="dd-p-4 dd-text-sm dd-text-left dd-text-gray-500 dd-cursor-pointer dd-text dd-font-semibold"
@@ -80,7 +80,7 @@
       </ul>
     </div>
 
-    <!---- error message on apply rules ---->
+    <!-- error message on apply rules -->
     <span v-if="errorMessage" class="dd-text-xs dd-text-red-600 dd-ml-3 dd-capitalize error-message">{{ errorMessage }}</span>
   </div>
 </template>
