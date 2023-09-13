@@ -18,9 +18,16 @@
           disabled ? 'dd-pointer-events-none dd-cursor-not-allowed' : ''
         ]"
         :readonly="!filterable"
-        class="select-input dropdown-button dd-border-solid focus-visible:dd-outline-none dd-flex dd-items-center dd-cursor-pointer dd-bg-white dd-relative dd-w-full dd-border dd-rounded-md dd-shadow-sm dd-pl-3 dd-pr-10 dd-py-2 dd-text-left dd-h-9 sm:dd-text-sm"
-        v-model="inputModelValue" @input="searchQuery($event.target.value)" :displayValue="(val) => findItem(val)"
-        @click="toggleDropdown" :placeholder="props.placeholder" :disabled="disabled"
+        :placeholder="queryPlaceholder ? queryPlaceholder : props.placeholder"
+        :disabled="disabled"
+        class="select-input dropdown-button dd-border-solid focus-visible:dd-outline-none 
+          dd-flex dd-items-center dd-cursor-pointer dd-bg-white dd-relative dd-w-full 
+          dd-border dd-rounded-md dd-shadow-sm dd-pl-3 dd-pr-10 dd-py-2 dd-text-left 
+          dd-h-9 sm:dd-text-sm"
+        v-model="inputModelValue"
+        @input="searchQuery($event.target.value)"
+        :displayValue="(val) => findItem(val)"
+        @click="toggleDropdown"
       />
       <ddAvatar v-if="selectedValue && showAvatar" size="mini" class="dd-mr-3"
         :srcLink="selectedValue[props.defaultProps.avatar]" />
@@ -44,13 +51,15 @@
           <!-- show online items for single select -->
           <div class="dd-flex dd-items-center">
             <span v-show="showOnline && props.checkIcon != 'left'" class="dd-mr-3" :class="[
-               inputModelValue == item[props.defaultProps.name] ? 'dd-bg-green-400' : 'dd-bg-gray-200',
+               (inputModelValue == item[props.defaultProps.name] || (queryPlaceholder == item[props.defaultProps.name]))
+                ? 'dd-bg-green-400' : 'dd-bg-gray-200',
               'dd-inline-block dd-h-2 dd-w-2 dd-flex-shrink-0 dd-rounded-full',
             ]" aria-hidden="true">
             </span>
             <ddAvatar size="mini" class="dd-mr-3" v-if="showAvatar" :srcLink="item[props.defaultProps.avatar]" />
             <span :class="[
-              props.checkIcon != 'none' && inputModelValue == item[props.defaultProps.name] ? 'dd-font-semibold' : 'dd-font-normal',
+              props.checkIcon != 'none' && (inputModelValue == item[props.defaultProps.name]
+               || (queryPlaceholder == item[props.defaultProps.name]))  ? 'dd-font-semibold' : 'dd-font-normal',
               'dd-block dd-truncate',
             ]">
               {{ item[props.defaultProps.name] }}
@@ -58,7 +67,8 @@
             <!-- tick icon single select -->
           </div>
           <span
-            v-if="(!multiple && props.checkIcon != 'none' && inputModelValue == item[props.defaultProps.name])"
+            v-if="(!multiple && props.checkIcon != 'none' && (inputModelValue == item[props.defaultProps.name]
+              || (queryPlaceholder == item[props.defaultProps.name])))"
             class="custom-tick" :class="[
               `dd-absolute dd-inset-y-0 dd-flex dd-items-center ${props.checkIcon == 'left'
                 ? 'dd-left-1 pl-1.5'
@@ -188,6 +198,7 @@ const props = defineProps({
 const isIconRotated = ref(false)
 const showDropdown = ref(false)
 const queries = ref("")
+const queryPlaceholder = ref("")
 const optionsArray = ref(props.options)
 const componentRef = ref(null)
 const dropdownInput = ref("")
@@ -223,7 +234,6 @@ const inputSize = computed(() => {
 })
 
 const selectedValue = computed(() => {
-  showDropdown.value = false
   return props.options.find((predicate) => {
     return predicate[props.defaultProps.value] == inputModelValue.value;
   })
@@ -261,6 +271,13 @@ onBeforeUnmount(() => {
 const handleOutsideDropdown = (event) => {
   /* handled close case of dropdown */
   if (event.target !== componentRef.value && event.composedPath().includes(componentRef.value)) return;
+  if (showDropdown.value && queryPlaceholder.value) {
+    emits("update:modelValue", queryPlaceholder.value)
+    showDropdown.value = false;
+    isIconRotated.value = false;
+    queries.value = "";
+    return 
+  }
   showDropdown.value = false;
   isIconRotated.value = false;
   /* Set the last selected item in select dropdown */
@@ -282,8 +299,13 @@ const searchQuery = (val) => {
 const toggleDropdown = () => {
   showDropdown.value = !showDropdown.value;
   isIconRotated.value = !isIconRotated.value;
+  if (showDropdown.value && props.modelValue) {
+    queryPlaceholder.value = props.modelValue
+    emits("update:modelValue", "")
+  }
   nextTick(() => {
     adjustDropdownPosition();
+
   })
 }
 
