@@ -18,7 +18,7 @@
               : 'dd-text-left',
           ]" :icon="icon" :size="btnIconSize" />
         </div>
-        <input v-bind="{ ...$attrs, class: undefined }" ref="inputRef" :name="name" :disabled="disabled" :class="[
+        <input  v-bind="{ ...$attrs, class: undefined }" ref="inputRef" :name="name" :disabled="disabled" :class="[
           inputSize,
           noBorder,
           suffix ? '!dd-pr-10' : '!dd-pr-2',
@@ -31,7 +31,7 @@
             ? 'dd-text-right !dd-text-xs !dd-text-gray-700 !dd-font-normal'
             : 'dd-text-left',
           disabled
-            ? '!dd-text-gray-500 dd-ring-gray-200 dd-bg-gray-50 dd-cursor-not-allowed dd-select-none'
+            ? '!dd-text-gray-500 dd-ring-gray-200 dd-bg-gray-50 !dd-cursor-not-allowed dd-select-none'
             : '',
         ]" v-model="inputModelValue" :type="inputType"
           class="!dd-block !dd-border-solid focus:!dd-border-teal-600 !dd-border-gray-300 !dd-w-full !dd-rounded-md sm:!dd-text-sm focus:ring-2 focus:dd-ring-inset dd-shadow-sm focus:dd-shadow-sm focus-within:dd-shadow-sm"
@@ -54,9 +54,9 @@
               ? '!dd-h-8 !dd-w-8 dd-gap-1 dd-flex dd-items-center dd-justify-center dd-relative dd-right-2.5'
               : '',
           ]">
-            <dd-button v-if="successButton" content="iconOnly" type="secondary" size="xs"
+            <dd-button :disabled="disabled" v-if="successButton" content="iconOnly" type="secondary" size="xs"
               class="!dd-py-1 !dd-px-[3px] dd-text-gray-500" :icon="successIcon" @click="emits('success')" />
-            <dd-button v-if="closeButton" content="iconOnly" type="secondary" :icon="closeIcon" size="xs"
+            <dd-button :disabled="disabled" v-if="closeButton" content="iconOnly" type="secondary" :icon="closeIcon" size="xs"
               class="!dd-py-1 !dd-px-[3px] dd-text-gray-500" @click="emits('close')" />
           </div>
         </div>
