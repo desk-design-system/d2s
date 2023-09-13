@@ -242,7 +242,9 @@ watch([queries, filteredOptions], ([newVal]) => {
     filteredOptions.value.filter((el) => {
       return el.name.toLowerCase().includes(newVal.toLowerCase())
     })
-  showDropdown.value = true
+    if(newVal) {
+      showDropdown.value = true
+    }
 })
 
 //mounted hook
