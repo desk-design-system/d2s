@@ -26,7 +26,7 @@
         'dd-h-3 dd-w-3 ': size === 'xs',
         'dd-h-3 dd-w-3 ': size === 'base',
       }"
-      class="dd-ml-1 dd-inline-flex"
+      class="dd-ml-1 dd-inline-flex dd-cursor-pointer"
       aria-hidden="true"
     />
   </span>

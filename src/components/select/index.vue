@@ -1,99 +1,102 @@
 <template>
   <div v-bind="$attrs" ref="componentRef">
+    <!---- label ---->
     <slot name="label">
       <label v-if="label" class="dd-block dd-text-sm dd-font-medium dd-text-gray-700 dd-mb-1">{{ label }} <span
           v-if="isRequired" class="dd-text-red-500">*</span></label>
     </slot>
-      
-    <Combobox as="div" v-bind="$attrs" v-model="inputModelValue">
-      <div class=" dd-relative">
-        <ComboboxInput :class="[
+
+    <div
+      class="dd-relative">
+      <input
+        ref="dropdownInput"
+        :class="[
           hasError
             ? ' !dd-border-red-600 focus:!dd-border-red-600 dd-focus:!dd-ring-red-600'
             : 'dd-border-gray-300 focus:dd-ring-teal-600 focus:!dd-border-teal-600',
           inputSize,
           disabled ? 'dd-pointer-events-none dd-cursor-not-allowed' : ''
-        ]" :readonly="!filterable"
-          class="dd-border-solid focus-visible:dd-outline-none dd-flex dd-items-center dd-cursor-pointer dd-bg-white dd-relative dd-w-full dd-border dd-rounded-md dd-shadow-sm dd-pl-3 dd-pr-10 dd-py-2 dd-text-left dd-h-9 sm:dd-text-sm"
-          @change="searchQuery($event.target.value)" :displayValue="(val) => findItem(val)"
-          @click="setDropDown()" :placeholder="props.placeholder"
-          :disabled="disabled">
-          <ddAvatar v-if="selectedValue && showAvatar" size="mini" class="dd-mr-3"
-            :srcLink="selectedValue[props.defaultProps.avatar]" />
-        </ComboboxInput>
-        <span class="dd-absolute dd-inset-y-0 dd-right-0 dd-flex dd-items-center dd-pr-2 dd-pointer-events-none">
-          <ChevronDownIcon @click="setDropDown" class="dd-h-5 dd-w-5 dd-text-gray-400" aria-hidden="true" />
-        </span>
-          <ComboboxOptions v-if="filteredOptions.length > 0" :static="showDropdown" :class="listClass"
-            class="dd-absolute dd-z-10 dd-mt-1 dd-w-full dd-bg-white dd-shadow-lg dd-max-h-60 dd-rounded-md dd-py-1 dd-text-base dd-ring-1 dd-ring-black dd-ring-opacity-5 custom-select-overflow dd-overflow-auto focus:dd-outline-none sm:dd-text-sm">
-            <ComboboxOption as="template" v-for="item in filteredOptions" :key="item[props.defaultProps.id]"
-              :value="item[props.defaultProps.value]" v-slot="{ active, selected }">
-              <slot name="items" :isSelected="selected ??
-                item[props.defaultProps.id] === selected[props.defaultProps.id]
-              " :item="item">
-                <li :class="[
-                  active ? 'dd-text-white dd-bg-teal-600' : 'dd-text-gray-900',
-                  'dd-cursor-pointer dd-select-none dd-relative dd-py-2',
-                  props.checkIcon == 'left'
-                    ? ' dd-pl-8 dd-pr-4'
-                    : ' dd-pl-3 dd-pr-9',
-                ]">
-                  <div class="dd-flex dd-items-center">
-                    <span v-show="showOnline && props.checkIcon != 'left'" class="dd-mr-3" :class="[
-                      selected ? 'dd-bg-green-400' : 'dd-bg-gray-200',
-                      'dd-inline-block dd-h-2 dd-w-2 dd-flex-shrink-0 dd-rounded-full',
-                    ]" aria-hidden="true" />
-                    <ddAvatar size="mini" class="dd-mr-3" v-if="showAvatar" :srcLink="item[props.defaultProps.avatar]" />
-                    <span :class="[
-                      selected ? 'dd-font-semibold' : 'dd-font-normal',
-                      'dd-block dd-truncate',
-                    ]">
-                      {{ item[props.defaultProps.name] }}
-                    </span>
-                  </div>
-                  <span v-if="selected && props.checkIcon != 'none'" :class="[
-                    active ? 'dd-text-white' : 'dd-text-teal-600',
-                    `dd-absolute dd-inset-y-0  dd-flex dd-items-center  ${props.checkIcon == 'left'
-                      ? 'dd-left-1 pl-1.5'
-                      : 'dd-right-0 dd-pr-4'
-                    }`,
-                  ]">
-                    <CheckIcon class="dd-h-5 dd-w-5" aria-hidden="true" />
-                  </span>
-                </li>
-              </slot>
-            </ComboboxOption>
-          </ComboboxOptions>
-          <ComboboxOptions class="dd-shadow-md dd-text-center dd-rounded-md"
-            v-if="queries !== '' && filteredOptions.length === 0 && addNewItem"
-            v-model="queries">
-            <ComboboxOption
-              class="dd-p-4 dd-text-sm dd-text-left dd-text-gray-500 dd-cursor-pointer dd-text dd-font-semibold"
-              @click="addQuery(queries)">
-              Add as new: {{ queries }}
-            </ComboboxOption>
-          </ComboboxOptions>
-        </div>
-    </Combobox>
-    <span v-if="errorMessage" class="dd-text-xs dd-text-red-600 dd-ml-3">{{ errorMessage }}</span>
+        ]"
+        :readonly="!filterable"
+        class="select-input dropdown-button dd-border-solid focus-visible:dd-outline-none dd-flex dd-items-center dd-cursor-pointer dd-bg-white dd-relative dd-w-full dd-border dd-rounded-md dd-shadow-sm dd-pl-3 dd-pr-10 dd-py-2 dd-text-left dd-h-9 sm:dd-text-sm"
+        v-model="inputModelValue" @input="searchQuery($event.target.value)" :displayValue="(val) => findItem(val)"
+        @click="toggleDropdown" :placeholder="props.placeholder" :disabled="disabled"
+      />
+      <ddAvatar v-if="selectedValue && showAvatar" size="mini" class="dd-mr-3"
+        :srcLink="selectedValue[props.defaultProps.avatar]" />
+      <span class="dd-absolute dd-inset-y-0 dd-right-0 dd-flex dd-pt-1.5 dd-pr-2 dd-pointer-events-none">
+        <ChevronDownIcon @click="toggleDropdown" class="dd-h-5 dd-w-5 dd-text-gray-400" aria-hidden="true" />
+      </span>
+
+      <ul
+        v-if="filteredOptions.length > 0 && showDropdown"
+        ref="dropdownList"
+        class="select-list dropdown-menu dd-fixed dd-z-10 dd-mt-1 dd-w-full dd-bg-white dd-shadow-lg dd-max-h-60 dd-rounded-md dd-py-1 dd-text-base dd-ring-1 dd-ring-black dd-ring-opacity-5 dd-overflow-auto focus:dd-outline-none sm:dd-text-sm custom-select-overflow">
+        <li
+          v-for="(item, index) in filteredOptions"
+          :key="item[props.defaultProps.value]"
+          :value="item[props.defaultProps.value]"
+          class="select-item hover:dd-bg-teal-600 hover:!dd-text-white dd-cursor-pointer dd-select-none dd-relative dd-py-2" :class="[
+            props.checkIcon == 'left'
+              ? ' dd-pl-8 dd-pr-4'
+              : ' dd-pl-3 dd-pr-9'
+          ]" @click="selectItem(item)">
+          <!----- show online items for single select ----->
+          <div class="dd-flex dd-items-center">
+            <span v-show="showOnline && props.checkIcon != 'left'" class="dd-mr-3" :class="[
+               inputModelValue == item[props.defaultProps.name] ? 'dd-bg-green-400' : 'dd-bg-gray-200',
+              'dd-inline-block dd-h-2 dd-w-2 dd-flex-shrink-0 dd-rounded-full',
+            ]" aria-hidden="true">
+            </span>
+            <ddAvatar size="mini" class="dd-mr-3" v-if="showAvatar" :srcLink="item[props.defaultProps.avatar]" />
+            <span :class="[
+              props.checkIcon != 'none' && inputModelValue == item[props.defaultProps.name] ? 'dd-font-semibold' : 'dd-font-normal',
+              'dd-block dd-truncate',
+            ]">
+              {{ item[props.defaultProps.name] }}
+            </span>
+            <!----- tick icon single select ----->
+          </div>
+          <span
+            v-if="(!multiple && props.checkIcon != 'none' && inputModelValue == item[props.defaultProps.name])"
+            class="custom-tick" :class="[
+              `dd-absolute dd-inset-y-0 dd-flex dd-items-center ${props.checkIcon == 'left'
+                ? 'dd-left-1 pl-1.5'
+                : 'dd-right-0 dd-pr-4'
+              }`
+            ]">
+              <CheckIcon class="dd-h-5 dd-w-5" aria-hidden="true" />
+          </span>
+        </li>
+      </ul>
+      <!---- add new ---->
+      <ul class="dd-shadow-md dd-text-center dd-rounded-md add-new"
+        v-if="queries !== '' && filteredOptions.length === 0 && addNewItem">
+        <li class="dd-p-4 dd-text-sm dd-text-left dd-text-gray-500 dd-cursor-pointer dd-text dd-font-semibold"
+          @click="addQuery(queries)">
+          Add as new:
+          <span class="dd-break-words">{{ queries }}</span>
+        </li>
+      </ul>
+    </div>
+
+    <!---- error message on apply rules ---->
+    <span v-if="errorMessage" class="dd-text-xs dd-text-red-600 dd-ml-3 dd-capitalize error-message">{{ errorMessage }}</span>
   </div>
 </template>
 <script setup>
-import { useField } from "vee-validate";
-import { ref, computed, watch, onMounted, onBeforeUnmount } from "vue";
-import {
-  Combobox,
-  ComboboxOption,
-  ComboboxOptions,
-  ComboboxInput,
-} from "@headlessui/vue";
-import { CheckIcon, ChevronDownIcon } from "@heroicons/vue/solid";
-import ddAvatar from "../avatars/index.vue";
-import svgIcon from "../svgIcon/index.vue";
+import { useField } from "vee-validate"
+import { ref, computed, watch, watchEffect, onMounted, onBeforeUnmount } from "vue"
+import { CheckIcon, ChevronDownIcon } from "@heroicons/vue/solid"
+import ddAvatar from "../avatars/index.vue"
+
+//emits
 const emits = defineEmits([
   "update:modelValue",
   "change"
-]);
+])
+
+//props
 const props = defineProps({
   label: {
     type: String,
@@ -135,11 +138,11 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-  value: {
-    type: String,
-    default: null,
+  multiple: {
+    type: Boolean,
+    default: false,
   },
-  listClass: {
+  value: {
     type: String,
     default: null,
   },
@@ -148,7 +151,7 @@ const props = defineProps({
     default: false,
   },
   modelValue: {
-    type: [String, Number],
+    type: [Number, String],
     default: null,
   },
   srcLink: {
@@ -179,19 +182,80 @@ const props = defineProps({
       avatar: "avatar",
     }),
   },
-});
+})
 
+//data properties
+const isIconRotated = ref(false)
+const showDropdown = ref(false)
+const queries = ref("")
+const optionsArray = ref(props.options)
+const componentRef = ref(null)
+const dropdownInput = ref("")
+const dropdownList = ref("")
+
+//computed
 const inputModelValue = computed({
   get() {
-    return props.modelValue;
+    return props.modelValue
   },
   set(val) {
     emits("update:modelValue", val);
     emits("change", val);
   },
-});
+})
 
-const componentRef = ref(null);
+const filteredOptions = computed(() =>
+  queries.value == ""
+    ? optionsArray.value
+    : optionsArray.value.filter((el) => {
+      return el.name.toLowerCase().includes(queries.value.toLowerCase())
+    })
+)
+
+const inputSize = computed(() => {
+  return {
+    "dd-h-6 !dd-text-xs": props.size === "xs",
+    "dd-h-7  ": props.size === "sm",
+    "dd-h-8 ": props.size === "base",
+    "dd-h-9 ": props.size === "lg",
+    "dd-h-10 ": props.size === "xl",
+  }
+})
+
+const selectedValue = computed(() => {
+  showDropdown.value = false
+  return props.options.find((predicate) => {
+    return predicate[props.defaultProps.value] == inputModelValue.value;
+  })
+})
+
+const hasError = computed(() => {
+  if (errorMessage.value) {
+    return true;
+  } else {
+    return false;
+  }
+})
+
+//watcher
+watch([queries, filteredOptions], ([newVal]) => {
+    filteredOptions.value.filter((el) => {
+      return el.name.toLowerCase().includes(newVal.toLowerCase())
+    })
+  showDropdown.value = true
+})
+
+//mounted hook
+onMounted(() => {
+  window.addEventListener('click', handleOutsideDropdown)
+})
+
+//destroy hook
+onBeforeUnmount(() => {
+  window.removeEventListener('click', handleOutsideDropdown)
+})
+
+//methods
 const handleOutsideDropdown = (event) => {
   /* handled close case of dropdown */
   if (event.target !== componentRef.value && event.composedPath().includes(componentRef.value)) return;
@@ -202,44 +266,24 @@ const handleOutsideDropdown = (event) => {
   emits("update:modelValue", props.modelValue);
 }
 
-onMounted(() => { window.addEventListener('click', handleOutsideDropdown) })
-onBeforeUnmount(() => { window.removeEventListener('click', handleOutsideDropdown) })
-
-const inputSize = computed(() => {
-  return {
-    "dd-h-6 !dd-text-xs": props.size === "xs",
-    "dd-h-7  ": props.size === "sm",
-    "dd-h-8 ": props.size === "base",
-    "dd-h-9 ": props.size === "lg",
-    "dd-h-10 ": props.size === "xl",
-  };
-});
-const selectedValue = computed(() => {
+const selectItem = (item) => {
   showDropdown.value = false
-  return props.options.find((predicate) => {
-    return predicate[props.defaultProps.value] == inputModelValue.value;
-  });
-});
-
-const isIconRotated = ref(false);
-const showDropdown = ref(false);
-const queries = ref("");
-const filteredOptions = computed(() =>
-  queries.value == ""
-    ? props.options
-    : props.options.filter((el) => {
-      return el.name.toLowerCase().includes(queries.value.toLowerCase())
-    })
-);
+  queries.value = ""
+  emits("update:modelValue", item.name);
+  emits("change", item);
+}
 
 const searchQuery = (val) => {
-  queries.value = val;
-};
+  queries.value = val 
+}
 
-const setDropDown = () => {
+const toggleDropdown = () => {
   showDropdown.value = !showDropdown.value;
   isIconRotated.value = !isIconRotated.value;
-};
+  setTimeout(() => {
+    adjustDropdownPosition();
+  }, 0.001);
+}
 
 const addQuery = (query) => {
   queries.value = query;
@@ -248,12 +292,11 @@ const addQuery = (query) => {
     value: props.options.length + 1,
   };
   props.options.unshift(queryObj);
-  emits("update:modelValue", queryObj.value);
+  emits("update:modelValue", queryObj.name);
   showDropdown.value = false;
   isIconRotated.value = false;
   queries.value = "";
-};
-
+}
 
 const findItem = (val) => {
   const item = props.options.find((predicate) =>
@@ -267,27 +310,26 @@ const getRules = () => {
     return { regex: props.rules };
   }
   return props.rules;
-};
+}
 
 const { errorMessage, value, handleChange } = useField(props.name, getRules(), {
   label: props.name,
-});
+})
 
-watch(
-  () => value,
-  (newValue) => {
-    inputModelValue.value = newValue;
-  }
-);
+const adjustDropdownPosition = () => {
+  const dropdownButton = dropdownInput.value
+  const dropdownMenu = dropdownList.value
+  const buttonRect = dropdownButton.getBoundingClientRect();
+  const menuRect = dropdownMenu?.getBoundingClientRect();
 
-const inputType = ref("text");
-const hasError = computed(() => {
-  if (errorMessage.value) {
-    return true;
-  } else {
-    return false;
+  if (menuRect?.right > window.innerWidth) {
+    dropdownMenu.style.left = `${window.innerWidth - menuRect.width}px`;
   }
-});
+  if (menuRect?.bottom > window.innerHeight) {
+    dropdownMenu.style.top = `${buttonRect.top - menuRect.height}px`;
+  }
+}
+
 </script>
 
 <style scoped>
