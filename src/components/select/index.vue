@@ -86,7 +86,7 @@
 </template>
 <script setup>
 import { useField } from "vee-validate"
-import { ref, computed, watch, watchEffect, onMounted, onBeforeUnmount } from "vue"
+import { ref, computed, watch, watchEffect, onMounted, onBeforeUnmount, nextTick } from "vue"
 import { CheckIcon, ChevronDownIcon } from "@heroicons/vue/solid"
 import ddAvatar from "../avatars/index.vue"
 
@@ -280,9 +280,9 @@ const searchQuery = (val) => {
 const toggleDropdown = () => {
   showDropdown.value = !showDropdown.value;
   isIconRotated.value = !isIconRotated.value;
-  setTimeout(() => {
+  nextTick(() => {
     adjustDropdownPosition();
-  }, 0.001);
+  })
 }
 
 const addQuery = (query) => {
