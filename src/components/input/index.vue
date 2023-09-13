@@ -2,6 +2,9 @@
   <div class="dd-base" :class="$attrs.class">
     <dd-form-element :label="label" :description="hintText" size="flexible" :hintTextColor="hintTextColor"
       :isRequired="isRequired" :errorMessage="errorMessage">
+      <template #label>
+        <slot name="label" />
+      </template>
       <div class="dd-relative dd-rounded-md">
         <div v-if="prefix"
           class="!dd-pointer-events-none !dd-absolute !dd-inset-y-0 !dd-left-0 !dd-flex !dd-items-center !dd-pl-3 !dd-pr-3">
