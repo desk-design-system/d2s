@@ -271,6 +271,13 @@ onBeforeUnmount(() => {
 const handleOutsideDropdown = (event) => {
   /* handled close case of dropdown */
   if (event.target !== componentRef.value && event.composedPath().includes(componentRef.value)) return;
+  if((queries.value == props.modelValue) && showDropdown.value && !queryPlaceholder.value) {
+    emits("update:modelValue", "");
+    showDropdown.value = false;
+    isIconRotated.value = false;
+    queries.value = "";
+    return
+  }
   if (showDropdown.value && queryPlaceholder.value) {
     emits("update:modelValue", queryPlaceholder.value)
     showDropdown.value = false;
