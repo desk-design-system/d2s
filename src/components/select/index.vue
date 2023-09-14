@@ -7,7 +7,7 @@
     </slot>
 
     <div
-      class="dd-relative">
+      class="dd-relative dd-w-full">
       <input
         ref="dropdownInput"
         :class="[
