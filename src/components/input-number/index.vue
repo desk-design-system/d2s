@@ -1,5 +1,5 @@
 <template>
-  <dd-input :suffix="controls" class="input-number" v-model="numberInputModelVal">
+  <dd-input type="number" :suffix="controls" class="input-number" v-model="numberInputModelVal">
     <template v-if="controls" #suffix>
       <div class="dd-flex dd-gap-x-1 -dd-m-[7px]">
         <dd-button
@@ -32,7 +32,7 @@ import { DdButton, DdInput } from "../components";
 
 const props = defineProps({
   modelValue: {
-    type: Number,
+    type: [Number,String],
     default:null,
   },
   controls: {
