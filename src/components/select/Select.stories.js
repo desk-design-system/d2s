@@ -43,7 +43,7 @@ export const Default = {
         onClickMethod,
       };
     },
-    template: `<ddSelect v-model="selected" :options="optionsArr" :label=args.label :showOnline=args.showOnline :isRequired=args.isRequired :placeholder=args.placeholder :listClass=args.listClass :showAvatar=args.showAvatar :srcLink=args.srcLink :size=args.size :checkIcon=args.checkIcon :addNewItem=args.addNewItem :filterable=args.filterable :disabled=args.disabled /> `,
+    template: `<ddSelect v-model="selected" :options="optionsArr" :label=args.label :showOnline=args.showOnline :isRequired=args.isRequired :placeholder=args.placeholder :srcLink=args.srcLink :size=args.size :checkIcon=args.checkIcon :addNewItem=args.addNewItem :filterable=args.filterable :disabled=args.disabled /> `,
   }),
   argTypes: {
     placeholder: {
