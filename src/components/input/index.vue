@@ -7,7 +7,7 @@
       </template>
       <div class="dd-relative dd-rounded-md">
         <div v-if="prefix"
-          class="!dd-pointer-events-none !dd-absolute !dd-inset-y-0 !dd-left-0 !dd-flex !dd-items-center !dd-pl-3 !dd-pr-3">
+          class="!dd-pointer-events-none !dd-absolute !dd-inset-y-0 !dd-left-0 !dd-flex !dd-items-center !dd-pl-3 ">
           <svgIcon class="dd-text-gray-400" :class="[
             hasError
               ? ' !dd-border-red-600 focus:!dd-border-red-600 dd-focus:!dd-ring-red-600'
@@ -38,13 +38,15 @@
           :placeholder="placeholder" />
         <!-- $slots.suffix -->
         <div @click="suffixIconClick" v-if="suffix"
-          class="dd-cursor-pointer !dd-absolute !dd-inset-y-0 !dd-right-0 !dd-flex !dd-items-center !dd-pl-3 !dd-pr-3">
-          <svgIcon class="dd-text-gray-400" :class="[
-            hasError
-              ? ' !dd-border-red-600 focus:!dd-border-red-600 dd-focus:!dd-ring-red-600'
-              : 'dd-border-gray-300 dd-text-gray-500 focus:dd-ring-teal-600 focus:!dd-border-teal-600',
-            hintTextPropertyIcon,
-          ]" :icon="suffixIcon" :size="btnIconSize" />
+          class="dd-cursor-pointer !dd-absolute !dd-inset-y-0 dd-bg-white dd-my-2 !dd-right-0 !dd-flex !dd-items-center !dd-pl-3 !dd-mr-3">
+          <slot name="suffix">
+            <svgIcon class="dd-text-gray-400" :class="[
+              hasError
+                ? ' !dd-border-red-600 focus:!dd-border-red-600 dd-focus:!dd-ring-red-600'
+                : 'dd-border-gray-300 dd-text-gray-500 focus:dd-ring-teal-600 focus:!dd-border-teal-600',
+              hintTextPropertyIcon,
+            ]" :icon="suffixIcon" :size="btnIconSize" />
+          </slot>
         </div>
         <!-- button -->
         <div v-if="type !== 'password' && !Right"
@@ -332,4 +334,5 @@ input {
   padding-top: 0.5em;
   padding-bottom: 0.5em;
 }
+
 </style>
