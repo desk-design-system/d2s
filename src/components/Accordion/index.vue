@@ -47,8 +47,8 @@
 
 <script setup>
 import { computed, ref, useSlots } from "vue";
-import { DdSvgIcon } from "../components";
-import DdBadge from "../badges/index.vue";
+//   import { DdSvgIcon } from "../components";
+//   import DdBadge from "../badges/index.vue";
 
 const props = defineProps({
   active: {
@@ -87,13 +87,14 @@ const tabs = computed(() => {
  return slots.default().reduce((tabs, child) => {
     if (isAccordionTab(child)) {
       tabs.push(child);
-    } else if (child.children.length) {
+    } else if (child?.children?.length && child.children !=='v-if') {
       child.children.forEach((tab) => {
         if (isAccordionTab(tab)) {
           tabs.push(tab);
         }
       });
-    } else {
+    }
+     else {
       console.warn(
         "<AccordionTab> should always be a direct child of <Accordion>."
       );
