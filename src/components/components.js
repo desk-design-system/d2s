@@ -37,3 +37,4 @@ export { default as DdTree } from "./Tree/index.vue";
 export { default as DdSetting } from "./SettingsBar/index.vue";
 export { default as DdFormElement } from "./FormElement/index.vue";
 export { default as DdInputNumber } from "./input-number/index.vue"
+export { default as DdTimePicker } from "./time-picker/index.vue"
