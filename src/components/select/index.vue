@@ -8,27 +8,46 @@
 
     <div
       class="dd-relative dd-w-full">
-      <input
-        ref="dropdownInput"
-        :class="[
-          hasError
-            ? ' !dd-border-red-600 focus:!dd-border-red-600 dd-focus:!dd-ring-red-600'
-            : 'dd-border-gray-300 focus:dd-ring-teal-600 focus:!dd-border-teal-600',
-          inputSize,
-          disabled ? 'dd-pointer-events-none dd-cursor-not-allowed' : ''
-        ]"
-        :readonly="!filterable"
-        :placeholder="queryPlaceholder ? queryPlaceholder : props.placeholder"
-        :disabled="disabled"
-        class="select-input dropdown-button dd-border-solid focus-visible:dd-outline-none 
-          dd-flex dd-items-center dd-cursor-pointer dd-bg-white dd-relative dd-w-full 
-          dd-border dd-rounded-md dd-shadow-sm dd-pl-3 dd-pr-10 dd-py-2 dd-text-left 
-          dd-h-9 sm:dd-text-sm"
-        v-model="inputModelValue"
-        @input="searchQuery($event.target.value)"
-        :displayValue="(val) => findItem(val)"
-        @click="toggleDropdown"
-      />
+      <div :class="multiple ? 'dd-flex dd-flex-wrap dd-border dd-border-gray-200 dd-rounded-md dd-cursor-pointer dd-px-1 dd-py-0.5' : ''"
+          @click="focusToInput($event)">
+         <div v-if="multiple">
+          <ddBadge
+            v-for="(item, index) in selectedOptions"
+            :key="index"
+            class="dd-mr-2 dd-my-0.5"
+            @click.stop
+            closable
+            @close="removeItem(item)"
+            :title="item[defaultProps.name]" />
+        </div>
+        <input
+          ref="dropdownInput"
+          id="inputElement"
+          :class="[
+            hasError
+              ? ' !dd-border-red-600 focus:!dd-border-red-600 dd-focus:!dd-ring-red-600'
+              : 'dd-border-gray-300 focus:dd-ring-teal-600 focus:!dd-border-teal-600',
+            inputSize,
+            !multiple ? 'dd-w-full' : 'dd-border-none',
+            disabled ? 'dd-pointer-events-none dd-cursor-not-allowed' : ''
+          ]"
+          :readonly="!filterable"
+          :placeholder="queryPlaceholder ?
+            queryPlaceholder
+            : selectedOptions.length > 0
+            ? ''
+            : props.placeholder"
+          :disabled="disabled"
+          class="select-input dropdown-button dd-border-solid focus-visible:dd-outline-none 
+            dd-flex dd-items-center dd-cursor-pointer dd-bg-white dd-relative
+            dd-border dd-rounded-md dd-shadow-sm dd-pl-3 dd-pr-10 dd-py-2 dd-text-left 
+            dd-h-9 sm:dd-text-sm"
+          v-model="inputModelValue"
+          @input="searchQuery($event.target.value)"
+          :displayValue="(val) => findItem(val)"
+          @click="toggleDropdown"
+        />
+      </div>
       <ddAvatar v-if="selectedValue && showAvatar" size="mini" class="dd-mr-3"
         :srcLink="selectedValue[props.defaultProps.avatar]" />
       <span class="dd-absolute dd-inset-y-0 dd-right-0 dd-flex dd-pt-1.5 dd-pr-2 dd-pointer-events-none">
@@ -38,7 +57,7 @@
       <ul
         v-if="filteredOptions.length > 0 && showDropdown"
         ref="dropdownList"
-        class="select-list dropdown-menu dd-fixed dd-z-10 dd-mt-1 dd-w-full dd-bg-white dd-shadow-lg dd-max-h-60 dd-rounded-md dd-py-1 dd-text-base dd-ring-1 dd-ring-black dd-ring-opacity-5 dd-overflow-auto focus:dd-outline-none sm:dd-text-sm custom-select-overflow">
+        class="select-list dropdown-menu dd-fixed dd-z-10 dd-w-full dd-mt-1 dd-bg-white dd-shadow-lg dd-max-h-60 dd-rounded-md dd-py-1 dd-text-base dd-ring-1 dd-ring-black dd-ring-opacity-5 dd-overflow-auto focus:dd-outline-none sm:dd-text-sm custom-select-overflow">
         <li
           v-for="(item, index) in filteredOptions"
           :key="item[props.defaultProps.value]"
@@ -50,16 +69,17 @@
           ]" @click="selectItem(item)">
           <!-- show online items for single select -->
           <div class="dd-flex dd-items-center">
-            <span v-show="showOnline && props.checkIcon != 'left'" class="dd-mr-3" :class="[
-               (inputModelValue == item[props.defaultProps.name] || (queryPlaceholder == item[props.defaultProps.name]))
+            <span v-show="!multiple && showOnline && props.checkIcon != 'left'" class="dd-mr-3" :class="[
+              (inputModelValue == item[props.defaultProps.name] || (queryPlaceholder == item[props.defaultProps.name]))
                 ? 'dd-bg-green-400' : 'dd-bg-gray-200',
               'dd-inline-block dd-h-2 dd-w-2 dd-flex-shrink-0 dd-rounded-full',
             ]" aria-hidden="true">
             </span>
             <ddAvatar size="mini" class="dd-mr-3" v-if="showAvatar" :srcLink="item[props.defaultProps.avatar]" />
-            <span :class="[
-              props.checkIcon != 'none' && (inputModelValue == item[props.defaultProps.name]
-               || (queryPlaceholder == item[props.defaultProps.name]))  ? 'dd-font-semibold' : 'dd-font-normal',
+            <span
+              :class="[!multiple && props.checkIcon != 'none' && (inputModelValue == item[props.defaultProps.name]
+              || (queryPlaceholder == item[props.defaultProps.name]))
+              ? 'dd-font-semibold' : 'dd-font-normal',
               'dd-block dd-truncate',
             ]">
               {{ item[props.defaultProps.name] }}
@@ -77,6 +97,24 @@
             ]">
               <CheckIcon class="dd-h-5 dd-w-5" aria-hidden="true" />
           </span>
+          <!----- For multiple select  ----->
+          <span v-if="multiple">
+            <span
+              v-for="(element, selectedIndex) in selectedOptions"
+                :key="selectedIndex">
+                <!---- tick icons ---->
+                <span
+                  v-if="item.value == selectedOptions[selectedIndex]?.value"
+                  class="custom-tick" :class="[
+                    `dd-absolute dd-inset-y-0 dd-flex dd-items-center ${props.checkIcon == 'left'
+                      ? 'dd-left-1 pl-1.5'
+                      : 'dd-right-0 dd-pr-4'
+                    }`
+                  ]">
+                  <CheckIcon class="dd-h-5 dd-w-5" aria-hidden="true" />
+                </span>
+              </span>
+            </span>
         </li>
       </ul>
       <!-- add new -->
@@ -99,6 +137,7 @@ import { useField } from "vee-validate"
 import { ref, computed, watch, watchEffect, onMounted, onBeforeUnmount, nextTick } from "vue"
 import { CheckIcon, ChevronDownIcon } from "@heroicons/vue/solid"
 import ddAvatar from "../avatars/index.vue"
+import ddBadge from "../badges/index.vue"
 
 //emits
 const emits = defineEmits([
@@ -161,7 +200,7 @@ const props = defineProps({
     default: false,
   },
   modelValue: {
-    type: [Number, String],
+    type: [Number, String, Array],
     default: null,
   },
   srcLink: {
@@ -203,6 +242,7 @@ const optionsArray = ref(props.options)
 const componentRef = ref(null)
 const dropdownInput = ref("")
 const dropdownList = ref("")
+const selectedOptions = ref([])
 
 //computed
 const inputModelValue = computed({
@@ -234,9 +274,11 @@ const inputSize = computed(() => {
 })
 
 const selectedValue = computed(() => {
-  return props.options.find((predicate) => {
-    return predicate[props.defaultProps.value] == inputModelValue.value;
-  })
+  if(!props.multiple) {
+    return props.options.find((predicate) => {
+      return predicate[props.defaultProps.value] == inputModelValue.value;
+    })
+  }
 })
 
 const hasError = computed(() => {
@@ -293,7 +335,15 @@ const handleOutsideDropdown = (event) => {
 }
 
 const selectItem = (item) => {
-  showDropdown.value = false
+  if(props.multiple) {
+    addAndRemoveItem(item)
+    queries.value = ""
+    emits("update:modelValue", "");
+    return
+  }
+  else if(!props.multiple) {
+    showDropdown.value = false
+  }
   queries.value = ""
   emits("update:modelValue", item.name);
   emits("change", item);
@@ -312,7 +362,6 @@ const toggleDropdown = () => {
   }
   nextTick(() => {
     adjustDropdownPosition();
-
   })
 }
 
@@ -322,6 +371,14 @@ const addQuery = (query) => {
     name: query,
     value: props.options.length + 1,
   };
+  if (props.multiple) {
+    props.options.unshift(queryObj);
+    selectedOptions.value.push(queryObj)
+    showDropdown.value = true;
+    queries.value = "";
+    emits("update:modelValue", "");
+    return
+  }
   props.options.unshift(queryObj);
   emits("update:modelValue", queryObj.name);
   showDropdown.value = false;
@@ -346,6 +403,32 @@ const getRules = () => {
 const { errorMessage, value, handleChange } = useField(props.name, getRules(), {
   label: props.name,
 })
+
+//For multiselect push and splice from selected array
+const addAndRemoveItem = (item) => {
+  const indexToRemove = selectedOptions.value.findIndex(el => el.value === item.value)
+  if (indexToRemove !== -1) {
+    selectedOptions.value.splice(indexToRemove, 1);
+  }
+  else {
+    selectedOptions.value.push(item)
+  }
+}
+
+const listChange = () => {
+  inputModelValue.value = selectedOptions.value.map((row) => row[props.defaultProps.value])
+}
+
+const removeItem = (item) =>{
+  selectedOptions.value = selectedOptions.value.filter((ele) => ele[props.defaultProps.value] != item[props.defaultProps.value])
+}
+
+const focusToInput = (e) => {
+  if(props.multiple) {
+    showDropdown.value = !showDropdown.value
+  }
+  e.target.childNodes[1].inputElement
+}
 
 const adjustDropdownPosition = () => {
   const dropdownButton = dropdownInput.value
