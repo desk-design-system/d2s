@@ -23,7 +23,7 @@
       @click="$emit('close')"
       :class="{
         ...tagText,
-        'dd-h-3 dd-w-3 ': size === 'xs',
+        'dd-h-4 dd-w-3 ': size === 'xs',
         'dd-h-3 dd-w-3 ': size === 'base',
       }"
       class="dd-ml-1 dd-inline-flex dd-cursor-pointer"

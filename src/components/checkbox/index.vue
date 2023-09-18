@@ -26,7 +26,12 @@
       :label="label"
       class="!dd-ml-2"
       :class="[disabled ? '!dd-text-gray-300' : '!dd-text-gray-700']"
-    />
+    >
+    <template v-for="(_, name) in $slots" #[name]="slotProps">
+      <slot :name="name" v-bind="slotProps || {}" />
+    </template>
+    </dd-form-element>
+
   </div>
 </template>
 
