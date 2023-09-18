@@ -46,11 +46,7 @@
                 disabled ? 'dd-pointer-events-none dd-cursor-not-allowed' : ''
               ]"
               :readonly="!filterable"
-              :placeholder="queryPlaceholder ?
-                queryPlaceholder
-                : selectedOptions.length > 0
-                ? ''
-                : props.placeholder"
+              :placeholder="queryPlaceholder && !multiple ? queryPlaceholder : selectedOptions.length > 0 ? '' : props.placeholder"
               :disabled="disabled"
               class="select-input dropdown-button dd-border-solid focus-visible:dd-outline-none 
                  dd-items-center dd-cursor-pointer dd-bg-white dd-relative
@@ -277,7 +273,7 @@ const inputClass = ref(null)
 //computed
 const inputModelValue = computed({
   get() {
-    return props.modelValue
+    return props.multiple ? '' : props.modelValue
   },
   set(val) {
     emits("update:modelValue", val);
@@ -373,14 +369,15 @@ const handleOutsideDropdown = (event) => {
 
 
   if((queries.value == props.modelValue) && showDropdown.value && !queryPlaceholder.value) {
-    emits("update:modelValue", "");
+    // emits("update:modelValue", "");
     showDropdown.value = false;
     isIconRotated.value = false;
     queries.value = "";
     return
   }
   if (showDropdown.value && queryPlaceholder.value) {
-    emits("update:modelValue", queryPlaceholder.value)
+    // emits("update:modelValue", queryPlaceholder.value)
+    // console.log("Inside query", queryPlaceholder.value);
     showDropdown.value = false;
     isIconRotated.value = false;
     queries.value = "";
@@ -398,15 +395,15 @@ const selectItem = (item) => {
     addAndRemoveItem(item)
     showDropdown.value = true
     queries.value = ""
-    emits("update:modelValue", "");
+    // emits("update:modelValue", "");
     return
   }
   else if(!props.multiple) {
     showDropdown.value = false
+    queries.value = ""
+    emits("update:modelValue", item.name);
+    emits("change", item);
   }
-  queries.value = ""
-  emits("update:modelValue", item.name);
-  emits("change", item);
 }
 
 const searchQuery = (val) => {
@@ -436,7 +433,7 @@ const toggleDropdown = () => {
   isIconRotated.value = !isIconRotated.value;
   if (showDropdown.value && props.modelValue) {
     queryPlaceholder.value = props.modelValue
-    emits("update:modelValue", "")
+    // emits("update:modelValue", "")
   }
   nextTick(() => {
     adjustDropdownPosition();
@@ -454,7 +451,7 @@ const addQuery = (query) => {
     selectedOptions.value.push(queryObj)
     showDropdown.value = true;
     queries.value = "";
-    emits("update:modelValue", "");
+    emits("update:modelValue", selectedOptions.value);
     return
   }
   props.options.unshift(queryObj);
@@ -487,9 +484,13 @@ const addAndRemoveItem = (item) => {
   const indexToRemove = selectedOptions.value.findIndex(el => el.value === item.value)
   if (indexToRemove !== -1) {
     selectedOptions.value.splice(indexToRemove, 1);
+    emits('update:modelValue', selectedOptions.value)
+    console.log("Inside If", selectedOptions.value);
   }
   else {
     selectedOptions.value.push(item)
+    console.log("Inside else", selectedOptions.value);
+    emits('update:modelValue', selectedOptions.value)
   }
 }
 
@@ -499,6 +500,7 @@ const listChange = () => {
 
 const removeItem = (item) =>{
   selectedOptions.value = selectedOptions.value.filter((ele) => ele[props.defaultProps.value] != item[props.defaultProps.value])
+  emits('update:modelValue', selectedOptions.value)
 }
 
 const focusToInput = (e) => {
