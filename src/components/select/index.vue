@@ -75,7 +75,7 @@
           ref="dropdownList"
           :style="dropdownStyle"
           class="select-list dropdown-menu dd-absolute dd-z-10 dd-mt-1 dd-bg-white dd-shadow-lg dd-max-h-60 dd-rounded-md dd-py-1 dd-text-base dd-ring-1 dd-ring-black dd-ring-opacity-5 dd-overflow-auto focus:dd-outline-none sm:dd-text-sm custom-select-overflow">
-        <!-- add a SLOT here as sajjad bhai suggest and open and close it here on same line -->
+
           <li
             v-for="(item, index) in filteredOptions"
             :key="item[props.defaultProps.value]"
@@ -85,8 +85,6 @@
                 ? ' dd-pl-8 dd-pr-4'
                 : ' dd-pl-3 dd-pr-9'
             ]" @click="selectItem(item)">
-          <!-- add inside Default SLOT here as sajjad bhai suggest and open and close it here on same line -->
-            <!-- show online items for single select -->
             <div class="dd-flex dd-items-center">
               <span v-show="!multiple && showOnline && props.checkIcon != 'left'" class="dd-mr-3" :class="[
                 (inputModelValue == item[props.defaultProps.name] || (queryPlaceholder == item[props.defaultProps.name]))
