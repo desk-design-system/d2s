@@ -47,8 +47,8 @@ const props = defineProps( {
   title: String,
   placement: String,
   offSet:{
-    type: [Number],
-    default: 2
+    type: [String],
+    default: null
   } 
 } )
 
@@ -127,17 +127,20 @@ onBeforeMount( () => {
     parentTop.value.id = props.placement
     switch ( props.placement ) {
       case 'topLeft':
-        parentTop.value.style
+        parentTop.value.style.cssText = `top:${props.offSet}`
         parentTop.value.className = `dd-z-[12000] dd-fixed dd-left-[3%] dd-top-[11%]`
         break
       case 'bottomLeft':
+        parentTop.value.style.cssText = `bottom:${props.offSet}`
         parentTop.value.className = "dd-z-[12000] dd-fixed dd-left-[3%] dd-bottom-[5%]"
         break
       case 'bottomRight':
+        parentTop.value.style.cssText = `bottom:${props.offSet}`
         parentTop.value.className = "dd-z-[12000] dd-fixed dd-right-[3%] dd-bottom-[5%]"
         break
       case 'topRight':
       default:
+        parentTop.value.style.cssText = `top:${props.offSet}`
         parentTop.value.className = "dd-z-[12000] dd-fixed dd-right-[3%] dd-top-[11%]"
         break
     }
