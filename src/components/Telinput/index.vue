@@ -9,7 +9,7 @@
     
     <vue-tel-input
     ref="vueTelRef"
-    :placeholder="placeholder"
+      :inputOptions="{placeholder:placeholder}"
       :name="name"
       :style="{
         height: `${inputSize} !important`,
