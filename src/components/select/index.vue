@@ -7,7 +7,7 @@
     </slot>
 
     <div
-      class="dd-w-full">
+      class="dd-w-full dd-relative">
       <div
           :class="[multiple ? 'dd-flex dd-flex-wrap dd-border dd-min-h-8 dd-border-gray-300 dd-shadow-sm dd-box-border dd-rounded-md dd-cursor-pointer dd-px-0.5' : '', 
           showDropdown ? 'dd-border-teal-600 dd-outline-none': '']"
@@ -187,6 +187,14 @@ const props = defineProps({
     type: String,
     default: () => "Select" + Math.floor(Math.random() * 5000),
   },
+  itemText: {
+    type: String,
+    default: 'name'
+  },
+  itemValue: {
+    type: String,
+    default: 'value'
+  },
   options: {
     type: Array,
     required: true,
@@ -273,7 +281,7 @@ const inputClass = ref(null)
 //computed
 const inputModelValue = computed({
   get() {
-    return props.multiple ? '' : props.modelValue
+    return props.multiple ? '' : props.options.find(item=>item[props.itemValue] === props.modelValue)?.[props.itemText]
   },
   set(val) {
     emits("update:modelValue", val);
@@ -401,7 +409,7 @@ const selectItem = (item) => {
   else if(!props.multiple) {
     showDropdown.value = false
     queries.value = ""
-    emits("update:modelValue", item.name);
+    emits("update:modelValue", item[props.itemValue]);
     emits("change", item);
   }
 }

@@ -1,5 +1,5 @@
 <template>
-  <dd-input type="number" :suffix="controls" class="input-number" v-model="numberInputModelVal">
+  <dd-input type="number" min="0" :suffix="controls" class="input-number" v-model="numberInputModelVal" @input="nonNegativeNumber">
     <template v-if="controls" #suffix>
       <div class="dd-flex dd-gap-x-1 -dd-m-[7px]">
         <dd-button
@@ -67,6 +67,10 @@ const decrement = () => {
 const isString = computed( ()=>{
   return !Number.isInteger(parseInt(numberInputModelVal.value)) && numberInputModelVal.value 
 })
+
+const nonNegativeNumber = (event) => {
+  numberInputModelVal.value =  !!numberInputModelVal.value && Math.abs(numberInputModelVal.value) >= 0 ? Math.abs(numberInputModelVal.value) : null
+}
 
 </script>
 
