@@ -47,8 +47,6 @@
 
 <script setup>
 import { computed, ref, useSlots } from "vue";
-//   import { DdSvgIcon } from "../components";
-//   import DdBadge from "../badges/index.vue";
 
 const props = defineProps({
   active: {
@@ -69,7 +67,14 @@ const emit = defineEmits(["update:active"]);
 const slots = useSlots();
 
 const ACCORDION_TAB = "AccordionTab";
-let isActive = ref(props.active);
+let isActive = computed({
+    get(){
+        return props.active
+    },
+    set(active){
+        emit('update:active', active)
+    }
+})
 const colorProp = ref(props.color);
 
 //Methods

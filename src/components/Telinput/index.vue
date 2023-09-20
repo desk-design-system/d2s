@@ -9,6 +9,7 @@
     
     <vue-tel-input
     ref="vueTelRef"
+      :inputOptions="{placeholder:placeholder}"
       :name="name"
       :style="{
         height: `${inputSize} !important`,
@@ -43,6 +44,10 @@ const props = defineProps({
     default: "",
   },
   label: {
+    type: String,
+    default: "",
+  },
+  placeholder: {
     type: String,
     default: "",
   },
