@@ -583,8 +583,15 @@ const loadMore = () => {
     handleScroll();
   }, 0);
 };
+
+defineExpose({
+  handleScroll
+})
 onMounted(() => {
   handleScroll();
+  setTimeout(() => {
+    handleScroll();
+  }, 2000);
   document.addEventListener("click", handleDomClick);
 });
 onBeforeMount(() => {
@@ -595,7 +602,9 @@ onBeforeMount(() => {
 watchEffect(()=>{
   if(props.rows.length){
     limit.value = props.rows.length;
-
+    setTimeout(() => {
+    handleScroll();
+  }, 300);
   }
 })
 
