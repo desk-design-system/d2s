@@ -4,8 +4,9 @@
       <li v-for="(item, index ) in items" :key="index" class="dd-flex">
         <div class="dd-flex dd-items-center">
           <component v-if="(index +1) != items.length" v-bind="matchProperties(item)"
-            class=" dd-text-sm dd-font-medium dd-text-gray-500 dd-cursor-pointer hover:dd-text-teal-700"
-            :is="item[defaultProps.to] ? 'router-link' : 'a'">
+            class=" dd-text-sm dd-font-medium"
+            :class="`${item.disabled ? 'dd-text-gray-400 dd-cursor-not-allowed' : 'dd-text-gray-500 dd-cursor-pointer hover:dd-text-teal-700'}`"
+            :is="getBreadcrumbItemTag(item)">
               <HomeIcon v-if="index == 0" class="dd-h-5 dd-w-5 dd-flex-shrink-0" aria-hidden="true" />
              <span v-else>{{ item.name }}   </span> 
           </component>
@@ -70,6 +71,14 @@ const matchProperties = (item) =>{
     return{
       href: item[props.defaultProps.link]
     }
+  }
+}
+
+function getBreadcrumbItemTag ( item ) {
+  if ( item.disabled ) {
+    return 'span'
+  } else {
+    return item[props.defaultProps.to] ? 'router-link' : 'a'
   }
 }
 </script>
