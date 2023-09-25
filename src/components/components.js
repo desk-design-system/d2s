@@ -38,3 +38,4 @@ export { default as DdSetting } from "./SettingsBar/index.vue";
 export { default as DdFormElement } from "./FormElement/index.vue";
 export { default as DdInputNumber } from "./input-number/index.vue"
 export { default as DdTimePicker } from "./time-picker/index.vue"
+export { default as DdNewSelect } from "./new-select/index.vue"

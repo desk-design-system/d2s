@@ -7,6 +7,8 @@ import { defineRule, configure } from "vee-validate";
 import { localize } from "@vee-validate/i18n";
 
 import AllRules from "@vee-validate/rules";
+import { onClickOutside } from "./directives";
+import { removeFocus } from "./directives/remove-focus";
 
 Object.keys(AllRules).forEach((rule) => {
   defineRule(rule, AllRules[rule]);
@@ -32,4 +34,6 @@ app.provide("$notification", useNotification());
 app.config.globalProperties.$notification = useNotification();
 app.provide("$modal", useMessageBox());
 app.config.globalProperties.$modal = useMessageBox();
+app.directive('on-click-outside', onClickOutside)
+app.directive('remove-focus-if', removeFocus)
 app.mount("#app");
