@@ -21,7 +21,7 @@ export const useNotification = (globalProps = {}) => {
         dismiss: instance.ctx.dismiss,
       };
     },
-    error(title,message, timeout = 3000,placement = "topRight") {
+    error(title,message, timeout = 3000,placement = "topRight",offSet) {
       return this.open(
         Object.assign(
           {},
@@ -30,12 +30,13 @@ export const useNotification = (globalProps = {}) => {
             message: message,
             type: "Error",
             timeout: timeout,
-            placement: placement
+            placement: placement,
+            offSet:offSet
           }
         )
       );
     },
-    success(title, message, timeout = 3000, placement = "topRight") {
+    success(title, message, timeout = 3000, placement = "topRight", offSet) {
       return this.open(
         Object.assign(
           {},
@@ -44,12 +45,13 @@ export const useNotification = (globalProps = {}) => {
             title: title,
             type: "Success",
             timeout: timeout,
-            placement: placement
+            placement: placement,
+            offSet:offSet
           }
         )
       );
     },
-    info(title,message, timeout = 3000, placement = "topRight") {
+    info(title,message, timeout = 3000, placement = "topRight",offSet) {
       return this.open(
         Object.assign(
           {},
@@ -58,12 +60,13 @@ export const useNotification = (globalProps = {}) => {
             message: message,
             type: "Info",
             timeout: timeout,
-            placement: placement
+            placement: placement,
+            offSet:offSet
           }
         )
       );
     },
-    warning(title,message, timeout = 3000,placement = "topRight") {
+    warning(title,message, timeout = 3000,placement = "topRight",offSet) {
       return this.open(
         Object.assign(
           {},
@@ -72,7 +75,8 @@ export const useNotification = (globalProps = {}) => {
             message: message,
             type: "Warning",
             timeout: timeout,
-            placement: placement
+            placement: placement,
+            offSet:offSet
           }
         )
       );

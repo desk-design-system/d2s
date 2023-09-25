@@ -23,7 +23,7 @@
               </div>
               <div class="dd-ml-4 dd-flex dd-flex-shrink-0">
                 <button type="button" @click="closeNotification()"
-                  class="dd-inline-flex dd-rounded-md dd-bg-white dd-text-gray-400 hover:dd-text-gray-700 ">
+                  class="dd-inline-flex dd-rounded-md dd-bg-white dd-cursor-pointer dd-text-gray-400 hover:dd-text-gray-700 ">
                   <span class="dd-sr-only">Close</span>
                   <XIcon class="dd-h-5 dd-w-5 " aria-hidden="true" />
                 </button>
