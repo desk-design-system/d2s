@@ -20,7 +20,6 @@
       "
       style="border-color: rgb(209, 213, 219)"
       @click="getChecked"
-      @change="onChange"
     />
     <dd-form-element
       :label="label"
@@ -89,22 +88,26 @@ const props = defineProps({
 });
 
 
-
-const inputModelValue = ref(props.modelValue)
-
-const modelValArray = ref([])
-const onChange = () => {
-  if (Array.isArray(toRaw(props.modelValue))) {
+const inputModelValue = computed({
+  get(){
+    return props.modelValue
+  },
+  set(val){
+    if (Array.isArray(toRaw(props.modelValue))) {
     modelValArray.value = [...props.modelValue]
     if(modelValArray.value.includes(props.value)) modelValArray.value = modelValArray.value.filter(el => el!== ( props.value || props.modelValue ))
     else modelValArray.value.push(props.value)
       emits("update:modelValue", modelValArray.value);
       emits("change", modelValArray.value);
     } else {
-      emits("update:modelValue", props.value == props.modelValue  ? null : props.value || inputModelValue.value);
-      emits("change", props.value );
+      emits("update:modelValue", props.value == props.modelValue  ? null : props.value || val);
+      emits("change", props.value == props.modelValue  ? null : props.value || val );
     }
-}
+  }
+})
+
+const modelValArray = ref([])
+
 
 function getChecked() {
   emits("click");

@@ -76,11 +76,18 @@
             ]">
             <tr class="dd-bg-white">
               <th
+           
                 class="dd-py-2 !dd-pl-5 dd-text-left checkbox_wrapper !dd-leading-3 dd-h-[40px] table_head_row dd-sticky dd-top-0"
                 :class="[!search ? 'table_border' : '']" v-if="checkBoxProp">
-                <dd-checkbox v-model="allSelected" @click="selectAllFields" :disabled="checkAllDisabled || limit < 1"
+                <dd-checkbox 
+                v-if="showSelectAllCheckbox"
+                  v-model="allSelected" 
+                  @click="selectAllFields" 
+                  :disabled="checkAllDisabled || limit < 1"
                   :rows="rows" @indeterminate="indeterminate" :allCheckboxesChecked="allCheckboxesChecked"
-                  :selectedId="selectedId" />
+                  :selectedId="selectedId"
+                  
+                  />
               </th>
               <slot name="th" />
 
@@ -174,11 +181,14 @@
                       : '',
                   ]">
                     <div class="dd-h-full -dd-my-2.5">
-                      <dd-checkbox @change="setChecked(row[rowKey])" :checked="selectedId &&
-                        selectedId.includes(row?.id) &&
-                        !row?.disabled
-                        " :value="row?.id" :disabled="row?.disabled || checkAllDisabled" />
+                      <dd-checkbox 
+                        @change="setChecked(row[rowKey])" 
+                        :checked="selectedId && selectedId.includes(row?.id) && !row?.disabled && !row.checkboxDisabled " 
+                        :value="row?.checkboxDisabled ? null : row?.id" 
+                        :disabled="row?.disabled || checkAllDisabled || row?.checkboxDisabled"
+                      />
                     </div>
+                  
                   </div>
                 </td>
                 <slot name="td" />
@@ -318,6 +328,10 @@ const props = defineProps({
     default: true,
   },
   checkBoxProp: {
+    type: Boolean,
+    default: false,
+  },
+  showSelectAllCheckbox: {
     type: Boolean,
     default: false,
   },
@@ -611,7 +625,7 @@ const selectAllFields = () => {
     selectedId.value = [];
     setting.value = false;
     props.rows.forEach((row) => {
-      if (!row?.disabled === true) {
+      if (!row?.disabled === true && !row?.checkboxDisabled) {
         selectedId.value.push(row?.id);
         emits("allCheckboxes", row);
       }
