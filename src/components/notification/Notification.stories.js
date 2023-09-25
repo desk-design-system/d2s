@@ -34,6 +34,14 @@ export default {
           summary: null
         }
       }
+    },
+    offSet:{
+      description: "You can add required offset value",
+      table:{
+        defaultValue:{
+          summary: null
+        }
+      }
     }
   },
 };
