@@ -185,11 +185,7 @@ const { floatingStyles } = useFloating(parent, elementRef, {
 });
 
 const setPopperWidth = () => {
-  // const referenceWidth = document.getElementById("parent");
-  // const popperEl = document.getElementById("elementRef");
   elementRef.value.style.width = parent.value.clientWidth + 'px'; 
-  console.log("Reference width",parent.value.clientWidth);
-  console.log("Popper width",elementRef.value.style);
 };
 
 onMounted(()=>{
