@@ -46,7 +46,7 @@
 </template>
 
 <script setup>
-import { computed, ref, useSlots } from "vue";
+import { computed, nextTick, ref, useSlots } from "vue";
 
 const props = defineProps({
   active: {
@@ -65,14 +65,16 @@ const props = defineProps({
 
 const emit = defineEmits(["update:active"]);
 const slots = useSlots();
+const active = ref(props.active)
 
 const ACCORDION_TAB = "AccordionTab";
 let isActive = computed({
     get(){
-        return props.active
+        return active.value
     },
-    set(active){
-        emit('update:active', active)
+    set(activeVal){
+      active.value = activeVal
+      emit('update:active', activeVal)
     }
 })
 const colorProp = ref(props.color);
@@ -133,7 +135,7 @@ const colorClass = ref({
   rose: "dd-bg-gradient-to-l dd-from-rose-100 dd-border-rose-200",
 });
 
-const changeActiveIndex = (index) => {
+const changeActiveIndex = async (index) => {
   const active = isTabActive(index);
   if (props.multiple) {
     if (active) {
