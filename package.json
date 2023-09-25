@@ -26,6 +26,7 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
+    "@floating-ui/vue": "^1.0.2",
     "@headlessui/vue": "^1.6.4",
     "@heroicons/vue": "^1.0.6",
     "@vee-validate/i18n": "^4.8.3",
