@@ -36,6 +36,7 @@
     "vee-validate": "^4.8.4",
     "vue": "^3.2.40",
     "vue-tel-input": "^6.0.5",
+    "vue3-popper": "^1.5.0",
     "vuedraggable": "^4.1.0"
   },
   "devDependencies": {

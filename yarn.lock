@@ -1281,6 +1281,11 @@
   resolved "https://registry.npmjs.org/@pkgjs/parseargs/-/parseargs-0.11.0.tgz"
   integrity sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==
 
+"@popperjs/core@^2.9.2":
+  version "2.11.8"
+  resolved "https://registry.npmjs.org/@popperjs/core/-/core-2.11.8.tgz"
+  integrity sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==
+
 "@radix-ui/number@1.0.1":
   version "1.0.1"
   resolved "https://registry.npmjs.org/@radix-ui/number/-/number-1.0.1.tgz"
@@ -3551,6 +3556,11 @@ csstype@^3.0.2:
   version "3.1.2"
   resolved "https://registry.npmjs.org/csstype/-/csstype-3.1.2.tgz"
   integrity sha512-I7K1Uu0MBPzaFKg4nI5Q7Vs2t+3gWWW648spaF+Rg7pI9ds18Ugn+lvg4SHczUdKlHI5LWBXyqfS8+DufyBsgQ==
+
+debounce@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.npmjs.org/debounce/-/debounce-1.2.1.tgz"
+  integrity sha512-XRRe6Glud4rd/ZGQfiV1ruXSfbvfJedlV9Y6zOlP+2K04vBYiJEte6stfFkCP03aMnY5tsipamumUjL14fofug==
 
 debug@^2.6.9:
   version "2.6.9"
@@ -7384,6 +7394,14 @@ vue@^3.2.40:
     "@vue/runtime-dom" "3.2.45"
     "@vue/server-renderer" "3.2.45"
     "@vue/shared" "3.2.45"
+
+vue3-popper@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.npmjs.org/vue3-popper/-/vue3-popper-1.5.0.tgz"
+  integrity sha512-xaEnx90YBnlSg5G2yWqm2DHWHg+DB99UVRp4VsyTF0QLXyHrqSuE1Xo5+sG0AQq/lBcrGMlk5NU5xE2MDLKViw==
+  dependencies:
+    "@popperjs/core" "^2.9.2"
+    debounce "^1.2.1"
 
 vuedraggable@^4.1.0:
   version "4.1.0"

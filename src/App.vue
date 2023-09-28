@@ -1,10 +1,70 @@
 <template>
-  <dd-table :rows="rows" :columns="columnVal" :buttons="buttons" :Actions="Actions" :values="values" footer checkBoxProp fixedHeight rowKey="id" hoveringRow lastCell fixed actionHeader emptyState actionsPanel sortIcon settingbarIcon searchIcon @updateSettings="updateSettings" dragDrop />
+  <!-- <dd-table :rows="rows" :columns="columnVal" :buttons="buttons" :Actions="Actions" :values="values" footer checkBoxProp fixedHeight rowKey="id" hoveringRow lastCell fixed actionHeader emptyState actionsPanel sortIcon settingbarIcon searchIcon @updateSettings="updateSettings" dragDrop /> -->
+  <!-- <poper arrow >
+    <Button>Demo</Button>
+    <template #content>hello</template>
+  </poper> -->
+  <!-- <p v-for="i in 35 " :key="i">HHello</p> -->
+<ddvalidator ref="signInForm">
+  <ddselect rules="required"
+          name="Test"
+          is-required label="Test Select" :options="data" v-model="q" filterable multiple addNewItem  />
+</ddvalidator>
+  {{ q }}
+  <ddButton
+          
+          title="Continue"
+          size="lg"
+          block
+          content="textOnly"
+          @click="login" />
 </template>
 
 <script setup>
 import { ref } from "vue";
 import DdTable from "./components/table/index.vue";
+import poper from "./components/Popper/index.vue";
+import ddselect from "./components/select/index.vue";
+import ddvalidator  from "./components/validations/ddForm.vue";
+import ddButton  from "./components/buttons/index.vue";
+const q = ref('')
+const signInForm = ref(null)
+
+const login = async () => {
+  const isValid = await signInForm.value.validate()
+  if (isValid.valid) {
+    console.log("hello")
+  } else{
+    console.log("Get Out")
+  }
+}
+
+const data = ref([
+{
+  name: "Test",
+  value: 1
+},
+{
+  name: "Test 2",
+  value: 2
+},
+{
+  name: "Test 3",
+  value: 3
+},
+{
+  name: "Test 4",
+  value: 4
+},
+{
+  name: "Test 5",
+  value: 5
+},
+{
+  name: "Test 6",
+  value: 6
+},
+])
 
 let columns = ref([
   {
