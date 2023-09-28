@@ -1,40 +1,13 @@
 <template>
-  <!-- <dd-table :rows="rows" :columns="columnVal" :buttons="buttons" :Actions="Actions" :values="values" :show-select-all-checkbox="false" footer checkBoxProp fixedHeight rowKey="id" hoveringRow lastCell fixed actionHeader emptyState actionsPanel sortIcon settingbarIcon searchIcon @updateSettings="updateSettings" dragDrop /> -->
-  <div class="dd-p-8">
-    <DdAccordion class="dd-mt-40">
-      <DdAccordionTab title="Dropdown" class="!dd-overflow-scroll">
-        <div class="dd">
-          <DdNewSelect v-model="modelVal" :options="values" filterable="" />
-        </div>
-      </DdAccordionTab>
-    </DdAccordion>
-    Model Value: {{ modelVal }}
-    <DdDrawer v-model="show">
-      <div>
-        <DdNewSelect v-model="modelVal2" :options="values" />
-      </div>
-    </DdDrawer>
-    <div class="dd-mt-8">
-      <DdButton @click="show = true"> Show </DdButton>
-    </div>
-  </div>
+  <dd-table :rows="rows" :columns="columnVal" :buttons="buttons" :Actions="Actions" :values="values" :show-select-all-checkbox="false" footer checkBoxProp fixedHeight rowKey="id" hoveringRow lastCell fixed actionHeader emptyState actionsPanel sortIcon settingbarIcon searchIcon @updateSettings="updateSettings" dragDrop />
+  
 </template>
 
 <script setup>
 import { ref } from "vue";
 import DdTable from "./components/table/index.vue";
-import {
-  DdAccordion,
-  DdAccordionTab,
-  DdButton,
-  DdDrawer,
-  DdNewSelect,
-} from "./components/components";
 
-const modelVal = ref(null);
-const modelVal2 = ref(null);
 
-const show = ref(false);
 let columns = ref([
   {
     title: "ID",
