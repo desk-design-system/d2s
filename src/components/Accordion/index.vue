@@ -70,7 +70,7 @@ const active = ref(props.active)
 const ACCORDION_TAB = "AccordionTab";
 let isActive = computed({
     get(){
-        return active.value
+        return props.active
     },
     set(activeVal){
       active.value = activeVal

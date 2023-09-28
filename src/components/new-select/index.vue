@@ -1,13 +1,11 @@
 <template>
   <div>
-    {{ queryModelValue }}
     <div
       class="dd-w-full dd-relative"
       v-on-click-outside="hideDropdown"
     >
       <label class="">
         <input
-          id="parent"
           ref="parent"
           :placeholder="placeholder ? queryModelValue : ''"
           :readonly="!filterable"
@@ -30,11 +28,11 @@
     </div>
     <!-- Dropdown starts here -->
     <div
-      id="elementRef"
-      ref="elementRef"
-      class="dd-bg-white dd-max-h-60 dd-rounded-md dd-py-1 dd-shadow-lg dd-text-base dd-ring-1 dd-ring-black dd-ring-opacity-5 dd-overflow-auto focus:dd-outline-none sm:dd-text-sm"
-    
+      ref="elementRef"    
       :style="floatingStyles"
+    >
+    <div v-if="showDropdown" 
+    class="dd-bg-white dd-max-h-60 dd-rounded-md dd-py-1 dd-shadow-lg dd-text-base dd-ring-1 dd-ring-black dd-ring-opacity-5 dd-overflow-auto focus:dd-outline-none sm:dd-text-sm"
     >
       <ul ref="dropdownList"  v-if="showDropdown && filteredOptions">
         <li
@@ -57,6 +55,7 @@
           as new item.
         </li>
       </ul>
+    </div>
     </div>
   </div>
 </template>
@@ -186,9 +185,7 @@ const { floatingStyles } = useFloating(parent, elementRef, {
 });
 
 const setPopperWidth = () => {
-  const referenceWidth = document.getElementById("parent");
-  const popperEl = document.getElementById("elementRef");
-  popperEl.style.minWidth = referenceWidth.offsetWidth + 'px';
+  elementRef.value.style.width = parent.value.clientWidth + 'px'; 
 };
 
 onMounted(()=>{
