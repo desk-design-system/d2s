@@ -76,9 +76,9 @@
             ]">
             <tr class="dd-bg-white">
               <th
-           
                 class="dd-py-2 !dd-pl-5 dd-text-left checkbox_wrapper !dd-leading-3 dd-h-[40px] table_head_row dd-sticky dd-top-0"
                 :class="[!search ? 'table_border' : '']" v-if="checkBoxProp">
+                <div :style="`width:${checkBoxColumnSize}`">
                 <dd-checkbox 
                 v-if="showSelectAllCheckbox"
                   v-model="allSelected" 
@@ -88,6 +88,7 @@
                   :selectedId="selectedId"
                   
                   />
+                </div>
               </th>
               <slot name="th" />
 
@@ -414,6 +415,10 @@ const props = defineProps({
   dragDrop: {
     type: Boolean,
     default: false,
+  },
+  checkBoxColumnSize: {
+    type: String,
+    default: "28px",
   },
   defaultProps: {
     type: Object,
