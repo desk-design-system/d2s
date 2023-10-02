@@ -74,7 +74,6 @@ let isActive = computed({
     },
     set(activeVal){
       // active.value = activeVal
-      console.log("Is active", activeVal);
       emit('update:active', activeVal)
     }
 })
