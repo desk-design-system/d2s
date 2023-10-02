@@ -65,7 +65,7 @@ const props = defineProps({
 
 const emit = defineEmits(["update:active"]);
 const slots = useSlots();
-const active = ref(props.active)
+// const active = ref(props.active)
 
 const ACCORDION_TAB = "AccordionTab";
 let isActive = computed({
@@ -73,7 +73,8 @@ let isActive = computed({
         return props.active
     },
     set(activeVal){
-      active.value = activeVal
+      // active.value = activeVal
+      console.log("Is active", activeVal);
       emit('update:active', activeVal)
     }
 })
@@ -145,9 +146,9 @@ const changeActiveIndex = async (index) => {
       else isActive.value = [index];
     }
   } else {
-    isActive.value = isActive.value === index ? null : index;
+    isActive.value = isActive.value === index ? 0 : index;
   }
-  emit("update:active", index);
+  // emit("update:active", index);
 };
 
 const isTabActive = (index) => {
