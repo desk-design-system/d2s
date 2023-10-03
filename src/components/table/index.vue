@@ -435,25 +435,25 @@ const containerRef = ref(null);
 
 const handleScroll = () => {
   const container = containerRef.value;
-  const tableHeadCells = container.querySelectorAll(
+  const tableHeadCells = container?.querySelectorAll(
     ".fixedScroll th:nth-child(1)"
   );
-  const tableRowCells = container.querySelectorAll(
+  const tableRowCells = container?.querySelectorAll(
     ".fixedScroll td:nth-child(1)"
   );
-  const tableCells2 = container.querySelectorAll(
+  const tableCells2 = container?.querySelectorAll(
     ".fixedScroll td:nth-child(2)"
   );
-  const tableCells2Head = container.querySelectorAll(
+  const tableCells2Head = container?.querySelectorAll(
     ".fixedScroll th:nth-child(2)"
   );
-  const tableHeaderCell = container.querySelectorAll(
+  const tableHeaderCell = container?.querySelectorAll(
     ".fixedScroll .checkbox_wrapper"
   );
-  const tableLastCell = container.querySelectorAll(
+  const tableLastCell = container?.querySelectorAll(
     ".fixedScroll td:last-child"
   );
-  const tableLastHead = container.querySelectorAll(
+  const tableLastHead = container?.querySelectorAll(
     ".fixedScroll th:last-child"
   );
 
