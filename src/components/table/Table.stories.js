@@ -1363,11 +1363,11 @@ export const DragDrop = {
         },
       },
     },
-    checkBoxColumnSize: {
+    checkBoxSize: {
       description: "size of check box column",
       table: {
         defaultValue: {
-          summary: String,
+          summary: Number,
         },
       },
     },

@@ -75,10 +75,11 @@
             settingbarIcon ? '!dd-z-[99]' : ''
             ]">
             <tr class="dd-bg-white">
-              <th
+              <th 
+              :style="`width:${checkBoxSize}px`"
                 class="dd-py-2 !dd-pl-5 dd-text-left checkbox_wrapper !dd-leading-3 dd-h-[40px] table_head_row dd-sticky dd-top-0"
                 :class="[!search ? 'table_border' : '']" v-if="checkBoxProp">
-                <div :style="`width:${checkBoxColumnSize}`">
+                <div :style="`width:${checkBoxSize - 30}px`" >
                 <dd-checkbox 
                 v-if="showSelectAllCheckbox"
                   v-model="allSelected" 
@@ -416,9 +417,9 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-  checkBoxColumnSize: {
-    type: String,
-    default: "28px",
+  checkBoxSize: {
+    type: Number,
+    default: 60,
   },
   defaultProps: {
     type: Object,
