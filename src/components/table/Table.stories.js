@@ -1363,6 +1363,14 @@ export const DragDrop = {
         },
       },
     },
+    checkBoxSize: {
+      description: "size of check box column",
+      table: {
+        defaultValue: {
+          summary: Number,
+        },
+      },
+    },
     actionsPanel: {
       description: "To remove actions in row",
       table: {
