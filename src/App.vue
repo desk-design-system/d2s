@@ -5,61 +5,6 @@
 <script setup>
 import { ref } from "vue"
 import DdTable from "./components/table/index.vue"
-import poper from "./components/Popper/index.vue"
-import ddselect from "./components/select/index.vue"
-import ddvalidator from "./components/validations/ddForm.vue"
-import ddButton from "./components/buttons/index.vue"
-
-const signInForm = ref( null )
-
-
-
-const data = ref( [
-  {
-    name: "Test",
-    value: 1
-  },
-  {
-    name: "Test 2",
-    value: 2
-  },
-  {
-    name: "Test 3",
-    value: 3
-  },
-  {
-    name: "Test 4",
-    value: 4
-  },
-  {
-    name: "Test 5",
-    value: 5
-  },
-  {
-    name: "Test 6",
-    value: 6
-  },
-  {
-    name: "Test 7",
-    value: 7
-  },
-  {
-    name: "Test 8",
-    value: 8
-  },
-  {
-    name: "Test 9",
-    value: 9
-  },
-  {
-    name: "Test 10",
-    value: 10
-  },
-  {
-    name: "Test 11",
-    value: 11
-  },
-] )
 
 let columns = ref( [
   {
