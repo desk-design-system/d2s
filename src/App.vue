@@ -1,12 +1,14 @@
 <template>
-  <dd-table :rows="rows" :columns="columnVal" :buttons="buttons" :Actions="Actions" :values="values" footer checkBoxProp fixedHeight rowKey="id" hoveringRow lastCell fixed actionHeader emptyState actionsPanel sortIcon settingbarIcon searchIcon @updateSettings="updateSettings" dragDrop />
+  <dd-table :rows="rows" :columns="columnVal" :buttons="buttons" :Actions="Actions" :values="values" :show-select-all-checkbox="false" footer checkBoxProp fixedHeight rowKey="id" hoveringRow lastCell fixed actionHeader emptyState actionsPanel sortIcon settingbarIcon searchIcon @updateSettings="updateSettings" dragDrop />
+  
 </template>
 
 <script setup>
-import { ref } from "vue"
-import DdTable from "./components/table/index.vue"
+import { ref } from "vue";
+import DdTable from "./components/table/index.vue";
 
-let columns = ref( [
+
+let columns = ref([
   {
     title: "ID",
     value: "id",
@@ -117,8 +119,8 @@ let columns = ref( [
     sortDirection: "",
     hovered: false,
   },
-] )
-const rows = ref( [
+]);
+const rows = ref([
   {
     id: 0,
     username: "Herry007",
@@ -132,6 +134,7 @@ const rows = ref( [
     phone: "+13232321321",
     address: "Newyork",
     disabled: false,
+    checkboxDisabled:true
   },
   {
     id: 1,
@@ -146,6 +149,7 @@ const rows = ref( [
     address: "Newyork",
     status: "Repaired and Collected",
     disabled: false,
+    checkboxDisabled:true
   },
   {
     id: 2,
@@ -576,15 +580,15 @@ const rows = ref( [
     status: "in progress",
     task: "reparing",
   },
-] )
+]);
 
 const buttons = [
   { id: 1, label: "5", color: "white", size: "sm", active: "15" },
   { id: 2, label: "10", color: "white", size: "sm" },
   { id: 3, label: "15", color: "white", size: "sm" },
-]
+];
 
-const Actions = ref( [
+const Actions = ref([
   {
     name: "DropDown Menu 1",
     icon: "DotHorizontal",
@@ -603,9 +607,9 @@ const Actions = ref( [
     size: 12,
     value: 3,
   },
-] )
+]);
 
-const values = ref( [
+const values = ref([
   {
     name: "DropDown Menu 1",
     value: 1,
@@ -623,21 +627,20 @@ const values = ref( [
     name: "DropDown Menu 4",
     value: 4,
   },
-] )
+]);
 
-let columnVal = ref( columns.value )
-const updateSettings = ( data ) => {
-  const reorderedColumns = []
-  data.forEach( ( item ) => {
-    const column = columnVal.value.find( ( col ) => col.value === item.value )
-    if ( column ) {
-      reorderedColumns.push( column )
+let columnVal = ref(columns.value);
+const updateSettings = (data) => {
+  const reorderedColumns = [];
+  data.forEach((item) => {
+    const column = columnVal.value.find((col) => col.value === item.value);
+    if (column) {
+      reorderedColumns.push(column);
     }
-  } )
-  columnVal.value = reorderedColumns
-}
+  });
+  columnVal.value = reorderedColumns;
+};
 </script>
-
 
 <style>
 body {
