@@ -5,68 +5,94 @@
     <template #content>hello</template>
   </poper> -->
   <!-- <p v-for="i in 35 " :key="i">HHello</p> -->
-<ddvalidator ref="signInForm">
-  <ddselect rules="required"
-          name="Test"
-          is-required label="Test Select" :options="data" v-model="q" filterable multiple addNewItem  />
-</ddvalidator>
-  {{ q }}
-  <ddButton
-          
-          title="Continue"
-          size="lg"
-          block
-          content="textOnly"
-          @click="login" />
+  <div class="dd-mx-auto dd-w-[300px] dd-bg-red-400">
+    <ddvalidator ref="signInForm">
+      <ddselect  rules="required | " @addnewItem="test" is-required label="Single Select" :options="data" v-model="q"
+        filterable addNewItem />
+
+      <ddselect class="dd-w-full" filterable rules="required" is-required label="Multi Select" :options="data" v-model="qa"   multiple />
+
+    </ddvalidator>
+    {{q}}
+    <ddButton title="Continue" size="lg" block content="textOnly" @click="login" />
+  </div>
 </template>
 
 <script setup>
-import { ref } from "vue";
-import DdTable from "./components/table/index.vue";
-import poper from "./components/Popper/index.vue";
-import ddselect from "./components/select/index.vue";
-import ddvalidator  from "./components/validations/ddForm.vue";
-import ddButton  from "./components/buttons/index.vue";
-const q = ref('')
-const signInForm = ref(null)
-
+import { ref } from "vue"
+import DdTable from "./components/table/index.vue"
+import poper from "./components/Popper/index.vue"
+import ddselect from "./components/select/index.vue"
+import ddvalidator from "./components/validations/ddForm.vue"
+import ddButton from "./components/buttons/index.vue"
+const q = ref( '' )
+const qa = ref( '' )
+const signInForm = ref( null )
+const test = ( e ) => {
+  q.value = Date.now()
+  console.log( e, "e" )
+  data.value.push( {
+    name: e,
+    value: q.value
+  } )
+}
 const login = async () => {
   const isValid = await signInForm.value.validate()
-  if (isValid.valid) {
-    console.log("hello")
-  } else{
-    console.log("Get Out")
+  if ( isValid.valid ) {
+    console.log( "hello" )
+  } else {
+    console.log( "Get Out" )
   }
 }
 
-const data = ref([
-{
-  name: "Test",
-  value: 1
-},
-{
-  name: "Test 2",
-  value: 2
-},
-{
-  name: "Test 3",
-  value: 3
-},
-{
-  name: "Test 4",
-  value: 4
-},
-{
-  name: "Test 5",
-  value: 5
-},
-{
-  name: "Test 6",
-  value: 6
-},
-])
+const data = ref( [
+  {
+    name: "Test",
+    value: 1
+  },
+  {
+    name: "Test 2",
+    value: 2
+  },
+  {
+    name: "Test 3",
+    value: 3
+  },
+  {
+    name: "Test 4",
+    value: 4
+  },
+  {
+    name: "Test 5",
+    value: 5
+  },
+  {
+    name: "Test 6",
+    value: 6
+  },
+  {
+    name: "Test 7",
+    value: 7
+  },
+  {
+    name: "Test 8",
+    value: 8
+  },
+  {
+    name: "Test 9",
+    value: 9
+  },
+  {
+    name: "Test 10",
+    value: 10
+  },
+  {
+    name: "Test 11",
+    value: 11
+  },
+] )
 
-let columns = ref([
+let columns = ref( [
   {
     title: "ID",
     value: "id",
@@ -177,8 +203,8 @@ let columns = ref([
     sortDirection: "",
     hovered: false,
   },
-]);
-const rows = ref([
+] )
+const rows = ref( [
   {
     id: 0,
     username: "Herry007",
@@ -636,15 +662,15 @@ const rows = ref([
     status: "in progress",
     task: "reparing",
   },
-]);
+] )
 
 const buttons = [
   { id: 1, label: "5", color: "white", size: "sm", active: "15" },
   { id: 2, label: "10", color: "white", size: "sm" },
   { id: 3, label: "15", color: "white", size: "sm" },
-];
+]
 
-const Actions = ref([
+const Actions = ref( [
   {
     name: "DropDown Menu 1",
     icon: "DotHorizontal",
@@ -663,9 +689,9 @@ const Actions = ref([
     size: 12,
     value: 3,
   },
-]);
+] )
 
-const values = ref([
+const values = ref( [
   {
     name: "DropDown Menu 1",
     value: 1,
@@ -683,19 +709,19 @@ const values = ref([
     name: "DropDown Menu 4",
     value: 4,
   },
-]);
+] )
 
-let columnVal = ref(columns.value);
-const updateSettings = (data) => {
-  const reorderedColumns = [];
-  data.forEach((item) => {
-    const column = columnVal.value.find((col) => col.value === item.value);
-    if (column) {
-      reorderedColumns.push(column);
+let columnVal = ref( columns.value )
+const updateSettings = ( data ) => {
+  const reorderedColumns = []
+  data.forEach( ( item ) => {
+    const column = columnVal.value.find( ( col ) => col.value === item.value )
+    if ( column ) {
+      reorderedColumns.push( column )
     }
-  });
-  columnVal.value = reorderedColumns;
-};
+  } )
+  columnVal.value = reorderedColumns
+}
 </script>
 
 

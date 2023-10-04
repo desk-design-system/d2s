@@ -1,5 +1,5 @@
 <template>
-    <Popper  v-bind="$attrs">
+    <Popper   v-bind="$attrs">
       <slot>
       </slot>
       <template #content>
@@ -27,5 +27,9 @@ import Popper from "vue3-popper"
   --popper-theme-border-radius: 6px;
   --popper-theme-padding: 4px 0;
   --popper-theme-box-shadow: 0px 1px 2px 1px rgba(0, 0, 0, 0.05);
+}
+.inline-block{
+margin: 0 !important;
+border: none !important;
 }
 </style>

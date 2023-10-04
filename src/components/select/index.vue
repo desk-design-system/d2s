@@ -3,57 +3,27 @@
     <div v-bind="$attrs" ref="componentRef">
       <!---- label ---->
       <slot name="label">
-        <label v-if="label" class="dd-block dd-text-sm dd-font-medium dd-text-gray-700 dd-mb-1">{{ label }} <span
-            v-if="isRequired" class="dd-text-red-500">*</span></label>
+        <label v-if="label" class="dd-block dd-text-sm dd-font-medium dd-text-gray-700 dd-mb-1">{{ label }}
+          {{ showDropdown }}
+          <span v-if="isRequired" class="dd-text-red-500">*</span></label>
       </slot>
-      <div class="dd-w-full dd-relative dd-flex">
-        <div :class="[multiple ? ' dd-border dd-min-h-8 dd-border-gray-300 dd-shadow-sm dd-box-border dd-rounded-md dd-cursor-pointer dd-px-0.5' : '',
-        showDropdown ? 'dd-border-teal-600 dd-outline-none' : '', hasError
-          ? ' !dd-border-red-600 focus:!dd-border-red-600 dd-focus:!dd-ring-red-600'
-          : 'dd-border-gray-300 focus:dd-ring-teal-600 focus:!dd-border-teal-600',]"
-          ref="dropdownInputMutiple">
-          <input @vnode-mounted="focusToInput" @click="toggleDropdown" v-if="showDropdown" ref="dropdownInput"
-            id="inputElement" :class="[
-              inputSize,
-              !multiple ? 'dd-w-full' : 'dd-border-none !dd-h-[30px]',
-              disabled ? 'dd-pointer-events-none dd-cursor-not-allowed' : ''
-            ]" :readonly="!filterable"
-            :placeholder="queryPlaceholder && !multiple ? queryPlaceholder : selectedOptions.length > 0 ? '' : props.placeholder"
-            :disabled="disabled" class="select-input dropdown-button dd-border-solid focus-visible:dd-outline-none 
-                 dd-items-center dd-cursor-pointer dd-bg-white dd-relative
-                dd-border dd-rounded-md dd-shadow-sm dd-pl-3 dd-pr-10 dd-py-2 dd-text-left 
-                dd-h-9 sm:dd-text-sm !dd-w-full !dd-flex-1" v-model="inputValue"
-            @input="searchQuery($event.target.value)"  />
-            <!-- :displayValue="(val) => findItem(val)" -->
-          <div @click="toggleDropdown" v-else :class="[
-            inputSize,
-            !multiple ? 'dd-w-full' : 'dd-border-none !dd-h-[30px]',
-            disabled ? 'dd-pointer-events-none dd-cursor-not-allowed' : ''
-          ]" class=" dd-border-solid focus-visible:dd-outline-none 
-                 dd-items-center dd-cursor-pointer dd-bg-white dd-relative
-                dd-border dd-rounded-md dd-shadow-sm dd-pl-3 dd-pr-10 dd-py-2 dd-text-left 
-                dd-h-9 sm:dd-text-sm dd-min-w-[200px] dd-flex">
-            <span v-if="multiple">
-              <ddBadge v-for="(item, index) in selectedOptionsArray" :key="index" :class="[index == 0 ? '' : 'dd-ml-1']"
-                size="xs" @click.stop closable @close="removeItem(item)" :title="item[defaultProps.name]" />
-              <div v-if="showCollapseTag">
-                <ddBadge class="dd-ml-1 dd-mt-[5px]" size="xs" @click.stop
-                  :title="`+${maxCollapseTags ? selectedOptions.length - maxCollapseTags : selectedOptions.length - 1}`" />
-              </div>
-            </span>
-            <span v-else>{{ inputModelValue }}</span>
-          </div>
-        </div>
-        <ddAvatar v-if="selectedValue && showAvatar" size="mini" class="dd-mr-3"
-          :srcLink="selectedValue[props.defaultProps.avatar]" />
-        <span class="dd-absolute dd-inset-y-0 dd-right-0 dd-flex dd-pt-1.5 dd-pr-2 dd-pointer-events-none">
-          <ChevronDownIcon class="dd-h-5 dd-w-5 dd-text-gray-400" aria-hidden="true" />
-        </span>
-      </div>
+      <multiSelect :isIconRotated="isIconRotated" ref="dropdownInputWidth" :inputBasicCssClasses="inputBasicCssClasses"
+        :showAvatar="showAvatar" :showDropdown="showDropdown" :hasError="hasError" :inputSize="inputSize"
+        :showCollapseTag="showCollapseTag" :disabled="disabled" :filterable="filterable" :collapseTags="collapseTags"
+        :maxCollapseTags="maxCollapseTags" :selectedOptionsArray="selectedOptionsArray" :selectedOptions="selectedOptions"
+        :queryPlaceholder="queryPlaceholder" :selectedValue="selectedValue" :srcLink="srcLink"
+        @toggleDropdown="toggleDropdown" @searchQuery="searchQuery" @removeItem="removeItem" v-if="multiple" />
+      <singleSelect :isIconRotated="isIconRotated" ref="dropdownInputWidth" :inputBasicCssClasses="inputBasicCssClasses"
+        :inputModelValue="inputModelValue" :showAvatar="showAvatar" :showDropdown="showDropdown" :hasError="hasError"
+        :inputSize="inputSize" :disabled="disabled" :filterable="filterable" :collapseTags="collapseTags"
+        :selectedOptions="selectedOptions" :queryPlaceholder="queryPlaceholder" :selectedValue="selectedValue"
+        :srcLink="srcLink" @toggleDropdown="toggleDropdown" @searchQuery="searchQuery" v-else />
       <span v-if="errorMessage" class="dd-text-xs dd-text-red-600 dd-capitalize error-message">{{ errorMessage }}</span>
     </div>
-    <template v-if="filteredOptions.length > 0 && showDropdown" #content>
-      <ul ref="dropdownList" :style="dropdownStyle" class="  dd-max-h-60 ">
+    <template v-if="showDropdown" #content>
+      <div id="ulList">
+      <ul v-if="filteredOptions.length > 0" ref="dropdownList" :style="dropdownStyle"
+        class="dd-max-h-60 dd-overflow-auto">
         <li v-for="(item, index) in filteredOptions" :key="item[props.defaultProps.value]"
           :value="item[props.defaultProps.value]"
           class="select-item hover:dd-bg-teal-600 hover:!dd-text-white dd-cursor-pointer dd-select-none dd-relative dd-py-2"
@@ -107,16 +77,17 @@
         </li>
         <!-- add a SLOT here as sajjad bhai suggest and open and close it here on same line -->
       </ul>
-
       <!-- add new -->
-      <ul class="dd-shadow-md dd-text-center dd-rounded-md add-new"
+      <ul :style="dropdownStyle" class=" dd-text-center dd-rounded-md add-new"
         v-if="queries !== '' && filteredOptions.length === 0 && addNewItem">
-        <li class="dd-p-4 dd-text-sm dd-text-left dd-text-gray-500 dd-cursor-pointer dd-text dd-font-semibold"
+        <li
+          class="dd-py-2 dd-px-3  dd-text-sm dd-text-left dd-text-gray-500 dd-text dd-font-semibold hover:dd-bg-teal-600 hover:!dd-text-white dd-cursor-pointer"
           @click="addQuery(queries)">
           Add as new:
           <span class="dd-break-words">{{ queries }}</span>
         </li>
       </ul>
+    </div>
       <!-- </template> -->
     </template>
   </dd-popper>
@@ -125,13 +96,15 @@
 import { useField } from "vee-validate"
 import { ref, computed, watch, onMounted, onBeforeUnmount, nextTick, watchEffect } from "vue"
 import { CheckIcon, ChevronDownIcon } from "@heroicons/vue/solid"
+import multiSelect from "./multiSelectView.vue"
+import singleSelect from "./singleSelectView.vue"
 import ddAvatar from "../avatars/index.vue"
-import ddBadge from "../badges/index.vue"
 import ddPopper from "../Popper/index.vue"
 //emits
 const emits = defineEmits( [
   "update:modelValue",
-  "change"
+  "change",
+  "addnewItem"
 ] )
 
 //props
@@ -247,7 +220,7 @@ const queryPlaceholder = ref( "" )
 const optionsArray = ref( props.options )
 const componentRef = ref( null )
 const dropdownInput = ref( "" )
-const dropdownInputMutiple = ref( null )
+const dropdownInputWidth = ref( null )
 const dropdownList = ref( null )
 const selectedOptions = ref( [] )
 const inputClass = ref( null )
@@ -272,14 +245,14 @@ const filteredOptions = computed( () =>
 )
 
 const inputSize = computed( () => {
-  return {
-    "dd-h-6 !dd-text-xs": props.size === "xs",
-    "dd-h-7  ": props.size === "sm",
-    "dd-h-8 ": props.size === "base",
-    "dd-h-9 ": props.size === "lg",
-    "dd-h-10 ": props.size === "xl",
-  }
+    if (props.multiple) {
+      return  props.size === "lg" ? 'dd-min-h-[40px]' : 'dd-min-h-[32px]'
+    } else{
+      return      props.size === "lg" ? 'dd-h-[40px]' : 'dd-h-[32px]'
+    }
 } )
+
+const inputBasicCssClasses = " dd-shadow-sm dd-rounded-md select-input dropdown-button  dd-items-center dd-cursor-pointer dd-bg-white dd-relative  dd-pl-3 dd-pr-10 dd-py-2 dd-text-left sm:dd-text-sm !dd-w-full !dd-flex-1"
 
 const selectedValue = computed( () => {
   if ( !props.multiple ) {
@@ -318,8 +291,13 @@ onBeforeUnmount( () => {
 } )
 
 watchEffect( () => {
-  if ( dropdownInputMutiple.value ) {
-    inputClass.value = `left: ${dropdownInputMutiple.value.getBoundingClientRect().left}px; width: ${dropdownInputMutiple.value.getBoundingClientRect().width}px; top: ${dropdownInputMutiple.value.getBoundingClientRect().top + 30}px`
+  let dynamicWidth = null
+  if ( dropdownInputWidth.value ) {
+    dynamicWidth = dropdownInputWidth.value.dropdownInputWidth
+  }
+  if ( dynamicWidth ) {
+    console.log( dynamicWidth.getBoundingClientRect().width, "dynamicWidth" )
+    inputClass.value = `left: ${dynamicWidth.getBoundingClientRect().left}px; width: ${dynamicWidth.getBoundingClientRect().width}px; top: ${dynamicWidth.getBoundingClientRect().top + 30}px`
   } else if ( dropdownInput.value ) {
     inputClass.value = `left: ${dropdownInput.value.getBoundingClientRect().left}px; width: ${dropdownInput.value.getBoundingClientRect().width}px; top: ${dropdownInput.value.getBoundingClientRect().top + 30}px`
   }
@@ -332,7 +310,9 @@ const dropdownStyle = computed( () => {
 } )
 //methods
 const handleOutsideDropdown = ( event ) => {
-
+  if(event.composedPath().some((row) => row.id == "ulList")) {
+    return false
+  }
   /* handled close case of dropdown */
   if ( event.target !== componentRef.value && event.composedPath().includes( componentRef.value ) ) return
 
@@ -360,9 +340,8 @@ const handleOutsideDropdown = ( event ) => {
 const selectItem = ( item ) => {
   if ( props.multiple ) {
     addAndRemoveItem( item )
-    showDropdown.value = true
     queries.value = ""
-    // emits("update:modelValue", "");
+    showDropdown.value = true
     return
   }
   else if ( !props.multiple ) {
@@ -375,6 +354,7 @@ const selectItem = ( item ) => {
 
 const searchQuery = ( val ) => {
   queries.value = val
+  console.log( queries, "val" )
 }
 
 const selectedOptionsArray = computed( () => {
@@ -401,23 +381,33 @@ const toggleDropdown = () => {
 
 const addQuery = ( query ) => {
   queries.value = query
-  const queryObj = {
-    name: query,
-    value: props.options.length + 1,
-  }
-  if ( props.multiple ) {
-    props.options.unshift( queryObj )
-    selectedOptions.value.push( queryObj )
-    showDropdown.value = true
-    queries.value = ""
-    emits( "update:modelValue", selectedOptions.value )
-    return
-  }
-  props.options.unshift( queryObj )
-  emits( "update:modelValue", queryObj.name )
-  showDropdown.value = false
-  isIconRotated.value = false
-  queries.value = ""
+  emits( "addnewItem", query )
+  queries.value = ''
+  // const queryObj = {
+  //   name: query,
+  //   value: props.options.length + 1,
+  // }
+  // if ( props.multiple ) {
+  //   props.options.unshift( queryObj )
+  //   selectedOptions.value.push( queryObj )
+  //   showDropdown.value = true
+  //   queries.value = ""
+  //   emits( "update:modelValue", selectedOptions.value )
+  //   return
+  // }
+  // props.options.unshift( queryObj )
+  // emits( "update:modelValue", queryObj.name )
+  // showDropdown.value = false
+  // isIconRotated.value = false
+  // queries.value = ""
+//   const test = ( e ) => {
+//   q.value = Date.now()
+//   console.log( e, "e" )
+//   data.value.push( {
+//     name: e,
+//     value: q.value
+//   } )
+// }
 }
 
 const findItem = ( val ) => {
@@ -466,13 +456,4 @@ const focusToInput = ( e ) => {
   inputValue.value = ""
   dropdownInput.value.focus()
 }
-
-
-
 </script>
-
-<style scoped>
-.rotate-icon svg {
-  transform: rotate(180deg);
-}
-</style>
