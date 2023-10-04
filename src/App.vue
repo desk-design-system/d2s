@@ -1,21 +1,5 @@
 <template>
-  <!-- <dd-table :rows="rows" :columns="columnVal" :buttons="buttons" :Actions="Actions" :values="values" footer checkBoxProp fixedHeight rowKey="id" hoveringRow lastCell fixed actionHeader emptyState actionsPanel sortIcon settingbarIcon searchIcon @updateSettings="updateSettings" dragDrop /> -->
-  <!-- <poper arrow >
-    <Button>Demo</Button>
-    <template #content>hello</template>
-  </poper> -->
-  <!-- <p v-for="i in 35 " :key="i">HHello</p> -->
-  <div class="dd-mx-auto dd-w-[300px] dd-bg-red-400">
-    <ddvalidator ref="signInForm">
-      <ddselect  rules="required | " @addnewItem="test" is-required label="Single Select" :options="data" v-model="q"
-        filterable addNewItem />
-
-      <ddselect class="dd-w-full" filterable rules="required" is-required label="Multi Select" :options="data" v-model="qa"   multiple />
-
-    </ddvalidator>
-    {{q}}
-    <ddButton title="Continue" size="lg" block content="textOnly" @click="login" />
-  </div>
+  <dd-table :rows="rows" :columns="columnVal" :buttons="buttons" :Actions="Actions" :values="values" footer checkBoxProp fixedHeight rowKey="id" hoveringRow lastCell fixed actionHeader emptyState actionsPanel sortIcon settingbarIcon searchIcon @updateSettings="updateSettings" dragDrop />
 </template>
 
 <script setup>
@@ -25,25 +9,10 @@ import poper from "./components/Popper/index.vue"
 import ddselect from "./components/select/index.vue"
 import ddvalidator from "./components/validations/ddForm.vue"
 import ddButton from "./components/buttons/index.vue"
-const q = ref( '' )
-const qa = ref( '' )
+
 const signInForm = ref( null )
-const test = ( e ) => {
-  q.value = Date.now()
-  console.log( e, "e" )
-  data.value.push( {
-    name: e,
-    value: q.value
-  } )
-}
-const login = async () => {
-  const isValid = await signInForm.value.validate()
-  if ( isValid.valid ) {
-    console.log( "hello" )
-  } else {
-    console.log( "Get Out" )
-  }
-}
+
+
 
 const data = ref( [
   {
