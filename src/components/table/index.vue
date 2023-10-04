@@ -457,29 +457,29 @@ const handleScroll = () => {
     ".fixedScroll th:last-child"
   );
 
-  tableHeaderCell.forEach((cell) => {
+  tableHeaderCell?.forEach((cell) => {
     if (container.scrollLeft >= 0) {
-      cell.classList.add("checkbox_cell_wrapper");
+      cell?.classList?.add("checkbox_cell_wrapper");
     } else if (container.scrollLeft <= 0) {
-      cell.classList.remove("checkbox_cell_wrapper");
+      cell?.classList?.remove("checkbox_cell_wrapper");
     }
   });
 
-  tableHeadCells.forEach((cell) => {
+  tableHeadCells?.forEach((cell) => {
     if (container.scrollLeft >= 0) {
-      cell.classList.add("fixed_head_cell_one");
+      cell?.classList?.add("fixed_head_cell_one");
     } else if (container.scrollLeft < 0) {
-      cell.classList.remove("fixed_head_cell_one");
+      cell?.classList?.remove("fixed_head_cell_one");
     }
   });
-  tableRowCells.forEach((cell) => {
+  tableRowCells?.forEach((cell) => {
     if (container.scrollLeft >= 0) {
       if (props.checkBoxProp == false) {
         cell.style.boxShadow = "-2px 0 2px -2px rgba(0, 0, 0, 0.2) inset";
       }
-      cell.classList.add("fixed_cell_one");
+      cell?.classList?.add("fixed_cell_one");
     } else if (container.scrollLeft <= 0) {
-      cell.classList.remove("fixed_cell_one");
+      cell?.classList?.remove("fixed_cell_one");
       if (props.checkBoxProp == false) {
         cell.style.boxShadow = "none";
       }
@@ -487,40 +487,40 @@ const handleScroll = () => {
   });
 
   if (props.checkBoxProp !== false) {
-    tableCells2.forEach((cell) => {
+    tableCells2?.forEach((cell) => {
       if (container.scrollLeft >= 0) {
-        cell.classList.add("fixed_cell_two");
+        cell?.classList?.add("fixed_cell_two");
       } else if (container.scrollLeft <= 0) {
-        cell.classList.remove("fixed_cell_two");
+        cell?.classList?.remove("fixed_cell_two");
       }
     });
 
-    tableCells2Head.forEach((cell) => {
+    tableCells2Head?.forEach((cell) => {
       if (container.scrollLeft >= 0) {
-        cell.classList.add("fixed_cell_two_head");
+        cell?.classList?.add("fixed_cell_two_head");
       } else if (container.scrollLeft <= 0) {
-        cell.classList.remove("fixed_cell_two_head");
+        cell?.classList?.remove("fixed_cell_two_head");
       }
     });
   }
 
-  tableLastCell.forEach((cell) => {
+  tableLastCell?.forEach((cell) => {
     const scrollValueFromRight =
       container.scrollWidth - container.clientWidth - container.scrollLeft;
     if (scrollValueFromRight > -1) {
-      cell.classList.add("fixed_last_cell");
+      cell?.classList?.add("fixed_last_cell");
     } else if (scrollValueFromRight < -1) {
-      cell.classList.remove("fixed_last_cell");
+      cell?.classList?.remove("fixed_last_cell");
     }
   });
 
-  tableLastHead.forEach((cell) => {
+  tableLastHead?.forEach((cell) => {
     const scrollValueFromRight =
       container.scrollWidth - container.clientWidth - container.scrollLeft;
     if (scrollValueFromRight > 0) {
-      cell.classList.add("fixed_last_cell_head");
+      cell?.classList?.add("fixed_last_cell_head");
     } else if (scrollValueFromRight < 0) {
-      cell.classList.remove("fixed_last_cell_head");
+      cell?.classList?.remove("fixed_last_cell_head");
     }
   });
 };
