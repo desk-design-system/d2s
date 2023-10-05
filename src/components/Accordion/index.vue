@@ -47,6 +47,8 @@
 
 <script setup>
 import { computed, nextTick, ref, useSlots } from "vue";
+import DdSvgIcon from '../svgIcon/index.vue'
+import DdBadge from '../badges/index.vue'
 
 const props = defineProps({
   active: {
