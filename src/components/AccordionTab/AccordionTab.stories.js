@@ -1,5 +1,7 @@
+import { ref } from "vue";
 import DdAccordion from "../Accordion/index.vue";
 import DdAccordionTab from "./index.vue";
+import { computed } from "vue";
 
 // More on default export: https://storybook.js.org/docs/vue/writing-stories/introduction#default-export
 export default {
@@ -16,15 +18,31 @@ export const Default = {
       DdAccordionTab,
     },
     setup() {
-      console.log(args.active, 'args');
+      const multiple = computed(()=>args.multiple)
+      const active = ref(multiple ? [1] : 1)
+      const title = "Tab-1"
+      const prependIcon = computed(()=>args['prepend-icon'])
+      const appendIcon = computed(()=>args['append-icon'])
+      const badge = computed(()=>args.badge)
+      const color = computed(()=>args.color)
       return {
         args,
+        active,
+        title,
+        prependIcon,
+        appendIcon,
+        badge,
+        color,
+        multiple
       };
     },
-    template: `<dd-accordion :active=args.active :title=args.title>
+    template: `<dd-accordion v-model:active="active" :title="title"  :color="color">
         <dd-accordion-tab
           title="Tab-1"
-          v-bind="args"
+          :prepend-icon="prependIcon"
+          :append-icon="appendIcon"
+          :badge="badge"
+         
         >
           <h3>This is tab 1</h3>
         </dd-accordion-tab>
@@ -42,29 +60,65 @@ export const Default = {
       options: ["Alert", "SquareDot", "Circle", "Plus"],
     },
     title: {
-      description: "Title for the header.",
+      description: "Title for each accordion tab.",
       type: { name: "string", required: true },
       defaultValue: "",
     },
+    multiple: {
+      description: "Prop for activating multiple tabs. ",
+      type: 'boolean',
+      defaultValue: "",
+    },
     badge: {
-      description: "Using DdBadge with same name props",
-      type: { name: "string", required: true },
+      description: "Appends badge to the accordion tab. You can use this prop to pass the text to Badge.",
+      type: { name: "string"},
       defaultValue: "",
     },
     color: {
       description: "use any tailwind color for color",
+      control: { type: "select" },
+      options: ["slate", "gray", "zinc", "neutral","stone", "red", "orange", "amber", "yellow", "lime", "green", "emerald", "teal", "cyan", "sky", "blue", "indigo", "violet", "purple", "fuchsia", "pink", "rose"],
     },
-    "#append": {
-      description: "Append slot.",
+    "#left": {
+      description: "Use this slot to override the prepend-icon",
     },
-    "#prepend": {
-      description: "Prepend slot.",
+    "#right": {
+      description: "Use this slot to override the append-icon",
     },
     "#title": {
-      description: "Header slot.",
+      description: "Use this slot to override the whole title box with all of it's elements like append, prepend icons and badge as well.",
     },
   },
 };
+
+export const Multiple = {
+  render: (args) => ({
+    components: {
+      DdAccordion,
+      DdAccordionTab,
+    },
+    setup() {
+      const active = ref([1])
+      return {
+        args,
+        active
+      };
+    },
+    template: `<dd-accordion v-model:active="active" multiple>
+          <dd-accordion-tab
+            title="Tab-1"
+          >
+            <h3>This is tab 1</h3>
+          </dd-accordion-tab>
+          <dd-accordion-tab
+            title="Tab-2"
+          >
+            <h3>This is tab 2</h3>
+          </dd-accordion-tab>
+        </dd-accordion>`,
+  }),
+};
+
 export const PrependIcon = {
   render: (args) => ({
     components: {
@@ -72,39 +126,19 @@ export const PrependIcon = {
       DdAccordionTab,
     },
     setup() {
+      const active = ref(1)
       return {
         args,
+        active,
       };
     },
-    template: ` <dd-accordion  :active="0" :multiple='false' v-bind="args">
-                          <dd-accordion-tab  prepend-icon="Checklist" :title="args.title" v-bind="args">
+    template: ` <dd-accordion  v-model:active="active">
+                          <dd-accordion-tab  prepend-icon="Checklist" title="Tab with Prepend icon">
                               <h3>This is tab</h3>
                           </dd-accordion-tab>
                           
                     </dd-accordion>`,
   }),
-  argTypes: {
-    "prepend-icon": {
-      description: "Pass name of the icon to prepend in the titlw box",
-    },
-    "append-icon": {
-      description: "Pass name of the icon to append in the titlw box",
-    },
-    title: {
-      description: "Title for the header.",
-      type: { name: "string", required: true },
-      defaultValue: "",
-    },
-    "#right": {
-      description: "Append slot.",
-    },
-    "#left": {
-      description: "Prepend slot.",
-    },
-    "#title": {
-      description: "Header slot.",
-    },
-  },
 };
 export const AppendIcon = {
   render: (args) => ({
@@ -113,22 +147,19 @@ export const AppendIcon = {
       DdAccordionTab,
     },
     setup() {
+      const active = ref(1)
       return {
         args,
+        active
       };
     },
-    template: ` <dd-accordion  :active="0" :multiple='false' v-bind="args">
-                          <dd-accordion-tab  append-icon="Checklist" :title="args.title" v-bind="args">
+    template: ` <dd-accordion  v-model:active="active"  >
+                          <dd-accordion-tab  append-icon="Checklist" title="Tab with Append icon">
                               <h3>This is tab</h3>
                           </dd-accordion-tab>
                          
                     </dd-accordion>`,
   }),
-  args: {
-    "prepend-icon": "Mobile",
-    title: "Tab",
-    "append-icon": "",
-  },
 };
 
 export const Badge = {
@@ -138,49 +169,22 @@ export const Badge = {
       DdAccordionTab,
     },
     setup() {
+      const active = ref(1)
       return {
         args,
+        active
       };
     },
-    template: `<dd-accordion :active="0" v-bind="args">
+    template: `<dd-accordion v-model:active="active">
           <dd-accordion-tab
-            title="Tab-1"
-            prepend-icon="SquareDot"
+            title="Tab with badge"
             badge="Page $100.00"
-            closable
-            dot
-            v-bind="args"
           >
             <h3>This is tab 1</h3>
           </dd-accordion-tab>
         </dd-accordion>`,
   }),
-  argTypes: {
-    "prepend-icon": {
-      description: "Pass name of the icon to prepend in the titlw box",
-    },
-    "append-icon": {
-      description: "Pass name of the icon to append in the titlw box",
-    },
-    title: {
-      description: "Title for the header.",
-      type: { name: "string", required: true },
-      defaultValue: "",
-    },
-    badge: {
-      description: "Using DdBadge with same name props",
-      defaultValue: "",
-    },
-    "#append": {
-      description: "Append slot.",
-    },
-    "#prepend": {
-      description: "Prepend slot.",
-    },
-    "#title": {
-      description: "Header slot.",
-    },
-  },
+
 };
 
 export const Color = {
@@ -190,47 +194,19 @@ export const Color = {
       DdAccordionTab,
     },
     setup() {
+      const active = ref(1)
       return {
         args,
+        active
       };
     },
-    template: `<dd-accordion :active="1" color="red">
+    template: `<dd-accordion v-model:active="active" color="red">
           <dd-accordion-tab
-            title="Tab-1"
-            prepend-icon="SquareDot"
-            badge="Page $100.00"
-            closable
-            dot
+            title="Colored Tab"
             color="fuchsia"
           >
             <h3>This is tab 1</h3>
           </dd-accordion-tab>
         </dd-accordion>`,
   }),
-  argTypes: {
-    "prepend-icon": {
-      description: "Pass name of the icon to prepend in the titlw box",
-    },
-    "append-icon": {
-      description: "Pass name of the icon to append in the titlw box",
-    },
-    title: {
-      description: "Title for the header.",
-      type: { name: "string", required: true },
-      defaultValue: "",
-    },
-    badge: {
-      description: "Using DdBadge with same name props",
-      defaultValue: "",
-    },
-    "#append": {
-      description: "Append slot.",
-    },
-    "#prepend": {
-      description: "Prepend slot.",
-    },
-    "#title": {
-      description: "Header slot.",
-    },
-  },
 };
