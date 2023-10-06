@@ -7,6 +7,7 @@
       :hintTextColor="hintTextColor"
       :counter="counter"
       :isRequired="isRequired"
+      :errorMessage="errorMessage"
     >
       <div class="dd-w-full dd-rounded-md">
         <textarea
