@@ -13,9 +13,9 @@
       ref="dropdownInput" :class="[
         ' focus-visible:dd-outline-none',
       ]" :readonly="!filterable"
-      :placeholder="queryPlaceholder && !multiple ? queryPlaceholder : selectedOptions.length > 0 ? '' : props.placeholder"
+      :placeholder="inputModelValue"
       v-model="inputValue" @input="emits('searchQuery', $event.target.value)" />
-    <input class="focus-visible:dd-outline-none dd-cursor-pointer" :value="inputModelValue" readonly v-else />
+    <input :placeholder="placeholder" class="focus-visible:dd-outline-none dd-cursor-pointer" :value="inputModelValue" readonly v-else />
     <ddAvatar v-if="selectedValue && showAvatar" size="mini" class="dd-mr-3"
       :srcLink="selectedValue[props.defaultProps.avatar]" />
     <span :class="{ 'rotate-icon': isIconRotated }"
@@ -69,8 +69,8 @@ const props = defineProps( {
     default: false,
   },
   inputSize: {
-    type: Object,
-    default: () => { }
+    type: String,
+    default: ''
   },
   showCollapseTag: {
     type: Boolean,
@@ -89,7 +89,7 @@ const props = defineProps( {
     type: Array,
     default: () => [],
   },
-  queryPlaceholder: {
+  placeholder: {
     type: String,
     default: null,
   },
