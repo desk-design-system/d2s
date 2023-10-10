@@ -216,7 +216,6 @@ const isIconRotated = ref( false )
 const showDropdown = ref( false )
 const queries = ref( "" )
 const queryPlaceholder = ref( "" )
-const optionsArray = ref( props.options )
 const componentRef = ref( null )
 const dropdownInput = ref( "" )
 const dropdownInputWidth = ref( null )
@@ -235,12 +234,13 @@ const inputModelValue = computed( {
   },
 } )
 
-const filteredOptions = computed( () =>
-  queries.value == ""
-    ? optionsArray.value
-    : optionsArray.value.filter( ( el ) => {
+const filteredOptions = computed( () => {
+  return queries.value == ""
+    ? props.options
+    : props.options.filter( ( el ) => {
       return el.name.toLowerCase().includes( queries.value.toLowerCase() )
     } )
+}
 )
 
 const inputSize = computed( () => {
