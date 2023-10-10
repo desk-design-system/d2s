@@ -16,7 +16,7 @@
       "require": "./dist/style.css"
     }
   },
-  "version": "1.6.90",
+  "version": "1.6.91",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
