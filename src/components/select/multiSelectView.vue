@@ -31,7 +31,7 @@
       </div>
     <ddAvatar v-if="selectedValue && showAvatar" size="mini" class="dd-mr-3"
       :srcLink="selectedValue[props.defaultProps.avatar]" />
-    <span :class="{ 'rotate-icon': isIconRotated }" class="dd-absolute dd-inset-y-0 dd-right-0 dd-flex dd-pt-1.5 dd-pr-2 dd-pointer-events-none">
+    <span :class="{ 'rotate-icon': showDropdown }" class="dd-absolute dd-inset-y-0 dd-right-0 dd-flex dd-pt-1.5 dd-pr-2 dd-pointer-events-none">
       <ChevronDownIcon class="dd-h-5 dd-w-5 dd-text-gray-400" aria-hidden="true" />
     </span>
   </div>
