@@ -99,6 +99,8 @@ import multiSelect from "./multiSelectView.vue"
 import singleSelect from "./singleSelectView.vue"
 import ddAvatar from "../avatars/index.vue"
 import ddPopper from "../Popper/index.vue"
+import { useElementSize,onClickOutside } from '@vueuse/core'
+
 //emits
 const emits = defineEmits( [
   "update:modelValue",
@@ -222,7 +224,6 @@ const dropdownInputWidth = ref( null )
 const dropdownList = ref( null )
 const selectedOptions = ref( [] )
 const inputClass = ref( null )
-
 //computed
 const inputModelValue = computed( {
   get () {
@@ -278,18 +279,21 @@ watch( [queries, filteredOptions], ( [newVal] ) => {
     showDropdown.value = true
   }
 } )
-
+let size = ref()
 //mounted hook
 onMounted( () => {
-  window.addEventListener( 'click', handleOutsideDropdown )
+  // window.addEventListener( 'click', handleOutsideDropdown )
+  size.value = useElementSize(dropdownInputWidth.value.dropdownInputWidth)
+  onClickOutside(componentRef, handleOutsideDropdown)
+
 } )
 
 //destroy hook
 onBeforeUnmount( () => {
-  window.removeEventListener( 'click', handleOutsideDropdown )
+  // window.removeEventListener( 'click', handleOutsideDropdown )
 } )
-
 watchEffect( () => {
+  size.value?.width
   let dynamicWidth = null
   if ( dropdownInputWidth.value ) {
     dynamicWidth = dropdownInputWidth.value.dropdownInputWidth
@@ -302,7 +306,6 @@ watchEffect( () => {
 } )
 
 const dropdownStyle = computed( () => {
-
   return inputClass.value
 
 } )

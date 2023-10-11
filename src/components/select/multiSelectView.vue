@@ -4,9 +4,8 @@
     inputSize,
     inputBasicCssClasses,
     selectedOptionsArray.length > 0 ? '!dd-py-1 !dd-pb-0' : '',
-    
     disabled ? '!dd-pointer-events-none !dd-cursor-not-allowed' : '',
-    'dd-border-solid  dd-border  dd-shadow-sm dd-rounded-md dd-min-w-[200px] dd-max-w-[200px]',
+    'dd-border-solid  dd-border  dd-shadow-sm dd-rounded-md',
     showDropdown ? '!dd-border-solid !dd-border-teal-600 !dd-outline-none' : '', hasError
       ? ' dd-border-red-600 focus:!dd-border-red-600 focus:!dd-ring-red-600'
       : '!dd-border-gray-300 focus:!dd-ring-teal-600 focus:!dd-border-teal-600',]"
@@ -157,6 +156,7 @@ const props = defineProps( {
   },
 
 } )
+
 
 defineExpose({
   dropdownInputWidth

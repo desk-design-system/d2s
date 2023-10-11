@@ -31,5 +31,6 @@ import Popper from "vue3-popper"
 .inline-block{
 margin: 0 !important;
 border: none !important;
+display: block !important;
 }
 </style>

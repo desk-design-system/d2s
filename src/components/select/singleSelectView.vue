@@ -9,13 +9,13 @@
       : '!dd-border-gray-300 focus:!dd-ring-teal-600 focus:!dd-border-teal-600',]"
     @click="emits('toggleDropdown', $event)" ref="dropdownInputWidth" class="dd-w-full dd-relative dd-flex ">
 
-    <input @vnode-mounted="focusToInput" @click="emits('toggleDropdown', $event)" v-if="showDropdown" id="inputElement"
+    <input @vnode-mounted="focusToInput"  v-if="showDropdown" id="inputElement"
       ref="dropdownInput" :class="[
         ' focus-visible:dd-outline-none',
       ]" :readonly="!filterable"
       :placeholder="inputModelValue"
       v-model="inputValue" @input="emits('searchQuery', $event.target.value)" />
-    <input :placeholder="placeholder" class="focus-visible:dd-outline-none dd-cursor-pointer" :value="inputModelValue" readonly v-else />
+    <input  :placeholder="placeholder" class="focus-visible:dd-outline-none dd-cursor-pointer" :value="inputModelValue" readonly v-else />
     <ddAvatar v-if="selectedValue && showAvatar" size="mini" class="dd-mr-3"
       :srcLink="selectedValue[props.defaultProps.avatar]" />
     <span :class="{ 'rotate-icon': isIconRotated }"
