@@ -1,18 +1,18 @@
 <template>
   <dd-popper :show="showDropdown">
-    <div v-bind="$attrs" ref="componentRef">
+    <div v-bind="{...$attrs, class: undefined, style: undefined}" ref="componentRef">
       <!---- label ---->
       <slot name="label">
         <label v-if="label" class="dd-block dd-text-sm dd-font-medium dd-text-gray-700 dd-mb-1">{{ label }}
           <span v-if="isRequired" class="dd-text-red-500">*</span></label>
       </slot>
-      <multiSelect :isIconRotated="isIconRotated" ref="dropdownInputWidth" :inputBasicCssClasses="inputBasicCssClasses"
+      <multiSelect :attr-class="$attrs.class" :attr-style="$attrs.style" :isIconRotated="isIconRotated" ref="dropdownInputWidth" :inputBasicCssClasses="inputBasicCssClasses"
         :showAvatar="showAvatar" :showDropdown="showDropdown" :hasError="hasError" :inputSize="inputSize"
         :showCollapseTag="showCollapseTag" :disabled="disabled" :filterable="filterable" :collapseTags="collapseTags"
         :maxCollapseTags="maxCollapseTags" :selectedOptionsArray="selectedOptionsArray" :selectedOptions="selectedOptions"
          :selectedValue="selectedValue" :srcLink="srcLink"
         @toggleDropdown="toggleDropdown" @searchQuery="searchQuery" @removeItem="removeItem" v-if="multiple" />
-      <singleSelect :placeholder="placeholder" :isIconRotated="isIconRotated" ref="dropdownInputWidth" :inputBasicCssClasses="inputBasicCssClasses"
+      <singleSelect :attr-class="$attrs.class" :attr-style="$attrs.style" :placeholder="placeholder" :isIconRotated="isIconRotated" ref="dropdownInputWidth" :inputBasicCssClasses="inputBasicCssClasses"
         :inputModelValue="inputModelValue" :showAvatar="showAvatar" :showDropdown="showDropdown" :hasError="hasError"
         :inputSize="inputSize" :disabled="disabled" :filterable="filterable" :collapseTags="collapseTags"
         :selectedOptions="selectedOptions"  :selectedValue="selectedValue"
@@ -294,14 +294,15 @@ onBeforeUnmount( () => {
 } )
 watchEffect( () => {
   size.value?.width
+  inputClass.value = 'width:' + size.value?.width + 'px'
   let dynamicWidth = null
   if ( dropdownInputWidth.value ) {
     dynamicWidth = dropdownInputWidth.value.dropdownInputWidth
   }
   if ( dynamicWidth ) {
-    inputClass.value = `left: ${dynamicWidth.getBoundingClientRect().left}px; width: ${dynamicWidth.getBoundingClientRect().width}px; top: ${dynamicWidth.getBoundingClientRect().top + 30}px`
+    inputClass.value = `width: ${dynamicWidth.getBoundingClientRect().width}px;`
   } else if ( dropdownInput.value ) {
-    inputClass.value = `left: ${dropdownInput.value.getBoundingClientRect().left}px; width: ${dropdownInput.value.getBoundingClientRect().width}px; top: ${dropdownInput.value.getBoundingClientRect().top + 30}px`
+    inputClass.value = `width: ${dropdownInput.value.getBoundingClientRect().width}px;`
   }
 } )
 

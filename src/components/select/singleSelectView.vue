@@ -1,7 +1,8 @@
 <template>
-  <div :class="[
+  <div :style="attrStyle" :class="[
     inputSize,
     inputBasicCssClasses,
+    attrClass,
     disabled ? '!dd-pointer-events-none !dd-cursor-not-allowed' : '',
     'dd-border-solid  dd-border  dd-shadow-sm dd-rounded-md',
     showDropdown ? '!dd-border-solid !dd-border-teal-600 !dd-outline-none' : '', hasError
@@ -48,6 +49,14 @@ const focusToInput = ( e ) => {
 
 
 const props = defineProps( {
+  attrClass: {
+    type: String,
+  default: ""
+  },
+  attrStyle: {
+    type: String,
+    default: ""
+  },
   inputModelValue: {
     type: [String, Number],
     default: '',
