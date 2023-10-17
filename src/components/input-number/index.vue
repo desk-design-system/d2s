@@ -1,5 +1,5 @@
 <template>
-  <dd-input type="number" min="0" :suffix="controls" class="input-number" v-model="numberInputModelVal" @input="nonNegativeNumber">
+  <dd-input  type="number" @blur="handleBlur" :suffix="controls" class="input-number" v-model="numberInputModelVal" >
     <template v-if="controls" #suffix>
       <div class="dd-flex dd-gap-x-1 -dd-m-[7px]">
         <dd-button
@@ -27,13 +27,23 @@
 </template>
 
 <script setup>
-import { computed } from "vue";
+import { computed, nextTick } from "vue";
 import { DdButton, DdInput } from "../components";
+
+let oldValue = null
 
 const props = defineProps({
   modelValue: {
     type: [Number,String],
     default:null,
+  },
+  min: {
+    type: Number,
+    default: null,
+  },
+  max: {
+    type: Number,
+    default: null,
   },
   controls: {
     type: Boolean,
@@ -41,7 +51,31 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits(["update:modelValue"]);
+const emit = defineEmits(["update:modelValue", "blur"]);
+
+const minValue = () =>{
+  if(Number(props.min) > Number(numberInputModelVal.value)) {
+    numberInputModelVal.value = oldValue
+  }
+}
+const maxValue = () =>{
+  if(Number(props.max) < Number(numberInputModelVal.value)) {
+    numberInputModelVal.value = oldValue
+  }
+}
+
+const handleBlur = (event)=> {
+  if (props.min) {
+    minValue()
+  } 
+  if (props.max) {
+    maxValue()
+  }
+  nextTick(() =>{
+    oldValue = numberInputModelVal.value
+  })
+emit('blur', event)
+}
 
 const numberInputModelVal = computed({
   get() {
@@ -68,9 +102,9 @@ const isString = computed( ()=>{
   return !Number.isInteger(parseInt(numberInputModelVal.value)) && numberInputModelVal.value 
 })
 
-const nonNegativeNumber = (event) => {
-  numberInputModelVal.value =  !!numberInputModelVal.value && Math.abs(numberInputModelVal.value) >= 0 ? Math.abs(numberInputModelVal.value) : null
-}
+// const nonNegativeNumber = (event) => {
+//   numberInputModelVal.value =  !!numberInputModelVal.value && Math.abs(numberInputModelVal.value) >= 0 ? Math.abs(numberInputModelVal.value) : null
+// }
 
 </script>
 
