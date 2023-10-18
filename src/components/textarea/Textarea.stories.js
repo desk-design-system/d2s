@@ -1,7 +1,10 @@
 import DdTextarea from "./index.vue";
+import DdValidator from "../validations/ddForm.vue";
 import { action } from "@storybook/addon-actions";
 import { computed } from "vue";
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
+import AllRules from "@vee-validate/rules";
+import { defineRule } from 'vee-validate';
 // More on default export: https://storybook.js.org/docs/vue/writing-stories/introduction#default-export
 export default {
   title: "Atoms/TextArea",
@@ -11,8 +14,13 @@ export default {
 
 export const Default = {
   render: (args) => ({
-    components: { DdTextarea },
+    components: { DdTextarea, DdValidator },
     setup() {
+      onMounted(()=>{
+        Object.keys(AllRules).forEach((rule) => {
+          defineRule(rule, AllRules[rule]);
+        });
+      })
       const onClickMethod = () => action("clicked");
       const value = ref("");
       const label = computed(()=> args.label ?? 'Textarea')
@@ -27,7 +35,7 @@ export const Default = {
       const counter = computed(()=> args.counter)
       return { value, args, label, placeholder, rows, isRequired, rules, disabled, size, hintText, hintTextColor, counter };
     },
-    template: `<dd-textarea v-model="value" :label="label" :placeholder="placeholder" :rows="rows" :isRequired="isRequired" :rules="rules" :disabled="disabled" :size="size" :hint-text="hintText" :hint-text-color="hintTextColor" :counter="counter" />`,
+    template: `<dd-validator> {{rules}} <dd-textarea v-model="value" name="Default textarea" :label="label" :placeholder="placeholder" :rows="rows" :isRequired="isRequired" :rules="rules" :disabled="disabled" :size="size" :hint-text="hintText" :hint-text-color="hintTextColor" :counter="counter" /> </dd-validator>`,
   }),
   argTypes: {
     label: {

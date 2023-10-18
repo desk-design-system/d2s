@@ -27,6 +27,7 @@
           @blur="emits('blur')"
         />
       </div>
+      <span v-if="errorMessage" class="dd-text-xs dd-text-red-500 dd-capitalize">{{ errorMessage }}</span>
     </dd-form-element>
   </div>
 </template>
@@ -93,14 +94,14 @@ const props = defineProps({
   },
 });
 
-const getRules = () => {
+const getRules = computed(() => {
   if (props.rules instanceof RegExp) {
     return { regex: props.rules };
   }
   return props.rules;
-};
+})
 
-const { errorMessage, value, handleChange } = useField(props.name, getRules(), {
+const { errorMessage, value, handleChange } = useField(props.name, getRules, {
   label: props.name,
 });
 

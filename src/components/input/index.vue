@@ -188,14 +188,14 @@ defineExpose({
   inputRef,
 });
 
-const getRules = () => {
+const getRules = computed(() => {
   if (props.rules instanceof RegExp) {
     return { regex: props.rules };
   }
   return props.rules;
-};
+})
 
-const { errorMessage, value, handleChange } = useField(props.name, getRules(), {
+const { errorMessage, value, handleChange } = useField(props.name, getRules, {
   label: props.name,
 });
 

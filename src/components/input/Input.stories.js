@@ -1,9 +1,10 @@
 import DdInput from "./index.vue";
 import { action } from "@storybook/addon-actions";
 import DdButton from "../buttons/index.vue";
-import DdValidator from "../validations/ddForm.vue"
+import DdValidator from "../validations/ddForm.vue";
 import { defineRule } from 'vee-validate';
-import { ref } from "vue";
+import { ref, computed, onMounted } from "vue";
+import AllRules from "@vee-validate/rules";
 // More on default export: https://storybook.js.org/docs/vue/writing-stories/introduction#default-export
 export default {
   title: "Atoms/Input",
@@ -11,12 +12,24 @@ export default {
   tags: ['autodocs'],
 };
 
+
+
 export const Default = {
   render: (args) => ({
-    components: { DdInput, DdButton },
+    components: { DdInput, DdValidator },
     setup() {
+
       const onClickMethod = () => action("clicked");
+      onMounted(()=>{
+        Object.keys(AllRules).forEach((rule) => {
+          defineRule(rule, AllRules[rule]);
+        });
+      })
+
       const selected = ref("");
+      const rules = computed(()=> {
+        return args.rules ?? ''
+      })
       const editInput = () => {
         selected.value = selected.value.toUpperCase();
       };
@@ -24,9 +37,10 @@ export const Default = {
         selected.value = "";
       };
 
-      return { selected, args, editInput, resetInput, onClickMethod };
+
+      return { selected, args, rules,  editInput, resetInput, onClickMethod };
     },
-    template: `<dd-input v-model="selected" :label=args.label :size=args.size :placeholder=args.placeholder :prefix=args.prefix :suffix=args.suffix :icon=args.icon :rules=args.rules :closeButton=args.closeButton :successIcon=args.successIcon :closeIcon=args.closeIcon :disabled=args.disabled :hintText=args.hintText :hintTextColor=args.hintTextColor :hintTextBorder=args.hintTextBorder :type=args.type :Border=args.Border />`,
+    template: `<dd-validator> <dd-input v-model="selected" :label="args.label" name="Default input field" :size="args.size" :placeholder="args.placeholder" :prefix="args.prefix" :suffix="args.suffix" :icon="args.icon" :rules="rules" :closeButton="args.closeButton" :successIcon="args.successIcon" :closeIcon="args.closeIcon" :disabled="args.disabled" :hintText="args.hintText" :hintTextColor="args.hintTextColor" :hintTextBorder="args.hintTextBorder" :type="args.type" :Border="args.Border" /> </dd-validator>`,
   }),
   argTypes: {
     label: {
@@ -452,12 +466,17 @@ export const Validation = {
     setup() {
       const onClickMethod = () => action("clicked");
       const selected = ref("");
+      const formRef = ref("")
       const editInput = () => {
         selected.value = selected.value.toUpperCase();
       };
       const resetInput = () => {
         selected.value = "";
       };
+      const validate = ()=>{
+        console.log("Inside");
+        console.log("Form REf",formRef)
+      }
       defineRule('required', (value) => {
         if (!value || value === '') {
           return 'This field is required';
@@ -465,10 +484,10 @@ export const Validation = {
         return true;
       });
 
-      return { selected, args, editInput, resetInput, onClickMethod };
+      return { selected, args, editInput, resetInput, onClickMethod, validate };
     },
-    template: `<dd-validator>
-    <dd-input prefix suffix v-model="selected" name="selected" rules="required" v-bind="args" />
+    template: `<dd-validator ref="formRef">
+    <dd-input prefix suffix v-model="selected" name="selected" rules="required" v-bind="args" @blur="validate" />
   </dd-validator>`,
   }),
   argTypes: {
