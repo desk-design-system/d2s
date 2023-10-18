@@ -49,7 +49,7 @@
           </slot>
         </div>
         <!-- button -->
-        <div v-if="type !== 'password' && !Right"
+        <div v-if="type !== 'password' && !Right && (successButton || closeButton)"
           class="dd-cursor-pointer !dd-absolute !dd-inset-y-0 !dd-right-0 !dd-flex !dd-items-center !dd-pl-1 !dd-pr-1 dd-gap-1">
           <div :class="[
             successButton && closeButton

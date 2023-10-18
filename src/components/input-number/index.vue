@@ -1,27 +1,32 @@
 <template>
-  <dd-input  type="number" @blur="handleBlur" :suffix="controls" class="input-number" v-model="numberInputModelVal" >
-    <template v-if="controls" #suffix>
-      <div class="dd-flex dd-gap-x-1 -dd-m-[7px]">
-        <dd-button
-        type="secondary"
-        content="iconOnly"
-        :disabled="isString"
-          icon="Plus"
-          size="xs"
-          class="!dd-px-1"
-          @click="increment"
-        />
-
-        <dd-button
+  <dd-input  type="number" @blur="handleBlur" :suffix="controls || $slots.suffix" class="input-number" v-model="numberInputModelVal" >
+    <template v-if="controls || $slots.suffix" #suffix>
+      <slot v-if="!controls" name="suffix">
+    
+      </slot>
+      <template v-if="controls">
+        <div class="dd-flex dd-gap-x-1 -dd-m-[7px]">
+          <dd-button
           type="secondary"
           content="iconOnly"
-          icon="Minus"
-          size="xs"
-          class="!dd-px-1 disbled-button"
-          :disabled="disabled"
-          @click="decrement"
-        />
-      </div>
+          :disabled="isString"
+            icon="Plus"
+            size="xs"
+            class="!dd-px-1"
+            @click="increment"
+          />
+
+          <dd-button
+            type="secondary"
+            content="iconOnly"
+            icon="Minus"
+            size="xs"
+            class="!dd-px-1 disbled-button"
+            :disabled="disabled"
+            @click="decrement"
+          />
+        </div>
+      </template>
     </template>
   </dd-input>
 </template>
@@ -65,10 +70,10 @@ const maxValue = () =>{
 }
 
 const handleBlur = (event)=> {
-  if (props.min) {
+  if (props.min !== null) {
     minValue()
   } 
-  if (props.max) {
+  if (props.max !== null) {
     maxValue()
   }
   nextTick(() =>{
