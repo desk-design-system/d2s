@@ -70,6 +70,11 @@ const maxValue = () =>{
 }
 
 const handleBlur = (event)=> {
+
+if (numberInputModelVal.value == null || numberInputModelVal.value == '') {
+  numberInputModelVal.value = 0
+}
+
   if (props.min !== null) {
     minValue()
   } 
