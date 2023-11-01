@@ -4,7 +4,7 @@
     inputBasicCssClasses,
     attrClass,
     disabled ? '!dd-pointer-events-none !dd-cursor-not-allowed' : '',
-    'dd-border-solid  dd-border  dd-shadow-sm dd-rounded-md',
+    'dd-border-solid  dd-border   dd-rounded-md',
     showDropdown ? '!dd-border-solid !dd-border-teal-600 !dd-outline-none' : '', hasError
       ? ' dd-border-red-600 focus:!dd-border-red-600 focus:!dd-ring-red-600'
       : '!dd-border-gray-300 focus:!dd-ring-teal-600 focus:!dd-border-teal-600',]"

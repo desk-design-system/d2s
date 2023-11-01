@@ -2,9 +2,10 @@
   <div class="dd-base" :class="$attrs.class">
     <dd-form-element :label="label" :description="hintText" size="flexible" :hintTextColor="hintTextColor"
       :isRequired="isRequired" :errorMessage="errorMessage">
-      <template #label>
-        <slot name="label" />
-      </template>
+      <slot name="label">
+        <label v-if="label" class="dd-block dd-text-sm dd-font-medium dd-text-gray-700 dd-mb-1">{{ label }}
+          <span v-if="isRequired" class="dd-text-red-500">*</span></label>
+      </slot>
       <div class="dd-relative dd-rounded-md">
         <div v-if="prefix"
           class="!dd-pointer-events-none !dd-absolute !dd-inset-y-0 !dd-left-0 !dd-flex !dd-items-center !dd-pl-3 ">
