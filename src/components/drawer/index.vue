@@ -38,7 +38,8 @@
                         <p v-if="primaryHeader" class="dd-test-sm dd-text-teal-100 dd-pt-1">{{ description }}</p>
                       </slot>
                     </div>
-                    <div :class="[header ? 'dd-mt-6' : 'dd-py-6']" class="dd-relative  dd-flex-1 dd-px-6 ">
+                    <div :class="[header ? 'dd-mt-6' : 'dd-py-6']" class="dd-relative dd-overflow-auto   dd-flex-1 dd-mx-6 " :style="`max-width:${sizeInner}`">
+                      
                       <slot></slot>
                     </div>
                   </div>
@@ -133,6 +134,11 @@ const inputModelValue = computed( {
     emits( "change", val )
   }
 } )
+let newSize = ref((props.size))
+let numericValue = ref(parseInt(newSize.value))
+let sizeInner = computed(() => {
+    return numericValue.value - 48 + newSize.value.substring(numericValue.value.toString().length);
+});
 </script>
 
 
