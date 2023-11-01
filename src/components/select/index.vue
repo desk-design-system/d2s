@@ -246,9 +246,9 @@ const filteredOptions = computed( () => {
 
 const inputSize = computed( () => {
     if (props.multiple) {
-      return  props.size === "lg" ? 'dd-min-h-[40px]' : 'dd-min-h-[32px]'
+      return  props.size === "lg" ? 'dd-min-h-[36px]' : 'dd-min-h-[32px]'
     } else {
-      return      props.size === "lg" ? 'dd-h-[40px]' : 'dd-h-[32px]'
+      return      props.size === "lg" ? 'dd-h-[36px]' : 'dd-h-[32px]'
     }
 } )
 

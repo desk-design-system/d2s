@@ -1,6 +1,6 @@
 <template>
   <div class="dd-base" :class="$attrs.class">
-    <dd-form-element :label="label" :description="hintText" size="flexible" :hintTextColor="hintTextColor"
+    <dd-form-element  :description="hintText" size="flexible" :hintTextColor="hintTextColor"
       :isRequired="isRequired" :errorMessage="errorMessage">
       <slot name="label">
         <label v-if="label" class="dd-block dd-text-sm dd-font-medium dd-text-gray-700 dd-mb-1">{{ label }}
@@ -39,7 +39,7 @@
           :placeholder="placeholder" />
         <!-- $slots.suffix -->
         <div @click="suffixIconClick" v-if="suffix"
-          class="dd-cursor-pointer !dd-absolute !dd-inset-y-0 dd-bg-white dd-my-2 !dd-right-0 !dd-flex !dd-items-center !dd-pl-3 !dd-mr-3">
+          class="dd-cursor-pointer !dd-absolute !dd-inset-y-0  dd-my-2 !dd-right-0 !dd-flex !dd-items-center !dd-pl-3 !dd-mr-3">
           <slot name="suffix">
             <svgIcon class="dd-text-gray-400" :class="[
               hasError
@@ -139,7 +139,7 @@ const props = defineProps({
   },
   icon: {
     type: String,
-    default: "Search",
+    default: null,
   },
   hintTextColor: {
     type: String,
@@ -246,11 +246,15 @@ const btnIconSize = computed(() => {
 const suffixIcon = computed(() => {
   if (props.icon) {
     return props.icon;
-  } else if (props.type == "password" && inputType.value == "text") {
-    return "Eyeoff";
-  } else {
-    return "Eye";
   }
+  if(props.type == "password") {
+    if (inputType.value == "text") {
+    return "Eyeoff";
+    } else {
+      return "Eye";
+    }
+  }
+  return null
 });
 const suffixIconClick = () => {
   if (props.type == "password") {
