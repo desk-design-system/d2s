@@ -1,7 +1,7 @@
 <template>
   <div v-bind="$attrs" :class="description ? 'dd-flex dd-flex-col dd-gap-1' : '' ">
     <slot name="label">
-      <div class="dd-block dd-text-gray-700 dd-text-sm dd-font-medium">
+      <div v-if="label" class="dd-block dd-text-gray-700 dd-text-sm dd-font-medium">
         {{ label }} <span v-if="isRequired" class="dd-text-red-500">*</span>
       </div>
     </slot>

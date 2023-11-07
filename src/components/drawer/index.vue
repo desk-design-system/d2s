@@ -38,8 +38,7 @@
                         <p v-if="primaryHeader" class="dd-test-sm dd-text-teal-100 dd-pt-1">{{ description }}</p>
                       </slot>
                     </div>
-                    <div :class="[header ? 'dd-mt-6' : 'dd-py-6']" class="dd-relative dd-overflow-auto   dd-flex-1 dd-mx-6 " :style="`max-width:${sizeInner}`">
-                      
+                    <div :class="[header ? 'dd-mt-6' : 'dd-py-6']" class="dd-relative dd-overflow-auto   dd-flex-1 dd-mx-6 ">
                       <slot></slot>
                     </div>
                   </div>

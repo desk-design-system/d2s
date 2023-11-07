@@ -1,11 +1,12 @@
 <template>
+  <slot name="label">
+    
+      <label v-if="label" class="dd-block dd-text-sm dd-font-medium dd-text-gray-700 dd-mb-1">{{ label }}
+      <span v-if="isRequired" class="dd-text-red-500">*</span></label>
+  </slot>
   <dd-popper :show="showDropdown">
     <div v-bind="{...$attrs, class: undefined, style: undefined}" ref="componentRef">
       <!---- label ---->
-      <slot name="label">
-        <label v-if="label" class="dd-block dd-text-sm dd-font-medium dd-text-gray-700 dd-mb-1">{{ label }}
-          <span v-if="isRequired" class="dd-text-red-500">*</span></label>
-      </slot>
       <multiSelect :attr-class="$attrs.class" :attr-style="$attrs.style" :isIconRotated="isIconRotated" ref="dropdownInputWidth" :inputBasicCssClasses="inputBasicCssClasses"
         :showAvatar="showAvatar" :showDropdown="showDropdown" :hasError="hasError" :inputSize="inputSize"
         :showCollapseTag="showCollapseTag" :disabled="disabled" :filterable="filterable" :collapseTags="collapseTags"
